@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Документ приемки от внутреннего поставщика",
+  "type": "object",
+  "properties": {
+    "documentNumber": {
+      "type": "string",
+      "description": "Номер документа"
+    },
+    "supplier": {
+      "type": "string",
+      "description": "Поставщик"
+    },
+    "deliveryDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Дата поставки"
+    },
+    "orderNumber": {
+      "type": "string",
+      "description": "Номер заказа"
+    },
+    "orderDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Дата заказа"
+    },
+    "status": {
+      "type": "string",
+      "description": "Статус"
+    },
+    "tn": {
+      "type": "string",
+      "description": "Номер ТН"
+    },
+    "ttn": {
+      "type": "string",
+      "description": "Номер ТТН"
+    }
+  },
+  "required": [
+    "documentNumber",
+    "supplier",
+    "deliveryDate",
+    "orderNumber",
+    "orderDate",
+    "status",
+    "tn",
+    "ttn"
+  ]
+}
+

@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Информация о товаре",
+  "type": "object",
+  "properties": {
+    "NameGoods": {
+      "type": "string",
+      "description": "Наименование товара"
+    },
+    "Article": {
+      "type": "string",
+      "description": "PLU"
+    },
+    "Unit": {
+      "type": "string",
+      "description": "Единица измерения"
+    },
+    "Stock": {
+      "type": "number",
+      "description": "Остаток"
+    },
+    "POSPrice": {
+      "type": "number",
+      "description": "Цена на кассе"
+    },
+    "Price": {
+      "type": "number",
+      "description": "Цена"
+    },
+    "ShelfLife": {
+      "type": "string",
+      "description": "Срок годности"
+    },
+    "TopTypecode": {
+      "type": "string",
+      "description": "Код TOP"
+    },
+    "ShelfLifeStatusMsg" : {
+      "type" : "string",
+      "description" : ""
+    }
+  },
+  "required": [
+    "NameGoods",
+    "Article",
+    "Unit",
+    "Stock",
+    "POSPrice",
+    "Price",
+    "ShelfLife",
+    "TopTypecode",
+    "ShelfLifeStatusMsg"
+  ]
+}

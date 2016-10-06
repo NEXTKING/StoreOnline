@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Запрос на печать ценников",
+  "type": "object",
+  "properties": {
+    "printerName": {
+      "type": "string",
+      "description": "Наименование принтера"
+    },
+    "layout": {
+      "type": "string",
+      "description": "Название шаблона печати"
+    },
+    "pluList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Article": {
+            "type": "string",
+            "description": "PLU"
+          },
+          "printerName": {
+            "type": "string",
+            "description": "Наименование принтера"
+          },
+          "layout": {
+            "type": "string",
+            "description": "Название шаблона печати"
+          }
+        },
+        "required": [
+          "Article"
+        ],
+        "description": "Список товаров"
+      }
+    },
+    "color": {
+      "type": "string",
+      "description": "true - для печати промо-ценников, false - для печати регулярных ценников"
+    }
+  },
+  "required": [
+    "pluList",
+    "color"
+  ]
+}
+

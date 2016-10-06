@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Паллет документа приемки товара",
+  "type": "object",
+  "properties": {
+    "documentNumber": {
+      "type": "string",
+      "description": "Номер документа"
+    },
+    "palletNumber": {
+      "type": "string",
+      "description": "Номер паллета"
+    },
+    "accepted": {
+      "type": "boolean",
+      "description": "Принят"
+    },
+    "difference": {
+      "type": "boolean",
+      "description": "Разница"
+    },
+    "supplierNum": {
+      "type": "string",
+      "description": "Номер поставщика"
+    },
+    "supplier": {
+      "type": "string",
+      "description": "Поставщик"
+    },
+    "ttnDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Дата ТТН"
+    },
+    "deliveryDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Дата поставки"
+    },
+    "positionCount": {
+      "type": "integer",
+      "description": "Количество позиций"
+    },
+    "weight": {
+      "type": "number",
+      "description": "Вес"
+    },
+    "acceptedWeight": {
+      "type": "number",
+      "description": "Принятый вес"
+    },
+    "isWeightTechnologyStore" : {
+      "type" : "boolean",
+      "description" : ""
+    },
+    "ttn": {
+      "type": "string",
+      "description": "Номер ТТН"
+    }
+  },
+  "required": [
+    "documentNumber",
+    "palletNumber",
+    "accepted",
+    "difference",
+    "supplierNum",
+    "supplier",
+    "ttnDate",
+    "deliveryDate",
+    "positionCount",
+    "weight",
+    "acceptedWeight",
+    "isWeightTechnologyStore",
+    "ttn"
+  ]
+}
+

@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Запрос повторной печати ценников",
+  "type": "object",
+  "properties": {
+    "documentNumber": {
+      "type": "integer",
+      "description": "Номер документа"
+    },
+    "useBlankPaper": {
+      "type": "boolean",
+      "description": "Печатать регулярные ценники"
+    },
+    "useColorPaper": {
+      "type": "boolean",
+      "description": "Печатать промо-ценники"
+    }
+  },
+  "required": [
+    "documentNumber",
+    "useBlankPaper",
+    "useColorPaper"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Документ приемки от внутреннего поставщика",
+  "type": "object",
+  "properties": {
+    "supplier": {
+      "type": "string",
+      "description": "Поставщик"
+    },
+    "ttn": {
+      "type": "string",
+      "description": "Номер ТТН"
+    },
+    "releaseDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Дата заказа"
+    },
+    "documentNumber": {
+      "type": "string",
+      "description": "Номер документа"
+    },
+    "palletCount" : {
+      "type" : "integer",
+      "description" : ""
+    },
+    "quantityReclamationExists" : {
+      "type" : "boolean",
+      "description" : "Акт разногласий по количеству существует"
+    },
+    "qualityReclamationExists" : {
+      "type" : "boolean",
+      "description" : "Акт разногласий по качеству существует"
+    }
+  },
+  "required": [
+    "supplier",
+    "ttn",
+    "releaseDate",
+    "documentNumber",
+    "palletCount",
+    "quantityReclamationExists",
+    "qualityReclamationExists"
+  ]
+}
+

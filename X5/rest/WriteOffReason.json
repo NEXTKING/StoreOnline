@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Общая информация по инвентаризации",
+  "type" : "object",
+  "properties" : {
+    "code" : {
+      "type" : "string",
+      "description" : "Код причины списания"
+    },
+    "description" : {
+      "type" : "string",
+      "description" : "Описание причины списания"
+    }
+  },
+  "required" : [
+    "code",
+    "description"
+  ]
+}

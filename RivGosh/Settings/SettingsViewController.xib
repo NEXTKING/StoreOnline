@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingsViewController">
+            <connections>
+                <outlet property="restartActivityIndicator" destination="1Qe-s9-65a" id="UHm-Hn-YuB"/>
+                <outlet property="restartButton" destination="DVZ-RG-ZKi" id="a9q-C2-oCj"/>
+                <outlet property="view" destination="iN0-l3-epB" id="msO-UE-UDw"/>
+                <outlet property="xReportButton" destination="rdX-eE-Mqd" id="8ah-6C-REZ"/>
+                <outlet property="zReportButton" destination="ubb-7U-eHq" id="nGY-YT-Sbi"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DVZ-RG-ZKi">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="4eq-fK-SIG"/>
+                        <constraint firstAttribute="width" constant="235" id="j0j-da-9LS"/>
+                    </constraints>
+                    <state key="normal" title="Перезапустить очередь печати"/>
+                    <connections>
+                        <action selector="restartQueueAction:" destination="-1" eventType="touchUpInside" id="Xdq-vg-ne6"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rdX-eE-Mqd">
+                    <constraints>
+                        <constraint firstAttribute="width" constant="235" id="NHI-wJ-dLf"/>
+                        <constraint firstAttribute="height" constant="30" id="Sez-3y-Q8w"/>
+                    </constraints>
+                    <state key="normal" title="X-отчет"/>
+                    <connections>
+                        <action selector="xReportAction:" destination="-1" eventType="touchUpInside" id="5it-bd-asj"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ubb-7U-eHq">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="MMg-Jn-fvb"/>
+                        <constraint firstAttribute="width" constant="235" id="YtL-dc-BkL"/>
+                    </constraints>
+                    <state key="normal" title="Z-отчет"/>
+                </button>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="1Qe-s9-65a"/>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="ubb-7U-eHq" firstAttribute="centerX" secondItem="DVZ-RG-ZKi" secondAttribute="centerX" id="0wF-qf-cA3"/>
+                <constraint firstItem="1Qe-s9-65a" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="9Sw-60-7hd"/>
+                <constraint firstItem="ubb-7U-eHq" firstAttribute="top" secondItem="rdX-eE-Mqd" secondAttribute="bottom" constant="8" id="CXo-GE-Di5"/>
+                <constraint firstItem="1Qe-s9-65a" firstAttribute="top" secondItem="ubb-7U-eHq" secondAttribute="bottom" constant="8" id="H4T-Oq-4O8"/>
+                <constraint firstItem="DVZ-RG-ZKi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="74" id="SVa-3g-NyQ"/>
+                <constraint firstItem="rdX-eE-Mqd" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="nVd-fY-3Xf"/>
+                <constraint firstItem="rdX-eE-Mqd" firstAttribute="top" secondItem="DVZ-RG-ZKi" secondAttribute="bottom" constant="8" id="t5t-de-VYL"/>
+                <constraint firstItem="DVZ-RG-ZKi" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="y8i-fM-dlk"/>
+            </constraints>
+            <point key="canvasLocation" x="549" y="143"/>
+        </view>
+    </objects>
+</document>

@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Зона инвентаризации",
+  "type" : "object",
+  "properties" : {
+    "id" : {
+      "type" : "integer",
+      "description" : "Идентификатор инвентаризации"
+    },
+    "number" : {
+      "type" : "string",
+      "description" : ""
+    },
+    "description" : {
+      "type" : "string",
+      "description" : ""
+    },
+    "local_id" : {
+      "type" : "string",
+      "description" : ""
+    },
+    "code" : {
+      "type" : "string",
+      "description" : ""
+    },
+    "countings" : {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "description": "Номер подсчета"
+      },
+      "description": "Список доступных подсчетов"
+    }
+  },
+  "required" : [
+    "id",
+    "number",
+    "description",
+    "local_id",
+    "code"
+  ]
+}

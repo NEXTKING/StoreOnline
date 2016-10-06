@@ -1,0 +1,70 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Документ приемки от внутреннего поставщика",
+  "type": "object",
+  "properties": {
+    "Article" : {
+      "type" : "string",
+      "description" : ""
+    },
+    "NameGoods" : {
+      "type" : "string",
+      "description" : ""
+    },
+    "quantity" : {
+      "type" : "number",
+      "description" : ""
+    },
+    "targetQuantity" : {
+      "type" : "number",
+      "description" : ""
+    },
+    "docNum" : {
+      "type" : "string",
+      "description" : ""
+    },
+    "supplier" : {
+      "type" : "string",
+      "description" : ""
+    },
+    "reclamationType" : {
+      "type" : "string",
+      "description" : ""
+    },
+    "palletNumber" : {
+      "type" : "string",
+      "description" : ""
+    },
+    "Unit" : {
+      "type" : "string",
+      "description" : ""
+    },
+    "Price" : {
+      "type" : "number",
+      "description" : ""
+    },
+    "difference" : {
+      "type" : "number",
+      "description" : ""
+    },
+    "id" : {
+      "type" : "string",
+      "description" : ""
+    }
+  },
+  "required": [
+    "Article",
+    "NameGoods",
+    "targetQuantity",
+    "quantity",
+    "docNum",
+    "supplier",
+    "reclamationType",
+    "palletNumber",
+    "Unit",
+    "Price",
+    "difference",
+    "id"
+  ]
+}
+

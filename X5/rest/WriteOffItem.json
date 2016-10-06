@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Общая информация по инвентаризации",
+  "type" : "object",
+  "properties" : {
+    "reasonCode" : {
+      "type" : "string",
+      "description" : "Код причины списания"
+    },
+    "reasonDescription" : {
+      "type" : "string",
+      "description" : "Причина списания"
+    },
+    "Article" : {
+      "type" : "string",
+      "description" : "Артикул"
+    },
+    "docNum" : {
+      "type" : "string",
+      "description" : "Номер документа списания"
+    },
+    "NameGoods" : {
+      "type" : "string",
+      "description" : "Наименование товара"
+    },
+    "Unit" : {
+      "type" : "string",
+      "description" : "Единица измерения"
+    },
+    "quantity" : {
+      "type" : "number",
+      "description" : "Количество"
+    },
+    "difference" : {
+      "type" : "number",
+      "description" : "Добавочное количество"
+    },
+    "defectCode" : {
+      "type" : "string",
+      "description" : "Код дефекта"
+    },
+    "defectDescription" : {
+      "type" : "string",
+      "description" : "Описание дефекта"
+    },
+    "stockQuantity" : {
+      "type" : "number",
+      "description" : "Остаток"
+    }
+  },
+  "required" : [
+    "reasonCode",
+    "reasonDescription",
+    "Article",
+    "docNum",
+    "NameGoods",
+    "Unit",
+    "quantity",
+    "difference",
+    "defectCode",
+    "defectDescription",
+    "stockQuantity"
+  ]
+}

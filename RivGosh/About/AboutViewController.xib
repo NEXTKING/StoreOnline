@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AboutViewController">
+            <connections>
+                <outlet property="buildLabel" destination="fYP-8H-Qil" id="or0-z7-nIb"/>
+                <outlet property="udidTextView" destination="Kdk-7q-gah" id="Cfh-nD-ljg"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID устройства" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CuC-uK-DoO">
+                    <rect key="frame" x="15" y="74" width="134" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="oyF-sD-1gc"/>
+                        <constraint firstAttribute="width" constant="134" id="wOL-yA-xa7"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium" translatesAutoresizingMaskIntoConstraints="NO" id="Kdk-7q-gah">
+                    <rect key="frame" x="8" y="100" width="294" height="51"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="51" id="Xu7-BT-O6f"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сборка" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fYP-8H-Qil">
+                    <rect key="frame" x="15" y="159" width="297" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="FkF-8n-D2d"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="CuC-uK-DoO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="74" id="3SO-GZ-k8a"/>
+                <constraint firstItem="fYP-8H-Qil" firstAttribute="top" secondItem="Kdk-7q-gah" secondAttribute="bottom" constant="8" id="FiS-sD-Gze"/>
+                <constraint firstAttribute="trailing" secondItem="Kdk-7q-gah" secondAttribute="trailing" constant="18" id="N0C-yR-TKI"/>
+                <constraint firstAttribute="trailing" secondItem="fYP-8H-Qil" secondAttribute="trailing" constant="8" id="XrQ-wv-W9N"/>
+                <constraint firstItem="Kdk-7q-gah" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="bFb-in-JwC"/>
+                <constraint firstItem="Kdk-7q-gah" firstAttribute="top" secondItem="CuC-uK-DoO" secondAttribute="bottom" constant="5" id="bkY-JP-nrs"/>
+                <constraint firstItem="CuC-uK-DoO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="cDf-Zt-WIr"/>
+                <constraint firstItem="fYP-8H-Qil" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="s9y-MJ-00M"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <point key="canvasLocation" x="421" y="393"/>
+        </view>
+    </objects>
+</document>

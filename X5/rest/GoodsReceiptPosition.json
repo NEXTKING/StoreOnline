@@ -1,0 +1,70 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Позиция документа приемки товара",
+  "type": "object",
+  "properties": {
+    "orderNumber": {
+      "type": "string",
+      "description": "Номер заказа"
+    },
+    "tn": {
+      "type": "string",
+      "description": "Номер ТН"
+    },
+    "documentNumber": {
+      "type": "string",
+      "description": "Номер документа"
+    },
+    "supplier": {
+      "type": "string",
+      "description": "Поставщик"
+    },
+    "price": {
+      "type": "number",
+      "description": "Цена"
+    },
+    "Article": {
+      "type": "string",
+      "description": "PLU"
+    },
+    "ean": {
+      "type": "string",
+      "description": "EAN"
+    },
+    "NameGoods": {
+      "type": "string",
+      "description": "Наименование товара"
+    },
+    "targetQuantity": {
+      "type": "number",
+      "description": "Количество по накладной"
+    },
+    "uomName": {
+      "type": "string",
+      "description": "Единица измерения"
+    },
+    "quantity": {
+      "type": "number",
+      "description": "Принятое количество"
+    },
+    "difference": {
+      "type": "number",
+      "description": "Разница принятого количества и количества по накладной"
+    }
+  },
+  "required": [
+    "orderNumber",
+    "tn",
+    "documentNumber",
+    "supplier",
+    "price",
+    "Article",
+    "ean",
+    "NameGoods",
+    "targetQuantity",
+    "uomName",
+    "quantity",
+    "difference"
+  ]
+}
+

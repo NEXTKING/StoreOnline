@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Позиция инвентаризации",
+  "type" : "object",
+  "properties" : {
+    "Article" : {
+      "type" : "string",
+      "description" : "PLU"
+    },
+    "NameGoods" : {
+      "type" : "string",
+      "description" : "Наименование товара"
+    },
+    "Unit" : {
+      "type" : "string",
+      "description" : "Единица измерения"
+    },
+    "quantity" : {
+      "type" : "number",
+      "description" : "Количество"
+    }
+  },
+  "required" : [
+    "Article",
+    "NameGoods",
+    "Unit",
+    "quantity"
+  ]
+}

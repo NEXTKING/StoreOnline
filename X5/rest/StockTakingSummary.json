@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Общая информация по инвентаризации",
+  "type" : "object",
+  "properties" : {
+    "number" : {
+      "type" : "string",
+      "description" : "Номер инвентаризации"
+    },
+    "name" : {
+      "type" : "string",
+      "description" : "Наименование"
+    },
+    "date" : {
+      "type" : "string",
+      "format" : "date-time",
+      "description" : "Дата"
+    },
+    "positionCount" : {
+      "type" : "integer",
+      "description" : "Количество позиций"
+    },
+    "finalQuantity" : {
+      "type" : "integer",
+      "description" : "Посчитанное количество"
+    },
+    "finalWeight" : {
+      "type" : "number",
+      "description" : "Посчитанный вес"
+    },
+    "finalCost" : {
+      "type" : "number",
+      "description" : "Стоимость посчитанных позиций"
+    },
+    "id" : {
+      "type" : "string",
+      "description" : "Идентификатор"
+    }
+  },
+  "required" : [
+    "number",
+    "name",
+    "date",
+    "positionCount",
+    "finalQuantity",
+    "finalWeight",
+    "finalCost",
+    "id"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Общая информация по документу приемки от внешнего поставщика",
+  "type": "object",
+  "properties": {
+    "orderDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Дата заказа"
+    },
+    "supplier": {
+      "type": "string",
+      "description": "Поставщик"
+    },
+    "deliveryDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Дата поставки"
+    },
+    "orderNumber": {
+      "type": "string",
+      "description": "Номер заказа"
+    },
+    "tn": {
+      "type": "string",
+      "description": "Номер ТН"
+    },
+    "count": {
+      "type": "integer",
+      "description": "Количество позиций"
+    },
+    "calculate": {
+      "type": "integer",
+      "description": "Количество посчитанных позиций"
+    },
+    "sumTotal" : {
+      "type": "number",
+      "description": ""
+    },
+    "sumCalcTotal" : {
+      "type": "number",
+      "description": ""
+    }
+  },
+  "required": [
+    "orderDate",
+    "supplier",
+    "deliveryDate",
+    "orderNumber",
+    "tn",
+    "count",
+    "calculate",
+    "sumTotal",
+    "sumCalcTotal"
+  ]
+}
+

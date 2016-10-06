@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Результат повторной печати ценников",
+  "type": "object",
+  "properties": {
+    "useBlankPaper": {
+      "type": "boolean",
+      "description": "В документе верификации присутствуют регулярные ценники"
+    },
+    "useColorPaper": {
+      "type": "boolean",
+      "description": "В документе верификации присутствуют промо-ценники"
+    },
+    "done": {
+      "type": "boolean",
+      "description": "Ценники отправлены на печать"
+    }
+  },
+  "required": [
+    "useBlankPaper",
+    "useColorPaper",
+    "done"
+  ]
+}

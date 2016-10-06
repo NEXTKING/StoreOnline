@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Счетчик",
+  "type" : "object",
+  "properties" : {
+    "id" : {
+      "type" : "integer",
+      "description" : ""
+    },
+    "name" : {
+      "type" : "string",
+      "description" : ""
+    },
+    "local_id" : {
+      "type" : "string",
+      "description" : ""
+    },
+    "code" : {
+      "type" : "string",
+      "description" : ""
+    }
+  },
+  "required" : [
+    "id",
+    "name",
+    "local_id",
+    "code"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Информация о товаре",
+  "type": "object",
+  "properties": {
+    "itemId": {
+      "type": "string",
+      "description": "Идентификатор товара"
+    },
+    "posPrice": {
+      "type": "number",
+      "description": "Цена на кассе"
+    },
+    "topTypecode": {
+      "type": "string",
+      "description": "Код TOP"
+    },
+    "priceTypeCode": {
+      "type": "string",
+      "description": "Промо цена"
+    }
+  },
+  "required": [
+    "itemId",
+    "posPrice",
+    "topTypecode",
+    "priceTypeCode"
+  ]
+}

@@ -1,0 +1,865 @@
+<definitions name="PI_MOBILE_SERVICE"
+    targetNamespace="http://xmlns.oracle.com/orawsv/MAA_WEB/PI_MOBILE_SERVICE"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:tns="http://xmlns.oracle.com/orawsv/MAA_WEB/PI_MOBILE_SERVICE"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <types>
+    <xsd:schema targetNamespace="http://xmlns.oracle.com/orawsv/MAA_WEB/PI_MOBILE_SERVICE"
+     elementFormDefault="qualified">
+      <xsd:element name="WARE_SUBGROUP_INFOInput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_ID_PORTION-NUMBER-OUT">
+                <xsd:complexType/>
+              </xsd:element>
+              <xsd:element name="A_DEVICE_UID-VARCHAR2-IN" type="xsd:string"/>
+              <xsd:element name="AO_DATA-TROWARRAY-COUT">
+                <xsd:complexType/>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+
+
+      <xsd:element name="WARE_SUBGROUP_INFOOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_ID_PORTION" type="xsd:integer"/>
+              <xsd:element name="AO_DATA" type="tns:TROWARRAYType"/>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="WARE_PRICE_INFOInput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_ID_PORTION-NUMBER-OUT">
+                <xsd:complexType/>
+              </xsd:element>
+              <xsd:element name="A_DEVICE_UID-VARCHAR2-IN" type="xsd:string"/>
+              <xsd:element name="AO_DATA-TROWARRAY-COUT">
+                <xsd:complexType/>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+
+
+      <xsd:element name="WARE_PRICE_INFOOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_ID_PORTION" type="xsd:integer"/>
+              <xsd:element name="AO_DATA" type="tns:TROWARRAYType"/>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="WARE_INFOInput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_ID_PORTION-NUMBER-OUT">
+                <xsd:complexType/>
+              </xsd:element>
+              <xsd:element name="A_DEVICE_UID-VARCHAR2-IN" type="xsd:string"/>
+              <xsd:element name="AO_DATA-TROWARRAY-COUT">
+                <xsd:complexType/>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+
+
+      <xsd:element name="WARE_INFOOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_ID_PORTION" type="xsd:integer"/>
+              <xsd:element name="AO_DATA" type="tns:TROWARRAYType"/>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="WARE_IMAGE_INFOInput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_ID_PORTION-NUMBER-OUT">
+                <xsd:complexType/>
+              </xsd:element>
+              <xsd:element name="A_DEVICE_UID-VARCHAR2-IN" type="xsd:string"/>
+              <xsd:element name="AO_DATA-TROWARRAY-COUT">
+                <xsd:complexType/>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+
+
+      <xsd:element name="WARE_IMAGE_INFOOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_ID_PORTION" type="xsd:integer"/>
+              <xsd:element name="AO_DATA" type="tns:TROWARRAYType"/>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="WARE_GROUP_INFOInput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_ID_PORTION-NUMBER-OUT">
+                <xsd:complexType/>
+              </xsd:element>
+              <xsd:element name="A_DEVICE_UID-VARCHAR2-IN" type="xsd:string"/>
+              <xsd:element name="AO_DATA-TROWARRAY-COUT">
+                <xsd:complexType/>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+
+
+      <xsd:element name="WARE_GROUP_INFOOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_ID_PORTION" type="xsd:integer"/>
+              <xsd:element name="AO_DATA" type="tns:TROWARRAYType"/>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="WARE_BARCODE_INFOInput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_ID_PORTION-NUMBER-OUT">
+                <xsd:complexType/>
+              </xsd:element>
+              <xsd:element name="A_DEVICE_UID-VARCHAR2-IN" type="xsd:string"/>
+              <xsd:element name="AO_DATA-TROWARRAY-COUT">
+                <xsd:complexType/>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+
+
+      <xsd:element name="WARE_BARCODE_INFOOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_ID_PORTION" type="xsd:integer"/>
+              <xsd:element name="AO_DATA" type="tns:TROWARRAYType"/>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="USER_INFOInput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_ID_PORTION-NUMBER-OUT">
+                <xsd:complexType/>
+              </xsd:element>
+              <xsd:element name="A_DEVICE_UID-VARCHAR2-IN" type="xsd:string"/>
+              <xsd:element name="AO_DATA-TROWARRAY-COUT">
+                <xsd:complexType/>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+
+
+      <xsd:element name="USER_INFOOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_ID_PORTION" type="xsd:integer"/>
+              <xsd:element name="AO_DATA" type="tns:TROWARRAYType"/>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TRADEMARK_INFOInput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_ID_PORTION-NUMBER-OUT">
+                <xsd:complexType/>
+              </xsd:element>
+              <xsd:element name="A_DEVICE_UID-VARCHAR2-IN" type="xsd:string"/>
+              <xsd:element name="AO_DATA-TROWARRAY-COUT">
+                <xsd:complexType/>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+
+
+      <xsd:element name="TRADEMARK_INFOOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_ID_PORTION" type="xsd:integer"/>
+              <xsd:element name="AO_DATA" type="tns:TROWARRAYType"/>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SVARCHAR2-SET_INC_DONEInput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_INC_CODE-VARCHAR2-IN" type="xsd:string"/>
+              <xsd:element name="A_ID_PORTION-NUMBER-IN" type="xsd:integer"/>
+              <xsd:element name="A_DEVICE_UID-VARCHAR2-IN" type="xsd:string"/>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+
+
+      <xsd:element name="SET_INC_DONEOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="RETURN" type="xsd:string"/>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SVARCHAR2-RESET_INC_DONEInput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_INC_CODE-VARCHAR2-IN" type="xsd:string"/>
+              <xsd:element name="A_ID_PORTION-NUMBER-IN" type="xsd:integer"/>
+              <xsd:element name="A_DEVICE_UID-VARCHAR2-IN" type="xsd:string"/>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+
+
+      <xsd:element name="RESET_INC_DONEOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="RETURN" type="xsd:string"/>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="PASTING_WARES_INFOInput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_ID_PORTION-NUMBER-OUT">
+                <xsd:complexType/>
+              </xsd:element>
+              <xsd:element name="A_DEVICE_UID-VARCHAR2-IN" type="xsd:string"/>
+              <xsd:element name="AO_DATA-TROWARRAY-COUT">
+                <xsd:complexType/>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+
+
+      <xsd:element name="PASTING_WARES_INFOOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_ID_PORTION" type="xsd:integer"/>
+              <xsd:element name="AO_DATA" type="tns:TROWARRAYType"/>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="PASTING_TASK_INFOInput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_ID_PORTION-NUMBER-OUT">
+                <xsd:complexType/>
+              </xsd:element>
+              <xsd:element name="A_DEVICE_UID-VARCHAR2-IN" type="xsd:string"/>
+              <xsd:element name="AO_DATA-TROWARRAY-COUT">
+                <xsd:complexType/>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+
+
+      <xsd:element name="PASTING_TASK_INFOOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_ID_PORTION" type="xsd:integer"/>
+              <xsd:element name="AO_DATA" type="tns:TROWARRAYType"/>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SNUMBER-PASTING_SET_TASK_DONEInput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_TASK_NUM-VARCHAR2-IN" type="xsd:string"/>
+              <xsd:element name="A_MESSAGE-VARCHAR2-OUT">
+                <xsd:complexType/>
+              </xsd:element>
+              <xsd:element name="A_DEVICE_UID-VARCHAR2-IN" type="xsd:string"/>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+
+
+      <xsd:element name="PASTING_SET_TASK_DONEOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="RETURN" type="xsd:double"/>
+              <xsd:element name="A_MESSAGE" type="xsd:string"/>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SNUMBER-PASTING_SAVE_PRINT_FACTInput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_MESSAGE-VARCHAR2-OUT">
+                <xsd:complexType/>
+              </xsd:element>
+              <xsd:element name="A_DEVICE_UID-VARCHAR2-IN" type="xsd:string"/>
+              <xsd:element name="AT_PRINT_INFO-PASTINGBILLPRINTINFO-CIN" type="tns:PASTINGBILLPRINTINFOType"/>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+
+
+      <xsd:element name="PASTING_SAVE_PRINT_FACTOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="RETURN" type="xsd:double"/>
+              <xsd:element name="A_MESSAGE" type="xsd:string"/>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GET_PORTION_INFOInput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_TOTAL_SIZE_KB-NUMBER-OUT">
+                <xsd:complexType/>
+              </xsd:element>
+              <xsd:element name="A_STR_COUNT-NUMBER-OUT">
+                <xsd:complexType/>
+              </xsd:element>
+              <xsd:element name="A_INC_CODE-VARCHAR2-IN" type="xsd:string"/>
+              <xsd:element name="A_DEVICE_UID-VARCHAR2-IN" type="xsd:string"/>
+              <xsd:element name="A_COUNT-NUMBER-OUT">
+                <xsd:complexType/>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+
+
+      <xsd:element name="GET_PORTION_INFOOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_TOTAL_SIZE_KB" type="xsd:double"/>
+              <xsd:element name="A_STR_COUNT" type="xsd:double"/>
+              <xsd:element name="A_COUNT" type="xsd:integer"/>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CTPORTIONINFOARRAY-GET_PORTIONS_INFOInput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="A_DEVICE_UID-VARCHAR2-IN" type="xsd:string"/>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+
+
+      <xsd:element name="GET_PORTIONS_INFOOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="RETURN" type="tns:TPORTIONINFOARRAYType"/>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SVARCHAR2-CVS_VERSIONInput">
+        <xsd:complexType>
+            <xsd:sequence>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+
+
+      <xsd:element name="CVS_VERSIONOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="RETURN" type="xsd:string"/>
+            </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="TROWARRAYType">
+        <xsd:sequence>
+          <xsd:element name="TROWARRAY">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="CSV_ROWS">
+                  <xsd:complexType>
+                    <xsd:sequence>
+                      <xsd:element name="TROW" type="tns:TROW_IntType" maxOccurs="unbounded" minOccurs="0"/>
+                    </xsd:sequence>
+                  </xsd:complexType>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TROW_IntType">
+        <xsd:sequence>
+          <xsd:element name="NUM" type="xsd:integer"/>
+          <xsd:element name="VAL">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="4000"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PASTINGBILLPRINTINFOType">
+        <xsd:sequence>
+          <xsd:element name="PASTINGBILLPRINTINFO">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="WARE_INFO">
+                  <xsd:complexType>
+                    <xsd:sequence>
+                      <xsd:element name="PASTINGBILLPRINTWAREINFO" type="tns:PASTINGBILLPRINTWAREINFO_IntType" maxOccurs="unbounded" minOccurs="0"/>
+                    </xsd:sequence>
+                  </xsd:complexType>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PASTINGBILLPRINTWAREINFO_IntType">
+        <xsd:sequence>
+          <xsd:element name="TASK_NUM">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="256"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="WARE_CODE">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="256"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TPORTIONINFOARRAYType">
+        <xsd:sequence>
+          <xsd:element name="TPORTIONINFOARRAY">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="PORTIONS_INFO">
+                  <xsd:complexType>
+                    <xsd:sequence>
+                      <xsd:element name="TPORTIONINFO" type="tns:TPORTIONINFO_IntType" maxOccurs="unbounded" minOccurs="0"/>
+                    </xsd:sequence>
+                  </xsd:complexType>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TPORTIONINFO_IntType">
+        <xsd:sequence>
+          <xsd:element name="INC_CODE">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="256"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="SIZE_KB" type="xsd:double"/>
+          <xsd:element name="STR_COUNT" type="xsd:integer"/>
+          <xsd:element name="PORTIONS_COUNT" type="xsd:integer"/>
+        </xsd:sequence>
+      </xsd:complexType>
+   </xsd:schema>
+  </types>
+
+  <message name="WARE_SUBGROUP_INFOInputMessage">
+    <part name="parameters" element="tns:WARE_SUBGROUP_INFOInput"/>
+  </message>
+
+  <message name="WARE_SUBGROUP_INFOOutputMessage">
+    <part name="parameters" element="tns:WARE_SUBGROUP_INFOOutput"/>
+  </message>
+
+  <message name="WARE_PRICE_INFOInputMessage">
+    <part name="parameters" element="tns:WARE_PRICE_INFOInput"/>
+  </message>
+
+  <message name="WARE_PRICE_INFOOutputMessage">
+    <part name="parameters" element="tns:WARE_PRICE_INFOOutput"/>
+  </message>
+
+  <message name="WARE_INFOInputMessage">
+    <part name="parameters" element="tns:WARE_INFOInput"/>
+  </message>
+
+  <message name="WARE_INFOOutputMessage">
+    <part name="parameters" element="tns:WARE_INFOOutput"/>
+  </message>
+
+  <message name="WARE_IMAGE_INFOInputMessage">
+    <part name="parameters" element="tns:WARE_IMAGE_INFOInput"/>
+  </message>
+
+  <message name="WARE_IMAGE_INFOOutputMessage">
+    <part name="parameters" element="tns:WARE_IMAGE_INFOOutput"/>
+  </message>
+
+  <message name="WARE_GROUP_INFOInputMessage">
+    <part name="parameters" element="tns:WARE_GROUP_INFOInput"/>
+  </message>
+
+  <message name="WARE_GROUP_INFOOutputMessage">
+    <part name="parameters" element="tns:WARE_GROUP_INFOOutput"/>
+  </message>
+
+  <message name="WARE_BARCODE_INFOInputMessage">
+    <part name="parameters" element="tns:WARE_BARCODE_INFOInput"/>
+  </message>
+
+  <message name="WARE_BARCODE_INFOOutputMessage">
+    <part name="parameters" element="tns:WARE_BARCODE_INFOOutput"/>
+  </message>
+
+  <message name="USER_INFOInputMessage">
+    <part name="parameters" element="tns:USER_INFOInput"/>
+  </message>
+
+  <message name="USER_INFOOutputMessage">
+    <part name="parameters" element="tns:USER_INFOOutput"/>
+  </message>
+
+  <message name="TRADEMARK_INFOInputMessage">
+    <part name="parameters" element="tns:TRADEMARK_INFOInput"/>
+  </message>
+
+  <message name="TRADEMARK_INFOOutputMessage">
+    <part name="parameters" element="tns:TRADEMARK_INFOOutput"/>
+  </message>
+
+  <message name="SET_INC_DONEInputMessage">
+    <part name="parameters" element="tns:SVARCHAR2-SET_INC_DONEInput"/>
+  </message>
+
+  <message name="SET_INC_DONEOutputMessage">
+    <part name="parameters" element="tns:SET_INC_DONEOutput"/>
+  </message>
+
+  <message name="RESET_INC_DONEInputMessage">
+    <part name="parameters" element="tns:SVARCHAR2-RESET_INC_DONEInput"/>
+  </message>
+
+  <message name="RESET_INC_DONEOutputMessage">
+    <part name="parameters" element="tns:RESET_INC_DONEOutput"/>
+  </message>
+
+  <message name="PASTING_WARES_INFOInputMessage">
+    <part name="parameters" element="tns:PASTING_WARES_INFOInput"/>
+  </message>
+
+  <message name="PASTING_WARES_INFOOutputMessage">
+    <part name="parameters" element="tns:PASTING_WARES_INFOOutput"/>
+  </message>
+
+  <message name="PASTING_TASK_INFOInputMessage">
+    <part name="parameters" element="tns:PASTING_TASK_INFOInput"/>
+  </message>
+
+  <message name="PASTING_TASK_INFOOutputMessage">
+    <part name="parameters" element="tns:PASTING_TASK_INFOOutput"/>
+  </message>
+
+  <message name="PASTING_SET_TASK_DONEInputMessage">
+    <part name="parameters" element="tns:SNUMBER-PASTING_SET_TASK_DONEInput"/>
+  </message>
+
+  <message name="PASTING_SET_TASK_DONEOutputMessage">
+    <part name="parameters" element="tns:PASTING_SET_TASK_DONEOutput"/>
+  </message>
+
+  <message name="PASTING_SAVE_PRINT_FACTInputMessage">
+    <part name="parameters" element="tns:SNUMBER-PASTING_SAVE_PRINT_FACTInput"/>
+  </message>
+
+  <message name="PASTING_SAVE_PRINT_FACTOutputMessage">
+    <part name="parameters" element="tns:PASTING_SAVE_PRINT_FACTOutput"/>
+  </message>
+
+  <message name="GET_PORTION_INFOInputMessage">
+    <part name="parameters" element="tns:GET_PORTION_INFOInput"/>
+  </message>
+
+  <message name="GET_PORTION_INFOOutputMessage">
+    <part name="parameters" element="tns:GET_PORTION_INFOOutput"/>
+  </message>
+
+  <message name="GET_PORTIONS_INFOInputMessage">
+    <part name="parameters" element="tns:CTPORTIONINFOARRAY-GET_PORTIONS_INFOInput"/>
+  </message>
+
+  <message name="GET_PORTIONS_INFOOutputMessage">
+    <part name="parameters" element="tns:GET_PORTIONS_INFOOutput"/>
+  </message>
+
+  <message name="CVS_VERSIONInputMessage">
+    <part name="parameters" element="tns:SVARCHAR2-CVS_VERSIONInput"/>
+  </message>
+
+  <message name="CVS_VERSIONOutputMessage">
+    <part name="parameters" element="tns:CVS_VERSIONOutput"/>
+  </message>
+
+  <portType name="PI_MOBILE_SERVICEPortType">
+  <operation name="WARE_SUBGROUP_INFO">
+      <input message="tns:WARE_SUBGROUP_INFOInputMessage"/>
+      <output message="tns:WARE_SUBGROUP_INFOOutputMessage"/>
+    </operation>
+  <operation name="WARE_PRICE_INFO">
+      <input message="tns:WARE_PRICE_INFOInputMessage"/>
+      <output message="tns:WARE_PRICE_INFOOutputMessage"/>
+    </operation>
+  <operation name="WARE_INFO">
+      <input message="tns:WARE_INFOInputMessage"/>
+      <output message="tns:WARE_INFOOutputMessage"/>
+    </operation>
+  <operation name="WARE_IMAGE_INFO">
+      <input message="tns:WARE_IMAGE_INFOInputMessage"/>
+      <output message="tns:WARE_IMAGE_INFOOutputMessage"/>
+    </operation>
+  <operation name="WARE_GROUP_INFO">
+      <input message="tns:WARE_GROUP_INFOInputMessage"/>
+      <output message="tns:WARE_GROUP_INFOOutputMessage"/>
+    </operation>
+  <operation name="WARE_BARCODE_INFO">
+      <input message="tns:WARE_BARCODE_INFOInputMessage"/>
+      <output message="tns:WARE_BARCODE_INFOOutputMessage"/>
+    </operation>
+  <operation name="USER_INFO">
+      <input message="tns:USER_INFOInputMessage"/>
+      <output message="tns:USER_INFOOutputMessage"/>
+    </operation>
+  <operation name="TRADEMARK_INFO">
+      <input message="tns:TRADEMARK_INFOInputMessage"/>
+      <output message="tns:TRADEMARK_INFOOutputMessage"/>
+    </operation>
+  <operation name="SET_INC_DONE">
+      <input message="tns:SET_INC_DONEInputMessage"/>
+      <output message="tns:SET_INC_DONEOutputMessage"/>
+    </operation>
+  <operation name="RESET_INC_DONE">
+      <input message="tns:RESET_INC_DONEInputMessage"/>
+      <output message="tns:RESET_INC_DONEOutputMessage"/>
+    </operation>
+  <operation name="PASTING_WARES_INFO">
+      <input message="tns:PASTING_WARES_INFOInputMessage"/>
+      <output message="tns:PASTING_WARES_INFOOutputMessage"/>
+    </operation>
+  <operation name="PASTING_TASK_INFO">
+      <input message="tns:PASTING_TASK_INFOInputMessage"/>
+      <output message="tns:PASTING_TASK_INFOOutputMessage"/>
+    </operation>
+  <operation name="PASTING_SET_TASK_DONE">
+      <input message="tns:PASTING_SET_TASK_DONEInputMessage"/>
+      <output message="tns:PASTING_SET_TASK_DONEOutputMessage"/>
+    </operation>
+  <operation name="PASTING_SAVE_PRINT_FACT">
+      <input message="tns:PASTING_SAVE_PRINT_FACTInputMessage"/>
+      <output message="tns:PASTING_SAVE_PRINT_FACTOutputMessage"/>
+    </operation>
+  <operation name="GET_PORTION_INFO">
+      <input message="tns:GET_PORTION_INFOInputMessage"/>
+      <output message="tns:GET_PORTION_INFOOutputMessage"/>
+    </operation>
+  <operation name="GET_PORTIONS_INFO">
+      <input message="tns:GET_PORTIONS_INFOInputMessage"/>
+      <output message="tns:GET_PORTIONS_INFOOutputMessage"/>
+    </operation>
+  <operation name="CVS_VERSION">
+      <input message="tns:CVS_VERSIONInputMessage"/>
+      <output message="tns:CVS_VERSIONOutputMessage"/>
+    </operation>
+  </portType>
+
+  <binding name="PI_MOBILE_SERVICEBinding"
+           type="tns:PI_MOBILE_SERVICEPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="WARE_SUBGROUP_INFO">
+      <soap:operation
+ soapAction="WARE_SUBGROUP_INFO"/>
+      <input>
+        <soap:body parts="parameters" use="literal"/>
+      </input>
+      <output>
+        <soap:body parts="parameters" use="literal"/>
+      </output>
+    </operation>
+    <operation name="WARE_PRICE_INFO">
+      <soap:operation
+ soapAction="WARE_PRICE_INFO"/>
+      <input>
+        <soap:body parts="parameters" use="literal"/>
+      </input>
+      <output>
+        <soap:body parts="parameters" use="literal"/>
+      </output>
+    </operation>
+    <operation name="WARE_INFO">
+      <soap:operation
+ soapAction="WARE_INFO"/>
+      <input>
+        <soap:body parts="parameters" use="literal"/>
+      </input>
+      <output>
+        <soap:body parts="parameters" use="literal"/>
+      </output>
+    </operation>
+    <operation name="WARE_IMAGE_INFO">
+      <soap:operation
+ soapAction="WARE_IMAGE_INFO"/>
+      <input>
+        <soap:body parts="parameters" use="literal"/>
+      </input>
+      <output>
+        <soap:body parts="parameters" use="literal"/>
+      </output>
+    </operation>
+    <operation name="WARE_GROUP_INFO">
+      <soap:operation
+ soapAction="WARE_GROUP_INFO"/>
+      <input>
+        <soap:body parts="parameters" use="literal"/>
+      </input>
+      <output>
+        <soap:body parts="parameters" use="literal"/>
+      </output>
+    </operation>
+    <operation name="WARE_BARCODE_INFO">
+      <soap:operation
+ soapAction="WARE_BARCODE_INFO"/>
+      <input>
+        <soap:body parts="parameters" use="literal"/>
+      </input>
+      <output>
+        <soap:body parts="parameters" use="literal"/>
+      </output>
+    </operation>
+    <operation name="USER_INFO">
+      <soap:operation
+ soapAction="USER_INFO"/>
+      <input>
+        <soap:body parts="parameters" use="literal"/>
+      </input>
+      <output>
+        <soap:body parts="parameters" use="literal"/>
+      </output>
+    </operation>
+    <operation name="TRADEMARK_INFO">
+      <soap:operation
+ soapAction="TRADEMARK_INFO"/>
+      <input>
+        <soap:body parts="parameters" use="literal"/>
+      </input>
+      <output>
+        <soap:body parts="parameters" use="literal"/>
+      </output>
+    </operation>
+    <operation name="SET_INC_DONE">
+      <soap:operation
+ soapAction="SET_INC_DONE"/>
+      <input>
+        <soap:body parts="parameters" use="literal"/>
+      </input>
+      <output>
+        <soap:body parts="parameters" use="literal"/>
+      </output>
+    </operation>
+    <operation name="RESET_INC_DONE">
+      <soap:operation
+ soapAction="RESET_INC_DONE"/>
+      <input>
+        <soap:body parts="parameters" use="literal"/>
+      </input>
+      <output>
+        <soap:body parts="parameters" use="literal"/>
+      </output>
+    </operation>
+    <operation name="PASTING_WARES_INFO">
+      <soap:operation
+ soapAction="PASTING_WARES_INFO"/>
+      <input>
+        <soap:body parts="parameters" use="literal"/>
+      </input>
+      <output>
+        <soap:body parts="parameters" use="literal"/>
+      </output>
+    </operation>
+    <operation name="PASTING_TASK_INFO">
+      <soap:operation
+ soapAction="PASTING_TASK_INFO"/>
+      <input>
+        <soap:body parts="parameters" use="literal"/>
+      </input>
+      <output>
+        <soap:body parts="parameters" use="literal"/>
+      </output>
+    </operation>
+    <operation name="PASTING_SET_TASK_DONE">
+      <soap:operation
+ soapAction="PASTING_SET_TASK_DONE"/>
+      <input>
+        <soap:body parts="parameters" use="literal"/>
+      </input>
+      <output>
+        <soap:body parts="parameters" use="literal"/>
+      </output>
+    </operation>
+    <operation name="PASTING_SAVE_PRINT_FACT">
+      <soap:operation
+ soapAction="PASTING_SAVE_PRINT_FACT"/>
+      <input>
+        <soap:body parts="parameters" use="literal"/>
+      </input>
+      <output>
+        <soap:body parts="parameters" use="literal"/>
+      </output>
+    </operation>
+    <operation name="GET_PORTION_INFO">
+      <soap:operation
+ soapAction="GET_PORTION_INFO"/>
+      <input>
+        <soap:body parts="parameters" use="literal"/>
+      </input>
+      <output>
+        <soap:body parts="parameters" use="literal"/>
+      </output>
+    </operation>
+    <operation name="GET_PORTIONS_INFO">
+      <soap:operation
+ soapAction="GET_PORTIONS_INFO"/>
+      <input>
+        <soap:body parts="parameters" use="literal"/>
+      </input>
+      <output>
+        <soap:body parts="parameters" use="literal"/>
+      </output>
+    </operation>
+    <operation name="CVS_VERSION">
+      <soap:operation
+ soapAction="CVS_VERSION"/>
+      <input>
+        <soap:body parts="parameters" use="literal"/>
+      </input>
+      <output>
+        <soap:body parts="parameters" use="literal"/>
+      </output>
+    </operation>
+  </binding>
+
+  <service name="PI_MOBILE_SERVICEService">
+    <documentation>Oracle Web Service</documentation>
+    <port name="PI_MOBILE_SERVICEPort" binding="tns:PI_MOBILE_SERVICEBinding">
+       <soap:address
+             location="http://sm-tnshop12.office.custis.ru:8080/orawsv/MAA_WEB/PI_MOBILE_SERVICE"/>
+     </port>
+  </service>
+
+</definitions>

@@ -1,0 +1,475 @@
+Спецификация WsMobileThinBusinessLogic: {
+
+	Информация о товаре: {
+		Контроллер: gk.xrg_bo.boserver.bl.process.xrg_mobile_service.GoodInfoService,
+		Базовый URL: "/mobile/thin/goodInfo",
+		Сервисы: [
+			get: {
+				Method: PUT,
+				url: "",
+				request: GoodInfoRequest.json,
+				response: GoodInfo.json,
+				description: "Возвращает информацию о товаре, ID которого хранится в GoodInfoRequest"
+			},
+			getMobilePosGoodInfo: {
+				Method: POST,
+				url: "/mobilePosGoodInfo",
+				request: GoodInfoRequest.json,
+				response: MobilePosGoodInfo.json,
+				description: "Возвращает информацию о товаре"
+			}
+		]
+	},
+
+	Приемка товара: {
+		Контроллер: gk.xrg_bo.boserver.bl.process.xrg_mobile_service.GoodsReceiptController,
+		Базовый URL: "/mobile/thin/goodsdelivery",
+		Сервисы: [
+			getGoodsReceiptFromExternal: {
+				url: "external/list",
+				response: GoodsReceiptFromExternalHeader.json[],
+				description: "Возвращает список документов приемки от внешних поставщиков"
+			},
+			getGoodsReceiptPositionList: {
+				url: "external/positionList",
+				request: GoodsReceiptFromInternalHeader.json,
+				response: GoodsReceiptPosition.json[],
+				description: "Возвращает список позиций для документа приемки от внешного поставщика"
+			},
+			getDocSummary: {
+				url: "external/docSummary",
+				request: GoodsReceiptFromExternalHeader.json,
+				response: GoodsReceiptDocSummary.json[],
+				description: "Возвращает итоговую информацию по приемке от внешнего поставщика"
+			},
+			getGoodsReceiptPosition: {
+				url: "external/getPosition",
+				request: GoodsReceiptPosition.json,
+				response: GoodsReceiptPosition.json,
+				description: "Возвращает информацию по позиции в документе приемки от внешнего поставщика"
+			},
+			saveGoodsReceiptPosition: {
+				url: "external/savePosition",
+				request: GoodsReceiptPosition.json,
+				response: GoodsReceiptDocSummary.json,
+				description: "Сохраняет новую позицию с MDE в документе приемки от внешнего поставщика"
+			},
+			getGoodsReceiptFromInternal: {
+				url: "internal/list",
+				response: GoodsReceiptFromInternalHeader.json[],
+				description: "Возвращает список документов приемки от внутренних поставщиков" 	
+			},
+			getGoodsReceiptPalletList: {
+				url: "internal/palletList",
+				request: GoodsReceiptFromInternalHeader.json,
+				response: Pallet.json[],
+				description: "Возвращает список паллет для документа приемки от внутреннего поставщика"
+			},
+			getGoodsReceiptPallet: {
+				url: "internal/getPallet",
+				request: Pallet.json,	
+				response: Pallet.json,
+				description: "Возвращает информацию по паллете в документе приемки от внутреннего поставщика"
+			},
+			saveGoodsReceiptPallet: {
+				url: "internal/savePallet",
+				request: Pallet.json,
+				response:  Pallet.json[],
+				description: "Сохраняет паллету с MDE в документе приемки, возвращает список паллет"
+			}
+		]
+	},
+
+	Верификация ценников: {
+		Контроллер: gk.xrg_bo.boserver.bl.process.xrg_mobile_service.PriceTagVerificationController,
+		Базовый URL: "/mobile/thin/ptverification",
+		Сервисы: [
+			getDocList: {
+				url: "list",
+				response: PriceTagVerificationHeader.json[],
+				description: "Возвращает список документов верификации ценников"
+			},
+			addItem: {
+				url: "addItem",
+				request: PriceTagVerificationResult.json,
+				response: PriceTagVerificationResponse.json,
+				description: "Добавляет результат проверки ценника товара в документ"
+			},
+			getPosList: {
+				url: "listPos",
+				request: PriceTagVerificationResponse.json,
+				response: PriceTagVerificationPosition.json[],
+				description: "Возвращает список позиций из документа верификации ценников"
+			},
+			printLabels: {
+				url: "print",
+				request: PriceTagPrintRequest.json,
+				response: PriceTagPrintResponse.json,
+				description: "Отправляет список ценников на печать"
+			}
+		]
+	},
+
+	Сервис печати: {
+		Контроллер: gk.xrg_bo.boserver.bl.process.xrg_mobile_service.PrinterController,
+		Базовый URL: "/mobile/thin/printer",
+		Сервисы: [
+			get: {
+				url: "list",
+				response: PrinterList.json,
+				description: "Возвращает список принтеров"
+			},
+			listLayouts: {
+				url: "layouts",
+				response: LayoutList.json,
+				description: "Возвращает список шаблонов"
+			},
+			print: {
+				url: "print",
+				request: PrintRequest.json,
+				response: Boolean,
+				description: "Отправляет ценники на печать в LPP"
+			},
+			print-direct: {
+				url: "print-direct",
+				request: PrintRequest.json,
+				response: Boolean,
+				description: "Отправляет ценники на сервис мобильной печати (или на LPP, если указан не мобильный принтер)"
+			}
+		]
+	},
+
+	Акты разногласий: {
+		Контроллер: gk.xrg_bo.boserver.bl.process.xrg_mobile_service.ReclamationController,
+		Базовый URL: "/mobile/thin/recl",
+		Сервисы: [
+			getReleasedInternalReceipts: {
+				url: "rcpts",
+				response: GoodReceiptIntHeader.json[],
+				description: "Возвращает список проведенных документов приемки от внутренних поставщиков"
+			},
+			getReceiptPalletList: {
+				url: "rcpts/pallet/list",
+				request: ReclamationHeader.json,
+				response: ReclamationPallet.json[],
+				description: "Возвращает список паллет для документа приемки от внутреннего поставщика"
+			},
+			getReclamations: {
+				url: "list",
+				response: ReclamationHeader.json[],
+				description: "Возвращает список актов разногласий" 
+			},
+			createReclamation: {
+				url: "create",
+				request: ReclamationHeader.json,
+				response: ReclamationHeader,
+				description: "Создает акт разногласий"
+			},
+			deleteReclamation: {
+				url: "delete",
+				request: ReclamationHeader.json,
+				response: Boolean,
+				description: "Удаляет акт разногласий"
+			},
+			getPallet: {
+				url: "pallet",
+				request: ReclamationHeader.json,
+				response: ReclamationPallet,
+				description: "Возвращает паллету для документа приемки от внутреннего поставщика"
+			},
+			addPallet: {
+				url: "pallet/add",
+				request: ReclamationPallet.json,
+				response: Boolean,
+				description: "Добавляет паллету в акт разногласий"
+			},
+			getPalletList: {
+				url: "pallet/list",
+				request: ReclamationHeader.json,
+				response: ReclamationPallet.json[],
+				description: "Возвращает список паллет в акте разногласий"
+			},
+			deletePallet: {
+				url: "pallet/delete",
+				request: ReclamationPallet.json,
+				response: Boolean.json,
+				description: "Удаляет паллету из акта разногласий"
+			},
+			getPalletPosition: {
+				url: "pallet/position",
+				request: ReclamationPalletPosition.json,
+				response: ReclamationPalletPosition.json,
+				description: "Возвращает позицию из паллеты в акте разногласий"
+			},
+			getPalletPositions: {
+				url: "pallet/positions",
+				request: ReclamationPallet.json,
+				response: ReclamationPalletPosition.json[],
+				description: "Возвращает список позиций в паллете в акте разногласий"
+			},
+			savePalletPosition: {
+				url: "pallet/position/save",
+				request: ReclamationPalletPosition.json,
+				response: ReclamationPalletPosition.json,
+				description: "Сохраняет позицию в паллете в акте разногласий"
+			},
+			deletePalletPosition: {
+				url: "pallet/position/delete",
+				request: ReclamationPalletPosition.json,
+				response: ReclamationPallet.json,
+				description: "Удаляет позицию из паллеты"
+			},
+			deleteZeroPositions: {
+				url: "pallet/positions/delete",
+				request: ReclamationHeader.json,
+				response: ReclamationPalletPosition.json[],
+				description: "Удаляет позиции из паллеты в акте разногласий с нулевым расхождением и возвращает список оставшихся позиций"
+			},
+		]
+	},
+
+	Инвентаризация: {
+		Контроллер: gk.xrg_bo.boserver.bl.process.xrg_mobile_service.StockTakingController,
+		Базовый URL: "mobile/thin/inv",
+		Сервисы: [
+			getLocalStockTakingList: {
+				url: "local",
+				response: StockTaking.json[],
+				description: "Возвращает список локальных инвентаризаций"
+			},
+			getLocalStockTakingSummary: {
+				url: "local/summary",
+				request: StockTaking.json,
+				response: StockTakingSummary.json,
+				description: "Возвращает итоговую информацию по локальной инвентаризации"
+			},
+			getLocalStockTakingPositions: {
+				url: "local/positions",
+				request: StockTaking.json,
+				response: StockTakingPosition.json[],
+				description: "Возвращает список позиций локальной инвентаризации"
+			},
+			getLocalStockTakingPosition: {
+				url: "local/position",
+				request: StockTakingPositionRequest.json,
+				response: StockTakingPosition.json,
+				description: "Возвращает информацию о позиции в локальной инвентаризации"
+			},
+			saveLocalStockTakingPosition: {
+				url: "local/position/save",
+				request: StockTakingPositionSaveRequest.json,
+				response: StockTakingSummary,
+				description: "Сохраняет новый товар в локальной инвентаризации, возвращает итоговую информацию по ней"
+			},
+			deleteLocalStockTakingPosition: {
+				url: "local/position/delete",
+				request: StockTakingPositionSaveRequest.json,
+				response: StockTakingSummary.json,
+				description: "Удаляет позицию из локальной инвентаризации"
+			},
+			getFullStockTakingList: {
+				url: "full",
+				response: StockTaking.json[],
+				description: "Возвращает список полных инвентаризаций"
+			},
+			getEmplloyees: {
+				url: "full/employees",
+				request: StockTaking.json,
+				response: StockTakingCounter.json[],
+				description: "Возвращает список счетчиков полной инвентаризации"
+			},
+			getEmplloyee: {
+				url: "full/employee",
+				request: StockTakingCounter.json,
+				response: StockTakingCounter.json,
+				description: "Возвращает информацию о счетчике полной инвентаризации"
+			},
+			getAreas: {
+				url: "full/areas",
+				request: StockTaking.json,
+				response: StockTakingArea.json[],
+				description: "Возвращает список зон подсчета полной инвентаризации"
+			},
+			getArea: {
+				url: "full/area",
+				request: StockTakingArea.json,
+				response: StockTakingArea,
+				description: "Возвращает информацию о зоне подсчета полной инвентаризации"
+			},
+			getCountings: {
+				url: "full/countings",
+				request: StockTakingCoutingsRequest.json,
+				response: Integer[],
+				description: "Возвращает список номеров подсчетов полной инвентаризации"
+			},
+			getFullStockTakingSummary: {
+				url: "full/summary",
+				request: StockTakingItemParams.json,
+				response: FullStockTakingSummary.json,
+				description: "Возвращает итоговую информацию по полной инвентаризации"
+			},
+			getFullStockTakingPositions: {
+				url: "full/positions",
+				request: StockTakingItemParams.json,
+				response: StockTakingPosition.json[],
+				description: "Возвращает список позиций полной инвентаризации"
+			},
+			getFullStockTakingPosition: {
+				url: "full/position",
+				request: StockTakingItemParams.json,
+				response: StockTakingPosition.json,
+				description: "Возвращает информацию по позиции в полной инвентаризации"
+			},
+			saveFullStockTakingPosition: {
+				url: "full/position/save",
+				request: FullStockTakingPositionSaveRequest.json,
+				response: FullStockTakingSummary.json,
+				description: "Сохраняет новую позицию в полной инвентаризации, возвращает итоговую информацию по ней"
+			},
+			deleteFullStockTakingPosition: {
+				url: "full/position/delete",
+				request: FullStockTakingPositionSaveRequest.json,
+				response: FullStockTakingSummary.json,
+				description: "Удаляет позицию из полной инвентаризации"
+			},
+			releaseFullStockTakingCounting: {
+				url: "full/counting/release",
+				request: StockTakingCounting.json,
+				response: Boolean,
+				description: "Проводит подсчет полной инвентаризации"
+			}
+		]
+	},
+
+	Информация о магазине: {
+		Контроллер: gk.xrg_bo.boserver.bl.process.xrg_mobile_service.StoreDataController,
+		Базовый URL: "/mobile/thin/store",
+		Сервисы: [
+			getStoreData: {
+				url: "data",
+				response: StoreData.json,
+				description: "Возвращает информацию о магазине: номер магазина"
+			}
+		]
+	},
+
+	Сервис авторизации: {
+		Контроллер: gk.xrg_bo.boserver.bl.process.xrg_mobile_service.UserController,
+		Базовый URL: "/mobile/thin/user",
+		Сервисы: [
+			login: {
+				url: "login",
+				request: LoginParam.json,
+				response: LoginResponse.json,
+				description: "Выполняет авторизацию пользователя по логин/паролю. Возвращает sessionToken."
+			}
+		]
+	},
+
+	Возврат товара: {
+		Контроллер: gk.xrg_bo.boserver.bl.process.xrg_mobile_service.TransferRequestController,
+		Базовый URL: "mobile/thin/transferrequest",
+		Сервисы: [
+			getTransferRequestDocumentList: {
+				url: "list",
+				response: ClientTransferRequestDocument.json[],
+				description: "Возвращает список заявок на возврат товаров"
+			},
+			getTransferRequestDocument: {
+				url: "summary",
+				request: ClientTransferRequestDocument.json,
+				response: ClientTransferRequestDocument.json,
+				description: "Возвращает детальную информацию по заявке на возврат товара"
+			},
+			getTransferRequestDocumentPositionList: {
+				url: "positions/list",
+				request: ClientTransferRequestDocument.json,
+				response: ClientTransferRequestPosition.json[],
+				description: "Возвращает список позиций в заявке на возврат товара"
+			},
+			getTransferRequestDocumentPosition: {
+				url: "positions/get",
+				request: ClientTransferRequestPosition.json,
+				response: ClientTransferRequestPosition.json,
+				description: "Возвращает информацию по позиции в заявке на возврат товара"
+			},
+			updateTransferRequestDocumentPosition: {
+				url: "positions/update",
+				request: ClientTransferRequestPosition.json,
+				response: ClientTransferRequestDocument.json,
+				description: "Обновляет позицию в заявке на возврат товара. Возвращает документ заявки"
+			},
+			deleteTransferRequestDocumentPosition: {
+				url: "positions/delete",
+				request: ClientTransferRequestPosition.json,
+				response: ClientTransferRequestDocument.json,
+				description: "Удаляет позицию из заявки на возврат товара. Возвращает документ заявки"
+			},
+			createTransferRequestDocumentPosition: {
+				url: "positions/create",
+				request: ClientTransferRequestPosition.json,
+				response: ClientTransferRequestDocument.json,
+				description: "Создает позицию в заявке на возврат товара. Возвращает документ заявки"
+			}
+		]
+	},
+
+	Списания товаров: {
+		Контроллер: gk.xrg_bo.boserver.bl.process.xrg_mobile_service.WriteOffController,
+		Базовый URL: "mobile/thin/writeoff",
+		Сервисы: [
+			getWriteOffsList: {
+				url: "list",
+				response: WriteOff.json[],
+				description: "Возвращает список документов списания"
+			},
+			getWriteOffReasonsList: {
+				url: "reasons",
+				response: WriteOffReason.json[],
+				description: "Возвращает список причин списания"
+			},
+			createWriteOff: {
+				url: "create",
+				request: WriteOff.json,
+				response: WriteOff.json,
+				description: "Создает документ списания"
+			},
+			deleteWriteOff: {
+				url: "delete",
+				request: WriteOff.json,
+				response: Boolean,
+				description: "Удаляет документ списания"
+			},
+			getWriteOffSummary: {
+				url: "summary",
+				request: WriteOff.json,
+				response: WriteOff.json,
+				description: "Возвращает итоговую информацию по списанию"
+			},
+			getWriteOffPositions: {
+				url: "positions",
+				request: WriteOff.json,
+				response: WriteOffItem.json[],
+				description: "Возвращает список позиций документа списания"
+			},
+			getItemInfo: {
+				url: "item",
+				request: WriteOffItemRequest.json,
+				response: WriteOffItem.json,
+				description: "Возвращает информацию о товаре в документе списания"
+			},
+			savePosition: {
+				url: "position/save",
+				request: WriteOffItem.json,
+				response: WriteOff.json,
+				description: "Сохраняет позицию в документе списания"
+			},
+			deletePosition: {
+				url: "position/delete",
+				request: WriteOffItem.json,
+				response: WriteOff.json,
+				description: "Удаляет позицию из документа списания"
+			}
+		]
+	}
+}

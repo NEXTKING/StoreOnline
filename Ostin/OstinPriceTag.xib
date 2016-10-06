@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="lMK-5k-nn9" customClass="OstinPriceTag">
+            <rect key="frame" x="0.0" y="0.0" width="190" height="147"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J3l-ai-XAa" customClass="AntiAliasView">
+                    <rect key="frame" x="-5" y="0.0" width="81" height="28"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="28" id="JQE-Ci-aXR"/>
+                        <constraint firstAttribute="width" constant="81" id="o5I-Wz-NM7"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="LC6O3402" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHS-9C-CXR" customClass="AntiAliasingLabel">
+                    <rect key="frame" x="0.0" y="29" width="58" height="9"/>
+                    <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="8"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="AC021" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gAb-7P-NQN" customClass="AntiAliasingLabel">
+                    <rect key="frame" x="59" y="28" width="39" height="10"/>
+                    <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="8"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="LC6O34 02 One Size Платок Женск., Kerchief, молочный, р.One Size" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VcC-rv-G9m" customClass="AntiAliasingLabel">
+                    <rect key="frame" x="1" y="39" width="163" height="21"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="8"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nbd-8K-37K">
+                    <rect key="frame" x="0.0" y="38" width="190" height="1"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Цены указаны в рублях:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C06-Og-9Gs" customClass="AntiAliasingLabel">
+                    <rect key="frame" x="1" y="59" width="94" height="12"/>
+                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="8"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="699,-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q11-uw-JI0" customClass="AntiAliasingLabel">
+                    <rect key="frame" x="0.0" y="70" width="98" height="24"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wuU-jL-AqW" customClass="AntiAliasingLabel">
+                    <rect key="frame" x="0.0" y="93" width="190" height="54"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <string key="text">Состав: 100% полиэстер Сделано в Китае Изготовлено 10.2015. ТР ТС 017/2011. Импортер: ООО "Остин" 117420, Россия, г. Москва, ул. Профсоюзная, д.61 А, тел. 974 78 72. Изготовитель: Нинбо Цяньчжень Имп Энд Эксп. Ко., Лтд 9 эт., здание "Чайна Истэрн Эйрлайнс", 796, Чжуншань, Восточная Роуд, Нинбо, Китай</string>
+                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="7"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="elF-zg-KRb">
+                    <rect key="frame" x="0.0" y="95" width="190" height="1"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="eac.png" translatesAutoresizingMaskIntoConstraints="NO" id="0hg-Xm-09K">
+                    <rect key="frame" x="166" y="2" width="24" height="24"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Размер" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axP-6x-gXD" customClass="AntiAliasingLabel">
+                    <rect key="frame" x="120" y="59" width="70" height="12"/>
+                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="8"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Б/р" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBb-55-3u5" customClass="AntiAliasingLabel">
+                    <rect key="frame" x="115" y="68" width="75" height="17"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Б/р" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAL-5v-gPG" customClass="AntiAliasingLabel">
+                    <rect key="frame" x="115" y="84" width="75" height="12"/>
+                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="8"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="09.06.2016" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bgj-NU-Yvc" customClass="AntiAliasingLabel">
+                    <rect key="frame" x="145" y="28" width="45" height="10"/>
+                    <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="8"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="5622 601" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHg-wx-NLA" customClass="AntiAliasingLabel">
+                    <rect key="frame" x="99" y="28" width="43" height="10"/>
+                    <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="8"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="J3l-ai-XAa" firstAttribute="leading" secondItem="lMK-5k-nn9" secondAttribute="leading" constant="-5" id="do0-9z-idg"/>
+                <constraint firstItem="J3l-ai-XAa" firstAttribute="top" secondItem="lMK-5k-nn9" secondAttribute="top" id="xD2-xZ-Aym"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="articleLabel" destination="zHS-9C-CXR" id="lHa-LM-hbu"/>
+                <outlet property="barcodeWidthConstraint" destination="o5I-Wz-NM7" id="E8C-kS-75f"/>
+                <outlet property="barocdeImage" destination="J3l-ai-XAa" id="zhv-ry-mMw"/>
+                <outlet property="bigSizeLabel" destination="fBb-55-3u5" id="PmI-93-MYW"/>
+                <outlet property="dateLabel" destination="Bgj-NU-Yvc" id="7Vy-BK-sti"/>
+                <outlet property="descriptionLabel" destination="wuU-jL-AqW" id="MZi-NM-qno"/>
+                <outlet property="dropLabel" destination="gAb-7P-NQN" id="lmy-j3-Jky"/>
+                <outlet property="nameLabel" destination="VcC-rv-G9m" id="jec-aX-saI"/>
+                <outlet property="priceLabel" destination="q11-uw-JI0" id="ntz-7l-6Wj"/>
+                <outlet property="shopCodeLabel" destination="hHg-wx-NLA" id="wAc-s5-cNR"/>
+                <outlet property="smallSizeLabel" destination="FAL-5v-gPG" id="gl6-Mb-pOS"/>
+            </connections>
+            <point key="canvasLocation" x="325" y="311.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="eac.png" width="75" height="61"/>
+    </resources>
+</document>

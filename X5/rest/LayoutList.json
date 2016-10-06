@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Список шаблонов печати",
+  "type": "object",
+  "properties": {
+    "layouts": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Название шаблона печати"
+      },
+      "description": "Список шаблонов печати"
+    }
+  },
+  "required": [
+    "layouts"
+  ]
+}

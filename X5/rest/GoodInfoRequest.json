@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Запрос информации о товаре",
+  "type": "object",
+  "properties": {
+    "ean": {
+      "type": "string",
+      "description": "EAN/PLU"
+    }
+  },
+  "required": [
+    "ean"
+  ]
+}

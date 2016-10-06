@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Параметры аутентификации",
+  "type": "object",
+  "properties": {
+    "Login": {
+      "type": "string",
+      "description": "Имя пользователя"
+    },
+    "Password": {
+      "type": "string",
+      "description": "Пароль"
+    },
+    "StationId" : {
+      "type" : "string",
+      "description" : ""
+    }
+  },
+  "required": [
+    "Login",
+    "Password",
+    "StationId"
+  ]
+}

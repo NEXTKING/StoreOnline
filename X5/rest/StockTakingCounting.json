@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "",
+  "type" : "object",
+  "properties" : {
+    "id" : {
+      "type" : "string",
+      "description" : ""
+    },
+    "area_number" : {
+      "type" : "string"
+    },
+    "counting_number" : {
+      "type" : "integer"
+    },
+    "employee_number" : {
+      "type" : "integer"
+    }
+  },
+  "required" : [
+    "id",
+    "area_number",
+    "counting_number",
+    "employee_number"
+  ]
+}

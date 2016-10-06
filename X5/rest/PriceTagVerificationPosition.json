@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Позиция документа верификации ценников",
+  "type": "object",
+  "properties": {
+    "Article": {
+      "type": "string",
+      "description": "PLU"
+    },
+    "NameGoods": {
+      "type": "string",
+      "description": "Наименование товара"
+    },
+    "verificationStatus": {
+      "type": "string",
+      "description": "Результат проверки"
+    }
+  },
+  "required": [
+    "Article",
+    "NameGoods",
+    "verificationStatus"
+  ]
+}

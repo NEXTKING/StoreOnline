@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Позиция заявки на возврат товара",
+  "type": "object",
+  "properties": {
+    "localId" : {
+      "type" : "string",
+      "description" : "Внутренний номер документа заявки на возврат"
+    },
+    "positionId" : {
+      "type" : "string",
+      "description" : "Внутренний номер позиции в документе заявка на возврат"
+    },
+    "documentNumber" : {
+      "type" : "string",
+      "description" : "Номер документа заявки на возврат"
+    },
+    "itemId" : {
+      "type" : "string",
+      "description" : "Артикул"
+    },
+    "itemName" : {
+      "type" : "string",
+      "description" : "Наименование товара"
+    },
+    "unitOfMeasure" : {
+      "type" : "string",
+      "description" : "Единица измерения"
+    },
+    "quantity" : {
+      "type" : "number",
+      "description" : "Количество"
+    },
+    "difference" : {
+      "type" : "number",
+      "description" : "Добавочное количество"
+    },
+    "stock" : {
+      "type" : "number",
+      "description" : "Текущий остаток"
+    }
+  },
+  "required": [
+    "documentNumber",
+    "itemId",
+    "itemName",
+    "unitOfMeasure",
+    "quantity",
+    "difference",
+    "stock"
+  ]
+}
+

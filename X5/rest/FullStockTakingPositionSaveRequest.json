@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "",
+  "type" : "object",
+  "properties" : {
+    "id" : {
+      "type" : "string",
+      "description" : "Идентификатор инвентаризации"
+    },
+    "area_number" : {
+      "type" : "string"
+    },
+    "counting_number" : {
+      "type" : "integer"
+    },
+    "employee_number" : {
+      "type" : "integer"
+    },
+    "Article" : {
+      "type" : "string",
+      "description" : "Артикул"
+    },
+    "quantity" : {
+      "type" : "number",
+      "description" : "Количество"
+    },
+    "difference" : {
+      "type" : "number",
+      "description" : "Добавочное количество"
+    }
+  },
+  "required" : [
+    "id",
+    "area_number",
+    "counting_number",
+    "employee_number",
+    "Article",
+    "quantity",
+    "difference"
+  ]
+}

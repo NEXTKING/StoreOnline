@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Документ приемки от внутреннего поставщика",
+  "type": "object",
+  "properties": {
+    "docNum" : {
+      "type" : "string",
+      "description" : "Номер документа"
+    },
+    "ttn" : {
+      "type" : "string",
+      "description" : "№ ТТН"
+    },
+    "supplier" : {
+      "type" : "string",
+      "description" : "Поставщик"
+    },
+    "reclamationType" : {
+      "type" : "string",
+      "description" : "Тип акта разногласий"
+    },
+    "palletCount" : {
+      "type" : "integer",
+      "description" : "Количество паллет в акте"
+    },
+    "targetPalletCount" : {
+      "type" : "integer",
+      "description" : "Количество паллет в документе приемки"
+    },
+    "id" : {
+      "type" : "string",
+      "description" : "Идентификатор"
+    },
+    "reclamationTypeCode" : {
+      "type" : "string",
+      "description" : "Код типа акта разногласий"
+    },
+    "allPositions" : {
+      "type" : "boolean",
+      "description" : "Копировать все позиции документа приемки"
+    },
+    "palletNumber" : {
+      "type" : "string",
+      "description" : "Номер паллета"
+    }
+  },
+  "required": [
+    "docNum",
+    "ttn",
+    "supplier",
+    "reclamationType",
+    "palletCount",
+    "targetPalletCount",
+    "id",
+    "reclamationTypeCode",
+    "allPositions",
+    "palletNumber"
+  ]
+}
+

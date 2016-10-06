@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Документ приемки от внешнего поставщика",
+  "type": "object",
+  "properties": {
+    "orderDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Дата заказа"
+    },
+    "supplier": {
+      "type": "string",
+      "description": "Поставщик"
+    },
+    "deliveryDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Дата поставки"
+    },
+    "orderNumber": {
+      "type": "string",
+      "description": "Номер заказа"
+    },
+    "tn": {
+      "type": "string",
+      "description": "Номер ТН"
+    },
+    "positionCount": {
+      "type": "integer",
+      "description": "Количество позиций"
+    }
+  },
+  "required": []
+}
+

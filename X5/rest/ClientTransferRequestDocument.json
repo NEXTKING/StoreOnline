@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Заявка на возврат товара",
+  "type": "object",
+  "properties": {
+    "localId" : {
+      "type" : "string",
+      "description" : "Внутренний номер документа заявки на возврат"
+    },
+    "documentNumber" : {
+      "type" : "string",
+      "description" : "Номер документа заявки на возврат"
+    },
+    "documentType" : {
+      "type" : "string",
+      "description" : "Вид заявки"
+    },
+    "supplierCode" : {
+      "type" : "string",
+      "description" : "Код получателя"
+    },
+    "supplierName" : {
+      "type" : "string",
+      "description" : "Получатель"
+    },
+    "positionCount" : {
+      "type" : "integer",
+      "description" : "Количество позиций"
+    },
+    "quantity" : {
+      "type" : "integer",
+      "description" : "Суммарное количество товара по документу"
+    },
+    "weight" : {
+      "type" : "number",
+      "description" : "Суммарный вес товара по документу"
+    }
+  },
+  "required": [
+    "documentNumber",
+    "documentType",
+    "supplierCode",
+    "supplierName",
+    "positionCount",
+    "quantity",
+    "weight"
+  ]
+}
+

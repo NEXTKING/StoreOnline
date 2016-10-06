@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Список принтеров",
+  "type": "object",
+  "properties": {
+    "printers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Наименование принтера"
+      },
+      "description": "Список принтеров"
+    }
+  },
+  "required": [
+    "printers"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Общая информация по инвентаризации",
+  "type" : "object",
+  "properties" : {
+    "numDoc" : {
+      "type" : "string",
+      "description" : "Номер документа списания"
+    },
+    "date" : {
+      "type" : "string",
+      "format" : "date-time",
+      "description" : "Дата документа"
+    },
+    "reasonCode" : {
+      "type" : "string",
+      "description" : "Код причины списания"
+    },
+    "reason" : {
+      "type" : "string",
+      "description" : "Причина списания"
+    },
+    "posCount" : {
+      "type" : "integer",
+      "description" : "Количество позиций документа"
+    },
+    "totalAmmount" : {
+      "type" : "number",
+      "description" : "Сумма"
+    },
+    "deleted" : {
+      "type" : "boolean",
+      "description" : "Документ был удален"
+    }
+  },
+  "required" : [
+    "numDoc",
+    "date",
+    "reasonCode",
+    "reason",
+    "posCount",
+    "totalAmmount",
+    "deleted"
+  ]
+}

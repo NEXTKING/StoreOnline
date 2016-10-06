@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Документ верификации ценников",
+  "type": "object",
+  "properties": {
+    "numDoc": {
+      "type": "integer",
+      "description": "Номер документа"
+    },
+    "createDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Дата создания"
+    },
+    "positionCount": {
+      "type": "integer",
+      "description": "Количество позиций для печати"
+    },
+    "printedCount": {
+      "type": "integer",
+      "description": "Количество распечатанных позиций"
+    }
+  },
+  "required": [
+    "nomDoc",
+    "createDate",
+    "positionCount",
+    "printedCount"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Результат добавления позиции в документ верификации ценников",
+  "type": "object",
+  "properties": {
+    "documentNumber": {
+      "type": "integer",
+      "description": "Номер документа"
+    },
+    "summary": {
+      "type": "object",
+      "properties": {
+        "okLabelCount": {
+          "type": "integer",
+          "description": "Количество корректных ценников"
+        },
+        "wrongLabelCount": {
+          "type": "integer",
+          "description": "Количество некорректных ценников"
+        },
+        "missingArticleCount": {
+          "type": "integer",
+          "description": "Количество ценников при отсутствующем товаре"
+        },
+        "missingLabelCount": {
+          "type": "integer",
+          "description": "Количество отсутствующих ценников"
+        }
+      },
+      "required": [
+        "okLabelCount",
+        "wrongLabelCount",
+        "missingArticleCount",
+        "missingLabelCount"
+      ],
+      "description": "Общая информация по документу верификации ценников"
+    }
+  },
+  "required": [
+    "documentNumber",
+    "summary"
+  ]
+}

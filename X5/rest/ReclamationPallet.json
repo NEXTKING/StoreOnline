@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Документ приемки от внутреннего поставщика",
+  "type": "object",
+  "properties": {
+    "palletNumber" : {
+      "type" : "string",
+      "description" : "Номер паллета"
+    },
+    "id" : {
+      "type" : "string",
+      "description" : "Идентификатор документа"
+    },
+    "positionCount" : {
+      "type" : "integer",
+      "description" : "Количество позиций"
+    },
+    "editedPositions" : {
+      "type" : "integer",
+      "description" : "Количество отредактированных позиций"
+    },
+    "allPositions" : {
+      "type" : "boolean",
+      "description" : "Добавить все позиции документа"
+    }
+  },
+  "required": [
+    "palletNumber",
+    "id",
+    "positionCount",
+    "editedPositions",
+    "allPositions"
+  ]
+}
+

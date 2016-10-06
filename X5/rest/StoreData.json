@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Результат верификации ценников",
+  "type": "object",
+  "properties": {
+    "boNumber": {
+      "type": "string",
+      "description": ""
+    }
+  },
+  "required": [
+    "boNumber"
+  ]
+}

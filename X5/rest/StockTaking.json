@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Документ инвентаризации",
+  "type": "object",
+  "properties": {
+    "number" : {
+      "type" : "string",
+      "description" : "Номер инвентаризации"
+    },
+    "name" : {
+      "type" : "string",
+      "description" : "Наименование"
+    },
+    "date" : {
+      "type" : "string",
+      "format" : "date-time",
+      "description" : "Дата"
+    },
+    "positionCount" : {
+      "type" : "integer",
+      "description" : "Количество позиций"
+    },
+    "id" : {
+      "type" : "string",
+      "description" : "Идентификатор"
+    }
+  },
+  "required": [
+    "number",
+    "name",
+    "date",
+    "positionCount",
+    "id"
+  ]
+}
+
