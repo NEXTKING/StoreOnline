@@ -382,6 +382,12 @@
 		C651CA811D7585BA0045C3F7 /* TerminalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C651CA7F1D7585BA0045C3F7 /* TerminalViewController.m */; };
 		C651CA821D7585BA0045C3F7 /* TerminalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C651CA801D7585BA0045C3F7 /* TerminalViewController.xib */; };
 		C655B1BE1DA5399000EE7AB9 /* SynchronizationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C655B1BD1DA5399000EE7AB9 /* SynchronizationController.m */; };
+		C66723681DA7A0C8001B30AC /* Barcode+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C667235D1DA7A0C8001B30AC /* Barcode+CoreDataClass.m */; };
+		C66723691DA7A0C8001B30AC /* Barcode+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C667235F1DA7A0C8001B30AC /* Barcode+CoreDataProperties.m */; };
+		C667236A1DA7A0C8001B30AC /* Item+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723611DA7A0C8001B30AC /* Item+CoreDataClass.m */; };
+		C667236B1DA7A0C8001B30AC /* Item+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723631DA7A0C8001B30AC /* Item+CoreDataProperties.m */; };
+		C667236C1DA7A0C8001B30AC /* Price+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723651DA7A0C8001B30AC /* Price+CoreDataClass.m */; };
+		C667236D1DA7A0C8001B30AC /* Price+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723671DA7A0C8001B30AC /* Price+CoreDataProperties.m */; };
 		C67103EA1D93271C000AEC24 /* navigation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C67103E91D93271C000AEC24 /* navigation@2x.png */; };
 		C67103EE1D93CAE7000AEC24 /* ItemsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C67103ED1D93CAE7000AEC24 /* ItemsListViewController.m */; };
 		C67103F21D93CB59000AEC24 /* ItemsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C67103F01D93CB59000AEC24 /* ItemsListCell.m */; };
@@ -452,8 +458,6 @@
 		C6F601C81D9E71090095AE21 /* StockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F601C61D9E71090095AE21 /* StockCell.m */; };
 		C6F601C91D9E71090095AE21 /* StockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6F601C71D9E71090095AE21 /* StockCell.xib */; };
 		C6F601CA1DA256A30095AE21 /* NwobjStock.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F601B41D9E5BD70095AE21 /* NwobjStock.m */; };
-		C6F601CD1DA261170095AE21 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F601CB1DA261170095AE21 /* Item+CoreDataClass.swift */; };
-		C6F601CE1DA261170095AE21 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F601CC1DA261170095AE21 /* Item+CoreDataProperties.swift */; };
 		C6FFF3FB1D79785100947948 /* ItemsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C6FFF3F91D79785100947948 /* ItemsModel.xcdatamodeld */; };
 		C6FFF40A1D797A2E00947948 /* Item+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FFF4031D797A2E00947948 /* Item+CoreDataProperties.m */; };
 		C6FFF40B1D797A2E00947948 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FFF4051D797A2E00947948 /* Item.m */; };
@@ -838,6 +842,18 @@
 		C651CA801D7585BA0045C3F7 /* TerminalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TerminalViewController.xib; sourceTree = "<group>"; };
 		C655B1BC1DA5399000EE7AB9 /* SynchronizationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynchronizationController.h; sourceTree = "<group>"; };
 		C655B1BD1DA5399000EE7AB9 /* SynchronizationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynchronizationController.m; sourceTree = "<group>"; };
+		C667235C1DA7A0C8001B30AC /* Barcode+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Barcode+CoreDataClass.h"; sourceTree = "<group>"; };
+		C667235D1DA7A0C8001B30AC /* Barcode+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Barcode+CoreDataClass.m"; sourceTree = "<group>"; };
+		C667235E1DA7A0C8001B30AC /* Barcode+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Barcode+CoreDataProperties.h"; sourceTree = "<group>"; };
+		C667235F1DA7A0C8001B30AC /* Barcode+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Barcode+CoreDataProperties.m"; sourceTree = "<group>"; };
+		C66723601DA7A0C8001B30AC /* Item+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Item+CoreDataClass.h"; sourceTree = "<group>"; };
+		C66723611DA7A0C8001B30AC /* Item+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Item+CoreDataClass.m"; sourceTree = "<group>"; };
+		C66723621DA7A0C8001B30AC /* Item+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Item+CoreDataProperties.h"; sourceTree = "<group>"; };
+		C66723631DA7A0C8001B30AC /* Item+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Item+CoreDataProperties.m"; sourceTree = "<group>"; };
+		C66723641DA7A0C8001B30AC /* Price+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Price+CoreDataClass.h"; sourceTree = "<group>"; };
+		C66723651DA7A0C8001B30AC /* Price+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Price+CoreDataClass.m"; sourceTree = "<group>"; };
+		C66723661DA7A0C8001B30AC /* Price+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Price+CoreDataProperties.h"; sourceTree = "<group>"; };
+		C66723671DA7A0C8001B30AC /* Price+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Price+CoreDataProperties.m"; sourceTree = "<group>"; };
 		C67103E91D93271C000AEC24 /* navigation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation@2x.png"; sourceTree = "<group>"; };
 		C67103EC1D93CAE7000AEC24 /* ItemsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemsListViewController.h; sourceTree = "<group>"; };
 		C67103ED1D93CAE7000AEC24 /* ItemsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemsListViewController.m; sourceTree = "<group>"; };
@@ -912,8 +928,6 @@
 		C6F601C51D9E71090095AE21 /* StockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StockCell.h; sourceTree = "<group>"; };
 		C6F601C61D9E71090095AE21 /* StockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StockCell.m; sourceTree = "<group>"; };
 		C6F601C71D9E71090095AE21 /* StockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StockCell.xib; sourceTree = "<group>"; };
-		C6F601CB1DA261170095AE21 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Item+CoreDataClass.swift"; path = "../../Item+CoreDataClass.swift"; sourceTree = "<group>"; };
-		C6F601CC1DA261170095AE21 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Item+CoreDataProperties.swift"; path = "../../Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C6FFF3FA1D79785100947948 /* ItemsModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ItemsModel.xcdatamodel; sourceTree = "<group>"; };
 		C6FFF4021D797A2E00947948 /* Item+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Item+CoreDataProperties.h"; sourceTree = "<group>"; };
 		C6FFF4031D797A2E00947948 /* Item+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Item+CoreDataProperties.m"; sourceTree = "<group>"; };
@@ -1934,9 +1948,19 @@
 		C6F601A71D9D1D060095AE21 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				C6F601CB1DA261170095AE21 /* Item+CoreDataClass.swift */,
-				C6F601CC1DA261170095AE21 /* Item+CoreDataProperties.swift */,
 				C6F601A81D9D1D800095AE21 /* ItemsModel.xcdatamodeld */,
+				C667235C1DA7A0C8001B30AC /* Barcode+CoreDataClass.h */,
+				C667235D1DA7A0C8001B30AC /* Barcode+CoreDataClass.m */,
+				C667235E1DA7A0C8001B30AC /* Barcode+CoreDataProperties.h */,
+				C667235F1DA7A0C8001B30AC /* Barcode+CoreDataProperties.m */,
+				C66723601DA7A0C8001B30AC /* Item+CoreDataClass.h */,
+				C66723611DA7A0C8001B30AC /* Item+CoreDataClass.m */,
+				C66723621DA7A0C8001B30AC /* Item+CoreDataProperties.h */,
+				C66723631DA7A0C8001B30AC /* Item+CoreDataProperties.m */,
+				C66723641DA7A0C8001B30AC /* Price+CoreDataClass.h */,
+				C66723651DA7A0C8001B30AC /* Price+CoreDataClass.m */,
+				C66723661DA7A0C8001B30AC /* Price+CoreDataProperties.h */,
+				C66723671DA7A0C8001B30AC /* Price+CoreDataProperties.m */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -3084,7 +3108,6 @@
 				B9F5F0B71D0057710010E1EA /* NwobjDiscounts.m in Sources */,
 				C655B1BE1DA5399000EE7AB9 /* SynchronizationController.m in Sources */,
 				C6F600C91D9C363C0095AE21 /* PI_MOBILE_SERVICEService.m in Sources */,
-				C6F601CD1DA261170095AE21 /* Item+CoreDataClass.swift in Sources */,
 				C6F600C81D9C363C0095AE21 /* NSDate+ISO8601Unparsing.m in Sources */,
 				B9F5F0B11D0057650010E1EA /* NwobjInventoryItemDescription.m in Sources */,
 				B9F5F0B21D0057650010E1EA /* NwobjAuthorization.m in Sources */,
@@ -3097,6 +3120,7 @@
 				B9F5F0B41D0057650010E1EA /* NwobjSendCart.m in Sources */,
 				B9F5F0B51D0057650010E1EA /* NwobjZones.m in Sources */,
 				B92DCE301C845E8F002AA184 /* PrintViewController.m in Sources */,
+				C667236C1DA7A0C8001B30AC /* Price+CoreDataClass.m in Sources */,
 				C6F601AD1D9D63440095AE21 /* MCPOfflineInmpl+Ostin.m in Sources */,
 				B92DCE341C845F0A002AA184 /* MCPSimulatorImpl.m in Sources */,
 				B90CE4881C89A05400DFB3E4 /* AntiAliasingLabel.m in Sources */,
@@ -3117,12 +3141,16 @@
 				B92DCE1A1C845E60002AA184 /* main.m in Sources */,
 				C67103F91D93DFE5000AEC24 /* SearchViewController.m in Sources */,
 				B90CE48E1C89B6DB00DFB3E4 /* AntiAliasTextLayer.m in Sources */,
+				C667236D1DA7A0C8001B30AC /* Price+CoreDataProperties.m in Sources */,
 				C6F600D71D9C486D0095AE21 /* NSData+Base64.m in Sources */,
 				C6069EE51D92D2E7008C3F58 /* MCPSimulatorImpl+Ostin.m in Sources */,
+				C667236A1DA7A0C8001B30AC /* Item+CoreDataClass.m in Sources */,
 				B90CE48B1C89B44600DFB3E4 /* AntiAliasView.m in Sources */,
-				C6F601CE1DA261170095AE21 /* Item+CoreDataProperties.swift in Sources */,
+				C667236B1DA7A0C8001B30AC /* Item+CoreDataProperties.m in Sources */,
 				C67103EE1D93CAE7000AEC24 /* ItemsListViewController.m in Sources */,
+				C66723691DA7A0C8001B30AC /* Barcode+CoreDataProperties.m in Sources */,
 				C646C40E1D8BFBF20048C8FE /* CoreDataController.m in Sources */,
+				C66723681DA7A0C8001B30AC /* Barcode+CoreDataClass.m in Sources */,
 				B92DCE2F1C845E8C002AA184 /* AppDelegate.m in Sources */,
 				B92DCE381C845F16002AA184 /* NwobjItemDescription.m in Sources */,
 				B92DCE351C845F0C002AA184 /* MCPNetworkImpl.m in Sources */,

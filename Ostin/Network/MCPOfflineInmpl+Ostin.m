@@ -9,8 +9,9 @@
 #import "MCPOfflineInmpl+Ostin.h"
 #import "PI_MOBILE_SERVICEService.h"
 #import "NSData+Base64.h"
-#import "Ostin-Swift.h"
 #import "MCPServer.h"
+#import "Item+CoreDataClass.h"
+#import "Barcode+CoreDataClass.h"
 
 @interface MCPOfflineInmpl_Ostin ()
 {
@@ -62,7 +63,10 @@
     }
     else
     {
-        PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBinding *binding = [PI_MOBILE_SERVICEService PI_MOBILE_SERVICEBinding];
+        
+        //[self itemBarcodes:delegate];
+        [self itemsDownload:delegate];
+       /* PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBinding *binding = [PI_MOBILE_SERVICEService PI_MOBILE_SERVICEBinding];
         binding.logXMLInOut = YES;
         binding.timeout = 300;
         
@@ -86,8 +90,38 @@
          {
              if (delegate)
                  [delegate allItemsDescription:1 items:nil];
-         }];
+         }]; */
     }
+}
+
+- (void) itemsDownload:(id<ItemDescriptionDelegate>)delegate
+{
+    PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBinding *binding = [PI_MOBILE_SERVICEService PI_MOBILE_SERVICEBinding];
+    binding.logXMLInOut = YES;
+    binding.timeout = 300;
+    
+    PI_MOBILE_SERVICEService_ElementWARE_INFOInput* request = [PI_MOBILE_SERVICEService_ElementWARE_INFOInput new];
+    request.A_DEVICE_UIDVARCHAR2IN = @"300";
+    request.A_ID_PORTIONNUMBEROUT = [PI_MOBILE_SERVICEService_SequenceElement_A_ID_PORTIONNUMBEROUT3 new];
+    request.AO_DATATROWARRAYCOUT = [PI_MOBILE_SERVICEService_SequenceElement_AO_DATATROWARRAYCOUT3 new];
+    
+    [binding.customHeaders setObject:authValue forKey:@"Authorization"];
+    
+    [binding WARE_INFOUsingWARE_INFOInput:request success:^(NSArray* headers,NSArray* body)
+     {
+         if ([body[0] isKindOfClass:[PI_MOBILE_SERVICEService_ElementWARE_INFOOutput class]])
+         {
+             PI_MOBILE_SERVICEService_ElementWARE_INFOOutput *output = body[0];
+             PI_MOBILE_SERVICEService_TROWARRAYType* data = output.AO_DATA;
+             [self saveItems:data.TROWARRAY.CSV_ROWS];
+             
+             [delegate allItemsDescription:0 items:nil];
+         }
+     } error:^(NSError* error)
+     {
+         if (delegate)
+             [delegate allItemsDescription:1 items:nil];
+     }];
 }
 
 - (void) itemBarcodes:(id<ItemDescriptionDelegate>)delegate
@@ -111,8 +145,7 @@
              PI_MOBILE_SERVICEService_TROWARRAYType* data = output.AO_DATA;
              [self updateBarcodes:data.TROWARRAY.CSV_ROWS];
              
-             if (delegate)
-                 [delegate allItemsDescription:0 items:nil];
+             [self itemsDownload:delegate];
              
          }
      } error:^(NSError* error)
@@ -151,22 +184,19 @@
 - (void) saveItems:(NSArray*) items
 {
     [self.dataController recreatePersistentStore];
+    NSInteger found = 0;
     
     for (PI_MOBILE_SERVICEService_TROW_IntType *throw in items)
     {
         NSArray *csvSourse = [throw.VAL componentsSeparatedByString:@";"];
         NSArray *csv       = [self removeQuotes:csvSourse];
         Item *itemDB = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.dataController.managedObjectContext];
-        
-        NSLog(@"%@", csv[1]);
-        NSLog(@"%d", [csv[1] intValue]);
-        
-        
-        itemDB.itemID       = [csv[1] intValue];
+
+        itemDB.itemID       = @([csv[1] integerValue]);
         itemDB.itemCode     = csv[1];
-        itemDB.groupID      = [csv[2] intValue];
-        itemDB.subgroupID   = [csv[3] intValue];
-        itemDB.trademarkID  = [csv[4] intValue];
+        itemDB.groupID      = @([csv[2] intValue]);
+        itemDB.subgroupID   = @([csv[3] intValue]);
+        itemDB.trademarkID  = @([csv[4] intValue]);
         itemDB.color        = csv[5];
         itemDB.certificationType    = csv[6];
         itemDB.certificationAuthorittyCode  = csv[7];
@@ -180,12 +210,23 @@
         itemDB.size         = csv[16];
         itemDB.additionalInfo = csv[17];
         itemDB.additionalInfo = csv[18];
-        //itemDB.boxType        = csv[19];
         
-        //NSLog(@"%@", csv[12]);
+
+        
+        NSManagedObjectContext *moc =self.dataController.managedObjectContext;
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Barcode"];
+        
+        [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %@", itemDB.itemID]];
+        NSArray* results = [moc executeFetchRequest:request error:nil];
+        
+        for (Barcode *barcodeDB in results) {
+            found++;
+            barcodeDB.item = itemDB;
+        }
         
     }
     
+    NSLog(@"%ld", (long)found);
     [self.dataController.managedObjectContext save:nil];
 }
 
@@ -198,21 +239,27 @@
         NSArray *csvSourse = [throw.VAL componentsSeparatedByString:@";"];
         NSArray *csv       = [self removeQuotes:csvSourse];
         
-        NSInteger itemId = [csv[1] integerValue];
+        /*NSInteger itemId = [csv[1] integerValue];
     
         NSManagedObjectContext *moc =self.dataController.managedObjectContext;
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
     
         [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %d", itemId]];
         NSArray* results = [moc executeFetchRequest:request error:nil];
+        Item *itemDB = nil;
         
         if (results.count > 0)
-        {
-            Item *itemDB = results[0];
-            itemDB.barcode = csv[2];
-            
-            [foundBarcodes addObject:csv[2]];
-        }
+            itemDB = results[0]; */
+        
+        Barcode *barcodeDB = [NSEntityDescription insertNewObjectForEntityForName:@"Barcode" inManagedObjectContext:self.dataController.managedObjectContext];
+        
+        barcodeDB.itemID  = @([csv[1] integerValue]);
+        barcodeDB.code128 = csv[2];
+        barcodeDB.ean     = csv[3];
+        
+        NSLog(@"%d", barcodeDB.itemID.integerValue);
+        
+        
     }
     [self.dataController.managedObjectContext save:nil];
 }

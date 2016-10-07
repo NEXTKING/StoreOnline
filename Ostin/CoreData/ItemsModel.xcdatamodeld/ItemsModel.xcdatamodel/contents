@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="16A323" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Barcode" syncable="YES">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="16A323" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="Barcode" representedClassName="Barcode" syncable="YES">
         <attribute name="code128" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="ean" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="itemID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="barcodes" inverseEntity="Item" syncable="YES"/>
     </entity>
     <entity name="Item" representedClassName=".Item" syncable="YES">
@@ -29,12 +30,14 @@
         <relationship name="barcodes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Barcode" inverseName="item" inverseEntity="Barcode" syncable="YES"/>
         <relationship name="price" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Price" inverseName="item" inverseEntity="Price" syncable="YES"/>
     </entity>
-    <entity name="Price" syncable="YES">
+    <entity name="Price" representedClassName="Price" syncable="YES">
+        <attribute name="catalogPrice" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="retailPrice" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="price" inverseEntity="Item" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Item" positionX="-189" positionY="-243" width="128" height="373"/>
-        <element name="Barcode" positionX="7" positionY="-27" width="128" height="88"/>
-        <element name="Price" positionX="9" positionY="72" width="128" height="58"/>
+        <element name="Barcode" positionX="-0" positionY="-90" width="128" height="103"/>
+        <element name="Item" positionX="-207" positionY="-238" width="128" height="373"/>
+        <element name="Price" positionX="-0" positionY="92" width="128" height="88"/>
     </elements>
 </model>
