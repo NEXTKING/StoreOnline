@@ -11,14 +11,27 @@
 #import "Delegates.h"
 #import "TaskInformation.h"
 
+typedef enum : NSUInteger
+{
+    ItemSearchAttributeName = (1 << 0),
+    ItemSearchAttributeArticle = (1 << 1),
+    ItemSearchAttributeItemCode = (1 << 2),
+    ItemSearchAttributeBarcode = (1 << 3)
+}ItemSearchAttribute;
+
 @protocol GroupsDelegate <NSObject>
 - (void) groupsComplete: (int) result groups:(NSArray*) groups;
 - (void) subgroupsComplete: (int) result subgroups:(NSArray*) subgroups;
 - (void) brandsComplete: (int) result brands:(NSArray*) brands;
 @end
 
+<<<<<<< HEAD
 @protocol TasksDelegate <NSObject>
 - (void) tasksComplete: (int) result tasks:(NSArray<TaskInformation*>*) tasks;
+=======
+@protocol SearchDelegate <NSObject>
+- (void) searchComplete: (int) result attribute:(ItemSearchAttribute) searchAttribute items:(NSArray *) items;
+>>>>>>> origin/master
 @end
 
 #endif /* Delegates_Ostin_h */

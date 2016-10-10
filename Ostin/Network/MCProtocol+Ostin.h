@@ -18,6 +18,10 @@
 - (void) groups:(id<GroupsDelegate>) delegate uid:(NSString*)uid;
 - (void) subgroups:(id<GroupsDelegate>) delegate uid:(NSString*)uid;
 - (void) brands:(id<GroupsDelegate>) delegate uid:(NSString*)uid;
+<<<<<<< HEAD
 - (void) tasks:(id<TasksDelegate>) delegate userID:(NSNumber*) userID;
+=======
+- (void) search:(id<SearchDelegate>) delegate forQuery:(NSString *)query withAttribute:(ItemSearchAttribute)searchAttribute;
+>>>>>>> origin/master
 
 @end

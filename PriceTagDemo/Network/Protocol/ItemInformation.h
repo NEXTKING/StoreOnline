@@ -12,6 +12,9 @@
 @interface ParameterInformation : NSObject <NSCoding>
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic, strong) NSString* value;
+
+- (instancetype)initWithName:(NSString *)name value:(NSString *)value;
+
 @end
 
 @interface ItemInformation : NSObject <NSCoding>
@@ -36,5 +39,6 @@
 //Rivgosh
 @property (nonatomic, strong) NSArray<DiscountInformation*>* appliedDiscounts;
 
+- (NSString *)additionalParameterValueForName:(NSString *)name;
 
 @end
