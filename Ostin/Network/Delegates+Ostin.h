@@ -25,13 +25,12 @@ typedef enum : NSUInteger
 - (void) brandsComplete: (int) result brands:(NSArray*) brands;
 @end
 
-<<<<<<< HEAD
 @protocol TasksDelegate <NSObject>
 - (void) tasksComplete: (int) result tasks:(NSArray<TaskInformation*>*) tasks;
-=======
+@end
+
 @protocol SearchDelegate <NSObject>
 - (void) searchComplete: (int) result attribute:(ItemSearchAttribute) searchAttribute items:(NSArray *) items;
->>>>>>> origin/master
 @end
 
 #endif /* Delegates_Ostin_h */

@@ -61,9 +61,17 @@
     
 }
 
-<<<<<<< HEAD
 - (void) tasks:(id<TasksDelegate>)delegate userID:(NSNumber *)userID
-=======
+{
+    if (userID)
+    {
+        
+    }
+    else
+    {
+        
+    }
+}
 - (void) search:(id<SearchDelegate>)delegate forQuery:(NSString *)query withAttribute:(ItemSearchAttribute)searchAttribute
 {
     if ([query stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length == 0) // empty query
@@ -138,7 +146,7 @@
             [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"storeNumber" value:item.storeNumber]];
             [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"subgroupID" value:item.subgroupID.stringValue]];
             [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"trademarkID" value:item.trademarkID.stringValue]];
-            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"price" value:[NSString stringWithFormat:@"%f", item.price.retailPrice]]];
+            //[additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"price" value:[NSString stringWithFormat:@"%f", item.price.retailPrice]]];
 
             itemInformation.barcode = item.barcode;
             itemInformation.color = item.color;
@@ -155,19 +163,6 @@
     {
         if ([delegate respondsToSelector:@selector(searchComplete:attribute:items:)])
             [delegate searchComplete:1 attribute:searchAttribute items:nil];
-    }
-}
-
-- (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString *)code shopCode:(NSString *)shopCode
->>>>>>> origin/master
-{
-    if (userID)
-    {
-        
-    }
-    else
-    {
-        
     }
 }
 

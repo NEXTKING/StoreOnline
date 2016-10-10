@@ -3163,11 +3163,8 @@
 			files = (
 				C667238F1DAABBA9001B30AC /* SOAPPrices.m in Sources */,
 				C6F600C71D9C363C0095AE21 /* NSDate+ISO8601Parsing.m in Sources */,
-<<<<<<< HEAD
 				C66723891DA91614001B30AC /* SOAPWares.m in Sources */,
-=======
 				215EFF091DAB9ED600BE11C5 /* SearchTableViewCell.m in Sources */,
->>>>>>> origin/master
 				B9F5F0B61D0057710010E1EA /* DiscountInformation.m in Sources */,
 				C6B3C9871D93E7F400730D9F /* TasksViewController.m in Sources */,
 				C667239E1DAAEEFB001B30AC /* TaskItemBinding+CoreDataProperties.m in Sources */,
