@@ -72,7 +72,7 @@
 {
     _syncButton.enabled = NO;
     [_syncActivityIndicator startAnimating];
-    [[MCPServer instance] itemDescription:self itemCode:nil shopCode:_currentShopID];
+    [[MCPServer instance] itemDescription:self itemCode:nil shopCode:_currentShopID isoType:0];
 }
 
 - (void) finishSyncing:(BOOL) success

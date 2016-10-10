@@ -234,14 +234,14 @@
 {
     lastBarcode = barcode;
     [[NSUserDefaults standardUserDefaults] setValue:barcode forKey:@"LastBarcode"];
-    [self requestItemInfoWithCode:[self cleanBarcode:barcode]];
+    [self requestItemInfoWithCode:[self cleanBarcode:barcode] isoType:0];
 }
 
 - (void) barcodeData:(NSString *)barcode type:(int)type
 {
     lastBarcode = barcode;
     [[NSUserDefaults standardUserDefaults] setValue:barcode forKey:@"LastBarcode"];
-    [self requestItemInfoWithCode:[self cleanBarcode:barcode]];
+    [self requestItemInfoWithCode:[self cleanBarcode:barcode] isoType:type];
 }
 
 - (NSString*) cleanBarcode:(NSString*) barcode
@@ -265,7 +265,7 @@
     [self requestItemInfoWithCode:cardCode];
 }
 
-- (void) requestItemInfoWithCode:(NSString*) code
+- (void) requestItemInfoWithCode:(NSString*) code isoType:(int) type
 {
     
     [_loadingActivity startAnimating];
@@ -322,7 +322,7 @@
 #elif defined (INVENTORY)
     [[MCPServer instance] inventoryItemDescription:self itemCode:code];
 #else
-    [[MCPServer instance] itemDescription:self itemCode:code shopCode:nil];
+    [[MCPServer instance] itemDescription:self itemCode:code shopCode:nil isoType:type];
 #endif
 }
 

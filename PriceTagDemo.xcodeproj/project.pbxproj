@@ -382,12 +382,21 @@
 		C651CA811D7585BA0045C3F7 /* TerminalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C651CA7F1D7585BA0045C3F7 /* TerminalViewController.m */; };
 		C651CA821D7585BA0045C3F7 /* TerminalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C651CA801D7585BA0045C3F7 /* TerminalViewController.xib */; };
 		C655B1BE1DA5399000EE7AB9 /* SynchronizationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C655B1BD1DA5399000EE7AB9 /* SynchronizationController.m */; };
-		C66723681DA7A0C8001B30AC /* Barcode+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C667235D1DA7A0C8001B30AC /* Barcode+CoreDataClass.m */; };
-		C66723691DA7A0C8001B30AC /* Barcode+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C667235F1DA7A0C8001B30AC /* Barcode+CoreDataProperties.m */; };
-		C667236A1DA7A0C8001B30AC /* Item+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723611DA7A0C8001B30AC /* Item+CoreDataClass.m */; };
-		C667236B1DA7A0C8001B30AC /* Item+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723631DA7A0C8001B30AC /* Item+CoreDataProperties.m */; };
-		C667236C1DA7A0C8001B30AC /* Price+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723651DA7A0C8001B30AC /* Price+CoreDataClass.m */; };
-		C667236D1DA7A0C8001B30AC /* Price+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723671DA7A0C8001B30AC /* Price+CoreDataProperties.m */; };
+		C667237E1DA81285001B30AC /* Barcode+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723731DA81285001B30AC /* Barcode+CoreDataClass.m */; };
+		C667237F1DA81285001B30AC /* Barcode+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723751DA81285001B30AC /* Barcode+CoreDataProperties.m */; };
+		C66723801DA81285001B30AC /* Item+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723771DA81285001B30AC /* Item+CoreDataClass.m */; };
+		C66723811DA81285001B30AC /* Item+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723791DA81285001B30AC /* Item+CoreDataProperties.m */; };
+		C66723821DA81285001B30AC /* Price+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C667237B1DA81285001B30AC /* Price+CoreDataClass.m */; };
+		C66723831DA81285001B30AC /* Price+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C667237D1DA81285001B30AC /* Price+CoreDataProperties.m */; };
+		C66723861DA912CF001B30AC /* SOAPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723851DA912CF001B30AC /* SOAPOperation.m */; };
+		C66723891DA91614001B30AC /* SOAPWares.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723881DA91614001B30AC /* SOAPWares.m */; };
+		C667238C1DA93A66001B30AC /* SOAPBarcodes.m in Sources */ = {isa = PBXBuildFile; fileRef = C667238B1DA93A66001B30AC /* SOAPBarcodes.m */; };
+		C667238F1DAABBA9001B30AC /* SOAPPrices.m in Sources */ = {isa = PBXBuildFile; fileRef = C667238E1DAABBA9001B30AC /* SOAPPrices.m */; };
+		C66723921DAAEA87001B30AC /* SOAPTasks.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723911DAAEA87001B30AC /* SOAPTasks.m */; };
+		C667239B1DAAEEFB001B30AC /* Task+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723941DAAEEFB001B30AC /* Task+CoreDataClass.m */; };
+		C667239C1DAAEEFB001B30AC /* Task+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723961DAAEEFB001B30AC /* Task+CoreDataProperties.m */; };
+		C667239D1DAAEEFB001B30AC /* TaskItemBinding+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723981DAAEEFB001B30AC /* TaskItemBinding+CoreDataClass.m */; };
+		C667239E1DAAEEFB001B30AC /* TaskItemBinding+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C667239A1DAAEEFB001B30AC /* TaskItemBinding+CoreDataProperties.m */; };
 		C67103EA1D93271C000AEC24 /* navigation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C67103E91D93271C000AEC24 /* navigation@2x.png */; };
 		C67103EE1D93CAE7000AEC24 /* ItemsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C67103ED1D93CAE7000AEC24 /* ItemsListViewController.m */; };
 		C67103F21D93CB59000AEC24 /* ItemsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C67103F01D93CB59000AEC24 /* ItemsListCell.m */; };
@@ -428,6 +437,7 @@
 		C67663691D7DACB500398D58 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C67663681D7DACB500398D58 /* Settings.bundle */; };
 		C676636E1D7DB15100398D58 /* x5Bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C676636C1D7DB15100398D58 /* x5Bar@2x.png */; };
 		C6770FCD1D994188002A60D9 /* NwobjItemDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = C6770FCC1D994188002A60D9 /* NwobjItemDescription.m */; };
+		C67BB3691DABE4BC0032F2A4 /* TaskInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = C67BB3681DABE4BC0032F2A4 /* TaskInformation.m */; };
 		C690B4171CE8BB3100F4DF95 /* DiscountInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = C690B4161CE8BB3100F4DF95 /* DiscountInformation.m */; };
 		C690B4191CE8BBC100F4DF95 /* DiscountInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = C690B4161CE8BB3100F4DF95 /* DiscountInformation.m */; };
 		C6979E9A1D8FE6A800A0B51B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6979E991D8FE6A800A0B51B /* LoginViewController.m */; };
@@ -842,18 +852,36 @@
 		C651CA801D7585BA0045C3F7 /* TerminalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TerminalViewController.xib; sourceTree = "<group>"; };
 		C655B1BC1DA5399000EE7AB9 /* SynchronizationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynchronizationController.h; sourceTree = "<group>"; };
 		C655B1BD1DA5399000EE7AB9 /* SynchronizationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynchronizationController.m; sourceTree = "<group>"; };
-		C667235C1DA7A0C8001B30AC /* Barcode+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Barcode+CoreDataClass.h"; sourceTree = "<group>"; };
-		C667235D1DA7A0C8001B30AC /* Barcode+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Barcode+CoreDataClass.m"; sourceTree = "<group>"; };
-		C667235E1DA7A0C8001B30AC /* Barcode+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Barcode+CoreDataProperties.h"; sourceTree = "<group>"; };
-		C667235F1DA7A0C8001B30AC /* Barcode+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Barcode+CoreDataProperties.m"; sourceTree = "<group>"; };
-		C66723601DA7A0C8001B30AC /* Item+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Item+CoreDataClass.h"; sourceTree = "<group>"; };
-		C66723611DA7A0C8001B30AC /* Item+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Item+CoreDataClass.m"; sourceTree = "<group>"; };
-		C66723621DA7A0C8001B30AC /* Item+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Item+CoreDataProperties.h"; sourceTree = "<group>"; };
-		C66723631DA7A0C8001B30AC /* Item+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Item+CoreDataProperties.m"; sourceTree = "<group>"; };
-		C66723641DA7A0C8001B30AC /* Price+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Price+CoreDataClass.h"; sourceTree = "<group>"; };
-		C66723651DA7A0C8001B30AC /* Price+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Price+CoreDataClass.m"; sourceTree = "<group>"; };
-		C66723661DA7A0C8001B30AC /* Price+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Price+CoreDataProperties.h"; sourceTree = "<group>"; };
-		C66723671DA7A0C8001B30AC /* Price+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Price+CoreDataProperties.m"; sourceTree = "<group>"; };
+		C66723721DA81285001B30AC /* Barcode+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Barcode+CoreDataClass.h"; sourceTree = "<group>"; };
+		C66723731DA81285001B30AC /* Barcode+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Barcode+CoreDataClass.m"; sourceTree = "<group>"; };
+		C66723741DA81285001B30AC /* Barcode+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Barcode+CoreDataProperties.h"; sourceTree = "<group>"; };
+		C66723751DA81285001B30AC /* Barcode+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Barcode+CoreDataProperties.m"; sourceTree = "<group>"; };
+		C66723761DA81285001B30AC /* Item+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Item+CoreDataClass.h"; sourceTree = "<group>"; };
+		C66723771DA81285001B30AC /* Item+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Item+CoreDataClass.m"; sourceTree = "<group>"; };
+		C66723781DA81285001B30AC /* Item+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Item+CoreDataProperties.h"; sourceTree = "<group>"; };
+		C66723791DA81285001B30AC /* Item+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Item+CoreDataProperties.m"; sourceTree = "<group>"; };
+		C667237A1DA81285001B30AC /* Price+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Price+CoreDataClass.h"; sourceTree = "<group>"; };
+		C667237B1DA81285001B30AC /* Price+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Price+CoreDataClass.m"; sourceTree = "<group>"; };
+		C667237C1DA81285001B30AC /* Price+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Price+CoreDataProperties.h"; sourceTree = "<group>"; };
+		C667237D1DA81285001B30AC /* Price+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Price+CoreDataProperties.m"; sourceTree = "<group>"; };
+		C66723841DA912CF001B30AC /* SOAPOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPOperation.h; sourceTree = "<group>"; };
+		C66723851DA912CF001B30AC /* SOAPOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPOperation.m; sourceTree = "<group>"; };
+		C66723871DA91614001B30AC /* SOAPWares.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPWares.h; sourceTree = "<group>"; };
+		C66723881DA91614001B30AC /* SOAPWares.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPWares.m; sourceTree = "<group>"; };
+		C667238A1DA93A66001B30AC /* SOAPBarcodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPBarcodes.h; sourceTree = "<group>"; };
+		C667238B1DA93A66001B30AC /* SOAPBarcodes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPBarcodes.m; sourceTree = "<group>"; };
+		C667238D1DAABBA9001B30AC /* SOAPPrices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPPrices.h; sourceTree = "<group>"; };
+		C667238E1DAABBA9001B30AC /* SOAPPrices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPPrices.m; sourceTree = "<group>"; };
+		C66723901DAAEA86001B30AC /* SOAPTasks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPTasks.h; sourceTree = "<group>"; };
+		C66723911DAAEA87001B30AC /* SOAPTasks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPTasks.m; sourceTree = "<group>"; };
+		C66723931DAAEEFB001B30AC /* Task+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Task+CoreDataClass.h"; sourceTree = "<group>"; };
+		C66723941DAAEEFB001B30AC /* Task+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Task+CoreDataClass.m"; sourceTree = "<group>"; };
+		C66723951DAAEEFB001B30AC /* Task+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Task+CoreDataProperties.h"; sourceTree = "<group>"; };
+		C66723961DAAEEFB001B30AC /* Task+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Task+CoreDataProperties.m"; sourceTree = "<group>"; };
+		C66723971DAAEEFB001B30AC /* TaskItemBinding+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TaskItemBinding+CoreDataClass.h"; sourceTree = "<group>"; };
+		C66723981DAAEEFB001B30AC /* TaskItemBinding+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TaskItemBinding+CoreDataClass.m"; sourceTree = "<group>"; };
+		C66723991DAAEEFB001B30AC /* TaskItemBinding+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TaskItemBinding+CoreDataProperties.h"; sourceTree = "<group>"; };
+		C667239A1DAAEEFB001B30AC /* TaskItemBinding+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TaskItemBinding+CoreDataProperties.m"; sourceTree = "<group>"; };
 		C67103E91D93271C000AEC24 /* navigation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation@2x.png"; sourceTree = "<group>"; };
 		C67103EC1D93CAE7000AEC24 /* ItemsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemsListViewController.h; sourceTree = "<group>"; };
 		C67103ED1D93CAE7000AEC24 /* ItemsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemsListViewController.m; sourceTree = "<group>"; };
@@ -879,6 +907,8 @@
 		C676636C1D7DB15100398D58 /* x5Bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "x5Bar@2x.png"; sourceTree = "<group>"; };
 		C6770FCB1D994188002A60D9 /* NwobjItemDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NwobjItemDescription.h; sourceTree = "<group>"; };
 		C6770FCC1D994188002A60D9 /* NwobjItemDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NwobjItemDescription.m; sourceTree = "<group>"; };
+		C67BB3671DABE4BC0032F2A4 /* TaskInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskInformation.h; sourceTree = "<group>"; };
+		C67BB3681DABE4BC0032F2A4 /* TaskInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskInformation.m; sourceTree = "<group>"; };
 		C690B4151CE8BB3100F4DF95 /* DiscountInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscountInformation.h; sourceTree = "<group>"; };
 		C690B4161CE8BB3100F4DF95 /* DiscountInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscountInformation.m; sourceTree = "<group>"; };
 		C6979E981D8FE6A800A0B51B /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -1734,6 +1764,16 @@
 				C6F601AC1D9D63440095AE21 /* MCPOfflineInmpl+Ostin.m */,
 				C655B1BC1DA5399000EE7AB9 /* SynchronizationController.h */,
 				C655B1BD1DA5399000EE7AB9 /* SynchronizationController.m */,
+				C66723841DA912CF001B30AC /* SOAPOperation.h */,
+				C66723851DA912CF001B30AC /* SOAPOperation.m */,
+				C66723871DA91614001B30AC /* SOAPWares.h */,
+				C66723881DA91614001B30AC /* SOAPWares.m */,
+				C667238A1DA93A66001B30AC /* SOAPBarcodes.h */,
+				C667238B1DA93A66001B30AC /* SOAPBarcodes.m */,
+				C667238D1DAABBA9001B30AC /* SOAPPrices.h */,
+				C667238E1DAABBA9001B30AC /* SOAPPrices.m */,
+				C66723901DAAEA86001B30AC /* SOAPTasks.h */,
+				C66723911DAAEA87001B30AC /* SOAPTasks.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1745,6 +1785,8 @@
 				C6069EE21D92D258008C3F58 /* Delegates+Ostin.h */,
 				C6069EE71D92D873008C3F58 /* GroupInformation.h */,
 				C6069EE81D92D873008C3F58 /* GroupInformation.m */,
+				C67BB3671DABE4BC0032F2A4 /* TaskInformation.h */,
+				C67BB3681DABE4BC0032F2A4 /* TaskInformation.m */,
 			);
 			name = Protocol;
 			sourceTree = "<group>";
@@ -1949,18 +1991,26 @@
 			isa = PBXGroup;
 			children = (
 				C6F601A81D9D1D800095AE21 /* ItemsModel.xcdatamodeld */,
-				C667235C1DA7A0C8001B30AC /* Barcode+CoreDataClass.h */,
-				C667235D1DA7A0C8001B30AC /* Barcode+CoreDataClass.m */,
-				C667235E1DA7A0C8001B30AC /* Barcode+CoreDataProperties.h */,
-				C667235F1DA7A0C8001B30AC /* Barcode+CoreDataProperties.m */,
-				C66723601DA7A0C8001B30AC /* Item+CoreDataClass.h */,
-				C66723611DA7A0C8001B30AC /* Item+CoreDataClass.m */,
-				C66723621DA7A0C8001B30AC /* Item+CoreDataProperties.h */,
-				C66723631DA7A0C8001B30AC /* Item+CoreDataProperties.m */,
-				C66723641DA7A0C8001B30AC /* Price+CoreDataClass.h */,
-				C66723651DA7A0C8001B30AC /* Price+CoreDataClass.m */,
-				C66723661DA7A0C8001B30AC /* Price+CoreDataProperties.h */,
-				C66723671DA7A0C8001B30AC /* Price+CoreDataProperties.m */,
+				C66723721DA81285001B30AC /* Barcode+CoreDataClass.h */,
+				C66723731DA81285001B30AC /* Barcode+CoreDataClass.m */,
+				C66723741DA81285001B30AC /* Barcode+CoreDataProperties.h */,
+				C66723751DA81285001B30AC /* Barcode+CoreDataProperties.m */,
+				C66723761DA81285001B30AC /* Item+CoreDataClass.h */,
+				C66723771DA81285001B30AC /* Item+CoreDataClass.m */,
+				C66723781DA81285001B30AC /* Item+CoreDataProperties.h */,
+				C66723791DA81285001B30AC /* Item+CoreDataProperties.m */,
+				C667237A1DA81285001B30AC /* Price+CoreDataClass.h */,
+				C667237B1DA81285001B30AC /* Price+CoreDataClass.m */,
+				C667237C1DA81285001B30AC /* Price+CoreDataProperties.h */,
+				C667237D1DA81285001B30AC /* Price+CoreDataProperties.m */,
+				C66723931DAAEEFB001B30AC /* Task+CoreDataClass.h */,
+				C66723941DAAEEFB001B30AC /* Task+CoreDataClass.m */,
+				C66723951DAAEEFB001B30AC /* Task+CoreDataProperties.h */,
+				C66723961DAAEEFB001B30AC /* Task+CoreDataProperties.m */,
+				C66723971DAAEEFB001B30AC /* TaskItemBinding+CoreDataClass.h */,
+				C66723981DAAEEFB001B30AC /* TaskItemBinding+CoreDataClass.m */,
+				C66723991DAAEEFB001B30AC /* TaskItemBinding+CoreDataProperties.h */,
+				C667239A1DAAEEFB001B30AC /* TaskItemBinding+CoreDataProperties.m */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -3102,9 +3152,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C667238F1DAABBA9001B30AC /* SOAPPrices.m in Sources */,
 				C6F600C71D9C363C0095AE21 /* NSDate+ISO8601Parsing.m in Sources */,
+				C66723891DA91614001B30AC /* SOAPWares.m in Sources */,
 				B9F5F0B61D0057710010E1EA /* DiscountInformation.m in Sources */,
 				C6B3C9871D93E7F400730D9F /* TasksViewController.m in Sources */,
+				C667239E1DAAEEFB001B30AC /* TaskItemBinding+CoreDataProperties.m in Sources */,
 				B9F5F0B71D0057710010E1EA /* NwobjDiscounts.m in Sources */,
 				C655B1BE1DA5399000EE7AB9 /* SynchronizationController.m in Sources */,
 				C6F600C91D9C363C0095AE21 /* PI_MOBILE_SERVICEService.m in Sources */,
@@ -3120,16 +3173,20 @@
 				B9F5F0B41D0057650010E1EA /* NwobjSendCart.m in Sources */,
 				B9F5F0B51D0057650010E1EA /* NwobjZones.m in Sources */,
 				B92DCE301C845E8F002AA184 /* PrintViewController.m in Sources */,
-				C667236C1DA7A0C8001B30AC /* Price+CoreDataClass.m in Sources */,
+				C66723821DA81285001B30AC /* Price+CoreDataClass.m in Sources */,
 				C6F601AD1D9D63440095AE21 /* MCPOfflineInmpl+Ostin.m in Sources */,
 				B92DCE341C845F0A002AA184 /* MCPSimulatorImpl.m in Sources */,
 				B90CE4881C89A05400DFB3E4 /* AntiAliasingLabel.m in Sources */,
+				C67BB3691DABE4BC0032F2A4 /* TaskInformation.m in Sources */,
 				B92DCE361C845F11002AA184 /* NwObject.m in Sources */,
 				C6069EED1D92F06D008C3F58 /* CategoriesCollectionCell.m in Sources */,
 				B92DCE331C845F06002AA184 /* MCPServer.m in Sources */,
+				C667239C1DAAEEFB001B30AC /* Task+CoreDataProperties.m in Sources */,
 				C6069EE91D92D873008C3F58 /* GroupInformation.m in Sources */,
+				C66723921DAAEA87001B30AC /* SOAPTasks.m in Sources */,
 				B92DCE371C845F13002AA184 /* NwRequest.m in Sources */,
 				B907ADDD1D095C3200B44BF1 /* WYStoryboardPopoverSegue.m in Sources */,
+				C66723861DA912CF001B30AC /* SOAPOperation.m in Sources */,
 				B957B0D61D1BF5E0002A5256 /* MCPOfflineInmpl.m in Sources */,
 				B907ADDC1D095C2F00B44BF1 /* WYPopoverController.m in Sources */,
 				B92DCE3D1C845FAB002AA184 /* Logger.m in Sources */,
@@ -3138,22 +3195,25 @@
 				B92DCE311C845E92002AA184 /* DetailsTableViewController.m in Sources */,
 				B92DCE2E1C845E89002AA184 /* ViewController.m in Sources */,
 				B957B0D51D1BF5AC002A5256 /* MenuViewController.m in Sources */,
+				C667239B1DAAEEFB001B30AC /* Task+CoreDataClass.m in Sources */,
 				B92DCE1A1C845E60002AA184 /* main.m in Sources */,
 				C67103F91D93DFE5000AEC24 /* SearchViewController.m in Sources */,
+				C667238C1DA93A66001B30AC /* SOAPBarcodes.m in Sources */,
 				B90CE48E1C89B6DB00DFB3E4 /* AntiAliasTextLayer.m in Sources */,
-				C667236D1DA7A0C8001B30AC /* Price+CoreDataProperties.m in Sources */,
+				C66723831DA81285001B30AC /* Price+CoreDataProperties.m in Sources */,
 				C6F600D71D9C486D0095AE21 /* NSData+Base64.m in Sources */,
 				C6069EE51D92D2E7008C3F58 /* MCPSimulatorImpl+Ostin.m in Sources */,
-				C667236A1DA7A0C8001B30AC /* Item+CoreDataClass.m in Sources */,
+				C66723801DA81285001B30AC /* Item+CoreDataClass.m in Sources */,
 				B90CE48B1C89B44600DFB3E4 /* AntiAliasView.m in Sources */,
-				C667236B1DA7A0C8001B30AC /* Item+CoreDataProperties.m in Sources */,
+				C66723811DA81285001B30AC /* Item+CoreDataProperties.m in Sources */,
 				C67103EE1D93CAE7000AEC24 /* ItemsListViewController.m in Sources */,
-				C66723691DA7A0C8001B30AC /* Barcode+CoreDataProperties.m in Sources */,
+				C667237F1DA81285001B30AC /* Barcode+CoreDataProperties.m in Sources */,
 				C646C40E1D8BFBF20048C8FE /* CoreDataController.m in Sources */,
-				C66723681DA7A0C8001B30AC /* Barcode+CoreDataClass.m in Sources */,
+				C667237E1DA81285001B30AC /* Barcode+CoreDataClass.m in Sources */,
 				B92DCE2F1C845E8C002AA184 /* AppDelegate.m in Sources */,
 				B92DCE381C845F16002AA184 /* NwobjItemDescription.m in Sources */,
 				B92DCE351C845F0C002AA184 /* MCPNetworkImpl.m in Sources */,
+				C667239D1DAAEEFB001B30AC /* TaskItemBinding+CoreDataClass.m in Sources */,
 				C6F600CC1D9C363C0095AE21 /* xsd.m in Sources */,
 				C6F601CA1DA256A30095AE21 /* NwobjStock.m in Sources */,
 				C6979EAD1D91462C00A0B51B /* CategoriesViewController.m in Sources */,

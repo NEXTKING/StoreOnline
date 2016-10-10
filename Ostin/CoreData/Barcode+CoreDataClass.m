@@ -7,7 +7,7 @@
 //
 
 #import "Barcode+CoreDataClass.h"
-#import "Item.h"
+
 @implementation Barcode
 
 @end

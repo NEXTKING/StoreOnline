@@ -16,7 +16,6 @@
 
 @dynamic code128;
 @dynamic ean;
-@dynamic item;
 @dynamic itemID;
 
 @end

@@ -7,7 +7,8 @@
 //
 
 #import "MCPOfflineInmpl.h"
+#import "MCProtocol+Ostin.h"
 
-@interface MCPOfflineInmpl_Ostin : MCPOfflineInmpl
+@interface MCPOfflineInmpl_Ostin : MCPOfflineInmpl <MCProtocolOstin>
 
 @end

@@ -40,7 +40,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 
 - (void) requestData
 {
-    [[MCPServer instance] itemDescription:self itemCode:nil shopCode:nil];
+    [[MCPServer instance] itemDescription:self itemCode:nil shopCode:nil isoType:0];
 }
 
 - (void)didReceiveMemoryWarning {

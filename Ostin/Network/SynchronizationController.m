@@ -8,6 +8,7 @@
 
 #import "SynchronizationController.h"
 #import "MCPServer.h"
+#import "CoreDataController.h"
 
 @interface SynchronizationController() <ItemDescriptionDelegate>
 
@@ -17,18 +18,19 @@
 
 - (void) synchronize
 {
-    [[MCPServer instance] itemDescription:self itemCode:nil shopCode:nil];
+    [[MCPServer instance] itemDescription:self itemCode:nil shopCode:nil isoType:0];
 }
 
 #pragma mark - Network Delegates
 
 - (void) itemDescriptionComplete:(int)result itemDescription:(ItemInformation *)itemDescription
 {
-    
+    NSLog(@"%d", result);
 }
 
 - (void) allItemsDescription:(int)result items:(NSArray<ItemInformation *> *)items
 {
+    
     if (result == 0)
     {
         if (_delegate)

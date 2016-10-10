@@ -29,7 +29,7 @@
 // Functions
 @required
 - (void) hello:(id<HelloDelegate>) delegate;
-- (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString*) code shopCode:(NSString*) shopCode;
+- (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString*) code shopCode:(NSString*) shopCode isoType:(int) type;
 - (void) inventoryItemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString*) code;
 - (void) authorization:(id<AuthorizationDelegate>)delegate code:(NSString*) code;
 - (void) clinetCard:(id<ClientCardDelegate>)delegate cardNumber:(NSString*) card;

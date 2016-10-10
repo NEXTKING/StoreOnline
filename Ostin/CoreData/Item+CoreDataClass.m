@@ -8,7 +8,6 @@
 
 #import "Item+CoreDataClass.h"
 
-
 @implementation Item
 
 @end

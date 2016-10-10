@@ -18,7 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *code128;
 @property (nullable, nonatomic, copy) NSString *ean;
 @property (nullable, nonatomic, copy) NSNumber *itemID;
-@property (nullable, nonatomic, retain) Item *item;
 
 @end
 

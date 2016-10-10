@@ -59,6 +59,7 @@
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBarHidden = NO;
+    [dtdev addDelegate:self];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -66,6 +67,7 @@
     [super viewWillDisappear:animated];
     
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    [dtdev removeDelegate:self];
 }
 
 - (void) syncCompleteWithResult:(int)result

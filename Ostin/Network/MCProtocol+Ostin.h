@@ -18,6 +18,6 @@
 - (void) groups:(id<GroupsDelegate>) delegate uid:(NSString*)uid;
 - (void) subgroups:(id<GroupsDelegate>) delegate uid:(NSString*)uid;
 - (void) brands:(id<GroupsDelegate>) delegate uid:(NSString*)uid;
-
+- (void) tasks:(id<TasksDelegate>) delegate userID:(NSNumber*) userID;
 
 @end

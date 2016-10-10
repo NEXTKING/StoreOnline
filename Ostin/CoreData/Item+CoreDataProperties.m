@@ -34,7 +34,5 @@
 @dynamic storeNumber;
 @dynamic subgroupID;
 @dynamic trademarkID;
-@dynamic barcodes;
-@dynamic price;
 
 @end

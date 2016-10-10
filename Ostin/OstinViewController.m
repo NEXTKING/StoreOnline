@@ -15,6 +15,8 @@
 {
     BOOL restored;
     WYPopoverController *settingsPopover;
+    NSMutableArray* symbols;
+    NSMutableString* ringBarcode;
 }
 
 @end
@@ -35,6 +37,47 @@
         [self barcodeData:_externalBarcode type:0];
     }
     // Do any additional setup after loading the view.
+    
+    [self initializeRing];
+    
+    //[[MCPServer instance] itemDescription:self itemCode:@"2792304" shopCode:nil isoType:BAR_CODE128];
+}
+
+- (void) initializeRing
+{
+    symbols = [NSMutableArray new];
+    
+    for (int i = 0; i < 127; ++i) {
+        // ASCII to NSString
+        NSString *string = [NSString stringWithFormat:@"%c", i]; // A
+        UIKeyCommand *command = [UIKeyCommand keyCommandWithInput:string modifierFlags:0 action:@selector(gsKey:)];
+        [symbols addObject:command];
+    }
+}
+
+- (NSArray *)keyCommands
+{
+    return symbols;
+    
+    // <RS> - char(30): ctrl-shift-6 (or ctrl-^)
+    //UIKeyCommand *rsCommand = [UIKeyCommand keyCommandWithInput:@"6" modifierFlags:UIKeyModifierShift|UIKeyModifierControl action:@selector(rsKey:)];
+    // <GS> - char(29): ctrl-]
+    //UIKeyCommand *gsCommand = [UIKeyCommand keyCommandWithInput:@"]" modifierFlags:UIKeyModifierControl action:@selector(gsKey:)];
+    // <EOT> - char(4): ctrl-d
+    //UIKeyCommand *eotCommand = [UIKeyCommand keyCommandWithInput:@"D" modifierFlags:UIKeyModifierControl action:@selector(eotKey:)];
+    //return [[NSArray alloc] initWithObjects:rsCommand, gsCommand, eotCommand, nil];
+}
+
+
+- (void) gsKey: (UIKeyCommand *) keyCommand {
+    NSLog(@"%@", keyCommand.input);
+    
+    if ([keyCommand.input isEqualToString:@"$"])
+        ringBarcode.string = @"";
+    else if ([keyCommand.input isEqualToString:@"%"])
+        [self sendNotification:nil];
+    else
+        [ringBarcode appendString:keyCommand.input];
 }
 
 - (IBAction)immediateSwitchAction:(UISwitch*)sender
@@ -43,6 +86,54 @@
     id obj = sender.on?@YES:nil;
     [defaults setValue:obj forKey:@"PrintImmediatly"];
 }
+
+- (void) sendNotification:(id) sender
+{
+    [self barcodeData:ringBarcode type:0];
+}
+
+- (NSString*) parseBarcode:(NSString*) code
+{
+    if (code.length < 8)
+        return nil;
+   
+    NSString* finalCode = [code substringFromIndex:8];
+    
+    if (finalCode.length < 8)
+        return nil;
+    
+    finalCode = [finalCode substringToIndex:7];
+    
+    [self showInfoMessage:finalCode];
+    return finalCode;
+}
+
+- (void) barcodeData:(NSString *)barcode type:(int)type
+{
+    if (type != BAR_CODE128)
+    {
+        [super barcodeData:barcode type:type];
+        return;
+    }
+    
+    NSString* parsedCode = [self parseBarcode:barcode];
+    
+    if (!parsedCode)
+        return;
+    
+    [super barcodeData:parsedCode type:type];
+}
+
+- (void) barcodeData:(NSString *)barcode isotype:(NSString *)isotype
+{
+    NSString* parsedCode = [self parseBarcode:barcode];
+    
+    if (!parsedCode)
+        return;
+    
+    [super barcodeData:parsedCode isotype:isotype];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

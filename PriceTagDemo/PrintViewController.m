@@ -206,7 +206,11 @@ typedef enum PrintingTask
     switch (currentTask) {
         case PrintingTaskPrintLabel:
         case PrintingTaskFeed:
+#ifdef OSTIN
+            [self printZPL];
+#else
             [self printLabel];
+#endif
             break;
         case PrintingTaskCalibrate:
             [self calibratePrinter];
@@ -307,6 +311,41 @@ if (_shouldRetrack)
     
     currentTask = PrintingTaskNone;
 
+}
+
+
+- (void) printZPL
+{
+    _statusLabel.text = @"Печать...";
+    
+    if (!_currentPrint)
+    {
+        [self performSelector:@selector(performCallback) withObject:nil afterDelay:2.0];
+        return;
+    }
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSError* error = nil;
+        NSString *str=[[NSBundle mainBundle] pathForResource:@"ZPLtest" ofType:@"txt"];
+        NSData *file=[NSData dataWithContentsOfFile:str];
+        [dtDevice btWrite:file.bytes length:file.length error:&error];
+        
+        if (error)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self showInfoMessage:error.localizedDescription];
+            });
+            //[dtDevice btDisconnect:nil error:nil];
+            //[self startSearchingPtinter];
+        }
+        
+    });
+    
+    [self performSelector:@selector(performCallback) withObject:nil afterDelay:2.0];
+    //[self performSelector:@selector(retractPaper) withObject:nil afterDelay:5.0];
+    
+    currentTask = PrintingTaskNone;
 }
 
 - (void) calibratePrinter

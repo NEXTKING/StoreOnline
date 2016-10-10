@@ -7,7 +7,7 @@
 //
 
 #import "Price+CoreDataClass.h"
-#import "Item.h"
+
 @implementation Price
 
 @end
