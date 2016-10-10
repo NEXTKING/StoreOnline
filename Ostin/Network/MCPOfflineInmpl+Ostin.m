@@ -11,6 +11,7 @@
 #import "NSData+Base64.h"
 #import "MCPServer.h"
 #import "Item+CoreDataClass.h"
+#import "Price+CoreDataProperties.h"
 #import "Barcode+CoreDataClass.h"
 
 @interface MCPOfflineInmpl_Ostin ()
@@ -54,6 +55,99 @@
     
 }
 
+- (void) search:(id<SearchDelegate>)delegate forQuery:(NSString *)query withAttribute:(ItemSearchAttribute)searchAttribute
+{
+    if ([query stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length == 0) // empty query
+    {
+        if ([delegate respondsToSelector:@selector(searchComplete:attribute:items:)])
+            [delegate searchComplete:0 attribute:searchAttribute items:nil];
+        
+        return;
+    }
+    
+    NSMutableArray *searchPredicates = [[NSMutableArray alloc] init];
+    
+    if ((searchAttribute & ItemSearchAttributeName) != 0)
+    {
+        // name contains all substrings
+        NSArray *querySubstrings = [query componentsSeparatedByString:@" "];
+        NSMutableArray *substringPredicates = [[NSMutableArray alloc] initWithCapacity:querySubstrings.count];
+        for (NSString *substring in querySubstrings)
+        {
+            if (substring.length > 0)
+                [substringPredicates addObject:[NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@", substring]];
+        }
+        NSPredicate *namePredicate = [NSCompoundPredicate andPredicateWithSubpredicates:substringPredicates];
+        [searchPredicates addObject:namePredicate];
+    }
+    
+    if ((searchAttribute & ItemSearchAttributeArticle) != 0)
+    {
+        NSPredicate *articlePredicate = [NSPredicate predicateWithFormat:@"itemCode_2 == %@", query];
+        [searchPredicates addObject:articlePredicate];
+    }
+    
+    if ((searchAttribute & ItemSearchAttributeBarcode) != 0)
+    {
+        NSPredicate *barcodePredicate = [NSPredicate predicateWithFormat:@"barcode == %@", query];
+        [searchPredicates addObject:barcodePredicate];
+    }
+    
+    if ((searchAttribute & ItemSearchAttributeItemCode) != 0)
+    {
+        NSPredicate *itemCodePredicate = [NSPredicate predicateWithFormat:@"itemCode == %@", query];
+        [searchPredicates addObject:itemCodePredicate];
+    }
+    
+    NSManagedObjectContext *moc = self.dataController.managedObjectContext;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+    
+    NSPredicate *compoundPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:searchPredicates];
+    [request setPredicate:compoundPredicate];
+    NSArray* results = [moc executeFetchRequest:request error:nil];
+    
+    if (results.count > 0)
+    {
+        NSMutableArray *items = [[NSMutableArray alloc] init];
+        for (Item *item in results)
+        {
+            ItemInformation *itemInformation = [ItemInformation new];
+            NSMutableArray *additionalParameters = [NSMutableArray new];
+            
+            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"additionalInfo" value:item.additionalInfo]];
+            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"additionalSize" value:item.additionalSize]];
+            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"boxType" value:item.boxType]];
+            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"certificationAuthorittyCode" value:item.certificationAuthorittyCode]];
+            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"groupID" value:item.groupID.stringValue]];
+            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"itemCode" value:item.itemCode]];
+            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"itemCode_2" value:item.itemCode_2]];
+            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"line1" value:item.line1]];
+            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"line2" value:item.line2]];
+            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"priceHeader" value:item.priceHeader]];
+            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"size" value:item.size]];
+            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"sizeHeader" value:item.sizeHeader]];
+            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"storeNumber" value:item.storeNumber]];
+            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"subgroupID" value:item.subgroupID.stringValue]];
+            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"trademarkID" value:item.trademarkID.stringValue]];
+            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"price" value:[NSString stringWithFormat:@"%f", item.price.retailPrice]]];
+
+            itemInformation.barcode = item.barcode;
+            itemInformation.color = item.color;
+            itemInformation.itemId = item.itemID.integerValue;
+            itemInformation.name = item.name;
+            itemInformation.additionalParameters = additionalParameters;
+            
+            [items addObject:itemInformation];
+        }
+        if ([delegate respondsToSelector:@selector(searchComplete:attribute:items:)])
+            [delegate searchComplete:1 attribute:searchAttribute items:items];
+    }
+    else
+    {
+        if ([delegate respondsToSelector:@selector(searchComplete:attribute:items:)])
+            [delegate searchComplete:1 attribute:searchAttribute items:nil];
+    }
+}
 
 - (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString *)code shopCode:(NSString *)shopCode
 {

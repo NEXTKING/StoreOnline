@@ -12,6 +12,17 @@
 
 @implementation ParameterInformation
 
+- (instancetype)initWithName:(NSString *)name value:(NSString *)value
+{
+    self = [self init];
+    if (self)
+    {
+        self.name = name;
+        self.value = value;
+    }
+    return self;
+}
+
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if ((self = [self init]))
@@ -158,6 +169,19 @@
         class = [class superclass];
     }
     return array;
+}
+
+- (NSString *)additionalParameterValueForName:(NSString *)name
+{
+    if (self.additionalParameters != nil)
+    {
+        for (ParameterInformation *parameter in self.additionalParameters)
+        {
+            if ([parameter.name isEqualToString:name])
+                return parameter.value;
+        }
+    }
+    return nil;
 }
 
 @end
