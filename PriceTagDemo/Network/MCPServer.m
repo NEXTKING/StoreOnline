@@ -14,7 +14,7 @@
 #if __has_include("MCPNetworkImpl+RivGosh.h")
 #import "MCPNetworkImpl+RivGosh.h"
 #endif
-#if __has_include("MCPSimulatorImpl+Ostin.h")
+#if defined(OSTIN)
 #import "MCPOfflineInmpl+Ostin.h"
 #endif
 

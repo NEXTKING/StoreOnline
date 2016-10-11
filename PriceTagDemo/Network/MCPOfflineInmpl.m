@@ -56,7 +56,7 @@
 #endif
 }
 
-- (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString *)code shopCode:(NSString *)shopCode
+- (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString *)code shopCode:(NSString *)shopCode isoType:(int)type
 {
     if (code)
         [self itemDescriptionOffline:delegate itemCode:code];

@@ -109,7 +109,7 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setValue:_currentReceiptId forKey:@"currentReceiptID"];
     requestInProgress = YES;
-    [[MCPServer instance] itemDescription:self itemCode:code shopCode:nil];
+    [[MCPServer instance] itemDescription:self itemCode:code shopCode:nil isoType:0];
 }
 
 - (void) requestClientInfoWithCode:(NSString *)code

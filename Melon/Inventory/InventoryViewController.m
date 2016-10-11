@@ -231,7 +231,7 @@
         else
         {
             secondRequest = YES;
-            [[MCPServer instance] itemDescription:self itemCode:itemDescription.barcode shopCode:nil];
+            [[MCPServer instance] itemDescription:self itemCode:itemDescription.barcode shopCode:nil isoType:0];
             return;
         }
     }

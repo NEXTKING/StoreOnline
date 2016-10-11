@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "MCProtocol+RivGosh.h"
+
+#if defined (OSTIN)
 #import "MCProtocol+Ostin.h"
+#endif
 
 #define ACCESS_TOKEN_AUTO Nil
 
