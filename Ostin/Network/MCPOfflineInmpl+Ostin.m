@@ -307,8 +307,21 @@
         [request setPredicate:[NSPredicate predicateWithFormat:@"code128 LIKE[c] %@", code]];
     else if (type == BAR_UPC)
     {
+        
         NSString *string = [NSString stringWithFormat:@"0%@", code];
-        [request setPredicate:[NSPredicate predicateWithFormat:@"ean LIKE[c] %@", string]];
+        
+        if ([string isEqualToString:@"09900"])
+        {
+            NSString* substring = [string substringFromIndex:7];
+            [request setPredicate:[NSPredicate predicateWithFormat:@"code128 LIKE[c] %@", substring]];
+        }
+        else
+        {
+            NSString* substring = [string substringToIndex:11];
+            [request setPredicate:[NSPredicate predicateWithFormat:@"ean LIKE[c] %@", substring]];
+        }
+        
+        
     }
     else
         [request setPredicate:[NSPredicate predicateWithFormat:@"ean == %@", code]];
