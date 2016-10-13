@@ -15,6 +15,7 @@
 #import "Price+CoreDataProperties.h"
 #import "Barcode+CoreDataClass.h"
 #import "Price+CoreDataClass.h"
+#import "Task+CoreDataClass.h"
 #import "SOAPWares.h"
 #import "SOAPBarcodes.h"
 #import "SOAPPrices.h"
@@ -67,7 +68,7 @@
 {    
     if (userID)
     {
-        
+        [self tasksInternal:delegate userID:userID];
     }
     else
     {
@@ -279,6 +280,15 @@
     
     NSError* error = nil;
     NSArray* results = [moc executeFetchRequest:request error:&error];
+    NSMutableArray *exportTasks = [NSMutableArray new];
+    
+    for (Task* taskDB in results)
+    {
+        TaskInformation* taskInfo = [TaskInformation new];
+        taskInfo.name = taskDB.name;
+        taskInfo.userID = taskDB.userID.integerValue;
+        taskInfo.taskID = taskDB.taskID.integerValue;
+    }
     
     if (!error)
         [delegate tasksComplete:0 tasks:results];

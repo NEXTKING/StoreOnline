@@ -33,8 +33,8 @@ static id<MCProtocol> __inst = Nil;
 #if defined(RIVGOSH)
         __inst = [[MCPNetworkImpl_RivGosh alloc] init];
 #elif defined(OSTIN)
-       // __inst = [[MCPOfflineInmpl_Ostin alloc] init];
-        __inst = [[MCPSimulatorImpl_Ostin alloc] init];
+        __inst = [[MCPOfflineInmpl_Ostin alloc] init];
+        //__inst = [[MCPSimulatorImpl_Ostin alloc] init];
 #else
         
     #ifdef OFFLINE
