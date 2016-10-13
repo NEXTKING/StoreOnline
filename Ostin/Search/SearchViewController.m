@@ -108,6 +108,7 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
         
         ItemInformation* itemInfo = _searchResults[indexPath.row];
         ostinVC.externalBarcode = itemInfo.barcode;
+        ostinVC.currentItemInfo = itemInfo;
     }
 }
 

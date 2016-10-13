@@ -11,5 +11,5 @@
 @interface ItemsListViewController : UITableViewController
 
 @property (nonatomic, assign) BOOL tasksMode;
-
+@property (nonatomic, strong) NSDictionary *fakeData;
 @end

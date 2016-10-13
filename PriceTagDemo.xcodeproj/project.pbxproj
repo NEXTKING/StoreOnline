@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		215EFF091DAB9ED600BE11C5 /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 215EFF071DAB9ED600BE11C5 /* SearchTableViewCell.m */; };
 		215EFF0A1DAB9ED600BE11C5 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 215EFF081DAB9ED600BE11C5 /* SearchTableViewCell.xib */; };
+		218228621DAF838200F04B70 /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 218228611DAF838200F04B70 /* ContainerViewController.m */; };
+		218228661DAF864000F04B70 /* TasksCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 218228641DAF864000F04B70 /* TasksCell.m */; };
+		218228671DAF864000F04B70 /* TasksCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 218228651DAF864000F04B70 /* TasksCell.xib */; };
+		21BB44BF1DACF0D100ED67EE /* TaskProgressOverlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BB44BD1DACF0D100ED67EE /* TaskProgressOverlayController.m */; };
+		21BB44C01DACF0D100ED67EE /* TaskProgressOverlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21BB44BE1DACF0D100ED67EE /* TaskProgressOverlayController.xib */; };
+		21BB44E61DAD224600ED67EE /* TasksNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BB44E51DAD224600ED67EE /* TasksNavigationController.m */; };
 		23325335A97CCCACC42944AF /* libPods-Ostin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD3C223CF10EB177C6448781 /* libPods-Ostin.a */; };
 		5BADECA800A6702C5F474BB5 /* libPods-PriceTagDemoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1E01A49F9DF7B4A12A7407 /* libPods-PriceTagDemoUITests.a */; };
 		71454865FBE26CAE4A38F59F /* libPods-DesondoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D44F91159F3A6CCEC7C0AEB /* libPods-DesondoTests.a */; };
@@ -522,6 +528,16 @@
 		215EFF061DAB9ED600BE11C5 /* SearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableViewCell.h; sourceTree = "<group>"; };
 		215EFF071DAB9ED600BE11C5 /* SearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewCell.m; sourceTree = "<group>"; };
 		215EFF081DAB9ED600BE11C5 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
+		218228601DAF838200F04B70 /* ContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerViewController.h; sourceTree = "<group>"; };
+		218228611DAF838200F04B70 /* ContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerViewController.m; sourceTree = "<group>"; };
+		218228631DAF864000F04B70 /* TasksCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksCell.h; sourceTree = "<group>"; };
+		218228641DAF864000F04B70 /* TasksCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TasksCell.m; sourceTree = "<group>"; };
+		218228651DAF864000F04B70 /* TasksCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TasksCell.xib; sourceTree = "<group>"; };
+		21BB44BC1DACF0D100ED67EE /* TaskProgressOverlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskProgressOverlayController.h; sourceTree = "<group>"; };
+		21BB44BD1DACF0D100ED67EE /* TaskProgressOverlayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskProgressOverlayController.m; sourceTree = "<group>"; };
+		21BB44BE1DACF0D100ED67EE /* TaskProgressOverlayController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskProgressOverlayController.xib; sourceTree = "<group>"; };
+		21BB44E41DAD224600ED67EE /* TasksNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksNavigationController.h; sourceTree = "<group>"; };
+		21BB44E51DAD224600ED67EE /* TasksNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TasksNavigationController.m; sourceTree = "<group>"; };
 		26E6677B3BC7955145425ED2 /* Pods-DesondoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesondoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DesondoTests/Pods-DesondoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		305BD8FF1EE07980B92BBA8D /* Pods-Tsum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tsum.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tsum/Pods-Tsum.debug.xcconfig"; sourceTree = "<group>"; };
 		3441ACD00F2A17AFBB7CD4CD /* Pods-PriceTagDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceTagDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PriceTagDemoTests/Pods-PriceTagDemoTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1843,6 +1859,10 @@
 		C67103EB1D93CACB000AEC24 /* Tasks */ = {
 			isa = PBXGroup;
 			children = (
+				21BB44E41DAD224600ED67EE /* TasksNavigationController.h */,
+				21BB44E51DAD224600ED67EE /* TasksNavigationController.m */,
+				218228601DAF838200F04B70 /* ContainerViewController.h */,
+				218228611DAF838200F04B70 /* ContainerViewController.m */,
 				C67103EC1D93CAE7000AEC24 /* ItemsListViewController.h */,
 				C67103ED1D93CAE7000AEC24 /* ItemsListViewController.m */,
 				C67103EF1D93CB59000AEC24 /* ItemsListCell.h */,
@@ -1850,6 +1870,12 @@
 				C67103F11D93CB59000AEC24 /* ItemsListCell.xib */,
 				C6B3C9851D93E7F400730D9F /* TasksViewController.h */,
 				C6B3C9861D93E7F400730D9F /* TasksViewController.m */,
+				218228631DAF864000F04B70 /* TasksCell.h */,
+				218228641DAF864000F04B70 /* TasksCell.m */,
+				218228651DAF864000F04B70 /* TasksCell.xib */,
+				21BB44BC1DACF0D100ED67EE /* TaskProgressOverlayController.h */,
+				21BB44BD1DACF0D100ED67EE /* TaskProgressOverlayController.m */,
+				21BB44BE1DACF0D100ED67EE /* TaskProgressOverlayController.xib */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -2454,6 +2480,7 @@
 				B90CE4941C89F15100DFB3E4 /* eac.png in Resources */,
 				B957B1061D1C2A2D002A5256 /* 99002776879.jpg in Resources */,
 				B907ADDE1D095C7700B44BF1 /* settings_icon@2x.png in Resources */,
+				218228671DAF864000F04B70 /* TasksCell.xib in Resources */,
 				B957B1071D1C2A2D002A5256 /* 99002776883.jpg in Resources */,
 				B957B1081D1C2A2D002A5256 /* 99002776898.jpg in Resources */,
 				B957B0FC1D1C2A2D002A5256 /* 299101040151.jpg in Resources */,
@@ -2488,6 +2515,7 @@
 				C6979EA81D9135AD00A0B51B /* relevance@2x.png in Resources */,
 				B957B1191D1C2A2D002A5256 /* MT6O9195M.jpg in Resources */,
 				C6979EA21D91348000A0B51B /* catalog@2x.png in Resources */,
+				21BB44C01DACF0D100ED67EE /* TaskProgressOverlayController.xib in Resources */,
 				B957B1101D1C2A2D002A5256 /* MP4O9264G.jpg in Resources */,
 				B957B1091D1C2A2D002A5256 /* 99002777294.jpg in Resources */,
 				B957B1171D1C2A2D002A5256 /* MT2O9469M.jpg in Resources */,
@@ -3162,6 +3190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C667238F1DAABBA9001B30AC /* SOAPPrices.m in Sources */,
+				21BB44E61DAD224600ED67EE /* TasksNavigationController.m in Sources */,
 				C6F600C71D9C363C0095AE21 /* NSDate+ISO8601Parsing.m in Sources */,
 				C66723891DA91614001B30AC /* SOAPWares.m in Sources */,
 				215EFF091DAB9ED600BE11C5 /* SearchTableViewCell.m in Sources */,
@@ -3172,6 +3201,7 @@
 				C655B1BE1DA5399000EE7AB9 /* SynchronizationController.m in Sources */,
 				C6F600C91D9C363C0095AE21 /* PI_MOBILE_SERVICEService.m in Sources */,
 				C6F600C81D9C363C0095AE21 /* NSDate+ISO8601Unparsing.m in Sources */,
+				218228621DAF838200F04B70 /* ContainerViewController.m in Sources */,
 				B9F5F0B11D0057650010E1EA /* NwobjInventoryItemDescription.m in Sources */,
 				B9F5F0B21D0057650010E1EA /* NwobjAuthorization.m in Sources */,
 				C6979E9A1D8FE6A800A0B51B /* LoginViewController.m in Sources */,
@@ -3199,8 +3229,10 @@
 				C66723861DA912CF001B30AC /* SOAPOperation.m in Sources */,
 				B957B0D61D1BF5E0002A5256 /* MCPOfflineInmpl.m in Sources */,
 				B907ADDC1D095C2F00B44BF1 /* WYPopoverController.m in Sources */,
+				218228661DAF864000F04B70 /* TasksCell.m in Sources */,
 				B92DCE3D1C845FAB002AA184 /* Logger.m in Sources */,
 				B92DCE391C845F1E002AA184 /* ItemInformation.m in Sources */,
+				21BB44BF1DACF0D100ED67EE /* TaskProgressOverlayController.m in Sources */,
 				C67103F21D93CB59000AEC24 /* ItemsListCell.m in Sources */,
 				B92DCE311C845E92002AA184 /* DetailsTableViewController.m in Sources */,
 				B92DCE2E1C845E89002AA184 /* ViewController.m in Sources */,
