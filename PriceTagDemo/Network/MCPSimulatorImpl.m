@@ -308,7 +308,7 @@ static const double _longitude_scale_factor = 0.55;
 }
 */
 
-- (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString *)code shopCode:(NSString *)shopCode
+- (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString *)code shopCode:(NSString *)shopCode isoType:(int)type
 {
     self.currentBarcode = code;
     [self enableNetworkActivityIndicator:YES];

@@ -60,9 +60,27 @@
         if ([currentParam.name isEqualToString:@"FirstPrice"])
             firstPriceParam = currentParam;
     }
-   /* NSString *message = [NSString stringWithFormat:@"%@ %@", oldPriceParam?@"YES":@"NO", saleParam?@"YES":@"NO"];
+    
+    NSString *message = [NSString stringWithFormat:
+                         @"Presence:\n\n"
+                         "oldPrice: %@\n"
+                         "saleParam: %@\n"
+                         "firstPrice: %@\n\n"
+                         
+                         "Values:\n\n"
+                         "saleParam: %@\n"
+                         "price: %@"
+                         "oldPrice: %@\n"
+                         
+                         , oldPriceParam?@"YES":@"NO",
+                         saleParam?@"YES":@"NO",
+                         firstPriceParam?@"YES":@"NO",
+                         saleParam.value,
+                         @(item.price),
+                         oldPriceParam.value];
+    
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Title" message:message delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-    [alert show]; */
+    [alert show];
     
     if (saleParam && firstPriceParam && oldPriceParam  && [saleParam.value isEqualToString:@"1"] && (item.price != oldPriceParam.value.doubleValue) )
     {

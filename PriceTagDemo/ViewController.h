@@ -26,7 +26,7 @@
 @property (nonatomic, assign) NSInteger numberOfCopies;
 @property (assign, nonatomic) BOOL shouldRetrack;
 
-- (void) requestItemInfoWithCode:(NSString*) code;
+- (void) requestItemInfoWithCode:(NSString*) code isoType:(int) type;
 - (void) updateItemInfo:(ItemInformation*) itemInfo;
 - (void) clearInfo;
 - (void) amountCompareCompleted:(BOOL) isEqual;

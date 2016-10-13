@@ -140,10 +140,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) requestItemInfoWithCode:(NSString *)code
+- (void) requestItemInfoWithCode:(NSString *)code isoType:(int)type
 {
     _imageView.image = nil;
-    [super requestItemInfoWithCode:code];
+    [super requestItemInfoWithCode:code isoType:type];
     self.itemPriceLabel.backgroundColor = [UIColor colorWithRed:119.0/255.0 green:119.0/255.0 blue:119.0/255.0 alpha:0.28];
 }
 

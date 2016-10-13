@@ -10,6 +10,7 @@
 #import "PI_MOBILE_SERVICEService.h"
 #import "NSData+Base64.h"
 #import "MCPServer.h"
+#import "TaskInformation.h"
 #import "Item+CoreDataClass.h"
 #import "Price+CoreDataProperties.h"
 #import "Barcode+CoreDataClass.h"
@@ -17,6 +18,7 @@
 #import "SOAPWares.h"
 #import "SOAPBarcodes.h"
 #import "SOAPPrices.h"
+#import "SOAPTasks.h"
 #import "DTDevices.h"
 
 @interface MCPOfflineInmpl_Ostin ()
@@ -62,14 +64,36 @@
 }
 
 - (void) tasks:(id<TasksDelegate>)delegate userID:(NSNumber *)userID
-{
+{    
     if (userID)
     {
         
     }
     else
     {
+        NSOperationQueue *waresQueue = [NSOperationQueue new];
+        waresQueue.name = @"tasksQueue";
         
+        SOAPTasks *tasks = [SOAPTasks new];
+        __weak SOAPTasks* _tasks = tasks;
+        tasks.dataController = self.dataController;
+        tasks.authValue = authValue;
+        
+        NSBlockOperation* delegateCallOperation = [NSBlockOperation blockOperationWithBlock:^{
+            
+            BOOL success = _tasks.success;
+    
+            if (success)
+                [delegate tasksComplete:0 tasks:nil];
+            else
+                [delegate tasksComplete:1 tasks:nil];
+            
+        }];
+        
+        [delegateCallOperation addDependency:tasks];
+        
+        [waresQueue addOperations:@[tasks] waitUntilFinished:NO];
+        [[NSOperationQueue mainQueue] addOperation:delegateCallOperation];
     }
 }
 - (void) search:(id<SearchDelegate>)delegate forQuery:(NSString *)query withAttribute:(ItemSearchAttribute)searchAttribute
@@ -248,11 +272,24 @@
 
 #pragma mark Internal Metdods
 
+- (void) tasksInternal:(id<TasksDelegate>)delegate userID:(NSNumber*)userID
+{
+    NSManagedObjectContext *moc =self.dataController.managedObjectContext;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Task"];
+    
+    NSError* error = nil;
+    NSArray* results = [moc executeFetchRequest:request error:&error];
+    
+    if (!error)
+        [delegate tasksComplete:0 tasks:results];
+    else
+        [delegate tasksComplete:1 tasks:nil];
+}
+
 - (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString *)code isoType:(int) type
 {
     NSManagedObjectContext *moc =self.dataController.managedObjectContext;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Barcode"];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Offline barcode" message:[NSString stringWithFormat:@"%@", code] delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
     
     type = BAR_UPC;
     

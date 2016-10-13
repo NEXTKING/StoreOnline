@@ -262,7 +262,7 @@
 {
     NSRange trackRange = {.location = 1, .length = track2.length-2};
     NSString* cardCode = [track2 substringWithRange:trackRange];
-    [self requestItemInfoWithCode:cardCode];
+    [self requestItemInfoWithCode:cardCode isoType:0];
 }
 
 - (void) requestItemInfoWithCode:(NSString*) code isoType:(int) type

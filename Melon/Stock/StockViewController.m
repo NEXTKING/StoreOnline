@@ -27,7 +27,6 @@ static NSString * const reuseIdentifier = @"StockCell";
     [super viewDidLoad];
     
     dtDev = [DTDevices sharedDevice];
-    [dtDev addDelegate:self];
     
     self.tableView.estimatedRowHeight = 44.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -38,6 +37,18 @@ static NSString * const reuseIdentifier = @"StockCell";
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+     [dtDev addDelegate:self];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+     [dtDev removeDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning {

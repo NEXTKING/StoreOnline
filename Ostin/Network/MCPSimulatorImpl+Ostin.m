@@ -119,5 +119,10 @@
     
 }
 
+- (void) tasks:(id<TasksDelegate>)delegate userID:(NSNumber *)userID
+{
+    [delegate tasksComplete:0 tasks:nil];
+}
+
 
 @end

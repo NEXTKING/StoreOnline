@@ -37,7 +37,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) requestItemInfoWithCode:(NSString *)code
+- (void) requestItemInfoWithCode:(NSString *)code isoType:(int)type
 {
     if (bindingInProgress)
     {
@@ -46,7 +46,7 @@
     else
     {
         temporaryCode = code;
-        [super requestItemInfoWithCode:code];
+        [super requestItemInfoWithCode:code isoType:type];
     }
 }
 
@@ -156,8 +156,6 @@
 
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    bindingInProgress = NO;
-    
     if (buttonIndex != alertView.cancelButtonIndex)
     {
         
@@ -169,6 +167,13 @@
         }
     }
 }
+
+- (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+   if (alertView.tag == 987)
+       bindingInProgress = NO;
+}
+
 /*
 #pragma mark - Navigation
 
