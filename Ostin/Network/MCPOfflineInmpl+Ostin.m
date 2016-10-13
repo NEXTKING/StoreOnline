@@ -291,7 +291,7 @@
     }
     
     if (!error)
-        [delegate tasksComplete:0 tasks:results];
+        [delegate tasksComplete:0 tasks:exportTasks];
     else
         [delegate tasksComplete:1 tasks:nil];
 }
