@@ -10,11 +10,14 @@
 #import "MCPServer.h"
 #import "ItemsListCell.h"
 #import "OstinViewController.h"
+#import "TasksNavigationController.h"
+#import "TaskProgressOverlayController.h"
 
 @interface ItemsListViewController () <ItemDescriptionDelegate>
 {
-    NSArray* _items;
+    NSArray *_items;
 }
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *actionButton;
 
 @end
 
@@ -22,20 +25,42 @@
 
 static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
+
     self.tableView.estimatedRowHeight = 44.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"ItemsListCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
-    [self requestData];
+    // [self requestData];
+    [self setOverlayInfo];
+}
+
+- (void)setOverlayInfo
+{
+    if (_fakeData != nil)
+    {
+        NSDate *date = [_fakeData objectForKey:@"date"];
+        NSString *title = [_fakeData objectForKey:@"title"];
+        NSInteger total = [[_fakeData objectForKey:@"totalCount"] integerValue];
+        NSInteger complete = [[_fakeData objectForKey:@"completeCount"] integerValue];
+        
+        TasksNavigationController *navVC = (TasksNavigationController *)self.navigationController;
+        [navVC.overlayController setTitleText:title startDate:date totalItemsCount:total completeItemsCount:complete];
+    }
+}
+
+- (void)testActionButton
+{
+    self.actionButton.title = @"Начать";
+    self.actionButton.enabled = YES;
+    
+    self.actionButton.title = @"Завершить";
+    self.actionButton.enabled = YES;
+    
+    self.actionButton.title = @"Завершено";
+    self.actionButton.enabled = NO;
 }
 
 - (void) requestData
@@ -43,95 +68,50 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     [[MCPServer instance] itemDescription:self itemCode:nil shopCode:nil isoType:0];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)actionButtonPressed:(id)sender
+{
+    
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;//_items.count;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _items.count;
-}
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     ItemsListCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    ItemInformation *itemInfo = _items[indexPath.row];
-    
-    cell.articleLabel.text = itemInfo.article;
-    cell.nameLabel.text = itemInfo.name;
-    cell.barcodeLabel.text = itemInfo.barcode;
-    
-    cell.quantityLabel.hidden = !_tasksMode;
-    cell.quantityLabel.text = @"Количество 0 из 18";
-    
-    // Configure the cell...
+//    ItemInformation *itemInfo = _items[indexPath.row];
+//    
+//    cell.articleLabel.text = itemInfo.article;
+//    cell.nameLabel.text = itemInfo.name;
+//    cell.barcodeLabel.text = itemInfo.barcode;
+//    
+//    cell.quantityLabel.hidden = !_tasksMode;
+//    cell.quantityLabel.text = @"Количество 0 из 18";
     
     return cell;
 }
 
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-
-#pragma mark - Navigation
-
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self performSegueWithIdentifier:@"DetailDescriptionSegue" sender:indexPath];
 }
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    OstinViewController* ostinVC = segue.destinationViewController;
-    NSIndexPath *indexPath = sender;
-    
-    ItemInformation* itemInfo = _items[indexPath.row];
-    ostinVC.externalBarcode = itemInfo.barcode;
-    
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    
-    
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+//    OstinViewController* ostinVC = segue.destinationViewController;
+//    NSIndexPath *indexPath = sender;
+//    
+//    ItemInformation* itemInfo = _items[indexPath.row];
+//    ostinVC.externalBarcode = itemInfo.barcode;
 }
 
 
