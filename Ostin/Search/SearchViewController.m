@@ -14,6 +14,8 @@
 @interface SearchViewController () <UISearchBarDelegate, SearchDelegate>
 {
     NSArray* _searchResults;
+    BOOL isSearchRunning;
+    UIActivityIndicatorView *_activityIndicator;
 }
 @end
 
@@ -27,6 +29,31 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
     [self.tableView registerNib:[UINib nibWithNibName:@"SearchTableViewCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
     [self.tableView setRowHeight:UITableViewAutomaticDimension];
     [self.tableView setEstimatedRowHeight:130];
+}
+
+- (void)showActivityIndicator
+{
+    if (_activityIndicator == nil)
+    {
+        _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        _activityIndicator.frame = CGRectMake(0, 0, 40, 40);
+        _activityIndicator.center = self.tableView.center;
+    }
+    
+    [self.view addSubview:_activityIndicator];
+    [_activityIndicator startAnimating];
+}
+
+- (void)hideActivityIndicator
+{
+    [_activityIndicator stopAnimating];
+    [_activityIndicator removeFromSuperview];
+}
+
+- (void)showAlertWithMessage:(NSString*)message
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    [alert show];
 }
 
 #pragma mark - Table view data source
@@ -68,7 +95,7 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    if ([searchText length] == 0)
+    if (([searchText length] == 0) && !isSearchRunning)
     {
         _searchResults = nil;
         [self.tableView reloadData];
@@ -77,8 +104,16 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    ItemSearchAttribute searchAttribute = ItemSearchAttributeName | ItemSearchAttributeArticle | ItemSearchAttributeItemCode;
-    [[MCPServer instance] search:self forQuery:searchBar.text withAttribute:searchAttribute];
+    if (!isSearchRunning)
+    {
+        isSearchRunning = YES;
+        [self showActivityIndicator];
+        __weak typeof(self) wself = self;
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            ItemSearchAttribute searchAttribute = ItemSearchAttributeName | ItemSearchAttributeArticle | ItemSearchAttributeItemCode;
+            [[MCPServer instance] search:wself forQuery:searchBar.text withAttribute:searchAttribute];
+        });
+    }
     [searchBar resignFirstResponder];
 }
 
@@ -86,15 +121,24 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
 
 - (void)searchComplete:(int)result attribute:(ItemSearchAttribute)searchAttribute items:(NSArray *)items
 {
-    if (result == 1)
-    {
-        _searchResults = items;
-        [self.tableView reloadData];
-    }
-    else
-    {
+    __weak typeof(self) wself = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
         
-    }
+        isSearchRunning = NO;
+        [wself hideActivityIndicator];
+        if (result == 1)
+        {
+            _searchResults = items;
+            [wself.tableView reloadData];
+            
+            if (items.count == 0)
+                [wself showAlertWithMessage:@"По данному запросу не найдено ни одного товара."];
+        }
+        else
+        {
+            
+        }
+    });
 }
 
 #pragma mark - Navigation

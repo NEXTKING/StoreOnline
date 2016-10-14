@@ -37,6 +37,7 @@
         [self barcodeData:_externalBarcode type:0];
     }
     // Do any additional setup after loading the view.
+    [self updateItemInfo:self.currentItemInfo];
     
     [self initializeRing];
     
@@ -150,7 +151,7 @@
 - (void) updateItemInfo:(ItemInformation *)itemInfo
 {
     [super updateItemInfo:itemInfo];
-    
+
     _imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"no-image.png"]];
 }
 
