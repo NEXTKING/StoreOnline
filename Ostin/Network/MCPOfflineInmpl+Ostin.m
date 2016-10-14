@@ -171,8 +171,8 @@
             [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"storeNumber" value:item.storeNumber]];
             [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"subgroupID" value:item.subgroupID.stringValue]];
             [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"trademarkID" value:item.trademarkID.stringValue]];
-            //[additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"price" value:[NSString stringWithFormat:@"%f", item.price.retailPrice]]];
-
+            
+            itemInformation.price = item.priceHeader.doubleValue; // item.price.retailPrice
             itemInformation.barcode = item.barcode;
             itemInformation.color = item.color;
             itemInformation.itemId = item.itemID.integerValue;
@@ -288,6 +288,7 @@
         taskInfo.name = taskDB.name;
         taskInfo.userID = taskDB.userID.integerValue;
         taskInfo.taskID = taskDB.taskID.integerValue;
+        [exportTasks addObject:taskInfo];
     }
     
     if (!error)

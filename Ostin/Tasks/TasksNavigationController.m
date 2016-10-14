@@ -9,7 +9,7 @@
 #import "TasksNavigationController.h"
 #import "TasksViewController.h"
 #import "ItemsListViewController.h"
-#import "ContainerViewController.h"
+#import "OstinViewController.h"
 
 @interface UIView (childViews)
 - (NSArray*)allSubviews;
@@ -121,7 +121,7 @@
     {
         [self increaseTopScrollViewInsetInViewController:viewController];
     }
-    else if ([viewController isMemberOfClass:[ContainerViewController class]])
+    else if ([viewController isMemberOfClass:[OstinViewController class]])
     {
         [self increaseTopScrollViewInsetInViewController:viewController];
     }

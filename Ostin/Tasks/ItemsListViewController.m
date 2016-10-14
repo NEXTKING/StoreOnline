@@ -17,6 +17,7 @@
 {
     NSArray *_items;
 }
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *actionButton;
 
 @end
@@ -34,20 +35,23 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     
     [self.tableView registerNib:[UINib nibWithNibName:@"ItemsListCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
     // [self requestData];
-    [self setOverlayInfo];
+    [self updateOverlayInfo];
 }
 
-- (void)setOverlayInfo
+- (void)updateOverlayInfo
 {
-    if (_fakeData != nil)
+    if (_task != nil)
     {
-        NSDate *date = [_fakeData objectForKey:@"date"];
-        NSString *title = [_fakeData objectForKey:@"title"];
-        NSInteger total = [[_fakeData objectForKey:@"totalCount"] integerValue];
-        NSInteger complete = [[_fakeData objectForKey:@"completeCount"] integerValue];
-        
         TasksNavigationController *navVC = (TasksNavigationController *)self.navigationController;
-        [navVC.overlayController setTitleText:title startDate:date totalItemsCount:total completeItemsCount:complete];
+        __block NSInteger totalCount = 0;
+        __block NSInteger completeCount = 0;
+        
+        [_task.items enumerateObjectsUsingBlock:^(TaskItemInformation *item, NSUInteger idx, BOOL *stop) {
+            totalCount += item.quantity;
+            completeCount += item.scanned;
+        }];
+        
+        [navVC.overlayController setTitleText:_task.name startDate:_task.startDate totalItemsCount:totalCount completeItemsCount:completeCount];
     }
 }
 
@@ -78,7 +82,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;//_items.count;
+    return _task.items.count;
 }
 
 
@@ -86,14 +90,15 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 {
     ItemsListCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-//    ItemInformation *itemInfo = _items[indexPath.row];
-//    
-//    cell.articleLabel.text = itemInfo.article;
-//    cell.nameLabel.text = itemInfo.name;
-//    cell.barcodeLabel.text = itemInfo.barcode;
-//    
-//    cell.quantityLabel.hidden = !_tasksMode;
-//    cell.quantityLabel.text = @"Количество 0 из 18";
+    TaskItemInformation *taskItemInfo = _task.items[indexPath.row];
+    ItemInformation *item = _tasksMode ? [self itemInfoForTaskItemWithID:taskItemInfo.itemID] : _items[indexPath.row];
+    
+    cell.articleLabel.text = item != nil ? item.article : @"";
+    cell.nameLabel.text = item != nil ? item.name : @"";
+    cell.barcodeLabel.text = item != nil ? item.barcode : @"";
+    
+    cell.quantityLabel.hidden = !_tasksMode;
+    cell.quantityLabel.text = _tasksMode ? [NSString stringWithFormat:@"Количество %ld из %ld", taskItemInfo.scanned, taskItemInfo.quantity] : @"";
     
     return cell;
 }
@@ -119,7 +124,14 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 
 - (void) itemDescriptionComplete:(int)result itemDescription:(ItemInformation *)itemDescription
 {
-    
+    if (result == 0)
+    {
+        
+    }
+    else
+    {
+        
+    }
 }
 
 - (void) allItemsDescription:(int)result items:(NSArray<ItemInformation *> *)items
@@ -133,6 +145,15 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     {
         
     }
+}
+
+- (ItemInformation *)itemInfoForTaskItemWithID:(NSUInteger)ID
+{
+    for (ItemInformation *info in _items)
+        if (info.itemId == ID)
+            return info;
+    
+    return nil;
 }
 
 @end

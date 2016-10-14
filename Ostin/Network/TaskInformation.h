@@ -7,6 +7,7 @@
 //
 
 #import "SOAPOperation.h"
+#import "TaskItemInformation.h"
 
 @interface TaskInformation : NSObject
 
@@ -14,6 +15,7 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) NSInteger userID;
 @property (nonatomic, assign) NSInteger status;
-
+@property (nonatomic, copy) NSDate *startDate;
+@property (nonatomic, copy) NSArray<TaskItemInformation *> *items;
 
 @end

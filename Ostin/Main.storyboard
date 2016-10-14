@@ -152,7 +152,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AZS-Ji-mdC" id="wan-H7-iT0">
-                                    <frame key="frameInset" width="375" height="44"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -171,58 +171,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="actionButton" destination="wi6-zC-xG8" id="ozc-s2-ygv"/>
-                        <segue destination="NUT-yT-9RA" kind="show" identifier="DetailDescriptionSegue" id="jqW-wc-vwE"/>
+                        <segue destination="bjx-cV-0Vl" kind="show" identifier="DetailDescriptionSegue" id="bJE-ZF-HEQ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pbl-eS-2B4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4026" y="913"/>
-        </scene>
-        <!--Container View Controller-->
-        <scene sceneID="xNw-a6-svr">
-            <objects>
-                <viewController id="NUT-yT-9RA" customClass="ContainerViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="6aM-dm-quU"/>
-                        <viewControllerLayoutGuide type="bottom" id="jLG-QF-2cN"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="3GB-TE-l2K">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V6Z-ZY-G3G">
-                                <subviews>
-                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H3O-nc-2rF">
-                                        <connections>
-                                            <segue destination="bjx-cV-0Vl" kind="embed" id="hCT-jt-umq"/>
-                                        </connections>
-                                    </containerView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="H3O-nc-2rF" firstAttribute="leading" secondItem="V6Z-ZY-G3G" secondAttribute="leading" id="7e8-Wq-iEr"/>
-                                    <constraint firstItem="H3O-nc-2rF" firstAttribute="top" secondItem="V6Z-ZY-G3G" secondAttribute="top" id="8ft-8n-cbs"/>
-                                    <constraint firstAttribute="trailing" secondItem="H3O-nc-2rF" secondAttribute="trailing" id="HeJ-vh-iG3"/>
-                                    <constraint firstAttribute="bottom" secondItem="H3O-nc-2rF" secondAttribute="bottom" id="o4x-1I-9PE"/>
-                                </constraints>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="H3O-nc-2rF" firstAttribute="height" secondItem="3GB-TE-l2K" secondAttribute="height" id="D8q-30-MxE"/>
-                            <constraint firstItem="H3O-nc-2rF" firstAttribute="width" secondItem="3GB-TE-l2K" secondAttribute="width" id="EHh-Ap-0ZP"/>
-                            <constraint firstItem="V6Z-ZY-G3G" firstAttribute="top" secondItem="3GB-TE-l2K" secondAttribute="top" id="d9X-zE-D26"/>
-                            <constraint firstItem="V6Z-ZY-G3G" firstAttribute="leading" secondItem="3GB-TE-l2K" secondAttribute="leading" id="pgf-iU-As3"/>
-                            <constraint firstAttribute="bottom" secondItem="V6Z-ZY-G3G" secondAttribute="bottom" id="q7e-3h-OSC"/>
-                            <constraint firstAttribute="trailing" secondItem="V6Z-ZY-G3G" secondAttribute="trailing" id="srj-RM-Wi9"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="containerView" destination="H3O-nc-2rF" id="F3e-1I-poB"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Zdn-77-ZmG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4847" y="913"/>
         </scene>
         <!--Поиск-->
         <scene sceneID="3lm-j5-FQv">
@@ -262,7 +216,7 @@
                                 <rect key="frame" x="0.0" y="136" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hdP-cX-BwP" id="deJ-27-8Bb">
-                                    <frame key="frameInset" width="375" height="44"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -566,11 +520,11 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="535"/>
                     <connections>
-                        <outlet property="barcodeLabel" destination="GP7-So-IWH" id="2Tx-ko-1Pd"/>
+                        <outlet property="barcodeLabel" destination="GP7-So-IWH" id="ZFM-qO-FTd"/>
                         <outlet property="imageView" destination="f1k-EJ-jKA" id="GIe-Ra-dX9"/>
-                        <outlet property="itemArticleLabel" destination="EYO-qc-eUR" id="ROT-tB-2cu"/>
-                        <outlet property="itemNameLabel" destination="afp-zz-yTo" id="ECV-kv-INf"/>
-                        <outlet property="itemPriceLabel" destination="uWj-rc-74s" id="RJS-I4-ilz"/>
+                        <outlet property="itemArticleLabel" destination="EYO-qc-eUR" id="get-eA-zdA"/>
+                        <outlet property="itemNameLabel" destination="afp-zz-yTo" id="RYm-De-8cY"/>
+                        <outlet property="itemPriceLabel" destination="uWj-rc-74s" id="GXy-We-zjN"/>
                         <outlet property="loadingActivity" destination="LAL-bp-6xA" id="kvA-cp-Uk0"/>
                         <outlet property="printButton" destination="Eb3-MA-pHJ" id="bX7-Mc-yzH"/>
                         <outlet property="statusView" destination="Fz2-py-whp" id="rap-oX-NTM"/>
@@ -578,7 +532,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iA5-rx-KD9" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1980" y="-759"/>
+            <point key="canvasLocation" x="1979" y="-769"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="Yrr-wm-m76">
@@ -780,7 +734,7 @@
         <image name="tasks.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Vw5-OB-mXY"/>
-        <segue reference="hCT-jt-umq"/>
+        <segue reference="hNc-cd-i2d"/>
+        <segue reference="bJE-ZF-HEQ"/>
     </inferredMetricsTieBreakers>
 </document>

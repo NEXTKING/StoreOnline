@@ -9,8 +9,9 @@
 #import "TasksViewController.h"
 #import "TasksCell.h"
 #import "ItemsListViewController.h"
+#import "MCPServer.h"
 
-@interface TasksViewController ()
+@interface TasksViewController () <TasksDelegate>
 {
     NSArray *_tasks;
 }
@@ -27,8 +28,26 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
     self.tableView.estimatedRowHeight = 44.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self.tableView registerNib:[UINib nibWithNibName:@"TasksCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
-    
-    _tasks = @[@{@"taskName":@"ЗнП 580", @"taskDescription":@"Обработано 3 из 18"}, @{@"taskName":@"ЗнП 581", @"taskDescription":@"Обработано 8 из 18"}];
+
+    [self loadData];
+}
+
+- (void)loadData
+{
+    [[MCPServer instance] tasks:self userID:@(0)];
+}
+
+- (void)tasksComplete:(int)result tasks:(NSArray<TaskInformation *> *)tasks
+{
+    if (result == 0)
+    {
+        _tasks = tasks;
+        [self.tableView reloadData];
+    }
+    else
+    {
+        NSLog(@"tasks result != 0");
+    }
 }
 
 #pragma mark - Table view data source
@@ -43,10 +62,10 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TasksCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-    NSDictionary *task = _tasks[indexPath.row];
+    TaskInformation *task = [_tasks objectAtIndex:indexPath.row];
     
-    cell.titleLabel.text = task[@"taskName"];
-    cell.statusLabel.text = task[@"taskDescription"];
+    cell.titleLabel.text = task.name;
+    cell.statusLabel.text = [NSString stringWithFormat:@"%ld", task.status];
     
     return cell;
 }
@@ -61,24 +80,11 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
     if ([segue.identifier isEqualToString:@"TaskItemsListSegue"])
     {
         NSIndexPath *indexPath = sender;
+        TaskInformation *task = [_tasks objectAtIndex:indexPath.row];
         ItemsListViewController *dvc = segue.destinationViewController;
         
-        if (indexPath.row == 0)
-        {
-            NSDateComponents *components = [[NSDateComponents alloc] init];
-            [components setDay:-1];
-            
-            NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:components toDate:[NSDate date] options:0];
-            dvc.fakeData = @{@"date":date, @"title":@"ЗнП 580", @"totalCount":[NSNumber numberWithInt:18], @"completeCount":[NSNumber numberWithInt:3]};
-        }
-        else
-        {
-            NSDateComponents *components = [[NSDateComponents alloc] init];
-            [components setMinute:-20];
-            
-            NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:components toDate:[NSDate date] options:0];
-            dvc.fakeData = @{@"date":date, @"title":@"ЗнП 581", @"totalCount":[NSNumber numberWithInt:18], @"completeCount":[NSNumber numberWithInt:8]};
-        }
+        dvc.tasksMode = YES;
+        dvc.task = task;
     }
 }
 

@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		215EFF091DAB9ED600BE11C5 /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 215EFF071DAB9ED600BE11C5 /* SearchTableViewCell.m */; };
 		215EFF0A1DAB9ED600BE11C5 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 215EFF081DAB9ED600BE11C5 /* SearchTableViewCell.xib */; };
-		218228621DAF838200F04B70 /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 218228611DAF838200F04B70 /* ContainerViewController.m */; };
 		218228661DAF864000F04B70 /* TasksCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 218228641DAF864000F04B70 /* TasksCell.m */; };
 		218228671DAF864000F04B70 /* TasksCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 218228651DAF864000F04B70 /* TasksCell.xib */; };
+		2182286A1DAFCB2A00F04B70 /* TaskItemInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 218228691DAFCB2A00F04B70 /* TaskItemInformation.m */; };
 		21BB44BF1DACF0D100ED67EE /* TaskProgressOverlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BB44BD1DACF0D100ED67EE /* TaskProgressOverlayController.m */; };
 		21BB44C01DACF0D100ED67EE /* TaskProgressOverlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21BB44BE1DACF0D100ED67EE /* TaskProgressOverlayController.xib */; };
 		21BB44E61DAD224600ED67EE /* TasksNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BB44E51DAD224600ED67EE /* TasksNavigationController.m */; };
@@ -528,11 +528,11 @@
 		215EFF061DAB9ED600BE11C5 /* SearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableViewCell.h; sourceTree = "<group>"; };
 		215EFF071DAB9ED600BE11C5 /* SearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewCell.m; sourceTree = "<group>"; };
 		215EFF081DAB9ED600BE11C5 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
-		218228601DAF838200F04B70 /* ContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerViewController.h; sourceTree = "<group>"; };
-		218228611DAF838200F04B70 /* ContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerViewController.m; sourceTree = "<group>"; };
 		218228631DAF864000F04B70 /* TasksCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksCell.h; sourceTree = "<group>"; };
 		218228641DAF864000F04B70 /* TasksCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TasksCell.m; sourceTree = "<group>"; };
 		218228651DAF864000F04B70 /* TasksCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TasksCell.xib; sourceTree = "<group>"; };
+		218228681DAFCB2A00F04B70 /* TaskItemInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskItemInformation.h; sourceTree = "<group>"; };
+		218228691DAFCB2A00F04B70 /* TaskItemInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskItemInformation.m; sourceTree = "<group>"; };
 		21BB44BC1DACF0D100ED67EE /* TaskProgressOverlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskProgressOverlayController.h; sourceTree = "<group>"; };
 		21BB44BD1DACF0D100ED67EE /* TaskProgressOverlayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskProgressOverlayController.m; sourceTree = "<group>"; };
 		21BB44BE1DACF0D100ED67EE /* TaskProgressOverlayController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskProgressOverlayController.xib; sourceTree = "<group>"; };
@@ -1808,6 +1808,8 @@
 				C6069EE81D92D873008C3F58 /* GroupInformation.m */,
 				C67BB3671DABE4BC0032F2A4 /* TaskInformation.h */,
 				C67BB3681DABE4BC0032F2A4 /* TaskInformation.m */,
+				218228681DAFCB2A00F04B70 /* TaskItemInformation.h */,
+				218228691DAFCB2A00F04B70 /* TaskItemInformation.m */,
 			);
 			name = Protocol;
 			sourceTree = "<group>";
@@ -1861,8 +1863,6 @@
 			children = (
 				21BB44E41DAD224600ED67EE /* TasksNavigationController.h */,
 				21BB44E51DAD224600ED67EE /* TasksNavigationController.m */,
-				218228601DAF838200F04B70 /* ContainerViewController.h */,
-				218228611DAF838200F04B70 /* ContainerViewController.m */,
 				C67103EC1D93CAE7000AEC24 /* ItemsListViewController.h */,
 				C67103ED1D93CAE7000AEC24 /* ItemsListViewController.m */,
 				C67103EF1D93CB59000AEC24 /* ItemsListCell.h */,
@@ -3201,10 +3201,10 @@
 				C655B1BE1DA5399000EE7AB9 /* SynchronizationController.m in Sources */,
 				C6F600C91D9C363C0095AE21 /* PI_MOBILE_SERVICEService.m in Sources */,
 				C6F600C81D9C363C0095AE21 /* NSDate+ISO8601Unparsing.m in Sources */,
-				218228621DAF838200F04B70 /* ContainerViewController.m in Sources */,
 				B9F5F0B11D0057650010E1EA /* NwobjInventoryItemDescription.m in Sources */,
 				B9F5F0B21D0057650010E1EA /* NwobjAuthorization.m in Sources */,
 				C6979E9A1D8FE6A800A0B51B /* LoginViewController.m in Sources */,
+				2182286A1DAFCB2A00F04B70 /* TaskItemInformation.m in Sources */,
 				B907ADDA1D095B8A00B44BF1 /* MelonViewController.m in Sources */,
 				C6F601AA1D9D1D800095AE21 /* ItemsModel.xcdatamodeld in Sources */,
 				B957B0D91D1C291B002A5256 /* OstinViewController.m in Sources */,
@@ -3732,6 +3732,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = QR4V9984C7;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -3767,6 +3768,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = QR4V9984C7;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"OSTIN=1",
@@ -3885,6 +3887,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = QR4V9984C7;
 				ENABLE_BITCODE = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -3912,6 +3915,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				DEVELOPMENT_TEAM = QR4V9984C7;
 				ENABLE_BITCODE = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"RETRACT=1",
