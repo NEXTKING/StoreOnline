@@ -64,7 +64,7 @@
         
         Price *priceDB = [NSEntityDescription insertNewObjectForEntityForName:@"Price" inManagedObjectContext:self.dataController.managedObjectContext];
         
-        priceDB.itemID          = @([csv[1] integerValue]);
+        priceDB.itemID          = @([csv[1] longLongValue]);
         priceDB.catalogPrice    = @([csv[2] doubleValue]);
         priceDB.retailPrice     = @([csv[3] doubleValue]);
         priceDB.discount        = @([csv[4] doubleValue]);

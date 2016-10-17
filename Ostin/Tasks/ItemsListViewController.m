@@ -15,7 +15,7 @@
 
 @interface ItemsListViewController () <ItemDescriptionDelegate>
 {
-    NSArray *_items;
+    NSMutableArray *_items;
 }
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *actionButton;
@@ -29,7 +29,8 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    _items = [[NSMutableArray alloc] init];
+    
     self.tableView.estimatedRowHeight = 44.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
@@ -69,7 +70,13 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 
 - (void) requestData
 {
-    [[MCPServer instance] itemDescription:self itemCode:nil shopCode:nil isoType:0];
+    if (_tasksMode)
+    {
+        for (TaskItemInformation *taskItemInformation in _task.items)
+            [[MCPServer instance] itemDescription:self itemID:taskItemInformation.itemID];
+    }
+    else
+        [[MCPServer instance] itemDescription:self itemCode:nil shopCode:nil isoType:0];
 }
 
 - (IBAction)actionButtonPressed:(id)sender
@@ -82,7 +89,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _task.items.count;
+    return _items.count;
 }
 
 
@@ -90,15 +97,28 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 {
     ItemsListCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    TaskItemInformation *taskItemInfo = _task.items[indexPath.row];
-    ItemInformation *item = _tasksMode ? [self itemInfoForTaskItemWithID:taskItemInfo.itemID] : _items[indexPath.row];
-    
-    cell.articleLabel.text = item != nil ? item.article : @"";
-    cell.nameLabel.text = item != nil ? item.name : @"";
-    cell.barcodeLabel.text = item != nil ? item.barcode : @"";
-    
-    cell.quantityLabel.hidden = !_tasksMode;
-    cell.quantityLabel.text = _tasksMode ? [NSString stringWithFormat:@"Количество %ld из %ld", taskItemInfo.scanned, taskItemInfo.quantity] : @"";
+    if (_tasksMode)
+    {
+        TaskItemInformation *taskItemInfo = _task.items[indexPath.row];
+        ItemInformation *item = [self itemInfoForTaskItemWithID:taskItemInfo.itemID];
+        
+        cell.articleLabel.text = item != nil ? item.article : @"";
+        cell.nameLabel.text = item != nil ? item.name : @"";
+        cell.barcodeLabel.text = item != nil ? item.barcode : @"";
+        
+        cell.quantityLabel.hidden = NO;
+        cell.quantityLabel.text = [NSString stringWithFormat:@"Количество %d из %d", taskItemInfo.scanned, taskItemInfo.quantity];
+    }
+    else
+    {
+        ItemInformation *item = _items[indexPath.row];
+        
+        cell.articleLabel.text = item.article;
+        cell.nameLabel.text = item.name;
+        cell.barcodeLabel.text = item.barcode;
+        
+        cell.quantityLabel.hidden = YES;
+    }
     
     return cell;
 }
@@ -112,11 +132,14 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-//    OstinViewController* ostinVC = segue.destinationViewController;
-//    NSIndexPath *indexPath = sender;
-//    
-//    ItemInformation* itemInfo = _items[indexPath.row];
-//    ostinVC.externalBarcode = itemInfo.barcode;
+    if ([segue.identifier isEqualToString:@"DetailDescriptionSegue"])
+    {
+        OstinViewController* ostinVC = segue.destinationViewController;
+        NSIndexPath *indexPath = sender;
+        
+        ItemInformation* itemInfo = _items[indexPath.row];
+        ostinVC.currentItemInfo = itemInfo;
+    }
 }
 
 
@@ -126,7 +149,9 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 {
     if (result == 0)
     {
-        
+        [_items addObject:itemDescription];
+        NSUInteger index = [_items indexOfObject:itemDescription];
+        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     }
     else
     {
@@ -138,7 +163,8 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 {
     if (result == 0)
     {
-        _items = items;
+        [_items removeAllObjects];
+        [_items addObjectsFromArray:items];
         [self.tableView reloadData];
     }
     else
@@ -147,7 +173,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     }
 }
 
-- (ItemInformation *)itemInfoForTaskItemWithID:(NSUInteger)ID
+- (ItemInformation *)itemInfoForTaskItemWithID:(uint64_t)ID
 {
     for (ItemInformation *info in _items)
         if (info.itemId == ID)

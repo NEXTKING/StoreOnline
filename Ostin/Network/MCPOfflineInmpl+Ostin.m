@@ -102,7 +102,7 @@
     if ([query stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length == 0) // empty query
     {
         if ([delegate respondsToSelector:@selector(searchComplete:attribute:items:)])
-            [delegate searchComplete:0 attribute:searchAttribute items:nil];
+            [delegate searchComplete:1 attribute:searchAttribute items:nil];
         
         return;
     }
@@ -172,22 +172,22 @@
             [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"subgroupID" value:item.subgroupID.stringValue]];
             [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"trademarkID" value:item.trademarkID.stringValue]];
             
-            itemInformation.price = item.priceHeader.doubleValue; // item.price.retailPrice
-            itemInformation.barcode = item.barcode;
+            // itemInformation.price =
+            // itemInformation.barcode =
             itemInformation.color = item.color;
-            itemInformation.itemId = item.itemID.integerValue;
+            itemInformation.itemId = item.itemID.longLongValue;
             itemInformation.name = item.name;
             itemInformation.additionalParameters = additionalParameters;
             
             [items addObject:itemInformation];
         }
         if ([delegate respondsToSelector:@selector(searchComplete:attribute:items:)])
-            [delegate searchComplete:1 attribute:searchAttribute items:items];
+            [delegate searchComplete:0 attribute:searchAttribute items:items];
     }
     else
     {
         if ([delegate respondsToSelector:@selector(searchComplete:attribute:items:)])
-            [delegate searchComplete:1 attribute:searchAttribute items:nil];
+            [delegate searchComplete:0 attribute:searchAttribute items:nil];
     }
 }
 
@@ -370,6 +370,71 @@
     item.name       = itemDB.name;
     item.article    = itemDB.itemCode;
     item.price      = priceDB.catalogPrice.doubleValue;
+    
+    [delegate itemDescriptionComplete:0 itemDescription:item];
+}
+
+- (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemID:(uint64_t)itemID
+{
+    NSManagedObjectContext *moc = self.dataController.managedObjectContext;
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %d", itemID]];
+    NSArray *results = [moc executeFetchRequest:request error:nil];
+    if (results.count < 1)
+    {
+        [delegate itemDescriptionComplete:1 itemDescription:nil];
+        return;
+    }
+    else
+        NSLog(@"items result count: %d", results.count);
+    Item *itemDB = results[0];
+    
+    request = [NSFetchRequest fetchRequestWithEntityName:@"Price"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %d", itemID]];
+    results = [moc executeFetchRequest:request error:nil];
+    if (results.count < 1)
+    {
+        [delegate itemDescriptionComplete:1 itemDescription:nil];
+        return;
+    }
+    Price *priceDB = results[0];
+    
+    request = [NSFetchRequest fetchRequestWithEntityName:@"Barcode"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %d", itemID]];
+    results = [moc executeFetchRequest:request error:nil];
+    if (results.count < 1)
+    {
+        [delegate itemDescriptionComplete:1 itemDescription:nil];
+        return;
+    }
+    Barcode *barcodeDB = results[0];
+    
+    ItemInformation* item = [ItemInformation new];
+    
+    NSMutableArray *additionalParameters = [NSMutableArray new];
+    
+    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"additionalInfo" value:itemDB.additionalInfo]];
+    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"additionalSize" value:itemDB.additionalSize]];
+    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"boxType" value:itemDB.boxType]];
+    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"certificationAuthorittyCode" value:itemDB.certificationAuthorittyCode]];
+    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"groupID" value:itemDB.groupID.stringValue]];
+    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"itemCode" value:itemDB.itemCode]];
+    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"itemCode_2" value:itemDB.itemCode_2]];
+    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"line1" value:itemDB.line1]];
+    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"line2" value:itemDB.line2]];
+    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"priceHeader" value:itemDB.priceHeader]];
+    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"size" value:itemDB.size]];
+    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"sizeHeader" value:itemDB.sizeHeader]];
+    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"storeNumber" value:itemDB.storeNumber]];
+    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"subgroupID" value:itemDB.subgroupID.stringValue]];
+    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"trademarkID" value:itemDB.trademarkID.stringValue]];
+    
+    item.barcode    = barcodeDB.code128;
+    item.name       = itemDB.name;
+    item.article    = itemDB.itemCode;
+    item.price      = priceDB.catalogPrice.doubleValue;
+    item.additionalParameters = additionalParameters;
     
     [delegate itemDescriptionComplete:0 itemDescription:item];
 }

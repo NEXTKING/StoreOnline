@@ -11,7 +11,7 @@
 #import "MCPServer.h"
 #import "OstinViewController.h"
 
-@interface SearchViewController () <UISearchBarDelegate, SearchDelegate>
+@interface SearchViewController () <UISearchBarDelegate, SearchDelegate, ItemDescriptionDelegate>
 {
     NSArray* _searchResults;
     BOOL isSearchRunning;
@@ -76,7 +76,8 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"DetailDescriptionSegue" sender:indexPath];
+    ItemInformation *item = [_searchResults objectAtIndex:indexPath.row];
+    [[MCPServer instance] itemDescription:self itemID:item.itemId];
 }
 
 #pragma mark - UISearchBar delegate
@@ -126,7 +127,7 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
         
         isSearchRunning = NO;
         [wself hideActivityIndicator];
-        if (result == 1)
+        if (result == 0)
         {
             _searchResults = items;
             [wself.tableView reloadData];
@@ -141,6 +142,30 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
     });
 }
 
+#pragma mark - Item Description Delegate
+
+- (void)itemDescriptionComplete:(int)result itemDescription:(ItemInformation *)itemDescription
+{
+    if (result == 0)
+    {
+        [self performSegueWithIdentifier:@"DetailDescriptionSegue" sender:itemDescription];
+    }
+    else
+    {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        if (indexPath != nil)
+        {
+            ItemInformation *itemDescription = [_searchResults objectAtIndex:indexPath.row];
+            [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+            [self performSegueWithIdentifier:@"DetailDescriptionSegue" sender:itemDescription];
+        }
+        else
+        {
+            
+        }
+    }
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -148,10 +173,8 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
     if ([segue.identifier isEqualToString:@"DetailDescriptionSegue"])
     {
         OstinViewController* ostinVC = segue.destinationViewController;
-        NSIndexPath *indexPath = sender;
-        
-        ItemInformation* itemInfo = _searchResults[indexPath.row];
-        ostinVC.externalBarcode = itemInfo.barcode;
+        ItemInformation* itemInfo = sender;
+
         ostinVC.currentItemInfo = itemInfo;
     }
 }

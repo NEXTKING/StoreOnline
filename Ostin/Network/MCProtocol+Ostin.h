@@ -21,4 +21,6 @@
 - (void) tasks:(id<TasksDelegate>) delegate userID:(NSNumber*) userID;
 - (void) search:(id<SearchDelegate>) delegate forQuery:(NSString *)query withAttribute:(ItemSearchAttribute)searchAttribute;
 
+- (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemID:(uint64_t)itemID;
+
 @end

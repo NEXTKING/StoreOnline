@@ -64,7 +64,7 @@
      
         Barcode *barcodeDB = [NSEntityDescription insertNewObjectForEntityForName:@"Barcode" inManagedObjectContext:self.dataController.managedObjectContext];
         
-        barcodeDB.itemID  = @([csv[1] integerValue]);
+        barcodeDB.itemID  = @([csv[1] longLongValue]);
         barcodeDB.code128 = csv[2];
         barcodeDB.ean     = csv[3];
         
