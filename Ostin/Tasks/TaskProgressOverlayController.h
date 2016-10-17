@@ -10,7 +10,7 @@
 
 @interface TaskProgressOverlayController : UIViewController
 
-- (void)setTitleText:(NSString *)title startDate:(NSDate *)startDate totalItemsCount:(NSInteger)totalCount completeItemsCount:(NSInteger)completeCount;
+- (void)setTitleText:(NSString *)title startDate:(NSDate *)startDate totalItemsCount:(NSInteger)totalCount completeItemsCount:(NSInteger)completeCount timerIsRunning:(BOOL)timerIsRunning;
 - (void)setCompleteItemsCount:(NSInteger)count;
 
 @end

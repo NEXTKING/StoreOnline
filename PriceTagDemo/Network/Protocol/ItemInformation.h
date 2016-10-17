@@ -19,7 +19,7 @@
 
 @interface ItemInformation : NSObject <NSCoding>
 
-@property (nonatomic, assign) uint64_t itemId;
+@property (nonatomic, assign) NSInteger itemId;
 @property (nonatomic, copy) NSString* name;
 @property (nonatomic, copy) NSString* article;
 @property (nonatomic, copy) NSString* barcode;

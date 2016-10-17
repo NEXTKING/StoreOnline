@@ -35,7 +35,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"ItemsListCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
-    // [self requestData];
+    [self requestData];
     [self updateOverlayInfo];
 }
 
@@ -44,6 +44,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     if (_task != nil)
     {
         TasksNavigationController *navVC = (TasksNavigationController *)self.navigationController;
+        BOOL timerIsRunning = _task.status != 3;
         __block NSInteger totalCount = 0;
         __block NSInteger completeCount = 0;
         
@@ -52,36 +53,35 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
             completeCount += item.scanned;
         }];
         
-        [navVC.overlayController setTitleText:_task.name startDate:_task.startDate totalItemsCount:totalCount completeItemsCount:completeCount];
+        [navVC.overlayController setTitleText:_task.name startDate:_task.startDate totalItemsCount:totalCount completeItemsCount:completeCount timerIsRunning:timerIsRunning];
     }
 }
 
-- (void)testActionButton
+- (void)updateActionButton
 {
-    self.actionButton.title = @"Начать";
-    self.actionButton.enabled = YES;
-    
-    self.actionButton.title = @"Завершить";
-    self.actionButton.enabled = YES;
-    
-    self.actionButton.title = @"Завершено";
-    self.actionButton.enabled = NO;
-}
-
-- (void) requestData
-{
-    if (_tasksMode)
+    if (!_tasksMode)
     {
-        for (TaskItemInformation *taskItemInformation in _task.items)
-            [[MCPServer instance] itemDescription:self itemID:taskItemInformation.itemID];
+        self.actionButton.title = @"";
+        self.actionButton.enabled = YES;
     }
     else
-        [[MCPServer instance] itemDescription:self itemCode:nil shopCode:nil isoType:0];
-}
-
-- (IBAction)actionButtonPressed:(id)sender
-{
-    
+    {
+        if (_task.status == 0)
+        {
+            self.actionButton.title = @"Начать";
+            self.actionButton.enabled = YES;
+        }
+        else if (_task.status == 1)
+        {
+            self.actionButton.title = @"Завершить";
+            self.actionButton.enabled = YES;
+        }
+        else if (_task.status == 2)
+        {
+            self.actionButton.title = @"Завершено";
+            self.actionButton.enabled = NO;
+        }
+    }
 }
 
 #pragma mark - Table view data source
@@ -107,7 +107,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
         cell.barcodeLabel.text = item != nil ? item.barcode : @"";
         
         cell.quantityLabel.hidden = NO;
-        cell.quantityLabel.text = [NSString stringWithFormat:@"Количество %d из %d", taskItemInfo.scanned, taskItemInfo.quantity];
+        cell.quantityLabel.text = [NSString stringWithFormat:@"Количество %ld из %ld", taskItemInfo.scanned, taskItemInfo.quantity];
     }
     else
     {
@@ -173,11 +173,82 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     }
 }
 
-- (ItemInformation *)itemInfoForTaskItemWithID:(uint64_t)ID
+#pragma mark Core logic
+
+- (void)requestData
 {
-    for (ItemInformation *info in _items)
-        if (info.itemId == ID)
-            return info;
+    if (_tasksMode)
+    {
+        for (TaskItemInformation *taskItemInformation in _task.items)
+            [[MCPServer instance] itemDescription:self itemID:taskItemInformation.itemID];
+    }
+    else
+        [[MCPServer instance] itemDescription:self itemCode:nil shopCode:nil isoType:0];
+}
+
+- (void)itemDidScannedWithBarcode:(NSString *)barcode
+{
+    ItemInformation *item;
+    
+    for (ItemInformation *itemInfo in _items)
+        if ([itemInfo.barcode isEqualToString:barcode])
+        {
+            item = itemInfo;
+            break;
+        }
+    
+    if (item != nil)
+    {
+        TaskItemInformation *taskItemInfo = [self taskItemInfoForItemWithID:item.itemId];
+        if (taskItemInfo.scanned + 1 <= taskItemInfo.quantity)
+        {
+            taskItemInfo.scanned += 1;
+
+            [[MCPServer instance] saveTaskItem:nil taskID:_task.taskID itemID:taskItemInfo.itemID scanned:taskItemInfo.scanned];
+
+            NSUInteger index = [_items indexOfObject:item];
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self updateOverlayInfo];
+        }
+    }
+}
+
+- (IBAction)actionButtonPressed:(id)sender
+{
+    if (_tasksMode)
+    {
+        if (_task.status == TaskInformationStatusNotStarted)
+        {
+            _task.status = TaskInformationStatusInProgress;
+        }
+        else if (_task.status == TaskInformationStatusInProgress)
+        {
+            _task.status = TaskInformationStatusComplete;
+        }
+        
+        [[MCPServer instance] saveTask:nil taskID:_task.taskID userID:_task.userID status:_task.status];
+        
+        [self updateActionButton];
+        [self updateOverlayInfo];
+    }
+}
+
+#pragma mark Helpers
+
+- (ItemInformation *)itemInfoForTaskItemWithID:(NSUInteger)ID
+{
+    for (ItemInformation *itemInfo in _items)
+        if (itemInfo.itemId == ID)
+            return itemInfo;
+    
+    return nil;
+}
+
+- (TaskItemInformation *)taskItemInfoForItemWithID:(NSUInteger)ID
+{
+    for (TaskItemInformation *taskItemInfo in _task.items)
+        if (taskItemInfo.itemID == ID)
+            return taskItemInfo;
     
     return nil;
 }

@@ -16,6 +16,7 @@
 #import "Barcode+CoreDataClass.h"
 #import "Price+CoreDataClass.h"
 #import "Task+CoreDataClass.h"
+#import "TaskItemBinding+CoreDataClass.h"
 #import "SOAPWares.h"
 #import "SOAPBarcodes.h"
 #import "SOAPPrices.h"
@@ -102,6 +103,53 @@
         [[NSOperationQueue mainQueue] addOperation:delegateCallOperation];
     }
 }
+
+- (void) saveTask:(id<TasksDelegate>) delegate taskID:(NSInteger)taskID userID:(NSInteger)userID status:(NSInteger)status
+{
+    #warning userID is unsusable
+    NSManagedObjectContext *moc = self.dataController.managedObjectContext;
+
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Task"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"taskID == %ld", taskID]];
+    NSArray *results = [moc executeFetchRequest:request error:nil];
+    if (results.count < 1)
+    {
+        return;
+    }
+    Task *taskDB = results[0];
+    
+    if (status == TaskInformationStatusInProgress && taskDB.startDate == nil)
+    {
+        taskDB.startDate = [NSDate date];
+        [moc save:nil];
+    }
+    else if (status == TaskInformationStatusComplete && taskDB.endDate == nil)
+    {
+        taskDB.endDate = [NSDate date];
+        [moc save:nil];
+    }
+}
+
+- (void) saveTaskItem:(id<TasksDelegate>) delegate taskID:(NSInteger)taskID itemID:(NSInteger)itemID scanned:(NSUInteger)scanned
+{
+    NSManagedObjectContext *moc = self.dataController.managedObjectContext;
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"TaskItemBinding"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"taskID == %ld AND itemID == %ld", taskID, itemID]];
+    NSArray *results = [moc executeFetchRequest:request error:nil];
+    if (results.count < 1)
+    {
+        return;
+    }
+    TaskItemBinding *taskItemDB = results[0];
+    
+    if (taskItemDB.scanned.integerValue != scanned)
+    {
+        taskItemDB.scanned = [NSNumber numberWithInteger:scanned];
+        [moc save:nil];
+    }
+}
+
 - (void) search:(id<SearchDelegate>)delegate forQuery:(NSString *)query withAttribute:(ItemSearchAttribute)searchAttribute
 {
     if ([query stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length == 0) // empty query
@@ -180,7 +228,7 @@
             // itemInformation.price =
             // itemInformation.barcode =
             itemInformation.color = item.color;
-            itemInformation.itemId = item.itemID.longLongValue;
+            itemInformation.itemId = item.itemID.integerValue;
             itemInformation.name = item.name;
             itemInformation.additionalParameters = additionalParameters;
             
@@ -310,6 +358,7 @@
         taskInfo.name = taskDB.name;
         taskInfo.userID = taskDB.userID.integerValue;
         taskInfo.taskID = taskDB.taskID.integerValue;
+        taskInfo.status = (taskDB.startDate != nil && taskDB.endDate != nil) ? TaskInformationStatusComplete : taskDB.startDate != nil ? TaskInformationStatusInProgress : TaskInformationStatusNotStarted;
         [exportTasks addObject:taskInfo];
     }
     
@@ -401,24 +450,22 @@
     [delegate itemDescriptionComplete:0 itemDescription:item];
 }
 
-- (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemID:(uint64_t)itemID
+- (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemID:(NSUInteger)itemID
 {
     NSManagedObjectContext *moc = self.dataController.managedObjectContext;
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %d", itemID]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", itemID]];
     NSArray *results = [moc executeFetchRequest:request error:nil];
     if (results.count < 1)
     {
         [delegate itemDescriptionComplete:1 itemDescription:nil];
         return;
     }
-    else
-        NSLog(@"items result count: %d", results.count);
     Item *itemDB = results[0];
     
     request = [NSFetchRequest fetchRequestWithEntityName:@"Price"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %d", itemID]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", itemID]];
     results = [moc executeFetchRequest:request error:nil];
     if (results.count < 1)
     {
@@ -428,7 +475,7 @@
     Price *priceDB = results[0];
     
     request = [NSFetchRequest fetchRequestWithEntityName:@"Barcode"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %d", itemID]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", itemID]];
     results = [moc executeFetchRequest:request error:nil];
     if (results.count < 1)
     {

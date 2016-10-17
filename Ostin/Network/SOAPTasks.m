@@ -62,9 +62,9 @@
         
         Task *taskDB = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:self.dataController.managedObjectContext];
         
-        taskDB.taskID          = @([csv[1] longLongValue]);
+        taskDB.taskID          = @([csv[1] integerValue]);
         taskDB.name            = csv[2];
-        taskDB.userID          = @([csv[3] longLongValue]);
+        taskDB.userID          = @([csv[3] integerValue]);
     }
     
     NSError* error = nil;

@@ -9,6 +9,13 @@
 #import "SOAPOperation.h"
 #import "TaskItemInformation.h"
 
+typedef enum : NSUInteger
+{
+    TaskInformationStatusNotStarted = 0,
+    TaskInformationStatusInProgress = 1,
+    TaskInformationStatusComplete = 2
+}TaskInformationStatus;
+
 @interface TaskInformation : NSObject
 
 @property (nonatomic, assign) NSInteger taskID;

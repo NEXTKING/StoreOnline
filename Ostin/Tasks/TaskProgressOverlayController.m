@@ -31,7 +31,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerTickAction) userInfo:nil repeats:YES];
+}
+
+- (void)initializeTimer
+{
+    if (_timer == nil)
+        _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerTickAction) userInfo:nil repeats:YES];
+}
+
+- (void)destroyTimer
+{
+    [_timer invalidate];
+    _timer = nil;
 }
 
 - (void)timerTickAction
@@ -42,16 +53,12 @@
 
 - (void)dealloc
 {
-    if (_timer != nil && [_timer isValid])
-    {
-        [_timer invalidate];
-        _timer = nil;
-    }
+    [self destroyTimer];
 }
 
 #pragma mark Public setters
 
-- (void)setTitleText:(NSString *)title startDate:(NSDate *)startDate totalItemsCount:(NSInteger)totalCount completeItemsCount:(NSInteger)completeCount
+- (void)setTitleText:(NSString *)title startDate:(NSDate *)startDate totalItemsCount:(NSInteger)totalCount completeItemsCount:(NSInteger)completeCount timerIsRunning:(BOOL)timerIsRunning
 {
     _titleLabel.text = title;
     _startDate = startDate;
@@ -62,6 +69,7 @@
     [self updateProgressLabel];
     [self updateTimeLabel];
     [self updateSpeedLabel];
+    timerIsRunning ? [self initializeTimer] : [self destroyTimer];
 }
 
 - (void)setCompleteItemsCount:(NSInteger)count

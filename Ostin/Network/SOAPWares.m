@@ -67,7 +67,7 @@
         NSArray *csv       = [self removeQuotes:csvSourse];
         Item *itemDB = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.dataController.managedObjectContext];
         
-        itemDB.itemID       = @([csv[1] longLongValue]);
+        itemDB.itemID       = @([csv[1] integerValue]);
         itemDB.itemCode     = csv[1];
         itemDB.groupID      = @([csv[2] intValue]);
         itemDB.subgroupID   = @([csv[3] intValue]);
