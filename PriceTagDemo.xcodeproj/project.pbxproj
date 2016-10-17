@@ -377,6 +377,7 @@
 		C6069EE91D92D873008C3F58 /* GroupInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = C6069EE81D92D873008C3F58 /* GroupInformation.m */; };
 		C6069EED1D92F06D008C3F58 /* CategoriesCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C6069EEB1D92F06D008C3F58 /* CategoriesCollectionCell.m */; };
 		C6069EEE1D92F06D008C3F58 /* CategoriesCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6069EEC1D92F06D008C3F58 /* CategoriesCollectionCell.xib */; };
+		C607A60B1DB0E0E000F3E5E9 /* SOAPTaskWareBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = C607A60A1DB0E0E000F3E5E9 /* SOAPTaskWareBinding.m */; };
 		C60F6F7F1CD36965003949CE /* AntiAliasView.m in Sources */ = {isa = PBXBuildFile; fileRef = B90CE48A1C89B44600DFB3E4 /* AntiAliasView.m */; };
 		C60F6F821CD3754E003949CE /* MelonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C60F6F811CD3754E003949CE /* MelonViewController.m */; };
 		C629B5C71D076552002108DF /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C629B5C51D076552002108DF /* AboutViewController.m */; };
@@ -856,6 +857,8 @@
 		C6069EEA1D92F06D008C3F58 /* CategoriesCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesCollectionCell.h; sourceTree = "<group>"; };
 		C6069EEB1D92F06D008C3F58 /* CategoriesCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesCollectionCell.m; sourceTree = "<group>"; };
 		C6069EEC1D92F06D008C3F58 /* CategoriesCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoriesCollectionCell.xib; sourceTree = "<group>"; };
+		C607A6091DB0E0E000F3E5E9 /* SOAPTaskWareBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPTaskWareBinding.h; sourceTree = "<group>"; };
+		C607A60A1DB0E0E000F3E5E9 /* SOAPTaskWareBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPTaskWareBinding.m; sourceTree = "<group>"; };
 		C60F6F801CD3754E003949CE /* MelonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MelonViewController.h; sourceTree = "<group>"; };
 		C60F6F811CD3754E003949CE /* MelonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MelonViewController.m; sourceTree = "<group>"; };
 		C629B5C41D076552002108DF /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
@@ -1795,6 +1798,8 @@
 				C667238E1DAABBA9001B30AC /* SOAPPrices.m */,
 				C66723901DAAEA86001B30AC /* SOAPTasks.h */,
 				C66723911DAAEA87001B30AC /* SOAPTasks.m */,
+				C607A6091DB0E0E000F3E5E9 /* SOAPTaskWareBinding.h */,
+				C607A60A1DB0E0E000F3E5E9 /* SOAPTaskWareBinding.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -3237,6 +3242,7 @@
 				B92DCE311C845E92002AA184 /* DetailsTableViewController.m in Sources */,
 				B92DCE2E1C845E89002AA184 /* ViewController.m in Sources */,
 				B957B0D51D1BF5AC002A5256 /* MenuViewController.m in Sources */,
+				C607A60B1DB0E0E000F3E5E9 /* SOAPTaskWareBinding.m in Sources */,
 				C667239B1DAAEEFB001B30AC /* Task+CoreDataClass.m in Sources */,
 				B92DCE1A1C845E60002AA184 /* main.m in Sources */,
 				C67103F91D93DFE5000AEC24 /* SearchViewController.m in Sources */,

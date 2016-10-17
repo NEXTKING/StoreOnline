@@ -22,11 +22,11 @@
 - (NSArray*) downloadItems
 {
     PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBinding *binding = [PI_MOBILE_SERVICEService PI_MOBILE_SERVICEBinding];
-    binding.logXMLInOut = YES;
+    binding.logXMLInOut = NO;
     binding.timeout = 300;
     
     PI_MOBILE_SERVICEService_ElementWARE_BARCODE_INFOInput* request = [PI_MOBILE_SERVICEService_ElementWARE_BARCODE_INFOInput new];
-    request.A_DEVICE_UIDVARCHAR2IN = @"300";
+    request.A_DEVICE_UIDVARCHAR2IN = self.deviceID;
     request.A_ID_PORTIONNUMBEROUT = [PI_MOBILE_SERVICEService_SequenceElement_A_ID_PORTIONNUMBEROUT6 new];
     request.AO_DATATROWARRAYCOUT = [PI_MOBILE_SERVICEService_SequenceElement_AO_DATATROWARRAYCOUT6 new];
     

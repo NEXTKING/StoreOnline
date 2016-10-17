@@ -25,6 +25,7 @@
 @interface MCPOfflineInmpl_Ostin ()
 {
     NSString* authValue;
+    NSString* deviceID;
 }
 
 @end
@@ -40,6 +41,9 @@
         NSString *authStr = [NSString stringWithFormat:@"%@:%@", @"TEST0_WEB", @"q1w2e3r4t5@web"];
         NSData *authData = [authStr dataUsingEncoding:NSASCIIStringEncoding];
         authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodingWithLineLength:80]];
+        
+        deviceID = @"302";
+        //990023135202
     }
     
     
@@ -79,6 +83,7 @@
         __weak SOAPTasks* _tasks = tasks;
         tasks.dataController = self.dataController;
         tasks.authValue = authValue;
+        tasks.deviceID  = deviceID;
         
         NSBlockOperation* delegateCallOperation = [NSBlockOperation blockOperationWithBlock:^{
             
@@ -195,6 +200,20 @@
 {
     if (code)
     {
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        [request setEntity:[NSEntityDescription entityForName:@"Price" inManagedObjectContext:self.dataController.managedObjectContext]];
+        
+        [request setIncludesSubentities:NO]; //Omit subentities. Default is YES (i.e. include subentities)
+        
+        NSError *err;
+        NSUInteger priceCount = [self.dataController.managedObjectContext countForFetchRequest:request error:&err];
+         [request setEntity:[NSEntityDescription entityForName:@"Barcode" inManagedObjectContext:self.dataController.managedObjectContext]];
+        NSUInteger barcodeCount = [self.dataController.managedObjectContext countForFetchRequest:request error:&err];
+        [request setEntity:[NSEntityDescription entityForName:@"Item" inManagedObjectContext:self.dataController.managedObjectContext]];
+        NSUInteger itemCount = [self.dataController.managedObjectContext countForFetchRequest:request error:&err];
+        
+        NSLog(@"%lu, %lu, %lu", (unsigned long)priceCount, (unsigned long)barcodeCount, (unsigned long)itemCount);
+        
         [self itemDescription:delegate itemCode:code isoType:type];
     }
     else
@@ -230,16 +249,19 @@
         __weak SOAPWares* _wares = wares;
         wares.dataController = self.dataController;
         wares.authValue = authValue;
+        wares.deviceID  = deviceID;
         
         SOAPBarcodes *barcodes = [SOAPBarcodes new];
         __weak SOAPBarcodes* _barcodes = barcodes;
         barcodes.dataController = self.dataController;
         barcodes.authValue = authValue;
+        barcodes.deviceID  = deviceID;
         
         SOAPPrices *prices     = [SOAPPrices new];
         __weak SOAPPrices* _prices = prices;
         prices.dataController = self.dataController;
         prices.authValue      = authValue;
+        prices.deviceID       = deviceID;
         
         NSBlockOperation* delegateCallOperation = [NSBlockOperation blockOperationWithBlock:^{
             
@@ -299,7 +321,10 @@
 - (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString *)code isoType:(int) type
 {
     NSManagedObjectContext *moc =self.dataController.managedObjectContext;
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Barcode"];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"Barcode" inManagedObjectContext:self.dataController.managedObjectContext]];
+    
+    [request setIncludesSubentities:NO];
     
     type = BAR_UPC;
     
@@ -310,10 +335,11 @@
         
         NSString *string = [NSString stringWithFormat:@"0%@", code];
         
-        if ([string isEqualToString:@"09900"])
+        if ([string hasPrefix:@"09900"])
         {
-            NSString* substring = [string substringFromIndex:7];
-            [request setPredicate:[NSPredicate predicateWithFormat:@"code128 LIKE[c] %@", substring]];
+            NSString* substring     = [string substringFromIndex:5];
+            NSString* substring1    = [substring substringToIndex:substring.length-1];
+            [request setPredicate:[NSPredicate predicateWithFormat:@"code128 LIKE[c] %@", substring1]];
         }
         else
         {
@@ -338,7 +364,8 @@
     
     
     Barcode *barcodeDB = results[0];
-    request = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+    request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"Item" inManagedObjectContext:self.dataController.managedObjectContext]];
     
     [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %@", barcodeDB.itemID]];
     results = [moc executeFetchRequest:request error:nil];
@@ -351,7 +378,7 @@
     
     
     Item *itemDB = results[0];
-    request = [NSFetchRequest fetchRequestWithEntityName:@"Price"];
+    [request setEntity:[NSEntityDescription entityForName:@"Price" inManagedObjectContext:self.dataController.managedObjectContext]];
     
     [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %@", barcodeDB.itemID]];
     results = [moc executeFetchRequest:request error:nil];
