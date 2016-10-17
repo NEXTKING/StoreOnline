@@ -27,6 +27,13 @@
     [super viewDidLoad];
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     _immediateSwitch.on = ([defaults valueForKey:@"PrintImmediatly"] != nil);
+    
+    //[self barcodeData:@"990023247349" type:BAR_UPC];
+    //[self barcodeData:@"990025324185" type:BAR_UPC];
+    //[self barcodeData:@"990025878473" type:BAR_UPC];
+    
+    
+    
     if ([defaults valueForKey:@"LastBarcode"] && !_externalBarcode)
     {
         restored = YES;

@@ -24,7 +24,7 @@
     binding.timeout = 300;
     
     PI_MOBILE_SERVICEService_ElementPASTING_TASK_INFOInput* request = [PI_MOBILE_SERVICEService_ElementPASTING_TASK_INFOInput new];
-    request.A_DEVICE_UIDVARCHAR2IN = @"300";
+    request.A_DEVICE_UIDVARCHAR2IN = self.deviceID;
     request.A_ID_PORTIONNUMBEROUT = [PI_MOBILE_SERVICEService_SequenceElement_A_ID_PORTIONNUMBEROUT10 new];
     request.AO_DATATROWARRAYCOUT = [PI_MOBILE_SERVICEService_SequenceElement_AO_DATATROWARRAYCOUT10 new];
     

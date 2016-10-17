@@ -20,6 +20,7 @@
 
 @property (nonatomic, strong) CoreDataController* dataController;
 @property (nonatomic, copy) NSString* authValue;
+@property (nonatomic, copy) NSString* deviceID;
 @property (nonatomic, assign) BOOL success;
 
 - (NSArray*) downloadItems;

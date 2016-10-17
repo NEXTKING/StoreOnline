@@ -80,7 +80,7 @@
     PI_MOBILE_SERVICEService_ElementGET_PORTION_INFOInput* request = [PI_MOBILE_SERVICEService_ElementGET_PORTION_INFOInput new];
     
     request.A_INC_CODEVARCHAR2IN = code;
-    request.A_DEVICE_UIDVARCHAR2IN = @"300";
+    request.A_DEVICE_UIDVARCHAR2IN = _deviceID;
     request.A_TOTAL_SIZE_KBNUMBEROUT = [PI_MOBILE_SERVICEService_SequenceElement_A_TOTAL_SIZE_KBNUMBEROUT new];
     request.A_STR_COUNTNUMBEROUT = [PI_MOBILE_SERVICEService_SequenceElement_A_STR_COUNTNUMBEROUT new];
     request.A_COUNTNUMBEROUT = [PI_MOBILE_SERVICEService_SequenceElement_A_COUNTNUMBEROUT new];
@@ -115,7 +115,7 @@
     
     request.A_INC_CODEVARCHAR2IN    = incCode;
     request.A_ID_PORTIONNUMBERIN    = portion;
-    request.A_DEVICE_UIDVARCHAR2IN  = @"300";
+    request.A_DEVICE_UIDVARCHAR2IN  = _deviceID;
     
     [binding.customHeaders setObject:_authValue forKey:@"Authorization"];
     
