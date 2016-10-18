@@ -206,6 +206,15 @@
         UIKeyCommand *command = [UIKeyCommand keyCommandWithInput:string modifierFlags:0 action:@selector(gsKey:)];
         [symbols addObject:command];
     }
+    
+    [symbols addObject:[UIKeyCommand keyCommandWithInput:@"A" modifierFlags:UIKeyModifierShift action:@selector(gsKey:)]];
+    [symbols addObject:[UIKeyCommand keyCommandWithInput:@"D" modifierFlags:UIKeyModifierShift action:@selector(gsKey:)]];
+    [symbols addObject:[UIKeyCommand keyCommandWithInput:@"4" modifierFlags:UIKeyModifierShift action:@selector(gsKey:)]];
+}
+
+- (BOOL) canBecomeFirstResponder
+{
+    return YES;
 }
 
 - (NSArray *)keyCommands
