@@ -154,7 +154,7 @@
         [delegate tasksComplete:1 tasks:nil];*/
 }
 
-- (void) saveTask:(id<TasksDelegate>) delegate taskID:(NSInteger)taskID userID:(NSInteger)userID status:(NSInteger)status
+- (void) saveTask:(id<TasksDelegate>) delegate taskID:(NSInteger)taskID userID:(NSInteger)userID status:(NSInteger)status date:(NSDate *)date
 {
     #warning userID is unsusable
     NSManagedObjectContext *moc = self.dataController.managedObjectContext;
@@ -170,12 +170,12 @@
     
     if (status == TaskInformationStatusInProgress && taskDB.startDate == nil)
     {
-        taskDB.startDate = [NSDate date];
+        taskDB.startDate = date;
         [moc save:nil];
     }
     else if (status == TaskInformationStatusComplete && taskDB.endDate == nil)
     {
-        taskDB.endDate = [NSDate date];
+        taskDB.endDate = date;
         [moc save:nil];
     }
 }
@@ -409,6 +409,8 @@
         taskInfo.name = taskDB.name;
         taskInfo.userID = taskDB.userID.integerValue;
         taskInfo.taskID = taskDB.taskID.integerValue;
+        taskInfo.startDate = taskDB.startDate;
+        taskInfo.endDate = taskDB.endDate;
         taskInfo.status = (taskDB.startDate != nil && taskDB.endDate != nil) ? TaskInformationStatusComplete : taskDB.startDate != nil ? TaskInformationStatusInProgress : TaskInformationStatusNotStarted;
         
         NSFetchRequest *taskItemRequest = [NSFetchRequest fetchRequestWithEntityName:@"TaskItemBinding"];
@@ -569,6 +571,7 @@
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"subgroupID" value:itemDB.subgroupID.stringValue]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"trademarkID" value:itemDB.trademarkID.stringValue]];
     
+    item.itemId     = itemDB.itemID.integerValue;
     item.barcode    = barcodeDB.code128;
     item.name       = itemDB.name;
     item.article    = itemDB.itemCode;

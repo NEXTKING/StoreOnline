@@ -24,7 +24,7 @@
 
 - (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemID:(NSUInteger)itemID;
 
-- (void) saveTask:(id<TasksDelegate>) delegate taskID:(NSInteger)taskID userID:(NSInteger)userID status:(NSInteger)status;
+- (void) saveTask:(id<TasksDelegate>) delegate taskID:(NSInteger)taskID userID:(NSInteger)userID status:(NSInteger)status date:(NSDate *)date;
 - (void) saveTaskItem:(id<TasksDelegate>) delegate taskID:(NSInteger)taskID itemID:(NSInteger)itemID scanned:(NSUInteger)scanned;
 
 @end

@@ -36,6 +36,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     
     [self.tableView registerNib:[UINib nibWithNibName:@"ItemsListCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
     [self requestData];
+    [self updateActionButton];
     [self updateOverlayInfo];
 }
 
@@ -53,7 +54,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
             completeCount += item.scanned;
         }];
         
-        [navVC.overlayController setTitleText:_task.name startDate:_task.startDate totalItemsCount:totalCount completeItemsCount:completeCount timerIsRunning:timerIsRunning];
+        [navVC.overlayController setTitleText:_task.name startDate:_task.startDate endDate:_task.endDate totalItemsCount:totalCount completeItemsCount:completeCount timerIsRunning:timerIsRunning];
     }
 }
 
@@ -104,10 +105,10 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
         
         cell.articleLabel.text = item != nil ? item.article : @"";
         cell.nameLabel.text = item != nil ? item.name : @"";
-        cell.barcodeLabel.text = item != nil ? item.barcode : @"";
+        cell.barcodeLabel.text = item != nil ? [NSString stringWithFormat:@"Штрих-код: %@", item.barcode] : @"";
         
         cell.quantityLabel.hidden = NO;
-        cell.quantityLabel.text = [NSString stringWithFormat:@"Количество %ld из %ld", taskItemInfo.scanned, taskItemInfo.quantity];
+        cell.quantityLabel.text = [NSString stringWithFormat:@"Количество: %ld из %ld", taskItemInfo.scanned, taskItemInfo.quantity];
     }
     else
     {
@@ -217,16 +218,19 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 {
     if (_tasksMode)
     {
+        NSDate *now = [NSDate date];
         if (_task.status == TaskInformationStatusNotStarted)
         {
             _task.status = TaskInformationStatusInProgress;
+            _task.startDate = now;
         }
         else if (_task.status == TaskInformationStatusInProgress)
         {
             _task.status = TaskInformationStatusComplete;
+            _task.endDate = now;
         }
         
-        [[MCPServer instance] saveTask:nil taskID:_task.taskID userID:_task.userID status:_task.status];
+        [[MCPServer instance] saveTask:nil taskID:_task.taskID userID:_task.userID status:_task.status date:now];
         
         [self updateActionButton];
         [self updateOverlayInfo];
