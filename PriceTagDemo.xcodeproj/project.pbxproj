@@ -1314,12 +1314,9 @@
 		B92DCE171C845E60002AA184 /* Ostin */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
 				C68216331DB66AFF00833751 /* ZPL */,
-=======
 				C682162E1DB5458100833751 /* label.zpl */,
 				21B8DC781DB66BFD00FD9161 /* Utilities */,
->>>>>>> origin/tasks
 				C6F601A71D9D1D060095AE21 /* CoreData */,
 				C67103F61D93DFA6000AEC24 /* Search */,
 				C67103EB1D93CACB000AEC24 /* Tasks */,
