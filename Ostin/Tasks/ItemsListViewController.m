@@ -12,6 +12,7 @@
 #import "OstinViewController.h"
 #import "TasksNavigationController.h"
 #import "TaskProgressOverlayController.h"
+#import "BarcodeFormatter.h"
 
 @interface ItemsListViewController () <ItemDescriptionDelegate>
 {
@@ -36,6 +37,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     
     [self.tableView registerNib:[UINib nibWithNibName:@"ItemsListCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
     [self requestData];
+    [self updateNotificationStatus];
     [self updateActionButton];
     [self updateOverlayInfo];
 }
@@ -83,6 +85,51 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
             self.actionButton.enabled = NO;
         }
     }
+}
+
+- (void)updateNotificationStatus
+{
+    if (!_tasksMode)
+    {
+        if (_task.status == TaskInformationStatusNotStarted)
+        {
+            
+        }
+        else if (_task.status == TaskInformationStatusInProgress)
+        {
+            [self subscribeToScanNotifications];
+        }
+        else if (_task.status == TaskInformationStatusComplete)
+        {
+            [self unsubscribeFromScanNotifications];
+        }
+    }
+}
+
+- (void)dealloc
+{
+    [self unsubscribeFromScanNotifications];
+}
+
+#pragma mark Notifications
+
+- (void)subscribeToScanNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveScanNotification:) name:@"BarcodeScanNotification" object:nil];
+}
+
+- (void)unsubscribeFromScanNotifications
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"BarcodeScanNotification" object:nil];
+}
+
+- (void)didReceiveScanNotification:(NSNotification *)notification
+{
+    NSString *barcode = notification.userInfo[@"barcode"];
+    NSNumber *type = notification.userInfo[@"type"];
+    
+    NSString *internalBarcode = [BarcodeFormatter normalizedBarcodeFromString:barcode isoType:type.intValue];
+    [self itemDidScannedWithBarcode:internalBarcode];
 }
 
 #pragma mark - Table view data source
@@ -232,6 +279,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
         
         [[MCPServer instance] saveTask:nil taskID:_task.taskID userID:_task.userID status:_task.status date:now];
         
+        [self updateNotificationStatus];
         [self updateActionButton];
         [self updateOverlayInfo];
     }

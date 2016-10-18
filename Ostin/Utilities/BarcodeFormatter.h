@@ -1,0 +1,13 @@
+//
+//  BarcodeFormatter.h
+//  PriceTagDemo
+//
+//  Created by Evgeny Seliverstov on 18/10/2016.
+//  Copyright © 2016 Dataphone. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface BarcodeFormatter : NSObject
++ (NSString *)normalizedBarcodeFromString:(NSString *)barcodeString isoType:(int)type;
+@end

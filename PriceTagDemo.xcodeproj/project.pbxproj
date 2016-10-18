@@ -12,6 +12,7 @@
 		218228661DAF864000F04B70 /* TasksCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 218228641DAF864000F04B70 /* TasksCell.m */; };
 		218228671DAF864000F04B70 /* TasksCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 218228651DAF864000F04B70 /* TasksCell.xib */; };
 		2182286A1DAFCB2A00F04B70 /* TaskItemInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 218228691DAFCB2A00F04B70 /* TaskItemInformation.m */; };
+		21B8DC7B1DB66CF900FD9161 /* BarcodeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B8DC7A1DB66CF900FD9161 /* BarcodeFormatter.m */; };
 		21BB44BF1DACF0D100ED67EE /* TaskProgressOverlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BB44BD1DACF0D100ED67EE /* TaskProgressOverlayController.m */; };
 		21BB44C01DACF0D100ED67EE /* TaskProgressOverlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21BB44BE1DACF0D100ED67EE /* TaskProgressOverlayController.xib */; };
 		21BB44E61DAD224600ED67EE /* TasksNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BB44E51DAD224600ED67EE /* TasksNavigationController.m */; };
@@ -537,6 +538,8 @@
 		218228651DAF864000F04B70 /* TasksCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TasksCell.xib; sourceTree = "<group>"; };
 		218228681DAFCB2A00F04B70 /* TaskItemInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskItemInformation.h; sourceTree = "<group>"; };
 		218228691DAFCB2A00F04B70 /* TaskItemInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskItemInformation.m; sourceTree = "<group>"; };
+		21B8DC791DB66CF900FD9161 /* BarcodeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarcodeFormatter.h; path = Utilities/BarcodeFormatter.h; sourceTree = "<group>"; };
+		21B8DC7A1DB66CF900FD9161 /* BarcodeFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BarcodeFormatter.m; path = Utilities/BarcodeFormatter.m; sourceTree = "<group>"; };
 		21BB44BC1DACF0D100ED67EE /* TaskProgressOverlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskProgressOverlayController.h; sourceTree = "<group>"; };
 		21BB44BD1DACF0D100ED67EE /* TaskProgressOverlayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskProgressOverlayController.m; sourceTree = "<group>"; };
 		21BB44BE1DACF0D100ED67EE /* TaskProgressOverlayController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskProgressOverlayController.xib; sourceTree = "<group>"; };
@@ -1136,6 +1139,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21B8DC781DB66BFD00FD9161 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				21B8DC791DB66CF900FD9161 /* BarcodeFormatter.h */,
+				21B8DC7A1DB66CF900FD9161 /* BarcodeFormatter.m */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
 		4049A67B59B6A32B31D08993 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1302,7 +1314,12 @@
 		B92DCE171C845E60002AA184 /* Ostin */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				C68216331DB66AFF00833751 /* ZPL */,
+=======
+				C682162E1DB5458100833751 /* label.zpl */,
+				21B8DC781DB66BFD00FD9161 /* Utilities */,
+>>>>>>> origin/tasks
 				C6F601A71D9D1D060095AE21 /* CoreData */,
 				C67103F61D93DFA6000AEC24 /* Search */,
 				C67103EB1D93CACB000AEC24 /* Tasks */,
@@ -3263,6 +3280,7 @@
 				C67103F21D93CB59000AEC24 /* ItemsListCell.m in Sources */,
 				B92DCE311C845E92002AA184 /* DetailsTableViewController.m in Sources */,
 				B92DCE2E1C845E89002AA184 /* ViewController.m in Sources */,
+				21B8DC7B1DB66CF900FD9161 /* BarcodeFormatter.m in Sources */,
 				B957B0D51D1BF5AC002A5256 /* MenuViewController.m in Sources */,
 				C607A60B1DB0E0E000F3E5E9 /* SOAPTaskWareBinding.m in Sources */,
 				C667239B1DAAEEFB001B30AC /* Task+CoreDataClass.m in Sources */,
