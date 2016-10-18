@@ -63,9 +63,9 @@
         
         TaskItemBinding *taskDB = [NSEntityDescription insertNewObjectForEntityForName:@"TaskItemBinding" inManagedObjectContext:self.dataController.managedObjectContext];
         
-        taskDB.itemID            = @([csv[1] integerValue]);
         taskDB.taskID            = @([csv[2] integerValue]);
-        taskDB.quantity          = @([csv[3] integerValue]);
+        taskDB.itemID            = @([csv[3] integerValue]);
+        taskDB.quantity          = @([csv[4] integerValue]);
     }
     
     NSError* error = nil;
