@@ -12,6 +12,9 @@
 @interface AppDelegate () <DTDeviceDelegate>
 {
     int _networkIndicatorCounter;
+    NSMutableArray* symbols;
+    NSMutableString* ringBarcode;
+    NSString *ringBarcodeType;
 }
 
 @end
@@ -25,6 +28,7 @@
     DTDevices *dtDevice = [DTDevices sharedDevice];
     [dtDevice addDelegate:self];
     [dtDevice connect];
+    [self initializeRing];
     
 #ifdef DESONDO
     [[UINavigationBar appearance] setTitleTextAttributes:
@@ -188,6 +192,83 @@
 {
     --_networkIndicatorCounter;
     [self performSelector:@selector(networkIndicatorUpdate) withObject:Nil afterDelay:1];
+}
+
+#pragma mark - Scan Delegate
+
+- (void) initializeRing
+{
+    symbols = [NSMutableArray new];
+    
+    for (int i = 0; i < 127; ++i) {
+        // ASCII to NSString
+        NSString *string = [NSString stringWithFormat:@"%c", i]; // A
+        UIKeyCommand *command = [UIKeyCommand keyCommandWithInput:string modifierFlags:0 action:@selector(gsKey:)];
+        [symbols addObject:command];
+    }
+}
+
+- (NSArray *)keyCommands
+{
+    return symbols;
+    
+    // <RS> - char(30): ctrl-shift-6 (or ctrl-^)
+    //UIKeyCommand *rsCommand = [UIKeyCommand keyCommandWithInput:@"6" modifierFlags:UIKeyModifierShift|UIKeyModifierControl action:@selector(rsKey:)];
+    // <GS> - char(29): ctrl-]
+    //UIKeyCommand *gsCommand = [UIKeyCommand keyCommandWithInput:@"]" modifierFlags:UIKeyModifierControl action:@selector(gsKey:)];
+    // <EOT> - char(4): ctrl-d
+    //UIKeyCommand *eotCommand = [UIKeyCommand keyCommandWithInput:@"D" modifierFlags:UIKeyModifierControl action:@selector(eotKey:)];
+    //return [[NSArray alloc] initWithObjects:rsCommand, gsCommand, eotCommand, nil];
+}
+
+
+- (void) gsKey: (UIKeyCommand *) keyCommand {
+    NSLog(@"%@", keyCommand.input);
+    
+    if ([keyCommand.input isEqualToString:@"$"])
+    {
+        ringBarcode = [NSMutableString new];
+        ringBarcodeType = @"";
+    }
+    else if ([keyCommand.input isEqualToString:@"#"])
+    {
+        int type = 0;
+        if ([ringBarcode isEqualToString:@"A"])
+            type = BAR_UPC;
+        else if ([ringBarcode isEqualToString:@"D"])
+            type = BAR_CODE128;
+        else
+            type  = 0;
+        
+        [self sendNotificationWithCode:ringBarcode type:type];
+    }
+    else if (ringBarcode.length == 0 && ringBarcodeType.length == 0)
+        ringBarcodeType = keyCommand.input;
+    else
+        [ringBarcode appendString:keyCommand.input];
+}
+
+- (void) barcodeData:(NSString *)barcode type:(int)type
+{
+    [self sendNotificationWithCode:barcode type:type];
+}
+
+- (void) barcodeData:(NSString *)barcode isotype:(NSString *)isotype
+{
+    [self sendNotificationWithCode:barcode type:0];
+}
+
+- (void) sendNotificationWithCode:(NSString*) code type:(int) type
+{
+    
+    if (!code)
+        return;
+    
+    NSDictionary* params = @{@"barcode":code,@"type":@(type)};
+    
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:@"BarcodeScanNotification"
+     object:params];
 }
 
 @end

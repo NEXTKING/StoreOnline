@@ -35,23 +35,33 @@
     //[self barcodeData:@"990025324185" type:BAR_UPC];
     //[self barcodeData:@"990025878473" type:BAR_UPC];
     
-    
-    
-    if ([defaults valueForKey:@"LastBarcode"] && !_externalBarcode)
-    {
-        restored = YES;
-        [self barcodeData:[defaults valueForKey:@"LastBarcode"] type:0];
-    }
-    else if (_externalBarcode)
-    {
-        [self barcodeData:_externalBarcode type:0];
-    }
     // Do any additional setup after loading the view.
     [self updateItemInfo:self.currentItemInfo];
     
     [self initializeRing];
     
     //[[MCPServer instance] itemDescription:self itemCode:@"2792304" shopCode:nil isoType:BAR_CODE128];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([defaults valueForKey:@"LastBarcode"] && !_externalBarcode)
+    {
+        restored = YES;
+        
+        NSDictionary* params = @{@"barcode":[defaults valueForKey:@"LastBarcode"],@"type":@(0)};
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:@"BarcodeScanNotification"
+         object:params];
+    }
+    else if (_externalBarcode)
+    {
+        [self barcodeData:_externalBarcode type:0];
+    }
 }
 
 - (void) printButtonAction:(id)sender
@@ -87,29 +97,6 @@
     //return [[NSArray alloc] initWithObjects:rsCommand, gsCommand, eotCommand, nil];
 }
 
-
-- (void) gsKey: (UIKeyCommand *) keyCommand {
-    NSLog(@"%@", keyCommand.input);
-    
-    if ([keyCommand.input isEqualToString:@"$"])
-        ringBarcode.string = @"";
-    else if ([keyCommand.input isEqualToString:@"%"])
-        [self sendNotification:nil];
-    else
-        [ringBarcode appendString:keyCommand.input];
-}
-
-- (IBAction)immediateSwitchAction:(UISwitch*)sender
-{
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    id obj = sender.on?@YES:nil;
-    [defaults setValue:obj forKey:@"PrintImmediatly"];
-}
-
-- (void) sendNotification:(id) sender
-{
-    [self barcodeData:ringBarcode type:0];
-}
 
 - (NSString*) parseBarcode:(NSString*) code
 {

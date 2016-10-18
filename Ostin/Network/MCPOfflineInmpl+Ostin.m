@@ -445,7 +445,7 @@
     
     if (type == BAR_CODE128)
         [request setPredicate:[NSPredicate predicateWithFormat:@"code128 LIKE[c] %@", code]];
-    else if (type == BAR_UPC)
+    else if (type == BAR_UPC && code.length>=12)
     {
         
         NSString *string = [NSString stringWithFormat:@"0%@", code];

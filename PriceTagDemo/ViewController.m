@@ -46,11 +46,8 @@
     _numberOfCopies = 1;
     
     [self clearInfo];
-    
-    //[self drawImage];
-    
-    //[self barcodeData:@"111199990009" type:0];
 }
+
 
 - (void) clearInfo
 {
@@ -65,6 +62,11 @@
     [super viewWillAppear:animated];
     DTDevices *dtdev = [DTDevices sharedDevice];
     [dtdev addDelegate:self];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(scanNotification:)
+                                                 name:@"BarcodeScanNotification"
+                                               object:nil];
 }
 
 - (void) viewDidDisappear:(BOOL)animated
@@ -72,6 +74,8 @@
     [super viewDidDisappear:animated];
     DTDevices *dtdev = [DTDevices sharedDevice];
     [dtdev removeDelegate:self];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void) viewDidLayoutSubviews
@@ -110,7 +114,11 @@
     UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Отправить" style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * action) {
                                                           
-                                                              [self barcodeData:alert.textFields[0].text type:0];
+                                                              NSDictionary* params = @{@"barcode":alert.textFields[0].text,@"type":@(0)};
+                                                              
+                                                              [[NSNotificationCenter defaultCenter]
+                                                               postNotificationName:@"BarcodeScanNotification"
+                                                               object:params];
                                                           }];
     
     [alert addTextFieldWithConfigurationHandler:^(UITextField* textField)
@@ -234,18 +242,13 @@
 
 #pragma mark - Scanner Delegate
 
-- (void) barcodeData:(NSString *)barcode isotype:(NSString *)isotype
+- (void) scanNotification:(NSNotification*)aNotification
 {
-    lastBarcode = barcode;
-    [[NSUserDefaults standardUserDefaults] setValue:barcode forKey:@"LastBarcode"];
-    [self requestItemInfoWithCode:[self cleanBarcode:barcode] isoType:0];
-}
-
-- (void) barcodeData:(NSString *)barcode type:(int)type
-{
-    lastBarcode = barcode;
-    [[NSUserDefaults standardUserDefaults] setValue:barcode forKey:@"LastBarcode"];
-    [self requestItemInfoWithCode:[self cleanBarcode:barcode] isoType:type];
+    lastBarcode = [aNotification.object objectForKey:@"barcode"];
+    int type    = [[aNotification.object objectForKey:@"type"] intValue];
+    
+    [[NSUserDefaults standardUserDefaults] setValue:lastBarcode forKey:@"LastBarcode"];
+    [self requestItemInfoWithCode:[self cleanBarcode:lastBarcode] isoType:type];
 }
 
 - (NSString*) cleanBarcode:(NSString*) barcode
