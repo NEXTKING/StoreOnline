@@ -13,7 +13,7 @@
 
 - (void) main
 {
-    _incValue = @"ware_price";
+    _incValue = @"pasting_task";
     [super main];
 }
 

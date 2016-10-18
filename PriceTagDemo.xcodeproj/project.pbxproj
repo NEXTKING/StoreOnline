@@ -447,6 +447,7 @@
 		C676636E1D7DB15100398D58 /* x5Bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C676636C1D7DB15100398D58 /* x5Bar@2x.png */; };
 		C6770FCD1D994188002A60D9 /* NwobjItemDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = C6770FCC1D994188002A60D9 /* NwobjItemDescription.m */; };
 		C67BB3691DABE4BC0032F2A4 /* TaskInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = C67BB3681DABE4BC0032F2A4 /* TaskInformation.m */; };
+		C682162F1DB5458100833751 /* label.zpl in Resources */ = {isa = PBXBuildFile; fileRef = C682162E1DB5458100833751 /* label.zpl */; };
 		C690B4171CE8BB3100F4DF95 /* DiscountInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = C690B4161CE8BB3100F4DF95 /* DiscountInformation.m */; };
 		C690B4191CE8BBC100F4DF95 /* DiscountInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = C690B4161CE8BB3100F4DF95 /* DiscountInformation.m */; };
 		C6979E9A1D8FE6A800A0B51B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6979E991D8FE6A800A0B51B /* LoginViewController.m */; };
@@ -933,6 +934,7 @@
 		C6770FCC1D994188002A60D9 /* NwobjItemDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NwobjItemDescription.m; sourceTree = "<group>"; };
 		C67BB3671DABE4BC0032F2A4 /* TaskInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskInformation.h; sourceTree = "<group>"; };
 		C67BB3681DABE4BC0032F2A4 /* TaskInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskInformation.m; sourceTree = "<group>"; };
+		C682162E1DB5458100833751 /* label.zpl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = label.zpl; sourceTree = "<group>"; };
 		C690B4151CE8BB3100F4DF95 /* DiscountInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscountInformation.h; sourceTree = "<group>"; };
 		C690B4161CE8BB3100F4DF95 /* DiscountInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscountInformation.m; sourceTree = "<group>"; };
 		C6979E981D8FE6A800A0B51B /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -1294,6 +1296,7 @@
 		B92DCE171C845E60002AA184 /* Ostin */ = {
 			isa = PBXGroup;
 			children = (
+				C682162E1DB5458100833751 /* label.zpl */,
 				C6F601A71D9D1D060095AE21 /* CoreData */,
 				C67103F61D93DFA6000AEC24 /* Search */,
 				C67103EB1D93CACB000AEC24 /* Tasks */,
@@ -2505,6 +2508,7 @@
 				B957B11D1D1D25D1002A5256 /* Icon.png in Resources */,
 				215EFF0A1DAB9ED600BE11C5 /* SearchTableViewCell.xib in Resources */,
 				B957B10D1D1C2A2D002A5256 /* 8813780299.jpg in Resources */,
+				C682162F1DB5458100833751 /* label.zpl in Resources */,
 				C67103F31D93CB59000AEC24 /* ItemsListCell.xib in Resources */,
 				B92DCE421C846002002AA184 /* OstinPriceTag.xib in Resources */,
 				B957B1181D1C2A2D002A5256 /* MT4O9765M.jpg in Resources */,
@@ -3745,6 +3749,7 @@
 					"$(inherited)",
 					"OSTIN=1",
 					"OFFLINE=1",
+					"ZPL=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3779,6 +3784,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"OSTIN=1",
 					"OFFLINE=1",
+					"ZPL=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

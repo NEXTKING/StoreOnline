@@ -19,6 +19,7 @@
 - (void) subgroups:(id<GroupsDelegate>) delegate uid:(NSString*)uid;
 - (void) brands:(id<GroupsDelegate>) delegate uid:(NSString*)uid;
 - (void) tasks:(id<TasksDelegate>) delegate userID:(NSNumber*) userID;
+- (void) tasks:(id<TasksDelegate>) delegate taskID:(NSNumber*) taskID;
 - (void) search:(id<SearchDelegate>) delegate forQuery:(NSString *)query withAttribute:(ItemSearchAttribute)searchAttribute;
 
 - (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemID:(NSUInteger)itemID;

@@ -85,7 +85,7 @@
     request.A_STR_COUNTNUMBEROUT = [PI_MOBILE_SERVICEService_SequenceElement_A_STR_COUNTNUMBEROUT new];
     request.A_COUNTNUMBEROUT = [PI_MOBILE_SERVICEService_SequenceElement_A_COUNTNUMBEROUT new];
     
-    [binding.customHeaders setObject:_authValue forKey:@"Authorization"];
+    [binding.customHeaders setObject:self.authValue forKey:@"Authorization"];
     
     
     PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBindingResponse* response = [binding GET_PORTION_INFOUsingGET_PORTION_INFOInput:request];

@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingActivity;
 @property (weak, nonatomic) IBOutlet UILabel *barcodeLabel;
 @property (nonatomic, strong) ItemInformation* currentItemInfo;
+@property (nonatomic, strong) NSData* currentZPLInfo;
 @property (weak, nonatomic) IBOutlet UIButton *detailsButton;
 @property (nonatomic, assign) NSInteger numberOfCopies;
 @property (assign, nonatomic) BOOL shouldRetrack;

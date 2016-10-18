@@ -184,7 +184,11 @@
 {
     printVC.shouldRetrack = self.shouldRetrack;
     printVC.view.hidden = NO;
+#ifndef ZPL
     [printVC print:_currentItemInfo copies:_numberOfCopies];
+#else
+    [printVC printZPL:_currentZPLInfo copies:1];
+#endif
 }
 
 - (IBAction)retractAction:(id)sender

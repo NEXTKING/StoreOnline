@@ -21,6 +21,7 @@
 #import "SOAPBarcodes.h"
 #import "SOAPPrices.h"
 #import "SOAPTasks.h"
+#import "SOAPTaskWareBinding.h"
 #import "DTDevices.h"
 
 @interface MCPOfflineInmpl_Ostin ()
@@ -86,9 +87,15 @@
         tasks.authValue = authValue;
         tasks.deviceID  = deviceID;
         
+        SOAPTaskWareBinding *taskWareBinding = [SOAPTaskWareBinding new];
+        __weak SOAPTaskWareBinding* _taskWareBinding = taskWareBinding;
+        taskWareBinding.dataController = self.dataController;
+        taskWareBinding.authValue = authValue;
+        taskWareBinding.deviceID  = deviceID;
+        
         NSBlockOperation* delegateCallOperation = [NSBlockOperation blockOperationWithBlock:^{
             
-            BOOL success = _tasks.success;
+            BOOL success = _tasks.success && _taskWareBinding.success;
     
             if (success)
                 [delegate tasksComplete:0 tasks:nil];
@@ -98,10 +105,53 @@
         }];
         
         [delegateCallOperation addDependency:tasks];
+        [delegateCallOperation addDependency:taskWareBinding];
         
-        [waresQueue addOperations:@[tasks] waitUntilFinished:NO];
+        [waresQueue addOperations:@[tasks, taskWareBinding] waitUntilFinished:NO];
         [[NSOperationQueue mainQueue] addOperation:delegateCallOperation];
     }
+}
+
+- (void) tasks:(id<TasksDelegate>)delegate taskID:(NSNumber *)taskID
+{
+    NSManagedObjectContext *moc =self.dataController.managedObjectContext;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"TaskItemBinding" inManagedObjectContext:self.dataController.managedObjectContext]];
+    
+    [request setIncludesSubentities:NO];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"taskID == %ld", [taskID integerValue]]];
+    
+    NSError* error = nil;
+    NSArray* results = [moc executeFetchRequest:request error:&error];
+    
+    NSMutableArray* predicates = [NSMutableArray new];
+    
+    
+    for (TaskItemBinding* binding in results) {
+        NSPredicate* predicate = [NSPredicate predicateWithFormat:@"itemID == %ld", [binding.itemID integerValue]];
+        [predicates addObject:predicate];
+    }
+    
+    NSPredicate *itemsPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:predicates];
+    
+    NSFetchRequest *itemsRequest = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"TaskItemBinding" inManagedObjectContext:self.dataController.managedObjectContext]];
+    
+    /*for (Task* taskDB in results)
+    {
+        TaskInformation* taskInfo = [TaskInformation new];
+        taskInfo.name = taskDB.name;
+        taskInfo.userID = taskDB.userID.integerValue;
+        taskInfo.taskID = taskDB.taskID.integerValue;
+        taskInfo.status = (taskDB.startDate != nil && taskDB.endDate != nil) ? TaskInformationStatusComplete : taskDB.startDate != nil ? TaskInformationStatusInProgress : TaskInformationStatusNotStarted;
+        [exportTasks addObject:taskInfo];
+    }
+    
+    if (!error)
+        [delegate tasksComplete:0 tasks:exportTasks];
+    else
+        [delegate tasksComplete:1 tasks:nil];*/
 }
 
 - (void) saveTask:(id<TasksDelegate>) delegate taskID:(NSInteger)taskID userID:(NSInteger)userID status:(NSInteger)status

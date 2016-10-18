@@ -7,6 +7,7 @@
 //
 
 #import "SOAPTaskWareBinding.h"
+#import "TaskItemBinding+CoreDataClass.h"
 
 @implementation SOAPTaskWareBinding
 
@@ -55,7 +56,22 @@
 
 - (BOOL) saveItems: (NSArray*) items
 {
-    return YES;
+    for (PI_MOBILE_SERVICEService_TROW_IntType *throw in items)
+    {
+        NSArray *csvSourse = [throw.VAL componentsSeparatedByString:@";"];
+        NSArray *csv       = [self removeQuotes:csvSourse];
+        
+        TaskItemBinding *taskDB = [NSEntityDescription insertNewObjectForEntityForName:@"TaskItemBinding" inManagedObjectContext:self.dataController.managedObjectContext];
+        
+        taskDB.itemID            = @([csv[1] integerValue]);
+        taskDB.taskID            = @([csv[2] integerValue]);
+        taskDB.quantity          = @([csv[3] integerValue]);
+    }
+    
+    NSError* error = nil;
+    [self.dataController.managedObjectContext save:&error];
+    
+    return error? NO:YES;
 }
 
 @end

@@ -20,7 +20,8 @@ typedef enum PrintingTask
     PrintingTaskPrintLabel = 1,
     PrintingTaskFeed = 2,
     PrintingTaskCalibrate =3,
-    PrintingTaskRetract = 4
+    PrintingTaskRetract = 4,
+    PrintingTaskZPL = 5
 } PrintingTask;
 
 @interface PrintViewController () <DTDeviceDelegate, UIAlertViewDelegate>
@@ -29,6 +30,7 @@ typedef enum PrintingTask
     BOOL shouldContinueDiscover;
     NSInteger numberOfCopies;
     PrintingTask currentTask;
+    NSData* currentZpl;
 }
 
 @property (nonatomic, strong) ItemInformation* currentPrint;
@@ -167,6 +169,16 @@ typedef enum PrintingTask
     
 }
 
+- (void) printZPL:(NSData*) data copies:(NSInteger) copies{
+    currentTask = PrintingTaskZPL;
+    numberOfCopies = MAX(copies, 1);
+    _statusLabel.text = @"Подключение к принтеру...";
+    currentZpl = data;
+    shouldContinueDiscover = YES;
+    
+    [self tryConnectAndPrint];
+}
+
 #pragma mark - DTDevices Delegate
 
 - (void) bluetoothDiscoverComplete:(BOOL)success{
@@ -206,17 +218,17 @@ typedef enum PrintingTask
     switch (currentTask) {
         case PrintingTaskPrintLabel:
         case PrintingTaskFeed:
-#ifdef OSTIN
-            [self printZPL];
-#else
             [self printLabel];
-#endif
             break;
         case PrintingTaskCalibrate:
             [self calibratePrinter];
             break;
         case PrintingTaskRetract:
             [self temporaryFeedForValue:70.0];
+            break;
+        case PrintingTaskZPL:
+            [self printZPL];
+            break;
         default:
             break;
     }
@@ -318,7 +330,7 @@ if (_shouldRetrack)
 {
     _statusLabel.text = @"Печать...";
     
-    if (!_currentPrint)
+    if (!currentZpl)
     {
         [self performSelector:@selector(performCallback) withObject:nil afterDelay:2.0];
         return;
@@ -327,9 +339,7 @@ if (_shouldRetrack)
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         NSError* error = nil;
-        NSString *str=[[NSBundle mainBundle] pathForResource:@"ZPLtest" ofType:@"txt"];
-        NSData *file=[NSData dataWithContentsOfFile:str];
-        [dtDevice btWrite:file.bytes length:file.length error:&error];
+        [dtDevice btWrite:currentZpl.bytes length:currentZpl.length error:&error];
         
         if (error)
         {

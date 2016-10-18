@@ -33,6 +33,7 @@
 - (void) startSearchingPtinter;
 - (void) stopSearchingPrinter;
 - (void) print:(ItemInformation *)itemInfo copies:(NSInteger) copies;
+- (void) printZPL:(NSData*) data copies:(NSInteger) copies;
 - (void) calibrate;
 - (void) temporaryFeed;
 

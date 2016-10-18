@@ -28,6 +28,9 @@
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     _immediateSwitch.on = ([defaults valueForKey:@"PrintImmediatly"] != nil);
     
+    [[NSUserDefaults standardUserDefaults] setValue:@"00190EA20DAA" forKey:@"PrinterID"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     //[self barcodeData:@"990023247349" type:BAR_UPC];
     //[self barcodeData:@"990025324185" type:BAR_UPC];
     //[self barcodeData:@"990025878473" type:BAR_UPC];
@@ -49,6 +52,14 @@
     [self initializeRing];
     
     //[[MCPServer instance] itemDescription:self itemCode:@"2792304" shopCode:nil isoType:BAR_CODE128];
+}
+
+- (void) printButtonAction:(id)sender
+{
+    NSString *str=[[NSBundle mainBundle] pathForResource:@"label" ofType:@"zpl"];
+    NSData *file=[NSData dataWithContentsOfFile:str];
+    self.currentZPLInfo = file;
+    [super printButtonAction:sender];
 }
 
 - (void) initializeRing
