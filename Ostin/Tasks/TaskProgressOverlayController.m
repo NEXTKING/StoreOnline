@@ -13,6 +13,7 @@
     NSInteger _completeItemsCount;
     NSInteger _totalItemsCount;
     NSDate *_startDate;
+    NSDate *_endDate;
     NSTimer *_timer;
 }
 
@@ -58,10 +59,11 @@
 
 #pragma mark Public setters
 
-- (void)setTitleText:(NSString *)title startDate:(NSDate *)startDate totalItemsCount:(NSInteger)totalCount completeItemsCount:(NSInteger)completeCount timerIsRunning:(BOOL)timerIsRunning
+- (void)setTitleText:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate totalItemsCount:(NSInteger)totalCount completeItemsCount:(NSInteger)completeCount timerIsRunning:(BOOL)timerIsRunning
 {
     _titleLabel.text = title;
     _startDate = startDate;
+    _endDate = endDate;
     _totalItemsCount = totalCount;
     _completeItemsCount = completeCount;
     
@@ -87,7 +89,7 @@
 
 - (void)updateProgressLabel
 {
-    self.progressLabel.text = [NSString stringWithFormat:@"Завершено %d из %d", _completeItemsCount, _totalItemsCount];
+    self.progressLabel.text = [NSString stringWithFormat:@"Завершено %ld из %ld", _completeItemsCount, _totalItemsCount];
 }
 
 - (void)updateProgressBar
@@ -112,7 +114,8 @@
 {
     if (_startDate != nil)
     {
-        NSTimeInterval secondsPassed = [[NSDate date] timeIntervalSinceDate:_startDate];
+        NSDate *endDate = _endDate != nil ? _endDate : [NSDate date];
+        NSTimeInterval secondsPassed = [endDate timeIntervalSinceDate:_startDate];
         NSDateComponentsFormatter *dateComponentsFormatter = [[NSDateComponentsFormatter alloc] init];
         dateComponentsFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
         dateComponentsFormatter.allowedUnits = (NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond);
@@ -146,7 +149,7 @@
         }
         else
         {
-            self.speedLabel.text = [NSString stringWithFormat:@"%d / мин", _completeItemsCount];
+            self.speedLabel.text = [NSString stringWithFormat:@"%ld / мин", _completeItemsCount];
         }
     }
     else

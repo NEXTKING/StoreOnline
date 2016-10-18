@@ -28,7 +28,10 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
     self.tableView.estimatedRowHeight = 44.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self.tableView registerNib:[UINib nibWithNibName:@"TasksCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
+}
 
+- (void)viewWillAppear:(BOOL)animated
+{
     [self loadData];
 }
 
