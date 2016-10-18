@@ -46,7 +46,7 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
     }
     else
     {
-        NSLog(@"tasks result != 0");
+        
     }
 }
 
@@ -65,7 +65,7 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
     TaskInformation *task = [_tasks objectAtIndex:indexPath.row];
     
     cell.titleLabel.text = task.name;
-    cell.statusLabel.text = [NSString stringWithFormat:@"%ld", task.status];
+    cell.statusLabel.text = task.status == TaskInformationStatusNotStarted ? @"Новое" : task.status == TaskInformationStatusInProgress ? @"Не завершено" : @"Завершено";
     
     return cell;
 }
