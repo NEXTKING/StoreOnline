@@ -395,6 +395,7 @@
 
 - (void) tasksInternal:(id<TasksDelegate>)delegate userID:(NSNumber*)userID
 {
+    #warning userID is unsusable
     NSManagedObjectContext *moc =self.dataController.managedObjectContext;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Task"];
     
@@ -409,6 +410,20 @@
         taskInfo.userID = taskDB.userID.integerValue;
         taskInfo.taskID = taskDB.taskID.integerValue;
         taskInfo.status = (taskDB.startDate != nil && taskDB.endDate != nil) ? TaskInformationStatusComplete : taskDB.startDate != nil ? TaskInformationStatusInProgress : TaskInformationStatusNotStarted;
+        
+        NSFetchRequest *taskItemRequest = [NSFetchRequest fetchRequestWithEntityName:@"TaskItemBinding"];
+        [taskItemRequest setPredicate:[NSPredicate predicateWithFormat:@"taskID == %ld", taskDB.taskID.integerValue]];
+        NSArray *results = [moc executeFetchRequest:taskItemRequest error:nil];
+        NSMutableArray *taskItems = [[NSMutableArray alloc] initWithCapacity:results.count + 1];
+        for (TaskItemBinding *taskItemDB in results)
+        {
+            TaskItemInformation *taskItemInfo = [TaskItemInformation new];
+            taskItemInfo.itemID = taskItemDB.itemID.integerValue;
+            taskItemInfo.scanned = taskItemDB.scanned.integerValue;
+            taskItemInfo.quantity = taskItemDB.quantity.integerValue;
+            [taskItems addObject:taskItemInfo];
+        }
+        taskInfo.items = taskItems;
         [exportTasks addObject:taskInfo];
     }
     

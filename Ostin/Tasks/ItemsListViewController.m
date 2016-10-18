@@ -44,7 +44,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     if (_task != nil)
     {
         TasksNavigationController *navVC = (TasksNavigationController *)self.navigationController;
-        BOOL timerIsRunning = _task.status != 3;
+        BOOL timerIsRunning = _task.status == TaskInformationStatusInProgress;
         __block NSInteger totalCount = 0;
         __block NSInteger completeCount = 0;
         
@@ -66,17 +66,17 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     }
     else
     {
-        if (_task.status == 0)
+        if (_task.status == TaskInformationStatusNotStarted)
         {
             self.actionButton.title = @"Начать";
             self.actionButton.enabled = YES;
         }
-        else if (_task.status == 1)
+        else if (_task.status == TaskInformationStatusInProgress)
         {
             self.actionButton.title = @"Завершить";
             self.actionButton.enabled = YES;
         }
-        else if (_task.status == 2)
+        else if (_task.status == TaskInformationStatusComplete)
         {
             self.actionButton.title = @"Завершено";
             self.actionButton.enabled = NO;
