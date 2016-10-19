@@ -9,6 +9,7 @@
 #import "OstinViewController.h"
 #import "WYStoryboardPopoverSegue.h"
 #import "SettingsViewController.h"
+#import "ZPLGenerator.h"
 
 
 @interface OstinViewController ()
@@ -40,6 +41,9 @@
     
     [self initializeRing];
     
+    NSString* zpl = [ZPLGenerator additionalInfo];
+    NSLog(@"%@", zpl);
+    
     //[[MCPServer instance] itemDescription:self itemCode:@"2792304" shopCode:nil isoType:BAR_CODE128];
 }
 
@@ -68,7 +72,7 @@
 {
     NSString *str=[[NSBundle mainBundle] pathForResource:@"label" ofType:@"zpl"];
     NSData *file=[NSData dataWithContentsOfFile:str];
-    self.currentZPLInfo = file;
+    self.currentZPLInfo = [ZPLGenerator generateZPLWithItem:self.currentItemInfo patternPath:str];
     [super printButtonAction:sender];
 }
 

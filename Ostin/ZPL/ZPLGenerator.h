@@ -11,6 +11,7 @@
 
 @interface ZPLGenerator : NSObject
 
-+ (void) generateZPLWithItem:(ItemInformation*) item;
++ (NSData*) generateZPLWithItem:(ItemInformation*) item patternPath:(NSString*) path;
++ (NSString*) additionalInfo;
 
 @end

@@ -210,6 +210,7 @@
     [symbols addObject:[UIKeyCommand keyCommandWithInput:@"A" modifierFlags:UIKeyModifierShift action:@selector(gsKey:)]];
     [symbols addObject:[UIKeyCommand keyCommandWithInput:@"D" modifierFlags:UIKeyModifierShift action:@selector(gsKey:)]];
     [symbols addObject:[UIKeyCommand keyCommandWithInput:@"4" modifierFlags:UIKeyModifierShift action:@selector(gsKey:)]];
+    [symbols addObject:[UIKeyCommand keyCommandWithInput:@"$" modifierFlags:0 action:@selector(gsKey:)]];
 }
 
 - (BOOL) canBecomeFirstResponder
@@ -242,9 +243,9 @@
     else if ([keyCommand.input isEqualToString:@"#"])
     {
         int type = 0;
-        if ([ringBarcode isEqualToString:@"A"])
+        if ([ringBarcodeType isEqualToString:@"A"])
             type = BAR_UPC;
-        else if ([ringBarcode isEqualToString:@"D"])
+        else if ([ringBarcodeType isEqualToString:@"D"])
             type = BAR_CODE128;
         else
             type  = 0;
