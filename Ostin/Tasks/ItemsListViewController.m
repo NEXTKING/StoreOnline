@@ -89,7 +89,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 
 - (void)updateNotificationStatus
 {
-    if (!_tasksMode)
+    if (_tasksMode)
     {
         if (_task.status == TaskInformationStatusNotStarted)
         {

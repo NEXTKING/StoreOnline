@@ -37,20 +37,26 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
 
 - (void)loadData
 {
-    [[MCPServer instance] tasks:self userID:@(0)];
+    __weak typeof(self) wself = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[MCPServer instance] tasks:wself userID:@(0)];
+    });
 }
 
 - (void)tasksComplete:(int)result tasks:(NSArray<TaskInformation *> *)tasks
 {
-    if (result == 0)
-    {
-        _tasks = tasks;
-        [self.tableView reloadData];
-    }
-    else
-    {
-        
-    }
+    __weak typeof(self) wself = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (result == 0)
+        {
+            _tasks = tasks;
+            [wself.tableView reloadData];
+        }
+        else
+        {
+            
+        }
+    });
 }
 
 #pragma mark - Table view data source

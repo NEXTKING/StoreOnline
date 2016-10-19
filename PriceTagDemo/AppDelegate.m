@@ -278,7 +278,7 @@
     
     [[NSNotificationCenter defaultCenter]
      postNotificationName:@"BarcodeScanNotification"
-     object:params];
+     object:nil userInfo:params];
 }
 
 @end
