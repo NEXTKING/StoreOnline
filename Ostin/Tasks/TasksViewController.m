@@ -76,6 +76,10 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
     cell.titleLabel.text = task.name;
     cell.statusLabel.text = task.status == TaskInformationStatusNotStarted ? @"Новое" : task.status == TaskInformationStatusInProgress ? @"Не завершено" : @"Завершено";
     
+    UIColor *greenColor = [UIColor colorWithRed:215/255.0 green:1.0 blue:215/255.0 alpha:1.0];
+    UIColor *whiteColor = [UIColor whiteColor];
+    cell.backgroundColor = task.status == TaskInformationStatusComplete ? greenColor : whiteColor;
+    
     return cell;
 }
 

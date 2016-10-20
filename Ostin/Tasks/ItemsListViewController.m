@@ -125,8 +125,8 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 
 - (void)didReceiveScanNotification:(NSNotification *)notification
 {
-    NSString *barcode = notification.userInfo[@"barcode"];
-    NSNumber *type = notification.userInfo[@"type"];
+    NSString *barcode = notification.object[@"barcode"];
+    NSNumber *type = notification.object[@"type"];
     
     NSString *internalBarcode = [BarcodeFormatter normalizedBarcodeFromString:barcode isoType:type.intValue];
     [self itemDidScannedWithBarcode:internalBarcode];
@@ -156,6 +156,9 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
         
         cell.quantityLabel.hidden = NO;
         cell.quantityLabel.text = [NSString stringWithFormat:@"Количество: %ld из %ld", taskItemInfo.scanned, taskItemInfo.quantity];
+        UIColor *greenColor = [UIColor colorWithRed:215/255.0 green:1.0 blue:215/255.0 alpha:1.0];
+        UIColor *whiteColor = [UIColor whiteColor];
+        cell.backgroundColor = (taskItemInfo.scanned == taskItemInfo.quantity) && taskItemInfo.quantity != 0 ? greenColor : whiteColor;
     }
     else
     {
@@ -166,6 +169,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
         cell.barcodeLabel.text = item.barcode;
         
         cell.quantityLabel.hidden = YES;
+        cell.backgroundColor = [UIColor whiteColor];
     }
     
     return cell;
@@ -253,7 +257,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
             taskItemInfo.scanned += 1;
 
             [[MCPServer instance] saveTaskItem:nil taskID:_task.taskID itemID:taskItemInfo.itemID scanned:taskItemInfo.scanned];
-
+            
             NSUInteger index = [_items indexOfObject:item];
             [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
             [self updateOverlayInfo];
