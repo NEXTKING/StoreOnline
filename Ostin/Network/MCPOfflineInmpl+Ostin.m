@@ -22,6 +22,8 @@
 #import "SOAPPrices.h"
 #import "SOAPTasks.h"
 #import "SOAPTaskWareBinding.h"
+#import "SOAPSavePrintFact.h"
+#import "SOAPSetTaskDone.h"
 #import "DTDevices.h"
 
 @interface MCPOfflineInmpl_Ostin ()
@@ -175,8 +177,55 @@
     }
     else if (status == TaskInformationStatusComplete && taskDB.endDate == nil)
     {
-        taskDB.endDate = date;
-        [moc save:nil];
+        NSFetchRequest *taskItemRequest = [NSFetchRequest fetchRequestWithEntityName:@"TaskItemBinding"];
+        [taskItemRequest setPredicate:[NSPredicate predicateWithFormat:@"taskID == %ld", taskDB.taskID.integerValue]];
+        NSArray *results = [moc executeFetchRequest:taskItemRequest error:nil];
+        NSMutableArray *taskItems = [[NSMutableArray alloc] initWithCapacity:results.count + 1];
+        for (TaskItemBinding *taskItemDB in results)
+        {
+            TaskItemInformation *taskItemInfo = [TaskItemInformation new];
+            taskItemInfo.itemID = taskItemDB.itemID.integerValue;
+            taskItemInfo.scanned = taskItemDB.scanned.integerValue;
+            taskItemInfo.quantity = taskItemDB.quantity.integerValue;
+            [taskItems addObject:taskItemInfo];
+        }
+        
+        NSOperationQueue *setTaskDoneQueue = [NSOperationQueue new];
+        setTaskDoneQueue.name = @"setTaskDoneQueue";
+        
+        SOAPSavePrintFact *savePrintFact = [SOAPSavePrintFact new];
+        savePrintFact.taskName = taskDB.name;
+        savePrintFact.items = taskItems;
+        savePrintFact.authValue = authValue;
+        savePrintFact.deviceID  = deviceID;
+        
+        SOAPSetTaskDone *setTaskDone = [SOAPSetTaskDone new];
+        setTaskDone.taskName = taskDB.name;
+        setTaskDone.authValue = authValue;
+        setTaskDone.deviceID  = deviceID;
+        
+        NSBlockOperation* delegateCallOperation = [NSBlockOperation blockOperationWithBlock:^{
+            
+            NSManagedObjectContext *privateManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+            [privateManagedObjectContext setParentContext:moc];
+            Task *_taskDB = [privateManagedObjectContext objectWithID:taskDB.objectID];
+            
+            if (setTaskDone.success)
+            {
+                _taskDB.endDate = date;
+                [privateManagedObjectContext save:nil];
+                // need to call delegate here
+            }
+            else
+            {
+                
+            }
+        }];
+        
+        [setTaskDone addDependency:savePrintFact];
+        [delegateCallOperation addDependency:setTaskDone];
+        [setTaskDoneQueue addOperations:@[savePrintFact, setTaskDone] waitUntilFinished:NO];
+        [[NSOperationQueue mainQueue] addOperation:delegateCallOperation];
     }
 }
 
