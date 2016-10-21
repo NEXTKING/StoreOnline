@@ -632,6 +632,28 @@
     itemInfo.price      = priceDB.catalogPrice.doubleValue;
     itemInfo.additionalParameters = additionalParameters;
     
+//    NSLog(@"itemId: %ld", itemDB.itemID.integerValue);
+//    NSLog(@"barcode: %@", barcodeDB.code128);
+//    NSLog(@"name: %@", itemDB.name);
+//    NSLog(@"article: %@", itemDB.itemCode);
+//    NSLog(@"price: %f", priceDB.catalogPrice.doubleValue);
+//    
+//    NSLog(@"additionalParameters.additionalInfo: %@", itemDB.additionalInfo);
+//    NSLog(@"additionalParameters.additionalSize: %@", itemDB.additionalSize);
+//    NSLog(@"additionalParameters.boxType: %@", itemDB.boxType);
+//    NSLog(@"additionalParameters.certificationAuthorittyCode: %@", itemDB.certificationAuthorittyCode);
+//    NSLog(@"additionalParameters.groupID: %@", itemDB.groupID.stringValue);
+//    NSLog(@"additionalParameters.itemCode: %@", itemDB.itemCode);
+//    NSLog(@"additionalParameters.itemCode_2: %@", itemDB.itemCode_2);
+//    NSLog(@"additionalParameters.line1: %@", itemDB.line1);
+//    NSLog(@"additionalParameters.line2: %@", itemDB.line2);
+//    NSLog(@"additionalParameters.priceHeader: %@", itemDB.priceHeader);
+//    NSLog(@"additionalParameters.size: %@", itemDB.size);
+//    NSLog(@"additionalParameters.sizeHeader: %@", itemDB.sizeHeader);
+//    NSLog(@"additionalParameters.storeNumber: %@", itemDB.storeNumber);
+//    NSLog(@"additionalParameters.subgroupID: %@", itemDB.subgroupID.stringValue);
+//    NSLog(@"additionalParameters.trademarkID: %@", itemDB.trademarkID.stringValue);
+    
     return itemInfo;
 }
 
