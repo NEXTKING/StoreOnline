@@ -28,12 +28,18 @@
     dateFormatter.timeStyle = NSDateFormatterNoStyle;
     NSString* dateString = [dateFormatter stringFromDate:date];
     
+    NSString* size =        [self paramFromItem:item name:@"size"];
+    NSString*addSize   =    [self paramFromItem:item name:@"additionalSize"];
+    
     fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Ware.PriceHeader$" withString:[NSString stringWithFormat:@"Цены указаны в рублях:"]];
     fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Ware.CatalogPrice$" withString:[NSString stringWithFormat:@"%.0f,-",item.price]];
     fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Ware.SizeHeader$" withString:[NSString stringWithFormat:@"Размер:"]];
     fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Ware.RetailPrice$" withString:[NSString stringWithFormat:@""]];
     fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$PrintDate$" withString:[NSString stringWithFormat:@"%@", dateString]];
-    
+    fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Ware.SizeValue$" withString:size?size:@""];
+    fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Ware.CertificationCode$" withString:[NSString stringWithFormat:@""]];
+    fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Ware.ProdCode$" withString:item.article?item.article:@""];
+    fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Ware.AdditionalSize$" withString:addSize?addSize:@""];
     NSInteger checkSum = [self calculateUPCCheckSum:[NSString stringWithFormat:@"9900%@", item.barcode]];
     fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Barcode$" withString:[NSString stringWithFormat:@"%@%ld", item.barcode,(long)checkSum]];
     
@@ -42,6 +48,20 @@
     
     return [fileContents dataUsingEncoding:outEncoding];
 };
+
++ (NSString*) paramFromItem:(ItemInformation*) item name:(NSString*)name
+{
+    ParameterInformation* param = nil;
+    for (ParameterInformation *currentParam in item.additionalParameters) {
+        if ([currentParam.name isEqualToString:name])
+        {
+            param = currentParam;
+            break;
+        }
+    }
+    
+    return param.value;
+}
 
 + (NSInteger) calculateUPCCheckSum:(NSString*) code
 {
