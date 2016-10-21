@@ -557,11 +557,7 @@
     
     Price *priceDB = results[0];
     
-    ItemInformation* item = [ItemInformation new];
-    item.barcode    = code;
-    item.name       = itemDB.name;
-    item.article    = itemDB.itemCode;
-    item.price      = priceDB.catalogPrice.doubleValue;
+    ItemInformation *item = [self itemInfoFromDBEntities:itemDB barcode:barcodeDB price:priceDB];
     
     [delegate itemDescriptionComplete:0 itemDescription:item];
 }
@@ -600,7 +596,16 @@
     }
     Barcode *barcodeDB = results[0];
     
-    ItemInformation* item = [ItemInformation new];
+    ItemInformation *item = [self itemInfoFromDBEntities:itemDB barcode:barcodeDB price:priceDB];
+    
+    [delegate itemDescriptionComplete:0 itemDescription:item];
+}
+
+#pragma mark - Helpers
+
+- (ItemInformation*) itemInfoFromDBEntities:(Item*) itemDB barcode:(Barcode*)barcodeDB price:(Price*) priceDB
+{
+    ItemInformation* itemInfo = [ItemInformation new];
     
     NSMutableArray *additionalParameters = [NSMutableArray new];
     
@@ -620,14 +625,14 @@
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"subgroupID" value:itemDB.subgroupID.stringValue]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"trademarkID" value:itemDB.trademarkID.stringValue]];
     
-    item.itemId     = itemDB.itemID.integerValue;
-    item.barcode    = barcodeDB.code128;
-    item.name       = itemDB.name;
-    item.article    = itemDB.itemCode;
-    item.price      = priceDB.catalogPrice.doubleValue;
-    item.additionalParameters = additionalParameters;
+    itemInfo.itemId     = itemDB.itemID.integerValue;
+    itemInfo.barcode    = barcodeDB.code128;
+    itemInfo.name       = itemDB.name;
+    itemInfo.article    = itemDB.itemCode;
+    itemInfo.price      = priceDB.catalogPrice.doubleValue;
+    itemInfo.additionalParameters = additionalParameters;
     
-    [delegate itemDescriptionComplete:0 itemDescription:item];
+    return itemInfo;
 }
 
 #pragma mark Core Data

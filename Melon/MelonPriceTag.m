@@ -61,7 +61,7 @@
             firstPriceParam = currentParam;
     }
     
-    NSString *message = [NSString stringWithFormat:
+    /*NSString *message = [NSString stringWithFormat:
                          @"Presence:\n\n"
                          "oldPrice: %@\n"
                          "saleParam: %@\n"
@@ -80,9 +80,9 @@
                          oldPriceParam.value];
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Title" message:message delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-    [alert show];
+    [alert show];*/
     
-    if (saleParam && firstPriceParam && oldPriceParam  && [saleParam.value isEqualToString:@"1"] && (item.price != oldPriceParam.value.doubleValue) )
+    if (saleParam && firstPriceParam && oldPriceParam  && [saleParam.value isEqualToString:@"1"] && (item.price <= oldPriceParam.value.doubleValue) )
     {
         
         NSString *addString = [NSString stringWithFormat:@"%@ Ст.цена %@ р.", _dateLabel.text, firstPriceParam.value];
