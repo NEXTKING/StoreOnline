@@ -217,43 +217,52 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 
 - (void) itemDescriptionComplete:(int)result itemDescription:(ItemInformation *)itemDescription
 {
-    if (result == 0)
-    {
-        [_items addObject:itemDescription];
-        NSUInteger index = [_items indexOfObject:itemDescription];
-        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-    }
-    else
-    {
-        
-    }
+    __weak typeof(self) wself = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (result == 0)
+        {
+            [_items addObject:itemDescription];
+            NSUInteger index = [_items indexOfObject:itemDescription];
+            [wself.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+        }
+        else
+        {
+            
+        }
+    });
 }
 
 - (void) allItemsDescription:(int)result items:(NSArray<ItemInformation *> *)items
 {
-    if (result == 0)
-    {
-        [_items removeAllObjects];
-        [_items addObjectsFromArray:items];
-        [self.tableView reloadData];
-    }
-    else
-    {
-        
-    }
+    __weak typeof(self) wself = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (result == 0)
+        {
+            [_items removeAllObjects];
+            [_items addObjectsFromArray:items];
+            [wself.tableView reloadData];
+        }
+        else
+        {
+            
+        }
+    });
 }
 
 #pragma mark Core logic
 
 - (void)requestData
 {
-    if (_tasksMode)
-    {
-        for (TaskItemInformation *taskItemInformation in _task.items)
-            [[MCPServer instance] itemDescription:self itemID:taskItemInformation.itemID];
-    }
-    else
-        [[MCPServer instance] itemDescription:self itemCode:nil shopCode:nil isoType:0];
+    __weak typeof(self) wself = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        if (_tasksMode)
+        {
+            for (TaskItemInformation *taskItemInformation in _task.items)
+                [[MCPServer instance] itemDescription:wself itemID:taskItemInformation.itemID];
+        }
+        else
+            [[MCPServer instance] itemDescription:wself itemCode:nil shopCode:nil isoType:0];
+    });
 }
 
 - (void)itemDidScannedWithBarcode:(NSString *)barcode
