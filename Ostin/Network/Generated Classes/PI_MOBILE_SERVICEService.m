@@ -2382,8 +2382,18 @@ static Class classForElement(xmlNodePtr cur) {
     [USGlobals sharedInstance].wsdlStandardNamespaces[@"http://xmlns.oracle.com/orawsv/MAA_WEB/PI_MOBILE_SERVICE"] = @"PI_MOBILE_SERVICEService";
 }
 
-+ (PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBinding *)PI_MOBILE_SERVICEBinding {
-    return [[PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBinding alloc] initWithAddress:@"http://172.16.0.124:8080/orawsv/TEST0_WEB/PI_MOBILE_SERVICE"];
++ (PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBinding *)PI_MOBILE_SERVICEBinding
+{
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSString *protocol = [[NSUserDefaults standardUserDefaults] valueForKey:@"protocol_preference"];
+    NSString *host     = [[NSUserDefaults standardUserDefaults] valueForKey:@"host_preference"];
+    NSString *port     = [[NSUserDefaults standardUserDefaults] valueForKey:@"port_preference"];
+    NSString *path     = [[NSUserDefaults standardUserDefaults] valueForKey:@"path_preference"];
+    NSMutableString *address = [NSMutableString stringWithFormat:@"%@://%@%@",protocol, host, port.length > 0?[NSString stringWithFormat:@":%@", port]:@""];
+    if (path.length > 0)
+        [address appendFormat:@"/%@", path];
+    
+    return [[PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBinding alloc] initWithAddress:address];
 }
 
 @end

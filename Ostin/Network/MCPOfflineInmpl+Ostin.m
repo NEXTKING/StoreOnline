@@ -42,9 +42,16 @@
     
     if (self)
     {
-        NSString *authStr = [NSString stringWithFormat:@"%@:%@", @"TEST0_WEB", @"q1w2e3r4t5@web"];
-        NSData *authData = [authStr dataUsingEncoding:NSASCIIStringEncoding];
-        authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodingWithLineLength:80]];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        NSString *authUser = [[NSUserDefaults standardUserDefaults] valueForKey:@"auth_user_preference"];
+        NSString *authPassword = [[NSUserDefaults standardUserDefaults] valueForKey:@"auth_password_preference"];
+        if (authUser != nil && authPassword != nil)
+        {
+            NSString *authStr = [NSString stringWithFormat:@"%@:%@", authUser, authPassword];
+            NSData *authData = [authStr dataUsingEncoding:NSASCIIStringEncoding];
+            
+            authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodingWithLineLength:80]];
+        }
         
         deviceID = @"302";
         //990023135202

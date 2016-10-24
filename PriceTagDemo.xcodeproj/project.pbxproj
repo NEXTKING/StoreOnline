@@ -17,6 +17,7 @@
 		21BB44BF1DACF0D100ED67EE /* TaskProgressOverlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BB44BD1DACF0D100ED67EE /* TaskProgressOverlayController.m */; };
 		21BB44C01DACF0D100ED67EE /* TaskProgressOverlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21BB44BE1DACF0D100ED67EE /* TaskProgressOverlayController.xib */; };
 		21BB44E61DAD224600ED67EE /* TasksNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BB44E51DAD224600ED67EE /* TasksNavigationController.m */; };
+		21C054451DBE20FB0094C7B1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21C054441DBE20FB0094C7B1 /* Settings.bundle */; };
 		23325335A97CCCACC42944AF /* libPods-Ostin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD3C223CF10EB177C6448781 /* libPods-Ostin.a */; };
 		5BADECA800A6702C5F474BB5 /* libPods-PriceTagDemoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1E01A49F9DF7B4A12A7407 /* libPods-PriceTagDemoUITests.a */; };
 		71454865FBE26CAE4A38F59F /* libPods-DesondoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D44F91159F3A6CCEC7C0AEB /* libPods-DesondoTests.a */; };
@@ -284,7 +285,6 @@
 		B9950B731CE1E5A0005B4375 /* Barcode manual@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9950B721CE1E5A0005B4375 /* Barcode manual@2x.png */; };
 		B9950B741CE20860005B4375 /* NwobjInventoryItemDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = B9950B5F1CD9F5EC005B4375 /* NwobjInventoryItemDescription.m */; };
 		B9950B751CE20914005B4375 /* NwobjSendCart.m in Sources */ = {isa = PBXBuildFile; fileRef = B9950B5B1CD2A9CB005B4375 /* NwobjSendCart.m */; };
-		B9A3FE121CA180D70060483D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B912617D1CA1554F003F56DF /* Settings.bundle */; };
 		B9A3FE131CA180D80060483D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B912617D1CA1554F003F56DF /* Settings.bundle */; };
 		B9A3FE1C1CA19E200060483D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B9A3FE1B1CA19E200060483D /* main.m */; };
 		B9A3FE251CA19E200060483D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9A3FE231CA19E200060483D /* Main.storyboard */; };
@@ -548,6 +548,7 @@
 		21BB44BE1DACF0D100ED67EE /* TaskProgressOverlayController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskProgressOverlayController.xib; sourceTree = "<group>"; };
 		21BB44E41DAD224600ED67EE /* TasksNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksNavigationController.h; sourceTree = "<group>"; };
 		21BB44E51DAD224600ED67EE /* TasksNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TasksNavigationController.m; sourceTree = "<group>"; };
+		21C054441DBE20FB0094C7B1 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		26E6677B3BC7955145425ED2 /* Pods-DesondoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesondoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DesondoTests/Pods-DesondoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		305BD8FF1EE07980B92BBA8D /* Pods-Tsum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tsum.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tsum/Pods-Tsum.debug.xcconfig"; sourceTree = "<group>"; };
 		3441ACD00F2A17AFBB7CD4CD /* Pods-PriceTagDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceTagDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PriceTagDemoTests/Pods-PriceTagDemoTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1341,6 +1342,7 @@
 				B957B0D81D1C291B002A5256 /* OstinViewController.m */,
 				B92DCE411C846002002AA184 /* OstinPriceTag.xib */,
 				B92DCE291C845E60002AA184 /* Info.plist */,
+				21C054441DBE20FB0094C7B1 /* Settings.bundle */,
 				B92DCE181C845E60002AA184 /* Supporting Files */,
 			);
 			path = Ostin;
@@ -2518,7 +2520,6 @@
 			files = (
 				C67103EA1D93271C000AEC24 /* navigation@2x.png in Resources */,
 				B907ADE01D095C8000B44BF1 /* Barcode manual@2x.png in Resources */,
-				B9A3FE121CA180D70060483D /* Settings.bundle in Resources */,
 				B957B0FE1D1C2A2D002A5256 /* 99002520874.jpg in Resources */,
 				B957B1111D1C2A2D002A5256 /* MP4O9864G.jpg in Resources */,
 				B90CE4941C89F15100DFB3E4 /* eac.png in Resources */,
@@ -2564,6 +2565,7 @@
 				B957B1101D1C2A2D002A5256 /* MP4O9264G.jpg in Resources */,
 				B957B1091D1C2A2D002A5256 /* 99002777294.jpg in Resources */,
 				B957B1171D1C2A2D002A5256 /* MT2O9469M.jpg in Resources */,
+				21C054451DBE20FB0094C7B1 /* Settings.bundle in Resources */,
 				B957B1021D1C2A2D002A5256 /* 99002774407.jpg in Resources */,
 				B957B0FF1D1C2A2D002A5256 /* 99002774088.jpg in Resources */,
 				B957B10E1D1C2A2D002A5256 /* 9941170299.jpg in Resources */,
