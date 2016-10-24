@@ -261,7 +261,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Войти"/>
                                         <connections>
-                                            <segue destination="zOE-WY-XhU" kind="show" identifier="LoginSegue" id="Q9Y-fm-L7t"/>
+                                            <action selector="loginButtonPressed:" destination="Lfb-BJ-69Y" eventType="touchUpInside" id="YEx-Vc-hRx"/>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ShL-2P-8JI">
@@ -311,8 +311,11 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="sJF-gh-pHZ"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="loginTextField" destination="ShL-2P-8JI" id="bSt-ow-e5Q"/>
+                        <outlet property="passwordTextField" destination="mKG-2H-NtO" id="Et9-aC-wG6"/>
                         <outlet property="syncActivity" destination="VUL-bQ-EQa" id="a6f-aF-TXH"/>
                         <outlet property="syncButton" destination="7yS-4L-Bco" id="oQS-Ft-uza"/>
+                        <segue destination="zOE-WY-XhU" kind="show" identifier="LoginSegue" id="ztd-8i-mRI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VuA-2o-xpu" userLabel="First Responder" sceneMemberID="firstResponder"/>

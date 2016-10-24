@@ -14,7 +14,8 @@
 {
     DTDevices *dtdev;
 }
-
+@property (weak, nonatomic) IBOutlet UITextField *loginTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @end
 
 @implementation LoginViewController
@@ -30,18 +31,47 @@
 
 - (void) barcodeData:(NSString *)barcode type:(int)type
 {
-    [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
+    NSLog(@"%@", barcode);
+    // [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
 }
 
 - (void) barcodeData:(NSString *)barcode isotype:(NSString *)isotype
 {
-    [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
+    NSLog(@"%@", barcode);
+    // [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
 }
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)loginButtonPressed:(id)sender
+{
+    NSDictionary *auth = @{@"0":@"0", @"300":@"300", @"301":@"301", @"302":@"302", @"303":@"303", @"304":@"304"};
+    
+    if (_loginTextField.text != nil && _passwordTextField.text != nil && [[auth allKeys] containsObject:_loginTextField.text])
+    {
+        if ([auth[_loginTextField.text] isEqualToString:_passwordTextField.text])
+        {
+            [[NSUserDefaults standardUserDefaults] setValue:_loginTextField.text forKey:@"UserID"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
+        }
+        else
+            [self showAlertWithMessage:@"Введен неверный пароль"];
+    }
+    else
+    {
+        [self showAlertWithMessage:@"Введен неверный логин или пароль"];
+    }
+}
+
+- (void)showAlertWithMessage:(NSString*)message
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    [alert show];
 }
 
 - (IBAction)sync:(id)sender
@@ -74,6 +104,11 @@
 {
     _syncButton.enabled = YES;
     [_syncActivity stopAnimating];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 
 /*

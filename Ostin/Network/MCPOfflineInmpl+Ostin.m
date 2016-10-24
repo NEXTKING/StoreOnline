@@ -451,9 +451,9 @@
 
 - (void) tasksInternal:(id<TasksDelegate>)delegate userID:(NSNumber*)userID
 {
-    #warning userID is unsusable
     NSManagedObjectContext *moc =self.dataController.managedObjectContext;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Task"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"userID == %ld", userID.integerValue]];
     
     NSError* error = nil;
     NSArray* results = [moc executeFetchRequest:request error:&error];

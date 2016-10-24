@@ -37,9 +37,11 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
 
 - (void)loadData
 {
+    NSNumber *userID = @([[[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"] integerValue]);
+    
     __weak typeof(self) wself = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[MCPServer instance] tasks:wself userID:@(0)];
+        [[MCPServer instance] tasks:wself userID:userID];
     });
 }
 
