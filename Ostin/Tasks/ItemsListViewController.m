@@ -13,10 +13,13 @@
 #import "TasksNavigationController.h"
 #import "TaskProgressOverlayController.h"
 #import "BarcodeFormatter.h"
+#import "PrintViewController.h"
 
-@interface ItemsListViewController () <ItemDescriptionDelegate>
+@interface ItemsListViewController () <ItemDescriptionDelegate, PrinterControllerDelegate>
 {
     NSMutableArray *_items;
+    PrintViewController *_printVC;
+    ItemInformation *_itemInPrintQueue;
 }
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *actionButton;
@@ -40,6 +43,9 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     [self updateNotificationStatus];
     [self updateActionButton];
     [self updateOverlayInfo];
+    
+    if (_tasksMode)
+        [self initializePrintViewController];
 }
 
 - (void)updateOverlayInfo
@@ -103,6 +109,18 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
         {
             [self unsubscribeFromScanNotifications];
         }
+    }
+}
+
+- (void)initializePrintViewController
+{
+    if (_printVC == nil)
+    {
+        _printVC = [PrintViewController new];
+        _printVC.delegate = self;
+        
+        [self.view addSubview:_printVC.view];
+        _printVC.view.hidden = YES;
     }
 }
 
@@ -240,27 +258,26 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 
 - (void)itemDidScannedWithBarcode:(NSString *)barcode
 {
-    ItemInformation *item;
-    
-    for (ItemInformation *itemInfo in _items)
-        if ([itemInfo.barcode isEqualToString:barcode])
-        {
-            item = itemInfo;
-            break;
-        }
-    
-    if (item != nil)
+    if (_itemInPrintQueue == nil)
     {
-        TaskItemInformation *taskItemInfo = [self taskItemInfoForItemWithID:item.itemId];
-        if (taskItemInfo.scanned + 1 <= taskItemInfo.quantity)
+        ItemInformation *item;
+        
+        for (ItemInformation *itemInfo in _items)
+            if ([itemInfo.barcode isEqualToString:barcode])
+            {
+                item = itemInfo;
+                break;
+            }
+        
+        if (item != nil)
         {
-            taskItemInfo.scanned += 1;
-
-            [[MCPServer instance] saveTaskItem:nil taskID:_task.taskID itemID:taskItemInfo.itemID scanned:taskItemInfo.scanned];
-            
-            NSUInteger index = [_items indexOfObject:item];
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-            [self updateOverlayInfo];
+            TaskItemInformation *taskItemInfo = [self taskItemInfoForItemWithID:item.itemId];
+            if (taskItemInfo.scanned + 1 <= taskItemInfo.quantity)
+            {
+                _itemInPrintQueue = item;
+                [_printVC print:item copies:1];
+                _printVC.view.hidden = NO;
+            }
         }
     }
 }
@@ -287,6 +304,29 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
         [self updateActionButton];
         [self updateOverlayInfo];
     }
+}
+
+#pragma mark printer delegate
+
+- (void)printerDidFinishPrinting
+{
+    _printVC.view.hidden = YES;
+    
+    TaskItemInformation *taskItemInfo = [self taskItemInfoForItemWithID:_itemInPrintQueue.itemId];
+    taskItemInfo.scanned += 1;
+    [[MCPServer instance] saveTaskItem:nil taskID:_task.taskID itemID:taskItemInfo.itemID scanned:taskItemInfo.scanned];
+    
+    NSUInteger index = [_items indexOfObject:_itemInPrintQueue];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self updateOverlayInfo];
+    
+    _itemInPrintQueue = nil;
+}
+
+- (void)printerDidFailPrinting:(NSError *)error
+{
+    _printVC.view.hidden = YES;
+    _itemInPrintQueue = nil;
 }
 
 #pragma mark Helpers
