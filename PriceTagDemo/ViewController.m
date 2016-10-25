@@ -460,6 +460,10 @@
     _itemArticleLabel.text = itemDescription.article;
     _barcodeLabel.text = itemDescription.barcode;
     _itemPriceLabel.text = [NSString stringWithFormat:@"%.2f р.", itemDescription.price];
+    
+    DTDevices* dtDev = [DTDevices sharedDevice];
+    _printButton.enabled = (dtDev.connstate == CONN_CONNECTED) && _currentItemInfo;
+    _printButtonItem.enabled = (dtDev.connstate == CONN_CONNECTED) && _currentItemInfo;
 }
 
 @end

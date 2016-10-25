@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface BarcodeFormatter : NSObject
-+ (NSString *)normalizedBarcodeFromString:(NSString *)barcodeString isoType:(int)type;
++ (NSString *) normalizedBarcodeFromString:(NSString *)barcodeString isoType:(int)type;
++ (NSString *) generateCode128WithShopID:(NSString*)shopID code:(NSString*)code price:(double) price;
 @end

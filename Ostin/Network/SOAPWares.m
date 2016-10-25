@@ -83,6 +83,7 @@
         itemDB.priceHeader  = csv[13]; // csv[14];
         itemDB.sizeHeader   = csv[14]; // csv[15];
         itemDB.size         = csv[15]; // csv[16];
+        itemDB.additionalSize = csv[16];
         itemDB.additionalInfo = csv[17];
         itemDB.boxType = csv[18];
         

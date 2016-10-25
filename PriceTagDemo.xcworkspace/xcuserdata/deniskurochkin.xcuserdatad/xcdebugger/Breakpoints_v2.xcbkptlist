@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Ostin/Network/MCPOfflineInmpl+Ostin.m"
-            timestampString = "498587081.221441"
+            filePath = "Ostin/Search/SearchViewController.m"
+            timestampString = "499086185.149946"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "586"
-            endingLineNumber = "586"
-            landmarkName = "-itemInfoFromDBEntities:barcode:price:"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
+            landmarkName = "-prepareForSegue:sender:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -35,4 +35,21 @@
         return barcodeString;
 }
 
++ (NSString *) generateCode128WithShopID:(NSString*)shopID code:(NSString*)code price:(double) price
+{
+    NSDateFormatter* dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"ddMM"];
+    NSDate* currentDate = [NSDate date];
+    
+    NSString* dayMonthString = [dateFormatter stringFromDate:currentDate];
+    [dateFormatter setDateFormat:@"YYYY"];
+    NSString* yearString     = [dateFormatter stringFromDate:currentDate];
+    NSString* lastYearSymbol = [yearString substringFromIndex:3];
+    NSString* dateString = [NSString stringWithFormat:@"%@%@", dayMonthString,lastYearSymbol];
+    
+    NSString* priceString = [NSString stringWithFormat:@"%010.0f", price*100];
+    
+    return [NSString stringWithFormat:@"%@%@%@%@", shopID, dateString, code, priceString];
+}
+
 @end

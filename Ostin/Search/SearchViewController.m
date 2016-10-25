@@ -10,6 +10,7 @@
 #import "SearchTableViewCell.h"
 #import "MCPServer.h"
 #import "OstinViewController.h"
+#import "ZPLGenerator.h"
 
 @interface SearchViewController () <UISearchBarDelegate, SearchDelegate, ItemDescriptionDelegate>
 {
@@ -176,6 +177,8 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
         ItemInformation* itemInfo = sender;
 
         ostinVC.currentItemInfo = itemInfo;
+        ostinVC.externalBarcode = itemInfo.barcode;
+        [ZPLGenerator generateZPLWithItem:itemInfo patternPath:nil];
     }
 }
 

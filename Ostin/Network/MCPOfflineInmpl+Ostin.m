@@ -631,6 +631,8 @@
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"storeNumber" value:itemDB.storeNumber]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"subgroupID" value:itemDB.subgroupID.stringValue]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"trademarkID" value:itemDB.trademarkID.stringValue]];
+    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"retailPrice" value:priceDB.retailPrice.stringValue]];
+    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"discount" value:[NSString stringWithFormat:@"%.0f", priceDB.discount.doubleValue]]];
     
     itemInfo.itemId     = itemDB.itemID.integerValue;
     itemInfo.barcode    = barcodeDB.code128;

@@ -11,9 +11,12 @@
 ^FD>;$Barcode$>60^FS
 ^FO0,198^GB463,0,1^FS
 ^FO1,75^GB462,0,1^FS
-^FT5,300^A@N,14,0,ARI001.TTF
+^FH\^CI17^F8^FD^FS^CI0
+^FT5,300^A@N,12,0,ARI001.TTF
 ^FH\
-^FT3,214^CI17^F8^FDСостав Верх нр100% хлок Сделано в Бангладеш Изготовлено р07.2014. ГОСТ^FS^A@N,14,0,ARI001.TTF^FT3,230^A@N,14,0,ARI001.TTF^FD31408-2009. Импртер ООО Спортмастер юр.адрес р117437, г. Москва, ул.^FS^A@N,14,0,ARI001.TTF^FT3,246^A@N,14,0,ARI001.TTF^FDМиклухо-Маклая, д. 18, корпус 2, ком. 102. Изготовитель Соннет Текстайл Индастрис^FS^A@N,14,0,ARI001.TTF^FT3,262^A@N,14,0,ARI001.TTF^FDЛтд МОХИД ТАУЭР ХОЛДИНГ #807/859 БАРИК МИА ХАЙ-СКУЛ ЛЕЙН ГОШАИЛДАНГА, БАНДЕР,^FS^A@N,14,0,ARI001.TTF^FT3,278^A@N,14,0,ARI001.TTF^FDЧИТТАГОНГ БАНГЛАДЕШ^FS
+========С#==========
+FieldBlock($Ware.AdditionalInfo$, 80, 214, 16, @"^A@N,14,0,ARI001.FNT");
+====================
 ^FT5,230^A@N,14,0,ARI001.TTF
 ^FH\
 ^FH\^CI17^F8^FD^FS^CI0
@@ -28,13 +31,12 @@
 ^FH\^CI17^F8^FD^FS^CI0
 ^FT5,294^A@N,14,0,ARI001.TTF
 ^FH\
-^FH\^CI17^F8^FD^FS^CI0
-^FT5,111^A@N,17,0,ARI003.FNT
+^FT5,111^A@N,17,0,ARI005.TTF
 ^FH\
 ========С#==========
 FieldBlock($Ware.Description$, 50, 92, 19, @"^A@N,17,0,ARI003.FNT");
 ====================
-^FT5,111^A@N,17,0,ARI000.FNT
+^FT5,111^A@N,17,0,ARI001.TTF
 ^FH\
 ^FH\^CI17^F8^FD^FS^CI0
 ^FT366,171^A@N,34,0,ARI005.TTF
@@ -52,7 +54,7 @@ FieldBlock($Ware.Description$, 50, 92, 19, @"^A@N,17,0,ARI003.FNT");
 ^FT371,71^A@N,17,0,ARI001.TTF
 ^FH\
 ^FH\^CI17^F8^FD$PrintDate$^FS^CI0
-^FT420,51^A@N,11,0,ARI000.FNT
+^FT420,51^A@N,11,0,ARI001.TTF
 ^FH\
 ^FH\^CI17^F8^FD$Ware.CertificationCode$^FS^CI0
 ^FT183,71^A@N,17,0,ARI001.TTF
@@ -74,12 +76,11 @@ FieldBlock($Ware.Description$, 50, 92, 19, @"^A@N,17,0,ARI003.FNT");
 ^FH\
 ^FH\^CI17^F8^FD$Ware.CatalogPrice$^FS^CI0
 
-
 ^FT205,137^A@N,17,0,ARI001.TTF
 ^FH\
 ^FH\^CI17^F8^FD$Ware.DiscountHeader$^FS^CI0
 
-^FT210,186^A@N,75,0,ARI005.TTF
+^FT210,186^A@N,51,0,ARI005.TTF
 ^FH\
 ^FH\^CI17^F8^FD$Ware.RetailPrice$^FS^CI0
 

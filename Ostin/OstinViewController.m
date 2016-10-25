@@ -10,6 +10,7 @@
 #import "WYStoryboardPopoverSegue.h"
 #import "SettingsViewController.h"
 #import "ZPLGenerator.h"
+#import "BarcodeFormatter.h"
 
 
 @interface OstinViewController ()
@@ -41,8 +42,8 @@
     
     [self initializeRing];
     
-    NSString* zpl = [ZPLGenerator additionalInfo];
-    NSLog(@"%@", zpl);
+    [BarcodeFormatter generateCode128WithShopID:@"0123" code:@"1234567" price:999.00f];
+    //NSLog(@"%@", zpl);
     
     //[[MCPServer instance] itemDescription:self itemCode:@"2792304" shopCode:nil isoType:BAR_CODE128];
 }
@@ -64,14 +65,13 @@
     }
     else if (_externalBarcode)
     {
-        [self barcodeData:_externalBarcode type:0];
+        [self updateItemInfo:self.currentItemInfo];
     }
 }
 
 - (void) printButtonAction:(id)sender
 {
     NSString *str=[[NSBundle mainBundle] pathForResource:@"label" ofType:@"zpl"];
-    NSData *file=[NSData dataWithContentsOfFile:str];
     self.currentZPLInfo = [ZPLGenerator generateZPLWithItem:self.currentItemInfo patternPath:str];
     [super printButtonAction:sender];
 }
