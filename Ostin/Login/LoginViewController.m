@@ -31,14 +31,16 @@
 
 - (void) barcodeData:(NSString *)barcode type:(int)type
 {
-    NSLog(@"%@", barcode);
-    // [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
+    [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"UserID"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
 }
 
 - (void) barcodeData:(NSString *)barcode isotype:(NSString *)isotype
 {
-    NSLog(@"%@", barcode);
-    // [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
+    [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"UserID"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
 }
 
 
