@@ -14,7 +14,6 @@
 @interface ViewController ()  <PrinterControllerDelegate>
 {
     PrintViewController *printVC;
-    NSString* lastBarcode;
 }
 
 @end

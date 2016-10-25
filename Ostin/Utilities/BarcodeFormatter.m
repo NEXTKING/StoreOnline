@@ -31,6 +31,14 @@
             return substring;
         }
     }
+    #ifdef OSTIN
+    else if (type == BAR_CODE128 && barcodeString.length >=26)
+    {
+        NSString *barcode = [barcodeString substringWithRange:NSMakeRange(9, 7)];
+        
+        return barcode;
+    }
+    #endif
     else
         return barcodeString;
 }
@@ -50,6 +58,23 @@
     NSString* priceString = [NSString stringWithFormat:@"%010.0f", price*100];
     
     return [NSString stringWithFormat:@"%@%@%@%@", shopID, dateString, code, priceString];
+}
+
++ (NSDictionary *)dataFromBarcode:(NSString *)barcodeString isoType:(int)type
+{
+    #ifdef OSTIN
+    if (type == BAR_CODE128 && barcodeString.length >=26)
+    {
+        NSString *shopNumber = [barcodeString substringToIndex:4];
+        NSString *date = [barcodeString substringWithRange:NSMakeRange(4, 5)];
+        NSString *barcode = [barcodeString substringWithRange:NSMakeRange(9, 7)];
+        NSString *rawPrice = [barcodeString substringFromIndex:16];
+        NSString *price = [@([rawPrice doubleValue] / 100) stringValue];
+        
+        return @{@"shopNumber":shopNumber, @"date":date, @"barcode":barcode, @"price":price};
+    }
+    #endif
+    return nil;
 }
 
 @end
