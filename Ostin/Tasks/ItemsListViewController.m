@@ -14,6 +14,7 @@
 #import "TaskProgressOverlayController.h"
 #import "BarcodeFormatter.h"
 #import "PrintViewController.h"
+#import "ZPLGenerator.h"
 
 @interface ItemsListViewController () <ItemDescriptionDelegate, PrinterControllerDelegate>
 {
@@ -284,8 +285,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
             if (taskItemInfo.scanned + 1 <= taskItemInfo.quantity)
             {
                 _itemInPrintQueue = item;
-                [_printVC print:item copies:1];
-                _printVC.view.hidden = NO;
+                [self printItem:item];
             }
         }
     }
@@ -313,6 +313,14 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
         [self updateActionButton];
         [self updateOverlayInfo];
     }
+}
+
+- (void)printItem:(ItemInformation *)itemInfo
+{
+    NSString *str=[[NSBundle mainBundle] pathForResource:@"label" ofType:@"zpl"];
+    NSData *data = [ZPLGenerator generateZPLWithItem:itemInfo patternPath:str];
+    [_printVC printZPL:data copies:1];
+    _printVC.view.hidden = NO;
 }
 
 #pragma mark printer delegate

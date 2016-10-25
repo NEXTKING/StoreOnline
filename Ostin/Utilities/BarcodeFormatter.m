@@ -34,7 +34,8 @@
     #ifdef OSTIN
     else if (type == BAR_CODE128 && barcodeString.length >=26)
     {
-        NSString *barcode = [barcodeString substringWithRange:NSMakeRange(9, 7)];
+        NSString *substring = [barcodeString substringWithRange:NSMakeRange(barcodeString.length - 26, 26)];
+        NSString *barcode = [substring substringWithRange:NSMakeRange(9, 7)];
         
         return barcode;
     }
@@ -65,10 +66,12 @@
     #ifdef OSTIN
     if (type == BAR_CODE128 && barcodeString.length >=26)
     {
-        NSString *shopNumber = [barcodeString substringToIndex:4];
-        NSString *date = [barcodeString substringWithRange:NSMakeRange(4, 5)];
-        NSString *barcode = [barcodeString substringWithRange:NSMakeRange(9, 7)];
-        NSString *rawPrice = [barcodeString substringFromIndex:16];
+        NSString *substring = [barcodeString substringWithRange:NSMakeRange(barcodeString.length - 26, 26)];
+        
+        NSString *shopNumber = [substring substringToIndex:4];
+        NSString *date = [substring substringWithRange:NSMakeRange(4, 5)];
+        NSString *barcode = [substring substringWithRange:NSMakeRange(9, 7)];
+        NSString *rawPrice = [substring substringFromIndex:16];
         NSString *price = [@([rawPrice doubleValue] / 100) stringValue];
         
         return @{@"shopNumber":shopNumber, @"date":date, @"barcode":barcode, @"price":price};

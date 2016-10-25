@@ -496,34 +496,14 @@
     NSManagedObjectContext *moc =self.dataController.managedObjectContext;
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"Barcode" inManagedObjectContext:self.dataController.managedObjectContext]];
-    
     [request setIncludesSubentities:NO];
-    
-    type = BAR_UPC;
-    
+
     if (type == BAR_CODE128)
         [request setPredicate:[NSPredicate predicateWithFormat:@"code128 LIKE[c] %@", code]];
-    else if (type == BAR_UPC && code.length>=12)
-    {
-        
-        NSString *string = [NSString stringWithFormat:@"0%@", code];
-        
-        if ([string hasPrefix:@"09900"])
-        {
-            NSString* substring     = [string substringFromIndex:5];
-            NSString* substring1    = [substring substringToIndex:substring.length-1];
-            [request setPredicate:[NSPredicate predicateWithFormat:@"code128 LIKE[c] %@", substring1]];
-        }
-        else
-        {
-            NSString* substring = [string substringToIndex:11];
-            [request setPredicate:[NSPredicate predicateWithFormat:@"ean LIKE[c] %@", substring]];
-        }
-        
-        
-    }
+    else if (type == BAR_UPC)
+        [request setPredicate:[NSPredicate predicateWithFormat:@"code128 LIKE[c] %@", code]];
     else
-        [request setPredicate:[NSPredicate predicateWithFormat:@"ean == %@", code]];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"ean LIKE[c] %@", code]];
     
     
     NSArray* results = [moc executeFetchRequest:request error:nil];

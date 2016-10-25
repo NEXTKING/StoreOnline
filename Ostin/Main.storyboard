@@ -514,7 +514,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="QLQ-lV-9Be" firstAttribute="leading" secondItem="WlL-VO-2c9" secondAttribute="leading" id="8qX-Ab-6jG"/>
-                            <constraint firstItem="ox0-2M-7UG" firstAttribute="top" secondItem="QLQ-lV-9Be" secondAttribute="bottom" id="U6J-Sj-HqI"/>
+                            <constraint firstAttribute="bottom" secondItem="QLQ-lV-9Be" secondAttribute="bottom" id="KRk-wD-O7r"/>
                             <constraint firstItem="LAL-bp-6xA" firstAttribute="centerX" secondItem="WlL-VO-2c9" secondAttribute="centerX" id="c7q-q7-3aG"/>
                             <constraint firstAttribute="trailing" secondItem="QLQ-lV-9Be" secondAttribute="trailing" id="glK-vm-ro4"/>
                             <constraint firstAttribute="trailing" secondItem="O5D-Yp-Vmg" secondAttribute="trailing" constant="20" id="hGu-TX-XGR"/>

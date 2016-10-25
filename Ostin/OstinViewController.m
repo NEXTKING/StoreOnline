@@ -39,11 +39,6 @@
     // Do any additional setup after loading the view.
     [self updateItemInfo:self.currentItemInfo];
     
-    [self initializeRing];
-    
-    [BarcodeFormatter generateCode128WithShopID:@"0123" code:@"1234567" price:999.00f];
-    //NSLog(@"%@", zpl);
-    
     //[[MCPServer instance] itemDescription:self itemCode:@"2792304" shopCode:nil isoType:BAR_CODE128];
 }
 
@@ -75,78 +70,19 @@
     [super printButtonAction:sender];
 }
 
-- (void) initializeRing
-{
-    symbols = [NSMutableArray new];
-    
-    for (int i = 0; i < 127; ++i) {
-        // ASCII to NSString
-        NSString *string = [NSString stringWithFormat:@"%c", i]; // A
-        UIKeyCommand *command = [UIKeyCommand keyCommandWithInput:string modifierFlags:0 action:@selector(gsKey:)];
-        [symbols addObject:command];
-    }
-}
-
-- (NSArray *)keyCommands
-{
-    return symbols;
-    
-    // <RS> - char(30): ctrl-shift-6 (or ctrl-^)
-    //UIKeyCommand *rsCommand = [UIKeyCommand keyCommandWithInput:@"6" modifierFlags:UIKeyModifierShift|UIKeyModifierControl action:@selector(rsKey:)];
-    // <GS> - char(29): ctrl-]
-    //UIKeyCommand *gsCommand = [UIKeyCommand keyCommandWithInput:@"]" modifierFlags:UIKeyModifierControl action:@selector(gsKey:)];
-    // <EOT> - char(4): ctrl-d
-    //UIKeyCommand *eotCommand = [UIKeyCommand keyCommandWithInput:@"D" modifierFlags:UIKeyModifierControl action:@selector(eotKey:)];
-    //return [[NSArray alloc] initWithObjects:rsCommand, gsCommand, eotCommand, nil];
-}
-
-
-- (NSString*) parseBarcode:(NSString*) code
-{
-    if (code.length < 8)
-        return nil;
-   
-    NSString* finalCode = [code substringFromIndex:8];
-    
-    if (finalCode.length < 8)
-        return nil;
-    
-    finalCode = [finalCode substringToIndex:7];
-    
-    [self showInfoMessage:finalCode];
-    return finalCode;
-}
-
-- (void) barcodeData:(NSString *)barcode type:(int)type
-{
-    if (type != BAR_CODE128)
-    {
-        [super barcodeData:barcode type:type];
-        return;
-    }
-    
-    NSString* parsedCode = [self parseBarcode:barcode];
-    
-    if (!parsedCode)
-        return;
-    
-    [super barcodeData:parsedCode type:type];
-}
-
-- (void) barcodeData:(NSString *)barcode isotype:(NSString *)isotype
-{
-    NSString* parsedCode = [self parseBarcode:barcode];
-    
-    if (!parsedCode)
-        return;
-    
-    [super barcodeData:parsedCode isotype:isotype];
-}
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)scanNotification:(NSNotification*)aNotification
+{
+    lastBarcode = [aNotification.object objectForKey:@"barcode"];
+    NSNumber *type = [aNotification.object objectForKey:@"type"];
+    [[NSUserDefaults standardUserDefaults] setValue:lastBarcode forKey:@"LastBarcode"];
+    
+    NSString *internalBarcode = [BarcodeFormatter normalizedBarcodeFromString:lastBarcode isoType:type.intValue];
+    [self requestItemInfoWithCode:internalBarcode isoType:type.intValue];
 }
 
 - (void) requestItemInfoWithCode:(NSString *)code isoType:(int)type
