@@ -10,7 +10,7 @@
 #import "WYStoryboardPopoverSegue.h"
 #import "SettingsViewController.h"
 #import "ZPLGenerator.h"
-
+#import "BarcodeFormatter.h"
 
 @interface OstinViewController ()
 {
@@ -164,6 +164,18 @@
     _imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"no-image.png"]];
 }
 
+- (void) compareAmount:(ItemInformation *)itemInfo
+{
+    NSDictionary *data = [BarcodeFormatter dataFromBarcode:lastBarcode isoType:BAR_CODE128];
+    if (data != nil)
+    {
+        double price = [data[@"price"] doubleValue];
+        [self amountCompareCompleted:(price == itemInfo.price)];
+    }
+    else
+        [self amountCompareCompleted:NO];
+}
+
 - (void) amountCompareCompleted:(BOOL)isEqual
 {
     if (!isEqual && !restored)
@@ -234,6 +246,8 @@
         
     }
     
+    self.amountStatusLabel.text = isEqual ? @"✓" : @"✕";
+    self.amountStatusLabel.backgroundColor = isEqual ? [UIColor colorWithRed:0 green:180/255.0 blue:0 alpha:0.3] : [UIColor redColor];
     self.itemPriceLabel.backgroundColor = isEqual ? [UIColor colorWithRed:119.0/255.0 green:119.0/255.0 blue:119.0/255.0 alpha:0.28]:[UIColor redColor];
     restored = NO;
 }

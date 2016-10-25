@@ -11,7 +11,10 @@
 #import "DTDevices.h"
 
 @interface ViewController : UIViewController <DTDeviceDelegate,ItemDescriptionDelegate>
-
+{
+    @protected
+    NSString* lastBarcode;
+}
 @property (weak, nonatomic) IBOutlet UILabel *stateLabel;
 @property (weak, nonatomic) IBOutlet UIView *statusView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *printButtonItem;
