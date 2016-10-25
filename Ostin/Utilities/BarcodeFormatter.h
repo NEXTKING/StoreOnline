@@ -10,4 +10,5 @@
 
 @interface BarcodeFormatter : NSObject
 + (NSString *)normalizedBarcodeFromString:(NSString *)barcodeString isoType:(int)type;
++ (NSDictionary *)dataFromBarcode:(NSString *)barcodeString isoType:(int)type;
 @end
