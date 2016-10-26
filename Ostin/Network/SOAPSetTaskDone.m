@@ -28,8 +28,8 @@
     request.A_DEVICE_UIDVARCHAR2IN = self.deviceID;
     request.A_TASK_NUMVARCHAR2IN = self.taskName;
     request.A_MESSAGEVARCHAR2OUT = [PI_MOBILE_SERVICEService_SequenceElement_A_MESSAGEVARCHAR2OUT new];
-    // request.A_TASK_TYPEVARCHAR2IN =
-    // request.A_EXECUTED_USERVARCHAR2IN =
+    request.A_TASK_TYPEVARCHAR2IN = self.taskType;
+    request.A_EXECUTED_USERVARCHAR2IN = self.userID;
     [binding.customHeaders setObject:self.authValue forKey:@"Authorization"];
     
     PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBindingResponse *response = [binding PASTING_SET_TASK_DONEUsingSNUMBER_PASTING_SET_TASK_DONEInput:request];
@@ -39,13 +39,20 @@
         if ([response.bodyParts[0] isKindOfClass:[PI_MOBILE_SERVICEService_ElementPASTING_SET_TASK_DONEOutput class]])
         {
             PI_MOBILE_SERVICEService_ElementPASTING_SET_TASK_DONEOutput *output = response.bodyParts[0];
-             self.success = output.RETURN.integerValue == 1;
+            self.success = output.RETURN.integerValue == 1;
+            self.errorMessage = output.A_MESSAGE;
         }
         else
+        {
             self.success = NO;
+            self.errorMessage = @"Неверный ответ со стороны сервера при передаче статуса выполнения задания";
+        }
     }
-    
-    self.success = NO;
+    else
+    {
+        self.success = NO;
+        self.errorMessage = @"Неверный ответ со стороны сервера при передаче статуса выполнения задания";
+    }
 }
 
 @end

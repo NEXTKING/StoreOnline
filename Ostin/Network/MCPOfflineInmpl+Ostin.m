@@ -163,16 +163,16 @@
         [delegate tasksComplete:1 tasks:nil];*/
 }
 
-- (void) saveTask:(id<TasksDelegate>) delegate taskID:(NSInteger)taskID userID:(NSInteger)userID status:(NSInteger)status date:(NSDate *)date
+- (void)saveTaskWithID:(NSInteger)taskID userID:(NSInteger)userID status:(NSInteger)status date:(NSDate *)date completion:(void (^)(BOOL success, NSString *errorMessage))completion
 {
-    #warning userID is unsusable
     NSManagedObjectContext *moc = self.dataController.managedObjectContext;
 
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Task"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"taskID == %ld", taskID]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"taskID == %ld AND userID == %ld", taskID, userID]];
     NSArray *results = [moc executeFetchRequest:request error:nil];
     if (results.count < 1)
     {
+        completion(NO, nil);
         return;
     }
     Task *taskDB = results[0];
@@ -181,33 +181,45 @@
     {
         taskDB.startDate = date;
         [moc save:nil];
+        completion(YES, nil);
     }
     else if (status == TaskInformationStatusComplete && taskDB.endDate == nil)
     {
         NSFetchRequest *taskItemRequest = [NSFetchRequest fetchRequestWithEntityName:@"TaskItemBinding"];
         [taskItemRequest setPredicate:[NSPredicate predicateWithFormat:@"taskID == %ld", taskDB.taskID.integerValue]];
         NSArray *results = [moc executeFetchRequest:taskItemRequest error:nil];
-        NSMutableArray *taskItems = [[NSMutableArray alloc] initWithCapacity:results.count + 1];
-        for (TaskItemBinding *taskItemDB in results)
+        NSArray *scannedResults = [results filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"scanned > 0"]];
+        
+        NSMutableArray *wareCodes = [[NSMutableArray alloc] init];
+        for (TaskItemBinding *taskItemDB in scannedResults)
         {
-            TaskItemInformation *taskItemInfo = [TaskItemInformation new];
-            taskItemInfo.itemID = taskItemDB.itemID.integerValue;
-            taskItemInfo.scanned = taskItemDB.scanned.integerValue;
-            taskItemInfo.quantity = taskItemDB.quantity.integerValue;
-            [taskItems addObject:taskItemInfo];
+            NSFetchRequest *itemRequest = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+            [itemRequest setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", taskItemDB.itemID.integerValue]];
+            NSArray *itemResults = [moc executeFetchRequest:itemRequest error:nil];
+            if (itemResults.count > 0)
+            {
+                Item *item = itemResults[0];
+                for (int i = 0; i<taskItemDB.scanned.integerValue; i++)
+                    [wareCodes addObject:item.itemCode];
+            }
         }
         
         NSOperationQueue *setTaskDoneQueue = [NSOperationQueue new];
         setTaskDoneQueue.name = @"setTaskDoneQueue";
         
         SOAPSavePrintFact *savePrintFact = [SOAPSavePrintFact new];
+        __weak SOAPSavePrintFact *_savePrintFact = savePrintFact;
         savePrintFact.taskName = taskDB.name;
-        savePrintFact.items = taskItems;
+        savePrintFact.taskType = @"pasting";
+        savePrintFact.wareCodes = wareCodes;
         savePrintFact.authValue = authValue;
         savePrintFact.deviceID  = deviceID;
+        savePrintFact.userID = [NSString stringWithFormat:@"%ld", userID];
         
         SOAPSetTaskDone *setTaskDone = [SOAPSetTaskDone new];
+        __weak SOAPSetTaskDone *_setTaskDone = setTaskDone;
         setTaskDone.taskName = taskDB.name;
+        setTaskDone.taskType = @"pasting";
         setTaskDone.authValue = authValue;
         setTaskDone.deviceID  = deviceID;
         
@@ -217,15 +229,19 @@
             [privateManagedObjectContext setParentContext:moc];
             Task *_taskDB = [privateManagedObjectContext objectWithID:taskDB.objectID];
             
-            if (setTaskDone.success)
+            if (!_savePrintFact.success)
             {
-                _taskDB.endDate = date;
-                [privateManagedObjectContext save:nil];
-                // need to call delegate here
+                completion(NO, _savePrintFact.errorMessage);
+            }
+            else if (!_setTaskDone.success)
+            {
+                completion(NO, _setTaskDone.errorMessage);
             }
             else
             {
-                
+                _taskDB.endDate = date;
+                [privateManagedObjectContext save:nil];
+                completion(YES, nil);
             }
         }];
         
@@ -496,34 +512,14 @@
     NSManagedObjectContext *moc =self.dataController.managedObjectContext;
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"Barcode" inManagedObjectContext:self.dataController.managedObjectContext]];
-    
     [request setIncludesSubentities:NO];
-    
-    type = BAR_UPC;
-    
+
     if (type == BAR_CODE128)
         [request setPredicate:[NSPredicate predicateWithFormat:@"code128 LIKE[c] %@", code]];
-    else if (type == BAR_UPC && code.length>=12)
-    {
-        
-        NSString *string = [NSString stringWithFormat:@"0%@", code];
-        
-        if ([string hasPrefix:@"09900"])
-        {
-            NSString* substring     = [string substringFromIndex:5];
-            NSString* substring1    = [substring substringToIndex:substring.length-1];
-            [request setPredicate:[NSPredicate predicateWithFormat:@"code128 LIKE[c] %@", substring1]];
-        }
-        else
-        {
-            NSString* substring = [string substringToIndex:11];
-            [request setPredicate:[NSPredicate predicateWithFormat:@"ean LIKE[c] %@", substring]];
-        }
-        
-        
-    }
+    else if (type == BAR_UPC)
+        [request setPredicate:[NSPredicate predicateWithFormat:@"code128 LIKE[c] %@", code]];
     else
-        [request setPredicate:[NSPredicate predicateWithFormat:@"ean == %@", code]];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"ean LIKE[c] %@", code]];
     
     
     NSArray* results = [moc executeFetchRequest:request error:nil];

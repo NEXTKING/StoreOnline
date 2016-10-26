@@ -31,14 +31,14 @@
     request.AT_PRINT_INFOPASTINGBILLPRINTINFOCIN.PASTINGBILLPRINTINFO = [PI_MOBILE_SERVICEService_SequenceElement_PASTINGBILLPRINTINFO new];
     
     NSMutableArray *printWareInfos = [[NSMutableArray alloc] init];
-    for (TaskItemInformation *itemInformation in _items)
+    for (NSString *wareCode in self.wareCodes)
     {
         PI_MOBILE_SERVICEService_PASTINGBILLPRINTWAREINFO_IntType *printWareInfo = [PI_MOBILE_SERVICEService_PASTINGBILLPRINTWAREINFO_IntType new];
         printWareInfo.TASK_NUM = self.taskName;
-        printWareInfo.WARE_CODE = [NSString stringWithFormat:@"%ld", itemInformation.itemID];
-        // printWareInfo.TASK_TYPE =
-        // printWareInfo.IS_LABEL_PRINTED =
-        // printWareInfo.EXECUTED_USER =
+        printWareInfo.WARE_CODE = wareCode;
+        printWareInfo.TASK_TYPE = self.taskType;
+        printWareInfo.IS_LABEL_PRINTED = @"Y";
+        printWareInfo.EXECUTED_USER = self.userID;
         [printWareInfos addObject:printWareInfo];
     }
     request.AT_PRINT_INFOPASTINGBILLPRINTINFOCIN.PASTINGBILLPRINTINFO.WARE_INFO = printWareInfos;
@@ -53,12 +53,19 @@
         {
             PI_MOBILE_SERVICEService_ElementPASTING_SAVE_PRINT_FACTOutput *output = response.bodyParts[0];
             self.success = output.RETURN.integerValue == 1;
+            self.errorMessage = output.A_MESSAGE;
         }
         else
+        {
             self.success = NO;
+            self.errorMessage = @"Неверный ответ со стороны сервера при передаче напечатанных товаров";
+        }
     }
-    
-    self.success = NO;
+    else
+    {
+        self.success = NO;
+        self.errorMessage = @"Неверный ответ со стороны сервера при передаче напечатанных товаров";
+    }
 }
 
 @end

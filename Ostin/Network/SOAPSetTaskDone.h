@@ -11,8 +11,11 @@
 @interface SOAPSetTaskDone : NSOperation
 
 @property (nonatomic, copy) NSString* taskName;
+@property (nonatomic, copy) NSString* taskType;
 @property (nonatomic, copy) NSString* authValue;
 @property (nonatomic, copy) NSString* deviceID;
+@property (nonatomic, copy) NSString* userID;
 @property (nonatomic, assign) BOOL success;
+@property (nonatomic, copy) NSString* errorMessage;
 
 @end

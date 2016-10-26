@@ -14,10 +14,12 @@
 #import "TaskProgressOverlayController.h"
 #import "BarcodeFormatter.h"
 #import "PrintViewController.h"
+#import "ZPLGenerator.h"
 
 @interface ItemsListViewController () <ItemDescriptionDelegate, PrinterControllerDelegate>
 {
     NSMutableArray *_items;
+    UIActivityIndicatorView *_activityIndicator;
     PrintViewController *_printVC;
     ItemInformation *_itemInPrintQueue;
 }
@@ -127,6 +129,33 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 - (void)dealloc
 {
     [self unsubscribeFromScanNotifications];
+}
+
+- (void)showLoadingIndicator
+{
+    if (_activityIndicator == nil)
+    {
+        _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        _activityIndicator.frame = CGRectMake(0, 0, 40, 40);
+        _activityIndicator.center = self.tableView.center;
+    }
+    
+    [self.view addSubview:_activityIndicator];
+    [_activityIndicator startAnimating];
+    [self.tableView setScrollEnabled:NO];
+}
+
+- (void)hideLoadingIndicator
+{
+    [_activityIndicator stopAnimating];
+    [_activityIndicator removeFromSuperview];
+    [self.tableView setScrollEnabled:YES];
+}
+
+- (void)showAlertWithMessage:(NSString*)message
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    [alert show];
 }
 
 #pragma mark Notifications
@@ -284,8 +313,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
             if (taskItemInfo.scanned + 1 <= taskItemInfo.quantity)
             {
                 _itemInPrintQueue = item;
-                [_printVC print:item copies:1];
-                _printVC.view.hidden = NO;
+                [self printItem:item];
             }
         }
     }
@@ -296,23 +324,45 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     if (_tasksMode)
     {
         NSDate *now = [NSDate date];
+        TaskInformationStatus nextStatus;
+        
         if (_task.status == TaskInformationStatusNotStarted)
-        {
-            _task.status = TaskInformationStatusInProgress;
-            _task.startDate = now;
-        }
+            nextStatus = TaskInformationStatusInProgress;
         else if (_task.status == TaskInformationStatusInProgress)
-        {
-            _task.status = TaskInformationStatusComplete;
-            _task.endDate = now;
-        }
+            nextStatus = TaskInformationStatusComplete;
         
-        [[MCPServer instance] saveTask:nil taskID:_task.taskID userID:_task.userID status:_task.status date:now];
+        [self showLoadingIndicator];
         
-        [self updateNotificationStatus];
-        [self updateActionButton];
-        [self updateOverlayInfo];
+        __weak typeof(self) wself = self;
+        [[MCPServer instance] saveTaskWithID:_task.taskID userID:_task.userID status:nextStatus date:now completion:^(BOOL success, NSString *errorMessage) {
+            
+            [self hideLoadingIndicator];
+            if (success)
+            {
+                if (wself.task.status == TaskInformationStatusNotStarted)
+                    wself.task.startDate = now;
+                else if (wself.task.status == TaskInformationStatusInProgress)
+                    wself.task.endDate = now;
+                    
+                wself.task.status = nextStatus;
+                [wself updateNotificationStatus];
+                [wself updateActionButton];
+                [wself updateOverlayInfo];
+            }
+            else if (errorMessage != nil)
+            {
+                [wself showAlertWithMessage:errorMessage];
+            }
+        }];
     }
+}
+
+- (void)printItem:(ItemInformation *)itemInfo
+{
+    NSString *str=[[NSBundle mainBundle] pathForResource:@"label" ofType:@"zpl"];
+    NSData *data = [ZPLGenerator generateZPLWithItem:itemInfo patternPath:str];
+    [_printVC printZPL:data copies:1];
+    _printVC.view.hidden = NO;
 }
 
 #pragma mark printer delegate
