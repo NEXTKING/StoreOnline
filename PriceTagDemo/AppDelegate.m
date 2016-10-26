@@ -53,7 +53,7 @@
 #elif defined (OSTIN)
     [[UINavigationBar appearance] setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor clearColor]}];
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigation.png"] forBarMetrics:UIBarMetricsDefault];
+//    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigation.png"] forBarMetrics:UIBarMetricsDefault];
     
 #elif defined (MELON)
     [[UINavigationBar appearance] setTitleTextAttributes:
