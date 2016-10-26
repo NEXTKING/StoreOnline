@@ -53,7 +53,7 @@
             authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodingWithLineLength:80]];
         }
         
-        deviceID = @"302";
+        deviceID = @"305";
         //990023135202
     }
     

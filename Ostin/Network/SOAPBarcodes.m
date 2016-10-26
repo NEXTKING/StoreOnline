@@ -62,7 +62,7 @@
         NSArray *csvSourse = [throw.VAL componentsSeparatedByString:@";"];
         NSArray *csv       = [self removeQuotes:csvSourse];
      
-        Barcode *barcodeDB = [NSEntityDescription insertNewObjectForEntityForName:@"Barcode" inManagedObjectContext:self.dataController.managedObjectContext];
+        Barcode *barcodeDB = [NSEntityDescription insertNewObjectForEntityForName:@"Barcode" inManagedObjectContext:self.privateContext];
         
         barcodeDB.itemID  = @([csv[1] integerValue]);
         barcodeDB.code128 = csv[2];
@@ -71,7 +71,7 @@
     }
     
     NSError* error = nil;
-    [self.dataController.managedObjectContext save:&error];
+    [self.privateContext save:&error];
     
     return error? NO:YES;
 }

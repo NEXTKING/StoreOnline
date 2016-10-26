@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Ostin/Search/SearchViewController.m"
-            timestampString = "499086185.149946"
+            filePath = "PriceTagDemo/Network/Objects/NwObject.m"
+            timestampString = "499176524.768662"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
-            landmarkName = "-prepareForSegue:sender:"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
+            landmarkName = "-connection:didFailWithError:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -98,7 +98,7 @@
 			<key>Key</key>
 			<string>auth_user_preference</string>
 			<key>DefaultValue</key>
-			<string>TEST0_WEB</string>
+			<string>OST170_WEB</string>
 			<key>IsSecure</key>
 			<false/>
 			<key>KeyboardType</key>

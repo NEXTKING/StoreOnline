@@ -22,6 +22,7 @@
 @property (nonatomic, copy) NSString* authValue;
 @property (nonatomic, copy) NSString* deviceID;
 @property (nonatomic, assign) BOOL success;
+@property (nonatomic, strong) NSManagedObjectContext* privateContext;
 
 - (NSArray*) downloadItems;
 - (BOOL) saveItems: (NSArray*) items;

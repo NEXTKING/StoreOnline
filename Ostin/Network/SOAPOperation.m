@@ -20,6 +20,9 @@
 
 - (void) main
 {
+    _privateContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    [_privateContext setParentContext:_dataController.managedObjectContext];
+    
     if (self.isCancelled)
         return;
     
@@ -40,8 +43,21 @@
         if (self.isCancelled || !items)
             return;
         
-        BOOL localSuccess = NO;
-        localSuccess = [self saveItems:items];
+        __block BOOL localSuccess = NO;
+        
+        [_privateContext performBlockAndWait:^{
+            localSuccess = [self saveItems:items];
+            
+            if (localSuccess)
+            {
+                [self.dataController.managedObjectContext performBlockAndWait:^{
+                
+                    localSuccess = [_dataController.managedObjectContext save:nil];
+            
+                }];
+            }
+        }];
+    
         
         if (!localSuccess || self.isCancelled)
             return;

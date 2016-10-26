@@ -62,7 +62,7 @@
         NSArray *csvSourse = [throw.VAL componentsSeparatedByString:@";"];
         NSArray *csv       = [self removeQuotes:csvSourse];
         
-        Price *priceDB = [NSEntityDescription insertNewObjectForEntityForName:@"Price" inManagedObjectContext:self.dataController.managedObjectContext];
+        Price *priceDB = [NSEntityDescription insertNewObjectForEntityForName:@"Price" inManagedObjectContext:self.privateContext];
         
         priceDB.itemID          = @([csv[1] integerValue]);
         priceDB.catalogPrice    = @([csv[2] doubleValue]);
@@ -71,7 +71,7 @@
     }
     
     NSError* error = nil;
-    [self.dataController.managedObjectContext save:&error];
+    [self.privateContext save:&error];
     
     return error? NO:YES;
 }

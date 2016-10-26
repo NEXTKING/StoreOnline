@@ -26,6 +26,7 @@
     dtdev = [DTDevices sharedDevice];
     [dtdev addDelegate:self];
     [dtdev connect];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -51,7 +52,7 @@
 
 - (IBAction)loginButtonPressed:(id)sender
 {
-    NSDictionary *auth = @{@"0":@"0", @"300":@"300", @"301":@"301", @"302":@"302", @"303":@"303", @"304":@"304"};
+    NSDictionary *auth = @{@"0":@"0", @"3000":@"3000", @"3001":@"3001", @"302":@"302", @"303":@"303", @"304":@"304"};
     
     if (_loginTextField.text != nil && _passwordTextField.text != nil && [[auth allKeys] containsObject:_loginTextField.text])
     {

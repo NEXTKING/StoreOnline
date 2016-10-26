@@ -61,7 +61,7 @@
         NSArray *csvSourse = [throw.VAL componentsSeparatedByString:@";"];
         NSArray *csv       = [self removeQuotes:csvSourse];
         
-        TaskItemBinding *taskDB = [NSEntityDescription insertNewObjectForEntityForName:@"TaskItemBinding" inManagedObjectContext:self.dataController.managedObjectContext];
+        TaskItemBinding *taskDB = [NSEntityDescription insertNewObjectForEntityForName:@"TaskItemBinding" inManagedObjectContext:self.privateContext];
         
         taskDB.taskID            = @([csv[2] integerValue]);
         taskDB.itemID            = @([csv[3] integerValue]);
@@ -69,7 +69,7 @@
     }
     
     NSError* error = nil;
-    [self.dataController.managedObjectContext save:&error];
+    [self.privateContext save:&error];
     
     return error? NO:YES;
 }
