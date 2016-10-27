@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TaskInformation.h"
 
 @interface ItemsListViewController : UITableViewController
 
 @property (nonatomic, assign) BOOL tasksMode;
-@property (nonatomic, strong) NSDictionary *fakeData;
+@property (nonatomic, strong) TaskInformation *task;
 @end

@@ -9,7 +9,8 @@
 #import "OstinViewController.h"
 #import "WYStoryboardPopoverSegue.h"
 #import "SettingsViewController.h"
-
+#import "ZPLGenerator.h"
+#import "BarcodeFormatter.h"
 
 @interface OstinViewController ()
 {
@@ -28,123 +29,60 @@
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     _immediateSwitch.on = ([defaults valueForKey:@"PrintImmediatly"] != nil);
     
+    [[NSUserDefaults standardUserDefaults] setValue:@"00190EA20DAA" forKey:@"PrinterID"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     //[self barcodeData:@"990023247349" type:BAR_UPC];
     //[self barcodeData:@"990025324185" type:BAR_UPC];
     //[self barcodeData:@"990025878473" type:BAR_UPC];
     
-    
-    
-    if ([defaults valueForKey:@"LastBarcode"] && !_externalBarcode)
-    {
-        restored = YES;
-        [self barcodeData:[defaults valueForKey:@"LastBarcode"] type:0];
-    }
-    else if (_externalBarcode)
-    {
-        [self barcodeData:_externalBarcode type:0];
-    }
     // Do any additional setup after loading the view.
-    
-    [self initializeRing];
+    [self updateItemInfo:self.currentItemInfo];
     
     //[[MCPServer instance] itemDescription:self itemCode:@"2792304" shopCode:nil isoType:BAR_CODE128];
 }
 
-- (void) initializeRing
+- (void) viewWillAppear:(BOOL)animated
 {
-    symbols = [NSMutableArray new];
+    [super viewWillAppear:animated];
     
-    for (int i = 0; i < 127; ++i) {
-        // ASCII to NSString
-        NSString *string = [NSString stringWithFormat:@"%c", i]; // A
-        UIKeyCommand *command = [UIKeyCommand keyCommandWithInput:string modifierFlags:0 action:@selector(gsKey:)];
-        [symbols addObject:command];
-    }
-}
-
-- (NSArray *)keyCommands
-{
-    return symbols;
-    
-    // <RS> - char(30): ctrl-shift-6 (or ctrl-^)
-    //UIKeyCommand *rsCommand = [UIKeyCommand keyCommandWithInput:@"6" modifierFlags:UIKeyModifierShift|UIKeyModifierControl action:@selector(rsKey:)];
-    // <GS> - char(29): ctrl-]
-    //UIKeyCommand *gsCommand = [UIKeyCommand keyCommandWithInput:@"]" modifierFlags:UIKeyModifierControl action:@selector(gsKey:)];
-    // <EOT> - char(4): ctrl-d
-    //UIKeyCommand *eotCommand = [UIKeyCommand keyCommandWithInput:@"D" modifierFlags:UIKeyModifierControl action:@selector(eotKey:)];
-    //return [[NSArray alloc] initWithObjects:rsCommand, gsCommand, eotCommand, nil];
-}
-
-
-- (void) gsKey: (UIKeyCommand *) keyCommand {
-    NSLog(@"%@", keyCommand.input);
-    
-    if ([keyCommand.input isEqualToString:@"$"])
-        ringBarcode.string = @"";
-    else if ([keyCommand.input isEqualToString:@"%"])
-        [self sendNotification:nil];
-    else
-        [ringBarcode appendString:keyCommand.input];
-}
-
-- (IBAction)immediateSwitchAction:(UISwitch*)sender
-{
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    id obj = sender.on?@YES:nil;
-    [defaults setValue:obj forKey:@"PrintImmediatly"];
-}
-
-- (void) sendNotification:(id) sender
-{
-    [self barcodeData:ringBarcode type:0];
-}
-
-- (NSString*) parseBarcode:(NSString*) code
-{
-    if (code.length < 8)
-        return nil;
-   
-    NSString* finalCode = [code substringFromIndex:8];
     
-    if (finalCode.length < 8)
-        return nil;
-    
-    finalCode = [finalCode substringToIndex:7];
-    
-    [self showInfoMessage:finalCode];
-    return finalCode;
-}
-
-- (void) barcodeData:(NSString *)barcode type:(int)type
-{
-    if (type != BAR_CODE128)
+    if ([defaults valueForKey:@"LastBarcode"] && !_externalBarcode)
     {
-        [super barcodeData:barcode type:type];
-        return;
+        restored = YES;
+        
+        NSDictionary* params = @{@"barcode":[defaults valueForKey:@"LastBarcode"],@"type":@(0)};
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:@"BarcodeScanNotification"
+         object:params];
     }
-    
-    NSString* parsedCode = [self parseBarcode:barcode];
-    
-    if (!parsedCode)
-        return;
-    
-    [super barcodeData:parsedCode type:type];
+    else if (_externalBarcode)
+    {
+        [self updateItemInfo:self.currentItemInfo];
+    }
 }
 
-- (void) barcodeData:(NSString *)barcode isotype:(NSString *)isotype
+- (void) printButtonAction:(id)sender
 {
-    NSString* parsedCode = [self parseBarcode:barcode];
-    
-    if (!parsedCode)
-        return;
-    
-    [super barcodeData:parsedCode isotype:isotype];
+    NSString *str=[[NSBundle mainBundle] pathForResource:@"label" ofType:@"zpl"];
+    self.currentZPLInfo = [ZPLGenerator generateZPLWithItem:self.currentItemInfo patternPath:str];
+    [super printButtonAction:sender];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)scanNotification:(NSNotification*)aNotification
+{
+    lastBarcode = [aNotification.object objectForKey:@"barcode"];
+    NSNumber *type = [aNotification.object objectForKey:@"type"];
+    [[NSUserDefaults standardUserDefaults] setValue:lastBarcode forKey:@"LastBarcode"];
+    
+    NSString *internalBarcode = [BarcodeFormatter normalizedBarcodeFromString:lastBarcode isoType:type.intValue];
+    [self requestItemInfoWithCode:internalBarcode isoType:type.intValue];
 }
 
 - (void) requestItemInfoWithCode:(NSString *)code isoType:(int)type
@@ -157,8 +95,20 @@
 - (void) updateItemInfo:(ItemInformation *)itemInfo
 {
     [super updateItemInfo:itemInfo];
-    
+
     _imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"no-image.png"]];
+}
+
+- (void) compareAmount:(ItemInformation *)itemInfo
+{
+    NSDictionary *data = [BarcodeFormatter dataFromBarcode:lastBarcode isoType:BAR_CODE128];
+    if (data != nil)
+    {
+        double price = [data[@"price"] doubleValue];
+        [self amountCompareCompleted:(price == itemInfo.price)];
+    }
+    else
+        [self amountCompareCompleted:NO];
 }
 
 - (void) amountCompareCompleted:(BOOL)isEqual
@@ -231,6 +181,8 @@
         
     }
     
+    self.amountStatusLabel.text = isEqual ? @"✓" : @"✕";
+    self.amountStatusLabel.backgroundColor = isEqual ? [UIColor colorWithRed:0 green:180/255.0 blue:0 alpha:0.3] : [UIColor redColor];
     self.itemPriceLabel.backgroundColor = isEqual ? [UIColor colorWithRed:119.0/255.0 green:119.0/255.0 blue:119.0/255.0 alpha:0.28]:[UIColor redColor];
     restored = NO;
 }

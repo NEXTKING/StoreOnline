@@ -461,6 +461,30 @@ static Class classForElement(xmlNodePtr cur) {
         xmlSetProp(node, (const xmlChar *)property, [[value description] xmlString]);
 }
 @end
+@implementation PI_MOBILE_SERVICEService_SequenceElement_TASK_TYPE
++ (NSString *)deserializeNode:(xmlNodePtr)node {
+    NSString *str = [NSString stringWithXmlString:xmlNodeListGetString(node->doc, node->children, 1) free:YES];
+    return str;
+}
+
++ (NSString *)deserializeAttribute:(const char *)attrName ofNode:(xmlNodePtr)node {
+    NSString *attrString = [NSString stringWithXmlString:xmlGetProp(node, (const xmlChar *)attrName) free:YES];
+    if (!attrString) return nil;
+    return attrString;
+}
+
++ (void)serializeToChildOf:(xmlNodePtr)node withName:(const char *)childName value:(NSString *)value {
+    if (value)
+        xmlNewChild(node, NULL, (const xmlChar *)childName, [[value description] xmlString]);
+}
+
++ (void)serializeToProperty:(const char *)property onNode:(xmlNodePtr)node
+                      value:(NSString *)value
+{
+    if (value)
+        xmlSetProp(node, (const xmlChar *)property, [[value description] xmlString]);
+}
+@end
 @implementation PI_MOBILE_SERVICEService_ElementGET_PORTIONS_INFOOutput
 + (void)serializeToChildOf:(xmlNodePtr)node withName:(const char *)childName value:(PI_MOBILE_SERVICEService_ElementGET_PORTIONS_INFOOutput *)value {
     xmlNodePtr child = xmlNewChild(node, NULL, (const xmlChar *)childName, NULL);
@@ -1522,6 +1546,30 @@ static Class classForElement(xmlNodePtr cur) {
     return newObject;
 }
 @end
+@implementation PI_MOBILE_SERVICEService_SequenceElement_EXECUTED_USER
++ (NSString *)deserializeNode:(xmlNodePtr)node {
+    NSString *str = [NSString stringWithXmlString:xmlNodeListGetString(node->doc, node->children, 1) free:YES];
+    return str;
+}
+
++ (NSString *)deserializeAttribute:(const char *)attrName ofNode:(xmlNodePtr)node {
+    NSString *attrString = [NSString stringWithXmlString:xmlGetProp(node, (const xmlChar *)attrName) free:YES];
+    if (!attrString) return nil;
+    return attrString;
+}
+
++ (void)serializeToChildOf:(xmlNodePtr)node withName:(const char *)childName value:(NSString *)value {
+    if (value)
+        xmlNewChild(node, NULL, (const xmlChar *)childName, [[value description] xmlString]);
+}
+
++ (void)serializeToProperty:(const char *)property onNode:(xmlNodePtr)node
+                      value:(NSString *)value
+{
+    if (value)
+        xmlSetProp(node, (const xmlChar *)property, [[value description] xmlString]);
+}
+@end
 @implementation PI_MOBILE_SERVICEService_SequenceElement_TASK_NUM
 + (NSString *)deserializeNode:(xmlNodePtr)node {
     NSString *str = [NSString stringWithXmlString:xmlNodeListGetString(node->doc, node->children, 1) free:YES];
@@ -1570,41 +1618,86 @@ static Class classForElement(xmlNodePtr cur) {
         xmlSetProp(node, (const xmlChar *)property, [[value description] xmlString]);
 }
 @end
+@implementation PI_MOBILE_SERVICEService_SequenceElement_IS_LABEL_PRINTED
++ (NSString *)deserializeNode:(xmlNodePtr)node {
+    NSString *str = [NSString stringWithXmlString:xmlNodeListGetString(node->doc, node->children, 1) free:YES];
+    return str;
+}
+
++ (NSString *)deserializeAttribute:(const char *)attrName ofNode:(xmlNodePtr)node {
+    NSString *attrString = [NSString stringWithXmlString:xmlGetProp(node, (const xmlChar *)attrName) free:YES];
+    if (!attrString) return nil;
+    return attrString;
+}
+
++ (void)serializeToChildOf:(xmlNodePtr)node withName:(const char *)childName value:(NSString *)value {
+    if (value)
+        xmlNewChild(node, NULL, (const xmlChar *)childName, [[value description] xmlString]);
+}
+
++ (void)serializeToProperty:(const char *)property onNode:(xmlNodePtr)node
+                      value:(NSString *)value
+{
+    if (value)
+        xmlSetProp(node, (const xmlChar *)property, [[value description] xmlString]);
+}
+@end
 @implementation PI_MOBILE_SERVICEService_PASTINGBILLPRINTWAREINFO_IntType
 + (void)serializeToChildOf:(xmlNodePtr)node withName:(const char *)childName value:(PI_MOBILE_SERVICEService_PASTINGBILLPRINTWAREINFO_IntType *)value {
     xmlNodePtr child = xmlNewChild(node, NULL, (const xmlChar *)childName, NULL);
-
+    
     [value addElementsToNode:child];
 }
 
 - (void)addElementsToNode:(xmlNodePtr)node {
     if (_TASK_NUM)
         [PI_MOBILE_SERVICEService_SequenceElement_TASK_NUM serializeToChildOf:node withName:"PI_MOBILE_SERVICEService:TASK_NUM" value:_TASK_NUM];
-
+    
+    if (_TASK_TYPE)
+        [PI_MOBILE_SERVICEService_SequenceElement_TASK_TYPE serializeToChildOf:node withName:"PI_MOBILE_SERVICEService:TASK_TYPE" value:_TASK_TYPE];
+    
     if (_WARE_CODE)
         [PI_MOBILE_SERVICEService_SequenceElement_WARE_CODE serializeToChildOf:node withName:"PI_MOBILE_SERVICEService:WARE_CODE" value:_WARE_CODE];
-
+    
+    if (_IS_LABEL_PRINTED)
+        [PI_MOBILE_SERVICEService_SequenceElement_IS_LABEL_PRINTED serializeToChildOf:node withName:"PI_MOBILE_SERVICEService:IS_LABEL_PRINTED" value:_IS_LABEL_PRINTED];
+    
+    if (_EXECUTED_USER)
+        [PI_MOBILE_SERVICEService_SequenceElement_EXECUTED_USER serializeToChildOf:node withName:"PI_MOBILE_SERVICEService:EXECUTED_USER" value:_EXECUTED_USER];
+    
 }
 
 + (PI_MOBILE_SERVICEService_PASTINGBILLPRINTWAREINFO_IntType *)deserializeNode:(xmlNodePtr)cur {
     PI_MOBILE_SERVICEService_PASTINGBILLPRINTWAREINFO_IntType *newObject = [self new];
-
+    
     [newObject deserializeElementsFromNode:cur];
-
+    
     return newObject;
 }
 
 - (void)deserializeElementsFromNode:(xmlNodePtr)cur {
     for (cur = cur->children; cur; cur = cur->next) {
         if (cur->type != XML_ELEMENT_NODE) continue;
-
+        
         else if (xmlStrEqual(cur->name, (const xmlChar *)"TASK_NUM")) {
             Class elementClass = classForElement(cur) ?: [PI_MOBILE_SERVICEService_SequenceElement_TASK_NUM class];
             self.TASK_NUM = [elementClass deserializeNode:cur];
         }
+        else if (xmlStrEqual(cur->name, (const xmlChar *)"TASK_TYPE")) {
+            Class elementClass = classForElement(cur) ?: [PI_MOBILE_SERVICEService_SequenceElement_TASK_TYPE class];
+            self.TASK_TYPE = [elementClass deserializeNode:cur];
+        }
         else if (xmlStrEqual(cur->name, (const xmlChar *)"WARE_CODE")) {
             Class elementClass = classForElement(cur) ?: [PI_MOBILE_SERVICEService_SequenceElement_WARE_CODE class];
             self.WARE_CODE = [elementClass deserializeNode:cur];
+        }
+        else if (xmlStrEqual(cur->name, (const xmlChar *)"IS_LABEL_PRINTED")) {
+            Class elementClass = classForElement(cur) ?: [PI_MOBILE_SERVICEService_SequenceElement_IS_LABEL_PRINTED class];
+            self.IS_LABEL_PRINTED = [elementClass deserializeNode:cur];
+        }
+        else if (xmlStrEqual(cur->name, (const xmlChar *)"EXECUTED_USER")) {
+            Class elementClass = classForElement(cur) ?: [PI_MOBILE_SERVICEService_SequenceElement_EXECUTED_USER class];
+            self.EXECUTED_USER = [elementClass deserializeNode:cur];
         }
     }
 }
@@ -1840,20 +1933,26 @@ static Class classForElement(xmlNodePtr cur) {
 @implementation PI_MOBILE_SERVICEService_ElementSNUMBERPASTING_SET_TASK_DONEInput
 + (void)serializeToChildOf:(xmlNodePtr)node withName:(const char *)childName value:(PI_MOBILE_SERVICEService_ElementSNUMBERPASTING_SET_TASK_DONEInput *)value {
     xmlNodePtr child = xmlNewChild(node, NULL, (const xmlChar *)childName, NULL);
-
+    
     [value addElementsToNode:child];
 }
 
 - (void)addElementsToNode:(xmlNodePtr)node {
+    if (_A_TASK_TYPEVARCHAR2IN)
+        [xsd_string serializeToChildOf:node withName:"PI_MOBILE_SERVICEService:A_TASK_TYPE-VARCHAR2-IN" value:_A_TASK_TYPEVARCHAR2IN];
+    
     if (_A_TASK_NUMVARCHAR2IN)
         [xsd_string serializeToChildOf:node withName:"PI_MOBILE_SERVICEService:A_TASK_NUM-VARCHAR2-IN" value:_A_TASK_NUMVARCHAR2IN];
-
+    
     if (_A_MESSAGEVARCHAR2OUT)
         [PI_MOBILE_SERVICEService_SequenceElement_A_MESSAGEVARCHAR2OUT serializeToChildOf:node withName:"PI_MOBILE_SERVICEService:A_MESSAGE-VARCHAR2-OUT" value:_A_MESSAGEVARCHAR2OUT];
-
+    
+    if (_A_EXECUTED_USERVARCHAR2IN)
+        [xsd_string serializeToChildOf:node withName:"PI_MOBILE_SERVICEService:A_EXECUTED_USER-VARCHAR2-IN" value:_A_EXECUTED_USERVARCHAR2IN];
+    
     if (_A_DEVICE_UIDVARCHAR2IN)
         [xsd_string serializeToChildOf:node withName:"PI_MOBILE_SERVICEService:A_DEVICE_UID-VARCHAR2-IN" value:_A_DEVICE_UIDVARCHAR2IN];
-
+    
 }
 
 
@@ -1863,16 +1962,20 @@ static Class classForElement(xmlNodePtr cur) {
 }
 + (PI_MOBILE_SERVICEService_ElementSNUMBERPASTING_SET_TASK_DONEInput *)deserializeNode:(xmlNodePtr)cur {
     PI_MOBILE_SERVICEService_ElementSNUMBERPASTING_SET_TASK_DONEInput *newObject = [self new];
-
+    
     [newObject deserializeElementsFromNode:cur];
-
+    
     return newObject;
 }
 
 - (void)deserializeElementsFromNode:(xmlNodePtr)cur {
     for (cur = cur->children; cur; cur = cur->next) {
         if (cur->type != XML_ELEMENT_NODE) continue;
-
+        
+        else if (xmlStrEqual(cur->name, (const xmlChar *)"A_TASK_TYPE-VARCHAR2-IN")) {
+            Class elementClass = classForElement(cur) ?: [xsd_string class];
+            self.A_TASK_TYPEVARCHAR2IN = [elementClass deserializeNode:cur];
+        }
         else if (xmlStrEqual(cur->name, (const xmlChar *)"A_TASK_NUM-VARCHAR2-IN")) {
             Class elementClass = classForElement(cur) ?: [xsd_string class];
             self.A_TASK_NUMVARCHAR2IN = [elementClass deserializeNode:cur];
@@ -1880,6 +1983,10 @@ static Class classForElement(xmlNodePtr cur) {
         else if (xmlStrEqual(cur->name, (const xmlChar *)"A_MESSAGE-VARCHAR2-OUT")) {
             Class elementClass = classForElement(cur) ?: [PI_MOBILE_SERVICEService_SequenceElement_A_MESSAGEVARCHAR2OUT class];
             self.A_MESSAGEVARCHAR2OUT = [elementClass deserializeNode:cur];
+        }
+        else if (xmlStrEqual(cur->name, (const xmlChar *)"A_EXECUTED_USER-VARCHAR2-IN")) {
+            Class elementClass = classForElement(cur) ?: [xsd_string class];
+            self.A_EXECUTED_USERVARCHAR2IN = [elementClass deserializeNode:cur];
         }
         else if (xmlStrEqual(cur->name, (const xmlChar *)"A_DEVICE_UID-VARCHAR2-IN")) {
             Class elementClass = classForElement(cur) ?: [xsd_string class];
@@ -2382,8 +2489,18 @@ static Class classForElement(xmlNodePtr cur) {
     [USGlobals sharedInstance].wsdlStandardNamespaces[@"http://xmlns.oracle.com/orawsv/MAA_WEB/PI_MOBILE_SERVICE"] = @"PI_MOBILE_SERVICEService";
 }
 
-+ (PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBinding *)PI_MOBILE_SERVICEBinding {
-    return [[PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBinding alloc] initWithAddress:@"http://172.16.0.124:8080/orawsv/TEST0_WEB/PI_MOBILE_SERVICE"];
++ (PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBinding *)PI_MOBILE_SERVICEBinding
+{
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSString *protocol = [[NSUserDefaults standardUserDefaults] valueForKey:@"protocol_preference"];
+    NSString *host     = [[NSUserDefaults standardUserDefaults] valueForKey:@"host_preference"];
+    NSString *port     = [[NSUserDefaults standardUserDefaults] valueForKey:@"port_preference"];
+    NSString *path     = [[NSUserDefaults standardUserDefaults] valueForKey:@"path_preference"];
+    NSMutableString *address = [NSMutableString stringWithFormat:@"%@://%@%@",protocol, host, port.length > 0?[NSString stringWithFormat:@":%@", port]:@""];
+    if (path.length > 0)
+        [address appendFormat:@"/%@", path];
+    
+    return [[PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBinding alloc] initWithAddress:address];
 }
 
 @end

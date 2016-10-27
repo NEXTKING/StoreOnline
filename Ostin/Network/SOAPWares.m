@@ -61,35 +61,37 @@
 
 - (BOOL) saveItems: (NSArray*) items
 {
+    
     for (PI_MOBILE_SERVICEService_TROW_IntType *throw in items)
     {
         NSArray *csvSourse = [throw.VAL componentsSeparatedByString:@";"];
         NSArray *csv       = [self removeQuotes:csvSourse];
-        Item *itemDB = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.dataController.managedObjectContext];
+        Item *itemDB = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.privateContext];
         
         itemDB.itemID       = @([csv[1] integerValue]);
-        itemDB.itemCode     = csv[1];
-        itemDB.groupID      = @([csv[2] intValue]);
-        itemDB.subgroupID   = @([csv[3] intValue]);
-        itemDB.trademarkID  = @([csv[4] intValue]);
-        itemDB.color        = csv[5];
-        itemDB.certificationType    = csv[6];
-        itemDB.certificationAuthorittyCode  = csv[7];
-        itemDB.itemCode_2   = csv[8];
-        itemDB.line1        = csv[9];
-        itemDB.line2        = csv[10];
-        itemDB.storeNumber  = csv[11];
-        itemDB.name         = csv[12];
-        itemDB.priceHeader  = csv[14];
-        itemDB.sizeHeader   = csv[15];
-        itemDB.size         = csv[16];
+        itemDB.itemCode     = csv[2];
+        itemDB.groupID      = @([csv[3] intValue]);
+        itemDB.subgroupID   = @([csv[4] intValue]);
+        itemDB.trademarkID  = @([csv[5] intValue]);
+        itemDB.color        = csv[6];
+        itemDB.certificationType    = csv[7];
+        itemDB.certificationAuthorittyCode  = csv[8];
+        itemDB.itemCode_2   = csv[9];
+        itemDB.line1        = csv[9]; // csv[10];
+        itemDB.line2        = csv[10]; // csv[11];
+        itemDB.storeNumber  = csv[11]; // csv[12];
+        itemDB.name         = csv[12]; // csv[13];
+        itemDB.priceHeader  = csv[13]; // csv[14];
+        itemDB.sizeHeader   = csv[14]; // csv[15];
+        itemDB.size         = csv[15]; // csv[16];
+        itemDB.additionalSize = csv[16];
         itemDB.additionalInfo = csv[17];
-        //itemDB.additionalInfo = csv[18];
+        itemDB.boxType = csv[18];
         
     }
     
     NSError* error = nil;
-    [self.dataController.managedObjectContext save:&error];
+    [self.privateContext save:&error];
     
     return error? NO:YES;
 }

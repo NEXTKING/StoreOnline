@@ -159,6 +159,7 @@
     assert(theConnection == _exec_connection);
     
     // Processing done with error:
+    self.error = error;
     [self complete:NO];
     
     _exec_connection = nil;

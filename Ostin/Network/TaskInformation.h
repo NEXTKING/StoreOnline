@@ -7,6 +7,14 @@
 //
 
 #import "SOAPOperation.h"
+#import "TaskItemInformation.h"
+
+typedef enum : NSUInteger
+{
+    TaskInformationStatusNotStarted = 0,
+    TaskInformationStatusInProgress = 1,
+    TaskInformationStatusComplete = 2
+}TaskInformationStatus;
 
 @interface TaskInformation : NSObject
 
@@ -14,6 +22,8 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) NSInteger userID;
 @property (nonatomic, assign) NSInteger status;
-
+@property (nonatomic, copy) NSDate *startDate;
+@property (nonatomic, copy) NSDate *endDate;
+@property (nonatomic, copy) NSArray<TaskItemInformation *> *items;
 
 @end

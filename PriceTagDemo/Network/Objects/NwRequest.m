@@ -218,7 +218,7 @@
     if ( !_exec_request )
         return Nil;
     
-    _exec_request.timeoutInterval = 1000;
+    _exec_request.timeoutInterval = 10;
     
     [_exec_request setHTTPShouldHandleCookies:NO];
     [_exec_request addValue:_str_cookies forHTTPHeaderField:@"Cookie"];

@@ -1,11 +1,11 @@
 <definitions name="PI_MOBILE_SERVICE"
-    targetNamespace="http://xmlns.oracle.com/orawsv/MAA_WEB/PI_MOBILE_SERVICE"
+    targetNamespace="http://xmlns.oracle.com/orawsv/OST170_WEB/PI_MOBILE_SERVICE"
     xmlns="http://schemas.xmlsoap.org/wsdl/"
-    xmlns:tns="http://xmlns.oracle.com/orawsv/MAA_WEB/PI_MOBILE_SERVICE"
+    xmlns:tns="http://xmlns.oracle.com/orawsv/OST170_WEB/PI_MOBILE_SERVICE"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
   <types>
-    <xsd:schema targetNamespace="http://xmlns.oracle.com/orawsv/MAA_WEB/PI_MOBILE_SERVICE"
+    <xsd:schema targetNamespace="http://xmlns.oracle.com/orawsv/OST170_WEB/PI_MOBILE_SERVICE"
      elementFormDefault="qualified">
       <xsd:element name="WARE_SUBGROUP_INFOInput">
         <xsd:complexType>
@@ -276,10 +276,12 @@
       <xsd:element name="SNUMBER-PASTING_SET_TASK_DONEInput">
         <xsd:complexType>
             <xsd:sequence>
+              <xsd:element name="A_TASK_TYPE-VARCHAR2-IN" type="xsd:string"/>
               <xsd:element name="A_TASK_NUM-VARCHAR2-IN" type="xsd:string"/>
               <xsd:element name="A_MESSAGE-VARCHAR2-OUT">
                 <xsd:complexType/>
               </xsd:element>
+              <xsd:element name="A_EXECUTED_USER-VARCHAR2-IN" type="xsd:string"/>
               <xsd:element name="A_DEVICE_UID-VARCHAR2-IN" type="xsd:string"/>
             </xsd:sequence>
           </xsd:complexType>
@@ -429,7 +431,28 @@
               </xsd:restriction>
             </xsd:simpleType>
           </xsd:element>
+          <xsd:element name="TASK_TYPE">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="64"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
           <xsd:element name="WARE_CODE">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="256"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="IS_LABEL_PRINTED">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="32"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="EXECUTED_USER">
             <xsd:simpleType>
               <xsd:restriction base="xsd:string">
                 <xsd:maxLength value="256"/>
@@ -857,8 +880,8 @@
   <service name="PI_MOBILE_SERVICEService">
     <documentation>Oracle Web Service</documentation>
     <port name="PI_MOBILE_SERVICEPort" binding="tns:PI_MOBILE_SERVICEBinding">
-       <soap:address
-             location="http://sm-tnshop12.office.custis.ru:8080/orawsv/MAA_WEB/PI_MOBILE_SERVICE"/>
+       <soap:address 
+             location="http://172.16.4.234:8080/orawsv/OST170_WEB/PI_MOBILE_SERVICE"/>
      </port>
   </service>
 

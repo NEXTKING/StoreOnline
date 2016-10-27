@@ -19,6 +19,12 @@
 - (void) subgroups:(id<GroupsDelegate>) delegate uid:(NSString*)uid;
 - (void) brands:(id<GroupsDelegate>) delegate uid:(NSString*)uid;
 - (void) tasks:(id<TasksDelegate>) delegate userID:(NSNumber*) userID;
+- (void) tasks:(id<TasksDelegate>) delegate taskID:(NSNumber*) taskID;
 - (void) search:(id<SearchDelegate>) delegate forQuery:(NSString *)query withAttribute:(ItemSearchAttribute)searchAttribute;
+
+- (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemID:(NSUInteger)itemID;
+
+- (void) saveTaskWithID:(NSInteger)taskID userID:(NSInteger)userID status:(NSInteger)status date:(NSDate *)date completion:(void (^)(BOOL success, NSString *errorMessage))completion;
+- (void) saveTaskItem:(id<TasksDelegate>) delegate taskID:(NSInteger)taskID itemID:(NSInteger)itemID scanned:(NSUInteger)scanned;
 
 @end

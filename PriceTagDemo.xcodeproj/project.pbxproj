@@ -9,12 +9,15 @@
 /* Begin PBXBuildFile section */
 		215EFF091DAB9ED600BE11C5 /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 215EFF071DAB9ED600BE11C5 /* SearchTableViewCell.m */; };
 		215EFF0A1DAB9ED600BE11C5 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 215EFF081DAB9ED600BE11C5 /* SearchTableViewCell.xib */; };
-		218228621DAF838200F04B70 /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 218228611DAF838200F04B70 /* ContainerViewController.m */; };
+		2174D5811DB8CDDC00FCE9CE /* SOAPSavePrintFact.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174D5801DB8CDDC00FCE9CE /* SOAPSavePrintFact.m */; };
 		218228661DAF864000F04B70 /* TasksCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 218228641DAF864000F04B70 /* TasksCell.m */; };
 		218228671DAF864000F04B70 /* TasksCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 218228651DAF864000F04B70 /* TasksCell.xib */; };
+		2182286A1DAFCB2A00F04B70 /* TaskItemInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 218228691DAFCB2A00F04B70 /* TaskItemInformation.m */; };
+		21B8DC7B1DB66CF900FD9161 /* BarcodeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B8DC7A1DB66CF900FD9161 /* BarcodeFormatter.m */; };
 		21BB44BF1DACF0D100ED67EE /* TaskProgressOverlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BB44BD1DACF0D100ED67EE /* TaskProgressOverlayController.m */; };
 		21BB44C01DACF0D100ED67EE /* TaskProgressOverlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21BB44BE1DACF0D100ED67EE /* TaskProgressOverlayController.xib */; };
 		21BB44E61DAD224600ED67EE /* TasksNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BB44E51DAD224600ED67EE /* TasksNavigationController.m */; };
+		21C054451DBE20FB0094C7B1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21C054441DBE20FB0094C7B1 /* Settings.bundle */; };
 		23325335A97CCCACC42944AF /* libPods-Ostin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD3C223CF10EB177C6448781 /* libPods-Ostin.a */; };
 		5BADECA800A6702C5F474BB5 /* libPods-PriceTagDemoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1E01A49F9DF7B4A12A7407 /* libPods-PriceTagDemoUITests.a */; };
 		71454865FBE26CAE4A38F59F /* libPods-DesondoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D44F91159F3A6CCEC7C0AEB /* libPods-DesondoTests.a */; };
@@ -282,7 +285,6 @@
 		B9950B731CE1E5A0005B4375 /* Barcode manual@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9950B721CE1E5A0005B4375 /* Barcode manual@2x.png */; };
 		B9950B741CE20860005B4375 /* NwobjInventoryItemDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = B9950B5F1CD9F5EC005B4375 /* NwobjInventoryItemDescription.m */; };
 		B9950B751CE20914005B4375 /* NwobjSendCart.m in Sources */ = {isa = PBXBuildFile; fileRef = B9950B5B1CD2A9CB005B4375 /* NwobjSendCart.m */; };
-		B9A3FE121CA180D70060483D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B912617D1CA1554F003F56DF /* Settings.bundle */; };
 		B9A3FE131CA180D80060483D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B912617D1CA1554F003F56DF /* Settings.bundle */; };
 		B9A3FE1C1CA19E200060483D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B9A3FE1B1CA19E200060483D /* main.m */; };
 		B9A3FE251CA19E200060483D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9A3FE231CA19E200060483D /* Main.storyboard */; };
@@ -447,6 +449,9 @@
 		C676636E1D7DB15100398D58 /* x5Bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C676636C1D7DB15100398D58 /* x5Bar@2x.png */; };
 		C6770FCD1D994188002A60D9 /* NwobjItemDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = C6770FCC1D994188002A60D9 /* NwobjItemDescription.m */; };
 		C67BB3691DABE4BC0032F2A4 /* TaskInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = C67BB3681DABE4BC0032F2A4 /* TaskInformation.m */; };
+		C68216321DB668FD00833751 /* SOAPSetTaskDone.m in Sources */ = {isa = PBXBuildFile; fileRef = C68216311DB668FD00833751 /* SOAPSetTaskDone.m */; };
+		C68216351DB66AFF00833751 /* label.zpl in Resources */ = {isa = PBXBuildFile; fileRef = C68216341DB66AFF00833751 /* label.zpl */; };
+		C68216381DB66B1800833751 /* ZPLGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = C68216371DB66B1800833751 /* ZPLGenerator.m */; };
 		C690B4171CE8BB3100F4DF95 /* DiscountInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = C690B4161CE8BB3100F4DF95 /* DiscountInformation.m */; };
 		C690B4191CE8BBC100F4DF95 /* DiscountInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = C690B4161CE8BB3100F4DF95 /* DiscountInformation.m */; };
 		C6979E9A1D8FE6A800A0B51B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6979E991D8FE6A800A0B51B /* LoginViewController.m */; };
@@ -529,16 +534,21 @@
 		215EFF061DAB9ED600BE11C5 /* SearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableViewCell.h; sourceTree = "<group>"; };
 		215EFF071DAB9ED600BE11C5 /* SearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewCell.m; sourceTree = "<group>"; };
 		215EFF081DAB9ED600BE11C5 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
-		218228601DAF838200F04B70 /* ContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerViewController.h; sourceTree = "<group>"; };
-		218228611DAF838200F04B70 /* ContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerViewController.m; sourceTree = "<group>"; };
+		2174D57F1DB8CDDC00FCE9CE /* SOAPSavePrintFact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPSavePrintFact.h; sourceTree = "<group>"; };
+		2174D5801DB8CDDC00FCE9CE /* SOAPSavePrintFact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPSavePrintFact.m; sourceTree = "<group>"; };
 		218228631DAF864000F04B70 /* TasksCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksCell.h; sourceTree = "<group>"; };
 		218228641DAF864000F04B70 /* TasksCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TasksCell.m; sourceTree = "<group>"; };
 		218228651DAF864000F04B70 /* TasksCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TasksCell.xib; sourceTree = "<group>"; };
+		218228681DAFCB2A00F04B70 /* TaskItemInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskItemInformation.h; sourceTree = "<group>"; };
+		218228691DAFCB2A00F04B70 /* TaskItemInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskItemInformation.m; sourceTree = "<group>"; };
+		21B8DC791DB66CF900FD9161 /* BarcodeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarcodeFormatter.h; path = Utilities/BarcodeFormatter.h; sourceTree = "<group>"; };
+		21B8DC7A1DB66CF900FD9161 /* BarcodeFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BarcodeFormatter.m; path = Utilities/BarcodeFormatter.m; sourceTree = "<group>"; };
 		21BB44BC1DACF0D100ED67EE /* TaskProgressOverlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskProgressOverlayController.h; sourceTree = "<group>"; };
 		21BB44BD1DACF0D100ED67EE /* TaskProgressOverlayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskProgressOverlayController.m; sourceTree = "<group>"; };
 		21BB44BE1DACF0D100ED67EE /* TaskProgressOverlayController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskProgressOverlayController.xib; sourceTree = "<group>"; };
 		21BB44E41DAD224600ED67EE /* TasksNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksNavigationController.h; sourceTree = "<group>"; };
 		21BB44E51DAD224600ED67EE /* TasksNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TasksNavigationController.m; sourceTree = "<group>"; };
+		21C054441DBE20FB0094C7B1 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		26E6677B3BC7955145425ED2 /* Pods-DesondoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesondoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DesondoTests/Pods-DesondoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		305BD8FF1EE07980B92BBA8D /* Pods-Tsum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tsum.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tsum/Pods-Tsum.debug.xcconfig"; sourceTree = "<group>"; };
 		3441ACD00F2A17AFBB7CD4CD /* Pods-PriceTagDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceTagDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PriceTagDemoTests/Pods-PriceTagDemoTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -933,6 +943,11 @@
 		C6770FCC1D994188002A60D9 /* NwobjItemDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NwobjItemDescription.m; sourceTree = "<group>"; };
 		C67BB3671DABE4BC0032F2A4 /* TaskInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskInformation.h; sourceTree = "<group>"; };
 		C67BB3681DABE4BC0032F2A4 /* TaskInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskInformation.m; sourceTree = "<group>"; };
+		C68216301DB668FD00833751 /* SOAPSetTaskDone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPSetTaskDone.h; sourceTree = "<group>"; };
+		C68216311DB668FD00833751 /* SOAPSetTaskDone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPSetTaskDone.m; sourceTree = "<group>"; };
+		C68216341DB66AFF00833751 /* label.zpl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = label.zpl; sourceTree = "<group>"; };
+		C68216361DB66B1800833751 /* ZPLGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZPLGenerator.h; sourceTree = "<group>"; };
+		C68216371DB66B1800833751 /* ZPLGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZPLGenerator.m; sourceTree = "<group>"; };
 		C690B4151CE8BB3100F4DF95 /* DiscountInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscountInformation.h; sourceTree = "<group>"; };
 		C690B4161CE8BB3100F4DF95 /* DiscountInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscountInformation.m; sourceTree = "<group>"; };
 		C6979E981D8FE6A800A0B51B /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -1128,6 +1143,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21B8DC781DB66BFD00FD9161 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				21B8DC791DB66CF900FD9161 /* BarcodeFormatter.h */,
+				21B8DC7A1DB66CF900FD9161 /* BarcodeFormatter.m */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
 		4049A67B59B6A32B31D08993 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1294,6 +1318,8 @@
 		B92DCE171C845E60002AA184 /* Ostin */ = {
 			isa = PBXGroup;
 			children = (
+				C68216331DB66AFF00833751 /* ZPL */,
+				21B8DC781DB66BFD00FD9161 /* Utilities */,
 				C6F601A71D9D1D060095AE21 /* CoreData */,
 				C67103F61D93DFA6000AEC24 /* Search */,
 				C67103EB1D93CACB000AEC24 /* Tasks */,
@@ -1316,6 +1342,7 @@
 				B957B0D81D1C291B002A5256 /* OstinViewController.m */,
 				B92DCE411C846002002AA184 /* OstinPriceTag.xib */,
 				B92DCE291C845E60002AA184 /* Info.plist */,
+				21C054441DBE20FB0094C7B1 /* Settings.bundle */,
 				B92DCE181C845E60002AA184 /* Supporting Files */,
 			);
 			path = Ostin;
@@ -1800,6 +1827,10 @@
 				C66723911DAAEA87001B30AC /* SOAPTasks.m */,
 				C607A6091DB0E0E000F3E5E9 /* SOAPTaskWareBinding.h */,
 				C607A60A1DB0E0E000F3E5E9 /* SOAPTaskWareBinding.m */,
+				2174D57F1DB8CDDC00FCE9CE /* SOAPSavePrintFact.h */,
+				2174D5801DB8CDDC00FCE9CE /* SOAPSavePrintFact.m */,
+				C68216301DB668FD00833751 /* SOAPSetTaskDone.h */,
+				C68216311DB668FD00833751 /* SOAPSetTaskDone.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1813,6 +1844,8 @@
 				C6069EE81D92D873008C3F58 /* GroupInformation.m */,
 				C67BB3671DABE4BC0032F2A4 /* TaskInformation.h */,
 				C67BB3681DABE4BC0032F2A4 /* TaskInformation.m */,
+				218228681DAFCB2A00F04B70 /* TaskItemInformation.h */,
+				218228691DAFCB2A00F04B70 /* TaskItemInformation.m */,
 			);
 			name = Protocol;
 			sourceTree = "<group>";
@@ -1866,8 +1899,6 @@
 			children = (
 				21BB44E41DAD224600ED67EE /* TasksNavigationController.h */,
 				21BB44E51DAD224600ED67EE /* TasksNavigationController.m */,
-				218228601DAF838200F04B70 /* ContainerViewController.h */,
-				218228611DAF838200F04B70 /* ContainerViewController.m */,
 				C67103EC1D93CAE7000AEC24 /* ItemsListViewController.h */,
 				C67103ED1D93CAE7000AEC24 /* ItemsListViewController.m */,
 				C67103EF1D93CB59000AEC24 /* ItemsListCell.h */,
@@ -1939,6 +1970,16 @@
 				C6770FCC1D994188002A60D9 /* NwobjItemDescription.m */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		C68216331DB66AFF00833751 /* ZPL */ = {
+			isa = PBXGroup;
+			children = (
+				C68216341DB66AFF00833751 /* label.zpl */,
+				C68216361DB66B1800833751 /* ZPLGenerator.h */,
+				C68216371DB66B1800833751 /* ZPLGenerator.m */,
+			);
+			path = ZPL;
 			sourceTree = "<group>";
 		};
 		C6979E971D8FE67900A0B51B /* Login */ = {
@@ -2479,7 +2520,6 @@
 			files = (
 				C67103EA1D93271C000AEC24 /* navigation@2x.png in Resources */,
 				B907ADE01D095C8000B44BF1 /* Barcode manual@2x.png in Resources */,
-				B9A3FE121CA180D70060483D /* Settings.bundle in Resources */,
 				B957B0FE1D1C2A2D002A5256 /* 99002520874.jpg in Resources */,
 				B957B1111D1C2A2D002A5256 /* MP4O9864G.jpg in Resources */,
 				B90CE4941C89F15100DFB3E4 /* eac.png in Resources */,
@@ -2505,6 +2545,7 @@
 				B957B11D1D1D25D1002A5256 /* Icon.png in Resources */,
 				215EFF0A1DAB9ED600BE11C5 /* SearchTableViewCell.xib in Resources */,
 				B957B10D1D1C2A2D002A5256 /* 8813780299.jpg in Resources */,
+				C68216351DB66AFF00833751 /* label.zpl in Resources */,
 				C67103F31D93CB59000AEC24 /* ItemsListCell.xib in Resources */,
 				B92DCE421C846002002AA184 /* OstinPriceTag.xib in Resources */,
 				B957B1181D1C2A2D002A5256 /* MT4O9765M.jpg in Resources */,
@@ -2524,6 +2565,7 @@
 				B957B1101D1C2A2D002A5256 /* MP4O9264G.jpg in Resources */,
 				B957B1091D1C2A2D002A5256 /* 99002777294.jpg in Resources */,
 				B957B1171D1C2A2D002A5256 /* MT2O9469M.jpg in Resources */,
+				21C054451DBE20FB0094C7B1 /* Settings.bundle in Resources */,
 				B957B1021D1C2A2D002A5256 /* 99002774407.jpg in Resources */,
 				B957B0FF1D1C2A2D002A5256 /* 99002774088.jpg in Resources */,
 				B957B10E1D1C2A2D002A5256 /* 9941170299.jpg in Resources */,
@@ -3206,10 +3248,10 @@
 				C655B1BE1DA5399000EE7AB9 /* SynchronizationController.m in Sources */,
 				C6F600C91D9C363C0095AE21 /* PI_MOBILE_SERVICEService.m in Sources */,
 				C6F600C81D9C363C0095AE21 /* NSDate+ISO8601Unparsing.m in Sources */,
-				218228621DAF838200F04B70 /* ContainerViewController.m in Sources */,
 				B9F5F0B11D0057650010E1EA /* NwobjInventoryItemDescription.m in Sources */,
 				B9F5F0B21D0057650010E1EA /* NwobjAuthorization.m in Sources */,
 				C6979E9A1D8FE6A800A0B51B /* LoginViewController.m in Sources */,
+				2182286A1DAFCB2A00F04B70 /* TaskItemInformation.m in Sources */,
 				B907ADDA1D095B8A00B44BF1 /* MelonViewController.m in Sources */,
 				C6F601AA1D9D1D800095AE21 /* ItemsModel.xcdatamodeld in Sources */,
 				B957B0D91D1C291B002A5256 /* OstinViewController.m in Sources */,
@@ -3241,6 +3283,7 @@
 				C67103F21D93CB59000AEC24 /* ItemsListCell.m in Sources */,
 				B92DCE311C845E92002AA184 /* DetailsTableViewController.m in Sources */,
 				B92DCE2E1C845E89002AA184 /* ViewController.m in Sources */,
+				21B8DC7B1DB66CF900FD9161 /* BarcodeFormatter.m in Sources */,
 				B957B0D51D1BF5AC002A5256 /* MenuViewController.m in Sources */,
 				C607A60B1DB0E0E000F3E5E9 /* SOAPTaskWareBinding.m in Sources */,
 				C667239B1DAAEEFB001B30AC /* Task+CoreDataClass.m in Sources */,
@@ -3260,12 +3303,15 @@
 				C667237E1DA81285001B30AC /* Barcode+CoreDataClass.m in Sources */,
 				B92DCE2F1C845E8C002AA184 /* AppDelegate.m in Sources */,
 				B92DCE381C845F16002AA184 /* NwobjItemDescription.m in Sources */,
+				C68216321DB668FD00833751 /* SOAPSetTaskDone.m in Sources */,
 				B92DCE351C845F0C002AA184 /* MCPNetworkImpl.m in Sources */,
 				C667239D1DAAEEFB001B30AC /* TaskItemBinding+CoreDataClass.m in Sources */,
 				C6F600CC1D9C363C0095AE21 /* xsd.m in Sources */,
 				C6F601CA1DA256A30095AE21 /* NwobjStock.m in Sources */,
 				C6979EAD1D91462C00A0B51B /* CategoriesViewController.m in Sources */,
+				C68216381DB66B1800833751 /* ZPLGenerator.m in Sources */,
 				B92DCE3A1C845F21002AA184 /* WarehouseInformation.m in Sources */,
+				2174D5811DB8CDDC00FCE9CE /* SOAPSavePrintFact.m in Sources */,
 				B92DCE401C845FF2002AA184 /* OstinPriceTag.m in Sources */,
 				B907ADD91D095B8600B44BF1 /* SettingsViewController.m in Sources */,
 				B907ADDB1D095C0000B44BF1 /* CommonConfirmButton.m in Sources */,
@@ -3738,12 +3784,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = QR4V9984C7;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 					"OSTIN=1",
 					"OFFLINE=1",
+					"ZPL=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3773,10 +3821,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = QR4V9984C7;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"OSTIN=1",
 					"OFFLINE=1",
+					"ZPL=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3891,6 +3941,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = QR4V9984C7;
 				ENABLE_BITCODE = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -3918,6 +3969,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				DEVELOPMENT_TEAM = QR4V9984C7;
 				ENABLE_BITCODE = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"RETRACT=1",

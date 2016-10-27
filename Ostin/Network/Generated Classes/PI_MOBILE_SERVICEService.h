@@ -67,10 +67,13 @@
 @class PI_MOBILE_SERVICEService_SequenceElement_A_STR_COUNTNUMBEROUT;
 @class PI_MOBILE_SERVICEService_SequenceElement_A_TOTAL_SIZE_KBNUMBEROUT;
 @class PI_MOBILE_SERVICEService_SequenceElement_CSV_ROWS;
+@class PI_MOBILE_SERVICEService_SequenceElement_EXECUTED_USER;
 @class PI_MOBILE_SERVICEService_SequenceElement_INC_CODE;
+@class PI_MOBILE_SERVICEService_SequenceElement_IS_LABEL_PRINTED;
 @class PI_MOBILE_SERVICEService_SequenceElement_PASTINGBILLPRINTINFO;
 @class PI_MOBILE_SERVICEService_SequenceElement_PORTIONS_INFO;
 @class PI_MOBILE_SERVICEService_SequenceElement_TASK_NUM;
+@class PI_MOBILE_SERVICEService_SequenceElement_TASK_TYPE;
 @class PI_MOBILE_SERVICEService_SequenceElement_TPORTIONINFOARRAY;
 @class PI_MOBILE_SERVICEService_SequenceElement_TROWARRAY;
 @class PI_MOBILE_SERVICEService_SequenceElement_VAL;
@@ -188,6 +191,13 @@
 
 @end
 @interface PI_MOBILE_SERVICEService_SequenceElement_VAL : NSObject
++ (NSString *)deserializeNode:(xmlNodePtr)node;
++ (NSString *)deserializeAttribute:(const char *)attrName ofNode:(xmlNodePtr)node;
++ (void)serializeToChildOf:(xmlNodePtr)node withName:(const char *)childName value:(NSString *)value;
++ (void)serializeToProperty:(const char *)property onNode:(xmlNodePtr)node
+                      value:(NSString *)value;
+@end
+@interface PI_MOBILE_SERVICEService_SequenceElement_TASK_TYPE : NSObject
 + (NSString *)deserializeNode:(xmlNodePtr)node;
 + (NSString *)deserializeAttribute:(const char *)attrName ofNode:(xmlNodePtr)node;
 + (void)serializeToChildOf:(xmlNodePtr)node withName:(const char *)childName value:(NSString *)value;
@@ -443,6 +453,13 @@
 + (instancetype)deserializeNode:(xmlNodePtr)cur;
 
 @end
+@interface PI_MOBILE_SERVICEService_SequenceElement_EXECUTED_USER : NSObject
++ (NSString *)deserializeNode:(xmlNodePtr)node;
++ (NSString *)deserializeAttribute:(const char *)attrName ofNode:(xmlNodePtr)node;
++ (void)serializeToChildOf:(xmlNodePtr)node withName:(const char *)childName value:(NSString *)value;
++ (void)serializeToProperty:(const char *)property onNode:(xmlNodePtr)node
+                      value:(NSString *)value;
+@end
 @interface PI_MOBILE_SERVICEService_SequenceElement_TASK_NUM : NSObject
 + (NSString *)deserializeNode:(xmlNodePtr)node;
 + (NSString *)deserializeAttribute:(const char *)attrName ofNode:(xmlNodePtr)node;
@@ -457,6 +474,13 @@
 + (void)serializeToProperty:(const char *)property onNode:(xmlNodePtr)node
                       value:(NSString *)value;
 @end
+@interface PI_MOBILE_SERVICEService_SequenceElement_IS_LABEL_PRINTED : NSObject
++ (NSString *)deserializeNode:(xmlNodePtr)node;
++ (NSString *)deserializeAttribute:(const char *)attrName ofNode:(xmlNodePtr)node;
++ (void)serializeToChildOf:(xmlNodePtr)node withName:(const char *)childName value:(NSString *)value;
++ (void)serializeToProperty:(const char *)property onNode:(xmlNodePtr)node
+                      value:(NSString *)value;
+@end
 @interface PI_MOBILE_SERVICEService_PASTINGBILLPRINTWAREINFO_IntType : NSObject
 - (void)addElementsToNode:(xmlNodePtr)node;
 + (void)serializeToChildOf:(xmlNodePtr)node withName:(const char *)childName value:(PI_MOBILE_SERVICEService_PASTINGBILLPRINTWAREINFO_IntType *)value;
@@ -464,7 +488,10 @@
 
 /* elements */
 @property (nonatomic, strong) NSString * TASK_NUM;
+@property (nonatomic, strong) NSString * TASK_TYPE;
 @property (nonatomic, strong) NSString * WARE_CODE;
+@property (nonatomic, strong) NSString * IS_LABEL_PRINTED;
+@property (nonatomic, strong) NSString * EXECUTED_USER;
 @end
 @interface PI_MOBILE_SERVICEService_ElementSVARCHAR2SET_INC_DONEInput : NSObject
 - (void)addElementsToNode:(xmlNodePtr)node;
@@ -523,8 +550,10 @@
 + (instancetype)deserializeNode:(xmlNodePtr)cur;
 
 /* elements */
+@property (nonatomic, strong) NSString * A_TASK_TYPEVARCHAR2IN;
 @property (nonatomic, strong) NSString * A_TASK_NUMVARCHAR2IN;
 @property (nonatomic, strong) PI_MOBILE_SERVICEService_SequenceElement_A_MESSAGEVARCHAR2OUT * A_MESSAGEVARCHAR2OUT;
+@property (nonatomic, strong) NSString * A_EXECUTED_USERVARCHAR2IN;
 @property (nonatomic, strong) NSString * A_DEVICE_UIDVARCHAR2IN;
 @end
 @interface PI_MOBILE_SERVICEService_ElementWARE_INFOInput : NSObject

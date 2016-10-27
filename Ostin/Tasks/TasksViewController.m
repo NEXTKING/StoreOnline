@@ -9,8 +9,9 @@
 #import "TasksViewController.h"
 #import "TasksCell.h"
 #import "ItemsListViewController.h"
+#import "MCPServer.h"
 
-@interface TasksViewController ()
+@interface TasksViewController () <TasksDelegate>
 {
     NSArray *_tasks;
 }
@@ -27,8 +28,37 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
     self.tableView.estimatedRowHeight = 44.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self.tableView registerNib:[UINib nibWithNibName:@"TasksCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self loadData];
+}
+
+- (void)loadData
+{
+    NSNumber *userID = @([[[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"] integerValue]);
     
-    _tasks = @[@{@"taskName":@"ЗнП 580", @"taskDescription":@"Обработано 3 из 18"}, @{@"taskName":@"ЗнП 581", @"taskDescription":@"Обработано 8 из 18"}];
+    __weak typeof(self) wself = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[MCPServer instance] tasks:wself userID:userID];
+    });
+}
+
+- (void)tasksComplete:(int)result tasks:(NSArray<TaskInformation *> *)tasks
+{
+    __weak typeof(self) wself = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (result == 0)
+        {
+            _tasks = tasks;
+            [wself.tableView reloadData];
+        }
+        else
+        {
+            
+        }
+    });
 }
 
 #pragma mark - Table view data source
@@ -43,10 +73,14 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TasksCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-    NSDictionary *task = _tasks[indexPath.row];
+    TaskInformation *task = [_tasks objectAtIndex:indexPath.row];
     
-    cell.titleLabel.text = task[@"taskName"];
-    cell.statusLabel.text = task[@"taskDescription"];
+    cell.titleLabel.text = task.name;
+    cell.statusLabel.text = task.status == TaskInformationStatusNotStarted ? @"Новое" : task.status == TaskInformationStatusInProgress ? @"Не завершено" : @"Завершено";
+    
+    UIColor *greenColor = [UIColor colorWithRed:215/255.0 green:1.0 blue:215/255.0 alpha:1.0];
+    UIColor *whiteColor = [UIColor whiteColor];
+    cell.backgroundColor = task.status == TaskInformationStatusComplete ? greenColor : whiteColor;
     
     return cell;
 }
@@ -61,24 +95,11 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
     if ([segue.identifier isEqualToString:@"TaskItemsListSegue"])
     {
         NSIndexPath *indexPath = sender;
+        TaskInformation *task = [_tasks objectAtIndex:indexPath.row];
         ItemsListViewController *dvc = segue.destinationViewController;
         
-        if (indexPath.row == 0)
-        {
-            NSDateComponents *components = [[NSDateComponents alloc] init];
-            [components setDay:-1];
-            
-            NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:components toDate:[NSDate date] options:0];
-            dvc.fakeData = @{@"date":date, @"title":@"ЗнП 580", @"totalCount":[NSNumber numberWithInt:18], @"completeCount":[NSNumber numberWithInt:3]};
-        }
-        else
-        {
-            NSDateComponents *components = [[NSDateComponents alloc] init];
-            [components setMinute:-20];
-            
-            NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:components toDate:[NSDate date] options:0];
-            dvc.fakeData = @{@"date":date, @"title":@"ЗнП 581", @"totalCount":[NSNumber numberWithInt:18], @"completeCount":[NSNumber numberWithInt:8]};
-        }
+        dvc.tasksMode = YES;
+        dvc.task = task;
     }
 }
 

@@ -23,6 +23,8 @@
     NSDictionary*         _unsortedCookies;
 }
 
+@property(nonatomic, copy) NSError* error;
+
 - (NSString*) percentEncode:(NSString*)clearValue;
 - (NSString*) percentDecode:(NSString*)percentValue;
 

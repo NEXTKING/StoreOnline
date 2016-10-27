@@ -26,8 +26,14 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    DTDevices *dtdev = [DTDevices sharedDevice];
-    [dtdev addDelegate:self];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(scanNotification:)
+                                                 name:@"BarcodeScanNotification"
+                                               object:nil];
+    
+    //DTDevices *dtdev = [DTDevices sharedDevice];
+    //[dtdev addDelegate:self];
     [self.navigationController setToolbarHidden:NO animated:YES];
     
     if (_selectedIndexPath)
@@ -47,17 +53,15 @@
 - (void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    DTDevices *dtdev = [DTDevices sharedDevice];
-    [dtdev removeDelegate:self];
+    //DTDevices *dtdev = [DTDevices sharedDevice];
+    //[dtdev removeDelegate:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
 }
 
-- (void) barcodeData:(NSString *)barcode type:(int)type
+- (void) scanNotification:(NSNotification*)aNotification
 {
-    [self handleBarcodeData:barcode];
-}
-
-- (void) barcodeData:(NSString *)barcode isotype:(NSString *)isotype
-{
+    NSString* barcode = [aNotification.object objectForKey:@"barcode"];
     [self handleBarcodeData:barcode];
 }
 

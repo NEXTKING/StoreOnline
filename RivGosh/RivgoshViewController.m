@@ -29,22 +29,16 @@
 {
     [super viewDidLoad];
     self.navigationItem.hidesBackButton = YES;
-    DTDevices *dtDevice = [DTDevices sharedDevice];
-    [dtDevice addDelegate:self];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    DTDevices *dtDevice = [DTDevices sharedDevice];
-    [dtDevice removeDelegate:self];
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    DTDevices *dtDevice = [DTDevices sharedDevice];
-    [dtDevice addDelegate:self];
 }
 
 - (void) viewDidAppear:(BOOL)animated

@@ -14,7 +14,6 @@
 @interface ViewController ()  <PrinterControllerDelegate>
 {
     PrintViewController *printVC;
-    NSString* lastBarcode;
 }
 
 @end
@@ -46,11 +45,8 @@
     _numberOfCopies = 1;
     
     [self clearInfo];
-    
-    //[self drawImage];
-    
-    //[self barcodeData:@"111199990009" type:0];
 }
+
 
 - (void) clearInfo
 {
@@ -65,6 +61,11 @@
     [super viewWillAppear:animated];
     DTDevices *dtdev = [DTDevices sharedDevice];
     [dtdev addDelegate:self];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(scanNotification:)
+                                                 name:@"BarcodeScanNotification"
+                                               object:nil];
 }
 
 - (void) viewDidDisappear:(BOOL)animated
@@ -72,6 +73,8 @@
     [super viewDidDisappear:animated];
     DTDevices *dtdev = [DTDevices sharedDevice];
     [dtdev removeDelegate:self];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void) viewDidLayoutSubviews
@@ -110,7 +113,11 @@
     UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Отправить" style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * action) {
                                                           
-                                                              [self barcodeData:alert.textFields[0].text type:0];
+                                                              NSDictionary* params = @{@"barcode":alert.textFields[0].text,@"type":@(0)};
+                                                              
+                                                              [[NSNotificationCenter defaultCenter]
+                                                               postNotificationName:@"BarcodeScanNotification"
+                                                               object:params];
                                                           }];
     
     [alert addTextFieldWithConfigurationHandler:^(UITextField* textField)
@@ -184,7 +191,11 @@
 {
     printVC.shouldRetrack = self.shouldRetrack;
     printVC.view.hidden = NO;
+#ifndef ZPL
     [printVC print:_currentItemInfo copies:_numberOfCopies];
+#else
+    [printVC printZPL:_currentZPLInfo copies:1];
+#endif
 }
 
 - (IBAction)retractAction:(id)sender
@@ -230,18 +241,13 @@
 
 #pragma mark - Scanner Delegate
 
-- (void) barcodeData:(NSString *)barcode isotype:(NSString *)isotype
+- (void) scanNotification:(NSNotification*)aNotification
 {
-    lastBarcode = barcode;
-    [[NSUserDefaults standardUserDefaults] setValue:barcode forKey:@"LastBarcode"];
-    [self requestItemInfoWithCode:[self cleanBarcode:barcode] isoType:0];
-}
-
-- (void) barcodeData:(NSString *)barcode type:(int)type
-{
-    lastBarcode = barcode;
-    [[NSUserDefaults standardUserDefaults] setValue:barcode forKey:@"LastBarcode"];
-    [self requestItemInfoWithCode:[self cleanBarcode:barcode] isoType:type];
+    lastBarcode = [aNotification.object objectForKey:@"barcode"];
+    int type    = [[aNotification.object objectForKey:@"type"] intValue];
+    
+    [[NSUserDefaults standardUserDefaults] setValue:lastBarcode forKey:@"LastBarcode"];
+    [self requestItemInfoWithCode:[self cleanBarcode:lastBarcode] isoType:type];
 }
 
 - (NSString*) cleanBarcode:(NSString*) barcode
@@ -453,6 +459,10 @@
     _itemArticleLabel.text = itemDescription.article;
     _barcodeLabel.text = itemDescription.barcode;
     _itemPriceLabel.text = [NSString stringWithFormat:@"%.2f р.", itemDescription.price];
+    
+    DTDevices* dtDev = [DTDevices sharedDevice];
+    _printButton.enabled = (dtDev.connstate == CONN_CONNECTED) && _currentItemInfo;
+    _printButtonItem.enabled = (dtDev.connstate == CONN_CONNECTED) && _currentItemInfo;
 }
 
 @end

@@ -20,6 +20,9 @@
 
 - (void) main
 {
+    _privateContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    [_privateContext setParentContext:_dataController.managedObjectContext];
+    
     if (self.isCancelled)
         return;
     
@@ -40,8 +43,21 @@
         if (self.isCancelled || !items)
             return;
         
-        BOOL localSuccess = NO;
-        localSuccess = [self saveItems:items];
+        __block BOOL localSuccess = NO;
+        
+        [_privateContext performBlockAndWait:^{
+            localSuccess = [self saveItems:items];
+            
+            if (localSuccess)
+            {
+                [self.dataController.managedObjectContext performBlockAndWait:^{
+                
+                    localSuccess = [_dataController.managedObjectContext save:nil];
+            
+                }];
+            }
+        }];
+    
         
         if (!localSuccess || self.isCancelled)
             return;
@@ -85,7 +101,7 @@
     request.A_STR_COUNTNUMBEROUT = [PI_MOBILE_SERVICEService_SequenceElement_A_STR_COUNTNUMBEROUT new];
     request.A_COUNTNUMBEROUT = [PI_MOBILE_SERVICEService_SequenceElement_A_COUNTNUMBEROUT new];
     
-    [binding.customHeaders setObject:_authValue forKey:@"Authorization"];
+    [binding.customHeaders setObject:self.authValue forKey:@"Authorization"];
     
     
     PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBindingResponse* response = [binding GET_PORTION_INFOUsingGET_PORTION_INFOInput:request];

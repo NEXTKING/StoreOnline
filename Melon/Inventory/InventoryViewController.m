@@ -13,7 +13,6 @@
 
 @interface InventoryViewController () <UIAlertViewDelegate>
 {
-    BOOL secondRequest;
 }
 
 @end
@@ -24,7 +23,6 @@
     [super viewDidLoad];
      _statusView.layer.cornerRadius = _statusView.frame.size.height/2;
     DTDevices *dtDevice = [DTDevices sharedDevice];
-    [dtDevice addDelegate:self];
     [dtDevice connect];
     [self connectionState:dtDevice.connstate];
     
@@ -67,6 +65,12 @@
                                             selector:@selector(save)
                                                 name:UIApplicationWillResignActiveNotification
                                               object:nil];
+    
+   /* NSDictionary* params = @{@"barcode":@"123",@"type":@(0)};
+    
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:@"BarcodeScanNotification"
+     object:params];*/
     
     // Do any additional setup after loading the view.
 }
@@ -148,15 +152,22 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    DTDevices *dtdev = [DTDevices sharedDevice];
-    [dtdev addDelegate:self];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(scanNotification:)
+                                                 name:@"BarcodeScanNotification"
+                                               object:nil];
 }
 
 - (void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    DTDevices *dtdev = [DTDevices sharedDevice];
-    [dtdev removeDelegate:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void) scanNotification:(NSNotification*)aNotification
+{
+    NSString* barcode = [aNotification.object objectForKey:@"barcode"];
+    [self requestItemInformation:barcode];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -196,7 +207,7 @@
 
 - (void) requestItemInformation:(NSString*) code
 {
-    [[MCPServer instance] inventoryItemDescription:self itemCode:code];
+    [[MCPServer instance] itemDescription:self itemCode:code shopCode:nil isoType:0];
 }
 
 - (void) itemDescriptionComplete:(int)result itemDescription:(ItemInformation *)itemDescription
@@ -211,29 +222,15 @@
                     param = currentParam;
             }
         }
-        
-        if(secondRequest)
-            secondRequest = NO;
-        
-        //if (![itemDescription.barcode isEqualToString:@"788800"])
-        //    [self barcodeData:@"788800" type:0];
     }
     else
     {
         
-        if (secondRequest)
-        {
-            secondRequest = NO;
+        
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Внимание" message:@"Товар не найден в базе" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
             alert.tag = 0;
             [alert show];
-        }
-        else
-        {
-            secondRequest = YES;
-            [[MCPServer instance] itemDescription:self itemCode:itemDescription.barcode shopCode:nil isoType:0];
-            return;
-        }
+    
     }
     
     //Adding date to item
