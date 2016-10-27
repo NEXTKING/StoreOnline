@@ -24,6 +24,7 @@
 		21C054511DC238DA0094C7B1 /* Group+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C0544F1DC238DA0094C7B1 /* Group+CoreDataProperties.m */; };
 		21C054561DC239220094C7B1 /* Subgroup+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C054531DC239220094C7B1 /* Subgroup+CoreDataClass.m */; };
 		21C054571DC239220094C7B1 /* Subgroup+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C054551DC239220094C7B1 /* Subgroup+CoreDataProperties.m */; };
+		21C0545A1DC23F8E0094C7B1 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C054591DC23F8E0094C7B1 /* AsyncImageView.m */; };
 		23325335A97CCCACC42944AF /* libPods-Ostin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD3C223CF10EB177C6448781 /* libPods-Ostin.a */; };
 		5BADECA800A6702C5F474BB5 /* libPods-PriceTagDemoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1E01A49F9DF7B4A12A7407 /* libPods-PriceTagDemoUITests.a */; };
 		71454865FBE26CAE4A38F59F /* libPods-DesondoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D44F91159F3A6CCEC7C0AEB /* libPods-DesondoTests.a */; };
@@ -567,6 +568,8 @@
 		21C054531DC239220094C7B1 /* Subgroup+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Subgroup+CoreDataClass.m"; sourceTree = "<group>"; };
 		21C054541DC239220094C7B1 /* Subgroup+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Subgroup+CoreDataProperties.h"; sourceTree = "<group>"; };
 		21C054551DC239220094C7B1 /* Subgroup+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Subgroup+CoreDataProperties.m"; sourceTree = "<group>"; };
+		21C054581DC23F8E0094C7B1 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
+		21C054591DC23F8E0094C7B1 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
 		26E6677B3BC7955145425ED2 /* Pods-DesondoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesondoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DesondoTests/Pods-DesondoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		305BD8FF1EE07980B92BBA8D /* Pods-Tsum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tsum.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tsum/Pods-Tsum.debug.xcconfig"; sourceTree = "<group>"; };
 		3441ACD00F2A17AFBB7CD4CD /* Pods-PriceTagDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceTagDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PriceTagDemoTests/Pods-PriceTagDemoTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1350,6 +1353,8 @@
 				B92DCE261C845E60002AA184 /* LaunchScreen.storyboard */,
 				B92DCE3E1C845FF2002AA184 /* OstinPriceTag.h */,
 				B92DCE3F1C845FF2002AA184 /* OstinPriceTag.m */,
+				21C054581DC23F8E0094C7B1 /* AsyncImageView.h */,
+				21C054591DC23F8E0094C7B1 /* AsyncImageView.m */,
 				B90CE4861C89A05400DFB3E4 /* AntiAliasingLabel.h */,
 				B90CE4871C89A05400DFB3E4 /* AntiAliasingLabel.m */,
 				B90CE4891C89B44600DFB3E4 /* AntiAliasView.h */,
@@ -3291,6 +3296,7 @@
 				B9F5F0B51D0057650010E1EA /* NwobjZones.m in Sources */,
 				B92DCE301C845E8F002AA184 /* PrintViewController.m in Sources */,
 				C66723821DA81285001B30AC /* Price+CoreDataClass.m in Sources */,
+				21C0545A1DC23F8E0094C7B1 /* AsyncImageView.m in Sources */,
 				C6F601AD1D9D63440095AE21 /* MCPOfflineInmpl+Ostin.m in Sources */,
 				B92DCE341C845F0A002AA184 /* MCPSimulatorImpl.m in Sources */,
 				B90CE4881C89A05400DFB3E4 /* AntiAliasingLabel.m in Sources */,

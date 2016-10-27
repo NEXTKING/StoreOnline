@@ -15,6 +15,7 @@
 #import "BarcodeFormatter.h"
 #import "PrintViewController.h"
 #import "ZPLGenerator.h"
+#import "AsyncImageView.h"
 
 @interface ItemsListViewController () <ItemDescriptionDelegate, PrinterControllerDelegate>
 {
@@ -191,6 +192,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ItemsListCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    cell.itemImageView.image = [UIImage imageNamed:@"no-image.png"];
     
     if (_tasksMode)
     {
@@ -206,6 +208,10 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
         UIColor *greenColor = [UIColor colorWithRed:215/255.0 green:1.0 blue:215/255.0 alpha:1.0];
         UIColor *whiteColor = [UIColor whiteColor];
         cell.backgroundColor = (taskItemInfo.scanned == taskItemInfo.quantity) && taskItemInfo.quantity != 0 ? greenColor : whiteColor;
+        
+        NSString *urlString = [item additionalParameterValueForName:@"imageURL"];
+        if (urlString != nil)
+            cell.itemImageView.imageURL = [NSURL URLWithString:urlString];
     }
     else
     {
@@ -217,9 +223,19 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
         
         cell.quantityLabel.hidden = YES;
         cell.backgroundColor = [UIColor whiteColor];
+        
+        NSString *urlString = [item additionalParameterValueForName:@"imageURL"];
+        if (urlString != nil)
+            cell.itemImageView.imageURL = [NSURL URLWithString:urlString];
     }
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ItemsListCell *_cell = (ItemsListCell *)cell;
+    [[AsyncImageLoader sharedLoader] cancelLoadingImagesForTarget:_cell.itemImageView];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

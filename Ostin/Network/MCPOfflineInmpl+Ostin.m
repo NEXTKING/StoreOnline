@@ -17,6 +17,9 @@
 #import "Price+CoreDataClass.h"
 #import "Task+CoreDataClass.h"
 #import "TaskItemBinding+CoreDataClass.h"
+#import "Image+CoreDataClass.h"
+#import "Group+CoreDataClass.h"
+#import "Subgroup+CoreDataClass.h"
 #import "SOAPWares.h"
 #import "SOAPBarcodes.h"
 #import "SOAPPrices.h"
@@ -25,6 +28,7 @@
 #import "SOAPSavePrintFact.h"
 #import "SOAPSetTaskDone.h"
 #import "DTDevices.h"
+#import <CommonCrypto/CommonDigest.h>
 
 @interface MCPOfflineInmpl_Ostin ()
 {
@@ -523,44 +527,44 @@
     
     
     NSArray* results = [moc executeFetchRequest:request error:nil];
-    
-    
     if (results.count < 1)
     {
         [delegate itemDescriptionComplete:1 itemDescription:nil];
         return;
     }
-    
-    
     Barcode *barcodeDB = results[0];
+    
     request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"Item" inManagedObjectContext:self.dataController.managedObjectContext]];
-    
     [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %@", barcodeDB.itemID]];
     results = [moc executeFetchRequest:request error:nil];
-    
     if (results.count < 1)
     {
         [delegate itemDescriptionComplete:1 itemDescription:nil];
         return;
     }
-    
-    
     Item *itemDB = results[0];
-    [request setEntity:[NSEntityDescription entityForName:@"Price" inManagedObjectContext:self.dataController.managedObjectContext]];
     
+    [request setEntity:[NSEntityDescription entityForName:@"Price" inManagedObjectContext:self.dataController.managedObjectContext]];
     [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %@", barcodeDB.itemID]];
     results = [moc executeFetchRequest:request error:nil];
-    
     if (results.count < 1)
     {
         [delegate itemDescriptionComplete:1 itemDescription:nil];
         return;
     }
-    
     Price *priceDB = results[0];
     
-    ItemInformation *item = [self itemInfoFromDBEntities:itemDB barcode:barcodeDB price:priceDB];
+    request = [NSFetchRequest fetchRequestWithEntityName:@"Image"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %@", barcodeDB.itemID]];
+    results = [moc executeFetchRequest:request error:nil];
+    Image *imageDB;
+    if (results.count < 1)
+        imageDB = nil;
+    else
+        imageDB = results[0];
+    
+    ItemInformation *item = [self itemInfoFromDBEntities:itemDB barcode:barcodeDB price:priceDB image:imageDB];
     
     [delegate itemDescriptionComplete:0 itemDescription:item];
 }
@@ -599,14 +603,23 @@
     }
     Barcode *barcodeDB = results[0];
     
-    ItemInformation *item = [self itemInfoFromDBEntities:itemDB barcode:barcodeDB price:priceDB];
+    request = [NSFetchRequest fetchRequestWithEntityName:@"Image"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", itemID]];
+    results = [moc executeFetchRequest:request error:nil];
+    Image *imageDB;
+    if (results.count < 1)
+        imageDB = nil;
+    else
+        imageDB = results[0];
+    
+    ItemInformation *item = [self itemInfoFromDBEntities:itemDB barcode:barcodeDB price:priceDB image:imageDB];
     
     [delegate itemDescriptionComplete:0 itemDescription:item];
 }
 
 #pragma mark - Helpers
 
-- (ItemInformation*) itemInfoFromDBEntities:(Item*) itemDB barcode:(Barcode*)barcodeDB price:(Price*) priceDB
+- (ItemInformation*) itemInfoFromDBEntities:(Item*) itemDB barcode:(Barcode*)barcodeDB price:(Price*) priceDB image:(Image*) imageDB
 {
     ItemInformation* itemInfo = [ItemInformation new];
     
@@ -629,6 +642,8 @@
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"trademarkID" value:itemDB.trademarkID.stringValue]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"retailPrice" value:priceDB.retailPrice.stringValue]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"discount" value:[NSString stringWithFormat:@"%.0f", priceDB.discount.doubleValue]]];
+    if (imageDB != nil)
+        [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"imageURL" value:[self imageURLForFileName:imageDB.filename]]];
     
     itemInfo.itemId     = itemDB.itemID.integerValue;
     itemInfo.barcode    = barcodeDB.code128;
@@ -637,32 +652,33 @@
     itemInfo.price      = priceDB.catalogPrice.doubleValue;
     itemInfo.additionalParameters = additionalParameters;
     
-//    NSLog(@"itemId: %ld", itemDB.itemID.integerValue);
-//    NSLog(@"barcode: %@", barcodeDB.code128);
-//    NSLog(@"name: %@", itemDB.name);
-//    NSLog(@"article: %@", itemDB.itemCode);
-//    NSLog(@"price: %f", priceDB.catalogPrice.doubleValue);
-//    
-//    NSLog(@"additionalParameters.additionalInfo: %@", itemDB.additionalInfo);
-//    NSLog(@"additionalParameters.additionalSize: %@", itemDB.additionalSize);
-//    NSLog(@"additionalParameters.boxType: %@", itemDB.boxType);
-//    NSLog(@"additionalParameters.certificationAuthorittyCode: %@", itemDB.certificationAuthorittyCode);
-//    NSLog(@"additionalParameters.groupID: %@", itemDB.groupID.stringValue);
-//    NSLog(@"additionalParameters.itemCode: %@", itemDB.itemCode);
-//    NSLog(@"additionalParameters.itemCode_2: %@", itemDB.itemCode_2);
-//    NSLog(@"additionalParameters.line1: %@", itemDB.line1);
-//    NSLog(@"additionalParameters.line2: %@", itemDB.line2);
-//    NSLog(@"additionalParameters.priceHeader: %@", itemDB.priceHeader);
-//    NSLog(@"additionalParameters.size: %@", itemDB.size);
-//    NSLog(@"additionalParameters.sizeHeader: %@", itemDB.sizeHeader);
-//    NSLog(@"additionalParameters.storeNumber: %@", itemDB.storeNumber);
-//    NSLog(@"additionalParameters.subgroupID: %@", itemDB.subgroupID.stringValue);
-//    NSLog(@"additionalParameters.trademarkID: %@", itemDB.trademarkID.stringValue);
-    
     return itemInfo;
 }
 
-#pragma mark Core Data
+- (NSString *)imageURLForFileName:(NSString *)filename
+{
+    NSString* (^sha1)(NSString *) = ^(NSString *string) {
+        
+        NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
+        uint8_t digest[CC_SHA1_DIGEST_LENGTH];
+        CC_SHA1(data.bytes, (CC_LONG)data.length, digest);
+        
+        NSMutableString *output = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH * 2];
+        for (int i = 0; i < CC_SHA1_DIGEST_LENGTH; i++)
+            [output appendFormat:@"%02x", digest[i]];
+        
+        return output;
+    };
+    
+    NSString *picDir = [sha1(filename) substringToIndex:3];
+    NSString *width = @"400";
+    NSString *height = @"400";
+    NSString *algoritm = @"1";
+    NSString *hash = [sha1([NSString stringWithFormat:@"%@%@%@%@sportmaster404", filename, width, height, algoritm]) substringToIndex:4];
+    NSString *urlString = [NSString stringWithFormat:@"http://cdn.sportmaster.ru/upload/goods/%@/%@_%@_%@_%@/%@", picDir, width, height, algoritm, hash, filename];
+    
+    return urlString;
+}
 
 
 @end

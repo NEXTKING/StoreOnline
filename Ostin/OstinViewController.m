@@ -11,6 +11,7 @@
 #import "SettingsViewController.h"
 #import "ZPLGenerator.h"
 #import "BarcodeFormatter.h"
+#import "AsyncImageView.h"
 
 @interface OstinViewController ()
 {
@@ -95,8 +96,12 @@
 - (void) updateItemInfo:(ItemInformation *)itemInfo
 {
     [super updateItemInfo:itemInfo];
-
-    _imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"no-image.png"]];
+    
+    _imageView.image = [UIImage imageNamed:@"no-image.png"];
+    
+    NSString *urlString = [itemInfo additionalParameterValueForName:@"imageURL"];
+    if (urlString != nil)
+        _imageView.imageURL = [NSURL URLWithString:urlString];
 }
 
 - (void) compareAmount:(ItemInformation *)itemInfo
