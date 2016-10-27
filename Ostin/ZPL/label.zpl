@@ -66,9 +66,9 @@ FieldBlock($Ware.Description$, 50, 92, 19, @"^A@N,17,0,ARI003.FNT");
 ^FT5,137^A@N,17,0,ARI001.TTF
 ^FH\
 ^FH\^CI17^F8^FD$Ware.PriceHeader$^FS^CI0
-^FT366,187^A@N,14,0,ARI001.TTF
+^FT333,187^A@N,14,0,ARI001.TTF
 ^FH\
-^FB87,1,0,R^FH\^CI17^F8^FD$Ware.AdditionalSize$^FS^CI0
+^FB120,1,0,R^FH\^CI17^F8^FD$Ware.AdditionalSize$^FS^CI0
 ^FT5,308^A@N,14,0,ARI001.TTF
 ^FH\
 ^FH\^CI17^F8^FD$Ware.BoxType$^FS^CI0
