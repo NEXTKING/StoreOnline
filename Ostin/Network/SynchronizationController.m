@@ -14,11 +14,12 @@ typedef enum SyncStages
 {
     SSItems = 1 << 0,
     SSTasks = 1 << 1,
+    SSUsers = 1 << 2,
     
-    SSCount = 1 << 2    //Should be the biggest significant bit
+    SSCount = 1 << 3    //Should be the biggest significant bit
 }SyncStages;
 
-@interface SynchronizationController() <ItemDescriptionDelegate, TasksDelegate>
+@interface SynchronizationController() <ItemDescriptionDelegate, TasksDelegate, UserDelegate>
 {
     NSInteger updateMask;
 }
@@ -31,6 +32,7 @@ typedef enum SyncStages
 {
     [[MCPServer instance] itemDescription:self itemCode:nil shopCode:nil isoType:0];
     [[MCPServer instance] tasks:self userID:nil];
+    [[MCPServer instance] user:self login:nil password:nil];
     
     NSLog(@"%d", SSCount);
 }
@@ -87,6 +89,14 @@ typedef enum SyncStages
         [self updateSyncStatus:SSTasks];
     }
 
+}
+
+- (void)userComplete:(int)result user:(id)user
+{
+    if (result == 0)
+    {
+        [self updateSyncStatus:SSUsers];
+    }
 }
 
 @end

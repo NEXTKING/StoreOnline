@@ -11,12 +11,14 @@
 #import "NSData+Base64.h"
 #import "MCPServer.h"
 #import "TaskInformation.h"
+#import "UserInformation.h"
 #import "Item+CoreDataClass.h"
 #import "Price+CoreDataProperties.h"
 #import "Barcode+CoreDataClass.h"
 #import "Price+CoreDataClass.h"
 #import "Task+CoreDataClass.h"
 #import "TaskItemBinding+CoreDataClass.h"
+#import "User+CoreDataClass.h"
 #import "Image+CoreDataClass.h"
 #import "Group+CoreDataClass.h"
 #import "Subgroup+CoreDataClass.h"
@@ -27,6 +29,7 @@
 #import "SOAPTaskWareBinding.h"
 #import "SOAPSavePrintFact.h"
 #import "SOAPSetTaskDone.h"
+#import "SOAPUsers.h"
 #import "DTDevices.h"
 #import <CommonCrypto/CommonDigest.h>
 
@@ -81,6 +84,96 @@
 - (void) brands:(id<GroupsDelegate>)delegate uid:(NSString *)uid
 {
     
+}
+
+- (void) user:(id<UserDelegate>)delegate login:(NSString *)login password:(NSString *)password
+{
+    if (login != nil && password != nil)
+    {
+        NSString* (^md5)(NSString *) = ^(NSString *string) {
+            
+            const char * pointer = [string UTF8String];
+            unsigned char md5Buffer[CC_MD5_DIGEST_LENGTH];
+            CC_MD5(pointer, (CC_LONG)strlen(pointer), md5Buffer);
+            
+            NSMutableString *hashString = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+            for (int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
+                [hashString appendFormat:@"%02x",md5Buffer[i]];
+            
+            return hashString;
+        };
+        
+        NSManagedObjectContext *moc = self.dataController.managedObjectContext;
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"login ==[c] %@ AND password ==[c] %@", login, md5(password)]];
+        NSArray *results = [moc executeFetchRequest:request error:nil];
+        if (results.count < 1)
+        {
+            [delegate userComplete:1 user:nil];
+            return;
+        }
+        User *userDB = results[0];
+        
+        UserInformation *userInfo = [UserInformation new];
+        userInfo.key_user = userDB.key_user;
+        userInfo.barcode = userDB.barcode;
+        userInfo.login = userDB.login;
+        userInfo.password = userDB.password;
+        userInfo.name = userDB.name;
+        
+        [delegate userComplete:0 user:userInfo];
+    }
+    else
+    {
+        NSOperationQueue *usersQueue = [NSOperationQueue new];
+        usersQueue.name = @"usersQueue";
+        
+        SOAPUsers *users = [SOAPUsers new];
+        __weak SOAPUsers* _users = users;
+        users.dataController = self.dataController;
+        users.authValue = authValue;
+        users.deviceID = deviceID;
+        
+        NSBlockOperation* delegateCallOperation = [NSBlockOperation blockOperationWithBlock:^{
+            
+            BOOL success = _users.success;
+            
+            if (success)
+                [delegate userComplete:0 user:nil];
+            else
+                [delegate userComplete:1 user:nil];
+            
+        }];
+        
+        [delegateCallOperation addDependency:users];
+        
+        [usersQueue addOperations:@[users] waitUntilFinished:NO];
+        [[NSOperationQueue mainQueue] addOperation:delegateCallOperation];
+    }
+}
+
+- (void) user:(id<UserDelegate>)delegate barcode:(NSString *)barcode
+{
+    NSManagedObjectContext *moc = self.dataController.managedObjectContext;
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"barcode == %@", barcode]];
+    NSArray *results = [moc executeFetchRequest:request error:nil];
+    if (results.count < 1)
+    {
+        [delegate userComplete:1 user:nil];
+        return;
+    }
+    User *userDB = results[0];
+    
+    UserInformation *userInfo = [UserInformation new];
+    userInfo.key_user = userDB.key_user;
+    userInfo.barcode = userDB.barcode;
+    userInfo.login = userDB.login;
+    userInfo.password = userDB.password;
+    userInfo.name = userDB.name;
+    
+    [delegate userComplete:0 user:userInfo];
 }
 
 - (void) tasks:(id<TasksDelegate>)delegate userID:(NSNumber *)userID

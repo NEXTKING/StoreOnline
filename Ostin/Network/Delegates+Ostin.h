@@ -10,6 +10,7 @@
 #define Delegates_Ostin_h
 #import "Delegates.h"
 #import "TaskInformation.h"
+#import "UserInformation.h"
 
 typedef enum : NSUInteger
 {
@@ -31,6 +32,10 @@ typedef enum : NSUInteger
 
 @protocol SearchDelegate <NSObject>
 - (void) searchComplete: (int) result attribute:(ItemSearchAttribute) searchAttribute items:(NSArray *) items;
+@end
+
+@protocol UserDelegate <NSObject>
+- (void) userComplete: (int) result user:(UserInformation *)userInformation;
 @end
 
 #endif /* Delegates_Ostin_h */

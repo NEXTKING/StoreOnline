@@ -9,8 +9,9 @@
 #import "LoginViewController.h"
 #import "DTDevices.h"
 #import "SynchronizationController.h"
+#import "MCPServer.h"
 
-@interface LoginViewController () <DTDeviceDelegate, SyncronizationDelegate>
+@interface LoginViewController () <DTDeviceDelegate, SyncronizationDelegate, UserDelegate>
 {
     DTDevices *dtdev;
 }
@@ -32,16 +33,12 @@
 
 - (void) barcodeData:(NSString *)barcode type:(int)type
 {
-    [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"UserID"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
+    [[MCPServer instance] user:self barcode:barcode];
 }
 
 - (void) barcodeData:(NSString *)barcode isotype:(NSString *)isotype
 {
-    [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"UserID"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
+    [[MCPServer instance] user:self barcode:barcode];
 }
 
 
@@ -52,22 +49,24 @@
 
 - (IBAction)loginButtonPressed:(id)sender
 {
-    NSDictionary *auth = @{@"0":@"0", @"3000":@"3000", @"3001":@"3001", @"302":@"302", @"303":@"303", @"304":@"304"};
-    
-    if (_loginTextField.text != nil && _passwordTextField.text != nil && [[auth allKeys] containsObject:_loginTextField.text])
+    if (_loginTextField.text != nil && _passwordTextField.text != nil)
     {
-        if ([auth[_loginTextField.text] isEqualToString:_passwordTextField.text])
-        {
-            [[NSUserDefaults standardUserDefaults] setValue:_loginTextField.text forKey:@"UserID"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
-        }
-        else
-            [self showAlertWithMessage:@"Введен неверный пароль"];
+        [[MCPServer instance] user:self login:_loginTextField.text password:_passwordTextField.text];
+    }
+}
+
+- (void)userComplete:(int)result user:(UserInformation *)userInformation
+{
+    if (result == 0)
+    {
+        #warning Incorrect userID
+        [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"UserID"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
     }
     else
     {
-        [self showAlertWithMessage:@"Введен неверный логин или пароль"];
+        [self showAlertWithMessage:@"Введён неверный логин или пароль"];
     }
 }
 
