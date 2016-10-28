@@ -97,11 +97,12 @@
 {
     [super updateItemInfo:itemInfo];
     
-    _imageView.image = [UIImage imageNamed:@"no-image.png"];
-    
     NSString *urlString = [itemInfo additionalParameterValueForName:@"imageURL"];
-    if (urlString != nil)
-        _imageView.imageURL = [NSURL URLWithString:urlString];
+    _imageView.image = [UIImage imageNamed:@"no-image.png"];
+    _imageView.imageURL = [NSURL URLWithString:urlString];
+    
+    double retailPrice = [[itemInfo additionalParameterValueForName:@"retailPrice"] doubleValue];
+    self.itemPriceLabel.text = [NSString stringWithFormat:@"%.2f р.", MIN(itemInfo.price, retailPrice)];
 }
 
 - (void) compareAmount:(ItemInformation *)itemInfo
@@ -109,8 +110,10 @@
     NSDictionary *data = [BarcodeFormatter dataFromBarcode:lastBarcode isoType:BAR_CODE128];
     if (data != nil)
     {
-        double price = [data[@"price"] doubleValue];
-        [self amountCompareCompleted:(price == itemInfo.price)];
+        double barcodePrice = [data[@"price"] doubleValue];
+        double itemCatalogPrice = itemInfo.price;
+        double itemRetailPrice = [[itemInfo additionalParameterValueForName:@"retailPrice"] doubleValue];
+        [self amountCompareCompleted:(barcodePrice == MIN(itemRetailPrice, itemCatalogPrice))];
     }
     else
         [self amountCompareCompleted:NO];
