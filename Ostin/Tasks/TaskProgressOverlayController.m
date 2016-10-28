@@ -12,6 +12,7 @@
 {
     NSInteger _completeItemsCount;
     NSInteger _totalItemsCount;
+    NSInteger _excessItemsCount;
     NSDate *_startDate;
     NSDate *_endDate;
     NSTimer *_timer;
@@ -24,6 +25,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *speedLabel;
+@property (weak, nonatomic) IBOutlet UILabel *excessLabel;
 
 @end
 
@@ -59,18 +61,20 @@
 
 #pragma mark Public setters
 
-- (void)setTitleText:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate totalItemsCount:(NSInteger)totalCount completeItemsCount:(NSInteger)completeCount timerIsRunning:(BOOL)timerIsRunning
+- (void)setTitleText:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate totalItemsCount:(NSInteger)totalCount completeItemsCount:(NSInteger)completeCount excessItemsCount:(NSInteger)excessCount timerIsRunning:(BOOL)timerIsRunning
 {
     _titleLabel.text = title;
     _startDate = startDate;
     _endDate = endDate;
     _totalItemsCount = totalCount;
     _completeItemsCount = completeCount;
+    _excessItemsCount = excessCount;
     
     [self updateProgressBar];
     [self updateProgressLabel];
     [self updateTimeLabel];
     [self updateSpeedLabel];
+    [self updateExcessLabel];
     timerIsRunning ? [self initializeTimer] : [self destroyTimer];
 }
 
@@ -154,6 +158,11 @@
     }
     else
         self.speedLabel.text = @"";
+}
+
+- (void)updateExcessLabel
+{
+    self.excessLabel.text = _excessItemsCount > 0 ? [NSString stringWithFormat:@"Излишки %ld", _excessItemsCount] : @"Излишек нет";
 }
 
 @end

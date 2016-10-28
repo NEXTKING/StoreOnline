@@ -59,13 +59,15 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
         BOOL timerIsRunning = _task.status == TaskInformationStatusInProgress;
         __block NSInteger totalCount = 0;
         __block NSInteger completeCount = 0;
+        __block NSInteger excessCount = 0;
         
         [_task.items enumerateObjectsUsingBlock:^(TaskItemInformation *item, NSUInteger idx, BOOL *stop) {
             totalCount += item.quantity;
-            completeCount += item.scanned;
+            completeCount += item.scanned > item.quantity ? item.quantity : item.scanned;
+            excessCount += item.scanned > item.quantity ? item.scanned - item.quantity : 0;
         }];
         
-        [navVC.overlayController setTitleText:_task.name startDate:_task.startDate endDate:_task.endDate totalItemsCount:totalCount completeItemsCount:completeCount timerIsRunning:timerIsRunning];
+        [navVC.overlayController setTitleText:_task.name startDate:_task.startDate endDate:_task.endDate totalItemsCount:totalCount completeItemsCount:completeCount excessItemsCount:excessCount timerIsRunning:timerIsRunning];
     }
 }
 
@@ -325,12 +327,8 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
         
         if (item != nil)
         {
-            TaskItemInformation *taskItemInfo = [self taskItemInfoForItemWithID:item.itemId];
-            if (taskItemInfo.scanned + 1 <= taskItemInfo.quantity)
-            {
-                _itemInPrintQueue = item;
-                [self printItem:item];
-            }
+            _itemInPrintQueue = item;
+            [self printItem:item];
         }
     }
 }

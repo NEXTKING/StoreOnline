@@ -15,6 +15,7 @@
              endDate:(NSDate *)endDate
      totalItemsCount:(NSInteger)totalCount
   completeItemsCount:(NSInteger)completeCount
+    excessItemsCount:(NSInteger)excessCount
       timerIsRunning:(BOOL)timerIsRunning;
 
 - (void)setCompleteItemsCount:(NSInteger)count;
