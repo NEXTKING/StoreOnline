@@ -555,16 +555,7 @@
     }
     Price *priceDB = results[0];
     
-    request = [NSFetchRequest fetchRequestWithEntityName:@"Image"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %@", barcodeDB.itemID]];
-    results = [moc executeFetchRequest:request error:nil];
-    Image *imageDB;
-    if (results.count < 1)
-        imageDB = nil;
-    else
-        imageDB = results[0];
-    
-    ItemInformation *item = [self itemInfoFromDBEntities:itemDB barcode:barcodeDB price:priceDB image:imageDB];
+    ItemInformation *item = [self itemInfoFromDBEntities:itemDB barcode:barcodeDB price:priceDB];
     
     [delegate itemDescriptionComplete:0 itemDescription:item];
 }
@@ -603,23 +594,14 @@
     }
     Barcode *barcodeDB = results[0];
     
-    request = [NSFetchRequest fetchRequestWithEntityName:@"Image"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", itemID]];
-    results = [moc executeFetchRequest:request error:nil];
-    Image *imageDB;
-    if (results.count < 1)
-        imageDB = nil;
-    else
-        imageDB = results[0];
-    
-    ItemInformation *item = [self itemInfoFromDBEntities:itemDB barcode:barcodeDB price:priceDB image:imageDB];
+    ItemInformation *item = [self itemInfoFromDBEntities:itemDB barcode:barcodeDB price:priceDB];
     
     [delegate itemDescriptionComplete:0 itemDescription:item];
 }
 
 #pragma mark - Helpers
 
-- (ItemInformation*) itemInfoFromDBEntities:(Item*) itemDB barcode:(Barcode*)barcodeDB price:(Price*) priceDB image:(Image*) imageDB
+- (ItemInformation*) itemInfoFromDBEntities:(Item*) itemDB barcode:(Barcode*)barcodeDB price:(Price*) priceDB
 {
     ItemInformation* itemInfo = [ItemInformation new];
     
@@ -642,8 +624,7 @@
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"trademarkID" value:itemDB.trademarkID.stringValue]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"retailPrice" value:priceDB.retailPrice.stringValue]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"discount" value:[NSString stringWithFormat:@"%.0f", priceDB.discount.doubleValue]]];
-    if (imageDB != nil)
-        [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"imageURL" value:[self imageURLForFileName:imageDB.filename]]];
+    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"imageURL" value:[self imageURLForItemID:itemDB.itemID.integerValue]]];
     
     itemInfo.itemId     = itemDB.itemID.integerValue;
     itemInfo.barcode    = barcodeDB.code128;
@@ -680,5 +661,14 @@
     return urlString;
 }
 
+- (NSString *)imageURLForItemID:(NSUInteger)itemID
+{
+    NSString *protocol = [[NSUserDefaults standardUserDefaults] valueForKey:@"protocol_preference"];
+    NSString *host     = [[NSUserDefaults standardUserDefaults] valueForKey:@"host_preference"];
+    NSString *port     = [[NSUserDefaults standardUserDefaults] valueForKey:@"port_preference"];
+    NSString *urlString = [NSString stringWithFormat:@"%@://%@%@/MobileStick/api/Picture/%ld",protocol, host, port.length > 0?[NSString stringWithFormat:@":%@", port]:@"", itemID];
+    
+    return urlString;
+}
 
 @end
