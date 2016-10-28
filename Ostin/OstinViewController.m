@@ -71,6 +71,30 @@
     [super printButtonAction:sender];
 }
 
+- (IBAction)manualInputAction:(id)sender
+{
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Ручной ввод"
+                                                                   message:@"Введите артикул товара или код производителя"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    __weak typeof(self) wself = self;
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {}];
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Отправить" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        
+        NSString *text = alert.textFields[0].text;
+        text.length > 10 ? [wself requestItemInfoWithCode:text isoType:0] : [wself requestItemInfoWithArticle:text];
+    }];
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField* textField) {}];
+    
+    
+    [alert addAction:cancelAction];
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -90,6 +114,13 @@
 {
     _imageView.image = nil;
     [super requestItemInfoWithCode:code isoType:type];
+    self.itemPriceLabel.backgroundColor = [UIColor colorWithRed:119.0/255.0 green:119.0/255.0 blue:119.0/255.0 alpha:0.28];
+}
+
+- (void) requestItemInfoWithArticle:(NSString *)article
+{
+    _imageView.image = nil;
+    [[MCPServer instance] itemDescription:self article:article];
     self.itemPriceLabel.backgroundColor = [UIColor colorWithRed:119.0/255.0 green:119.0/255.0 blue:119.0/255.0 alpha:0.28];
 }
 

@@ -692,6 +692,45 @@
     [delegate itemDescriptionComplete:0 itemDescription:item];
 }
 
+- (void) itemDescription:(id<ItemDescriptionDelegate>)delegate article:(NSString *)article
+{
+    NSManagedObjectContext *moc = self.dataController.managedObjectContext;
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"itemCode ==[c] %@", article]];
+    NSArray *results = [moc executeFetchRequest:request error:nil];
+    if (results.count < 1)
+    {
+        [delegate itemDescriptionComplete:1 itemDescription:nil];
+        return;
+    }
+    Item *itemDB = results[0];
+    
+    request = [NSFetchRequest fetchRequestWithEntityName:@"Price"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", itemDB.itemID.integerValue]];
+    results = [moc executeFetchRequest:request error:nil];
+    if (results.count < 1)
+    {
+        [delegate itemDescriptionComplete:1 itemDescription:nil];
+        return;
+    }
+    Price *priceDB = results[0];
+    
+    request = [NSFetchRequest fetchRequestWithEntityName:@"Barcode"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", itemDB.itemID.integerValue]];
+    results = [moc executeFetchRequest:request error:nil];
+    if (results.count < 1)
+    {
+        [delegate itemDescriptionComplete:1 itemDescription:nil];
+        return;
+    }
+    Barcode *barcodeDB = results[0];
+    
+    ItemInformation *item = [self itemInfoFromDBEntities:itemDB barcode:barcodeDB price:priceDB];
+    
+    [delegate itemDescriptionComplete:0 itemDescription:item];
+}
+
 #pragma mark - Helpers
 
 - (ItemInformation*) itemInfoFromDBEntities:(Item*) itemDB barcode:(Barcode*)barcodeDB price:(Price*) priceDB

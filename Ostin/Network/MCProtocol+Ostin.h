@@ -24,6 +24,7 @@
 - (void) user:(id<UserDelegate>)delegate login:(NSString *)login password:(NSString *)password;
 - (void) user:(id<UserDelegate>)delegate barcode:(NSString *)barcode;
 - (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemID:(NSUInteger)itemID;
+- (void) itemDescription:(id<ItemDescriptionDelegate>)delegate article:(NSString *)article;
 
 - (void) saveTaskWithID:(NSInteger)taskID userID:(NSInteger)userID status:(NSInteger)status date:(NSDate *)date completion:(void (^)(BOOL success, NSString *errorMessage))completion;
 - (void) saveTaskItem:(id<TasksDelegate>) delegate taskID:(NSInteger)taskID itemID:(NSInteger)itemID scanned:(NSUInteger)scanned;
