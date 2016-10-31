@@ -37,6 +37,12 @@
 
 /*
  * Format: b
+ * Length: 4
+ */
+#define TAG_C4_TRANSACTION_FAILED_REASON 0xC4
+
+/*
+ * Format: b
  * Length: 2
  */
 #define TAG_C1_PROCESSING_RESULT 0xC1

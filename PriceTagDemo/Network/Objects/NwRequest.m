@@ -218,11 +218,12 @@
     if ( !_exec_request )
         return Nil;
     
-    _exec_request.timeoutInterval = 10;
+    _exec_request.timeoutInterval = 1000;
     
     [_exec_request setHTTPShouldHandleCookies:NO];
     [_exec_request addValue:_str_cookies forHTTPHeaderField:@"Cookie"];
     [_exec_request setValue:@"text/plain; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    [_exec_request setValue:@"keep-alive" forHTTPHeaderField:@"Connection"];
 #if RIVGOSH
     [_exec_request addValue:@"Basic 0JDQtNC80LjQvdC40YHRgtGA0LDRgtC+0YA6" forHTTPHeaderField:@"Authorization"];
 #endif
