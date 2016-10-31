@@ -29,6 +29,7 @@
 		21C054601DC355550094C7B1 /* User+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C0545E1DC355550094C7B1 /* User+CoreDataProperties.m */; };
 		21C054631DC355E20094C7B1 /* SOAPUsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C054621DC355E20094C7B1 /* SOAPUsers.m */; };
 		21C054661DC36D4D0094C7B1 /* UserInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C054651DC36D4D0094C7B1 /* UserInformation.m */; };
+		21C0546C1DC765800094C7B1 /* GradientTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C0546B1DC765800094C7B1 /* GradientTabBarController.m */; };
 		23325335A97CCCACC42944AF /* libPods-Ostin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD3C223CF10EB177C6448781 /* libPods-Ostin.a */; };
 		5BADECA800A6702C5F474BB5 /* libPods-PriceTagDemoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1E01A49F9DF7B4A12A7407 /* libPods-PriceTagDemoUITests.a */; };
 		71454865FBE26CAE4A38F59F /* libPods-DesondoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D44F91159F3A6CCEC7C0AEB /* libPods-DesondoTests.a */; };
@@ -582,6 +583,8 @@
 		21C054621DC355E20094C7B1 /* SOAPUsers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPUsers.m; sourceTree = "<group>"; };
 		21C054641DC36D4D0094C7B1 /* UserInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInformation.h; sourceTree = "<group>"; };
 		21C054651DC36D4D0094C7B1 /* UserInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInformation.m; sourceTree = "<group>"; };
+		21C0546A1DC765800094C7B1 /* GradientTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientTabBarController.h; sourceTree = "<group>"; };
+		21C0546B1DC765800094C7B1 /* GradientTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientTabBarController.m; sourceTree = "<group>"; };
 		26E6677B3BC7955145425ED2 /* Pods-DesondoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesondoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DesondoTests/Pods-DesondoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		305BD8FF1EE07980B92BBA8D /* Pods-Tsum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tsum.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tsum/Pods-Tsum.debug.xcconfig"; sourceTree = "<group>"; };
 		3441ACD00F2A17AFBB7CD4CD /* Pods-PriceTagDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceTagDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PriceTagDemoTests/Pods-PriceTagDemoTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1365,6 +1368,8 @@
 				B92DCE261C845E60002AA184 /* LaunchScreen.storyboard */,
 				B92DCE3E1C845FF2002AA184 /* OstinPriceTag.h */,
 				B92DCE3F1C845FF2002AA184 /* OstinPriceTag.m */,
+				21C0546A1DC765800094C7B1 /* GradientTabBarController.h */,
+				21C0546B1DC765800094C7B1 /* GradientTabBarController.m */,
 				21C054581DC23F8E0094C7B1 /* AsyncImageView.h */,
 				21C054591DC23F8E0094C7B1 /* AsyncImageView.m */,
 				B90CE4861C89A05400DFB3E4 /* AntiAliasingLabel.h */,
@@ -3294,6 +3299,7 @@
 				C667238F1DAABBA9001B30AC /* SOAPPrices.m in Sources */,
 				21C054631DC355E20094C7B1 /* SOAPUsers.m in Sources */,
 				21BB44E61DAD224600ED67EE /* TasksNavigationController.m in Sources */,
+				21C0546C1DC765800094C7B1 /* GradientTabBarController.m in Sources */,
 				C6F600C71D9C363C0095AE21 /* NSDate+ISO8601Parsing.m in Sources */,
 				C66723891DA91614001B30AC /* SOAPWares.m in Sources */,
 				215EFF091DAB9ED600BE11C5 /* SearchTableViewCell.m in Sources */,
