@@ -179,7 +179,9 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     NSNumber *type = notification.object[@"type"];
     
     NSString *internalBarcode = [BarcodeFormatter normalizedBarcodeFromString:barcode isoType:type.intValue];
-    [self itemDidScannedWithBarcode:internalBarcode];
+    NSDictionary *barcodeData = [BarcodeFormatter dataFromBarcode:barcode isoType:type.intValue];
+    double price = barcodeData != nil ? [barcodeData[@"price"] doubleValue] : -1;
+    [self itemDidScannedWithBarcode:internalBarcode price:price];
 }
 
 #pragma mark - Table view data source
@@ -312,7 +314,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     });
 }
 
-- (void)itemDidScannedWithBarcode:(NSString *)barcode
+- (void)itemDidScannedWithBarcode:(NSString *)barcode price:(double)barcodePrice
 {
     if (_itemInPrintQueue == nil)
     {
@@ -327,9 +329,20 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
         
         if (item != nil)
         {
-            _itemInPrintQueue = item;
-            [self printItem:item];
+            double retailPrice = [[item additionalParameterValueForName:@"price"] doubleValue];
+            double catalogPrice = item.price;
+            
+            if (MIN(retailPrice, catalogPrice) != barcodePrice)
+            {
+                _itemInPrintQueue = item;
+                [self playSound:1];
+                [self printItem:item];
+            }
+            else
+                [self playSound:0];
         }
+        else
+            [self playSound:2];
     }
 }
 
@@ -420,6 +433,27 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
             return taskItemInfo;
     
     return nil;
+}
+
+- (void)playSound:(int)number
+{
+    DTDevices *dtDev = [DTDevices sharedDevice];
+    
+    if (number == 0) // price is actual
+    {
+        int data[]={700,100,1400,100,700,100};
+        [dtDev playSound:100 beepData:data length:sizeof(data) error:nil];
+    }
+    else if (number == 1) // waiting print
+    {
+        int data[]={800,400,0,400,800,400,0,400,800,400};
+        [dtDev playSound:100 beepData:data length:sizeof(data) error:nil];
+    }
+    else if (number == 2) // ware not found in task
+    {
+        int data[] = {1000,200,700,200,500,200,700,200};
+        [dtDev playSound:100 beepData:data length:sizeof(data) error:nil];
+    }
 }
 
 @end
