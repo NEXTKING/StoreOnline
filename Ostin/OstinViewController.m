@@ -75,7 +75,7 @@
 {
     
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Ручной ввод"
-                                                                   message:@"Введите артикул товара или код производителя"
+                                                                   message:@"Введите код товара или код производителя"
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
     __weak typeof(self) wself = self;
