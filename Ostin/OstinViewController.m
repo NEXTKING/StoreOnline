@@ -52,11 +52,9 @@
     if ([defaults valueForKey:@"LastBarcode"] && !_externalBarcode)
     {
         restored = YES;
-        
-        NSDictionary* params = @{@"barcode":[defaults valueForKey:@"LastBarcode"],@"type":@(0)};
-        [[NSNotificationCenter defaultCenter]
-         postNotificationName:@"BarcodeScanNotification"
-         object:params];
+        NSString *barcode = [defaults valueForKey:@"LastBarcode"];
+        NSNumber *type = [defaults valueForKey:@"LastBarcodeType"] != nil ? [defaults valueForKey:@"LastBarcodeType"] : @(0);
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BarcodeScanNotification" object:@{@"barcode":barcode,@"type":type}];
     }
     else if (_externalBarcode)
     {
@@ -102,12 +100,17 @@
 
 - (void)scanNotification:(NSNotification*)aNotification
 {
-    lastBarcode = [aNotification.object objectForKey:@"barcode"];
-    NSNumber *type = [aNotification.object objectForKey:@"type"];
-    [[NSUserDefaults standardUserDefaults] setValue:lastBarcode forKey:@"LastBarcode"];
-    
-    NSString *internalBarcode = [BarcodeFormatter normalizedBarcodeFromString:lastBarcode isoType:type.intValue];
-    [self requestItemInfoWithCode:internalBarcode isoType:type.intValue];
+    if (aNotification.object != nil)
+    {
+        lastBarcode = [aNotification.object objectForKey:@"barcode"];
+        NSNumber *type = [aNotification.object objectForKey:@"type"];
+        [[NSUserDefaults standardUserDefaults] setValue:lastBarcode forKey:@"LastBarcode"];
+        [[NSUserDefaults standardUserDefaults] setValue:type forKey:@"LastBarcodeType"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        NSString *internalBarcode = [BarcodeFormatter normalizedBarcodeFromString:lastBarcode isoType:type.intValue];
+        [self requestItemInfoWithCode:internalBarcode isoType:type.intValue];
+    }
 }
 
 - (void) requestItemInfoWithCode:(NSString *)code isoType:(int)type
