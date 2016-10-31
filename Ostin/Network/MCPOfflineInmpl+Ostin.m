@@ -64,7 +64,6 @@
         //990023135202
     }
     
-    
     return self;
 }
 
@@ -176,7 +175,7 @@
     [delegate userComplete:0 user:userInfo];
 }
 
-- (void) tasks:(id<TasksDelegate>)delegate userID:(NSNumber *)userID
+- (void) tasks:(id<TasksDelegate>)delegate userID:(NSString *)userID
 {    
     if (userID)
     {
@@ -260,12 +259,12 @@
         [delegate tasksComplete:1 tasks:nil];*/
 }
 
-- (void)saveTaskWithID:(NSInteger)taskID userID:(NSInteger)userID status:(NSInteger)status date:(NSDate *)date completion:(void (^)(BOOL success, NSString *errorMessage))completion
+- (void)saveTaskWithID:(NSInteger)taskID userID:(NSString *)userID status:(NSInteger)status date:(NSDate *)date completion:(void (^)(BOOL success, NSString *errorMessage))completion
 {
     NSManagedObjectContext *moc = self.dataController.managedObjectContext;
 
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Task"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"taskID == %ld AND userID == %ld", taskID, userID]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"taskID == %ld AND userID == %@", taskID, userID]];
     NSArray *results = [moc executeFetchRequest:request error:nil];
     if (results.count < 1)
     {
@@ -311,7 +310,7 @@
         savePrintFact.wareCodes = wareCodes;
         savePrintFact.authValue = authValue;
         savePrintFact.deviceID  = deviceID;
-        savePrintFact.userID = [NSString stringWithFormat:@"%ld", userID];
+        savePrintFact.userID = userID;
         
         SOAPSetTaskDone *setTaskDone = [SOAPSetTaskDone new];
         __weak SOAPSetTaskDone *_setTaskDone = setTaskDone;
@@ -562,11 +561,11 @@
 
 #pragma mark Internal Metdods
 
-- (void) tasksInternal:(id<TasksDelegate>)delegate userID:(NSNumber*)userID
+- (void) tasksInternal:(id<TasksDelegate>)delegate userID:(NSString *)userID
 {
     NSManagedObjectContext *moc =self.dataController.managedObjectContext;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Task"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"userID == %ld", userID.integerValue]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"userID == %@", userID]];
     
     NSError* error = nil;
     NSArray* results = [moc executeFetchRequest:request error:&error];
@@ -576,7 +575,7 @@
     {
         TaskInformation* taskInfo = [TaskInformation new];
         taskInfo.name = taskDB.name;
-        taskInfo.userID = taskDB.userID.integerValue;
+        taskInfo.userID = taskDB.userID;
         taskInfo.taskID = taskDB.taskID.integerValue;
         taskInfo.startDate = taskDB.startDate;
         taskInfo.endDate = taskDB.endDate;

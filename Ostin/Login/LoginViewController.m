@@ -59,8 +59,8 @@
 {
     if (result == 0)
     {
-        #warning Incorrect userID
-        [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"UserID"];
+        NSString *userID = userInformation.key_user;
+        [[NSUserDefaults standardUserDefaults] setValue:userID forKey:@"UserID"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
     }

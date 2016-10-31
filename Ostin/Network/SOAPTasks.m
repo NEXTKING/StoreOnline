@@ -64,7 +64,7 @@
         
         taskDB.taskID          = @([csv[1] integerValue]);
         taskDB.name            = csv[2];
-        taskDB.userID          = @([csv[3] integerValue]);
+        taskDB.userID          = csv[3];
     }
     
     NSError* error = nil;
