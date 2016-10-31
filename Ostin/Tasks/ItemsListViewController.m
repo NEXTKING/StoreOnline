@@ -342,7 +342,10 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
                 [self playSound:0];
         }
         else
+        {
+            [self showAlertWithMessage:@"Товар не относится к текущему заданию"];
             [self playSound:2];
+        }
     }
 }
 
