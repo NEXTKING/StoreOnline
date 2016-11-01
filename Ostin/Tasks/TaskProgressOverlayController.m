@@ -138,22 +138,22 @@
         
         if ((secondsPassed / (60 * 60 * 24)) > 1)
         {
-            CGFloat average = _completeItemsCount / (secondsPassed / (60 * 60 * 24));
+            CGFloat average = (_completeItemsCount + _excessItemsCount) / (secondsPassed / (60 * 60 * 24));
             self.speedLabel.text = [NSString stringWithFormat:@"%.f / день", average];
         }
         else if ((secondsPassed / (60 * 60)) > 1)
         {
-            CGFloat average = _completeItemsCount / (secondsPassed / (60 * 60));
+            CGFloat average = (_completeItemsCount + _excessItemsCount) / (secondsPassed / (60 * 60));
             self.speedLabel.text = [NSString stringWithFormat:@"%.02f / час", average];
         }
         else if ((secondsPassed / 60) > 1)
         {
-            CGFloat average = _completeItemsCount / (secondsPassed / 60);
+            CGFloat average = (_completeItemsCount + _excessItemsCount) / (secondsPassed / 60);
             self.speedLabel.text = [NSString stringWithFormat:@"%.02f / мин", average];
         }
         else
         {
-            self.speedLabel.text = [NSString stringWithFormat:@"%ld / мин", _completeItemsCount];
+            self.speedLabel.text = [NSString stringWithFormat:@"%ld / мин", (_completeItemsCount + _excessItemsCount)];
         }
     }
     else
