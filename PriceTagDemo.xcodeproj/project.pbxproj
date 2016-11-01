@@ -375,6 +375,7 @@
 		B9F5F0B71D0057710010E1EA /* NwobjDiscounts.m in Sources */ = {isa = PBXBuildFile; fileRef = B9171DA01CF311A3004DB487 /* NwobjDiscounts.m */; };
 		B9F5F0B91D0058090010E1EA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B9F5F0B81D0058090010E1EA /* Settings.bundle */; };
 		B9F5F0BC1D0060750010E1EA /* NwobjSendLoyalty.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F5F0BB1D0060750010E1EA /* NwobjSendLoyalty.m */; };
+		C604184E1DC89ADC002E2B30 /* 0010001E353B.p12 in Resources */ = {isa = PBXBuildFile; fileRef = C604184D1DC89ADC002E2B30 /* 0010001E353B.p12 */; };
 		C6069EE51D92D2E7008C3F58 /* MCPSimulatorImpl+Ostin.m in Sources */ = {isa = PBXBuildFile; fileRef = C6069EE41D92D2E7008C3F58 /* MCPSimulatorImpl+Ostin.m */; };
 		C6069EE91D92D873008C3F58 /* GroupInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = C6069EE81D92D873008C3F58 /* GroupInformation.m */; };
 		C6069EED1D92F06D008C3F58 /* CategoriesCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C6069EEB1D92F06D008C3F58 /* CategoriesCollectionCell.m */; };
@@ -858,6 +859,7 @@
 		BC5BAAE72F08EFC6581A7745 /* Pods-Tsum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tsum.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tsum/Pods-Tsum.release.xcconfig"; sourceTree = "<group>"; };
 		C0B99DA259F160F2DA2D1470 /* Pods-Ostin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ostin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ostin/Pods-Ostin.release.xcconfig"; sourceTree = "<group>"; };
 		C3858CD9F96198DD4706F715 /* Pods-Ostin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ostin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ostin/Pods-Ostin.debug.xcconfig"; sourceTree = "<group>"; };
+		C604184D1DC89ADC002E2B30 /* 0010001E353B.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 0010001E353B.p12; sourceTree = "<group>"; };
 		C6069EE01D92D1B1008C3F58 /* MCProtocol+Ostin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MCProtocol+Ostin.h"; sourceTree = "<group>"; };
 		C6069EE21D92D258008C3F58 /* Delegates+Ostin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Delegates+Ostin.h"; sourceTree = "<group>"; };
 		C6069EE31D92D2E7008C3F58 /* MCPSimulatorImpl+Ostin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MCPSimulatorImpl+Ostin.h"; sourceTree = "<group>"; };
@@ -1691,6 +1693,7 @@
 		B9A3FE191CA19E200060483D /* RivGosh */ = {
 			isa = PBXGroup;
 			children = (
+				C604184D1DC89ADC002E2B30 /* 0010001E353B.p12 */,
 				C651CA7D1D75855C0045C3F7 /* Terminal */,
 				C6E776EC1D747B00000FEAC8 /* PaymentLibrary */,
 				C629B5C31D07653A002108DF /* About */,
@@ -2650,6 +2653,7 @@
 				C629B5C81D076552002108DF /* AboutViewController.xib in Resources */,
 				B9A3FE2A1CA19E200060483D /* LaunchScreen.storyboard in Resources */,
 				B9171DD41CF4C624004DB487 /* DiscountCartCell.xib in Resources */,
+				C604184E1DC89ADC002E2B30 /* 0010001E353B.p12 in Resources */,
 				B9F5F0B91D0058090010E1EA /* Settings.bundle in Resources */,
 				B9171DC81CF368E7004DB487 /* STMenuViewController.xib in Resources */,
 				C64D20321D79CB3500C3786B /* TerminalSettingsViewController.xib in Resources */,

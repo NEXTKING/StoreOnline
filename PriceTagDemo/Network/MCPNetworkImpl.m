@@ -69,7 +69,7 @@
     
 }
 
-- (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString *)code shopCode:(NSString *)shopCode
+- (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString *)code shopCode:(NSString *)shopCode isoType:(int)type
 {
     NwobjItemDescription *nwobjItemDescription = [NwobjItemDescription new];
     nwobjItemDescription.barcode = code;

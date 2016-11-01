@@ -17,7 +17,9 @@ typedef enum : NSInteger
     PLOperationTypeBalance = 3,
     PLOperationTypePayment = 4,
     PLOperationTypeReversal = 5,
-    PLOperationTypeSettings = 6
+    PLOperationTypeSettings = 6,
+    PLOperationTypeReconciliation = 7,
+    PLOperationTypeCutover = 8
 }PLOperationType;
 
 
@@ -54,8 +56,9 @@ typedef enum : NSInteger
 
 - (void) checkBalance: (NSError**) error;
 - (void) payment: (double) amount error: (NSError**) error;
+- (void) reconciliation: (double) amount error: (NSError**) error;
 - (void) reversal: (double) amount referenceNumber:(NSString*) reference error: (NSError**) error;
-- (void) endOfDay: (double) amount;
+- (void) endOfDay:(NSError **)error;
 - (void) updateTerminalSettings:(NSError**)error;
 - (void) cancelAllOperations;
 
