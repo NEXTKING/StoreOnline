@@ -21,10 +21,12 @@
         <attribute name="boxType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="certificationAuthorittyCode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="certificationType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="collection" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="drop" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="groupID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="itemCode" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="itemCode_2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="itemCodeOstin" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="itemID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
         <attribute name="line1" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="line2" optional="YES" attributeType="String" syncable="YES"/>
@@ -71,7 +73,7 @@
         <element name="Barcode" positionX="-47" positionY="-63" width="128" height="88"/>
         <element name="Group" positionX="-108" positionY="-72" width="128" height="75"/>
         <element name="Image" positionX="-126" positionY="-90" width="128" height="90"/>
-        <element name="Item" positionX="-207" positionY="-238" width="128" height="345"/>
+        <element name="Item" positionX="-207" positionY="-238" width="128" height="375"/>
         <element name="Price" positionX="-207" positionY="125" width="128" height="103"/>
         <element name="Subgroup" positionX="-99" positionY="-63" width="128" height="75"/>
         <element name="Task" positionX="-45" positionY="54" width="128" height="135"/>

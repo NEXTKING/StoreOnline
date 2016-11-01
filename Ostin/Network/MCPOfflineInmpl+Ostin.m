@@ -433,7 +433,7 @@
             [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"certificationAuthorittyCode" value:item.certificationAuthorittyCode]];
             [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"groupID" value:item.groupID.stringValue]];
             [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"itemCode" value:item.itemCode]];
-            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"itemCode_2" value:item.itemCode_2]];
+            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"itemCodeOstin" value:item.itemCodeOstin]];
             [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"line1" value:item.line1]];
             [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"line2" value:item.line2]];
             [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"priceHeader" value:item.priceHeader]];
@@ -442,7 +442,8 @@
             [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"storeNumber" value:item.storeNumber]];
             [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"subgroupID" value:item.subgroupID.stringValue]];
             [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"trademarkID" value:item.trademarkID.stringValue]];
-            
+            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"drop" value:item.drop]];
+            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"collection" value:item.collection]];
             // itemInformation.price =
             // itemInformation.barcode =
             itemInformation.color = item.color;
@@ -744,7 +745,7 @@
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"certificationAuthorittyCode" value:itemDB.certificationAuthorittyCode]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"groupID" value:itemDB.groupID.stringValue]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"itemCode" value:itemDB.itemCode]];
-    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"itemCode_2" value:itemDB.itemCode_2]];
+    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"itemCodeOstin" value:itemDB.itemCodeOstin]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"line1" value:itemDB.line1]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"line2" value:itemDB.line2]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"priceHeader" value:itemDB.priceHeader]];
@@ -757,6 +758,8 @@
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"discount" value:[NSString stringWithFormat:@"%.0f", priceDB.discount.doubleValue]]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"imageURL" value:[self imageURLForItemID:itemDB.itemID.integerValue]]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"ean" value:barcodeDB.ean]];
+    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"drop" value:itemDB.drop]];
+    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"collection" value:itemDB.collection]];
     
     itemInfo.itemId     = itemDB.itemID.integerValue;
     itemInfo.barcode    = barcodeDB.code128;
