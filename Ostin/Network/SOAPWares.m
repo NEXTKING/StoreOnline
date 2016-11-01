@@ -87,7 +87,7 @@
         itemDB.additionalInfo = csv[17];
         itemDB.boxType = csv[18];
         
-        if (csv.count > 19)
+        if (csv.count >= 22)
         {
             itemDB.itemCodeOstin = csv[19];
             itemDB.drop = csv[20];
