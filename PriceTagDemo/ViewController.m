@@ -7,11 +7,10 @@
 //
 
 #import "ViewController.h"
-#import "PrintViewController.h"
 #import "DetailsTableViewController.h"
 #import "OstinPriceTag.h"
 
-@interface ViewController ()  <PrinterControllerDelegate>
+@interface ViewController ()
 {
     PrintViewController *printVC;
 }

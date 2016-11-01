@@ -30,6 +30,7 @@
 		21C054631DC355E20094C7B1 /* SOAPUsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C054621DC355E20094C7B1 /* SOAPUsers.m */; };
 		21C054661DC36D4D0094C7B1 /* UserInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C054651DC36D4D0094C7B1 /* UserInformation.m */; };
 		21C0546C1DC765800094C7B1 /* GradientTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C0546B1DC765800094C7B1 /* GradientTabBarController.m */; };
+		21C0546E1DC788F10094C7B1 /* producer_label.zpl in Resources */ = {isa = PBXBuildFile; fileRef = 21C0546D1DC788F10094C7B1 /* producer_label.zpl */; };
 		23325335A97CCCACC42944AF /* libPods-Ostin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD3C223CF10EB177C6448781 /* libPods-Ostin.a */; };
 		5BADECA800A6702C5F474BB5 /* libPods-PriceTagDemoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1E01A49F9DF7B4A12A7407 /* libPods-PriceTagDemoUITests.a */; };
 		71454865FBE26CAE4A38F59F /* libPods-DesondoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D44F91159F3A6CCEC7C0AEB /* libPods-DesondoTests.a */; };
@@ -585,6 +586,7 @@
 		21C054651DC36D4D0094C7B1 /* UserInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInformation.m; sourceTree = "<group>"; };
 		21C0546A1DC765800094C7B1 /* GradientTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientTabBarController.h; sourceTree = "<group>"; };
 		21C0546B1DC765800094C7B1 /* GradientTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientTabBarController.m; sourceTree = "<group>"; };
+		21C0546D1DC788F10094C7B1 /* producer_label.zpl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = producer_label.zpl; sourceTree = "<group>"; };
 		26E6677B3BC7955145425ED2 /* Pods-DesondoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesondoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DesondoTests/Pods-DesondoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		305BD8FF1EE07980B92BBA8D /* Pods-Tsum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tsum.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tsum/Pods-Tsum.debug.xcconfig"; sourceTree = "<group>"; };
 		3441ACD00F2A17AFBB7CD4CD /* Pods-PriceTagDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceTagDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PriceTagDemoTests/Pods-PriceTagDemoTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -2020,6 +2022,7 @@
 			isa = PBXGroup;
 			children = (
 				C68216341DB66AFF00833751 /* label.zpl */,
+				21C0546D1DC788F10094C7B1 /* producer_label.zpl */,
 				C68216361DB66B1800833751 /* ZPLGenerator.h */,
 				C68216371DB66B1800833751 /* ZPLGenerator.m */,
 			);
@@ -2603,6 +2606,7 @@
 				B957B1001D1C2A2D002A5256 /* 99002774132.jpg in Resources */,
 				B957B1051D1C2A2D002A5256 /* 99002776863.jpg in Resources */,
 				B957B11D1D1D25D1002A5256 /* Icon.png in Resources */,
+				21C0546E1DC788F10094C7B1 /* producer_label.zpl in Resources */,
 				215EFF0A1DAB9ED600BE11C5 /* SearchTableViewCell.xib in Resources */,
 				B957B10D1D1C2A2D002A5256 /* 8813780299.jpg in Resources */,
 				C68216351DB66AFF00833751 /* label.zpl in Resources */,
