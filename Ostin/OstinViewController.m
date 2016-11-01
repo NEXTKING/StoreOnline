@@ -248,8 +248,12 @@
             [self.printButton sendActionsForControlEvents: UIControlEventTouchUpInside];
         }
         //,0,400,320,100,0,500
-        
-        
+    }
+    else if (isEqual && !restored)
+    {
+        DTDevices *dtDev = [DTDevices sharedDevice];
+        int data[]={700,100,1400,100,700,100};
+        [dtDev playSound:100 beepData:data length:sizeof(data) error:nil];
     }
     
     self.amountStatusLabel.text = isEqual ? @"✓" : @"✕";
