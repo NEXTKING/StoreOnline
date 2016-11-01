@@ -258,6 +258,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
         
         ItemInformation* itemInfo = _items[indexPath.row];
         ostinVC.currentItemInfo = itemInfo;
+        ostinVC.externalBarcode = itemInfo.barcode;
     }
 }
 

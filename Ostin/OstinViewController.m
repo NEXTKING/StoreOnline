@@ -29,6 +29,7 @@
     [super viewDidLoad];
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     _immediateSwitch.on = ([defaults valueForKey:@"PrintImmediatly"] != nil);
+    _additionalLabelSwitch.on = [defaults boolForKey:@"PrintAdditionalLabel"];
     
     [[NSUserDefaults standardUserDefaults] setValue:@"00190EA20DAA" forKey:@"PrinterID"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -38,8 +39,6 @@
     //[self barcodeData:@"990025878473" type:BAR_UPC];
     
     // Do any additional setup after loading the view.
-    [self updateItemInfo:self.currentItemInfo];
-    
     //[[MCPServer instance] itemDescription:self itemCode:@"2792304" shopCode:nil isoType:BAR_CODE128];
 }
 
@@ -49,7 +48,7 @@
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     
-    if ([defaults valueForKey:@"LastBarcode"] && !_externalBarcode)
+    if ([defaults valueForKey:@"LastBarcode"] && !_externalBarcode && !self.currentItemInfo)
     {
         restored = YES;
         NSString *barcode = [defaults valueForKey:@"LastBarcode"];
