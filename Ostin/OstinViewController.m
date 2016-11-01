@@ -15,6 +15,8 @@
 @interface OstinViewController ()
 {
     BOOL restored;
+    BOOL bindingInProgress;
+    UIAlertView *bindingAlert;
     WYPopoverController *settingsPopover;
     NSMutableArray* symbols;
     NSMutableString* ringBarcode;
@@ -77,6 +79,13 @@
 
 - (void)scanNotification:(NSNotification*)aNotification
 {
+    if (bindingInProgress)
+    {
+        NSString* code = [aNotification.object objectForKey:@"barcode"];
+        [bindingAlert textFieldAtIndex:0].text = code;
+        return;
+    }
+    
     lastBarcode = [aNotification.object objectForKey:@"barcode"];
     NSNumber *type = [aNotification.object objectForKey:@"type"];
     [[NSUserDefaults standardUserDefaults] setValue:lastBarcode forKey:@"LastBarcode"];
@@ -200,12 +209,61 @@
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         
         SettingsViewController* destinationViewController = (SettingsViewController *)segue.destinationViewController;
-        destinationViewController.preferredContentSize = CGSizeMake(200, 280);       // Deprecated in iOS7. Use 'preferredContentSize' instead.
+        destinationViewController.preferredContentSize = CGSizeMake(200, 200);       // Deprecated in iOS7. Use 'preferredContentSize' instead.
                
         settingsPopover = [popoverSegue popoverControllerWithSender:sender permittedArrowDirections:WYPopoverArrowDirectionAny animated:YES];
+        
+        destinationViewController.bindPrinterAction = ^
+        {
+            [self bindPrinter];
+            [settingsPopover dismissPopoverAnimated:YES];
+        };
+        
+        destinationViewController.feedPaperAction = ^
+        {
+            [self feedPaper];
+            [settingsPopover dismissPopoverAnimated:YES];
+            
+        };
         //popoverController.delegate = self;
     }
     
+}
+
+- (void) feedPaper
+{
+    self.currentZPLInfo = [NSData data];
+    [super printButtonAction:nil];
+}
+
+- (void) bindPrinter
+{
+    bindingInProgress = YES;
+    bindingAlert = [[UIAlertView alloc] initWithTitle:@"Привязка принтера" message:@"Отсканируйте или введите штрих-код принтера" delegate:self cancelButtonTitle:@"Отмена" otherButtonTitles:@"Оk", nil];
+    bindingAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [bindingAlert textFieldAtIndex:0].keyboardType = UIKeyboardTypeNumberPad;
+    bindingAlert.tag = 987;
+    [bindingAlert show];
+}
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != alertView.cancelButtonIndex)
+    {
+        
+        if (alertView.tag == 987)
+        {
+            NSString* barcode = [[alertView textFieldAtIndex:0] text];
+            [[NSUserDefaults standardUserDefaults] setValue:barcode forKey:@"PrinterID"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    }
+}
+
+- (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 987)
+        bindingInProgress = NO;
 }
 
 

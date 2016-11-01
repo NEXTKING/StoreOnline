@@ -85,7 +85,7 @@
 		B9171DC61CF368E7004DB487 /* STMenuDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = B9171DBB1CF368E7004DB487 /* STMenuDataSource.m */; };
 		B9171DC71CF368E7004DB487 /* STMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9171DBD1CF368E7004DB487 /* STMenuViewController.m */; };
 		B9171DC81CF368E7004DB487 /* STMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9171DBE1CF368E7004DB487 /* STMenuViewController.xib */; };
-		B9171DCD1CF46738004DB487 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9171DCC1CF46738004DB487 /* SettingsViewController.m */; };
+		B9171DCD1CF46738004DB487 /* RivgoshSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9171DCC1CF46738004DB487 /* RivgoshSettingsViewController.m */; };
 		B9171DCF1CF4674A004DB487 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9171DCE1CF4674A004DB487 /* SettingsViewController.xib */; };
 		B9171DD11CF469B5004DB487 /* person.png in Resources */ = {isa = PBXBuildFile; fileRef = B9171DD01CF469B5004DB487 /* person.png */; };
 		B9171DD41CF4C624004DB487 /* DiscountCartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9171DD31CF4C624004DB487 /* DiscountCartCell.xib */; };
@@ -615,8 +615,8 @@
 		B9171DBC1CF368E7004DB487 /* STMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMenuViewController.h; sourceTree = "<group>"; };
 		B9171DBD1CF368E7004DB487 /* STMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMenuViewController.m; sourceTree = "<group>"; };
 		B9171DBE1CF368E7004DB487 /* STMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STMenuViewController.xib; sourceTree = "<group>"; };
-		B9171DCB1CF46738004DB487 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
-		B9171DCC1CF46738004DB487 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		B9171DCB1CF46738004DB487 /* RivgoshSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RivgoshSettingsViewController.h; sourceTree = "<group>"; };
+		B9171DCC1CF46738004DB487 /* RivgoshSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RivgoshSettingsViewController.m; sourceTree = "<group>"; };
 		B9171DCE1CF4674A004DB487 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		B9171DD01CF469B5004DB487 /* person.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = person.png; path = ../person.png; sourceTree = "<group>"; };
 		B9171DD31CF4C624004DB487 /* DiscountCartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscountCartCell.xib; sourceTree = "<group>"; };
@@ -1305,8 +1305,8 @@
 		B9171DCA1CF466ED004DB487 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				B9171DCB1CF46738004DB487 /* SettingsViewController.h */,
-				B9171DCC1CF46738004DB487 /* SettingsViewController.m */,
+				B9171DCB1CF46738004DB487 /* RivgoshSettingsViewController.h */,
+				B9171DCC1CF46738004DB487 /* RivgoshSettingsViewController.m */,
 				B9171DCE1CF4674A004DB487 /* SettingsViewController.xib */,
 				B9F3C3BE1D1426AC00938D92 /* ZReportViewController.h */,
 				B9F3C3BF1D1426AC00938D92 /* ZReportViewController.m */,
@@ -3477,7 +3477,7 @@
 				B9171DC61CF368E7004DB487 /* STMenuDataSource.m in Sources */,
 				B92B6EA11CEDC7DF00B94B21 /* DiscountInformation.m in Sources */,
 				B970B8101CD0EBAD0066A66A /* NwobjClientCard.m in Sources */,
-				B9171DCD1CF46738004DB487 /* SettingsViewController.m in Sources */,
+				B9171DCD1CF46738004DB487 /* RivgoshSettingsViewController.m in Sources */,
 				B989F4DC1CFEE44A00B59F5A /* NwobjPrintStatus.m in Sources */,
 				B968E7011CCE749E005F91FF /* NwobjAuthorization.m in Sources */,
 				B9F3C3BA1D13FBBE00938D92 /* NwobjZreport.m in Sources */,
