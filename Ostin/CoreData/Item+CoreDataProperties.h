@@ -21,12 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *boxType;
 @property (nullable, nonatomic, copy) NSString *certificationAuthorittyCode;
 @property (nullable, nonatomic, copy) NSString *certificationType;
-@property (nullable, nonatomic, copy) NSString *collection;
 @property (nullable, nonatomic, copy) NSString *color;
-@property (nullable, nonatomic, copy) NSString *drop;
 @property (nullable, nonatomic, copy) NSNumber *groupID;
 @property (nullable, nonatomic, copy) NSString *itemCode;
-@property (nullable, nonatomic, copy) NSString *itemCodeOstin;
+@property (nullable, nonatomic, copy) NSString *itemCode_2;
 @property (nullable, nonatomic, copy) NSNumber *itemID;
 @property (nullable, nonatomic, copy) NSString *line1;
 @property (nullable, nonatomic, copy) NSString *line2;
