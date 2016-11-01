@@ -146,6 +146,7 @@
     DTDevices *dtdev = [DTDevices sharedDevice];
     
     [dtdev prnRetractPaper:nil];
+    [dtdev btDisconnect:nil error:nil];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
