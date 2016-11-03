@@ -11,4 +11,5 @@
 @interface SearchTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *itemCodeLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *itemImageView;
 @end

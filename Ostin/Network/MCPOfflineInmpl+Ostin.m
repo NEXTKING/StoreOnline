@@ -452,6 +452,7 @@
                 [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"storeNumber" value:item.storeNumber]];
                 [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"subgroupID" value:item.subgroupID.stringValue]];
                 [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"trademarkID" value:item.trademarkID.stringValue]];
+                [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"imageURL" value:[self imageURLForItemID:item.itemID.integerValue]]];
                 
                 // itemInformation.price =
                 // itemInformation.barcode =

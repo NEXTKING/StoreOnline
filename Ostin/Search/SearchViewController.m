@@ -11,6 +11,7 @@
 #import "MCPServer.h"
 #import "OstinViewController.h"
 #import "ZPLGenerator.h"
+#import "AsyncImageView.h"
 
 @interface SearchViewController () <UISearchBarDelegate, SearchDelegate, ItemDescriptionDelegate>
 {
@@ -71,7 +72,12 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
     
     cell.nameLabel.text = item.name;
     cell.itemCodeLabel.text = [item additionalParameterValueForName:@"itemCode"];
-
+    NSString *urlString = [item additionalParameterValueForName:@"imageURL"];
+    
+    cell.itemImageView.image = [UIImage imageNamed:@"no-image.png"];
+    if (urlString != nil)
+        cell.itemImageView.imageURL = [NSURL URLWithString:urlString];
+    
     return cell;
 }
 
@@ -79,6 +85,12 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
 {
     ItemInformation *item = [_searchResults objectAtIndex:indexPath.row];
     [[MCPServer instance] itemDescription:self itemID:item.itemId];
+}
+
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SearchTableViewCell *_cell = (SearchTableViewCell *)cell;
+    [[AsyncImageLoader sharedLoader] cancelLoadingImagesForTarget:_cell.itemImageView];
 }
 
 #pragma mark - UISearchBar delegate
