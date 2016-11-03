@@ -11,7 +11,7 @@
 #import "SynchronizationController.h"
 #import "MCPServer.h"
 
-@interface LoginViewController () <DTDeviceDelegate, SyncronizationDelegate, UserDelegate>
+@interface LoginViewController () <DTDeviceDelegate, SyncronizationDelegate, UserDelegate, UITextFieldDelegate>
 {
     DTDevices *dtdev;
 }
@@ -21,14 +21,18 @@
 
 @implementation LoginViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     dtdev = [DTDevices sharedDevice];
     [dtdev addDelegate:self];
     [dtdev connect];
     
-    // Do any additional setup after loading the view.
+    _loginTextField.delegate = self;
+    _loginTextField.returnKeyType = UIReturnKeyNext;
+    _passwordTextField.delegate = self;
+    _passwordTextField.returnKeyType = UIReturnKeyDone;
 }
 
 - (void) barcodeData:(NSString *)barcode type:(int)type
@@ -41,10 +45,20 @@
     [[MCPServer instance] user:self barcode:barcode];
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if ([textField isEqual:_loginTextField])
+        [_passwordTextField becomeFirstResponder];
+    else if ([textField isEqual:_passwordTextField])
+    {
+        [textField resignFirstResponder];
+        __weak typeof(self) wself = self;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [wself loginButtonPressed:nil];
+        });
+    }
+    
+    return YES;
 }
 
 - (IBAction)loginButtonPressed:(id)sender
