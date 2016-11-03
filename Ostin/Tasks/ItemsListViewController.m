@@ -436,17 +436,17 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     
     if (number == 0) // price is actual
     {
-        int data[]={700,100,1400,100,700,100};
+        int data[]={300,70,500,70,700,70,900,70};
         [dtDev playSound:100 beepData:data length:sizeof(data) error:nil];
     }
     else if (number == 1) // waiting print
     {
-        int data[]={800,400,0,400,800,400,0,400,800,400};
+        int data[]={800,400,0,200,800,400};
         [dtDev playSound:100 beepData:data length:sizeof(data) error:nil];
     }
     else if (number == 2) // ware not found in task
     {
-        int data[] = {1000,200,700,200,500,200,700,200};
+        int data[]={900,50,1100,50,1300,50,1500,50};
         [dtDev playSound:100 beepData:data length:sizeof(data) error:nil];
     }
 }

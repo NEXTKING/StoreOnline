@@ -194,7 +194,7 @@
     if (!isEqual && !restored)
     {
         DTDevices *dtDev = [DTDevices sharedDevice];
-        int beepData[]={1000,300,1000,300};
+        int beepData[]={1000,200,1000,200};
         [dtDev playSound:100 beepData:beepData length:sizeof(beepData) error:nil];
         /*int beepData[]={660,100,0,150,660,100,0,300,660,100,0,300};
         //
@@ -259,7 +259,7 @@
     else if (isEqual && !restored)
     {
         DTDevices *dtDev = [DTDevices sharedDevice];
-        int data[]={700,100,1400,100,700,100};
+        int data[]={300,70,500,70,700,70,900,70};
         [dtDev playSound:100 beepData:data length:sizeof(data) error:nil];
     }
     
