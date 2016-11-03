@@ -370,96 +370,103 @@
 
 - (void) search:(id<SearchDelegate>)delegate forQuery:(NSString *)query withAttribute:(ItemSearchAttribute)searchAttribute
 {
-    if ([query stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length == 0) // empty query
-    {
-        if ([delegate respondsToSelector:@selector(searchComplete:attribute:items:)])
-            [delegate searchComplete:1 attribute:searchAttribute items:nil];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         
-        return;
-    }
-    
-    NSMutableArray *searchPredicates = [[NSMutableArray alloc] init];
-    
-    if ((searchAttribute & ItemSearchAttributeName) != 0)
-    {
-        // name contains all substrings
-        NSArray *querySubstrings = [query componentsSeparatedByString:@" "];
-        NSMutableArray *substringPredicates = [[NSMutableArray alloc] initWithCapacity:querySubstrings.count];
-        for (NSString *substring in querySubstrings)
+        void (^returnBlock)(int result, ItemSearchAttribute searchAttribute, NSArray *items) = ^void(int result, ItemSearchAttribute attribute, NSArray *items)
         {
-            if (substring.length > 0)
-                [substringPredicates addObject:[NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@", substring]];
-        }
-        NSPredicate *namePredicate = [NSCompoundPredicate andPredicateWithSubpredicates:substringPredicates];
-        [searchPredicates addObject:namePredicate];
-    }
-    
-    if ((searchAttribute & ItemSearchAttributeArticle) != 0)
-    {
-        NSPredicate *articlePredicate = [NSPredicate predicateWithFormat:@"itemCode_2 == %@", query];
-        [searchPredicates addObject:articlePredicate];
-    }
-    
-    if ((searchAttribute & ItemSearchAttributeBarcode) != 0)
-    {
-        NSPredicate *barcodePredicate = [NSPredicate predicateWithFormat:@"barcode == %@", query];
-        [searchPredicates addObject:barcodePredicate];
-    }
-    
-    if ((searchAttribute & ItemSearchAttributeItemCode) != 0)
-    {
-        NSPredicate *itemCodePredicate = [NSPredicate predicateWithFormat:@"itemCode == %@", query];
-        [searchPredicates addObject:itemCodePredicate];
-    }
-    
-    NSManagedObjectContext *moc = self.dataController.managedObjectContext;
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
-    
-    NSPredicate *compoundPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:searchPredicates];
-    [request setPredicate:compoundPredicate];
-    NSArray* results = [moc executeFetchRequest:request error:nil];
-    
-    if (results.count > 0)
-    {
-        NSMutableArray *items = [[NSMutableArray alloc] init];
-        for (Item *item in results)
+            if ([delegate respondsToSelector:@selector(searchComplete:attribute:items:)])
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [delegate searchComplete:result attribute:attribute items:items];
+                });
+            }
+        };
+        
+        if ([query stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length == 0) // empty query
         {
-            ItemInformation *itemInformation = [ItemInformation new];
-            NSMutableArray *additionalParameters = [NSMutableArray new];
-            
-            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"additionalInfo" value:item.additionalInfo]];
-            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"additionalSize" value:item.additionalSize]];
-            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"boxType" value:item.boxType]];
-            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"certificationAuthorittyCode" value:item.certificationAuthorittyCode]];
-            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"groupID" value:item.groupID.stringValue]];
-            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"itemCode" value:item.itemCode]];
-            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"itemCode_2" value:item.itemCode_2]];
-            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"line1" value:item.line1]];
-            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"line2" value:item.line2]];
-            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"priceHeader" value:item.priceHeader]];
-            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"size" value:item.size]];
-            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"sizeHeader" value:item.sizeHeader]];
-            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"storeNumber" value:item.storeNumber]];
-            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"subgroupID" value:item.subgroupID.stringValue]];
-            [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"trademarkID" value:item.trademarkID.stringValue]];
-            
-            // itemInformation.price =
-            // itemInformation.barcode =
-            itemInformation.color = item.color;
-            itemInformation.itemId = item.itemID.integerValue;
-            itemInformation.name = item.name;
-            itemInformation.additionalParameters = additionalParameters;
-            
-            [items addObject:itemInformation];
+            returnBlock(1, searchAttribute, nil);
+            return;
         }
-        if ([delegate respondsToSelector:@selector(searchComplete:attribute:items:)])
-            [delegate searchComplete:0 attribute:searchAttribute items:items];
-    }
-    else
-    {
-        if ([delegate respondsToSelector:@selector(searchComplete:attribute:items:)])
-            [delegate searchComplete:0 attribute:searchAttribute items:nil];
-    }
+        
+        NSMutableArray *searchPredicates = [[NSMutableArray alloc] init];
+        
+        if ((searchAttribute & ItemSearchAttributeName) != 0)
+        {
+            // name contains all substrings
+            NSArray *querySubstrings = [query componentsSeparatedByString:@" "];
+            NSMutableArray *substringPredicates = [[NSMutableArray alloc] initWithCapacity:querySubstrings.count];
+            for (NSString *substring in querySubstrings)
+            {
+                if (substring.length > 0)
+                    [substringPredicates addObject:[NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@", substring]];
+            }
+            NSPredicate *namePredicate = [NSCompoundPredicate andPredicateWithSubpredicates:substringPredicates];
+            [searchPredicates addObject:namePredicate];
+        }
+        
+        if ((searchAttribute & ItemSearchAttributeArticle) != 0)
+        {
+            NSPredicate *articlePredicate = [NSPredicate predicateWithFormat:@"itemCode_2 ==[c] %@", query];
+            [searchPredicates addObject:articlePredicate];
+        }
+        
+        if ((searchAttribute & ItemSearchAttributeBarcode) != 0)
+        {
+            NSPredicate *barcodePredicate = [NSPredicate predicateWithFormat:@"barcode ==[c] %@", query];
+            [searchPredicates addObject:barcodePredicate];
+        }
+        
+        if ((searchAttribute & ItemSearchAttributeItemCode) != 0)
+        {
+            NSPredicate *itemCodePredicate = [NSPredicate predicateWithFormat:@"itemCode ==[c] %@", query];
+            [searchPredicates addObject:itemCodePredicate];
+        }
+        
+        NSManagedObjectContext *moc = self.dataController.managedObjectContext;
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+        
+        NSPredicate *compoundPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:searchPredicates];
+        [request setPredicate:compoundPredicate];
+        NSArray* results = [moc executeFetchRequest:request error:nil];
+        
+        if (results.count > 0)
+        {
+            NSMutableArray *items = [[NSMutableArray alloc] init];
+            for (Item *item in results)
+            {
+                ItemInformation *itemInformation = [ItemInformation new];
+                NSMutableArray *additionalParameters = [NSMutableArray new];
+                
+                [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"additionalInfo" value:item.additionalInfo]];
+                [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"additionalSize" value:item.additionalSize]];
+                [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"boxType" value:item.boxType]];
+                [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"certificationAuthorittyCode" value:item.certificationAuthorittyCode]];
+                [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"groupID" value:item.groupID.stringValue]];
+                [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"itemCode" value:item.itemCode]];
+                [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"itemCode_2" value:item.itemCode_2]];
+                [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"line1" value:item.line1]];
+                [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"line2" value:item.line2]];
+                [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"priceHeader" value:item.priceHeader]];
+                [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"size" value:item.size]];
+                [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"sizeHeader" value:item.sizeHeader]];
+                [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"storeNumber" value:item.storeNumber]];
+                [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"subgroupID" value:item.subgroupID.stringValue]];
+                [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"trademarkID" value:item.trademarkID.stringValue]];
+                
+                // itemInformation.price =
+                // itemInformation.barcode =
+                itemInformation.color = item.color;
+                itemInformation.itemId = item.itemID.integerValue;
+                itemInformation.name = item.name;
+                itemInformation.additionalParameters = additionalParameters;
+                
+                [items addObject:itemInformation];
+            }
+            returnBlock(0, searchAttribute, items);
+        }
+        else
+            returnBlock(0, searchAttribute, nil);
+    });
 }
 
 - (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString *)code shopCode:(NSString *)shopCode isoType:(int)type
@@ -563,171 +570,223 @@
 
 - (void) tasksInternal:(id<TasksDelegate>)delegate userID:(NSString *)userID
 {
-    NSManagedObjectContext *moc =self.dataController.managedObjectContext;
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Task"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"userID == %@", userID]];
-    
-    NSError* error = nil;
-    NSArray* results = [moc executeFetchRequest:request error:&error];
-    NSMutableArray *exportTasks = [NSMutableArray new];
-    
-    for (Task* taskDB in results)
-    {
-        TaskInformation* taskInfo = [TaskInformation new];
-        taskInfo.name = taskDB.name;
-        taskInfo.userID = taskDB.userID;
-        taskInfo.taskID = taskDB.taskID.integerValue;
-        taskInfo.startDate = taskDB.startDate;
-        taskInfo.endDate = taskDB.endDate;
-        taskInfo.status = (taskDB.startDate != nil && taskDB.endDate != nil) ? TaskInformationStatusComplete : taskDB.startDate != nil ? TaskInformationStatusInProgress : TaskInformationStatusNotStarted;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        NSFetchRequest *taskItemRequest = [NSFetchRequest fetchRequestWithEntityName:@"TaskItemBinding"];
-        [taskItemRequest setPredicate:[NSPredicate predicateWithFormat:@"taskID == %ld", taskDB.taskID.integerValue]];
-        NSArray *results = [moc executeFetchRequest:taskItemRequest error:nil];
-        NSMutableArray *taskItems = [[NSMutableArray alloc] initWithCapacity:results.count + 1];
-        for (TaskItemBinding *taskItemDB in results)
+        NSManagedObjectContext *moc =self.dataController.managedObjectContext;
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Task"];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"userID == %@", userID]];
+        
+        NSError* error = nil;
+        NSArray* results = [moc executeFetchRequest:request error:&error];
+        NSMutableArray *exportTasks = [NSMutableArray new];
+        
+        for (Task* taskDB in results)
         {
-            TaskItemInformation *taskItemInfo = [TaskItemInformation new];
-            taskItemInfo.itemID = taskItemDB.itemID.integerValue;
-            taskItemInfo.scanned = taskItemDB.scanned.integerValue;
-            taskItemInfo.quantity = taskItemDB.quantity.integerValue;
-            [taskItems addObject:taskItemInfo];
+            TaskInformation* taskInfo = [TaskInformation new];
+            taskInfo.name = taskDB.name;
+            taskInfo.userID = taskDB.userID;
+            taskInfo.taskID = taskDB.taskID.integerValue;
+            taskInfo.startDate = taskDB.startDate;
+            taskInfo.endDate = taskDB.endDate;
+            taskInfo.status = (taskDB.startDate != nil && taskDB.endDate != nil) ? TaskInformationStatusComplete : taskDB.startDate != nil ? TaskInformationStatusInProgress : TaskInformationStatusNotStarted;
+            
+            NSFetchRequest *taskItemRequest = [NSFetchRequest fetchRequestWithEntityName:@"TaskItemBinding"];
+            [taskItemRequest setPredicate:[NSPredicate predicateWithFormat:@"taskID == %ld", taskDB.taskID.integerValue]];
+            NSArray *results = [moc executeFetchRequest:taskItemRequest error:nil];
+            NSMutableArray *taskItems = [[NSMutableArray alloc] initWithCapacity:results.count + 1];
+            for (TaskItemBinding *taskItemDB in results)
+            {
+                TaskItemInformation *taskItemInfo = [TaskItemInformation new];
+                taskItemInfo.itemID = taskItemDB.itemID.integerValue;
+                taskItemInfo.scanned = taskItemDB.scanned.integerValue;
+                taskItemInfo.quantity = taskItemDB.quantity.integerValue;
+                [taskItems addObject:taskItemInfo];
+            }
+            taskInfo.items = taskItems;
+            [exportTasks addObject:taskInfo];
         }
-        taskInfo.items = taskItems;
-        [exportTasks addObject:taskInfo];
-    }
-    
-    if (!error)
-        [delegate tasksComplete:0 tasks:exportTasks];
-    else
-        [delegate tasksComplete:1 tasks:nil];
+        
+        if ([delegate respondsToSelector:@selector(tasksComplete:tasks:)])
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (!error)
+                    [delegate tasksComplete:0 tasks:exportTasks];
+                else
+                    [delegate tasksComplete:1 tasks:nil];
+            });
+        }
+    });
 }
 
 - (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString *)code isoType:(int) type
 {
-    NSManagedObjectContext *moc =self.dataController.managedObjectContext;
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"Barcode" inManagedObjectContext:self.dataController.managedObjectContext]];
-    [request setIncludesSubentities:NO];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
 
-    if (type == BAR_CODE128)
-        [request setPredicate:[NSPredicate predicateWithFormat:@"code128 LIKE[c] %@", code]];
-    else if (type == BAR_UPC)
-        [request setPredicate:[NSPredicate predicateWithFormat:@"code128 LIKE[c] %@", code]];
-    else
-        [request setPredicate:[NSPredicate predicateWithFormat:@"ean LIKE[c] %@", code]];
+        void (^returnBlock)(int result, ItemInformation *item) = ^void(int result, ItemInformation *item)
+        {
+            if ([delegate respondsToSelector:@selector(itemDescriptionComplete:itemDescription:)])
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [delegate itemDescriptionComplete:result itemDescription:item];
+                });
+            }
+        };
+        
+        NSManagedObjectContext *moc =self.dataController.managedObjectContext;
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        [request setEntity:[NSEntityDescription entityForName:@"Barcode" inManagedObjectContext:self.dataController.managedObjectContext]];
+        [request setIncludesSubentities:NO];
+
+        if (type == BAR_CODE128)
+            [request setPredicate:[NSPredicate predicateWithFormat:@"code128 LIKE[c] %@", code]];
+        else if (type == BAR_UPC)
+            [request setPredicate:[NSPredicate predicateWithFormat:@"code128 LIKE[c] %@", code]];
+        else
+            [request setPredicate:[NSPredicate predicateWithFormat:@"ean LIKE[c] %@", code]];
+        
+        
+        NSArray* results = [moc executeFetchRequest:request error:nil];
+        if (results.count < 1 && type != BAR_CODE128 && type !=BAR_UPC && code.length > 8)
+        {
+            NSString *codeWithoutChecksum = [code substringToIndex:code.length - 1];
+            [request setPredicate:[NSPredicate predicateWithFormat:@"ean LIKE[c] %@", codeWithoutChecksum]];
+            results = [moc executeFetchRequest:request error:nil];
+        }
+            
+        if (results.count < 1)
+        {
+            returnBlock(1, nil);
+            return;
+        }
+        Barcode *barcodeDB = results[0];
+        
+        request = [[NSFetchRequest alloc] init];
+        [request setEntity:[NSEntityDescription entityForName:@"Item" inManagedObjectContext:self.dataController.managedObjectContext]];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %@", barcodeDB.itemID]];
+        results = [moc executeFetchRequest:request error:nil];
+        if (results.count < 1)
+        {
+            returnBlock(1, nil);
+            return;
+        }
+        Item *itemDB = results[0];
+        
+        [request setEntity:[NSEntityDescription entityForName:@"Price" inManagedObjectContext:self.dataController.managedObjectContext]];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %@", barcodeDB.itemID]];
+        results = [moc executeFetchRequest:request error:nil];
+        if (results.count < 1)
+        {
+            returnBlock(1, nil);
+            return;
+        }
+        Price *priceDB = results[0];
+        
+        ItemInformation *item = [self itemInfoFromDBEntities:itemDB barcode:barcodeDB price:priceDB];
     
-    
-    NSArray* results = [moc executeFetchRequest:request error:nil];
-    if (results.count < 1)
-    {
-        [delegate itemDescriptionComplete:1 itemDescription:nil];
-        return;
-    }
-    Barcode *barcodeDB = results[0];
-    
-    request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"Item" inManagedObjectContext:self.dataController.managedObjectContext]];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %@", barcodeDB.itemID]];
-    results = [moc executeFetchRequest:request error:nil];
-    if (results.count < 1)
-    {
-        [delegate itemDescriptionComplete:1 itemDescription:nil];
-        return;
-    }
-    Item *itemDB = results[0];
-    
-    [request setEntity:[NSEntityDescription entityForName:@"Price" inManagedObjectContext:self.dataController.managedObjectContext]];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %@", barcodeDB.itemID]];
-    results = [moc executeFetchRequest:request error:nil];
-    if (results.count < 1)
-    {
-        [delegate itemDescriptionComplete:1 itemDescription:nil];
-        return;
-    }
-    Price *priceDB = results[0];
-    
-    ItemInformation *item = [self itemInfoFromDBEntities:itemDB barcode:barcodeDB price:priceDB];
-    
-    [delegate itemDescriptionComplete:0 itemDescription:item];
+        returnBlock(0, item);
+    });
 }
 
 - (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemID:(NSUInteger)itemID
 {
-    NSManagedObjectContext *moc = self.dataController.managedObjectContext;
-    
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", itemID]];
-    NSArray *results = [moc executeFetchRequest:request error:nil];
-    if (results.count < 1)
-    {
-        [delegate itemDescriptionComplete:1 itemDescription:nil];
-        return;
-    }
-    Item *itemDB = results[0];
-    
-    request = [NSFetchRequest fetchRequestWithEntityName:@"Price"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", itemID]];
-    results = [moc executeFetchRequest:request error:nil];
-    if (results.count < 1)
-    {
-        [delegate itemDescriptionComplete:1 itemDescription:nil];
-        return;
-    }
-    Price *priceDB = results[0];
-    
-    request = [NSFetchRequest fetchRequestWithEntityName:@"Barcode"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", itemID]];
-    results = [moc executeFetchRequest:request error:nil];
-    if (results.count < 1)
-    {
-        [delegate itemDescriptionComplete:1 itemDescription:nil];
-        return;
-    }
-    Barcode *barcodeDB = results[0];
-    
-    ItemInformation *item = [self itemInfoFromDBEntities:itemDB barcode:barcodeDB price:priceDB];
-    
-    [delegate itemDescriptionComplete:0 itemDescription:item];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        
+        void (^returnBlock)(int result, ItemInformation *item) = ^void(int result, ItemInformation *item)
+        {
+            if ([delegate respondsToSelector:@selector(itemDescriptionComplete:itemDescription:)])
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [delegate itemDescriptionComplete:result itemDescription:item];
+                });
+            }
+        };
+        
+        NSManagedObjectContext *moc = self.dataController.managedObjectContext;
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", itemID]];
+        NSArray *results = [moc executeFetchRequest:request error:nil];
+        if (results.count < 1)
+        {
+            returnBlock(1, nil);
+            return;
+        }
+        Item *itemDB = results[0];
+        
+        request = [NSFetchRequest fetchRequestWithEntityName:@"Price"];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", itemID]];
+        results = [moc executeFetchRequest:request error:nil];
+        if (results.count < 1)
+        {
+            returnBlock(1, nil);
+            return;
+        }
+        Price *priceDB = results[0];
+        
+        request = [NSFetchRequest fetchRequestWithEntityName:@"Barcode"];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", itemID]];
+        results = [moc executeFetchRequest:request error:nil];
+        if (results.count < 1)
+        {
+            returnBlock(1, nil);
+            return;
+        }
+        Barcode *barcodeDB = results[0];
+        
+        ItemInformation *item = [self itemInfoFromDBEntities:itemDB barcode:barcodeDB price:priceDB];
+        
+        returnBlock(0, item);
+    });
 }
 
 - (void) itemDescription:(id<ItemDescriptionDelegate>)delegate article:(NSString *)article
 {
-    NSManagedObjectContext *moc = self.dataController.managedObjectContext;
-    
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"itemCode ==[c] %@", article]];
-    NSArray *results = [moc executeFetchRequest:request error:nil];
-    if (results.count < 1)
-    {
-        [delegate itemDescriptionComplete:1 itemDescription:nil];
-        return;
-    }
-    Item *itemDB = results[0];
-    
-    request = [NSFetchRequest fetchRequestWithEntityName:@"Price"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", itemDB.itemID.integerValue]];
-    results = [moc executeFetchRequest:request error:nil];
-    if (results.count < 1)
-    {
-        [delegate itemDescriptionComplete:1 itemDescription:nil];
-        return;
-    }
-    Price *priceDB = results[0];
-    
-    request = [NSFetchRequest fetchRequestWithEntityName:@"Barcode"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", itemDB.itemID.integerValue]];
-    results = [moc executeFetchRequest:request error:nil];
-    if (results.count < 1)
-    {
-        [delegate itemDescriptionComplete:1 itemDescription:nil];
-        return;
-    }
-    Barcode *barcodeDB = results[0];
-    
-    ItemInformation *item = [self itemInfoFromDBEntities:itemDB barcode:barcodeDB price:priceDB];
-    
-    [delegate itemDescriptionComplete:0 itemDescription:item];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        
+        void (^returnBlock)(int result, ItemInformation *item) = ^void(int result, ItemInformation *item)
+        {
+            if ([delegate respondsToSelector:@selector(itemDescriptionComplete:itemDescription:)])
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [delegate itemDescriptionComplete:result itemDescription:item];
+                });
+            }
+        };
+        
+        NSManagedObjectContext *moc = self.dataController.managedObjectContext;
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"itemCode ==[c] %@", article]];
+        NSArray *results = [moc executeFetchRequest:request error:nil];
+        if (results.count < 1)
+        {
+            returnBlock(1, nil);
+            return;
+        }
+        Item *itemDB = results[0];
+        
+        request = [NSFetchRequest fetchRequestWithEntityName:@"Price"];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", itemDB.itemID.integerValue]];
+        results = [moc executeFetchRequest:request error:nil];
+        if (results.count < 1)
+        {
+            returnBlock(1, nil);
+            return;
+        }
+        Price *priceDB = results[0];
+        
+        request = [NSFetchRequest fetchRequestWithEntityName:@"Barcode"];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", itemDB.itemID.integerValue]];
+        results = [moc executeFetchRequest:request error:nil];
+        if (results.count < 1)
+        {
+            returnBlock(1, nil);
+            return;
+        }
+        Barcode *barcodeDB = results[0];
+        
+        ItemInformation *item = [self itemInfoFromDBEntities:itemDB barcode:barcodeDB price:priceDB];
+        
+        returnBlock(0, item);
+    });
 }
 
 #pragma mark - Helpers
@@ -795,12 +854,7 @@
 
 - (NSString *)imageURLForItemID:(NSUInteger)itemID
 {
-    NSString *protocol = [[NSUserDefaults standardUserDefaults] valueForKey:@"protocol_preference"];
-    NSString *host     = [[NSUserDefaults standardUserDefaults] valueForKey:@"host_preference"];
-    NSString *port     = [[NSUserDefaults standardUserDefaults] valueForKey:@"port_preference"];
-    NSString *urlString = [NSString stringWithFormat:@"%@://%@%@/MobileStick/api/Picture/%ld",protocol, host, port.length > 0?[NSString stringWithFormat:@":%@", port]:@"", itemID];
-    
-    return urlString;
+    return [NSString stringWithFormat:@"http://172.16.4.228:2080/MobileStick/api/Picture/%ld", itemID];
 }
 
 @end

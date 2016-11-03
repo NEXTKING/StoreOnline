@@ -108,13 +108,10 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
 {
     if (!isSearchRunning)
     {
+        ItemSearchAttribute searchAttribute = ItemSearchAttributeName | ItemSearchAttributeItemCode;
         isSearchRunning = YES;
         [self showActivityIndicator];
-        __weak typeof(self) wself = self;
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            ItemSearchAttribute searchAttribute = ItemSearchAttributeName | ItemSearchAttributeArticle | ItemSearchAttributeItemCode;
-            [[MCPServer instance] search:wself forQuery:searchBar.text withAttribute:searchAttribute];
-        });
+        [[MCPServer instance] search:self forQuery:searchBar.text withAttribute:searchAttribute];
     }
     [searchBar resignFirstResponder];
 }
@@ -123,24 +120,21 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
 
 - (void)searchComplete:(int)result attribute:(ItemSearchAttribute)searchAttribute items:(NSArray *)items
 {
-    __weak typeof(self) wself = self;
-    dispatch_async(dispatch_get_main_queue(), ^{
+    isSearchRunning = NO;
+    [self hideActivityIndicator];
+    
+    if (result == 0)
+    {
+        _searchResults = items;
+        [self.tableView reloadData];
         
-        isSearchRunning = NO;
-        [wself hideActivityIndicator];
-        if (result == 0)
-        {
-            _searchResults = items;
-            [wself.tableView reloadData];
-            
-            if (items.count == 0)
-                [wself showAlertWithMessage:@"По данному запросу не найдено ни одного товара."];
-        }
-        else
-        {
-            
-        }
-    });
+        if (items.count == 0)
+            [self showAlertWithMessage:@"По данному запросу не найдено ни одного товара."];
+    }
+    else
+    {
+        
+    }
 }
 
 #pragma mark - Item Description Delegate
