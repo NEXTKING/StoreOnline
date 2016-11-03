@@ -330,7 +330,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
         
         if (item != nil)
         {
-            double retailPrice = [[item additionalParameterValueForName:@"price"] doubleValue];
+            double retailPrice = [[item additionalParameterValueForName:@"retailPrice"] doubleValue];
             double catalogPrice = item.price;
             
             if (MIN(retailPrice, catalogPrice) != barcodePrice)

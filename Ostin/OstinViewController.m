@@ -11,6 +11,7 @@
 #import "SettingsViewController.h"
 #import "ZPLGenerator.h"
 #import "BarcodeFormatter.h"
+#import "AsyncImageView.h"
 
 @interface OstinViewController ()
 {
@@ -157,6 +158,7 @@
 - (void) requestItemInfoWithArticle:(NSString *)article
 {
     _imageView.image = nil;
+    [self.loadingActivity startAnimating];
     [[MCPServer instance] itemDescription:self article:article];
     self.itemPriceLabel.backgroundColor = [UIColor colorWithRed:119.0/255.0 green:119.0/255.0 blue:119.0/255.0 alpha:0.28];
 }
@@ -280,7 +282,7 @@
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         
         SettingsViewController* destinationViewController = (SettingsViewController *)segue.destinationViewController;
-        destinationViewController.preferredContentSize = CGSizeMake(200, 200);       // Deprecated in iOS7. Use 'preferredContentSize' instead.
+        destinationViewController.preferredContentSize = CGSizeMake(200, 180);       // Deprecated in iOS7. Use 'preferredContentSize' instead.
                
         settingsPopover = [popoverSegue popoverControllerWithSender:sender permittedArrowDirections:WYPopoverArrowDirectionAny animated:YES];
         

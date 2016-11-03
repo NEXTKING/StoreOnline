@@ -348,9 +348,13 @@
     }
     else if (result == 1)
     {
-            [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"LastBarcode"];
-            [self showInfoMessage:@"Не удалось найти товар в базе"];
-            [self clearInfo];
+        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"LastBarcode"];
+        [self showInfoMessage:@"Не удалось найти товар в базе"];
+        [self clearInfo];
+        
+        DTDevices* dtDev = [DTDevices sharedDevice];
+        int data[] = {1000,200,700,200,500,200,700,200};
+        [dtDev playSound:100 beepData:data length:sizeof(data) error:nil];
     }
     else
     {
