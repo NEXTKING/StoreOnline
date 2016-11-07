@@ -13,6 +13,7 @@
     NSInteger _completeItemsCount;
     NSInteger _totalItemsCount;
     NSInteger _excessItemsCount;
+    NSInteger _printedCount;
     NSDate *_startDate;
     NSDate *_endDate;
     NSTimer *_timer;
@@ -61,7 +62,7 @@
 
 #pragma mark Public setters
 
-- (void)setTitleText:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate totalItemsCount:(NSInteger)totalCount completeItemsCount:(NSInteger)completeCount excessItemsCount:(NSInteger)excessCount timerIsRunning:(BOOL)timerIsRunning
+- (void)setTitleText:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate totalItemsCount:(NSInteger)totalCount completeItemsCount:(NSInteger)completeCount excessItemsCount:(NSInteger)excessCount totalPrintedCount:(NSInteger)printedCount timerIsRunning:(BOOL)timerIsRunning
 {
     _titleLabel.text = title;
     _startDate = startDate;
@@ -69,6 +70,7 @@
     _totalItemsCount = totalCount;
     _completeItemsCount = completeCount;
     _excessItemsCount = excessCount;
+    _printedCount = printedCount;
     
     [self updateProgressBar];
     [self updateProgressLabel];
@@ -162,7 +164,9 @@
 
 - (void)updateExcessLabel
 {
-    self.excessLabel.text = _excessItemsCount > 0 ? [NSString stringWithFormat:@"Излишки %ld", _excessItemsCount] : @"Излишек нет";
+    NSMutableString *excessLabelText = [[NSMutableString alloc] initWithString: (_excessItemsCount > 0 ? [NSString stringWithFormat:@"Излишки по ЗнП %ld", _excessItemsCount] : @"Излишек по ЗнП нет")];
+    [excessLabelText appendString:(_printedCount > 0 ? [NSString stringWithFormat:@", всего расп. %ld", _printedCount] : @"")];
+    _excessLabel.text = excessLabelText;
 }
 
 @end

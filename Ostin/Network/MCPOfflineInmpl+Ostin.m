@@ -374,6 +374,22 @@
     }
 }
 
+- (void) savePrintItemsCount:(NSInteger)count inTaskWithID:(NSInteger)taskID
+{
+    NSManagedObjectContext *moc = self.dataController.managedObjectContext;
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Task"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"taskID == %ld", taskID]];
+    NSArray *results = [moc executeFetchRequest:request error:nil];
+    if (results.count < 1)
+    {
+        return;
+    }
+    Task *taskDB = results[0];
+    taskDB.totalPrintedCount = @(count);
+    [moc save:nil];
+}
+
 - (void) search:(id<SearchDelegate>)delegate forQuery:(NSString *)query withAttribute:(ItemSearchAttribute)searchAttribute
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
@@ -596,6 +612,7 @@
             taskInfo.startDate = taskDB.startDate;
             taskInfo.endDate = taskDB.endDate;
             taskInfo.status = (taskDB.startDate != nil && taskDB.endDate != nil) ? TaskInformationStatusComplete : taskDB.startDate != nil ? TaskInformationStatusInProgress : TaskInformationStatusNotStarted;
+            taskInfo.totalPrintedCount = taskDB.totalPrintedCount.integerValue;
             
             NSFetchRequest *taskItemRequest = [NSFetchRequest fetchRequestWithEntityName:@"TaskItemBinding"];
             [taskItemRequest setPredicate:[NSPredicate predicateWithFormat:@"taskID == %ld", taskDB.taskID.integerValue]];

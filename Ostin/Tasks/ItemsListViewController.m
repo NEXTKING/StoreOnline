@@ -63,7 +63,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
             excessCount += item.scanned > item.quantity ? item.scanned - item.quantity : 0;
         }];
         
-        [navVC.overlayController setTitleText:_task.name startDate:_task.startDate endDate:_task.endDate totalItemsCount:totalCount completeItemsCount:completeCount excessItemsCount:excessCount timerIsRunning:timerIsRunning];
+        [navVC.overlayController setTitleText:_task.name startDate:_task.startDate endDate:_task.endDate totalItemsCount:totalCount completeItemsCount:completeCount excessItemsCount:excessCount totalPrintedCount:_task.totalPrintedCount timerIsRunning:timerIsRunning];
     }
 }
 
@@ -172,6 +172,8 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 {
     ItemInformation *item = notification.object;
     TaskItemInformation *taskItemInfo = [self taskItemInfoForItemWithID:item.itemId];
+    _task.totalPrintedCount += 1;
+    [[MCPServer instance] savePrintItemsCount:_task.totalPrintedCount inTaskWithID:_task.taskID];
     
     if (taskItemInfo != nil)
     {
@@ -180,8 +182,8 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
         
         NSUInteger index = [_items indexOfObject:[self itemInfoForTaskItemWithID:taskItemInfo.itemID]];
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self updateOverlayInfo];
     }
+    [self updateOverlayInfo];
 }
 
 #pragma mark - Table view data source

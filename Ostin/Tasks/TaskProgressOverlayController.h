@@ -16,6 +16,7 @@
      totalItemsCount:(NSInteger)totalCount
   completeItemsCount:(NSInteger)completeCount
     excessItemsCount:(NSInteger)excessCount
+   totalPrintedCount:(NSInteger)printedCount
       timerIsRunning:(BOOL)timerIsRunning;
 
 - (void)setCompleteItemsCount:(NSInteger)count;
