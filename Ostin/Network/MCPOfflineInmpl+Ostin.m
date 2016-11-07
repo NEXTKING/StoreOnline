@@ -688,6 +688,52 @@
     });
 }
 
+- (void) itemsDescription:(id<ItemDescriptionDelegate>)delegate itemIDs:(NSArray<NSNumber *>*)itemIDs
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        
+        NSManagedObjectContext *moc = self.dataController.managedObjectContext;
+        NSMutableArray *items = [NSMutableArray new];
+        
+        for (NSNumber *itemID in itemIDs)
+        {
+            NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+            [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", itemID.integerValue]];
+            NSArray *results = [moc executeFetchRequest:request error:nil];
+            if (results.count < 1)
+                continue;
+
+            Item *itemDB = results[0];
+            
+            request = [NSFetchRequest fetchRequestWithEntityName:@"Price"];
+            [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", itemID.integerValue]];
+            results = [moc executeFetchRequest:request error:nil];
+            if (results.count < 1)
+                continue;
+
+            Price *priceDB = results[0];
+            
+            request = [NSFetchRequest fetchRequestWithEntityName:@"Barcode"];
+            [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", itemID.integerValue]];
+            results = [moc executeFetchRequest:request error:nil];
+            if (results.count < 1)
+                continue;
+
+            Barcode *barcodeDB = results[0];
+            
+            ItemInformation *item = [self itemInfoFromDBEntities:itemDB barcode:barcodeDB price:priceDB];
+            [items addObject:item];
+        }
+        
+        if ([delegate respondsToSelector:@selector(allItemsDescription:items:)])
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [delegate allItemsDescription:0 items:items];
+            });
+        }
+    });
+}
+
 - (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemID:(NSUInteger)itemID
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
@@ -736,6 +782,65 @@
         ItemInformation *item = [self itemInfoFromDBEntities:itemDB barcode:barcodeDB price:priceDB];
         
         returnBlock(0, item);
+    });
+}
+
+- (void) itemDescriptionWithItemCode:(NSString *)code isoType:(int)type completion:(void (^)(BOOL success, ItemInformation *item))completion
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+
+        NSManagedObjectContext *moc =self.dataController.managedObjectContext;
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        [request setEntity:[NSEntityDescription entityForName:@"Barcode" inManagedObjectContext:self.dataController.managedObjectContext]];
+        [request setIncludesSubentities:NO];
+        
+        if (type == BAR_CODE128)
+            [request setPredicate:[NSPredicate predicateWithFormat:@"code128 LIKE[c] %@", code]];
+        else if (type == BAR_UPC)
+            [request setPredicate:[NSPredicate predicateWithFormat:@"code128 LIKE[c] %@", code]];
+        else
+            [request setPredicate:[NSPredicate predicateWithFormat:@"ean LIKE[c] %@", code]];
+        
+        
+        NSArray* results = [moc executeFetchRequest:request error:nil];
+        if (results.count < 1 && type != BAR_CODE128 && type !=BAR_UPC && code.length > 8)
+        {
+            NSString *codeWithoutChecksum = [code substringToIndex:code.length - 1];
+            [request setPredicate:[NSPredicate predicateWithFormat:@"ean LIKE[c] %@", codeWithoutChecksum]];
+            results = [moc executeFetchRequest:request error:nil];
+        }
+        
+        if (results.count < 1)
+        {
+            completion(NO, nil);
+            return;
+        }
+        Barcode *barcodeDB = results[0];
+        
+        request = [[NSFetchRequest alloc] init];
+        [request setEntity:[NSEntityDescription entityForName:@"Item" inManagedObjectContext:self.dataController.managedObjectContext]];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %@", barcodeDB.itemID]];
+        results = [moc executeFetchRequest:request error:nil];
+        if (results.count < 1)
+        {
+            completion(NO, nil);
+            return;
+        }
+        Item *itemDB = results[0];
+        
+        [request setEntity:[NSEntityDescription entityForName:@"Price" inManagedObjectContext:self.dataController.managedObjectContext]];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %@", barcodeDB.itemID]];
+        results = [moc executeFetchRequest:request error:nil];
+        if (results.count < 1)
+        {
+            completion(NO, nil);
+            return;
+        }
+        Price *priceDB = results[0];
+        
+        ItemInformation *item = [self itemInfoFromDBEntities:itemDB barcode:barcodeDB price:priceDB];
+        
+        completion(YES, item);
     });
 }
 

@@ -16,13 +16,12 @@
 #import "PrintViewController.h"
 #import "ZPLGenerator.h"
 #import "AsyncImageView.h"
+#import "PrintServer.h"
 
-@interface ItemsListViewController () <ItemDescriptionDelegate, PrinterControllerDelegate>
+@interface ItemsListViewController () <ItemDescriptionDelegate>
 {
     NSMutableArray *_items;
     UIActivityIndicatorView *_activityIndicator;
-    PrintViewController *_printVC;
-    ItemInformation *_itemInPrintQueue;
 }
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *actionButton;
@@ -46,9 +45,6 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     [self updateNotificationStatus];
     [self updateActionButton];
     [self updateOverlayInfo];
-    
-    if (_tasksMode)
-        [self initializePrintViewController];
 }
 
 - (void)updateOverlayInfo
@@ -117,18 +113,6 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     }
 }
 
-- (void)initializePrintViewController
-{
-    if (_printVC == nil)
-    {
-        _printVC = [PrintViewController new];
-        _printVC.delegate = self;
-        
-        [self.view addSubview:_printVC.view];
-        _printVC.view.hidden = YES;
-    }
-}
-
 - (void)dealloc
 {
     [self unsubscribeFromScanNotifications];
@@ -157,8 +141,11 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 
 - (void)showAlertWithMessage:(NSString*)message
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    [alert show];
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:ac animated:YES completion:nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [ac dismissViewControllerAnimated:YES completion:nil];
+    });
 }
 
 #pragma mark Notifications
@@ -166,6 +153,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 - (void)subscribeToScanNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveScanNotification:) name:@"BarcodeScanNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveFinishPrintNotification:) name:@"PrinterDidFinishPrinting" object:nil];
 }
 
 - (void)unsubscribeFromScanNotifications
@@ -177,11 +165,23 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 {
     NSString *barcode = notification.object[@"barcode"];
     NSNumber *type = notification.object[@"type"];
+    [self itemDidScannedWithBarcode:barcode type:type];
+}
+
+- (void)didReceiveFinishPrintNotification:(NSNotification *)notification
+{
+    ItemInformation *item = notification.object;
+    TaskItemInformation *taskItemInfo = [self taskItemInfoForItemWithID:item.itemId];
     
-    NSString *internalBarcode = [BarcodeFormatter normalizedBarcodeFromString:barcode isoType:type.intValue];
-    NSDictionary *barcodeData = [BarcodeFormatter dataFromBarcode:barcode isoType:type.intValue];
-    double price = barcodeData != nil ? [barcodeData[@"price"] doubleValue] : -1;
-    [self itemDidScannedWithBarcode:internalBarcode price:price];
+    if (taskItemInfo != nil)
+    {
+        taskItemInfo.scanned += 1;
+        [[MCPServer instance] saveTaskItem:nil taskID:_task.taskID itemID:taskItemInfo.itemID scanned:taskItemInfo.scanned];
+        
+        NSUInteger index = [_items indexOfObject:[self itemInfoForTaskItemWithID:taskItemInfo.itemID]];
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self updateOverlayInfo];
+    }
 }
 
 #pragma mark - Table view data source
@@ -262,16 +262,13 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     }
 }
 
-
 #pragma mark Network Delegate
 
 - (void) itemDescriptionComplete:(int)result itemDescription:(ItemInformation *)itemDescription
 {
     if (result == 0)
     {
-        [_items addObject:itemDescription];
-        NSUInteger index = [_items indexOfObject:itemDescription];
-        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+        
     }
     else
     {
@@ -299,45 +296,65 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 {
     if (_tasksMode)
     {
+        NSMutableArray *itemsIDs = [NSMutableArray new];
         for (TaskItemInformation *taskItemInformation in _task.items)
-            [[MCPServer instance] itemDescription:self itemID:taskItemInformation.itemID];
+        {
+            [itemsIDs addObject:@(taskItemInformation.itemID)];
+        }
+        [[MCPServer instance] itemsDescription:self itemIDs:itemsIDs];
     }
-    else
-        [[MCPServer instance] itemDescription:self itemCode:nil shopCode:nil isoType:0];
 }
 
-- (void)itemDidScannedWithBarcode:(NSString *)barcode price:(double)barcodePrice
+- (void)itemDidScannedWithBarcode:(NSString *)barcode type:(NSNumber *)type
 {
-    if (_itemInPrintQueue == nil)
-    {
-        ItemInformation *item;
-        
-        for (ItemInformation *itemInfo in _items)
-            if ([itemInfo.barcode isEqualToString:barcode])
-            {
-                item = itemInfo;
-                break;
-            }
-        
-        if (item != nil)
+    ItemInformation *item;
+    NSString *internalBarcode = [BarcodeFormatter normalizedBarcodeFromString:barcode isoType:type.intValue];
+    NSDictionary *barcodeData = [BarcodeFormatter dataFromBarcode:barcode isoType:type.intValue];
+    
+    for (ItemInformation *itemInfo in _items)
+        if ([itemInfo.barcode isEqualToString:internalBarcode])
         {
-            double retailPrice = [[item additionalParameterValueForName:@"retailPrice"] doubleValue];
-            double catalogPrice = item.price;
-            
-            if (MIN(retailPrice, catalogPrice) != barcodePrice)
-            {
-                _itemInPrintQueue = item;
-                [self playSound:1];
-                [self printItem:item];
-            }
-            else
-                [self playSound:0];
+            item = itemInfo;
+            break;
+        }
+    
+    if (item != nil)
+    {
+        double barcodePrice = barcodeData != nil ? [barcodeData[@"price"] doubleValue] : -1;
+        double retailPrice = [[item additionalParameterValueForName:@"retailPrice"] doubleValue];
+        double catalogPrice = item.price;
+        
+        if (MIN(retailPrice, catalogPrice) != barcodePrice)
+        {
+            [self playSound:1];
+            [self printItem:item];
         }
         else
-        {
-            [self showAlertWithMessage:@"Товар не относится к текущему заданию"];
-            [self playSound:2];
-        }
+            [self playSound:0];
+    }
+    else
+    {
+        [self showAlertWithMessage:@"Товар не относится к текущему заданию"];
+        [self playSound:2];
+        
+        __weak typeof(self) wself = self;
+        double barcodePrice = barcodeData != nil ? [barcodeData[@"price"] doubleValue] : -1;
+        [[MCPServer instance] itemDescriptionWithItemCode:internalBarcode isoType:type.intValue completion:^(BOOL success, ItemInformation *item) {
+            
+            if (success)
+            {
+                double retailPrice = [[item additionalParameterValueForName:@"retailPrice"] doubleValue];
+                double catalogPrice = item.price;
+                
+                if (MIN(retailPrice, catalogPrice) != barcodePrice)
+                {
+                    [wself playSound:1];
+                    [wself printItem:item];
+                }
+                else
+                    [wself playSound:0];
+            }
+        }];
     }
 }
 
@@ -382,32 +399,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 - (void)printItem:(ItemInformation *)itemInfo
 {
     NSString *str=[[NSBundle mainBundle] pathForResource:@"label" ofType:@"zpl"];
-    NSData *data = [ZPLGenerator generateZPLWithItem:itemInfo patternPath:str];
-    [_printVC printZPL:data copies:1];
-    _printVC.view.hidden = NO;
-}
-
-#pragma mark printer delegate
-
-- (void)printerDidFinishPrinting
-{
-    _printVC.view.hidden = YES;
-    
-    TaskItemInformation *taskItemInfo = [self taskItemInfoForItemWithID:_itemInPrintQueue.itemId];
-    taskItemInfo.scanned += 1;
-    [[MCPServer instance] saveTaskItem:nil taskID:_task.taskID itemID:taskItemInfo.itemID scanned:taskItemInfo.scanned];
-    
-    NSUInteger index = [_items indexOfObject:_itemInPrintQueue];
-    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self updateOverlayInfo];
-    
-    _itemInPrintQueue = nil;
-}
-
-- (void)printerDidFailPrinting:(NSError *)error
-{
-    _printVC.view.hidden = YES;
-    _itemInPrintQueue = nil;
+    [[PrintServer instance] addItemToPrintQueue:itemInfo printFormat:str];
 }
 
 #pragma mark Helpers

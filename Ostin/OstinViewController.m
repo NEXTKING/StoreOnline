@@ -12,6 +12,7 @@
 #import "ZPLGenerator.h"
 #import "BarcodeFormatter.h"
 #import "AsyncImageView.h"
+#import "PrintServer.h"
 
 @interface OstinViewController ()
 {
@@ -72,32 +73,22 @@
 
 - (void) printButtonAction:(id)sender
 {
-    NSString *str=[[NSBundle mainBundle] pathForResource:@"label" ofType:@"zpl"];
-    self.currentZPLInfo = [ZPLGenerator generateZPLWithItem:self.currentItemInfo patternPath:str];
-    [super printButtonAction:sender];
+    NSString *str = [[NSBundle mainBundle] pathForResource:@"label" ofType:@"zpl"];
+    NSString *addStr = [[NSBundle mainBundle] pathForResource:@"producer_label" ofType:@"zpl"];
+    [[PrintServer instance] addItemToPrintQueue:self.currentItemInfo printFormat:str];
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PrintAdditionalLabel"])
+        [[PrintServer instance] addItemToPrintQueue:self.currentItemInfo printFormat:addStr];
 }
 
 - (void)printerDidFinishPrinting
 {
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PrintAdditionalLabel"])
-    {
-        NSString *str = [[NSBundle mainBundle] pathForResource:@"producer_label" ofType:@"zpl"];
-        NSData *additionalZPL = [ZPLGenerator generateEanZPLWithItem:self.currentItemInfo patternPath:str];
-        if (![additionalZPL isEqualToData:self.currentZPLInfo])
-        {
-            self.currentZPLInfo = additionalZPL;
-            [super printButtonAction:nil];
-        }
-        else
-            [super printerDidFinishPrinting];
-    }
-    else
-        [super printerDidFinishPrinting];
+    
 }
 
 - (void)printerDidFailPrinting:(NSError *)error
 {
-    [super printerDidFailPrinting:error];
+    
 }
 
 - (IBAction)manualInputAction:(id)sender
