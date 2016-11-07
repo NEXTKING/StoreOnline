@@ -54,8 +54,11 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
 
 - (void)showAlertWithMessage:(NSString*)message
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    [alert show];
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:ac animated:YES completion:nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [ac dismissViewControllerAnimated:YES completion:nil];
+    });
 }
 
 #pragma mark - Table view data source

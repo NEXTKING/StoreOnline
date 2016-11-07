@@ -330,5 +330,13 @@
         bindingInProgress = NO;
 }
 
+- (void)showInfoMessage:(NSString*)info
+{
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:info preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:ac animated:YES completion:nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [ac dismissViewControllerAnimated:YES completion:nil];
+    });
+}
 
 @end
