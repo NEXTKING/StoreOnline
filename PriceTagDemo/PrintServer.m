@@ -15,6 +15,7 @@
     PrintViewController *_printVC;
     NSMutableArray *_queue;
     BOOL _isPrinting;
+    UIWindow *_window;
 }
 @end
 
@@ -40,6 +41,9 @@
         _printVC.view.frame = CGRectMake(20, 214, 280, 140);
         _queue = [NSMutableArray new];
         _isPrinting = false;
+        _window = [[UIWindow alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.frame];
+        _window.windowLevel = UIWindowLevelAlert + 1;
+        [_window addSubview:_printVC.view];
     }
     return self;
 }
@@ -81,14 +85,12 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PrinterDidFinishPrinting" object:_queue[0][@"item"]];
     
     [_queue removeObjectAtIndex:0];
+    _isPrinting = NO;
     
     if (_queue.count > 0)
         [self print];
     else
-    {
-        _isPrinting = NO;
         [self hidePrintView];
-    }
 }
 
 - (void)printerDidFailPrinting:(NSError *)error
@@ -102,13 +104,13 @@
 
 - (void)showPrintView
 {
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    [window addSubview:_printVC.view];
+    [_window makeKeyAndVisible];
+    [_window setHidden:NO];
 }
 
 - (void)hidePrintView
 {
-    [_printVC.view removeFromSuperview];
+    [_window setHidden:YES];
 }
 
 @end
