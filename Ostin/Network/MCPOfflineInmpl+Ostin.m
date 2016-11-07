@@ -89,22 +89,28 @@
 {
     if (login != nil && password != nil)
     {
-        NSString* (^md5)(NSString *) = ^(NSString *string) {
+        NSString* (^hash)(NSString *) = ^(NSString *string) {
             
-            const char * pointer = [string UTF8String];
-            unsigned char md5Buffer[CC_MD5_DIGEST_LENGTH];
-            CC_MD5(pointer, (CC_LONG)strlen(pointer), md5Buffer);
+            NSUInteger len = [string length];
+            unichar buffer[len+1];
             
-            NSMutableString *hashString = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
-            for (int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
-                [hashString appendFormat:@"%02x",md5Buffer[i]];
+            [string getCharacters:buffer range:NSMakeRange(0, len)];
+            NSMutableData *data = [NSMutableData new];
+            for (int i = 0; i < len; i++)
+                [data appendBytes:&buffer[i] length:sizeof(unichar)];
+
+            unsigned char result[CC_MD5_DIGEST_LENGTH];
+            CC_MD5(data.bytes, (CC_LONG)data.length, result);
+            NSMutableString *hash = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH*2];
+            for (int i = 0; i<CC_MD5_DIGEST_LENGTH; i++)
+                [hash appendFormat:@"%02x",result[i]];
             
-            return hashString;
+            return hash;
         };
         
         NSManagedObjectContext *moc = self.dataController.managedObjectContext;
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
-        [request setPredicate:[NSPredicate predicateWithFormat:@"login ==[c] %@ AND password ==[c] %@", login, md5(password)]];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"login ==[c] %@ AND password ==[c] %@", login, hash(password)]];
         NSArray *results = [moc executeFetchRequest:request error:nil];
         if (results.count < 1)
         {
