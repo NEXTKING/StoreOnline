@@ -33,6 +33,7 @@
 		21C0546E1DC788F10094C7B1 /* producer_label.zpl in Resources */ = {isa = PBXBuildFile; fileRef = 21C0546D1DC788F10094C7B1 /* producer_label.zpl */; };
 		21C0549C1DCB8A0A0094C7B1 /* PrintServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C0549B1DCB8A0A0094C7B1 /* PrintServer.m */; };
 		21C0549D1DCB8A0A0094C7B1 /* PrintServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C0549B1DCB8A0A0094C7B1 /* PrintServer.m */; };
+		21D8381D1DD0A72800A98E0F /* SettingsViewController+Ostin.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D8381C1DD0A72800A98E0F /* SettingsViewController+Ostin.m */; };
 		23325335A97CCCACC42944AF /* libPods-Ostin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD3C223CF10EB177C6448781 /* libPods-Ostin.a */; };
 		5BADECA800A6702C5F474BB5 /* libPods-PriceTagDemoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1E01A49F9DF7B4A12A7407 /* libPods-PriceTagDemoUITests.a */; };
 		71454865FBE26CAE4A38F59F /* libPods-DesondoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D44F91159F3A6CCEC7C0AEB /* libPods-DesondoTests.a */; };
@@ -591,6 +592,8 @@
 		21C0546D1DC788F10094C7B1 /* producer_label.zpl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = producer_label.zpl; sourceTree = "<group>"; };
 		21C0549A1DCB8A0A0094C7B1 /* PrintServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintServer.h; sourceTree = "<group>"; };
 		21C0549B1DCB8A0A0094C7B1 /* PrintServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintServer.m; sourceTree = "<group>"; };
+		21D8381B1DD0A72800A98E0F /* SettingsViewController+Ostin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SettingsViewController+Ostin.h"; sourceTree = "<group>"; };
+		21D8381C1DD0A72800A98E0F /* SettingsViewController+Ostin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SettingsViewController+Ostin.m"; sourceTree = "<group>"; };
 		26E6677B3BC7955145425ED2 /* Pods-DesondoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesondoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DesondoTests/Pods-DesondoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		305BD8FF1EE07980B92BBA8D /* Pods-Tsum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tsum.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tsum/Pods-Tsum.debug.xcconfig"; sourceTree = "<group>"; };
 		3441ACD00F2A17AFBB7CD4CD /* Pods-PriceTagDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceTagDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PriceTagDemoTests/Pods-PriceTagDemoTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1386,6 +1389,8 @@
 				B90CE48D1C89B6DB00DFB3E4 /* AntiAliasTextLayer.m */,
 				B957B0D71D1C291B002A5256 /* OstinViewController.h */,
 				B957B0D81D1C291B002A5256 /* OstinViewController.m */,
+				21D8381B1DD0A72800A98E0F /* SettingsViewController+Ostin.h */,
+				21D8381C1DD0A72800A98E0F /* SettingsViewController+Ostin.m */,
 				B92DCE411C846002002AA184 /* OstinPriceTag.xib */,
 				B92DCE291C845E60002AA184 /* Info.plist */,
 				21C054441DBE20FB0094C7B1 /* Settings.bundle */,
@@ -3345,6 +3350,7 @@
 				C667239C1DAAEEFB001B30AC /* Task+CoreDataProperties.m in Sources */,
 				C6069EE91D92D873008C3F58 /* GroupInformation.m in Sources */,
 				C66723921DAAEA87001B30AC /* SOAPTasks.m in Sources */,
+				21D8381D1DD0A72800A98E0F /* SettingsViewController+Ostin.m in Sources */,
 				21C054501DC238DA0094C7B1 /* Group+CoreDataClass.m in Sources */,
 				21C0544A1DC236F70094C7B1 /* Image+CoreDataClass.m in Sources */,
 				B92DCE371C845F13002AA184 /* NwRequest.m in Sources */,

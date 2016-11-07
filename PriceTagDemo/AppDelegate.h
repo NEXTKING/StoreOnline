@@ -19,6 +19,7 @@
 @property (strong, nonatomic)  DSPF_Workspace* workspace;
 #endif
 
+- (void)resetWindowToInitialView;
 - (void) disableNetworkIndicator;
 - (void) enableNetworkIndicator;
 

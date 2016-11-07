@@ -115,6 +115,13 @@
     }
 }
 
+- (void)resetWindowToInitialView
+{
+    [self.window.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    UIStoryboard *initialStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController* initialScene = [initialStoryboard instantiateInitialViewController];
+    self.window.rootViewController = initialScene;
+}
 
 - (void)registerDefaultsFromSettingsBundle {
     // this function writes default settings as settings

@@ -73,8 +73,8 @@
 {
     if (result == 0)
     {
-        NSString *userID = userInformation.key_user;
-        [[NSUserDefaults standardUserDefaults] setValue:userID forKey:@"UserID"];
+        [[NSUserDefaults standardUserDefaults] setValue:userInformation.key_user forKey:@"UserID"];
+        [[NSUserDefaults standardUserDefaults] setValue:userInformation.name forKey:@"UserName"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
     }
