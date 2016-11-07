@@ -17,6 +17,8 @@
 @dynamic taskID;
 @dynamic name;
 @dynamic userID;
-@dynamic isCompleted;
+@dynamic totalPrintedCount;
+@dynamic startDate;
+@dynamic endDate;
 
 @end

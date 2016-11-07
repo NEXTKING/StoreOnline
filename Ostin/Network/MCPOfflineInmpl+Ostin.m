@@ -404,7 +404,7 @@
             for (NSString *substring in querySubstrings)
             {
                 if (substring.length > 0)
-                    [substringPredicates addObject:[NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@", substring]];
+                    [substringPredicates addObject:[NSPredicate predicateWithFormat:@"name CONTAINS[c] %@", substring]];
             }
             NSPredicate *namePredicate = [NSCompoundPredicate andPredicateWithSubpredicates:substringPredicates];
             [searchPredicates addObject:namePredicate];
