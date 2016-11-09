@@ -18,6 +18,16 @@
 		21BB44C01DACF0D100ED67EE /* TaskProgressOverlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21BB44BE1DACF0D100ED67EE /* TaskProgressOverlayController.xib */; };
 		21BB44E61DAD224600ED67EE /* TasksNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BB44E51DAD224600ED67EE /* TasksNavigationController.m */; };
 		21C054451DBE20FB0094C7B1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21C054441DBE20FB0094C7B1 /* Settings.bundle */; };
+		21D838211DD3244100A98E0F /* ReceivesListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D838201DD3244100A98E0F /* ReceivesListViewController.m */; };
+		21D838251DD32BF700A98E0F /* ReceivesListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D838231DD32BF700A98E0F /* ReceivesListCell.m */; };
+		21D838261DD32BF700A98E0F /* ReceivesListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D838241DD32BF700A98E0F /* ReceivesListCell.xib */; };
+		21D838301DD334FE00A98E0F /* ReceiveBoxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D8382E1DD334FE00A98E0F /* ReceiveBoxCell.m */; };
+		21D838311DD334FE00A98E0F /* ReceiveBoxCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D8382F1DD334FE00A98E0F /* ReceiveBoxCell.xib */; };
+		21D838351DD3353200A98E0F /* ReceiveItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D838331DD3353200A98E0F /* ReceiveItemCell.m */; };
+		21D838361DD3353200A98E0F /* ReceiveItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D838341DD3353200A98E0F /* ReceiveItemCell.xib */; };
+		21D8383D1DD3366D00A98E0F /* receive_group_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21D8383B1DD3366D00A98E0F /* receive_group_icon@2x.png */; };
+		21D8383E1DD3366D00A98E0F /* receive_box_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21D8383C1DD3366D00A98E0F /* receive_box_icon@2x.png */; };
+		21D838411DD34B7000A98E0F /* ReceiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D838401DD34B7000A98E0F /* ReceiveViewController.m */; };
 		23325335A97CCCACC42944AF /* libPods-Ostin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD3C223CF10EB177C6448781 /* libPods-Ostin.a */; };
 		5BADECA800A6702C5F474BB5 /* libPods-PriceTagDemoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1E01A49F9DF7B4A12A7407 /* libPods-PriceTagDemoUITests.a */; };
 		71454865FBE26CAE4A38F59F /* libPods-DesondoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D44F91159F3A6CCEC7C0AEB /* libPods-DesondoTests.a */; };
@@ -549,6 +559,21 @@
 		21BB44E41DAD224600ED67EE /* TasksNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksNavigationController.h; sourceTree = "<group>"; };
 		21BB44E51DAD224600ED67EE /* TasksNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TasksNavigationController.m; sourceTree = "<group>"; };
 		21C054441DBE20FB0094C7B1 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		21D8381F1DD3244100A98E0F /* ReceivesListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReceivesListViewController.h; path = Receive/ReceivesListViewController.h; sourceTree = "<group>"; };
+		21D838201DD3244100A98E0F /* ReceivesListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReceivesListViewController.m; path = Receive/ReceivesListViewController.m; sourceTree = "<group>"; };
+		21D838221DD32BF700A98E0F /* ReceivesListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReceivesListCell.h; path = Receive/ReceivesListCell.h; sourceTree = "<group>"; };
+		21D838231DD32BF700A98E0F /* ReceivesListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReceivesListCell.m; path = Receive/ReceivesListCell.m; sourceTree = "<group>"; };
+		21D838241DD32BF700A98E0F /* ReceivesListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ReceivesListCell.xib; path = Receive/ReceivesListCell.xib; sourceTree = "<group>"; };
+		21D8382D1DD334FE00A98E0F /* ReceiveBoxCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReceiveBoxCell.h; path = Receive/ReceiveBoxCell.h; sourceTree = "<group>"; };
+		21D8382E1DD334FE00A98E0F /* ReceiveBoxCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReceiveBoxCell.m; path = Receive/ReceiveBoxCell.m; sourceTree = "<group>"; };
+		21D8382F1DD334FE00A98E0F /* ReceiveBoxCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ReceiveBoxCell.xib; path = Receive/ReceiveBoxCell.xib; sourceTree = "<group>"; };
+		21D838321DD3353200A98E0F /* ReceiveItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReceiveItemCell.h; path = Receive/ReceiveItemCell.h; sourceTree = "<group>"; };
+		21D838331DD3353200A98E0F /* ReceiveItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReceiveItemCell.m; path = Receive/ReceiveItemCell.m; sourceTree = "<group>"; };
+		21D838341DD3353200A98E0F /* ReceiveItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ReceiveItemCell.xib; path = Receive/ReceiveItemCell.xib; sourceTree = "<group>"; };
+		21D8383B1DD3366D00A98E0F /* receive_group_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "receive_group_icon@2x.png"; sourceTree = "<group>"; };
+		21D8383C1DD3366D00A98E0F /* receive_box_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "receive_box_icon@2x.png"; sourceTree = "<group>"; };
+		21D8383F1DD34B7000A98E0F /* ReceiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReceiveViewController.h; path = Receive/ReceiveViewController.h; sourceTree = "<group>"; };
+		21D838401DD34B7000A98E0F /* ReceiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReceiveViewController.m; path = Receive/ReceiveViewController.m; sourceTree = "<group>"; };
 		26E6677B3BC7955145425ED2 /* Pods-DesondoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesondoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DesondoTests/Pods-DesondoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		305BD8FF1EE07980B92BBA8D /* Pods-Tsum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tsum.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tsum/Pods-Tsum.debug.xcconfig"; sourceTree = "<group>"; };
 		3441ACD00F2A17AFBB7CD4CD /* Pods-PriceTagDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceTagDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PriceTagDemoTests/Pods-PriceTagDemoTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1152,6 +1177,26 @@
 			name = Utilities;
 			sourceTree = "<group>";
 		};
+		21D8381E1DD3237300A98E0F /* Receive */ = {
+			isa = PBXGroup;
+			children = (
+				21D8381F1DD3244100A98E0F /* ReceivesListViewController.h */,
+				21D838201DD3244100A98E0F /* ReceivesListViewController.m */,
+				21D8383F1DD34B7000A98E0F /* ReceiveViewController.h */,
+				21D838401DD34B7000A98E0F /* ReceiveViewController.m */,
+				21D838221DD32BF700A98E0F /* ReceivesListCell.h */,
+				21D838231DD32BF700A98E0F /* ReceivesListCell.m */,
+				21D838241DD32BF700A98E0F /* ReceivesListCell.xib */,
+				21D8382D1DD334FE00A98E0F /* ReceiveBoxCell.h */,
+				21D8382E1DD334FE00A98E0F /* ReceiveBoxCell.m */,
+				21D8382F1DD334FE00A98E0F /* ReceiveBoxCell.xib */,
+				21D838321DD3353200A98E0F /* ReceiveItemCell.h */,
+				21D838331DD3353200A98E0F /* ReceiveItemCell.m */,
+				21D838341DD3353200A98E0F /* ReceiveItemCell.xib */,
+			);
+			name = Receive;
+			sourceTree = "<group>";
+		};
 		4049A67B59B6A32B31D08993 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1638,11 +1683,14 @@
 			children = (
 				C6F601B61D9E635A0095AE21 /* Inventory */,
 				C6F601BB1D9E635A0095AE21 /* Stock */,
+				21D8381E1DD3237300A98E0F /* Receive */,
 				C6FFF3F81D79781300947948 /* CoreData */,
 				C63010EB1D35335A00D3DD57 /* EAN13BarcodeGenerator */,
 				B9950B721CE1E5A0005B4375 /* Barcode manual@2x.png */,
 				B9950B6C1CDBACAE005B4375 /* settings_icon@2x.png */,
 				B970B85C1CD2A0150066A66A /* send@2x.png */,
+				21D8383B1DD3366D00A98E0F /* receive_group_icon@2x.png */,
+				21D8383C1DD3366D00A98E0F /* receive_box_icon@2x.png */,
 				B970B8571CD296820066A66A /* CartCell.xib */,
 				B970B84A1CD288460066A66A /* CommonConfirmButton.h */,
 				B970B84B1CD288460066A66A /* CommonConfirmButton.m */,
@@ -2629,11 +2677,16 @@
 				B970B83E1CD21C200066A66A /* PrintViewController.xib in Resources */,
 				B9950B731CE1E5A0005B4375 /* Barcode manual@2x.png in Resources */,
 				B970B85D1CD2A0150066A66A /* send@2x.png in Resources */,
+				21D838361DD3353200A98E0F /* ReceiveItemCell.xib in Resources */,
 				B970B83D1CD217C10066A66A /* Settings.bundle in Resources */,
 				B970B8271CD209830066A66A /* LaunchScreen.storyboard in Resources */,
 				C6F601C91D9E71090095AE21 /* StockCell.xib in Resources */,
+				21D8383D1DD3366D00A98E0F /* receive_group_icon@2x.png in Resources */,
+				21D838311DD334FE00A98E0F /* ReceiveBoxCell.xib in Resources */,
+				21D838261DD32BF700A98E0F /* ReceivesListCell.xib in Resources */,
 				B9950B6D1CDBACAE005B4375 /* settings_icon@2x.png in Resources */,
 				B970B8241CD209830066A66A /* Assets.xcassets in Resources */,
+				21D8383E1DD3366D00A98E0F /* receive_box_icon@2x.png in Resources */,
 				B970B8431CD21D040066A66A /* MelonPriceTag.xib in Resources */,
 				B970B8221CD209830066A66A /* Main.storyboard in Resources */,
 			);
@@ -3413,9 +3466,11 @@
 				B949E5E61D1935D6006DA010 /* NwobjZreport.m in Sources */,
 				B989F4D31CFD965000B59F5A /* NwobjDiscounts.m in Sources */,
 				B92B6E921CEB4CD500B94B21 /* MCPOfflineInmpl.m in Sources */,
+				21D838251DD32BF700A98E0F /* ReceivesListCell.m in Sources */,
 				C674491B1D34E1C000C4B9B1 /* UIStepperManual.m in Sources */,
 				C6FFF40C1D797A2E00947948 /* AdditionalParameter+CoreDataProperties.m in Sources */,
 				C690B4191CE8BBC100F4DF95 /* DiscountInformation.m in Sources */,
+				21D838211DD3244100A98E0F /* ReceivesListViewController.m in Sources */,
 				C6FFF40D1D797A2E00947948 /* AdditionalParameter.m in Sources */,
 				B92B6E951CEB85A000B94B21 /* NwobjZones.m in Sources */,
 				B92B6E911CEB483C00B94B21 /* MenuViewController.m in Sources */,
@@ -3424,8 +3479,10 @@
 				B9950B5D1CD2AEBC005B4375 /* NwobjSendCart.m in Sources */,
 				B9D2B9A01D0718B8009C4824 /* NwobjOpenShift.m in Sources */,
 				B9D2B99E1D0718B8009C4824 /* NwobjSendPayment.m in Sources */,
+				21D838351DD3353200A98E0F /* ReceiveItemCell.m in Sources */,
 				C6F601C41D9E662D0095AE21 /* StockViewController.m in Sources */,
 				C6FFF40A1D797A2E00947948 /* Item+CoreDataProperties.m in Sources */,
+				21D838301DD334FE00A98E0F /* ReceiveBoxCell.m in Sources */,
 				B970B8511CD2924C0066A66A /* CartFooterView.m in Sources */,
 				B970B8371CD214D20066A66A /* NwobjItemDescription.m in Sources */,
 				C6FFF4101D797C0500947948 /* CoreDataController.m in Sources */,
@@ -3437,6 +3494,7 @@
 				B970B8351CD214D20066A66A /* NwObject.m in Sources */,
 				B970B8301CD214BA0066A66A /* PrintViewController.m in Sources */,
 				C60F6F821CD3754E003949CE /* MelonViewController.m in Sources */,
+				21D838411DD34B7000A98E0F /* ReceiveViewController.m in Sources */,
 				B9950B6A1CDB89A5005B4375 /* WYStoryboardPopoverSegue.m in Sources */,
 				B970B8411CD21CF30066A66A /* MelonPriceTag.m in Sources */,
 				B9D2B99F1D0718B8009C4824 /* NwobjSendLoyalty.m in Sources */,
