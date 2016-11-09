@@ -109,9 +109,8 @@
 
 - (void) sendPaymentInfo:(PLOperationResult*) result
 {
-    NSString* masledNumber = [self maskedNumberOutOfTrack:result.maskedNumber];
     
-    [[MCPServer instance] sendPayment:self amount:_amount.doubleValue authCode:result.authCode transactionCode:result.referenceNumber card:masledNumber receiptId:_receiptId];
+    [[MCPServer instance] sendPayment:self operation:result receiptId:_receiptId amount:_amount.doubleValue];
     [[MCPServer instance] sendLoyalty:nil receiptId:_receiptId];
 }
 
@@ -306,8 +305,8 @@
 {
     if (!success)
     {
-        [self showInfoMessage:@"Ошибка при вводе ПИН кода. Попробуйте выполнить платеж заново."];
-        [self performBankPayment];
+        [self showInfoMessage:@"Ошибка при вводе ПИН кода. Введите ПИН повторно"];
+        //[self performBankPayment];
     }
 }
 

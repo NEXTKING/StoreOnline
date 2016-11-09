@@ -11,6 +11,8 @@
 
 @implementation NwobjSendPayment
 
+static int receiptWidth = 36;
+
 - (id)init
 {
     self = [super init];
@@ -49,36 +51,63 @@
 {
     NSMutableString * finalMutable = [[NSMutableString alloc] init];
     
-    NSString *slipString = nil;
+    NSMutableString *slipString = [[NSMutableString alloc] init];
+    NSString *amountString = [NSString stringWithFormat:@"%.2f", _amount];
+    NSString *bin = [_card substringToIndex:1];
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
     
-    slipString = [NSString stringWithFormat:
-                  @"        Газпромбанк\n"
-                  "14.02.16\n"
-                  "14:16\n"
-                  "ЧЕК\n"
-                  "Оплата\n"
-                  "Номер операции:       %@\n"
-                  "Терминал:               00595152\n"
-                  "Пункт обслуживания: 550000008153\n"
-                  "Visa Electron  A0000000032010\n"
-                  "Карта:(C)       %@\n"
-                  "Клиент:        SHAVEINIKOVA/ANNA\n"
-                  "\n"
-                  "Сумма (Руб):\n"
-                  "2000.00\n"
-                  "Комиссия за операцию - 0 руб.\n"
-                  "ОДОБРЕНО\n"
-                  "Код авторизации:          %@\n"
-                  "\n"
-                  "Номер ссылки:       604583437541\n"
-                  "Введен ПИН-код\n"
-                  "\n"
-                  "\n"
-                  "\n"
-                  "__________________________\n"
-                  "подп.кассира(контролера)\n"
-                  "2DB4FF75BA5C414F773AC9EA2B0F6786\n"
-                  "================================", _transactionCode, _card, _authCode];
+    NSDateFormatter *timeForatter = [NSDateFormatter new];
+    timeForatter.dateStyle = NSDateFormatterNoStyle;
+    timeForatter.timeStyle = NSDateFormatterMediumStyle;
+    NSString *time = [timeForatter stringFromDate:[NSDate date]];
+    
+    NSString *ips;
+    switch (bin.integerValue) {
+        case 4:
+            ips = @"VISA";
+            break;
+        case 5:
+            ips = @"MASTERCARD";
+            break;
+            
+        default:
+            ips = @"";
+            break;
+    }
+
+    [slipString appendFormat:@"\n"];
+    [slipString appendFormat:@"Терминал: %@\n", _terminalID];
+    [slipString appendFormat:@"Чек %@\n", _receiptID];
+    [slipString appendFormat:@"Мерчант: %@\n", _merchantID];
+    [slipString appendFormat:@"%@\n", [self centeredValue:@"ОПЛАТА"]];
+    [slipString appendFormat:@"%@\n", [self centeredValue:@"ОДОБРЕНО"]];
+    [slipString appendFormat:@"%@\n", [self keyValueFormattedString:@"СУММА:" value:amountString]];
+    [slipString appendFormat:@"РУБ\n"];
+    [slipString appendFormat:@"%@\n", [self keyValueFormattedString:@"КОМИССИЯ Банка ГПБ (АО):" value:@"0.00"]];
+    [slipString appendFormat:@"РУБ\n"];
+    [slipString appendFormat:@"%@\n", [self keyValueFormattedString:@"ИТОГО:" value:amountString]];
+    [slipString appendFormat:@"РУБ\n"];
+    [slipString appendFormat:@"AID: %@\n", _aid];
+    [slipString appendFormat:@"Карта: %@\n", ips];
+    [slipString appendFormat:@"%@\n", [self centeredValue:_card]];
+    [slipString appendFormat:@"%@\n", [self centeredValue:_cardholderName]];
+    [slipString appendFormat:@"Код авториз.: %@ Код ответа:\n", _authCode];
+    [slipString appendFormat:@"000\n"];
+    [slipString appendFormat:@"Дата     %@\n", [dateFormatter stringFromDate:[NSDate date]]];
+    [slipString appendFormat:@"                 ВРЕМЯ   :\n"];
+    [slipString appendFormat:@"%@\n", time];
+    [slipString appendFormat:@"Дата ПЦ  %@\n", [dateFormatter stringFromDate:[NSDate date]]];
+    [slipString appendFormat:@"                 ВРЕМЯ ПЦ:\n"];
+    [slipString appendFormat:@"%@\n", time];
+    [slipString appendFormat:@"ВВЕДЕН OFFLINE-PIN\n"];
+    [slipString appendFormat:@"=======================\n"];
+    [slipString appendFormat:@"\n"];
+    [slipString appendFormat:@"\n"];
+    [slipString appendFormat:@"\n"];
+    [slipString appendFormat:@"__________________________\n"];
+    [slipString appendFormat:@"подпись клиента\n"];
+    
     
     [finalMutable appendString:slipString];
     [finalMutable appendString:@"[cut]"];
@@ -89,6 +118,29 @@
     NSLog(@"%@", finalMutable);
     
     return finalMutable;
+}
+
+- (NSString* ) keyValueFormattedString:(NSString*) key value:(NSString*) value
+{
+    int length = key.length + value.length;
+    int spaceNumber = receiptWidth - length;
+    
+    NSMutableString *mutable = [[NSMutableString alloc] init];
+    [mutable appendString: key];
+    [mutable appendFormat:@"%*s", spaceNumber,""];
+    [mutable appendString: value];
+    
+    return mutable;
+}
+
+- (NSString*) centeredValue: (NSString*) value
+{
+    int spaceNumber = receiptWidth - value.length;
+    NSMutableString *mutable = [[NSMutableString alloc] init];
+    [mutable appendFormat:@"%*s", spaceNumber/2,""];
+    [mutable appendString: value];
+    
+    return mutable;
 }
 
 - (void) run: (NSString*) url
@@ -105,7 +157,7 @@
     //    nwReq.URL = [NSMutableString stringWithFormat:@"%@/client/?barcode=%@", url, _cardNumber ];
     //#else
     NSString* uuid = [[[[UIDevice currentDevice] identifierForVendor] UUIDString] substringToIndex:12];
-    nwReq.URL = [NSMutableString stringWithFormat:@"%@/pay/%@/?id=%@&sum=%@&auth_code=%@&tran_code=%@&card=%@",url,uuid, _receiptID, [NSString stringWithFormat:@"%.2f", _amount], _authCode, _transactionCode, _card];
+    nwReq.URL = [NSMutableString stringWithFormat:@"%@/pay/%@/?id=%@&sum=%@&auth_code=%@&tran_code=%@&card=%@",url,uuid, _receiptID, [NSString stringWithFormat:@"%.2f", _amount], _authCode, _referenceNumber, _card];
     //#endif
     nwReq.httpMethod = HTTP_METHOD_POST;
     //[nwReq addParam:@"value" withValue:string];

@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PriceTagDemo/Network/Objects/NwObject.m"
-            timestampString = "499258830.1056"
+            filePath = "RivGosh/PaymentViewController.m"
+            timestampString = "499859294.395501"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
-            landmarkName = "-connection:didFailWithError:"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "-performBankPayment"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,13 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RivGosh/PaymentViewController.m"
-            timestampString = "499692808.551532"
+            filePath = "../PLTest/PaymentLibrary/PaymentLibrary/PLManager.m"
+            timestampString = "499859926.494897"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "332"
-            endingLineNumber = "332"
-            landmarkName = "-paymentManagerDidFinishOperation:result:"
+            startingLineNumber = "464"
+            endingLineNumber = "464"
+            landmarkName = "-smartCardInserted:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

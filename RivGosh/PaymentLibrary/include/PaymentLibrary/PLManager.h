@@ -19,7 +19,8 @@ typedef enum : NSInteger
     PLOperationTypeReversal = 5,
     PLOperationTypeSettings = 6,
     PLOperationTypeReconciliation = 7,
-    PLOperationTypeCutover = 8
+    PLOperationTypeCutover = 8,
+    PLOperationTypeHistory = 9
 }PLOperationType;
 
 
@@ -61,6 +62,7 @@ typedef enum : NSInteger
 - (void) endOfDay:(NSError **)error;
 - (void) updateTerminalSettings:(NSError**)error;
 - (void) cancelAllOperations;
+- (void) operationsHistory:(NSError**) error;
 
 
 @end

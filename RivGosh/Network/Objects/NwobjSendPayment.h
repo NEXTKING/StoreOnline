@@ -12,9 +12,14 @@
 @interface NwobjSendPayment : NwObject
 
 @property (nonatomic, weak) id <SendPaymentDelegate> delegate;
+@property (nonatomic, copy) NSString* processingResult;
 @property (nonatomic, copy) NSString* receiptID;
 @property (nonatomic, copy) NSString* authCode;
-@property (nonatomic, copy) NSString* transactionCode;
+@property (nonatomic, copy) NSString* referenceNumber;
+@property (nonatomic, copy) NSString* terminalID;
+@property (nonatomic, copy) NSString* merchantID;
+@property (nonatomic, copy) NSString* cardholderName;
+@property (nonatomic, copy) NSString* aid;
 @property (nonatomic, copy) NSString* card;
 @property (nonatomic, assign) double amount;
 

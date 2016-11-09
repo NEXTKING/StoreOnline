@@ -11,9 +11,10 @@
 #import "DTDevices.h"
 #import "DiscountsViewController.h"
 
-@interface RivgoshViewController () <UIAlertViewDelegate, ClientCardDelegate, DiscountsDelegate, ApplyDiscountsDelegate, PrinterDelegate>
+@interface RivgoshViewController () <UIAlertViewDelegate, ClientCardDelegate, DiscountsDelegate, ApplyDiscountsDelegate, PrinterDelegate, DTDeviceDelegate>
 {
     BOOL requestInProgress;
+    DTDevices* dtdev;
 }
 
 @property (nonatomic, strong) UIActivityIndicatorView* internalActivityIndicator;
@@ -29,16 +30,46 @@
 {
     [super viewDidLoad];
     self.navigationItem.hidesBackButton = YES;
+    dtdev = [DTDevices sharedDevice];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    
+    [dtdev removeDelegate:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"BarcodeScanNotification" object:nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [dtdev addDelegate:self];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(scanNotification:)
+                                                 name:@"BarcodeScanNotification"
+                                               object:nil];
+}
+
+- (void) scanNotification:(NSNotification*) aNotification
+{
+    if (requestInProgress)
+        return;
+    
+    NSString* barcode = [aNotification.object objectForKey:@"barcode"];
+    [self processBarcode:barcode];
+}
+
+- (void) processBarcode:(NSString*) barcode
+{
+    if (    [barcode hasPrefix:@"5550"]
+        ||  [barcode hasPrefix:@"5000"]
+        ||  [barcode hasPrefix:@"9990"]
+        ||  [barcode hasPrefix:@"8888"])
+        [self requestClientInfoWithCode:barcode];
+    else
+        [self requestItemInformation:barcode];
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -60,35 +91,6 @@
     [alert textFieldAtIndex:0].keyboardType = UIKeyboardTypeNumberPad;
     [alert show];
 }
-
-- (void) barcodeData:(NSString *)barcode isotype:(NSString *)isotype
-{
-    if (requestInProgress)
-        return;
-    
-    if (    [barcode hasPrefix:@"5550"]
-        ||  [barcode hasPrefix:@"5000"]
-        ||  [barcode hasPrefix:@"9990"]
-        ||  [barcode hasPrefix:@"8888"])
-        [self requestClientInfoWithCode:barcode];
-    else
-        [self requestItemInformation:barcode];
-}
-
-- (void) barcodeData:(NSString *)barcode type:(int)type
-{
-    if (requestInProgress)
-        return;
-    
-    if (    [barcode hasPrefix:@"5550"]
-        ||  [barcode hasPrefix:@"5000"]
-        ||  [barcode hasPrefix:@"9990"]
-        ||  [barcode hasPrefix:@"8888"])
-        [self requestClientInfoWithCode:barcode];
-    else
-        [self requestItemInformation:barcode];
-}
-
 
 - (void) magneticCardData:(NSString *)track1 track2:(NSString *)track2 track3:(NSString *)track3
 {
@@ -123,7 +125,7 @@
 - (IBAction)manuallyAddItem:(id)sender
 {
     //[self barcodeData:@"2756563201240" type:0];
-    [self barcodeData:@"588305" type:0];
+    //[self barcodeData:@"588305" type:0];
     //[self barcodeData:@"788800" type:0];
 }
 
@@ -344,7 +346,7 @@
     
     if (alertView.tag == 1)
     {
-        [self barcodeData:[alertView textFieldAtIndex:0].text type:0];
+        [self processBarcode:[alertView textFieldAtIndex:0].text];
     }
     else if (alertView.tag == 10)
     {

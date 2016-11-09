@@ -30,7 +30,6 @@
     [dtDevice connect];
     
     NSLog(@"Error descripion: %@", error.localizedDescription);
-    _statusView.layer.cornerRadius = _statusView.frame.size.height/2;
     //NSString * build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
     //_buildLabel.text = [NSString stringWithFormat:@"Build: %@", build];
     _buildLabel.text = @"";
@@ -44,6 +43,12 @@
     UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.rightBarButtonItem = infoButton;
     
+}
+
+- (void) viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    _statusView.layer.cornerRadius = _statusView.frame.size.height/2;
 }
 
 - (void) showAppInfo

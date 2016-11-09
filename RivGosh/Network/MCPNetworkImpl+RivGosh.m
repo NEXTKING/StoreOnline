@@ -16,6 +16,7 @@
 #import "NwobjPrintRepeat.h"
 #import "NwobjectXReport.h"
 #import "NwobjZreport.h"
+#import "NwobjPrintText.h"
 
 @implementation MCPNetworkImpl_RivGosh
 
@@ -35,15 +36,20 @@
     [restart run:self.serverAddress];    
 }
 
-- (void) sendPayment:(id<SendPaymentDelegate>)delegate amount:(double)amount authCode:(NSString *)authCode transactionCode:(NSString *)transactionCode card:(NSString *)card receiptId:(NSString *)receiptId
+- (void) sendPayment:(id<SendPaymentDelegate>)delegate operation:(PLOperationResult *)operation receiptId:(NSString *)receiptId amount:(double)amount
 {
     NwobjSendPayment *nwobjSendPayment = [NwobjSendPayment new];
     nwobjSendPayment.delegate = delegate;
-    nwobjSendPayment.authCode = authCode;
+    nwobjSendPayment.authCode = operation.authCode;
     nwobjSendPayment.amount = amount;
-    nwobjSendPayment.transactionCode = transactionCode;
-    nwobjSendPayment.card = card;
+    nwobjSendPayment.referenceNumber = operation.referenceNumber;
+    nwobjSendPayment.card = operation.maskedNumber;
     nwobjSendPayment.receiptID = receiptId;
+    nwobjSendPayment.cardholderName = operation.cardholderName;
+    nwobjSendPayment.processingResult = @"000";
+    nwobjSendPayment.terminalID = operation.terminalID;
+    nwobjSendPayment.merchantID = operation.merchantID;
+    nwobjSendPayment.aid = operation.aid;
     
     [nwobjSendPayment run:self.serverAddress];
 }
@@ -97,6 +103,15 @@
     zReport.amount      = amount;
     zReport.reqID       = reqID;
     [zReport run:self.serverAddress];
+}
+
+- (void) printHistory: (id<PrinterDelegate>)delegate  history:(NSArray*) history
+{
+    NwobjPrintText *printText = [NwobjPrintText new];
+    printText.delegate = delegate;
+    printText.operationsHistory = history;
+     [printText run:self.serverAddress];
+    
 }
 
 @end

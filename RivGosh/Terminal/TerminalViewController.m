@@ -9,8 +9,9 @@
 #import "TerminalViewController.h"
 #import "PLManager.h"
 #import "TerminalSettingsViewController.h"
+#import "MCPServer.h"
 
-@interface TerminalViewController () <PLManagerDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface TerminalViewController () <PLManagerDelegate, UITableViewDelegate, UITableViewDataSource, PrinterDelegate>
 {
     UIAlertController* infoAlert;
     PLManager *paymentLibrary;
@@ -54,6 +55,51 @@
     {
         [self showInfoMessage:error.localizedDescription];
     }
+}
+
+- (IBAction)historyAction:(id) sender
+{
+    NSError* error = nil;
+    [paymentLibrary operationsHistory:&error];
+    if (error)
+    {
+        [self showInfoMessage:error.localizedDescription];
+    }
+   
+    /*NSMutableArray* ops = [[NSMutableArray alloc] init];
+    {
+        NSArray* op = @[@(200), @"123123123",@"123123123",@"123456789",@"123123123",@"123123123",@(123.45)];
+        [ops addObject:op];
+    }
+    {
+        NSArray* op = @[@(200), @"123123123",@"123123123",@"123456789",@"123123123",@"123123123",@(123.45)];
+        [ops addObject:op];
+    }
+    {
+        NSArray* op = @[@(200), @"123123123",@"123123123",@"123456789",@"123123123",@"123123123",@(123.45)];
+        [ops addObject:op];
+    }
+    {
+        NSArray* op = @[@(200), @"123123123",@"123123123",@"123456789",@"123123123",@"123123123",@(123.45)];
+        [ops addObject:op];
+    }
+    {
+        NSArray* op = @[@(200), @"123123123",@"123123123",@"123456789",@"123123123",@"123123123",@(123.45)];
+        [ops addObject:op];
+    }
+    {
+        NSArray* op = @[@(200), @"123123123",@"123123123",@"123456789",@"123123123",@"123123123",@(123.45)];
+        [ops addObject:op];
+    }
+    {
+        NSArray* op = @[@(200), @"123123123",@"123123123",@"123456789",@"123123123",@"123123123",@(123.45)];
+        [ops addObject:op];
+    }{
+        NSArray* op = @[@(200), @"123123123",@"123123123",@"123456789",@"123123123",@"123123123",@(123.45)];
+        [ops addObject:op];
+    }
+        
+    [[MCPServer instance] printHistory:self history:ops];*/
 }
 
 - (IBAction)reversalAction:(id)sender
@@ -141,6 +187,11 @@
             message = @"Выполняется обмен ключами шифрования...";
         }
             break;
+        case PLOperationTypeHistory:
+        {
+            message = @"Получение истории операций...";
+        }
+            break;
             
         default:
             break;
@@ -152,8 +203,9 @@
 
 - (void) paymentManagerDidFinishOperation:(PLOperationType)operation result:(PLOperationResult *)result
 {
-    
-    [infoAlert dismissViewControllerAnimated:YES completion:nil];
+   
+    if (operation != PLOperationTypeHistory)
+        [infoAlert dismissViewControllerAnimated:YES completion:nil];
     
     NSString*message = @"";
     switch (operation) {
@@ -177,6 +229,25 @@
             message = (result.success) ? @"Ключи шифрования успешно загружены!":@"Не удалось получить ключи шифрования. Попробуйте снова.";
         }
             break;
+        case PLOperationTypeHistory:
+        {
+            if (result.success && result.operationsHistory.count > 0)
+            {
+                infoAlert.message = @"Печать истории операций...";
+                [[MCPServer instance] printHistory:self history:result.operationsHistory];
+            }
+            else if (result.success && result.operationsHistory.count == 0)
+            {
+                 message = @"История не содержит ни одной операции.";
+                [infoAlert dismissViewControllerAnimated:YES completion:nil];
+            }
+            else
+            {
+                message = @"Не удалось получить историю операций. Попробуйте снова.";
+                [infoAlert dismissViewControllerAnimated:YES completion:nil];
+            }
+        }
+            break;
             
         default:
             break;
@@ -197,7 +268,7 @@
 {
     switch (section) {
         case 0:
-            return 3;
+            return 4;
             break;
         case 1:
             return 1;
@@ -233,6 +304,9 @@
             case 2:
                 cell.textLabel.text = @"Сверка итогов";
                 break;
+            case 3:
+                cell.textLabel.text = @"История операций";
+                break;
                 
             default:
                 break;
@@ -265,7 +339,9 @@
                 break;
             case 2:
                 break;
-            
+            case 3:
+                [self historyAction:nil];
+                break;
                 
             default:
                 break;
@@ -280,6 +356,20 @@
     }
 }
 
+
+- (void) printTextComplete:(int)result
+{
+    [infoAlert dismissViewControllerAnimated:YES completion:nil];
+    
+    if (result == 0)
+    {
+        [self showInfoMessage:@"История успешно напечатана!"];
+    }
+    else
+    {
+        [self showInfoMessage:@"Ошибка печати истории. Попробуйте снова."];
+    }
+}
 
 /*
 #pragma mark - Navigation

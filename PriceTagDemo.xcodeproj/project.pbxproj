@@ -385,6 +385,7 @@
 		C60F6F821CD3754E003949CE /* MelonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C60F6F811CD3754E003949CE /* MelonViewController.m */; };
 		C629B5C71D076552002108DF /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C629B5C51D076552002108DF /* AboutViewController.m */; };
 		C629B5C81D076552002108DF /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C629B5C61D076552002108DF /* AboutViewController.xib */; };
+		C62B0FDE1DCA309F00D067D5 /* NwobjPrintText.m in Sources */ = {isa = PBXBuildFile; fileRef = C62B0FDD1DCA309F00D067D5 /* NwobjPrintText.m */; };
 		C63011091D35335A00D3DD57 /* BarCodeEAN13.m in Sources */ = {isa = PBXBuildFile; fileRef = C63010EF1D35335A00D3DD57 /* BarCodeEAN13.m */; };
 		C630110A1D35335A00D3DD57 /* BarCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = C63010F11D35335A00D3DD57 /* BarCodeView.m */; };
 		C646C40E1D8BFBF20048C8FE /* CoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FFF40F1D797C0500947948 /* CoreDataController.m */; };
@@ -876,6 +877,8 @@
 		C629B5C41D076552002108DF /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		C629B5C51D076552002108DF /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		C629B5C61D076552002108DF /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
+		C62B0FDC1DCA309F00D067D5 /* NwobjPrintText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NwobjPrintText.h; sourceTree = "<group>"; };
+		C62B0FDD1DCA309F00D067D5 /* NwobjPrintText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NwobjPrintText.m; sourceTree = "<group>"; };
 		C63010EE1D35335A00D3DD57 /* BarCodeEAN13.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarCodeEAN13.h; sourceTree = "<group>"; };
 		C63010EF1D35335A00D3DD57 /* BarCodeEAN13.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarCodeEAN13.m; sourceTree = "<group>"; };
 		C63010F01D35335A00D3DD57 /* BarCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarCodeView.h; sourceTree = "<group>"; };
@@ -1249,6 +1252,8 @@
 				B9BE90EF1D0B18C4008CBD56 /* NwobjectXReport.m */,
 				B9F3C3B81D13FBBD00938D92 /* NwobjZreport.h */,
 				B9F3C3B91D13FBBE00938D92 /* NwobjZreport.m */,
+				C62B0FDC1DCA309F00D067D5 /* NwobjPrintText.h */,
+				C62B0FDD1DCA309F00D067D5 /* NwobjPrintText.m */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -3511,6 +3516,7 @@
 				B989F4E21CFF0A4F00B59F5A /* PrinterStatus.m in Sources */,
 				B9A3FE351CA1A0620060483D /* ViewController.m in Sources */,
 				B9950B751CE20914005B4375 /* NwobjSendCart.m in Sources */,
+				C62B0FDE1DCA309F00D067D5 /* NwobjPrintText.m in Sources */,
 				B989F4D11CFC62B500B59F5A /* DiscountTitleCell.m in Sources */,
 				B9171DC01CF368E7004DB487 /* DSPF_SideMenuCell_technopark.m in Sources */,
 				B9A3FE1C1CA19E200060483D /* main.m in Sources */,

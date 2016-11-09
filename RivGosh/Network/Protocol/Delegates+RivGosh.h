@@ -27,6 +27,7 @@
 - (void) openShiftComplete: (int) result;
 - (void) xReportComplete:   (int) result;
 - (void) zReportComplete:   (int) result zReport:(ZReport*)report reqID:(id)reqID;
+- (void) printTextComplete: (int) result;
 @end
 
 @protocol SendPaymentDelegate <NSObject>

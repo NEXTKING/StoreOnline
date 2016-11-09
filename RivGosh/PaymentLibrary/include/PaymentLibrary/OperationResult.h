@@ -21,8 +21,13 @@
 @property (nonatomic, copy) NSString* authCode;
 @property (nonatomic, copy) NSString* maskedNumber;
 @property (nonatomic, copy) NSString* referenceNumber;
+@property (nonatomic, copy) NSString* cardholderName;
 @property (nonatomic, assign) double balance;
 @property (nonatomic, copy) NSString *errorLocalizedDescription;
+@property (nonatomic, copy) NSString* aid;
+@property (nonatomic, copy) NSString* terminalID;
+@property (nonatomic, copy) NSString* merchantID;
+@property (nonatomic, strong) NSArray* operationsHistory;
 @property (nonatomic, strong) PLBankSlip *bankSlip;
 
 @end
