@@ -1033,7 +1033,15 @@
 
 - (NSString *)imageURLForItemID:(NSUInteger)itemID
 {
-    return [NSString stringWithFormat:@"http://172.16.4.228:2080/MobileStick/api/Picture/%ld", itemID];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSString *protocol = [[NSUserDefaults standardUserDefaults] valueForKey:@"protocol_image_preference"];
+    NSString *host     = [[NSUserDefaults standardUserDefaults] valueForKey:@"host_image_preference"];
+    NSString *port     = [[NSUserDefaults standardUserDefaults] valueForKey:@"port_image_preference"];
+    NSString *path     = [[NSUserDefaults standardUserDefaults] valueForKey:@"path_image_preference"];
+    NSMutableString *address = [NSMutableString stringWithFormat:@"%@://%@%@",protocol, host, port.length > 0?[NSString stringWithFormat:@":%@", port]:@""];
+    if (path.length > 0)
+        [address appendFormat:@"/%@", path];
+    return [NSString stringWithFormat:@"%@/%ld", address, itemID];
 }
 
 @end

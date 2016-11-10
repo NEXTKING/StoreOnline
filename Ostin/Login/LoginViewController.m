@@ -144,6 +144,9 @@
     _syncButton.enabled = YES;
     _progressView.hidden = YES;
     [_syncActivity stopAnimating];
+    
+    NSString *message = result == 0 ? @"Синхронизация успешно завершена" : @"Произошла ошибка при синхронизации";
+    [self showAlertWithMessage:message];
 }
 
 - (void)resetPortionsCompleteWithResult:(int)result
