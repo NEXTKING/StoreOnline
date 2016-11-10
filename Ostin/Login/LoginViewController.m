@@ -99,10 +99,22 @@
     [_syncActivity startAnimating];
     _syncButton.enabled = NO;
     _progressView.hidden = NO;
+    _resetButton.enabled = NO;
     
     SynchronizationController *sync = [SynchronizationController new];
     sync.delegate = self;
     [sync synchronize];
+}
+
+- (IBAction)reset:(id)sender
+{
+    [_syncActivity startAnimating];
+    _syncButton.enabled = NO;
+    _resetButton.enabled = NO;
+    
+    SynchronizationController *sync = [SynchronizationController new];
+    sync.delegate = self;
+    [sync resetPortions];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -128,9 +140,20 @@
 
 - (void) syncCompleteWithResult:(int)result
 {
+    _resetButton.enabled = YES;
     _syncButton.enabled = YES;
     _progressView.hidden = YES;
     [_syncActivity stopAnimating];
+}
+
+- (void)resetPortionsCompleteWithResult:(int)result
+{
+    _resetButton.enabled = YES;
+    _syncButton.enabled = YES;
+    [_syncActivity stopAnimating];
+    
+    NSString *message = result == 0 ? @"Порции сброшены успешно" : @"Произошла ошибка при сбросе порций";
+    [self showAlertWithMessage:message];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

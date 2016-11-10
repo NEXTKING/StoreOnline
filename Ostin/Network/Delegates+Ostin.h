@@ -22,6 +22,7 @@ typedef enum : NSUInteger
 
 @protocol ItemDescriptionDelegate_Ostin <ItemDescriptionDelegate>
 @property(nonatomic, strong) NSProgress *progress;
+- (void) resetDatabaseAndPortionsCountComplete:(int)result;
 @end
 
 @protocol GroupsDelegate <NSObject>

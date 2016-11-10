@@ -12,6 +12,7 @@
 
 - (void) syncProgressChanged:(double)progress;
 - (void) syncCompleteWithResult:(int) result;
+- (void) resetPortionsCompleteWithResult:(int)result;
 
 @end
 
@@ -20,5 +21,6 @@
 @property (nonatomic, weak) id<SyncronizationDelegate> delegate;
 
 - (void) synchronize;
+- (void) resetPortions;
 
 @end

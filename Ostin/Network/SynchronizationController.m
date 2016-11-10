@@ -19,7 +19,7 @@ typedef enum SyncStages
     SSCount = 1 << 3    //Should be the biggest significant bit
 }SyncStages;
 
-@interface SynchronizationController() <ItemDescriptionDelegate, TasksDelegate, UserDelegate>
+@interface SynchronizationController() <ItemDescriptionDelegate_Ostin, TasksDelegate, UserDelegate>
 {
     NSInteger updateMask;
     NSProgress *_progress;
@@ -67,6 +67,11 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
+}
+
+- (void)resetPortions
+{
+    [[MCPServer instance] resetDatabaseAndPortionsCount:self];
 }
 
 #pragma mark - Network Delegates
@@ -130,6 +135,11 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     {
         [self updateSyncStatus:SSUsers];
     }
+}
+
+- (void)resetDatabaseAndPortionsCountComplete:(int)result
+{
+    [_delegate resetPortionsCompleteWithResult:result];
 }
 
 @end

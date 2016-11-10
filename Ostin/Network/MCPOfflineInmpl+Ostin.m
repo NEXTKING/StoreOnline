@@ -30,6 +30,7 @@
 #import "SOAPSavePrintFact.h"
 #import "SOAPSetTaskDone.h"
 #import "SOAPUsers.h"
+#import "SOAPResetIncDone.h"
 #import "DTDevices.h"
 #import <CommonCrypto/CommonDigest.h>
 
@@ -67,6 +68,37 @@
     return self;
 }
 
+- (void)resetDatabaseAndPortionsCount:(id<ItemDescriptionDelegate_Ostin>)delegate
+{
+    NSOperationQueue *resetQueue = [NSOperationQueue new];
+    resetQueue.name = @"resetQueue";
+    
+    SOAPResetIncDone *resetIncDone = [SOAPResetIncDone new];
+    __weak SOAPResetIncDone* _resetIncDone = resetIncDone;
+    resetIncDone.authValue = authValue;
+    resetIncDone.deviceID = deviceID;
+    
+    __weak typeof(self) wself = self;
+    NSBlockOperation* delegateCallOperation = [NSBlockOperation blockOperationWithBlock:^{
+        
+        BOOL success = _resetIncDone.success;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (success)
+            {
+                [wself.dataController recreatePersistentStore];
+                [delegate resetDatabaseAndPortionsCountComplete:0];
+            }
+            else
+                [delegate resetDatabaseAndPortionsCountComplete:1];
+        });
+    }];
+    
+    [delegateCallOperation addDependency:resetIncDone];
+    
+    [resetQueue addOperations:@[resetIncDone] waitUntilFinished:NO];
+    [[NSOperationQueue mainQueue] addOperation:delegateCallOperation];
+}
 
 - (void) groups:(id<GroupsDelegate>)delegate uid:(NSString *)uid
 {

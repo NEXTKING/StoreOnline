@@ -11,6 +11,7 @@
 @interface LoginViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *syncActivity;
 @property (weak, nonatomic) IBOutlet UIButton *syncButton;
+@property (weak, nonatomic) IBOutlet UIButton *resetButton;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 
 @end

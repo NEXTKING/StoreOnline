@@ -286,32 +286,55 @@
                                 </constraints>
                             </view>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="VUL-bQ-EQa"/>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7yS-4L-Bco">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="133" id="Lcq-O3-MUX"/>
-                                    <constraint firstAttribute="height" constant="30" id="kns-Ta-hOt"/>
-                                </constraints>
-                                <state key="normal" title="Синхронизация"/>
-                                <connections>
-                                    <action selector="sync:" destination="Lfb-BJ-69Y" eventType="touchUpInside" id="BZP-dp-ioF"/>
-                                </connections>
-                            </button>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cu8-JH-aLy">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="Vqb-gs-bYT"/>
                                 </constraints>
                             </progressView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xnz-tH-tqM">
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7yS-4L-Bco">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="133" id="Lcq-O3-MUX"/>
+                                            <constraint firstAttribute="height" constant="30" id="kns-Ta-hOt"/>
+                                        </constraints>
+                                        <state key="normal" title="Синхронизация"/>
+                                        <connections>
+                                            <action selector="sync:" destination="Lfb-BJ-69Y" eventType="touchUpInside" id="BZP-dp-ioF"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nUI-2L-emP">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="85M-SB-y3X"/>
+                                            <constraint firstAttribute="height" constant="30" id="o35-l6-pJR"/>
+                                        </constraints>
+                                        <state key="normal" title="Сброс порций"/>
+                                        <connections>
+                                            <action selector="reset:" destination="Lfb-BJ-69Y" eventType="touchUpInside" id="A3y-4o-sMs"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="7yS-4L-Bco" firstAttribute="leading" secondItem="Xnz-tH-tqM" secondAttribute="leading" id="0Na-IL-lRV"/>
+                                    <constraint firstItem="nUI-2L-emP" firstAttribute="leading" secondItem="7yS-4L-Bco" secondAttribute="trailing" constant="16" id="74U-8S-xU0"/>
+                                    <constraint firstAttribute="trailing" secondItem="nUI-2L-emP" secondAttribute="trailing" id="A2L-yG-PaT"/>
+                                    <constraint firstAttribute="bottom" secondItem="nUI-2L-emP" secondAttribute="bottom" id="Ipc-sP-FNl"/>
+                                    <constraint firstItem="7yS-4L-Bco" firstAttribute="top" secondItem="Xnz-tH-tqM" secondAttribute="top" id="X7j-GN-QfM"/>
+                                    <constraint firstAttribute="bottom" secondItem="7yS-4L-Bco" secondAttribute="bottom" id="zbh-Hm-NzP"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="7yS-4L-Bco" firstAttribute="centerX" secondItem="ehb-6u-CqD" secondAttribute="centerX" id="EBH-6x-LUo"/>
-                            <constraint firstItem="VUL-bQ-EQa" firstAttribute="top" secondItem="7yS-4L-Bco" secondAttribute="bottom" constant="8" id="GnT-Dv-EkR"/>
                             <constraint firstItem="sf8-X2-67E" firstAttribute="top" secondItem="cu8-JH-aLy" secondAttribute="bottom" constant="8" id="IJK-zz-1gN"/>
                             <constraint firstItem="sf8-X2-67E" firstAttribute="top" secondItem="VUL-bQ-EQa" secondAttribute="bottom" constant="24" id="QII-zE-l0o"/>
                             <constraint firstAttribute="trailing" secondItem="cu8-JH-aLy" secondAttribute="trailing" constant="16" id="Vgn-w5-pUq"/>
                             <constraint firstItem="WHj-Gm-6Bi" firstAttribute="centerY" secondItem="ehb-6u-CqD" secondAttribute="centerY" id="XQP-IR-KlY"/>
+                            <constraint firstItem="VUL-bQ-EQa" firstAttribute="top" secondItem="Xnz-tH-tqM" secondAttribute="bottom" constant="8" id="aam-1s-7nz"/>
                             <constraint firstItem="cu8-JH-aLy" firstAttribute="leading" secondItem="ehb-6u-CqD" secondAttribute="leading" constant="16" id="gia-7J-aNu"/>
                             <constraint firstItem="VUL-bQ-EQa" firstAttribute="centerX" secondItem="ehb-6u-CqD" secondAttribute="centerX" id="gie-n6-hm4"/>
+                            <constraint firstItem="Xnz-tH-tqM" firstAttribute="centerX" secondItem="ehb-6u-CqD" secondAttribute="centerX" id="iVg-Xh-brG"/>
                             <constraint firstItem="WHj-Gm-6Bi" firstAttribute="centerX" secondItem="ehb-6u-CqD" secondAttribute="centerX" id="yHx-ht-fft"/>
                         </constraints>
                     </view>
@@ -322,6 +345,7 @@
                         <outlet property="loginTextField" destination="ShL-2P-8JI" id="bSt-ow-e5Q"/>
                         <outlet property="passwordTextField" destination="mKG-2H-NtO" id="Et9-aC-wG6"/>
                         <outlet property="progressView" destination="cu8-JH-aLy" id="oto-LO-siO"/>
+                        <outlet property="resetButton" destination="nUI-2L-emP" id="FGe-ga-bw0"/>
                         <outlet property="syncActivity" destination="VUL-bQ-EQa" id="a6f-aF-TXH"/>
                         <outlet property="syncButton" destination="7yS-4L-Bco" id="oQS-Ft-uza"/>
                         <segue destination="zOE-WY-XhU" kind="show" identifier="LoginSegue" id="ztd-8i-mRI"/>
