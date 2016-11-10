@@ -10,13 +10,16 @@
 #import "PI_MOBILE_SERVICEService.h"
 #import "CoreDataController.h"
 
-@interface SOAPOperation : NSOperation
+@interface SOAPOperation : NSOperation <NSProgressReporting>
 {
 @protected
     NSInteger numberOfPortions;
     NSInteger currentPortionID;
     NSString *_incValue;
 }
+
+//Progress protocol
+@property (nonatomic, strong) NSProgress *progress;
 
 @property (nonatomic, strong) CoreDataController* dataController;
 @property (nonatomic, copy) NSString* authValue;

@@ -10,6 +10,7 @@
 
 @protocol SyncronizationDelegate <NSObject>
 
+- (void) syncProgressChanged:(double)progress;
 - (void) syncCompleteWithResult:(int) result;
 
 @end

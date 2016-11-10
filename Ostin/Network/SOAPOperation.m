@@ -17,6 +17,18 @@
 
 @implementation SOAPOperation
 
+- (id) init
+{
+    self = [super init];
+    
+    if (self)
+    {
+        self.progress = [NSProgress new];
+    }
+    
+    return self;
+}
+
 
 - (void) main
 {
@@ -30,11 +42,20 @@
     numberOfPortions = [self getPortions:_incValue];
     
     if (numberOfPortions == 0)
+    {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            _progress.totalUnitCount = 1;
+            _progress.completedUnitCount = 1;
+        });
         self.success = YES; // Nothing to download
+    }
     
     if (self.isCancelled || numberOfPortions <= 0)
         return;
     
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        _progress.totalUnitCount = numberOfPortions;
+    });
     
     while (numberOfPortions > 0) {
         
@@ -68,6 +89,11 @@
             return;
         
         numberOfPortions--;
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            _progress.completedUnitCount++;
+        });
+//        NSLog(@"%@: %@", _incValue, _progress);
     }
     
     self.success = YES;
@@ -162,6 +188,5 @@
     
     return noQuotes;
 }
-
 
 @end

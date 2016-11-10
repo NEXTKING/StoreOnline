@@ -22,19 +22,51 @@ typedef enum SyncStages
 @interface SynchronizationController() <ItemDescriptionDelegate, TasksDelegate, UserDelegate>
 {
     NSInteger updateMask;
+    NSProgress *_progress;
 }
-
 @end
 
 @implementation SynchronizationController
 
+static void *ProgressObserverContext = &ProgressObserverContext;
+
 - (void) synchronize
 {
+    _progress = [NSProgress progressWithTotalUnitCount:3];
+    [_progress becomeCurrentWithPendingUnitCount:0];
+    [_progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionNew context:ProgressObserverContext];
+    
     [[MCPServer instance] itemDescription:self itemCode:nil shopCode:nil isoType:0];
     [[MCPServer instance] tasks:self userID:nil];
     [[MCPServer instance] user:self login:nil password:nil];
     
     NSLog(@"%d", SSCount);
+}
+
+// avoid warning
+
+- (void)setProgress:(NSProgress *)progress
+{
+    
+}
+
+- (NSProgress *)progress
+{
+    return _progress;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (context == ProgressObserverContext)
+    {
+        NSProgress *progress = (NSProgress *)object;
+//        NSLog(@"TOTAL PROGRESS IS: %f", progress.fractionCompleted);
+        [_delegate syncProgressChanged:progress.fractionCompleted];
+    }
+    else
+    {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
 }
 
 #pragma mark - Network Delegates
@@ -58,11 +90,12 @@ typedef enum SyncStages
     }
     
     if (allBitsAreSet)
+    {
+        [_progress resignCurrent];
         [_delegate syncCompleteWithResult:0];
-    
+        [_progress removeObserver:self forKeyPath:@"fractionCompleted" context:ProgressObserverContext];
+    }
 }
-
-
 
 - (void) itemDescriptionComplete:(int)result itemDescription:(ItemInformation *)itemDescription
 {

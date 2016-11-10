@@ -130,6 +130,8 @@
     }
     else
     {
+        NSProgress *usersProgress = [NSProgress progressWithTotalUnitCount:1 parent:delegate.progress pendingUnitCount:1];
+        
         NSOperationQueue *usersQueue = [NSOperationQueue new];
         usersQueue.name = @"usersQueue";
         
@@ -138,6 +140,8 @@
         users.dataController = self.dataController;
         users.authValue = authValue;
         users.deviceID = deviceID;
+        
+        [usersProgress addChild:users.progress withPendingUnitCount:1];
         
         NSBlockOperation* delegateCallOperation = [NSBlockOperation blockOperationWithBlock:^{
             
@@ -189,6 +193,8 @@
     }
     else
     {
+        NSProgress *tasksProgress = [NSProgress progressWithTotalUnitCount:2 parent:delegate.progress pendingUnitCount:1];
+        
         NSOperationQueue *waresQueue = [NSOperationQueue new];
         waresQueue.name = @"tasksQueue";
         
@@ -203,6 +209,9 @@
         taskWareBinding.dataController = self.dataController;
         taskWareBinding.authValue = authValue;
         taskWareBinding.deviceID  = deviceID;
+        
+        [tasksProgress addChild:tasks.progress withPendingUnitCount:1];
+        [tasksProgress addChild:taskWareBinding.progress withPendingUnitCount:1];
         
         NSBlockOperation* delegateCallOperation = [NSBlockOperation blockOperationWithBlock:^{
             
@@ -492,7 +501,7 @@
     });
 }
 
-- (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString *)code shopCode:(NSString *)shopCode isoType:(int)type
+- (void) itemDescription:(id<ItemDescriptionDelegate_Ostin>)delegate itemCode:(NSString *)code shopCode:(NSString *)shopCode isoType:(int)type
 {
     if (code)
     {
@@ -536,7 +545,10 @@
                 }
             }
         }*/
-       
+        
+        NSProgress *itemsProgress = [NSProgress progressWithTotalUnitCount:5 parent:delegate.progress pendingUnitCount:1];
+//        __weak NSProgress *_itemsProgress = itemsProgress;
+        
         NSOperationQueue *waresQueue = [NSOperationQueue new];
         NSDate *startDate = [NSDate date];
         waresQueue.name = @"waresQueue";
@@ -559,8 +571,14 @@
         prices.authValue      = authValue;
         prices.deviceID       = deviceID;
         
+        [itemsProgress addChild:wares.progress withPendingUnitCount:3];
+        [itemsProgress addChild:barcodes.progress withPendingUnitCount:1];
+        [itemsProgress addChild:prices.progress withPendingUnitCount:1];
+        //[itemsProgress becomeCurrentWithPendingUnitCount:1];
+        
         NSBlockOperation* delegateCallOperation = [NSBlockOperation blockOperationWithBlock:^{
             
+            //[_itemsProgress resignCurrent];
             BOOL success = _wares.success && _barcodes.success && _prices.success;
             NSDate *endDate = [NSDate date];
             NSLog(@"%f s", [endDate timeIntervalSince1970] - [startDate timeIntervalSince1970]);

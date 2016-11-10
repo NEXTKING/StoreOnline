@@ -33,6 +33,7 @@
     _loginTextField.returnKeyType = UIReturnKeyNext;
     _passwordTextField.delegate = self;
     _passwordTextField.returnKeyType = UIReturnKeyDone;
+    _progressView.hidden = YES;
 }
 
 - (void) barcodeData:(NSString *)barcode type:(int)type
@@ -97,6 +98,7 @@
 {
     [_syncActivity startAnimating];
     _syncButton.enabled = NO;
+    _progressView.hidden = NO;
     
     SynchronizationController *sync = [SynchronizationController new];
     sync.delegate = self;
@@ -119,9 +121,15 @@
     [dtdev removeDelegate:self];
 }
 
+- (void)syncProgressChanged:(double)progress
+{
+    _progressView.progress = progress;
+}
+
 - (void) syncCompleteWithResult:(int)result
 {
     _syncButton.enabled = YES;
+    _progressView.hidden = YES;
     [_syncActivity stopAnimating];
 }
 

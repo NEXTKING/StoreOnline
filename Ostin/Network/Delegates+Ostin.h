@@ -20,6 +20,10 @@ typedef enum : NSUInteger
     ItemSearchAttributeBarcode = (1 << 3)
 }ItemSearchAttribute;
 
+@protocol ItemDescriptionDelegate_Ostin <ItemDescriptionDelegate>
+@property(nonatomic, strong) NSProgress *progress;
+@end
+
 @protocol GroupsDelegate <NSObject>
 - (void) groupsComplete: (int) result groups:(NSArray*) groups;
 - (void) subgroupsComplete: (int) result subgroups:(NSArray*) subgroups;
@@ -27,6 +31,7 @@ typedef enum : NSUInteger
 @end
 
 @protocol TasksDelegate <NSObject>
+@property(nonatomic, strong) NSProgress *progress;
 - (void) tasksComplete: (int) result tasks:(NSArray<TaskInformation*>*) tasks;
 @end
 
@@ -35,6 +40,7 @@ typedef enum : NSUInteger
 @end
 
 @protocol UserDelegate <NSObject>
+@property(nonatomic, strong) NSProgress *progress;
 - (void) userComplete: (int) result user:(UserInformation *)userInformation;
 @end
 
