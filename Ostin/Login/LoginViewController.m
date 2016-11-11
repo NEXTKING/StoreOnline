@@ -34,6 +34,7 @@
     _passwordTextField.delegate = self;
     _passwordTextField.returnKeyType = UIReturnKeyDone;
     _progressView.hidden = YES;
+    _progressLabel.hidden = YES;
 }
 
 - (void) barcodeData:(NSString *)barcode type:(int)type
@@ -96,11 +97,14 @@
 
 - (IBAction)sync:(id)sender
 {
-    [_syncActivity startAnimating];
     _syncButton.enabled = NO;
     _progressView.hidden = NO;
+    _progressLabel.hidden = NO;
     _resetButton.enabled = NO;
     _loginButton.enabled = NO;
+    
+    _progressView.progress = 0;
+    _progressLabel.text = @"0 %";
     
     SynchronizationController *sync = [SynchronizationController new];
     sync.delegate = self;
@@ -109,7 +113,6 @@
 
 - (IBAction)reset:(id)sender
 {
-    [_syncActivity startAnimating];
     _syncButton.enabled = NO;
     _resetButton.enabled = NO;
     _loginButton.enabled = NO;
@@ -138,6 +141,7 @@
 - (void)syncProgressChanged:(double)progress
 {
     _progressView.progress = progress;
+    _progressLabel.text = [NSString stringWithFormat:@"%d %%", (int)(progress * 100)];
 }
 
 - (void) syncCompleteWithResult:(int)result
@@ -146,7 +150,7 @@
     _syncButton.enabled = YES;
     _loginButton.enabled = YES;
     _progressView.hidden = YES;
-    [_syncActivity stopAnimating];
+    _progressLabel.hidden = YES;
     
     NSString *message = result == 0 ? @"Синхронизация успешно завершена" : @"Произошла ошибка при синхронизации";
     [self showAlertWithMessage:message];
@@ -157,7 +161,6 @@
     _resetButton.enabled = YES;
     _syncButton.enabled = YES;
     _loginButton.enabled = YES;
-    [_syncActivity stopAnimating];
     
     NSString *message = result == 0 ? @"Порции сброшены успешно" : @"Произошла ошибка при сбросе порций";
     [self showAlertWithMessage:message];
