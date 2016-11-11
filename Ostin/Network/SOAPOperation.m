@@ -93,7 +93,7 @@
         dispatch_sync(dispatch_get_main_queue(), ^{
             _progress.completedUnitCount++;
         });
-//        NSLog(@"%@: %@", _incValue, _progress);
+        NSLog(@"%@: %@", _incValue, _progress);
     }
     
     self.success = YES;

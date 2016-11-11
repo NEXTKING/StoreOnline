@@ -16,6 +16,7 @@
     NSMutableArray *_queue;
     BOOL _isPrinting;
     UIWindow *_window;
+    NSTimer *_controlQueueTimer;
 }
 @end
 
@@ -74,8 +75,15 @@
                 // priceTag
             }
             
+            if (_controlQueueTimer != nil)
+            {
+                [_controlQueueTimer invalidate];
+                _controlQueueTimer = nil;
+            }
+            
             _isPrinting = YES;
             [self showPrintView];
+            [self initializeControlQueueTimer];
         }
     }
 }
@@ -111,6 +119,11 @@
 - (void)hidePrintView
 {
     [_window setHidden:YES];
+}
+
+- (void)initializeControlQueueTimer
+{
+    _controlQueueTimer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(hidePrintView) userInfo:nil repeats:NO];
 }
 
 @end

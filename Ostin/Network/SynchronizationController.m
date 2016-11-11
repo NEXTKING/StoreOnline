@@ -32,7 +32,7 @@ static void *ProgressObserverContext = &ProgressObserverContext;
 
 - (void) synchronize
 {
-    _progress = [NSProgress progressWithTotalUnitCount:3];
+    _progress = [NSProgress progressWithTotalUnitCount:5];
     [_progress becomeCurrentWithPendingUnitCount:0];
     [_progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionNew context:ProgressObserverContext];
     
@@ -60,7 +60,7 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     if (context == ProgressObserverContext)
     {
         NSProgress *progress = (NSProgress *)object;
-//        NSLog(@"TOTAL PROGRESS IS: %f", progress.fractionCompleted);
+        NSLog(@"TOTAL PROGRESS IS: %f", progress.fractionCompleted);
         [_delegate syncProgressChanged:progress.fractionCompleted];
     }
     else

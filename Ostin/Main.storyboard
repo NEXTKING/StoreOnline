@@ -342,6 +342,7 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="sJF-gh-pHZ"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="loginButton" destination="bHC-W2-dJA" id="SoG-jB-f1d"/>
                         <outlet property="loginTextField" destination="ShL-2P-8JI" id="bSt-ow-e5Q"/>
                         <outlet property="passwordTextField" destination="mKG-2H-NtO" id="Et9-aC-wG6"/>
                         <outlet property="progressView" destination="cu8-JH-aLy" id="oto-LO-siO"/>

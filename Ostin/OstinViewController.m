@@ -133,6 +133,8 @@
     	lastBarcode = [aNotification.object objectForKey:@"barcode"];
     	NSNumber *type = [aNotification.object objectForKey:@"type"];
     	[[NSUserDefaults standardUserDefaults] setValue:lastBarcode forKey:@"LastBarcode"];
+        [[NSUserDefaults standardUserDefaults] setValue:type forKey:@"LastBarcodeType"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     
     	NSString *internalBarcode = [BarcodeFormatter normalizedBarcodeFromString:lastBarcode isoType:type.intValue];
     	[self requestItemInfoWithCode:internalBarcode isoType:type.intValue];

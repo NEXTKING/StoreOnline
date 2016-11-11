@@ -100,6 +100,7 @@
     _syncButton.enabled = NO;
     _progressView.hidden = NO;
     _resetButton.enabled = NO;
+    _loginButton.enabled = NO;
     
     SynchronizationController *sync = [SynchronizationController new];
     sync.delegate = self;
@@ -111,6 +112,7 @@
     [_syncActivity startAnimating];
     _syncButton.enabled = NO;
     _resetButton.enabled = NO;
+    _loginButton.enabled = NO;
     
     SynchronizationController *sync = [SynchronizationController new];
     sync.delegate = self;
@@ -142,6 +144,7 @@
 {
     _resetButton.enabled = YES;
     _syncButton.enabled = YES;
+    _loginButton.enabled = YES;
     _progressView.hidden = YES;
     [_syncActivity stopAnimating];
     
@@ -153,6 +156,7 @@
 {
     _resetButton.enabled = YES;
     _syncButton.enabled = YES;
+    _loginButton.enabled = YES;
     [_syncActivity stopAnimating];
     
     NSString *message = result == 0 ? @"Порции сброшены успешно" : @"Произошла ошибка при сбросе порций";

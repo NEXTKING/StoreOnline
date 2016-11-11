@@ -285,6 +285,7 @@
         [predicates addObject:predicate];
     }
     
+    
     NSPredicate *itemsPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:predicates];
     
     NSFetchRequest *itemsRequest = [[NSFetchRequest alloc] init];
@@ -382,9 +383,19 @@
             }
             else
             {
+                __block NSError *error = nil;
+                
                 _taskDB.endDate = date;
-                [privateManagedObjectContext save:nil];
-                completion(YES, nil);
+                [privateManagedObjectContext performBlockAndWait:^{
+                    [privateManagedObjectContext save:&error];
+                }];
+                
+                if (!error)
+                    [moc performBlockAndWait:^{
+                        [moc save:&error];
+                    }];
+                
+                completion(error != nil, nil);
             }
         }];
         
@@ -393,6 +404,8 @@
         [setTaskDoneQueue addOperations:@[savePrintFact, setTaskDone] waitUntilFinished:NO];
         [[NSOperationQueue mainQueue] addOperation:delegateCallOperation];
     }
+    else
+        completion(NO, nil);
 }
 
 - (void) saveTaskItem:(id<TasksDelegate>) delegate taskID:(NSInteger)taskID itemID:(NSInteger)itemID scanned:(NSUInteger)scanned
@@ -556,7 +569,7 @@
     else
     {
         
-        
+        /*
         NSFetchRequest *request = [[NSFetchRequest alloc] init];
         [request setEntity:[NSEntityDescription entityForName:@"Barcode" inManagedObjectContext:self.dataController.managedObjectContext]];
         [request setIncludesSubentities:NO]; //Omit subentities. Default is YES (i.e. include subentities)
@@ -567,7 +580,7 @@
         NSArray* itemsq = [self.dataController.managedObjectContext executeFetchRequest:request error:nil];
         
         
-       /* NSInteger count = 0;
+       NSInteger count = 0;
         for (Barcode *barcode in barcodesq) {
             for (Item *item in itemsq) {
                 if (item.itemID.integerValue == barcode.itemID.integerValue)
@@ -578,8 +591,7 @@
             }
         }*/
         
-        NSProgress *itemsProgress = [NSProgress progressWithTotalUnitCount:5 parent:delegate.progress pendingUnitCount:1];
-//        __weak NSProgress *_itemsProgress = itemsProgress;
+        NSProgress *itemsProgress = [NSProgress progressWithTotalUnitCount:3 parent:delegate.progress pendingUnitCount:3];
         
         NSOperationQueue *waresQueue = [NSOperationQueue new];
         NSDate *startDate = [NSDate date];
@@ -603,14 +615,12 @@
         prices.authValue      = authValue;
         prices.deviceID       = deviceID;
         
-        [itemsProgress addChild:wares.progress withPendingUnitCount:3];
+        [itemsProgress addChild:wares.progress withPendingUnitCount:1];
         [itemsProgress addChild:barcodes.progress withPendingUnitCount:1];
         [itemsProgress addChild:prices.progress withPendingUnitCount:1];
-        //[itemsProgress becomeCurrentWithPendingUnitCount:1];
         
         NSBlockOperation* delegateCallOperation = [NSBlockOperation blockOperationWithBlock:^{
-            
-            //[_itemsProgress resignCurrent];
+        
             BOOL success = _wares.success && _barcodes.success && _prices.success;
             NSDate *endDate = [NSDate date];
             NSLog(@"%f s", [endDate timeIntervalSince1970] - [startDate timeIntervalSince1970]);
