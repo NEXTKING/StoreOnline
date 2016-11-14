@@ -14,6 +14,7 @@
 - (void) main
 {
     self.incValue = @"pasting_wares";
+    self.coreDataId = @"TaskItemBinding";
     [super main];
 }
 
@@ -53,25 +54,28 @@
     return nil;
 }
 
-
-- (BOOL) saveItems: (NSArray*) items
+- (void) updateObject:(NSManagedObject *)obj csv:(NSArray *)csv
 {
-    for (PI_MOBILE_SERVICEService_TROW_IntType *throw in items)
-    {
-        NSArray *csvSourse = [throw.VAL componentsSeparatedByString:@";"];
-        NSArray *csv       = [self removeQuotes:csvSourse];
-        
-        TaskItemBinding *taskDB = [NSEntityDescription insertNewObjectForEntityForName:@"TaskItemBinding" inManagedObjectContext:self.privateContext];
-        
-        taskDB.taskID            = @([csv[2] integerValue]);
-        taskDB.itemID            = @([csv[3] integerValue]);
-        taskDB.quantity          = @([csv[4] integerValue]);
-    }
+    TaskItemBinding* taskDB = (TaskItemBinding*)obj;
+    
+    taskDB.taskID = @([csv[2] integerValue]);
+    taskDB.itemID = @([csv[3] integerValue]);
+    taskDB.quantity = @([csv[4] integerValue]);
+}
+
+- (NSManagedObject*) findObject:(NSArray *)csv
+{
+    NSInteger taskID = [csv[1] integerValue];
+    NSInteger itemID = [csv[2] integerValue];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"TaskItemBinding"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"taskID == %@ AND itemID == %@", @(taskID), @(itemID)]];
     
     NSError* error = nil;
-    [self.privateContext save:&error];
+    NSArray* results = [self.privateContext executeFetchRequest:request error:&error];
     
-    return error? NO:YES;
+    if (results.count > 0)
+        return results[0];
+    return nil;
 }
 
 @end

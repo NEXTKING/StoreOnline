@@ -14,6 +14,7 @@
 	return [[NSFetchRequest alloc] initWithEntityName:@"Task"];
 }
 
+@dynamic dateCreated;
 @dynamic taskID;
 @dynamic name;
 @dynamic userID;

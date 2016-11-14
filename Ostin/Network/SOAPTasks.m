@@ -14,6 +14,7 @@
 - (void) main
 {
     self.incValue = @"pasting_task";
+    self.coreDataId = @"Task";
     [super main];
 }
 
@@ -53,25 +54,34 @@
     return nil;
 }
 
-- (BOOL) saveItems: (NSArray*) items
+- (void) updateObject:(NSManagedObject *)obj csv:(NSArray *)csv
 {
-    for (PI_MOBILE_SERVICEService_TROW_IntType *throw in items)
+    Task* taskDB = (Task*)obj;
+    
+    taskDB.taskID = @([csv[1] integerValue]);
+    taskDB.name = csv[2];
+    taskDB.userID = csv[3];
+    if (csv.count >= 4)
     {
-        NSArray *csvSourse = [throw.VAL componentsSeparatedByString:@";"];
-        NSArray *csv       = [self removeQuotes:csvSourse];
-        
-        Task *taskDB = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:self.privateContext];
-        
-        taskDB.taskID          = @([csv[1] integerValue]);
-        taskDB.name            = csv[2];
-        taskDB.userID          = csv[3];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"dd.MM.yyyy hh:mm:ss"];
+        NSDate *date = [dateFormatter dateFromString:csv[4]];
+        taskDB.dateCreated = date;
     }
-    
-    NSError* error = nil;
-    [self.privateContext save:&error];
-    
-    return error? NO:YES;
 }
 
+- (NSManagedObject*) findObject:(NSArray *)csv
+{
+    NSInteger taskID = [csv[1] integerValue];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Task"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"taskID == %@", @(taskID)]];
+    
+    NSError* error = nil;
+    NSArray* results = [self.privateContext executeFetchRequest:request error:&error];
+    
+    if (results.count > 0)
+        return results[0];
+    return nil;
+}
 
 @end

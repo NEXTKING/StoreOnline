@@ -14,6 +14,7 @@
 - (void) main
 {
     self.incValue = @"user";
+    self.coreDataId = @"User";
     [super main];
     
 }
@@ -50,26 +51,29 @@
     return nil;
 }
 
-- (BOOL) saveItems: (NSArray*) items
+- (void) updateObject:(NSManagedObject *)obj csv:(NSArray *)csv
 {
-    for (PI_MOBILE_SERVICEService_TROW_IntType *throw in items)
-    {
-        NSArray *csvSourse = [throw.VAL componentsSeparatedByString:@";"];
-        NSArray *csv       = [self removeQuotes:csvSourse];
-        
-        User *userDB = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:self.privateContext];
-        
-        userDB.key_user = csv[1];
-        userDB.barcode  = csv[2];
-        userDB.login    = csv[3];
-        userDB.password = csv[4];
-        userDB.name     = csv[5];
-    }
+    User* userDB = (User*)obj;
+    
+    userDB.key_user = csv[1];
+    userDB.barcode  = csv[2];
+    userDB.login    = csv[3];
+    userDB.password = csv[4];
+    userDB.name     = csv[5];
+}
+
+- (NSManagedObject*) findObject:(NSArray *)csv
+{
+    NSString *key_user = csv[1];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"key_user == %@", key_user]];
     
     NSError* error = nil;
-    [self.privateContext save:&error];
+    NSArray* results = [self.privateContext executeFetchRequest:request error:&error];
     
-    return error? NO:YES;
+    if (results.count > 0)
+        return results[0];
+    return nil;
 }
 
 @end

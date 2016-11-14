@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<Task *> *)fetchRequest;
 
+@property (nullable, nonatomic, copy) NSDate *dateCreated;
 @property (nullable, nonatomic, copy) NSNumber *taskID;
 @property (nullable, nonatomic, copy) NSString *name;
 @property (nullable, nonatomic, copy) NSString *userID;

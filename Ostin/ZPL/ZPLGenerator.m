@@ -33,7 +33,7 @@
     NSString* addInfo   =    [self paramFromItem:item name:@"additionalInfo"];
     NSString* userID    =    @"300";
     NSString* shopID    =    [self paramFromItem:item name:@"storeNumber"];
-    NSString* drop      =    @"";
+    NSString* drop      =    [self paramFromItem:item name:@"drop"];
     NSString* boxType   =    [self paramFromItem:item name:@"boxType"];
     NSString* discountNum  =    [self paramFromItem:item name:@"discount"];
     NSString* discount = (discountNum.integerValue > 0) ? [NSString stringWithFormat:@"Скидка %@%%", discountNum]:@"";

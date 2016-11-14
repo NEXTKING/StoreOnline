@@ -15,6 +15,7 @@
 {
     
     self.incValue = @"ware_barcode";
+    self.coreDataId = @"Barcode";
     [super main];
     
 }
@@ -55,26 +56,27 @@
     return nil;
 }
 
-- (BOOL) saveItems: (NSArray*) items
+- (void) updateObject:(NSManagedObject *)obj csv:(NSArray *)csv
 {
-    for (PI_MOBILE_SERVICEService_TROW_IntType *throw in items)
-    {
-        NSArray *csvSourse = [throw.VAL componentsSeparatedByString:@";"];
-        NSArray *csv       = [self removeQuotes:csvSourse];
-     
-        Barcode *barcodeDB = [NSEntityDescription insertNewObjectForEntityForName:@"Barcode" inManagedObjectContext:self.privateContext];
-        
-        barcodeDB.itemID  = @([csv[1] integerValue]);
-        barcodeDB.code128 = csv[2];
-        barcodeDB.ean     = csv[3];
-        
-    }
+    Barcode* barcodeDB = (Barcode*)obj;
     
-    NSError* error = nil;
-    [self.privateContext save:&error];
-    
-    return error? NO:YES;
+    barcodeDB.itemID = @([csv[1] integerValue]);
+    barcodeDB.code128 = csv[2];
+    barcodeDB.ean = csv[3];
 }
 
+- (NSManagedObject*) findObject:(NSArray *)csv
+{
+    NSInteger itemID = [csv[1] integerValue];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Barcode"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %@", @(itemID)]];
+    
+    NSError* error = nil;
+    NSArray* results = [self.privateContext executeFetchRequest:request error:&error];
+    
+    if (results.count > 0)
+        return results[0];
+    return nil;
+}
 
 @end
