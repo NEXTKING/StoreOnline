@@ -30,6 +30,7 @@
 #import "SOAPSavePrintFact.h"
 #import "SOAPSetTaskDone.h"
 #import "SOAPUsers.h"
+#import "SOAPResetIncDone.h"
 #import "DTDevices.h"
 #import <CommonCrypto/CommonDigest.h>
 
@@ -67,6 +68,37 @@
     return self;
 }
 
+- (void)resetDatabaseAndPortionsCount:(id<ItemDescriptionDelegate_Ostin>)delegate
+{
+    NSOperationQueue *resetQueue = [NSOperationQueue new];
+    resetQueue.name = @"resetQueue";
+    
+    SOAPResetIncDone *resetIncDone = [SOAPResetIncDone new];
+    __weak SOAPResetIncDone* _resetIncDone = resetIncDone;
+    resetIncDone.authValue = authValue;
+    resetIncDone.deviceID = deviceID;
+    
+    __weak typeof(self) wself = self;
+    NSBlockOperation* delegateCallOperation = [NSBlockOperation blockOperationWithBlock:^{
+        
+        BOOL success = _resetIncDone.success;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (success)
+            {
+                [wself.dataController recreatePersistentStore];
+                [delegate resetDatabaseAndPortionsCountComplete:0];
+            }
+            else
+                [delegate resetDatabaseAndPortionsCountComplete:1];
+        });
+    }];
+    
+    [delegateCallOperation addDependency:resetIncDone];
+    
+    [resetQueue addOperations:@[resetIncDone] waitUntilFinished:NO];
+    [[NSOperationQueue mainQueue] addOperation:delegateCallOperation];
+}
 
 - (void) groups:(id<GroupsDelegate>)delegate uid:(NSString *)uid
 {
@@ -130,6 +162,8 @@
     }
     else
     {
+        NSProgress *usersProgress = [NSProgress progressWithTotalUnitCount:1 parent:delegate.progress pendingUnitCount:1];
+        
         NSOperationQueue *usersQueue = [NSOperationQueue new];
         usersQueue.name = @"usersQueue";
         
@@ -138,6 +172,8 @@
         users.dataController = self.dataController;
         users.authValue = authValue;
         users.deviceID = deviceID;
+        
+        [usersProgress addChild:users.progress withPendingUnitCount:1];
         
         NSBlockOperation* delegateCallOperation = [NSBlockOperation blockOperationWithBlock:^{
             
@@ -189,6 +225,8 @@
     }
     else
     {
+        NSProgress *tasksProgress = [NSProgress progressWithTotalUnitCount:2 parent:delegate.progress pendingUnitCount:1];
+        
         NSOperationQueue *waresQueue = [NSOperationQueue new];
         waresQueue.name = @"tasksQueue";
         
@@ -203,6 +241,9 @@
         taskWareBinding.dataController = self.dataController;
         taskWareBinding.authValue = authValue;
         taskWareBinding.deviceID  = deviceID;
+        
+        [tasksProgress addChild:tasks.progress withPendingUnitCount:1];
+        [tasksProgress addChild:taskWareBinding.progress withPendingUnitCount:1];
         
         NSBlockOperation* delegateCallOperation = [NSBlockOperation blockOperationWithBlock:^{
             
@@ -243,6 +284,7 @@
         NSPredicate* predicate = [NSPredicate predicateWithFormat:@"itemID == %ld", [binding.itemID integerValue]];
         [predicates addObject:predicate];
     }
+    
     
     NSPredicate *itemsPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:predicates];
     
@@ -324,6 +366,7 @@
         setTaskDone.taskType = @"pasting";
         setTaskDone.authValue = authValue;
         setTaskDone.deviceID  = deviceID;
+        setTaskDone.userID = userID;
         
         NSBlockOperation* delegateCallOperation = [NSBlockOperation blockOperationWithBlock:^{
             
@@ -341,9 +384,21 @@
             }
             else
             {
+                __block NSError *error = nil;
+                
                 _taskDB.endDate = date;
-                [privateManagedObjectContext save:nil];
-                completion(YES, nil);
+                [privateManagedObjectContext performBlockAndWait:^{
+                    [privateManagedObjectContext save:&error];
+                }];
+                
+                if (!error)
+                    [moc performBlockAndWait:^{
+                        [moc save:&error];
+                    }];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(YES, nil);
+                });
             }
         }];
         
@@ -352,6 +407,8 @@
         [setTaskDoneQueue addOperations:@[savePrintFact, setTaskDone] waitUntilFinished:NO];
         [[NSOperationQueue mainQueue] addOperation:delegateCallOperation];
     }
+    else
+        completion(NO, nil);
 }
 
 - (void) saveTaskItem:(id<TasksDelegate>) delegate taskID:(NSInteger)taskID itemID:(NSInteger)itemID scanned:(NSUInteger)scanned
@@ -492,7 +549,7 @@
     });
 }
 
-- (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString *)code shopCode:(NSString *)shopCode isoType:(int)type
+- (void) itemDescription:(id<ItemDescriptionDelegate_Ostin>)delegate itemCode:(NSString *)code shopCode:(NSString *)shopCode isoType:(int)type
 {
     if (code)
     {
@@ -515,7 +572,7 @@
     else
     {
         
-        
+        /*
         NSFetchRequest *request = [[NSFetchRequest alloc] init];
         [request setEntity:[NSEntityDescription entityForName:@"Barcode" inManagedObjectContext:self.dataController.managedObjectContext]];
         [request setIncludesSubentities:NO]; //Omit subentities. Default is YES (i.e. include subentities)
@@ -526,7 +583,7 @@
         NSArray* itemsq = [self.dataController.managedObjectContext executeFetchRequest:request error:nil];
         
         
-       /* NSInteger count = 0;
+       NSInteger count = 0;
         for (Barcode *barcode in barcodesq) {
             for (Item *item in itemsq) {
                 if (item.itemID.integerValue == barcode.itemID.integerValue)
@@ -536,7 +593,9 @@
                 }
             }
         }*/
-       
+        
+        NSProgress *itemsProgress = [NSProgress progressWithTotalUnitCount:3 parent:delegate.progress pendingUnitCount:3];
+        
         NSOperationQueue *waresQueue = [NSOperationQueue new];
         NSDate *startDate = [NSDate date];
         waresQueue.name = @"waresQueue";
@@ -559,8 +618,12 @@
         prices.authValue      = authValue;
         prices.deviceID       = deviceID;
         
+        [itemsProgress addChild:wares.progress withPendingUnitCount:1];
+        [itemsProgress addChild:barcodes.progress withPendingUnitCount:1];
+        [itemsProgress addChild:prices.progress withPendingUnitCount:1];
+        
         NSBlockOperation* delegateCallOperation = [NSBlockOperation blockOperationWithBlock:^{
-            
+        
             BOOL success = _wares.success && _barcodes.success && _prices.success;
             NSDate *endDate = [NSDate date];
             NSLog(@"%f s", [endDate timeIntervalSince1970] - [startDate timeIntervalSince1970]);
@@ -983,7 +1046,15 @@
 
 - (NSString *)imageURLForItemID:(NSUInteger)itemID
 {
-    return [NSString stringWithFormat:@"http://172.16.4.228:2080/MobileStick/api/Picture/%ld", itemID];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSString *protocol = [[NSUserDefaults standardUserDefaults] valueForKey:@"protocol_image_preference"];
+    NSString *host     = [[NSUserDefaults standardUserDefaults] valueForKey:@"host_image_preference"];
+    NSString *port     = [[NSUserDefaults standardUserDefaults] valueForKey:@"port_image_preference"];
+    NSString *path     = [[NSUserDefaults standardUserDefaults] valueForKey:@"path_image_preference"];
+    NSMutableString *address = [NSMutableString stringWithFormat:@"%@://%@%@",protocol, host, port.length > 0?[NSString stringWithFormat:@":%@", port]:@""];
+    if (path.length > 0)
+        [address appendFormat:@"/%@", path];
+    return [NSString stringWithFormat:@"%@/%ld", address, itemID];
 }
 
 @end

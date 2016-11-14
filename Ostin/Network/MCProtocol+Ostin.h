@@ -15,6 +15,7 @@
 
 @protocol MCProtocolOstin <MCProtocol>
 
+- (void) resetDatabaseAndPortionsCount:(id<ItemDescriptionDelegate_Ostin>)delegate;
 - (void) groups:(id<GroupsDelegate>) delegate uid:(NSString*)uid;
 - (void) subgroups:(id<GroupsDelegate>) delegate uid:(NSString*)uid;
 - (void) brands:(id<GroupsDelegate>) delegate uid:(NSString*)uid;

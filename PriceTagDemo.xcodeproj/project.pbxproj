@@ -34,6 +34,7 @@
 		21C0549C1DCB8A0A0094C7B1 /* PrintServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C0549B1DCB8A0A0094C7B1 /* PrintServer.m */; };
 		21C0549D1DCB8A0A0094C7B1 /* PrintServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C0549B1DCB8A0A0094C7B1 /* PrintServer.m */; };
 		21D8381D1DD0A72800A98E0F /* SettingsViewController+Ostin.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D8381C1DD0A72800A98E0F /* SettingsViewController+Ostin.m */; };
+		21D838441DD4B47F00A98E0F /* SOAPResetIncDone.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D838431DD4B47F00A98E0F /* SOAPResetIncDone.m */; };
 		23325335A97CCCACC42944AF /* libPods-Ostin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD3C223CF10EB177C6448781 /* libPods-Ostin.a */; };
 		5BADECA800A6702C5F474BB5 /* libPods-PriceTagDemoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1E01A49F9DF7B4A12A7407 /* libPods-PriceTagDemoUITests.a */; };
 		71454865FBE26CAE4A38F59F /* libPods-DesondoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D44F91159F3A6CCEC7C0AEB /* libPods-DesondoTests.a */; };
@@ -594,6 +595,8 @@
 		21C0549B1DCB8A0A0094C7B1 /* PrintServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintServer.m; sourceTree = "<group>"; };
 		21D8381B1DD0A72800A98E0F /* SettingsViewController+Ostin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SettingsViewController+Ostin.h"; sourceTree = "<group>"; };
 		21D8381C1DD0A72800A98E0F /* SettingsViewController+Ostin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SettingsViewController+Ostin.m"; sourceTree = "<group>"; };
+		21D838421DD4B47F00A98E0F /* SOAPResetIncDone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPResetIncDone.h; sourceTree = "<group>"; };
+		21D838431DD4B47F00A98E0F /* SOAPResetIncDone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPResetIncDone.m; sourceTree = "<group>"; };
 		26E6677B3BC7955145425ED2 /* Pods-DesondoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesondoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DesondoTests/Pods-DesondoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		305BD8FF1EE07980B92BBA8D /* Pods-Tsum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tsum.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tsum/Pods-Tsum.debug.xcconfig"; sourceTree = "<group>"; };
 		3441ACD00F2A17AFBB7CD4CD /* Pods-PriceTagDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceTagDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PriceTagDemoTests/Pods-PriceTagDemoTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1886,6 +1889,8 @@
 				C68216311DB668FD00833751 /* SOAPSetTaskDone.m */,
 				21C054611DC355E20094C7B1 /* SOAPUsers.h */,
 				21C054621DC355E20094C7B1 /* SOAPUsers.m */,
+				21D838421DD4B47F00A98E0F /* SOAPResetIncDone.h */,
+				21D838431DD4B47F00A98E0F /* SOAPResetIncDone.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -3316,6 +3321,7 @@
 				21BB44E61DAD224600ED67EE /* TasksNavigationController.m in Sources */,
 				21C0546C1DC765800094C7B1 /* GradientTabBarController.m in Sources */,
 				C6F600C71D9C363C0095AE21 /* NSDate+ISO8601Parsing.m in Sources */,
+				21D838441DD4B47F00A98E0F /* SOAPResetIncDone.m in Sources */,
 				C66723891DA91614001B30AC /* SOAPWares.m in Sources */,
 				215EFF091DAB9ED600BE11C5 /* SearchTableViewCell.m in Sources */,
 				B9F5F0B61D0057710010E1EA /* DiscountInformation.m in Sources */,

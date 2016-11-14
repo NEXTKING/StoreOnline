@@ -20,7 +20,7 @@ typedef enum : NSUInteger
 
 @property (nonatomic, assign) NSInteger taskID;
 @property (nonatomic, copy) NSString *name;
-@property (nonatomic, assign) NSString *userID;
+@property (nonatomic, copy) NSString *userID;
 @property (nonatomic, assign) NSInteger status;
 @property (nonatomic, assign) NSInteger totalPrintedCount;
 @property (nonatomic, copy) NSDate *startDate;
