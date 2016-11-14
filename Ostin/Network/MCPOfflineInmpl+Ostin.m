@@ -366,6 +366,7 @@
         setTaskDone.taskType = @"pasting";
         setTaskDone.authValue = authValue;
         setTaskDone.deviceID  = deviceID;
+        setTaskDone.userID = userID;
         
         NSBlockOperation* delegateCallOperation = [NSBlockOperation blockOperationWithBlock:^{
             
@@ -395,7 +396,9 @@
                         [moc save:&error];
                     }];
                 
-                completion(error != nil, nil);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(YES, nil);
+                });
             }
         }];
         
