@@ -32,13 +32,13 @@
     NSString* addSize   =    [self paramFromItem:item name:@"additionalSize"];
     NSString* addInfo   =    [self paramFromItem:item name:@"additionalInfo"];
     NSString* userID    =    @"300";
-    NSString* shopID    =    @"123";
+    NSString* shopID    =    [self paramFromItem:item name:@"storeNumber"];
     NSString* drop      =    @"";
     NSString* boxType   =    [self paramFromItem:item name:@"boxType"];
     NSString* discountNum  =    [self paramFromItem:item name:@"discount"];
     NSString* discount = (discountNum.integerValue > 0) ? [NSString stringWithFormat:@"Скидка %@%%", discountNum]:@"";
     NSString* retailPrice   = [self paramFromItem:item name:@"retailPrice"];
-    NSString* barcode       = [BarcodeFormatter generateCode128WithShopID:@"01234" code:item.barcode price:MIN(item.price, [retailPrice doubleValue])];
+    NSString* barcode       = [BarcodeFormatter generateCode128WithShopID:(shopID?shopID:@"000") code:item.barcode price:MIN(item.price, [retailPrice doubleValue])];
     
     NSString* catalogPrice = @"";
     if (discountNum.integerValue > 0)
