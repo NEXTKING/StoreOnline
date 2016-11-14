@@ -14,7 +14,7 @@
 - (void) main
 {
     
-    _incValue = @"ware_price";
+    self.incValue = @"ware_price";
     [super main];
     
 }

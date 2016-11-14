@@ -13,7 +13,7 @@
 
 - (void) main
 {
-    _incValue = @"user";
+    self.incValue = @"user";
     [super main];
     
 }

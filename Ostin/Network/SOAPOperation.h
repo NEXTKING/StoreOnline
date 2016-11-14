@@ -15,7 +15,6 @@
 @protected
     NSInteger numberOfPortions;
     NSInteger currentPortionID;
-    NSString *_incValue;
 }
 
 @property (nonatomic, strong) CoreDataController* dataController;
@@ -23,9 +22,12 @@
 @property (nonatomic, copy) NSString* deviceID;
 @property (nonatomic, assign) BOOL success;
 @property (nonatomic, strong) NSManagedObjectContext* privateContext;
+@property (nonatomic, copy) NSString* incValue;
+@property (nonatomic, copy) NSString* coreDataId;
 
 - (NSArray*) downloadItems;
-- (BOOL) saveItems: (NSArray*) items;
+- (NSManagedObject*) findObject:(NSArray*) csv;
+- (void) updateObject:(NSManagedObject*) obj csv:(NSArray*) csv;
 
 - (NSInteger) getPortions:(NSString*) code;
 - (BOOL) commitPortion:(NSString*) incCode portionID:(NSNumber*) portion;

@@ -13,7 +13,7 @@
 
 - (void) main
 {
-    _incValue = @"pasting_task";
+    self.incValue = @"pasting_task";
     [super main];
 }
 

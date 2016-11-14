@@ -13,7 +13,7 @@
 
 - (void) main
 {
-    _incValue = @"pasting_wares";
+    self.incValue = @"pasting_wares";
     [super main];
 }
 

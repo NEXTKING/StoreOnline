@@ -14,7 +14,7 @@
 - (void) main
 {
     
-    _incValue = @"ware_barcode";
+    self.incValue = @"ware_barcode";
     [super main];
     
 }
