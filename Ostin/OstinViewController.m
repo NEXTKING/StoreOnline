@@ -34,7 +34,7 @@
     _immediateSwitch.on = ([defaults valueForKey:@"PrintImmediatly"] != nil);
     _additionalLabelSwitch.on = [defaults boolForKey:@"PrintAdditionalLabel"];
     
-    [[NSUserDefaults standardUserDefaults] setValue:@"00190EA20DAA" forKey:@"PrinterID"];
+    //[[NSUserDefaults standardUserDefaults] setValue:@"00190EA20DAA" forKey:@"PrinterID"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     //[self barcodeData:@"990023247349" type:BAR_UPC];
@@ -73,12 +73,19 @@
 
 - (void) printButtonAction:(id)sender
 {
-    NSString *str = [[NSBundle mainBundle] pathForResource:@"label" ofType:@"zpl"];
-    NSString *addStr = [[NSBundle mainBundle] pathForResource:@"producer_label" ofType:@"zpl"];
-    [[PrintServer instance] addItemToPrintQueue:self.currentItemInfo printFormat:str];
-    
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PrintAdditionalLabel"])
-        [[PrintServer instance] addItemToPrintQueue:self.currentItemInfo printFormat:addStr];
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"PrinterID"] != nil)
+    {
+        NSString *str = [[NSBundle mainBundle] pathForResource:@"label" ofType:@"zpl"];
+        NSString *addStr = [[NSBundle mainBundle] pathForResource:@"producer_label" ofType:@"zpl"];
+        [[PrintServer instance] addItemToPrintQueue:self.currentItemInfo printFormat:str];
+        
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PrintAdditionalLabel"])
+            [[PrintServer instance] addItemToPrintQueue:self.currentItemInfo printFormat:addStr];
+    }
+    else
+    {
+        [self showInfoMessage:@"Принтер не привязан"];
+    }
 }
 
 - (void)printerDidFinishPrinting
@@ -307,7 +314,7 @@
     bindingInProgress = YES;
     bindingAlert = [[UIAlertView alloc] initWithTitle:@"Привязка принтера" message:@"Отсканируйте или введите штрих-код принтера" delegate:self cancelButtonTitle:@"Отмена" otherButtonTitles:@"Оk", nil];
     bindingAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
-    [bindingAlert textFieldAtIndex:0].keyboardType = UIKeyboardTypeNumberPad;
+    [bindingAlert textFieldAtIndex:0].keyboardType = UIKeyboardTypeASCIICapable;
     bindingAlert.tag = 987;
     [bindingAlert show];
 }
