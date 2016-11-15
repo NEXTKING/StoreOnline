@@ -402,8 +402,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 {
     if ([[NSUserDefaults standardUserDefaults] valueForKey:@"PrinterID"] != nil)
     {
-        NSString *str=[[NSBundle mainBundle] pathForResource:@"label" ofType:@"zpl"];
-        [[PrintServer instance] addItemToPrintQueue:itemInfo printFormat:str];
+        [[PrintServer instance] addItemToPrintQueue:itemInfo printFormat:@"mainZPL"];
     }
     else
     {

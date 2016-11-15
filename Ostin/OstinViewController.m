@@ -75,12 +75,10 @@
 {
     if ([[NSUserDefaults standardUserDefaults] valueForKey:@"PrinterID"] != nil)
     {
-        NSString *str = [[NSBundle mainBundle] pathForResource:@"label" ofType:@"zpl"];
-        NSString *addStr = [[NSBundle mainBundle] pathForResource:@"producer_label" ofType:@"zpl"];
-        [[PrintServer instance] addItemToPrintQueue:self.currentItemInfo printFormat:str];
+        [[PrintServer instance] addItemToPrintQueue:self.currentItemInfo printFormat:@"mainZPL"];
         
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PrintAdditionalLabel"])
-            [[PrintServer instance] addItemToPrintQueue:self.currentItemInfo printFormat:addStr];
+            [[PrintServer instance] addItemToPrintQueue:self.currentItemInfo printFormat:@"additionalZPL"];
     }
     else
     {

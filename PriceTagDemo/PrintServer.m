@@ -67,7 +67,18 @@
             if ([format isKindOfClass:[NSString class]])
             {
                 // zpl
-                NSData *data = [ZPLGenerator generateZPLWithItem:item patternPath:format];
+                NSData *data = nil;
+                if ([format isEqualToString:@"mainZPL"])
+                {
+                    NSString *str = [[NSBundle mainBundle] pathForResource:@"label" ofType:@"zpl"];
+                    data = [ZPLGenerator generateZPLWithItem:item patternPath:str];
+                }
+                else if ([format isEqualToString:@"additionalZPL"])
+                {
+                    NSString *addStr = [[NSBundle mainBundle] pathForResource:@"producer_label" ofType:@"zpl"];
+                    data = [ZPLGenerator generateEanZPLWithItem:item patternPath:addStr];
+                }
+                
                 [_printVC printZPL:data copies:1];
             }
             else if ([format isKindOfClass:[UIView class]])
