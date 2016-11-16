@@ -134,7 +134,14 @@
 
 - (void)initializeControlQueueTimer
 {
-    _controlQueueTimer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(hidePrintView) userInfo:nil repeats:NO];
+    _controlQueueTimer = [NSTimer scheduledTimerWithTimeInterval:40 target:self selector:@selector(reset) userInfo:nil repeats:NO];
+}
+
+- (void)reset
+{
+    _isPrinting = NO;
+    [_queue removeAllObjects];
+    [self hidePrintView];
 }
 
 @end

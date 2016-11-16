@@ -35,6 +35,8 @@
 		21C0549D1DCB8A0A0094C7B1 /* PrintServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C0549B1DCB8A0A0094C7B1 /* PrintServer.m */; };
 		21D8381D1DD0A72800A98E0F /* SettingsViewController+Ostin.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D8381C1DD0A72800A98E0F /* SettingsViewController+Ostin.m */; };
 		21D838441DD4B47F00A98E0F /* SOAPResetIncDone.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D838431DD4B47F00A98E0F /* SOAPResetIncDone.m */; };
+		21D838471DDC57F800A98E0F /* AppSuspendingBlocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D838461DDC57F800A98E0F /* AppSuspendingBlocker.m */; };
+		21D838491DDC628B00A98E0F /* emptySound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 21D838481DDC628B00A98E0F /* emptySound.wav */; };
 		23325335A97CCCACC42944AF /* libPods-Ostin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD3C223CF10EB177C6448781 /* libPods-Ostin.a */; };
 		5BADECA800A6702C5F474BB5 /* libPods-PriceTagDemoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1E01A49F9DF7B4A12A7407 /* libPods-PriceTagDemoUITests.a */; };
 		71454865FBE26CAE4A38F59F /* libPods-DesondoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D44F91159F3A6CCEC7C0AEB /* libPods-DesondoTests.a */; };
@@ -597,6 +599,9 @@
 		21D8381C1DD0A72800A98E0F /* SettingsViewController+Ostin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SettingsViewController+Ostin.m"; sourceTree = "<group>"; };
 		21D838421DD4B47F00A98E0F /* SOAPResetIncDone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPResetIncDone.h; sourceTree = "<group>"; };
 		21D838431DD4B47F00A98E0F /* SOAPResetIncDone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPResetIncDone.m; sourceTree = "<group>"; };
+		21D838451DDC57F800A98E0F /* AppSuspendingBlocker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppSuspendingBlocker.h; path = Utilities/AppSuspendingBlocker.h; sourceTree = "<group>"; };
+		21D838461DDC57F800A98E0F /* AppSuspendingBlocker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppSuspendingBlocker.m; path = Utilities/AppSuspendingBlocker.m; sourceTree = "<group>"; };
+		21D838481DDC628B00A98E0F /* emptySound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = emptySound.wav; sourceTree = "<group>"; };
 		26E6677B3BC7955145425ED2 /* Pods-DesondoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesondoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DesondoTests/Pods-DesondoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		305BD8FF1EE07980B92BBA8D /* Pods-Tsum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tsum.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tsum/Pods-Tsum.debug.xcconfig"; sourceTree = "<group>"; };
 		3441ACD00F2A17AFBB7CD4CD /* Pods-PriceTagDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceTagDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PriceTagDemoTests/Pods-PriceTagDemoTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1196,6 +1201,8 @@
 			children = (
 				21B8DC791DB66CF900FD9161 /* BarcodeFormatter.h */,
 				21B8DC7A1DB66CF900FD9161 /* BarcodeFormatter.m */,
+				21D838451DDC57F800A98E0F /* AppSuspendingBlocker.h */,
+				21D838461DDC57F800A98E0F /* AppSuspendingBlocker.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1394,6 +1401,7 @@
 				B957B0D81D1C291B002A5256 /* OstinViewController.m */,
 				21D8381B1DD0A72800A98E0F /* SettingsViewController+Ostin.h */,
 				21D8381C1DD0A72800A98E0F /* SettingsViewController+Ostin.m */,
+				21D838481DDC628B00A98E0F /* emptySound.wav */,
 				B92DCE411C846002002AA184 /* OstinPriceTag.xib */,
 				B92DCE291C845E60002AA184 /* Info.plist */,
 				21C054441DBE20FB0094C7B1 /* Settings.bundle */,
@@ -2636,6 +2644,7 @@
 				C6979EAA1D9135AD00A0B51B /* tasks@2x.png in Resources */,
 				B957B1131D1C2A2D002A5256 /* MS4O9767M.jpg in Resources */,
 				B957B10B1D1C2A2D002A5256 /* 99002789530.jpg in Resources */,
+				21D838491DDC628B00A98E0F /* emptySound.wav in Resources */,
 				C6979EA91D9135AD00A0B51B /* search@2x.png in Resources */,
 				B92DCE281C845E60002AA184 /* LaunchScreen.storyboard in Resources */,
 				C6979EA81D9135AD00A0B51B /* relevance@2x.png in Resources */,
@@ -3336,6 +3345,7 @@
 				C6979E9A1D8FE6A800A0B51B /* LoginViewController.m in Sources */,
 				2182286A1DAFCB2A00F04B70 /* TaskItemInformation.m in Sources */,
 				21C054601DC355550094C7B1 /* User+CoreDataProperties.m in Sources */,
+				21D838471DDC57F800A98E0F /* AppSuspendingBlocker.m in Sources */,
 				B907ADDA1D095B8A00B44BF1 /* MelonViewController.m in Sources */,
 				C6F601AA1D9D1D800095AE21 /* ItemsModel.xcdatamodeld in Sources */,
 				B957B0D91D1C291B002A5256 /* OstinViewController.m in Sources */,

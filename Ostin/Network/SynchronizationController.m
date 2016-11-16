@@ -9,6 +9,7 @@
 #import "SynchronizationController.h"
 #import "MCPServer.h"
 #import "CoreDataController.h"
+#import "AppSuspendingBlocker.h"
 
 typedef enum SyncStages
 {
@@ -23,6 +24,7 @@ typedef enum SyncStages
 {
     NSInteger updateMask;
     NSProgress *_progress;
+    AppSuspendingBlocker *_suspendingBlocker;
 }
 @end
 
@@ -35,6 +37,9 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     _progress = [NSProgress progressWithTotalUnitCount:5];
     [_progress becomeCurrentWithPendingUnitCount:0];
     [_progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionNew context:ProgressObserverContext];
+    
+    _suspendingBlocker = [AppSuspendingBlocker new];
+    [_suspendingBlocker startBlock];
     
     [[MCPServer instance] itemDescription:self itemCode:nil shopCode:nil isoType:0];
     [[MCPServer instance] tasks:self userID:nil];
@@ -96,6 +101,7 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     
     if (allBitsAreSet)
     {
+        [_suspendingBlocker stopBlock];
         [_progress resignCurrent];
         [_delegate syncCompleteWithResult:0];
         [_progress removeObserver:self forKeyPath:@"fractionCompleted" context:ProgressObserverContext];
@@ -116,6 +122,7 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     }
     else
     {
+        [_suspendingBlocker stopBlock];
         [_delegate syncCompleteWithResult:result];
     }
 }
@@ -126,7 +133,11 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     {
         [self updateSyncStatus:SSTasks];
     }
-
+    else
+    {
+        [_suspendingBlocker stopBlock];
+        [_delegate syncCompleteWithResult:result];
+    }
 }
 
 - (void)userComplete:(int)result user:(id)user
@@ -134,6 +145,11 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     if (result == 0)
     {
         [self updateSyncStatus:SSUsers];
+    }
+    else
+    {
+        [_suspendingBlocker stopBlock];
+        [_delegate syncCompleteWithResult:result];
     }
 }
 
