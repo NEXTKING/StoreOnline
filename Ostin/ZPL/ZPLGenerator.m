@@ -31,8 +31,12 @@
     NSString* size      =    [self paramFromItem:item name:@"size"];
     NSString* addSize   =    [self paramFromItem:item name:@"additionalSize"];
     NSString* addInfo   =    [self paramFromItem:item name:@"additionalInfo"];
-    NSString* userID    =    @"300";
+    NSString* key_user  =    [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
+    NSString* userID    =    key_user.length > 4 ? [key_user substringToIndex:4] : key_user;
     NSString* shopID    =    [self paramFromItem:item name:@"storeNumber"];
+    if (shopID != nil && shopID.length > 4)
+        shopID = [shopID substringToIndex:4];
+    
     NSString* drop      =    [self paramFromItem:item name:@"drop"];
     NSString* boxType   =    [self paramFromItem:item name:@"boxType"];
     NSString* discountNum  =    [self paramFromItem:item name:@"discount"];
@@ -123,9 +127,9 @@
                                                    usedEncoding:&outEncoding
                                                           error:&error];
     NSString* size     =    [self paramFromItem:item name:@"size"];
-    NSString* ean      =    [self paramFromItem:item name:@"ean"];
+    NSString* ean = item.barcode ? [NSString stringWithFormat:@"09900%@%ld", item.barcode, [self calculateUPCCheckSum:item.barcode]] : @"000000000000";
     fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Ware.Code$" withString:item.article?item.article:@""];
-    fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Barcode_EAN13$" withString:ean?ean:@"000000000000"];
+    fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Barcode_EAN13$" withString:ean];
     fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Ware.SizeHeader$" withString:[NSString stringWithFormat:@"Размер:"]];
     fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Ware.SizeValue$" withString:size?size:@""];
     
