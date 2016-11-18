@@ -9,10 +9,12 @@
 #import "ReceivesListViewController.h"
 #import "ReceivesListCell.h"
 #import "ReceiveViewController.h"
+#import "MCPServer.h"
 
-@interface ReceivesListViewController ()
+@interface ReceivesListViewController () <AcceptanesDelegate>
 {
     NSArray *_items;
+    NSDateFormatter *_dateFormatter;
 }
 @end
 
@@ -24,7 +26,34 @@
     [self.tableView setBackgroundView:nil];
     [self.tableView setBackgroundColor:[UIColor whiteColor]];
     [self.tableView registerNib:[UINib nibWithNibName:@"ReceivesListCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
-    _items = @[@{@"date":@"8 ноября 2016, 16:30", @"isComplete": @(NO)}, @{@"date":@"8 ноября 2016, 12:30", @"isComplete": @(YES)}];
+    
+    _dateFormatter = [NSDateFormatter new];
+    _dateFormatter.dateFormat = @"d MMMM yyyy, hh:mm";
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self loadData];
+    
+}
+
+- (void)loadData
+{
+    [[MCPServer instance] acceptanes:self shopID:nil];
+}
+
+- (void)acceptanesComplete:(int)result items:(NSArray<NSDate*>*)items
+{
+    if (result == 0)
+    {
+        _items = items;
+        [self.tableView reloadData];
+    }
+    else
+    {
+        
+    }
 }
 
 #pragma mark - Table view data source
@@ -43,10 +72,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ReceivesListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    NSDictionary *item = _items[indexPath.row];
+    NSDate *date = _items[indexPath.row];
     
-    cell.titleLabel.text = item[@"date"];
-    cell.backgroundColor = [item[@"isComplete"] boolValue] ? [UIColor colorWithRed:126/255.0 green:211/255.0 blue:33/255.0 alpha:0.5] : [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:0.3];
+    cell.titleLabel.text = [_dateFormatter stringFromDate:date];
     
     return cell;
 }
@@ -61,11 +89,9 @@
     if ([segue.identifier isEqualToString:@"receiveRootSegue"])
     {
         NSIndexPath *indexPath = sender;
-        NSDictionary *item = _items[indexPath.row];
         
         ReceiveViewController *dvc = segue.destinationViewController;
-        dvc.isRootController = YES;
-        dvc.item = [NSString stringWithFormat:@"Приёмка %@", item[@"date"]];
+        dvc.date = _items[indexPath.row];
     }
 }
 

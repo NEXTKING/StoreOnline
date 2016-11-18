@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AcceptanesInformation.h"
 
 @interface ReceiveViewController : UIViewController
-@property (nonatomic, assign) BOOL isRootController;
-@property (nonatomic, strong) id item;
+@property (nonatomic, strong) AcceptanesInformation *rootItem;
+@property (nonatomic, strong) NSDate *date;
 @end

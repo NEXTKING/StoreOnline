@@ -257,6 +257,9 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <state key="normal" title="Отметить все без сканирования"/>
+                                                <connections>
+                                                    <action selector="acceptAllButtonPressed:" destination="d5e-eo-QCu" eventType="touchUpInside" id="UXc-cv-G3B"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -291,7 +294,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomView" destination="6fJ-Q9-q1p" id="gD0-eg-2oD"/>
                         <outlet property="tableView" destination="ClS-cB-Ght" id="dHL-UQ-KjD"/>
+                        <outlet property="totalQuantityLabel" destination="VZz-8N-QEB" id="n5D-zH-UyN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Igj-4d-ywE" userLabel="First Responder" sceneMemberID="firstResponder"/>
