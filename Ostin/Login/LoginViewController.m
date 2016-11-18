@@ -24,11 +24,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    dtdev = [DTDevices sharedDevice];
-    [dtdev addDelegate:self];
-    [dtdev connect];
-    
+
     _loginTextField.delegate = self;
     _loginTextField.returnKeyType = UIReturnKeyNext;
     _passwordTextField.delegate = self;
@@ -37,15 +33,28 @@
     _progressLabel.hidden = YES;
 }
 
-- (void) barcodeData:(NSString *)barcode type:(int)type
+#pragma mark Notifications
+
+- (void)subscribeToScanNotifications
 {
-    [[MCPServer instance] user:self barcode:barcode];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveScanNotification:) name:@"BarcodeScanNotification" object:nil];
 }
 
-- (void) barcodeData:(NSString *)barcode isotype:(NSString *)isotype
+- (void)unsubscribeFromScanNotifications
 {
-    [[MCPServer instance] user:self barcode:barcode];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"BarcodeScanNotification" object:nil];
 }
+
+- (void)didReceiveScanNotification:(NSNotification *)notification
+{
+    NSString *barcode = notification.object[@"barcode"];
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [[MCPServer instance] user:self barcode:barcode];
+    });
+}
+
+#pragma mark -
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -127,7 +136,7 @@
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBarHidden = NO;
-    [dtdev addDelegate:self];
+    [self subscribeToScanNotifications];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -135,7 +144,7 @@
     [super viewWillDisappear:animated];
     
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
-    [dtdev removeDelegate:self];
+    [self unsubscribeFromScanNotifications];
 }
 
 - (void)syncProgressChanged:(double)progress
