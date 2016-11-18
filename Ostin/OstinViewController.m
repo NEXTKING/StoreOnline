@@ -108,7 +108,19 @@
     UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Отправить" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         
         NSString *text = alert.textFields[0].text;
-        text.length > 10 ? [wself requestItemInfoWithCode:text isoType:0] : [wself requestItemInfoWithArticle:text];
+        NSCharacterSet *nonNumbers = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+        NSRange r = [text rangeOfCharacterFromSet: nonNumbers];
+        BOOL isAllDigit = r.location == NSNotFound && text.length > 0;
+        
+        if (isAllDigit && text.length > 10)
+        {
+            if ([text hasPrefix:@"09900"])
+                text = [text substringFromIndex:1];
+            NSString *code = [BarcodeFormatter normalizedBarcodeFromString:text isoType:BAR_UPC];
+            [wself requestItemInfoWithCode:code isoType:BAR_UPC];
+        }
+        else
+            [wself requestItemInfoWithArticle:text];
     }];
     
     [alert addTextFieldWithConfigurationHandler:^(UITextField* textField) {}];
