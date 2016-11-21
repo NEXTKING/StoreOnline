@@ -9,11 +9,6 @@
         <attribute name="groupID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="groupTitle" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Image" representedClassName="Image" syncable="YES">
-        <attribute name="fileID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="filename" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="itemID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-    </entity>
     <entity name="Item" representedClassName=".Item" syncable="YES">
         <attribute name="additionalInfo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="additionalSize" optional="YES" attributeType="String" syncable="YES"/>
@@ -37,6 +32,11 @@
         <attribute name="storeNumber" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="subgroupID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="trademarkID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="ItemPrintFact" representedClassName="ItemPrintFact" syncable="YES">
+        <attribute name="itemCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="taskName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="wasUploaded" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <entity name="Price" representedClassName="Price" syncable="YES">
         <attribute name="catalogPrice" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
@@ -63,7 +63,6 @@
         <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="scanned" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="taskID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="wasUploaded" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="barcode" optional="YES" attributeType="String" syncable="YES"/>
@@ -75,12 +74,12 @@
     <elements>
         <element name="Barcode" positionX="-47" positionY="-63" width="128" height="90"/>
         <element name="Group" positionX="-108" positionY="-72" width="128" height="75"/>
-        <element name="Image" positionX="-126" positionY="-90" width="128" height="90"/>
         <element name="Item" positionX="-207" positionY="-238" width="128" height="375"/>
         <element name="Price" positionX="-207" positionY="125" width="128" height="120"/>
         <element name="Subgroup" positionX="-99" positionY="-63" width="128" height="75"/>
         <element name="Task" positionX="-45" positionY="54" width="128" height="150"/>
-        <element name="TaskItemBinding" positionX="-47" positionY="216" width="128" height="120"/>
+        <element name="TaskItemBinding" positionX="-47" positionY="216" width="128" height="105"/>
         <element name="User" positionX="-90" positionY="-54" width="128" height="120"/>
+        <element name="ItemPrintFact" positionX="-117" positionY="-81" width="128" height="90"/>
     </elements>
 </model>

@@ -1,8 +1,8 @@
 //
-//  Image+CoreDataClass.h
+//  ItemPrintFact+CoreDataClass.h
 //  PriceTagDemo
 //
-//  Created by Evgeny Seliverstov on 27/10/2016.
+//  Created by Evgeny Seliverstov on 21/11/2016.
 //  Copyright © 2016 Dataphone. All rights reserved.
 //
 
@@ -11,10 +11,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Image : NSManagedObject
+@interface ItemPrintFact : NSManagedObject
 
 @end
 
 NS_ASSUME_NONNULL_END
 
-#import "Image+CoreDataProperties.h"
+#import "ItemPrintFact+CoreDataProperties.h"

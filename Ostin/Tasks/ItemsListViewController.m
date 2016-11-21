@@ -199,6 +199,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     {
         taskItemInfo.scanned += 1;
         [[MCPServer instance] saveTaskItem:nil taskID:_task.taskID itemID:taskItemInfo.itemID scanned:taskItemInfo.scanned];
+        [[MCPServer instance] savePrintItemFactForItemCode:item.article taskName:_task.name];
         
         NSUInteger index = [_items indexOfObject:[self itemInfoForTaskItemWithID:taskItemInfo.itemID]];
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];

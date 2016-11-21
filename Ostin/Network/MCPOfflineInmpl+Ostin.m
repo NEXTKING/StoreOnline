@@ -19,7 +19,7 @@
 #import "Task+CoreDataClass.h"
 #import "TaskItemBinding+CoreDataClass.h"
 #import "User+CoreDataClass.h"
-#import "Image+CoreDataClass.h"
+#import "ItemPrintFact+CoreDataClass.h"
 #import "Group+CoreDataClass.h"
 #import "Subgroup+CoreDataClass.h"
 #import "SOAPWares.h"
@@ -343,24 +343,13 @@
     }
     else if (status == TaskInformationStatusComplete && taskDB.endDate == nil)
     {
-        NSFetchRequest *taskItemRequest = [NSFetchRequest fetchRequestWithEntityName:@"TaskItemBinding"];
-        [taskItemRequest setPredicate:[NSPredicate predicateWithFormat:@"taskID == %ld AND wasUploaded == %@", taskDB.taskID.integerValue, @(NO)]];
+        NSFetchRequest *taskItemRequest = [NSFetchRequest fetchRequestWithEntityName:@"ItemPrintFact"];
+        [taskItemRequest setPredicate:[NSPredicate predicateWithFormat:@"taskName == %@ AND wasUploaded == %@", taskDB.name, @NO]];
         NSArray *results = [moc executeFetchRequest:taskItemRequest error:nil];
-        NSArray *scannedResults = [results filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"scanned > 0"]];
         
         NSMutableArray *wareCodes = [[NSMutableArray alloc] init];
-        for (TaskItemBinding *taskItemDB in scannedResults)
-        {
-            NSFetchRequest *itemRequest = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
-            [itemRequest setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", taskItemDB.itemID.integerValue]];
-            NSArray *itemResults = [moc executeFetchRequest:itemRequest error:nil];
-            if (itemResults.count > 0)
-            {
-                Item *item = itemResults[0];
-                for (int i = 0; i<taskItemDB.scanned.integerValue; i++)
-                    [wareCodes addObject:item.itemCode];
-            }
-        }
+        for (ItemPrintFact *itemPrintFactDB in results)
+            [wareCodes addObject:itemPrintFactDB.itemCode];
         
         __block NSOperationQueue *setTaskDoneQueue = [NSOperationQueue new];
         setTaskDoneQueue.name = @"setTaskDoneQueue";
@@ -383,13 +372,12 @@
                 NSManagedObjectContext *privateMoc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
                 [privateMoc setParentContext:moc];
                 
-                NSFetchRequest *taskItemRequest = [NSFetchRequest fetchRequestWithEntityName:@"TaskItemBinding"];
-                [taskItemRequest setPredicate:[NSPredicate predicateWithFormat:@"taskID == %ld AND wasUploaded == %@", taskID, @(NO)]];
+                NSFetchRequest *taskItemRequest = [NSFetchRequest fetchRequestWithEntityName:@"ItemPrintFact"];
+                [taskItemRequest setPredicate:[NSPredicate predicateWithFormat:@"taskName == %@ AND wasUploaded == %@", taskDB.name, @NO]];
                 NSArray *results = [privateMoc executeFetchRequest:taskItemRequest error:nil];
-                NSArray *scannedResults = [results filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"scanned > 0"]];
                 
-                for (TaskItemBinding *taskItemDB in scannedResults)
-                    taskItemDB.wasUploaded = @(YES);
+                for (ItemPrintFact *itemPrintFactDB in results)
+                    itemPrintFactDB.wasUploaded = @YES;
                 
                 __block NSError *error = nil;
                 
@@ -534,6 +522,18 @@
         taskItemDB.scanned = [NSNumber numberWithInteger:scanned];
         [moc save:nil];
     }
+}
+
+- (void) savePrintItemFactForItemCode:(NSString *)itemCode taskName:(NSString *)taskName
+{
+    NSManagedObjectContext *moc = self.dataController.managedObjectContext;
+    
+    ItemPrintFact *itemPrintFactDB = [NSEntityDescription insertNewObjectForEntityForName:@"ItemPrintFact" inManagedObjectContext:moc];
+    
+    itemPrintFactDB.taskName = taskName;
+    itemPrintFactDB.itemCode = itemCode;
+    itemPrintFactDB.wasUploaded = @NO;
+    [moc save:nil];
 }
 
 - (void) savePrintItemsCount:(NSInteger)count inTaskWithID:(NSInteger)taskID
