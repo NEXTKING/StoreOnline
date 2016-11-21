@@ -105,10 +105,12 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
         else if (_task.status == TaskInformationStatusInProgress)
         {
             [self subscribeToScanNotifications];
+            [self subscribeToPrinterNotifications];
         }
         else if (_task.status == TaskInformationStatusComplete)
         {
             [self unsubscribeFromScanNotifications];
+            [self unsubscribeFromPrinterNotifications];
         }
     }
 }
@@ -148,15 +150,33 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     });
 }
 
+- (void)showInfoAlertWithMessage:(NSString*)message
+{
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+    [ac addAction:cancelAction];
+    [self presentViewController:ac animated:YES completion:nil];
+}
+
 #pragma mark Notifications
 
 - (void)subscribeToScanNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveScanNotification:) name:@"BarcodeScanNotification" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveFinishPrintNotification:) name:@"PrinterDidFinishPrinting" object:nil];
 }
 
 - (void)unsubscribeFromScanNotifications
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"BarcodeScanNotification" object:nil];
+}
+
+- (void)subscribeToPrinterNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveFinishPrintNotification:) name:@"PrinterDidFinishPrinting" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveFailPrintNotification:) name:@"PrinterDidFailPrinting" object:nil];
+}
+
+- (void)unsubscribeFromPrinterNotifications
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"BarcodeScanNotification" object:nil];
 }
@@ -184,6 +204,11 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
     [self updateOverlayInfo];
+}
+
+- (void)didReceiveFailPrintNotification:(NSNotification *)notification
+{
+    
 }
 
 #pragma mark - Table view data source
@@ -392,7 +417,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
             }
             else if (errorMessage != nil)
             {
-                [wself showAlertWithMessage:errorMessage];
+                [wself showInfoAlertWithMessage:errorMessage];
             }
         }];
     }
@@ -403,6 +428,9 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     if ([[NSUserDefaults standardUserDefaults] valueForKey:@"PrinterID"] != nil)
     {
         [[PrintServer instance] addItemToPrintQueue:itemInfo printFormat:@"mainZPL"];
+        
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PrintAdditionalLabel"])
+            [[PrintServer instance] addItemToPrintQueue:itemInfo printFormat:@"additionalZPL"];
     }
     else
     {

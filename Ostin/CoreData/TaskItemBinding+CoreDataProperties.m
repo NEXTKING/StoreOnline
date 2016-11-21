@@ -18,5 +18,6 @@
 @dynamic quantity;
 @dynamic itemID;
 @dynamic scanned;
+@dynamic wasUploaded;
 
 @end

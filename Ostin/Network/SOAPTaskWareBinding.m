@@ -61,6 +61,7 @@
     taskDB.taskID = @([csv[2] integerValue]);
     taskDB.itemID = @([csv[3] integerValue]);
     taskDB.quantity = @([csv[4] integerValue]);
+    taskDB.wasUploaded = @(NO);
 }
 
 - (NSManagedObject*) findObject:(NSArray *)csv

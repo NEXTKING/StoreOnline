@@ -30,12 +30,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    _immediateSwitch.on = ([defaults valueForKey:@"PrintImmediatly"] != nil);
-    _additionalLabelSwitch.on = [defaults boolForKey:@"PrintAdditionalLabel"];
-    
+
     //[[NSUserDefaults standardUserDefaults] setValue:@"00190EA20DAA" forKey:@"PrinterID"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
     
     //[self barcodeData:@"990023247349" type:BAR_UPC];
     //[self barcodeData:@"990025324185" type:BAR_UPC];
@@ -47,9 +43,12 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    if (!_externalBarcode)
+        [super viewWillAppear:animated];
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    _immediateSwitch.on = ([defaults valueForKey:@"PrintImmediatly"] != nil);
+    _additionalLabelSwitch.on = [defaults boolForKey:@"PrintAdditionalLabel"];
     
     if ([defaults valueForKey:@"LastBarcode"] && !_externalBarcode && !self.currentItemInfo)
     {
@@ -62,6 +61,12 @@
     {
         [self updateItemInfo:self.currentItemInfo];
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    if (!_externalBarcode)
+        [super viewWillDisappear:animated];
 }
 
 - (IBAction)additionalLabelSwitchDidChanged:(id)sender

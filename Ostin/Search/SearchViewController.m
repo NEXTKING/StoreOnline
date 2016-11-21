@@ -187,7 +187,6 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
 
         ostinVC.currentItemInfo = itemInfo;
         ostinVC.externalBarcode = itemInfo.barcode;
-        [ZPLGenerator generateZPLWithItem:itemInfo patternPath:nil];
     }
 }
 

@@ -127,9 +127,10 @@
                                                    usedEncoding:&outEncoding
                                                           error:&error];
     NSString* size     =    [self paramFromItem:item name:@"size"];
-    NSString* ean = item.barcode ? [NSString stringWithFormat:@"09900%@%ld", item.barcode, [self calculateUPCCheckSum:item.barcode]] : @"000000000000";
+    NSString* barcode = [NSString stringWithFormat:@"09900%@", item.barcode];
+    NSString* upc = [NSString stringWithFormat:@"%@%ld", barcode, [self calculateUPCCheckSum:barcode]];
     fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Ware.Code$" withString:item.article?item.article:@""];
-    fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Barcode_EAN13$" withString:ean];
+    fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Barcode_EAN13$" withString:upc];
     fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Ware.SizeHeader$" withString:[NSString stringWithFormat:@"Размер:"]];
     fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Ware.SizeValue$" withString:size?size:@""];
     

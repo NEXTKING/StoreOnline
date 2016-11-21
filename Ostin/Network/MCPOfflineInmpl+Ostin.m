@@ -121,44 +121,51 @@
 {
     if (login != nil && password != nil)
     {
-        NSString* (^hash)(NSString *) = ^(NSString *string) {
-            
-            NSUInteger len = [string length];
-            unichar buffer[len+1];
-            
-            [string getCharacters:buffer range:NSMakeRange(0, len)];
-            NSMutableData *data = [NSMutableData new];
-            for (int i = 0; i < len; i++)
-                [data appendBytes:&buffer[i] length:sizeof(unichar)];
+         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+             
+            NSString* (^hash)(NSString *) = ^(NSString *string) {
+                
+                NSUInteger len = [string length];
+                unichar buffer[len+1];
+                
+                [string getCharacters:buffer range:NSMakeRange(0, len)];
+                NSMutableData *data = [NSMutableData new];
+                for (int i = 0; i < len; i++)
+                    [data appendBytes:&buffer[i] length:sizeof(unichar)];
 
-            unsigned char result[CC_MD5_DIGEST_LENGTH];
-            CC_MD5(data.bytes, (CC_LONG)data.length, result);
-            NSMutableString *hash = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH*2];
-            for (int i = 0; i<CC_MD5_DIGEST_LENGTH; i++)
-                [hash appendFormat:@"%02x",result[i]];
+                unsigned char result[CC_MD5_DIGEST_LENGTH];
+                CC_MD5(data.bytes, (CC_LONG)data.length, result);
+                NSMutableString *hash = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH*2];
+                for (int i = 0; i<CC_MD5_DIGEST_LENGTH; i++)
+                    [hash appendFormat:@"%02x",result[i]];
+                
+                return hash;
+            };
             
-            return hash;
-        };
-        
-        NSManagedObjectContext *moc = self.dataController.managedObjectContext;
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
-        [request setPredicate:[NSPredicate predicateWithFormat:@"login ==[c] %@ AND password ==[c] %@", login, hash(password)]];
-        NSArray *results = [moc executeFetchRequest:request error:nil];
-        if (results.count < 1)
-        {
-            [delegate userComplete:1 user:nil];
-            return;
-        }
-        User *userDB = results[0];
-        
-        UserInformation *userInfo = [UserInformation new];
-        userInfo.key_user = userDB.key_user;
-        userInfo.barcode = userDB.barcode;
-        userInfo.login = userDB.login;
-        userInfo.password = userDB.password;
-        userInfo.name = userDB.name;
-        
-        [delegate userComplete:0 user:userInfo];
+            NSManagedObjectContext *moc = self.dataController.managedObjectContext;
+            NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
+            [request setPredicate:[NSPredicate predicateWithFormat:@"login ==[c] %@ AND password ==[c] %@", login, hash(password)]];
+            NSArray *results = [moc executeFetchRequest:request error:nil];
+            if (results.count < 1)
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [delegate userComplete:1 user:nil];
+                });
+                return;
+            }
+            User *userDB = results[0];
+            
+            UserInformation *userInfo = [UserInformation new];
+            userInfo.key_user = userDB.key_user;
+            userInfo.barcode = userDB.barcode;
+            userInfo.login = userDB.login;
+            userInfo.password = userDB.password;
+            userInfo.name = userDB.name;
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [delegate userComplete:0 user:userInfo];
+            });
+        });
     }
     else
     {
@@ -195,26 +202,33 @@
 
 - (void) user:(id<UserDelegate>)delegate barcode:(NSString *)barcode
 {
-    NSManagedObjectContext *moc = self.dataController.managedObjectContext;
-    
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"barcode == %@", barcode]];
-    NSArray *results = [moc executeFetchRequest:request error:nil];
-    if (results.count < 1)
-    {
-        [delegate userComplete:1 user:nil];
-        return;
-    }
-    User *userDB = results[0];
-    
-    UserInformation *userInfo = [UserInformation new];
-    userInfo.key_user = userDB.key_user;
-    userInfo.barcode = userDB.barcode;
-    userInfo.login = userDB.login;
-    userInfo.password = userDB.password;
-    userInfo.name = userDB.name;
-    
-    [delegate userComplete:0 user:userInfo];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+
+        NSManagedObjectContext *moc = self.dataController.managedObjectContext;
+        
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"barcode == %@", barcode]];
+        NSArray *results = [moc executeFetchRequest:request error:nil];
+        if (results.count < 1)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [delegate userComplete:1 user:nil];
+            });
+            return;
+        }
+        User *userDB = results[0];
+        
+        UserInformation *userInfo = [UserInformation new];
+        userInfo.key_user = userDB.key_user;
+        userInfo.barcode = userDB.barcode;
+        userInfo.login = userDB.login;
+        userInfo.password = userDB.password;
+        userInfo.name = userDB.name;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [delegate userComplete:0 user:userInfo];
+        });
+    });
 }
 
 - (void) tasks:(id<TasksDelegate>)delegate userID:(NSString *)userID
@@ -330,7 +344,7 @@
     else if (status == TaskInformationStatusComplete && taskDB.endDate == nil)
     {
         NSFetchRequest *taskItemRequest = [NSFetchRequest fetchRequestWithEntityName:@"TaskItemBinding"];
-        [taskItemRequest setPredicate:[NSPredicate predicateWithFormat:@"taskID == %ld", taskDB.taskID.integerValue]];
+        [taskItemRequest setPredicate:[NSPredicate predicateWithFormat:@"taskID == %ld AND wasUploaded == %@", taskDB.taskID.integerValue, @(NO)]];
         NSArray *results = [moc executeFetchRequest:taskItemRequest error:nil];
         NSArray *scannedResults = [results filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"scanned > 0"]];
         
@@ -348,9 +362,9 @@
             }
         }
         
-        NSOperationQueue *setTaskDoneQueue = [NSOperationQueue new];
+        __block NSOperationQueue *setTaskDoneQueue = [NSOperationQueue new];
         setTaskDoneQueue.name = @"setTaskDoneQueue";
-        
+
         SOAPSavePrintFact *savePrintFact = [SOAPSavePrintFact new];
         __weak SOAPSavePrintFact *_savePrintFact = savePrintFact;
         savePrintFact.taskName = taskDB.name;
@@ -360,6 +374,40 @@
         savePrintFact.deviceID  = deviceID;
         savePrintFact.userID = userID;
         
+        __block BOOL savePrintFactLocalSuccess = NO;
+        
+        NSBlockOperation *savePrintFactLocal = [NSBlockOperation blockOperationWithBlock:^{
+            
+            if (_savePrintFact.success)
+            {
+                NSManagedObjectContext *privateMoc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+                [privateMoc setParentContext:moc];
+                
+                NSFetchRequest *taskItemRequest = [NSFetchRequest fetchRequestWithEntityName:@"TaskItemBinding"];
+                [taskItemRequest setPredicate:[NSPredicate predicateWithFormat:@"taskID == %ld AND wasUploaded == %@", taskID, @(NO)]];
+                NSArray *results = [privateMoc executeFetchRequest:taskItemRequest error:nil];
+                NSArray *scannedResults = [results filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"scanned > 0"]];
+                
+                for (TaskItemBinding *taskItemDB in scannedResults)
+                    taskItemDB.wasUploaded = @(YES);
+                
+                __block NSError *error = nil;
+                
+                [privateMoc performBlockAndWait:^{
+                    [privateMoc save:&error];
+                }];
+                
+                if (!error)
+                {
+                    [moc performBlockAndWait:^{
+                        [moc save:&error];
+                    }];
+                    
+                    savePrintFactLocalSuccess = YES;
+                }
+            }
+        }];
+        
         SOAPSetTaskDone *setTaskDone = [SOAPSetTaskDone new];
         __weak SOAPSetTaskDone *_setTaskDone = setTaskDone;
         setTaskDone.taskName = taskDB.name;
@@ -368,44 +416,101 @@
         setTaskDone.deviceID  = deviceID;
         setTaskDone.userID = userID;
         
-        NSBlockOperation* delegateCallOperation = [NSBlockOperation blockOperationWithBlock:^{
+        __block BOOL setTaskDoneLocalSuccess = NO;
+        
+        NSBlockOperation* setTaskDoneLocal = [NSBlockOperation blockOperationWithBlock:^{
             
-            NSManagedObjectContext *privateManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-            [privateManagedObjectContext setParentContext:moc];
-            Task *_taskDB = [privateManagedObjectContext objectWithID:taskDB.objectID];
-            
-            if (!_savePrintFact.success)
+            if (_setTaskDone.success)
             {
-                completion(NO, _savePrintFact.errorMessage);
-            }
-            else if (!_setTaskDone.success)
-            {
-                completion(NO, _setTaskDone.errorMessage);
-            }
-            else
-            {
-                __block NSError *error = nil;
+                NSManagedObjectContext *privateMoc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+                [privateMoc setParentContext:moc];
+                Task *_taskDB = [privateMoc objectWithID:taskDB.objectID];
                 
                 _taskDB.endDate = date;
-                [privateManagedObjectContext performBlockAndWait:^{
-                    [privateManagedObjectContext save:&error];
+                [privateMoc performBlockAndWait:^{
+                    [privateMoc save:nil];
+                }];
+
+                [moc performBlockAndWait:^{
+                    [moc save:nil];
                 }];
                 
-                if (!error)
-                    [moc performBlockAndWait:^{
-                        [moc save:&error];
-                    }];
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    completion(YES, nil);
-                });
+                setTaskDoneLocalSuccess = YES;
             }
         }];
         
-        [setTaskDone addDependency:savePrintFact];
-        [delegateCallOperation addDependency:setTaskDone];
-        [setTaskDoneQueue addOperations:@[savePrintFact, setTaskDone] waitUntilFinished:NO];
-        [[NSOperationQueue mainQueue] addOperation:delegateCallOperation];
+        // if wareCodes > 0
+        // [save print fact]->[save to core data]->[set task done]->[save to core data]->(completion)
+        
+        // if wareCodes = 0
+        // [set task done]->[save to core data]->(completion)
+        
+        if (wareCodes.count > 0)
+        {
+            [savePrintFactLocal addDependency:savePrintFact];
+            
+            NSBlockOperation *controlOperation = [NSBlockOperation blockOperationWithBlock:^{
+                
+                if (savePrintFactLocalSuccess)
+                {
+                    NSBlockOperation *delegateOperation = [NSBlockOperation blockOperationWithBlock:^{
+                        
+                        if (_setTaskDone.success && setTaskDoneLocal)
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                completion(YES, nil);
+                            });
+                        else
+                        {
+                            NSString *msg = [NSString stringWithString:_setTaskDone.errorMessage];
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                completion(NO, msg);
+                            });
+                        }
+                    }];
+                    
+                    [setTaskDoneLocal addDependency:setTaskDone];
+                    [setTaskDoneQueue addOperations:@[setTaskDone, setTaskDoneLocal] waitUntilFinished:NO];
+                    
+                    [delegateOperation addDependency:setTaskDoneLocal];
+                    [[NSOperationQueue mainQueue] addOperation:delegateOperation];
+                }
+                else
+                {
+                    NSString *msg = [NSString stringWithString:_savePrintFact.errorMessage];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        completion(NO, msg);
+                    });
+                }
+            }];
+            
+            [controlOperation addDependency:savePrintFactLocal];
+            [setTaskDoneQueue addOperations:@[savePrintFact, savePrintFactLocal] waitUntilFinished:NO];
+            [[NSOperationQueue mainQueue] addOperation:controlOperation];
+        }
+        else
+        {
+            
+            NSBlockOperation *delegateOperation = [NSBlockOperation blockOperationWithBlock:^{
+                
+                    if (_setTaskDone.success && setTaskDoneLocal)
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            completion(YES, nil);
+                        });
+                    else
+                    {
+                        NSString *msg = [NSString stringWithString:_setTaskDone.errorMessage];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            completion(NO, msg);
+                        });
+                    }
+            }];
+            
+            [setTaskDoneLocal addDependency:setTaskDone];
+            [delegateOperation addDependency:setTaskDoneLocal];
+            [setTaskDoneQueue addOperations:@[setTaskDone, setTaskDoneLocal] waitUntilFinished:NO];
+            
+            [[NSOperationQueue mainQueue] addOperation:delegateOperation];
+        }
     }
     else
         completion(NO, nil);
@@ -898,7 +1003,9 @@
         
         if (results.count < 1)
         {
-            completion(NO, nil);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(NO, nil);
+            });
             return;
         }
         Barcode *barcodeDB = results[0];
@@ -909,7 +1016,9 @@
         results = [moc executeFetchRequest:request error:nil];
         if (results.count < 1)
         {
-            completion(NO, nil);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(NO, nil);
+            });
             return;
         }
         Item *itemDB = results[0];
@@ -919,14 +1028,18 @@
         results = [moc executeFetchRequest:request error:nil];
         if (results.count < 1)
         {
-            completion(NO, nil);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(NO, nil);
+            });
             return;
         }
         Price *priceDB = results[0];
         
         ItemInformation *item = [self itemInfoFromDBEntities:itemDB barcode:barcodeDB price:priceDB];
         
-        completion(YES, item);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(YES, item);
+        });
     });
 }
 

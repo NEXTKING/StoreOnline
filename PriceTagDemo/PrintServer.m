@@ -9,6 +9,7 @@
 #import "PrintServer.h"
 #import "PrintViewController.h"
 #import "ZPLGenerator.h"
+#import "AppSuspendingBlocker.h"
 
 @interface PrintServer() <PrinterControllerDelegate>
 {
@@ -17,6 +18,7 @@
     BOOL _isPrinting;
     UIWindow *_window;
     NSTimer *_controlQueueTimer;
+    AppSuspendingBlocker *_suspendingBlocker;
 }
 @end
 
@@ -43,8 +45,9 @@
         _queue = [NSMutableArray new];
         _isPrinting = false;
         _window = [[UIWindow alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.frame];
-        _window.windowLevel = UIWindowLevelAlert + 1;
+        _window.windowLevel = [[[[UIApplication sharedApplication] delegate] window] windowLevel] + 1;
         [_window addSubview:_printVC.view];
+        _suspendingBlocker = [AppSuspendingBlocker new];
     }
     return self;
 }
@@ -52,49 +55,49 @@
 - (void)addItemToPrintQueue:(ItemInformation *)item printFormat:(id)format
 {
     [_queue addObject:@{@"item": item, @"format": format}];
-    [self print];
+    
+    if (!_isPrinting)
+        [self print];
 }
 
 - (void)print
 {
-    if (!_isPrinting)
+    if (_queue.count > 0)
     {
-        if (_queue.count > 0)
+        ItemInformation *item = _queue[0][@"item"];
+        id format = _queue[0][@"format"];
+        
+        if (_controlQueueTimer != nil)
         {
-            ItemInformation *item = _queue[0][@"item"];
-            id format = _queue[0][@"format"];
-            
-            if ([format isKindOfClass:[NSString class]])
+            [_controlQueueTimer invalidate];
+            _controlQueueTimer = nil;
+        }
+        
+        _isPrinting = YES;
+        [self showPrintView];
+        [self initializeControlQueueTimer];
+        [_suspendingBlocker startBlock];
+        
+        if ([format isKindOfClass:[NSString class]])
+        {
+            // zpl
+            NSData *data = nil;
+            if ([format isEqualToString:@"mainZPL"])
             {
-                // zpl
-                NSData *data = nil;
-                if ([format isEqualToString:@"mainZPL"])
-                {
-                    NSString *str = [[NSBundle mainBundle] pathForResource:@"label" ofType:@"zpl"];
-                    data = [ZPLGenerator generateZPLWithItem:item patternPath:str];
-                }
-                else if ([format isEqualToString:@"additionalZPL"])
-                {
-                    NSString *addStr = [[NSBundle mainBundle] pathForResource:@"producer_label" ofType:@"zpl"];
-                    data = [ZPLGenerator generateEanZPLWithItem:item patternPath:addStr];
-                }
-                
-                [_printVC printZPL:data copies:1];
+                NSString *str = [[NSBundle mainBundle] pathForResource:@"label" ofType:@"zpl"];
+                data = [ZPLGenerator generateZPLWithItem:item patternPath:str];
             }
-            else if ([format isKindOfClass:[UIView class]])
+            else if ([format isEqualToString:@"additionalZPL"])
             {
-                // priceTag
-            }
-            
-            if (_controlQueueTimer != nil)
-            {
-                [_controlQueueTimer invalidate];
-                _controlQueueTimer = nil;
+                NSString *addStr = [[NSBundle mainBundle] pathForResource:@"producer_label" ofType:@"zpl"];
+                data = [ZPLGenerator generateEanZPLWithItem:item patternPath:addStr];
             }
             
-            _isPrinting = YES;
-            [self showPrintView];
-            [self initializeControlQueueTimer];
+            [_printVC printZPL:data copies:1];
+        }
+        else if ([format isKindOfClass:[UIView class]])
+        {
+            // priceTag
         }
     }
 }
@@ -107,18 +110,33 @@
     _isPrinting = NO;
     
     if (_queue.count > 0)
+    {
         [self print];
+    }
     else
+    {
+        if (_controlQueueTimer != nil)
+        {
+            [_controlQueueTimer invalidate];
+            _controlQueueTimer = nil;
+        }
+        
         [self hidePrintView];
+        [_suspendingBlocker stopBlock];
+    }
 }
 
 - (void)printerDidFailPrinting:(NSError *)error
 {
     _isPrinting = NO;
     [self hidePrintView];
+    [_suspendingBlocker stopBlock];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PrinterDidFailPrinting" object:_queue[0][@"item"]];
     
     [_queue removeObjectAtIndex:0];
+    
+    if (_queue.count > 0)
+        [self print];
 }
 
 - (void)showPrintView
@@ -130,18 +148,27 @@
 - (void)hidePrintView
 {
     [_window setHidden:YES];
+    [[[[UIApplication sharedApplication] delegate] window] makeKeyAndVisible];
 }
 
 - (void)initializeControlQueueTimer
 {
-    _controlQueueTimer = [NSTimer scheduledTimerWithTimeInterval:40 target:self selector:@selector(reset) userInfo:nil repeats:NO];
+    if (![NSThread isMainThread])
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _controlQueueTimer = [NSTimer scheduledTimerWithTimeInterval:40 target:self selector:@selector(reset:) userInfo:nil repeats:NO];
+        });
+    }
+    else
+        _controlQueueTimer = [NSTimer scheduledTimerWithTimeInterval:40 target:self selector:@selector(reset:) userInfo:nil repeats:NO];
 }
 
-- (void)reset
+- (void)reset:(NSTimer *)timer
 {
     _isPrinting = NO;
     [_queue removeAllObjects];
     [self hidePrintView];
+    [_suspendingBlocker stopBlock];
 }
 
 @end

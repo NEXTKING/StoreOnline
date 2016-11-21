@@ -13,7 +13,7 @@
 
 @interface LoginViewController () <DTDeviceDelegate, SyncronizationDelegate, UserDelegate, UITextFieldDelegate>
 {
-    DTDevices *dtdev;
+    BOOL _scanLoginEnable;
 }
 @property (weak, nonatomic) IBOutlet UITextField *loginTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
@@ -31,6 +31,7 @@
     _passwordTextField.returnKeyType = UIReturnKeyDone;
     _progressView.hidden = YES;
     _progressLabel.hidden = YES;
+    _scanLoginEnable = YES;
 }
 
 #pragma mark Notifications
@@ -48,10 +49,9 @@
 - (void)didReceiveScanNotification:(NSNotification *)notification
 {
     NSString *barcode = notification.object[@"barcode"];
-
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    
+    if (_scanLoginEnable && barcode.length > 0)
         [[MCPServer instance] user:self barcode:barcode];
-    });
 }
 
 #pragma mark -
@@ -76,12 +76,20 @@
 {
     if (_loginTextField.text != nil && _passwordTextField.text != nil)
     {
+        _syncButton.enabled = NO;
+        _resetButton.enabled = NO;
+        _loginButton.enabled = NO;
+        _scanLoginEnable = NO;
         [[MCPServer instance] user:self login:_loginTextField.text password:_passwordTextField.text];
     }
 }
 
 - (void)userComplete:(int)result user:(UserInformation *)userInformation
 {
+    _syncButton.enabled = YES;
+    _resetButton.enabled = YES;
+    _loginButton.enabled = YES;
+    _scanLoginEnable = YES;
     if (result == 0)
     {
         [[NSUserDefaults standardUserDefaults] setValue:userInformation.key_user forKey:@"UserID"];
