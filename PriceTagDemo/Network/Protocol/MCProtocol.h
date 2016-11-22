@@ -42,4 +42,5 @@
 - (void) acceptanes:(id<AcceptanesDelegate>)delegate date:(NSDate*)date containerBarcode:(NSString*)containerBarcode;
 - (void) addItem:(ItemInformation*)item toAcceptionWithDate:(NSDate*)date containerBarcode:(NSString*)containerBarcode scannedCount:(NSUInteger)scannedCount manually:(BOOL)manually;
 - (void) acceptanesHierarchy:(id<AcceptanesDelegate>)delegate date:(NSDate*)date barcode:(NSString*)barcode;
+- (void) sendAcceptanes:(id<AcceptanesDelegate>)delegate date:(NSDate *)date shopID:(NSString *)shopID;
 @end

@@ -23,8 +23,11 @@ typedef enum : NSUInteger
 @property (nonnull, nonatomic, copy) NSNumber *quantity;
 @property (nonnull, nonatomic, copy) NSNumber *scanned;
 @property (nonnull, nonatomic, copy) NSDate *date;
-@property (nullable, nonatomic, copy) ItemInformation *itemInformation;
+@property (nullable, nonatomic) ItemInformation *itemInformation;
 @property (assign, nonatomic) AcceptanesInformationItemType type;
 @property (assign, nonatomic) BOOL manually;
 
+@property (assign, nonatomic) BOOL isComplete;
+@property (nonnull, nonatomic, copy) NSNumber *ID;
+@property (nonnull, nonatomic, copy) NSString *shopName;
 @end

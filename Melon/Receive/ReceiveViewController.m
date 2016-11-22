@@ -10,11 +10,20 @@
 #import "ReceivesListCell.h"
 #import "ReceiveBoxCell.h"
 #import "ReceiveItemCell.h"
+#import "ReceivesListViewController.h"
 #import "MCPServer.h"
+
+typedef enum : NSUInteger
+{
+    AcceptanesControllerKindRoot = (1 << 0),
+    AcceptanesControllerKindExcesses = (1 << 1),
+    AcceptanesControllerKindRegular = (1 << 2)
+}AcceptanesControllerKind;
 
 @interface ReceiveViewController () <AcceptanesDelegate, ItemDescriptionDelegate>
 {
     NSMutableArray *_items;
+    NSString *_lastBarcode;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *totalQuantityLabel;
@@ -37,9 +46,19 @@
     [self setupView];
 }
 
-- (void)setupView
+- (AcceptanesControllerKind)kind
 {
     if (_rootItem && _rootItem.barcode)
+        return AcceptanesControllerKindRegular;
+    else if (_rootItem)
+        return AcceptanesControllerKindExcesses;
+    else
+        return AcceptanesControllerKindRoot;
+}
+
+- (void)setupView
+{
+    if ([self kind] == AcceptanesControllerKindRegular)
     {
         _bottomView.hidden = NO;
         _bottomView.userInteractionEnabled = YES;
@@ -49,16 +68,21 @@
         _bottomView.hidden = YES;
         _bottomView.userInteractionEnabled = NO;
         
-        UIImage *sendImage = [UIImage imageNamed:@"send"];
-        UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithImage:sendImage style:UIBarButtonItemStylePlain target:self action:@selector(sendButtonPressed:)];
-        self.navigationItem.rightBarButtonItem = sendButton;
+        if ([self kind] == AcceptanesControllerKindRoot)
+        {
+            UIImage *sendImage = [UIImage imageNamed:@"send"];
+            UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithImage:sendImage style:UIBarButtonItemStylePlain target:self action:@selector(sendButtonPressed:)];
+            self.navigationItem.rightBarButtonItem = sendButton;
+        }
     }
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self subscribeToScanNotifications];
+    
+    if ([self kind] != AcceptanesControllerKindExcesses)
+        [self subscribeToScanNotifications];
     
     if (!_items)
     {
@@ -70,7 +94,9 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self unsubscribeFromScanNotifications];
+    
+    if ([self kind] != AcceptanesControllerKindExcesses)
+        [self unsubscribeFromScanNotifications];
 }
 
 #pragma mark data
@@ -84,7 +110,26 @@
 {
     if (result == 0)
     {
-        [_items addObjectsFromArray:items];
+        if ([self kind] == AcceptanesControllerKindRoot)
+        {
+            NSArray *boxes = [items objectsAtIndexes:[items indexesOfObjectsPassingTest:^BOOL(AcceptanesInformation *acceptInfo, NSUInteger idx, BOOL *stop) {
+                return acceptInfo.type == AcceptanesInformationItemTypeBox;
+            }]];
+            [_items addObjectsFromArray:boxes];
+        }
+        else if ([self kind] == AcceptanesControllerKindExcesses)
+        {
+            NSArray *excessItems = [items objectsAtIndexes:[items indexesOfObjectsPassingTest:^BOOL(AcceptanesInformation *acceptInfo, NSUInteger idx, BOOL *stop) {
+                return acceptInfo.type == AcceptanesInformationItemTypeItem;
+            }]];
+            [_items addObjectsFromArray:excessItems];
+        }
+        else
+        {
+            [_items addObjectsFromArray:items];
+            [self updateBottomBar];
+        }
+        
         [self.tableView reloadData];
     }
 }
@@ -95,8 +140,28 @@
     {
         [self showExcessPickerForItem:itemDescription scanned:1 manually:NO];
     }
+    _lastBarcode = nil;
 }
 
+- (void)acceptanesHierarchyComplete:(int)result items:(NSArray<AcceptanesInformation *> *)items
+{
+    if (result == 0)
+    {
+        [self showNavigateToOtherBoxAlert:items];
+    }
+    else if (_lastBarcode)
+    {
+        [[MCPServer instance] itemDescription:self itemCode:_lastBarcode shopCode:nil isoType:0];
+    }
+}
+
+-(void)sendAcceptanesComplete:(int)result
+{
+    if (result == 0)
+    {
+        [self showCloseAcceptionAlert];
+    }
+}
 - (void)addItemToAcception:(ItemInformation *)itemInfo containerBarcode:(NSString *)containerBarcode scanned:(NSUInteger)scanned manually:(BOOL)manually
 {
     [[MCPServer instance] addItem:itemInfo toAcceptionWithDate:_date containerBarcode:containerBarcode scannedCount:scanned manually:manually];
@@ -108,7 +173,7 @@
     {
         AcceptanesInformation *acceptInfo = _items[i];
         
-        if (acceptInfo.itemInformation.itemId == itemInfo.itemId)
+        if ([acceptInfo.barcode isEqualToString:itemInfo.barcode])
         {
             NSUInteger section = [self numberOfSectionsInTableView:_tableView] - 1;
             [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:i inSection:section]] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -122,6 +187,7 @@
     acceptInfo.quantity = @(0);
     acceptInfo.scanned = @(1);
     acceptInfo.itemInformation = itemInfo;
+    acceptInfo.type = AcceptanesInformationItemTypeItem;
     
     [_items addObject:acceptInfo];
     NSUInteger section = [self numberOfSectionsInTableView:_tableView] - 1;
@@ -142,6 +208,37 @@
     }
 }
 
+- (void)navigateToBoxHierarhy:(NSArray<AcceptanesInformation*>*)boxHierarhy
+{
+    for (int i = 0; i < self.navigationController.viewControllers.count; i++)
+    {
+        if ([self.navigationController.viewControllers[i] isKindOfClass:[ReceivesListViewController class]])
+        {
+            ReceivesListViewController *vc = self.navigationController.viewControllers[i];
+            [vc createViewControllersHierarhyWithAcceptanesInfos:boxHierarhy];
+            break;
+        }
+    }
+}
+
+- (void)sendAcceptanesData
+{
+    [[MCPServer instance] sendAcceptanes:self date:_date shopID:[[NSUserDefaults standardUserDefaults] valueForKey:@"shopID"]];
+}
+
+- (void)closeAcception
+{
+    NSMutableArray *closedAcceptions = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"ClosedAcceptions"] mutableCopy];
+    if (closedAcceptions == nil)
+        closedAcceptions = [NSMutableArray new];
+    
+    [closedAcceptions addObject:_date];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:closedAcceptions forKey:@"ClosedAcceptions"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark Actions
 
 - (IBAction)acceptAllButtonPressed:(id)sender
@@ -151,7 +248,7 @@
 
 - (void)sendButtonPressed:(id)sender
 {
-    
+    [self showSendAcceptanesDataPicker];
 }
 
 - (void)showExcessPickerForItem:(ItemInformation *)itemInfo scanned:(NSUInteger)scanned manually:(BOOL)manually
@@ -173,6 +270,21 @@
     [self presentViewController:ac animated:YES completion:nil];
 }
 
+- (void)showNavigateToOtherBoxAlert:(NSArray<AcceptanesInformation*>*)boxHierarhy
+{
+    NSString *message = [NSString stringWithFormat:@"Отсканирована коробка %@", [boxHierarhy lastObject].barcode];
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *navigateAction = [UIAlertAction actionWithTitle:@"Перейти" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self navigateToBoxHierarhy:boxHierarhy];
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleCancel handler:nil];
+    
+    [ac addAction:navigateAction];
+    [ac addAction:cancelAction];
+    
+    [self presentViewController:ac animated:YES completion:nil];
+}
+
 - (void)showAcceptAllPicker
 {
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:@"Вы уверены, что хотите отметить все товары без сканирования?" preferredStyle:UIAlertControllerStyleActionSheet];
@@ -182,6 +294,34 @@
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleCancel handler:nil];
     
     [ac addAction:acceptAllAction];
+    [ac addAction:cancelAction];
+    
+    [self presentViewController:ac animated:YES completion:nil];
+}
+
+- (void)showSendAcceptanesDataPicker
+{
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:@"Отправить данные приёмки на сервер?" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *sendAction = [UIAlertAction actionWithTitle:@"Отправить" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self sendAcceptanesData];
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleCancel handler:nil];
+    
+    [ac addAction:sendAction];
+    [ac addAction:cancelAction];
+    
+    [self presentViewController:ac animated:YES completion:nil];
+}
+
+- (void)showCloseAcceptionAlert
+{
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:@"Данные переданы успешно. Завершить приёмку?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *closeAction = [UIAlertAction actionWithTitle:@"Завершить" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        [self closeAcception];
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Продолжить" style:UIAlertActionStyleDefault handler:nil];
+    
+    [ac addAction:closeAction];
     [ac addAction:cancelAction];
     
     [self presentViewController:ac animated:YES completion:nil];
@@ -211,7 +351,8 @@
                 [self pushToAcceptItem:acceptInfo];
             else
             {
-                [self addItemToAcception:acceptInfo.itemInformation containerBarcode:acceptInfo.containerBarcode scanned:(acceptInfo.scanned.integerValue + 1) manually:NO];
+                acceptInfo.scanned = @(acceptInfo.scanned.integerValue + 1);
+                [self addItemToAcception:acceptInfo.itemInformation containerBarcode:acceptInfo.containerBarcode scanned:acceptInfo.scanned.integerValue manually:NO];
                 [self updateScreenForItem:acceptInfo.itemInformation];
             }
             
@@ -219,16 +360,27 @@
         }
     }
     // need to find barcode in current acception and show alert to navigate if it is box
-    
+    [[MCPServer instance] acceptanesHierarchy:self date:_date barcode:barcode];
     // or find item in database and show alert to choose excess type
-    [[MCPServer instance] itemDescription:self itemCode:barcode shopCode:nil isoType:0];
+    _lastBarcode = barcode;
 }
 
 #pragma mark - Table view data source
 
+- (void)updateBottomBar
+{
+    __block NSInteger itemsCount = 0;
+    
+    [_items enumerateObjectsUsingBlock:^(AcceptanesInformation *acceptInfo, NSUInteger idx, BOOL *stop) {
+        if (acceptInfo.type == AcceptanesInformationItemTypeItem)
+            itemsCount += acceptInfo.quantity.integerValue;
+    }];
+    _totalQuantityLabel.text = [NSString stringWithFormat:@"Итого: %ld товара(ов)", itemsCount];
+}
+
 - (NSString *)titleText
 {
-    if (_rootItem && _rootItem.barcode)
+    if ([self kind] == AcceptanesControllerKindRegular)
     {
         switch (_rootItem.type)
         {
@@ -243,22 +395,26 @@
                 break;
         }
     }
+    else if ([self kind] == AcceptanesControllerKindExcesses)
+    {
+        return @"Излишки";
+    }
     else
     {
         NSDateFormatter *dateFormatter = [NSDateFormatter new];
         dateFormatter.dateFormat = @"d MMMM yyyy, hh:mm";
-        return [NSString stringWithFormat:@"%@ %@", (_rootItem ? @"Излишки" : @"Приёмка"), [dateFormatter stringFromDate:self.date]];
+        return [NSString stringWithFormat:@"Приёмка %@", [dateFormatter stringFromDate:self.date]];
     }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return _rootItem ? 2 : 1;
+    return [self kind] == AcceptanesControllerKindRoot ? 2 : 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (_rootItem)
+    if ([self kind] == AcceptanesControllerKindRoot)
         return section == 0 ? 1 : _items.count;
     else
         return _items.count;
@@ -266,7 +422,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (_rootItem && indexPath.section == 0)
+    if ([self kind] == AcceptanesControllerKindRoot && indexPath.section == 0)
     {
         ReceivesListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ListCell" forIndexPath:indexPath];
         
@@ -333,7 +489,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self numberOfSectionsInTableView:self.tableView] == 2 && indexPath.section == 0)
+    if ([self kind] == AcceptanesControllerKindRoot && indexPath.section == 0)
     {
         AcceptanesInformation *excessBox = [AcceptanesInformation new];
         excessBox.type = AcceptanesInformationItemTypeBox;
@@ -369,8 +525,9 @@
     if (acceptInfo.type == AcceptanesInformationItemTypeBox || acceptInfo.type == AcceptanesInformationItemTypeSet)
     {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        ReceiveViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"ReceiveViewController"];
+        ReceiveViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"ReceiveVC"];
         vc.rootItem = acceptInfo;
+        vc.date = _date;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

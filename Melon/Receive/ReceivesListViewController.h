@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ReceivesListViewController : UITableViewController
-
+- (void)createViewControllersHierarhyWithAcceptanesInfos:(NSArray *)acceptInfos;
 @end

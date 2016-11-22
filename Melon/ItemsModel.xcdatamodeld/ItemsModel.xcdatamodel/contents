@@ -4,9 +4,12 @@
         <attribute name="barcode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="containerBarcode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="iD" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="isComplete" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="manually" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="quantity" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="scanned" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="shopName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="AdditionalParameter" representedClassName="AdditionalParameter" syncable="YES">
@@ -23,7 +26,7 @@
         <relationship name="additionalParams" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AdditionalParameter" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AcceptItem" positionX="-108" positionY="108" width="128" height="150"/>
+        <element name="AcceptItem" positionX="-108" positionY="108" width="128" height="195"/>
         <element name="AdditionalParameter" positionX="43" positionY="132" width="128" height="73"/>
         <element name="Item" positionX="-252" positionY="45" width="128" height="150"/>
     </elements>

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		214AD0EF1DE4881F00FE0345 /* NwobjSendAcceptanes.m in Sources */ = {isa = PBXBuildFile; fileRef = 214AD0EE1DE4881F00FE0345 /* NwobjSendAcceptanes.m */; };
+		214AD0F01DE4881F00FE0345 /* NwobjSendAcceptanes.m in Sources */ = {isa = PBXBuildFile; fileRef = 214AD0EE1DE4881F00FE0345 /* NwobjSendAcceptanes.m */; };
 		215EFF091DAB9ED600BE11C5 /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 215EFF071DAB9ED600BE11C5 /* SearchTableViewCell.m */; };
 		215EFF0A1DAB9ED600BE11C5 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 215EFF081DAB9ED600BE11C5 /* SearchTableViewCell.xib */; };
 		2174D5811DB8CDDC00FCE9CE /* SOAPSavePrintFact.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174D5801DB8CDDC00FCE9CE /* SOAPSavePrintFact.m */; };
@@ -545,6 +547,8 @@
 		130FCD91C43484C3772DAD9E /* Pods-Desondo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Desondo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Desondo/Pods-Desondo.release.xcconfig"; sourceTree = "<group>"; };
 		18C39E1F4A73A73377662262 /* libPods-Azbuka.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Azbuka.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FEDC44E1FDE1CDA6F21D54C /* Pods-Desondo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Desondo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Desondo/Pods-Desondo.debug.xcconfig"; sourceTree = "<group>"; };
+		214AD0ED1DE4881F00FE0345 /* NwobjSendAcceptanes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NwobjSendAcceptanes.h; sourceTree = "<group>"; };
+		214AD0EE1DE4881F00FE0345 /* NwobjSendAcceptanes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NwobjSendAcceptanes.m; sourceTree = "<group>"; };
 		215EFF061DAB9ED600BE11C5 /* SearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableViewCell.h; sourceTree = "<group>"; };
 		215EFF071DAB9ED600BE11C5 /* SearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewCell.m; sourceTree = "<group>"; };
 		215EFF081DAB9ED600BE11C5 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
@@ -1574,6 +1578,8 @@
 				C6F601B41D9E5BD70095AE21 /* NwobjStock.m */,
 				21D838551DDDACC200A98E0F /* NwobjAcceptanes.h */,
 				21D838561DDDACC200A98E0F /* NwobjAcceptanes.m */,
+				214AD0ED1DE4881F00FE0345 /* NwobjSendAcceptanes.h */,
+				214AD0EE1DE4881F00FE0345 /* NwobjSendAcceptanes.m */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -3421,6 +3427,7 @@
 				B93DB9B61C50DAA500C8A7A3 /* ViewController.m in Sources */,
 				B90CE4961C89FCC100DFB3E4 /* AntiAliasView.m in Sources */,
 				B92DCE061C78A600002AA184 /* WarehouseInformation.m in Sources */,
+				214AD0EF1DE4881F00FE0345 /* NwobjSendAcceptanes.m in Sources */,
 				B93DBA6E1C5132BD00C8A7A3 /* NSString+MD5.m in Sources */,
 				B93DB9B31C50DAA500C8A7A3 /* AppDelegate.m in Sources */,
 				B982D7E91CEB1A7100071D9A /* MCPOfflineInmpl.m in Sources */,
@@ -3506,6 +3513,7 @@
 				C6F601C41D9E662D0095AE21 /* StockViewController.m in Sources */,
 				C6FFF40A1D797A2E00947948 /* Item+CoreDataProperties.m in Sources */,
 				21D838301DD334FE00A98E0F /* ReceiveBoxCell.m in Sources */,
+				214AD0F01DE4881F00FE0345 /* NwobjSendAcceptanes.m in Sources */,
 				B970B8511CD2924C0066A66A /* CartFooterView.m in Sources */,
 				21D8384F1DDC93DF00A98E0F /* AcceptItem+CoreDataProperties.m in Sources */,
 				B970B8371CD214D20066A66A /* NwobjItemDescription.m in Sources */,

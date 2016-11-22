@@ -60,7 +60,7 @@
     NwRequest *nwReq = [[NwRequest alloc] init];
     
     nwReq.httpMethod = HTTP_METHOD_GET;
-    nwReq.URL = [NSMutableString stringWithFormat:@"%@/GetAcceptanes", url];
+    nwReq.URL = [NSMutableString stringWithFormat:@"%@/GetAcceptancesCV", url];
     [nwReq addParam:@"ShopName" withValue:_shopId];
 
     //[nwReq addParam:@"password" withValue:[_userPassword sha256]];
@@ -200,6 +200,18 @@
     obj = [result objectForKey:@"IsScannedByHand"];
     if (obj && [obj isKindOfClass:[NSNumber class]])
         acceptInfo.manually = [NSNumber numberWithBool:obj];
+    
+    obj = [result objectForKey:@"IsComplete"];
+    if (obj && [obj isKindOfClass:[NSNumber class]])
+        acceptInfo.isComplete = [NSNumber numberWithBool:obj];
+    
+    obj = [result objectForKey:@"ID"];
+    if (obj && [obj isKindOfClass:[NSNumber class]])
+        acceptInfo.ID = obj;
+    
+    obj = [result objectForKey:@"ShopName"];
+    if (obj && [obj isKindOfClass:[NSString class]])
+        acceptInfo.shopName = obj;
     
     return acceptInfo;
 }

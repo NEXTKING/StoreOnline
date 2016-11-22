@@ -23,6 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSDate *date;
 @property (nonatomic, copy) NSNumber *manually;
 
+@property (nonatomic, copy) NSNumber *isComplete;
+@property (nonatomic, copy) NSNumber *iD;
+@property (nonatomic, copy) NSString *shopName;
 @end
 
 NS_ASSUME_NONNULL_END

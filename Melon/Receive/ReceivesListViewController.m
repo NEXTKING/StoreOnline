@@ -47,7 +47,21 @@
 {
     if (result == 0)
     {
-        _items = items;
+        NSMutableArray *dates = [NSMutableArray arrayWithArray:items];
+        NSArray *closedDates = [[NSUserDefaults standardUserDefaults] arrayForKey:@"ClosedAcceptions"];
+        
+        for (NSDate *closedDate in closedDates)
+        {
+            for (NSDate *date in dates)
+            {
+                if ([closedDate compare:date] == NSOrderedSame)
+                {
+                    [dates removeObject:date];
+                    break;
+                }
+            }
+        }
+        _items = dates;
         [self.tableView reloadData];
     }
     else
@@ -84,6 +98,8 @@
     [self performSegueWithIdentifier:@"receiveRootSegue" sender:indexPath];
 }
 
+#pragma mark navigation
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"receiveRootSegue"])
@@ -92,7 +108,32 @@
         
         ReceiveViewController *dvc = segue.destinationViewController;
         dvc.date = _items[indexPath.row];
+        dvc.rootItem = nil;
     }
+}
+
+- (void)createViewControllersHierarhyWithAcceptanesInfos:(NSArray<AcceptanesInformation*>*)acceptInfos
+{
+    NSMutableArray *viewControllers = [NSMutableArray new];
+    NSDate *date = [acceptInfos.lastObject.date copy];
+    
+    for (int i = 0; i <= [self.navigationController.viewControllers indexOfObject:self]; i++)
+        [viewControllers addObject:[self.navigationController.viewControllers objectAtIndex:i]];
+    
+    ReceiveViewController *rootVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ReceiveVC"];
+    rootVC.date = date;
+    
+    [viewControllers addObject:rootVC];
+    
+    for (AcceptanesInformation *acceptInfo in acceptInfos)
+    {
+        ReceiveViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ReceiveVC"];
+        vc.date = date;
+        vc.rootItem = acceptInfo;
+        [viewControllers addObject:vc];
+    }
+    
+    [self.navigationController setViewControllers:viewControllers animated:YES];
 }
 
 @end

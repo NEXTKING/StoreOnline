@@ -22,4 +22,8 @@
 @dynamic date;
 @dynamic manually;
 
+@dynamic isComplete;
+@dynamic iD;
+@dynamic shopName;
+
 @end

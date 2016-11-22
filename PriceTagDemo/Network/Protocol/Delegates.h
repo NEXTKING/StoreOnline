@@ -43,6 +43,8 @@
 @protocol AcceptanesDelegate <NSObject>
 - (void) acceptanesComplete:(int) result items:(NSArray*)items;
 - (void) acceptanesHierarchyComplete:(int)result items:(NSArray<AcceptanesInformation*>*)items;
+@optional
+- (void) sendAcceptanesComplete:(int)result;
 @end
 
 

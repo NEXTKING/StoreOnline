@@ -225,7 +225,7 @@
         <!--Receive View Controller-->
         <scene sceneID="Gcn-Ol-iDQ">
             <objects>
-                <viewController id="d5e-eo-QCu" customClass="ReceiveViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ReceiveVC" id="d5e-eo-QCu" customClass="ReceiveViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="klu-DW-eUK"/>
                         <viewControllerLayoutGuide type="bottom" id="Wx8-Tf-Si6"/>
