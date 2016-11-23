@@ -587,6 +587,7 @@
         acceptItemDB.iD = acceptInfo.ID;
         acceptItemDB.shopName = acceptInfo.shopName;
         
+        /*
         #warning need to remove
         if (acceptInfo.type == AcceptanesInformationItemTypeItem)
         {
@@ -594,6 +595,7 @@
             item.name = @"Товар";
             item.barcode = acceptInfo.barcode;
         }
+        */
     }
     
     [_dataController.managedObjectContext save:nil];

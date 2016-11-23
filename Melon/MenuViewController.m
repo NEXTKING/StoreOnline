@@ -10,7 +10,7 @@
 #import "MCPServer.h"
 #import "DTDevices.h"
 
-@interface MenuViewController () <ItemDescriptionDelegate, UIAlertViewDelegate, DTDeviceDelegate, ZonesDelegate>
+@interface MenuViewController () <ItemDescriptionDelegate, UIAlertViewDelegate, DTDeviceDelegate, ZonesDelegate, AcceptanesDelegate>
 {
     NSInteger *reqCount;
 }
@@ -111,6 +111,18 @@
 }
 
 - (void) zonesComplete:(int)result zones:(NSArray *)zones
+{
+    if (result == 0)
+    {
+        [[MCPServer instance] acceptanes:nil shopID:_currentShopID];
+    }
+    else
+    {
+        [self finishSyncing:NO];
+    }
+}
+
+- (void)acceptanesComplete:(int)result items:(NSArray *)items
 {
     if (result == 0)
     {
