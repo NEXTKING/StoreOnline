@@ -11,7 +11,7 @@
 
 @interface SettingsViewController_Ostin ()
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-
+@property (weak, nonatomic) IBOutlet UISwitch *additionalLabelSwitch;
 @end
 
 @implementation SettingsViewController_Ostin
@@ -20,6 +20,7 @@
 {
     [super viewDidLoad];
     _nameLabel.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserName"];
+    _additionalLabelSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"PrintAdditionalLabel"];
 }
 
 - (void)showInfoMessage:(NSString*)info
@@ -38,6 +39,13 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate resetWindowToInitialView];
+}
+
+- (IBAction)additionalLabelSwitchDidChanged:(id)sender
+{
+    UISwitch *_switch = sender;
+    [[NSUserDefaults standardUserDefaults] setBool:_switch.on forKey:@"PrintAdditionalLabel"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

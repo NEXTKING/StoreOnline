@@ -13,6 +13,5 @@
 @property (weak, nonatomic) IBOutlet UISwitch *immediateSwitch;
 @property (copy, nonatomic) NSString* externalBarcode;
 @property (weak, nonatomic) IBOutlet UILabel *amountStatusLabel;
-@property (weak, nonatomic) IBOutlet UISwitch *additionalLabelSwitch;
 
 @end

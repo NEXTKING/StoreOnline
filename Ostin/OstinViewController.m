@@ -43,12 +43,10 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    if (!_externalBarcode)
-        [super viewWillAppear:animated];
+    [super viewWillAppear:animated];
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     _immediateSwitch.on = ([defaults valueForKey:@"PrintImmediatly"] != nil);
-    _additionalLabelSwitch.on = [defaults boolForKey:@"PrintAdditionalLabel"];
     
     if ([defaults valueForKey:@"LastBarcode"] && !_externalBarcode && !self.currentItemInfo)
     {
@@ -65,15 +63,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    if (!_externalBarcode)
-        [super viewWillDisappear:animated];
-}
-
-- (IBAction)additionalLabelSwitchDidChanged:(id)sender
-{
-    UISwitch *_switch = sender;
-    [[NSUserDefaults standardUserDefaults] setBool:_switch.on forKey:@"PrintAdditionalLabel"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [super viewWillDisappear:animated];
 }
 
 - (void) printButtonAction:(id)sender
@@ -150,7 +140,7 @@
         [bindingAlert textFieldAtIndex:0].text = code;
         return;
     }
-    if (aNotification.object != nil)
+    else if (!_externalBarcode && aNotification.object != nil)
 	{
     	lastBarcode = [aNotification.object objectForKey:@"barcode"];
     	NSNumber *type = [aNotification.object objectForKey:@"type"];
@@ -297,7 +287,7 @@
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         
         SettingsViewController* destinationViewController = (SettingsViewController *)segue.destinationViewController;
-        destinationViewController.preferredContentSize = CGSizeMake(200, 220);       // Deprecated in iOS7. Use 'preferredContentSize' instead.
+        destinationViewController.preferredContentSize = CGSizeMake(200, 280);       // Deprecated in iOS7. Use 'preferredContentSize' instead.
                
         settingsPopover = [popoverSegue popoverControllerWithSender:sender permittedArrowDirections:WYPopoverArrowDirectionAny animated:YES];
         

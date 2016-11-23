@@ -17,11 +17,17 @@
 #import "ZPLGenerator.h"
 #import "AsyncImageView.h"
 #import "PrintServer.h"
+#import "WYStoryboardPopoverSegue.h"
+#import "SettingsViewController.h"
 
 @interface ItemsListViewController () <ItemDescriptionDelegate>
 {
     NSMutableArray *_items;
     UIActivityIndicatorView *_activityIndicator;
+    
+    BOOL bindingInProgress;
+    UIAlertView *bindingAlert;
+    WYPopoverController *settingsPopover;
 }
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *actionButton;
@@ -42,9 +48,16 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     
     [self.tableView registerNib:[UINib nibWithNibName:@"ItemsListCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
     [self requestData];
-    [self updateNotificationStatus];
+    [self subscribeToScanNotifications];
+    [self subscribeToPrinterNotifications];
     [self updateActionButton];
     [self updateOverlayInfo];
+}
+
+- (void)dealloc
+{
+    [self unsubscribeFromScanNotifications];
+    [self unsubscribeFromPrinterNotifications];
 }
 
 - (void)updateOverlayInfo
@@ -92,32 +105,6 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
             self.actionButton.enabled = NO;
         }
     }
-}
-
-- (void)updateNotificationStatus
-{
-    if (_tasksMode)
-    {
-        if (_task.status == TaskInformationStatusNotStarted)
-        {
-            
-        }
-        else if (_task.status == TaskInformationStatusInProgress)
-        {
-            [self subscribeToScanNotifications];
-            [self subscribeToPrinterNotifications];
-        }
-        else if (_task.status == TaskInformationStatusComplete)
-        {
-            [self unsubscribeFromScanNotifications];
-            [self unsubscribeFromPrinterNotifications];
-        }
-    }
-}
-
-- (void)dealloc
-{
-    [self unsubscribeFromScanNotifications];
 }
 
 - (void)showLoadingIndicator
@@ -178,33 +165,46 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 
 - (void)unsubscribeFromPrinterNotifications
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"BarcodeScanNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PrinterDidFinishPrinting" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PrinterDidFailPrinting" object:nil];
 }
 
 - (void)didReceiveScanNotification:(NSNotification *)notification
 {
-    NSString *barcode = notification.object[@"barcode"];
-    NSNumber *type = notification.object[@"type"];
-    [self itemDidScannedWithBarcode:barcode type:type];
+    if (bindingInProgress)
+    {
+        NSString* code = [notification.object objectForKey:@"barcode"];
+        [bindingAlert textFieldAtIndex:0].text = code;
+        return;
+    }
+    else if (_task.status == TaskInformationStatusInProgress)
+    {
+        NSString *barcode = notification.object[@"barcode"];
+        NSNumber *type = notification.object[@"type"];
+        [self itemDidScannedWithBarcode:barcode type:type];
+    }
 }
 
 - (void)didReceiveFinishPrintNotification:(NSNotification *)notification
 {
-    ItemInformation *item = notification.object;
-    TaskItemInformation *taskItemInfo = [self taskItemInfoForItemWithID:item.itemId];
-    _task.totalPrintedCount += 1;
-    [[MCPServer instance] savePrintItemsCount:_task.totalPrintedCount inTaskWithID:_task.taskID];
-    
-    if (taskItemInfo != nil)
+    if (_task.status == TaskInformationStatusInProgress)
     {
-        taskItemInfo.scanned += 1;
-        [[MCPServer instance] saveTaskItem:nil taskID:_task.taskID itemID:taskItemInfo.itemID scanned:taskItemInfo.scanned];
-        [[MCPServer instance] savePrintItemFactForItemCode:item.article taskName:_task.name];
+        ItemInformation *item = notification.object;
+        TaskItemInformation *taskItemInfo = [self taskItemInfoForItemWithID:item.itemId];
+        _task.totalPrintedCount += 1;
+        [[MCPServer instance] savePrintItemsCount:_task.totalPrintedCount inTaskWithID:_task.taskID];
         
-        NSUInteger index = [_items indexOfObject:[self itemInfoForTaskItemWithID:taskItemInfo.itemID]];
-        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        if (taskItemInfo != nil)
+        {
+            taskItemInfo.scanned += 1;
+            [[MCPServer instance] saveTaskItem:nil taskID:_task.taskID itemID:taskItemInfo.itemID scanned:taskItemInfo.scanned];
+            [[MCPServer instance] savePrintItemFactForItemCode:item.article taskName:_task.name];
+            
+            NSUInteger index = [_items indexOfObject:[self itemInfoForTaskItemWithID:taskItemInfo.itemID]];
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+        [self updateOverlayInfo];
     }
-    [self updateOverlayInfo];
 }
 
 - (void)didReceiveFailPrintNotification:(NSNotification *)notification
@@ -287,6 +287,21 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
         ItemInformation* itemInfo = _items[indexPath.row];
         ostinVC.currentItemInfo = itemInfo;
         ostinVC.externalBarcode = itemInfo.barcode;
+    }
+    else if ([segue.identifier isEqualToString:@"MelonPopover"])
+    {
+        WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
+        
+        SettingsViewController* destinationViewController = (SettingsViewController *)segue.destinationViewController;
+        destinationViewController.preferredContentSize = CGSizeMake(200, 280);
+        
+        settingsPopover = [popoverSegue popoverControllerWithSender:sender permittedArrowDirections:WYPopoverArrowDirectionAny animated:YES];
+        
+        destinationViewController.bindPrinterAction = ^
+        {
+            [self bindPrinter];
+            [settingsPopover dismissPopoverAnimated:YES];
+        };
     }
 }
 
@@ -412,7 +427,6 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
                     wself.task.endDate = now;
                     
                 wself.task.status = nextStatus;
-                [wself updateNotificationStatus];
                 [wself updateActionButton];
                 [wself updateOverlayInfo];
             }
@@ -437,6 +451,38 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     {
         [self showAlertWithMessage:@"Принтер не привязан"];
     }
+}
+
+#pragma mark bind printer
+
+- (void) bindPrinter
+{
+    bindingInProgress = YES;
+    bindingAlert = [[UIAlertView alloc] initWithTitle:@"Привязка принтера" message:@"Отсканируйте или введите штрих-код принтера" delegate:self cancelButtonTitle:@"Отмена" otherButtonTitles:@"Оk", nil];
+    bindingAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [bindingAlert textFieldAtIndex:0].keyboardType = UIKeyboardTypeASCIICapable;
+    bindingAlert.tag = 987;
+    [bindingAlert show];
+}
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != alertView.cancelButtonIndex)
+    {
+        
+        if (alertView.tag == 987)
+        {
+            NSString* barcode = [[alertView textFieldAtIndex:0] text];
+            [[NSUserDefaults standardUserDefaults] setValue:barcode forKey:@"PrinterID"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    }
+}
+
+- (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 987)
+        bindingInProgress = NO;
 }
 
 #pragma mark Helpers
