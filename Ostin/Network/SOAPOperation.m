@@ -109,7 +109,7 @@
 {
     for (PI_MOBILE_SERVICEService_TROW_IntType *throw in items)
     {
-        NSArray *csvSourse = [throw.VAL componentsSeparatedByString:@";"];
+        NSArray *csvSourse = [throw.VAL componentsSeparatedByString:@"\";\""];
         NSArray *csv       = [self removeQuotes:csvSourse];
         
         if (csv.count < 1)
