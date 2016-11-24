@@ -62,6 +62,10 @@ typedef enum : NSUInteger
     {
         _bottomView.hidden = NO;
         _bottomView.userInteractionEnabled = YES;
+        
+        UIImage *barcodeImage = [UIImage imageNamed:@"Barcode manual"];
+        UIBarButtonItem *manualInputButton = [[UIBarButtonItem alloc] initWithImage:barcodeImage style:UIBarButtonItemStylePlain target:self action:@selector(showManualInputAlert)];
+        self.navigationItem.rightBarButtonItem = manualInputButton;
     }
     else
     {
@@ -139,6 +143,13 @@ typedef enum : NSUInteger
     if (result == 0)
     {
         [self showExcessPickerForItem:itemDescription scanned:1 manually:NO];
+    }
+    else
+    {
+        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Info" message:@"Не удалось найти товар в базе" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [ac addAction:cancelAction];
+        [self presentViewController:ac animated:YES completion:nil];
     }
     _lastBarcode = nil;
 }
@@ -327,6 +338,27 @@ typedef enum : NSUInteger
     [self presentViewController:ac animated:YES completion:nil];
 }
 
+- (void)showManualInputAlert
+{
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Ручной ввод" message:@"Введите штрих-код" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {}];
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Отправить" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        
+        NSDictionary* params = @{@"barcode":alert.textFields[0].text, @"type":@(0)};
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BarcodeScanNotification"object:params];
+    }];
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField* textField) {
+        
+         textField.keyboardType = UIKeyboardTypeNumberPad;
+    }];
+    
+    
+    [alert addAction:cancelAction];
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 #pragma mark Notifications
 
 - (void)subscribeToScanNotifications
@@ -360,9 +392,9 @@ typedef enum : NSUInteger
         }
     }
     // need to find barcode in current acception and show alert to navigate if it is box
-    [[MCPServer instance] acceptanesHierarchy:self date:_date barcode:barcode];
     // or find item in database and show alert to choose excess type
     _lastBarcode = barcode;
+    [[MCPServer instance] acceptanesHierarchy:self date:_date barcode:barcode];
 }
 
 #pragma mark - Table view data source
