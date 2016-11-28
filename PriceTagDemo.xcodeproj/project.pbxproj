@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		214AD0EF1DE4881F00FE0345 /* NwobjSendAcceptanes.m in Sources */ = {isa = PBXBuildFile; fileRef = 214AD0EE1DE4881F00FE0345 /* NwobjSendAcceptanes.m */; };
 		214AD0F01DE4881F00FE0345 /* NwobjSendAcceptanes.m in Sources */ = {isa = PBXBuildFile; fileRef = 214AD0EE1DE4881F00FE0345 /* NwobjSendAcceptanes.m */; };
+		214AD0F61DE87FD200FE0345 /* MelonPriceTag30x60.m in Sources */ = {isa = PBXBuildFile; fileRef = 214AD0F51DE87FD200FE0345 /* MelonPriceTag30x60.m */; };
+		214AD0F81DE87FE600FE0345 /* MelonPriceTag30x60.xib in Resources */ = {isa = PBXBuildFile; fileRef = 214AD0F71DE87FE600FE0345 /* MelonPriceTag30x60.xib */; };
 		215EFF091DAB9ED600BE11C5 /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 215EFF071DAB9ED600BE11C5 /* SearchTableViewCell.m */; };
 		215EFF0A1DAB9ED600BE11C5 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 215EFF081DAB9ED600BE11C5 /* SearchTableViewCell.xib */; };
 		2174D5811DB8CDDC00FCE9CE /* SOAPSavePrintFact.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174D5801DB8CDDC00FCE9CE /* SOAPSavePrintFact.m */; };
@@ -549,6 +551,9 @@
 		1FEDC44E1FDE1CDA6F21D54C /* Pods-Desondo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Desondo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Desondo/Pods-Desondo.debug.xcconfig"; sourceTree = "<group>"; };
 		214AD0ED1DE4881F00FE0345 /* NwobjSendAcceptanes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NwobjSendAcceptanes.h; sourceTree = "<group>"; };
 		214AD0EE1DE4881F00FE0345 /* NwobjSendAcceptanes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NwobjSendAcceptanes.m; sourceTree = "<group>"; };
+		214AD0F41DE87FD200FE0345 /* MelonPriceTag30x60.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MelonPriceTag30x60.h; sourceTree = "<group>"; };
+		214AD0F51DE87FD200FE0345 /* MelonPriceTag30x60.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MelonPriceTag30x60.m; sourceTree = "<group>"; };
+		214AD0F71DE87FE600FE0345 /* MelonPriceTag30x60.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MelonPriceTag30x60.xib; sourceTree = "<group>"; };
 		215EFF061DAB9ED600BE11C5 /* SearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableViewCell.h; sourceTree = "<group>"; };
 		215EFF071DAB9ED600BE11C5 /* SearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewCell.m; sourceTree = "<group>"; };
 		215EFF081DAB9ED600BE11C5 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
@@ -1727,6 +1732,9 @@
 				B970B83F1CD21CF30066A66A /* MelonPriceTag.h */,
 				B970B8401CD21CF30066A66A /* MelonPriceTag.m */,
 				B970B8421CD21D040066A66A /* MelonPriceTag.xib */,
+				214AD0F41DE87FD200FE0345 /* MelonPriceTag30x60.h */,
+				214AD0F51DE87FD200FE0345 /* MelonPriceTag30x60.m */,
+				214AD0F71DE87FE600FE0345 /* MelonPriceTag30x60.xib */,
 				C60F6F801CD3754E003949CE /* MelonViewController.h */,
 				C60F6F811CD3754E003949CE /* MelonViewController.m */,
 				B9950B6E1CDBAF69005B4375 /* SettingsViewController.h */,
@@ -2706,6 +2714,7 @@
 				21D838361DD3353200A98E0F /* ReceiveItemCell.xib in Resources */,
 				B970B83D1CD217C10066A66A /* Settings.bundle in Resources */,
 				B970B8271CD209830066A66A /* LaunchScreen.storyboard in Resources */,
+				214AD0F81DE87FE600FE0345 /* MelonPriceTag30x60.xib in Resources */,
 				C6F601C91D9E71090095AE21 /* StockCell.xib in Resources */,
 				21D8383D1DD3366D00A98E0F /* receive_group_icon@2x.png in Resources */,
 				21D838311DD334FE00A98E0F /* ReceiveBoxCell.xib in Resources */,
@@ -3553,6 +3562,7 @@
 				B970B82C1CD213470066A66A /* AppDelegate.m in Sources */,
 				B970B8521CD294A90066A66A /* RivgoshViewController.m in Sources */,
 				B9950B701CDBAF69005B4375 /* SettingsViewController.m in Sources */,
+				214AD0F61DE87FD200FE0345 /* MelonPriceTag30x60.m in Sources */,
 				C63011091D35335A00D3DD57 /* BarCodeEAN13.m in Sources */,
 				B970B8381CD214D20066A66A /* NwobjAuthorization.m in Sources */,
 				B970B83A1CD214E00066A66A /* ItemInformation.m in Sources */,
