@@ -27,7 +27,6 @@ static const double _longitude_scale_factor = 0.55;
 
 @interface MCPSimulatorImpl()
 {
-    NSMutableDictionary *_itemsDictionary;
     NSMutableArray *_discountsArray;
     
     NSString *_currentTaskId;
@@ -196,51 +195,42 @@ static const double _longitude_scale_factor = 0.55;
         [_itemsDictionary setObject:itemInfo forKey:@"9900000206178"];
     }
     
-    {
-        ItemInformation *itemInfo = [ItemInformation new];
-        itemInfo.name       = @"Пастила Малина от шеф-кондитера АВ Россия";
-        itemInfo.article    = @"2101300";
-        itemInfo.barcode    = @"2101300";
-        itemInfo.price      = 128.00;
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"items" ofType:@"csv"];
+    NSData *fileData = [NSData dataWithContentsOfFile:filePath];
+    NSString *fileString = [[NSString alloc] initWithData:fileData encoding:NSUTF8StringEncoding];
+    NSArray* csvRows = [fileString componentsSeparatedByString:@"\r\n"];
+    
+    for (NSString* csvRow in csvRows) {
         
-        [_itemsDictionary setObject:itemInfo forKey:@"2101300"];
-    }
-    {
-        ItemInformation *itemInfo = [ItemInformation new];
-        itemInfo.name       = @"Айва азербайджан";
-        itemInfo.article    = @"2101300";
-        itemInfo.barcode    = @"2180192";
-        itemInfo.price      = 396.00;
+        NSArray* parsedCSV = [csvRow componentsSeparatedByString:@";"];
         
-        [_itemsDictionary setObject:itemInfo forKey:@"2180192"];
-    }
-    {
-        ItemInformation *itemInfo = [ItemInformation new];
-        itemInfo.name       = @"Игристое вино испанское Кава Ллопарт Интеграль Брют Натюр Ресерва 0.375 л";
-        itemInfo.article    = @"2101300";
-        itemInfo.barcode    = @"9900000180263";
-        itemInfo.price      = 1290.00;
+        if (parsedCSV.count < 7)
+            continue;
         
-        [_itemsDictionary setObject:itemInfo forKey:@"9900000180263"];
-    }
-    {
         ItemInformation *itemInfo = [ItemInformation new];
-        itemInfo.name       = @"Мюсли Crispy Food Органик хрустящие с яблоком и клубникой 375 г Дания";
-        itemInfo.article    = @"2101300";
-        itemInfo.barcode    = @"5701164700694";
-        itemInfo.price      = 352.00;
+        itemInfo.itemId         = [parsedCSV[0] integerValue];
+        itemInfo.barcode        = parsedCSV[1];
+        itemInfo.article        = parsedCSV[2];
+        itemInfo.name           = parsedCSV[3];
+        itemInfo.price          = [parsedCSV[6] doubleValue];
+        itemInfo.imageName      = parsedCSV[7];
         
-        [_itemsDictionary setObject:itemInfo forKey:@"5701164700694"];
-    }
-    {
-        ItemInformation *itemInfo = [ItemInformation new];
-        itemInfo.name       = @"Мюсли Crispy Food Органик хрустящие с малиной, киноа и ржаными хлопьями 375 г Дания";
-        itemInfo.article    = @"2101300";
-        itemInfo.barcode    = @"9900000166779";
-        itemInfo.price      = 352.00;
         
-        [_itemsDictionary setObject:itemInfo forKey:@"9900000166779"];
+        ParameterInformation *sizeInfo = [ParameterInformation new];
+        sizeInfo.name = @"Размер";
+        sizeInfo.value = parsedCSV[4];
+        
+        ParameterInformation *paramInfo = [ParameterInformation new];
+        paramInfo.name = @"stock";
+        paramInfo.value = parsedCSV[5];
+        itemInfo.additionalParameters = @[sizeInfo,paramInfo];
+        
+        [_itemsDictionary setObject:itemInfo forKey:parsedCSV[1]];
+        
     }
+    
+    
+  
     
     //Filling discounts array with sample stuff
     
@@ -307,6 +297,13 @@ static const double _longitude_scale_factor = 0.55;
         [delegate loginComplete:0 userId:@"userID" sessionId:@"0123456789"];
 }
 */
+
+- (void) inventoryItemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString *)code
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(_network_delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [delegate itemDescriptionComplete:1 itemDescription:nil];
+    });
+}
 
 - (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString *)code shopCode:(NSString *)shopCode isoType:(int)type
 {

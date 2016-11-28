@@ -73,8 +73,29 @@
     //if (!settingsString)
         [self registerDefaultsFromSettingsBundle];
     
+    UIImage* image = [self generateBarcodeFromString:@"123"];
+    
     return YES;
 }
+
+- (UIImage*) generateBarcodeFromString:(NSString*) text
+{
+    CIFilter *imageFilter = [CIFilter filterWithName:@"CICode128BarcodeGenerator"];
+    [imageFilter setValue:[text dataUsingEncoding:NSASCIIStringEncoding] forKey:@"inputMessage"];
+    
+    CGImageRef moi3 = [[CIContext contextWithOptions:nil]
+                       createCGImage:[imageFilter outputImage]
+                       fromRect:[[imageFilter outputImage] extent]];
+    UIImage* finalImage = [UIImage imageWithCGImage:moi3];
+    
+    NSString *f = @"file.png";
+    [UIImagePNGRepresentation(finalImage) writeToFile:f atomically:YES];
+    NSData *myImageData = UIImagePNGRepresentation(finalImage);
+    finalImage = [UIImage imageWithData:myImageData];
+    
+    return finalImage;
+}
+
 
 - (void) connectionState:(int)state
 {

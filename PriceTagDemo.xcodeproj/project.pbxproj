@@ -380,6 +380,35 @@
 		C6069EED1D92F06D008C3F58 /* CategoriesCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C6069EEB1D92F06D008C3F58 /* CategoriesCollectionCell.m */; };
 		C6069EEE1D92F06D008C3F58 /* CategoriesCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6069EEC1D92F06D008C3F58 /* CategoriesCollectionCell.xib */; };
 		C607A60B1DB0E0E000F3E5E9 /* SOAPTaskWareBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = C607A60A1DB0E0E000F3E5E9 /* SOAPTaskWareBinding.m */; };
+		C60A2FEC1DE335F600FC4995 /* 210001.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C60A2FD51DE335F600FC4995 /* 210001.jpg */; };
+		C60A2FED1DE335F600FC4995 /* 210003.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C60A2FD61DE335F600FC4995 /* 210003.jpg */; };
+		C60A2FEE1DE335F600FC4995 /* 210005.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C60A2FD71DE335F600FC4995 /* 210005.jpg */; };
+		C60A2FEF1DE335F600FC4995 /* 210009.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C60A2FD81DE335F600FC4995 /* 210009.jpg */; };
+		C60A2FF01DE335F600FC4995 /* 220001.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C60A2FD91DE335F600FC4995 /* 220001.jpg */; };
+		C60A2FF11DE335F600FC4995 /* 221002.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C60A2FDA1DE335F600FC4995 /* 221002.jpg */; };
+		C60A2FF21DE335F600FC4995 /* 221003.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C60A2FDB1DE335F600FC4995 /* 221003.jpg */; };
+		C60A2FF31DE335F600FC4995 /* 221005.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C60A2FDC1DE335F600FC4995 /* 221005.jpg */; };
+		C60A2FF41DE335F600FC4995 /* 230008.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C60A2FDD1DE335F600FC4995 /* 230008.jpg */; };
+		C60A2FF51DE335F600FC4995 /* 230014.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C60A2FDE1DE335F600FC4995 /* 230014.jpg */; };
+		C60A2FF61DE335F600FC4995 /* 231002.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C60A2FDF1DE335F600FC4995 /* 231002.jpg */; };
+		C60A2FF71DE335F600FC4995 /* 231003.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C60A2FE01DE335F600FC4995 /* 231003.jpg */; };
+		C60A2FF81DE335F600FC4995 /* 231007.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C60A2FE11DE335F600FC4995 /* 231007.jpg */; };
+		C60A2FF91DE335F600FC4995 /* 231010.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C60A2FE21DE335F600FC4995 /* 231010.jpg */; };
+		C60A2FFA1DE335F600FC4995 /* 231015.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C60A2FE31DE335F600FC4995 /* 231015.jpg */; };
+		C60A2FFB1DE335F600FC4995 /* 231017.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C60A2FE41DE335F600FC4995 /* 231017.jpg */; };
+		C60A2FFC1DE335F600FC4995 /* 232001.png in Resources */ = {isa = PBXBuildFile; fileRef = C60A2FE51DE335F600FC4995 /* 232001.png */; };
+		C60A2FFD1DE335F600FC4995 /* 232101.png in Resources */ = {isa = PBXBuildFile; fileRef = C60A2FE61DE335F600FC4995 /* 232101.png */; };
+		C60A2FFE1DE335F600FC4995 /* 240002.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C60A2FE71DE335F600FC4995 /* 240002.jpg */; };
+		C60A2FFF1DE335F600FC4995 /* 240003.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C60A2FE81DE335F600FC4995 /* 240003.jpg */; };
+		C60A30001DE335F600FC4995 /* 241001.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C60A2FE91DE335F600FC4995 /* 241001.jpg */; };
+		C60A30011DE335F600FC4995 /* 241002.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C60A2FEA1DE335F600FC4995 /* 241002.jpg */; };
+		C60A30021DE335F600FC4995 /* 270001.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C60A2FEB1DE335F600FC4995 /* 270001.jpg */; };
+		C60A30051DE33E8A00FC4995 /* MCPSimulatorImpl+RivGosh.m in Sources */ = {isa = PBXBuildFile; fileRef = C60A30041DE33E8A00FC4995 /* MCPSimulatorImpl+RivGosh.m */; };
+		C60A30061DE33FAB00FC4995 /* items.csv in Resources */ = {isa = PBXBuildFile; fileRef = C6929F8E1DE3264700464179 /* items.csv */; };
+		C60A301C1DE35B7C00FC4995 /* DSPF_Printer_technopark.m in Sources */ = {isa = PBXBuildFile; fileRef = C60A300B1DE35B7C00FC4995 /* DSPF_Printer_technopark.m */; };
+		C60A301D1DE35B7C00FC4995 /* libMoebiusLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C60A30161DE35B7C00FC4995 /* libMoebiusLibrary.a */; };
+		C60A301E1DE35B7C00FC4995 /* MoebiusPrinterManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = C60A30191DE35B7C00FC4995 /* MoebiusPrinterManager.mm */; };
+		C60A301F1DE35B7C00FC4995 /* StreamBridge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C60A301A1DE35B7C00FC4995 /* StreamBridge.cpp */; };
 		C60F6F7F1CD36965003949CE /* AntiAliasView.m in Sources */ = {isa = PBXBuildFile; fileRef = B90CE48A1C89B44600DFB3E4 /* AntiAliasView.m */; };
 		C60F6F821CD3754E003949CE /* MelonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C60F6F811CD3754E003949CE /* MelonViewController.m */; };
 		C629B5C71D076552002108DF /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C629B5C51D076552002108DF /* AboutViewController.m */; };
@@ -454,6 +483,7 @@
 		C68216381DB66B1800833751 /* ZPLGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = C68216371DB66B1800833751 /* ZPLGenerator.m */; };
 		C690B4171CE8BB3100F4DF95 /* DiscountInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = C690B4161CE8BB3100F4DF95 /* DiscountInformation.m */; };
 		C690B4191CE8BBC100F4DF95 /* DiscountInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = C690B4161CE8BB3100F4DF95 /* DiscountInformation.m */; };
+		C6929F8F1DE3264700464179 /* items.csv in Resources */ = {isa = PBXBuildFile; fileRef = C6929F8E1DE3264700464179 /* items.csv */; };
 		C6979E9A1D8FE6A800A0B51B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6979E991D8FE6A800A0B51B /* LoginViewController.m */; };
 		C6979EA21D91348000A0B51B /* catalog@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6979EA11D91348000A0B51B /* catalog@2x.png */; };
 		C6979EA71D9135AD00A0B51B /* filter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6979EA31D9135AD00A0B51B /* filter@2x.png */; };
@@ -462,6 +492,17 @@
 		C6979EAA1D9135AD00A0B51B /* tasks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6979EA61D9135AD00A0B51B /* tasks@2x.png */; };
 		C6979EAD1D91462C00A0B51B /* CategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6979EAC1D91462C00A0B51B /* CategoriesViewController.m */; };
 		C6B3C9871D93E7F400730D9F /* TasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6B3C9861D93E7F400730D9F /* TasksViewController.m */; };
+		C6D2A57D1DE4C3C9003444A9 /* OstinPriceTag.xib in Resources */ = {isa = PBXBuildFile; fileRef = B92DCE411C846002002AA184 /* OstinPriceTag.xib */; };
+		C6D2A57E1DE4C3CC003444A9 /* OstinPriceTag.m in Sources */ = {isa = PBXBuildFile; fileRef = B92DCE3F1C845FF2002AA184 /* OstinPriceTag.m */; };
+		C6D2A57F1DE4C734003444A9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B90CE4801C898DFE00DFB3E4 /* CoreGraphics.framework */; };
+		C6D2A5881DE4D654003444A9 /* 280010.png in Resources */ = {isa = PBXBuildFile; fileRef = C6D2A5801DE4D654003444A9 /* 280010.png */; };
+		C6D2A5891DE4D654003444A9 /* 280011.png in Resources */ = {isa = PBXBuildFile; fileRef = C6D2A5811DE4D654003444A9 /* 280011.png */; };
+		C6D2A58A1DE4D654003444A9 /* 280012.png in Resources */ = {isa = PBXBuildFile; fileRef = C6D2A5821DE4D654003444A9 /* 280012.png */; };
+		C6D2A58B1DE4D654003444A9 /* 280013.png in Resources */ = {isa = PBXBuildFile; fileRef = C6D2A5831DE4D654003444A9 /* 280013.png */; };
+		C6D2A58C1DE4D654003444A9 /* 280014.png in Resources */ = {isa = PBXBuildFile; fileRef = C6D2A5841DE4D654003444A9 /* 280014.png */; };
+		C6D2A58D1DE4D654003444A9 /* 280015.png in Resources */ = {isa = PBXBuildFile; fileRef = C6D2A5851DE4D654003444A9 /* 280015.png */; };
+		C6D2A58E1DE4D654003444A9 /* 280016.png in Resources */ = {isa = PBXBuildFile; fileRef = C6D2A5861DE4D654003444A9 /* 280016.png */; };
+		C6D2A58F1DE4D654003444A9 /* 280017.png in Resources */ = {isa = PBXBuildFile; fileRef = C6D2A5871DE4D654003444A9 /* 280017.png */; };
 		C6E776F41D747B00000FEAC8 /* libPaymentLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E776F31D747B00000FEAC8 /* libPaymentLibrary.a */; };
 		C6F600C71D9C363C0095AE21 /* NSDate+ISO8601Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F600BC1D9C363C0095AE21 /* NSDate+ISO8601Parsing.m */; };
 		C6F600C81D9C363C0095AE21 /* NSDate+ISO8601Unparsing.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F600BE1D9C363C0095AE21 /* NSDate+ISO8601Unparsing.m */; };
@@ -869,6 +910,48 @@
 		C6069EEC1D92F06D008C3F58 /* CategoriesCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoriesCollectionCell.xib; sourceTree = "<group>"; };
 		C607A6091DB0E0E000F3E5E9 /* SOAPTaskWareBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPTaskWareBinding.h; sourceTree = "<group>"; };
 		C607A60A1DB0E0E000F3E5E9 /* SOAPTaskWareBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPTaskWareBinding.m; sourceTree = "<group>"; };
+		C60A2FD51DE335F600FC4995 /* 210001.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 210001.jpg; sourceTree = "<group>"; };
+		C60A2FD61DE335F600FC4995 /* 210003.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 210003.jpg; sourceTree = "<group>"; };
+		C60A2FD71DE335F600FC4995 /* 210005.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 210005.jpg; sourceTree = "<group>"; };
+		C60A2FD81DE335F600FC4995 /* 210009.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 210009.jpg; sourceTree = "<group>"; };
+		C60A2FD91DE335F600FC4995 /* 220001.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 220001.jpg; sourceTree = "<group>"; };
+		C60A2FDA1DE335F600FC4995 /* 221002.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 221002.jpg; sourceTree = "<group>"; };
+		C60A2FDB1DE335F600FC4995 /* 221003.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 221003.jpg; sourceTree = "<group>"; };
+		C60A2FDC1DE335F600FC4995 /* 221005.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 221005.jpg; sourceTree = "<group>"; };
+		C60A2FDD1DE335F600FC4995 /* 230008.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 230008.jpg; sourceTree = "<group>"; };
+		C60A2FDE1DE335F600FC4995 /* 230014.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 230014.jpg; sourceTree = "<group>"; };
+		C60A2FDF1DE335F600FC4995 /* 231002.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 231002.jpg; sourceTree = "<group>"; };
+		C60A2FE01DE335F600FC4995 /* 231003.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 231003.jpg; sourceTree = "<group>"; };
+		C60A2FE11DE335F600FC4995 /* 231007.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 231007.jpg; sourceTree = "<group>"; };
+		C60A2FE21DE335F600FC4995 /* 231010.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 231010.jpg; sourceTree = "<group>"; };
+		C60A2FE31DE335F600FC4995 /* 231015.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 231015.jpg; sourceTree = "<group>"; };
+		C60A2FE41DE335F600FC4995 /* 231017.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 231017.jpg; sourceTree = "<group>"; };
+		C60A2FE51DE335F600FC4995 /* 232001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 232001.png; sourceTree = "<group>"; };
+		C60A2FE61DE335F600FC4995 /* 232101.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 232101.png; sourceTree = "<group>"; };
+		C60A2FE71DE335F600FC4995 /* 240002.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 240002.jpg; sourceTree = "<group>"; };
+		C60A2FE81DE335F600FC4995 /* 240003.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 240003.jpg; sourceTree = "<group>"; };
+		C60A2FE91DE335F600FC4995 /* 241001.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 241001.jpg; sourceTree = "<group>"; };
+		C60A2FEA1DE335F600FC4995 /* 241002.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 241002.jpg; sourceTree = "<group>"; };
+		C60A2FEB1DE335F600FC4995 /* 270001.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 270001.jpg; sourceTree = "<group>"; };
+		C60A30031DE33E8A00FC4995 /* MCPSimulatorImpl+RivGosh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MCPSimulatorImpl+RivGosh.h"; sourceTree = "<group>"; };
+		C60A30041DE33E8A00FC4995 /* MCPSimulatorImpl+RivGosh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MCPSimulatorImpl+RivGosh.m"; sourceTree = "<group>"; };
+		C60A300A1DE35B7C00FC4995 /* DSPF_Printer_technopark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPF_Printer_technopark.h; sourceTree = "<group>"; };
+		C60A300B1DE35B7C00FC4995 /* DSPF_Printer_technopark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPF_Printer_technopark.m; sourceTree = "<group>"; };
+		C60A300D1DE35B7C00FC4995 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
+		C60A300E1DE35B7C00FC4995 /* Device_Tmpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device_Tmpl.h; sourceTree = "<group>"; };
+		C60A300F1DE35B7C00FC4995 /* GStdAfx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GStdAfx.h; sourceTree = "<group>"; };
+		C60A30101DE35B7C00FC4995 /* IOSStreamInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOSStreamInterface.h; sourceTree = "<group>"; };
+		C60A30111DE35B7C00FC4995 /* MoebiusAux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoebiusAux.h; sourceTree = "<group>"; };
+		C60A30121DE35B7C00FC4995 /* MoebiusFE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoebiusFE.h; sourceTree = "<group>"; };
+		C60A30131DE35B7C00FC4995 /* MoebiusKKM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoebiusKKM.h; sourceTree = "<group>"; };
+		C60A30141DE35B7C00FC4995 /* pch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pch.h; sourceTree = "<group>"; };
+		C60A30151DE35B7C00FC4995 /* Struct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Struct.h; sourceTree = "<group>"; };
+		C60A30161DE35B7C00FC4995 /* libMoebiusLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMoebiusLibrary.a; sourceTree = "<group>"; };
+		C60A30171DE35B7C00FC4995 /* MoebiusPrinter_C_Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoebiusPrinter_C_Interface.h; sourceTree = "<group>"; };
+		C60A30181DE35B7C00FC4995 /* MoebiusPrinterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoebiusPrinterManager.h; sourceTree = "<group>"; };
+		C60A30191DE35B7C00FC4995 /* MoebiusPrinterManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MoebiusPrinterManager.mm; sourceTree = "<group>"; };
+		C60A301A1DE35B7C00FC4995 /* StreamBridge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StreamBridge.cpp; sourceTree = "<group>"; };
+		C60A301B1DE35B7C00FC4995 /* StreamBridge.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StreamBridge.hpp; sourceTree = "<group>"; };
 		C60F6F801CD3754E003949CE /* MelonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MelonViewController.h; sourceTree = "<group>"; };
 		C60F6F811CD3754E003949CE /* MelonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MelonViewController.m; sourceTree = "<group>"; };
 		C629B5C41D076552002108DF /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
@@ -950,6 +1033,7 @@
 		C68216371DB66B1800833751 /* ZPLGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZPLGenerator.m; sourceTree = "<group>"; };
 		C690B4151CE8BB3100F4DF95 /* DiscountInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscountInformation.h; sourceTree = "<group>"; };
 		C690B4161CE8BB3100F4DF95 /* DiscountInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscountInformation.m; sourceTree = "<group>"; };
+		C6929F8E1DE3264700464179 /* items.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = items.csv; sourceTree = "<group>"; };
 		C6979E981D8FE6A800A0B51B /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		C6979E991D8FE6A800A0B51B /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		C6979EA11D91348000A0B51B /* catalog@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "catalog@2x.png"; sourceTree = "<group>"; };
@@ -961,6 +1045,14 @@
 		C6979EAC1D91462C00A0B51B /* CategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesViewController.m; sourceTree = "<group>"; };
 		C6B3C9851D93E7F400730D9F /* TasksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksViewController.h; sourceTree = "<group>"; };
 		C6B3C9861D93E7F400730D9F /* TasksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TasksViewController.m; sourceTree = "<group>"; };
+		C6D2A5801DE4D654003444A9 /* 280010.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 280010.png; sourceTree = "<group>"; };
+		C6D2A5811DE4D654003444A9 /* 280011.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 280011.png; sourceTree = "<group>"; };
+		C6D2A5821DE4D654003444A9 /* 280012.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 280012.png; sourceTree = "<group>"; };
+		C6D2A5831DE4D654003444A9 /* 280013.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 280013.png; sourceTree = "<group>"; };
+		C6D2A5841DE4D654003444A9 /* 280014.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 280014.png; sourceTree = "<group>"; };
+		C6D2A5851DE4D654003444A9 /* 280015.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 280015.png; sourceTree = "<group>"; };
+		C6D2A5861DE4D654003444A9 /* 280016.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 280016.png; sourceTree = "<group>"; };
+		C6D2A5871DE4D654003444A9 /* 280017.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 280017.png; sourceTree = "<group>"; };
 		C6E776EF1D747B00000FEAC8 /* OperationResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OperationResult.h; sourceTree = "<group>"; };
 		C6E776F01D747B00000FEAC8 /* PLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLManager.h; sourceTree = "<group>"; };
 		C6E776F21D747B00000FEAC8 /* ZebraLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZebraLibrary.h; sourceTree = "<group>"; };
@@ -1085,6 +1177,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6D2A57F1DE4C734003444A9 /* CoreGraphics.framework in Frameworks */,
 				B970B82E1CD213BB0066A66A /* libdtdev.a in Frameworks */,
 				B970B82D1CD213660066A66A /* ExternalAccessory.framework in Frameworks */,
 				AE8C2626871398B9A08C8303 /* libPods-Melon.a in Frameworks */,
@@ -1097,6 +1190,7 @@
 			files = (
 				B9A3FE401CA1A4580060483D /* libdtdev.a in Frameworks */,
 				B9A3FE3F1CA1A4350060483D /* ExternalAccessory.framework in Frameworks */,
+				C60A301D1DE35B7C00FC4995 /* libMoebiusLibrary.a in Frameworks */,
 				C6E776F41D747B00000FEAC8 /* libPaymentLibrary.a in Frameworks */,
 				7DC540BCDFB8152BC8C1981A /* libPods-RivGosh.a in Frameworks */,
 			);
@@ -1216,6 +1310,8 @@
 			children = (
 				B9171DA71CF316DF004DB487 /* MCPNetworkImpl+RivGosh.h */,
 				B9171DA81CF316DF004DB487 /* MCPNetworkImpl+RivGosh.m */,
+				C60A30031DE33E8A00FC4995 /* MCPSimulatorImpl+RivGosh.h */,
+				C60A30041DE33E8A00FC4995 /* MCPSimulatorImpl+RivGosh.m */,
 				B9171D9B1CF3112A004DB487 /* Objects */,
 				B9171D9C1CF3112A004DB487 /* Protocol */,
 				B9171D9D1CF3112A004DB487 /* Security */,
@@ -1636,6 +1732,7 @@
 		B970B8161CD209820066A66A /* Melon */ = {
 			isa = PBXGroup;
 			children = (
+				C6929F8D1DE3257D00464179 /* DemoData */,
 				C6F601B61D9E635A0095AE21 /* Inventory */,
 				C6F601BB1D9E635A0095AE21 /* Stock */,
 				C6FFF3F81D79781300947948 /* CoreData */,
@@ -1691,6 +1788,7 @@
 		B9A3FE191CA19E200060483D /* RivGosh */ = {
 			isa = PBXGroup;
 			children = (
+				C60A30091DE35B7C00FC4995 /* PrinterLib */,
 				C651CA7D1D75855C0045C3F7 /* Terminal */,
 				C6E776EC1D747B00000FEAC8 /* PaymentLibrary */,
 				C629B5C31D07653A002108DF /* About */,
@@ -1850,6 +1948,76 @@
 			name = Protocol;
 			sourceTree = "<group>";
 		};
+		C60A2FD41DE335F600FC4995 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				C6D2A5801DE4D654003444A9 /* 280010.png */,
+				C6D2A5811DE4D654003444A9 /* 280011.png */,
+				C6D2A5821DE4D654003444A9 /* 280012.png */,
+				C6D2A5831DE4D654003444A9 /* 280013.png */,
+				C6D2A5841DE4D654003444A9 /* 280014.png */,
+				C6D2A5851DE4D654003444A9 /* 280015.png */,
+				C6D2A5861DE4D654003444A9 /* 280016.png */,
+				C6D2A5871DE4D654003444A9 /* 280017.png */,
+				C60A2FD51DE335F600FC4995 /* 210001.jpg */,
+				C60A2FD61DE335F600FC4995 /* 210003.jpg */,
+				C60A2FD71DE335F600FC4995 /* 210005.jpg */,
+				C60A2FD81DE335F600FC4995 /* 210009.jpg */,
+				C60A2FD91DE335F600FC4995 /* 220001.jpg */,
+				C60A2FDA1DE335F600FC4995 /* 221002.jpg */,
+				C60A2FDB1DE335F600FC4995 /* 221003.jpg */,
+				C60A2FDC1DE335F600FC4995 /* 221005.jpg */,
+				C60A2FDD1DE335F600FC4995 /* 230008.jpg */,
+				C60A2FDE1DE335F600FC4995 /* 230014.jpg */,
+				C60A2FDF1DE335F600FC4995 /* 231002.jpg */,
+				C60A2FE01DE335F600FC4995 /* 231003.jpg */,
+				C60A2FE11DE335F600FC4995 /* 231007.jpg */,
+				C60A2FE21DE335F600FC4995 /* 231010.jpg */,
+				C60A2FE31DE335F600FC4995 /* 231015.jpg */,
+				C60A2FE41DE335F600FC4995 /* 231017.jpg */,
+				C60A2FE51DE335F600FC4995 /* 232001.png */,
+				C60A2FE61DE335F600FC4995 /* 232101.png */,
+				C60A2FE71DE335F600FC4995 /* 240002.jpg */,
+				C60A2FE81DE335F600FC4995 /* 240003.jpg */,
+				C60A2FE91DE335F600FC4995 /* 241001.jpg */,
+				C60A2FEA1DE335F600FC4995 /* 241002.jpg */,
+				C60A2FEB1DE335F600FC4995 /* 270001.jpg */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		C60A30091DE35B7C00FC4995 /* PrinterLib */ = {
+			isa = PBXGroup;
+			children = (
+				C60A300A1DE35B7C00FC4995 /* DSPF_Printer_technopark.h */,
+				C60A300B1DE35B7C00FC4995 /* DSPF_Printer_technopark.m */,
+				C60A300C1DE35B7C00FC4995 /* Include */,
+				C60A30161DE35B7C00FC4995 /* libMoebiusLibrary.a */,
+				C60A30171DE35B7C00FC4995 /* MoebiusPrinter_C_Interface.h */,
+				C60A30181DE35B7C00FC4995 /* MoebiusPrinterManager.h */,
+				C60A30191DE35B7C00FC4995 /* MoebiusPrinterManager.mm */,
+				C60A301A1DE35B7C00FC4995 /* StreamBridge.cpp */,
+				C60A301B1DE35B7C00FC4995 /* StreamBridge.hpp */,
+			);
+			path = PrinterLib;
+			sourceTree = "<group>";
+		};
+		C60A300C1DE35B7C00FC4995 /* Include */ = {
+			isa = PBXGroup;
+			children = (
+				C60A300D1DE35B7C00FC4995 /* Device.h */,
+				C60A300E1DE35B7C00FC4995 /* Device_Tmpl.h */,
+				C60A300F1DE35B7C00FC4995 /* GStdAfx.h */,
+				C60A30101DE35B7C00FC4995 /* IOSStreamInterface.h */,
+				C60A30111DE35B7C00FC4995 /* MoebiusAux.h */,
+				C60A30121DE35B7C00FC4995 /* MoebiusFE.h */,
+				C60A30131DE35B7C00FC4995 /* MoebiusKKM.h */,
+				C60A30141DE35B7C00FC4995 /* pch.h */,
+				C60A30151DE35B7C00FC4995 /* Struct.h */,
+			);
+			path = Include;
+			sourceTree = "<group>";
+		};
 		C629B5C31D07653A002108DF /* About */ = {
 			isa = PBXGroup;
 			children = (
@@ -1980,6 +2148,15 @@
 				C68216371DB66B1800833751 /* ZPLGenerator.m */,
 			);
 			path = ZPL;
+			sourceTree = "<group>";
+		};
+		C6929F8D1DE3257D00464179 /* DemoData */ = {
+			isa = PBXGroup;
+			children = (
+				C60A2FD41DE335F600FC4995 /* images */,
+				C6929F8E1DE3264700464179 /* items.csv */,
+			);
+			path = DemoData;
 			sourceTree = "<group>";
 		};
 		C6979E971D8FE67900A0B51B /* Login */ = {
@@ -2624,18 +2801,51 @@
 			buildActionMask = 2147483647;
 			files = (
 				B970B8451CD21D860066A66A /* eac_black@2x.png in Resources */,
+				C6D2A5891DE4D654003444A9 /* 280011.png in Resources */,
 				B970B8591CD296820066A66A /* CartCell.xib in Resources */,
+				C60A2FF41DE335F600FC4995 /* 230008.jpg in Resources */,
 				B970B8481CD273870066A66A /* MFG_Bar@2x.png in Resources */,
+				C6D2A58F1DE4D654003444A9 /* 280017.png in Resources */,
 				B970B83E1CD21C200066A66A /* PrintViewController.xib in Resources */,
+				C60A2FF11DE335F600FC4995 /* 221002.jpg in Resources */,
+				C60A2FFD1DE335F600FC4995 /* 232101.png in Resources */,
 				B9950B731CE1E5A0005B4375 /* Barcode manual@2x.png in Resources */,
+				C60A2FF01DE335F600FC4995 /* 220001.jpg in Resources */,
+				C6D2A58A1DE4D654003444A9 /* 280012.png in Resources */,
+				C60A2FF71DE335F600FC4995 /* 231003.jpg in Resources */,
+				C60A2FFE1DE335F600FC4995 /* 240002.jpg in Resources */,
+				C60A2FEE1DE335F600FC4995 /* 210005.jpg in Resources */,
+				C60A30001DE335F600FC4995 /* 241001.jpg in Resources */,
+				C60A2FFC1DE335F600FC4995 /* 232001.png in Resources */,
 				B970B85D1CD2A0150066A66A /* send@2x.png in Resources */,
+				C6D2A58D1DE4D654003444A9 /* 280015.png in Resources */,
+				C60A2FEC1DE335F600FC4995 /* 210001.jpg in Resources */,
 				B970B83D1CD217C10066A66A /* Settings.bundle in Resources */,
+				C60A2FFB1DE335F600FC4995 /* 231017.jpg in Resources */,
 				B970B8271CD209830066A66A /* LaunchScreen.storyboard in Resources */,
+				C60A30021DE335F600FC4995 /* 270001.jpg in Resources */,
+				C60A2FF61DE335F600FC4995 /* 231002.jpg in Resources */,
 				C6F601C91D9E71090095AE21 /* StockCell.xib in Resources */,
+				C6D2A57D1DE4C3C9003444A9 /* OstinPriceTag.xib in Resources */,
 				B9950B6D1CDBACAE005B4375 /* settings_icon@2x.png in Resources */,
+				C60A30011DE335F600FC4995 /* 241002.jpg in Resources */,
+				C60A2FF21DE335F600FC4995 /* 221003.jpg in Resources */,
+				C6D2A5881DE4D654003444A9 /* 280010.png in Resources */,
+				C6D2A58B1DE4D654003444A9 /* 280013.png in Resources */,
 				B970B8241CD209830066A66A /* Assets.xcassets in Resources */,
+				C60A2FEF1DE335F600FC4995 /* 210009.jpg in Resources */,
+				C60A2FFA1DE335F600FC4995 /* 231015.jpg in Resources */,
+				C60A2FF31DE335F600FC4995 /* 221005.jpg in Resources */,
+				C60A2FF51DE335F600FC4995 /* 230014.jpg in Resources */,
 				B970B8431CD21D040066A66A /* MelonPriceTag.xib in Resources */,
 				B970B8221CD209830066A66A /* Main.storyboard in Resources */,
+				C60A2FF91DE335F600FC4995 /* 231010.jpg in Resources */,
+				C60A2FFF1DE335F600FC4995 /* 240003.jpg in Resources */,
+				C60A2FF81DE335F600FC4995 /* 231007.jpg in Resources */,
+				C6D2A58E1DE4D654003444A9 /* 280016.png in Resources */,
+				C6D2A58C1DE4D654003444A9 /* 280014.png in Resources */,
+				C6929F8F1DE3264700464179 /* items.csv in Resources */,
+				C60A2FED1DE335F600FC4995 /* 210003.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2656,6 +2866,7 @@
 				B9A3FE451CA1B1A50060483D /* rivgosh@2x.png in Resources */,
 				B9171DC11CF368E7004DB487 /* DSPF_SideMenuCell_technopark.xib in Resources */,
 				C651CA821D7585BA0045C3F7 /* TerminalViewController.xib in Resources */,
+				C60A30061DE33FAB00FC4995 /* items.csv in Resources */,
 				B9A3FE461CA1B5A00060483D /* CartCell.xib in Resources */,
 				B9A3FE271CA19E200060483D /* Assets.xcassets in Resources */,
 				B9A3FE251CA19E200060483D /* Main.storyboard in Resources */,
@@ -3410,6 +3621,7 @@
 				B949E5E71D1935ED006DA010 /* ZReport.m in Sources */,
 				B949E5E41D1935D6006DA010 /* NwobjPrintRepeat.m in Sources */,
 				B949E5E51D1935D6006DA010 /* NwobjectXReport.m in Sources */,
+				C6D2A57E1DE4C3CC003444A9 /* OstinPriceTag.m in Sources */,
 				B949E5E61D1935D6006DA010 /* NwobjZreport.m in Sources */,
 				B989F4D31CFD965000B59F5A /* NwobjDiscounts.m in Sources */,
 				B92B6E921CEB4CD500B94B21 /* MCPOfflineInmpl.m in Sources */,
@@ -3478,8 +3690,10 @@
 				B92B6EA11CEDC7DF00B94B21 /* DiscountInformation.m in Sources */,
 				B970B8101CD0EBAD0066A66A /* NwobjClientCard.m in Sources */,
 				B9171DCD1CF46738004DB487 /* SettingsViewController.m in Sources */,
+				C60A30051DE33E8A00FC4995 /* MCPSimulatorImpl+RivGosh.m in Sources */,
 				B989F4DC1CFEE44A00B59F5A /* NwobjPrintStatus.m in Sources */,
 				B968E7011CCE749E005F91FF /* NwobjAuthorization.m in Sources */,
+				C60A301C1DE35B7C00FC4995 /* DSPF_Printer_technopark.m in Sources */,
 				B9F3C3BA1D13FBBE00938D92 /* NwobjZreport.m in Sources */,
 				B92B6EA71CEDC81B00B94B21 /* DiscountsViewController.m in Sources */,
 				B9BE90F01D0B18C4008CBD56 /* NwobjectXReport.m in Sources */,
@@ -3505,9 +3719,11 @@
 				B9F5F0BC1D0060750010E1EA /* NwobjSendLoyalty.m in Sources */,
 				B9950B741CE20860005B4375 /* NwobjInventoryItemDescription.m in Sources */,
 				B989F4E21CFF0A4F00B59F5A /* PrinterStatus.m in Sources */,
+				C60A301E1DE35B7C00FC4995 /* MoebiusPrinterManager.mm in Sources */,
 				B9A3FE351CA1A0620060483D /* ViewController.m in Sources */,
 				B9950B751CE20914005B4375 /* NwobjSendCart.m in Sources */,
 				B989F4D11CFC62B500B59F5A /* DiscountTitleCell.m in Sources */,
+				C60A301F1DE35B7C00FC4995 /* StreamBridge.cpp in Sources */,
 				B9171DC01CF368E7004DB487 /* DSPF_SideMenuCell_technopark.m in Sources */,
 				B9A3FE1C1CA19E200060483D /* main.m in Sources */,
 				B9171DC41CF368E7004DB487 /* DSPF_Workspace.m in Sources */,
@@ -4097,6 +4313,10 @@
 					"$(inherited)",
 					"MELON=1",
 					"OFFLINE=1",
+					_DEBUG,
+					_WINRT_DLL,
+					_ZWINRT,
+					_IOS,
 				);
 				INFOPLIST_FILE = Melon/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -4126,6 +4346,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"MELON=1",
 					"OFFLINE=1",
+					_IOS,
 				);
 				INFOPLIST_FILE = Melon/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -4152,6 +4373,9 @@
 					"DEBUG=1",
 					"$(inherited)",
 					"RIVGOSH=1",
+					_WINRT_DLL,
+					_ZWINRT,
+					_IOS,
 				);
 				INFOPLIST_FILE = RivGosh/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -4164,6 +4388,7 @@
 					"$(USER_LIBRARY_DIR)/Mobile",
 					"Documents/com~apple~CloudDocs/PLTest/PaymentLibrary/PaymentLibrary",
 					"$(PROJECT_DIR)/RivGosh/PaymentLibrary",
+					"$(PROJECT_DIR)/RivGosh/PrinterLib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dataphone.RivGosh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4177,7 +4402,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
-				GCC_PREPROCESSOR_DEFINITIONS = "RIVGOSH=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"RIVGOSH=1",
+					_WINRT_DLL,
+					_ZWINRT,
+					_IOS,
+				);
 				INFOPLIST_FILE = RivGosh/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -4189,6 +4419,7 @@
 					"$(USER_LIBRARY_DIR)/Mobile",
 					"Documents/com~apple~CloudDocs/PLTest/PaymentLibrary/PaymentLibrary",
 					"$(PROJECT_DIR)/RivGosh/PaymentLibrary",
+					"$(PROJECT_DIR)/RivGosh/PrinterLib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dataphone.RivGosh;
 				PRODUCT_NAME = "$(TARGET_NAME)";

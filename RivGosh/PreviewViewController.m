@@ -94,6 +94,7 @@
     PaymentViewController* paymentVC = segue.destinationViewController;
     paymentVC.amount = _finalAmountLabel.text;
     paymentVC.receiptId = _receiptID;
+    paymentVC.items = _items;
 }
 
 

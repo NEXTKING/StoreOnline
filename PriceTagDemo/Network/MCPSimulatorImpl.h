@@ -13,6 +13,10 @@
 
 @interface MCPSimulatorImpl : NSObject
     <MCProtocol>
+{
+    @protected
+    NSMutableDictionary *_itemsDictionary;
+}
 
 @property (nonatomic, copy, readwrite) NSString *accessToken;
 @property (nonatomic, copy, readwrite) NSString *userId;

@@ -9,8 +9,10 @@
 #import "PaymentViewController.h"
 #import "MCPServer.h"
 #import "PLManager.h"
+#import "DTDevices.h"
+#import "DSPF_Printer_technopark.h"
 
-@interface PaymentViewController () <PrinterDelegate, SendPaymentDelegate, PLManagerDelegate>
+@interface PaymentViewController () <PrinterDelegate, SendPaymentDelegate, PLManagerDelegate, DTDeviceDelegate>
 {
     BOOL shouldContinueStatusCheck;
     BOOL loopMode;
@@ -37,6 +39,7 @@
     paymentLibrary = [PLManager instance];
     paymentLibrary.delegate = self;
     [self checkPrinterStatus];
+    
 }
 
 - (void) viewDidDisappear:(BOOL)animated
@@ -49,6 +52,18 @@
         _restartPayment.hidden = NO;
         _restartPayment.enabled = NO;
     }
+    
+    DTDevices* dtdev = [DTDevices sharedDevice];
+    [dtdev removeDelegate:self];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    DTDevices* dtdev = [DTDevices sharedDevice];
+    [dtdev addDelegate:self];
+    [dtdev emsrConfigMaskedDataShowExpiration:TRUE showServiceCode:TRUE showTrack3:FALSE unmaskedDigitsAtStart:6 unmaskedDigitsAtEnd:2 unmaskedDigitsAfter:7 error:nil];
+    [dtdev emsrSetEncryption:ALG_PPAD_3DES_CBC keyID:3 params:nil error:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -64,6 +79,7 @@
 
 - (IBAction) switchBackToCart:(id) sender
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"CleanAllData" object:nil userInfo:nil];
     [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
 }
 
@@ -94,17 +110,60 @@
     _restartPayment.enabled = NO;
     _placeholderLabel.hidden = NO;
     _placeholderLabel.text = @"Вставьте карту оплаты или приложите ее к считывателю";
-    NSError* error;
-    [paymentLibrary payment:_amount.doubleValue error:&error];
+    //NSError* error;
+    //[paymentLibrary payment:_amount.doubleValue error:&error];
     
-    if (error)
+    /*if (error)
     {
         [self showInfoMessage:error.localizedDescription];
         _restartPayment.hidden = NO;
         _restartPayment.enabled = YES;
         _placeholderLabel.text = @"Во время оплаты произошла ошибка. Попробуйте снова.";
-    }
+    }*/
     //[self sendPaymentInfo];
+}
+
+
+- (void) magneticCardEncryptedData:(int)encryption tracks:(int)tracks data:(NSData *)data track1masked:(NSString *)track1masked track2masked:(NSString *)track2masked track3:(NSString *)track3 source:(int)source
+{
+    [self paymentManagerWillRequestPINEntry];
+    [self startFakePinEntry];
+}
+
+- (void) smartCardInserted:(SC_SLOTS)slot
+{
+    [self startFakePinEntry];
+}
+
+- (void) startFakePinEntry
+{
+    DTDevices* dtdev = [DTDevices sharedDevice];
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
+    
+    NSError* error;
+    [dtdev ppadPINEntry:0 startY:0 timeout:30 echoChar:'*' message:@"Enter PIN: " error:&error];
+    BOOL errorOccured = !(error == nil);
+        
+        //Run UI Updates
+    
+            [self paymentManagerDidReceivePINEntry:!errorOccured];
+            
+            if (errorOccured)
+                [self paymentManagerWillRequestPINEntry];
+    
+        
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
+
+    [self paymentManagerWillStartOperation:PLOperationTypePayment];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        PLOperationResult* result = [PLOperationResult new];
+        result.success = YES;
+        result.resultCode = 0;
+        [self paymentManagerDidFinishOperation:PLOperationTypePayment result:result];
+        
+    });
+
 }
 
 - (void) sendPaymentInfo:(PLOperationResult*) result
@@ -348,6 +407,9 @@
         _restartPayment.hidden = YES;
         [self sendPaymentInfo:result];
         _placeholderLabel.hidden = YES;
+        
+        DSPF_Printer_technopark* printer = [DSPF_Printer_technopark new];
+        [printer printTransportGroup:_items];
     }
 }
 

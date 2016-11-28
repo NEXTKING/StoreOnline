@@ -10,6 +10,7 @@
 
 @interface PaymentViewController : UIViewController
 
+@property (nonatomic, strong) NSArray* items;
 @property (nonatomic, copy) NSString* amount;
 @property (nonatomic, copy) NSString* receiptId;
 

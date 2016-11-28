@@ -111,7 +111,23 @@
     NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString*path = [[NSString alloc] initWithFormat:@"%@/zones.arch", docDir];
     NSArray* sectionsData = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
-    for (NSDictionary* zoneDict in sectionsData) {
+    
+    NSMutableArray* fakeZones = [NSMutableArray new];
+    
+    {
+        NSDictionary* fakeZone = @{@"Description":@"Зона 1",@"ZoneCode":@"1"};
+        [fakeZones addObject:fakeZone];
+    }
+    {
+        NSDictionary* fakeZone = @{@"Description":@"Зона 2",@"ZoneCode":@"2"};
+        [fakeZones addObject:fakeZone];
+    }
+    {
+        NSDictionary* fakeZone = @{@"Description":@"Зона 3",@"ZoneCode":@"3"};
+        [fakeZones addObject:fakeZone];
+    }
+    
+    for (NSDictionary* zoneDict in fakeZones) {
         SectionDescription *section = [SectionDescription new];
         section.name    = [zoneDict objectForKey:@"Description"];
         section.barcode = [zoneDict objectForKey:@"ZoneCode"];

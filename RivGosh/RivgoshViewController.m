@@ -11,7 +11,7 @@
 #import "DTDevices.h"
 #import "DiscountsViewController.h"
 
-@interface RivgoshViewController () <UIAlertViewDelegate, ClientCardDelegate, DiscountsDelegate, ApplyDiscountsDelegate, PrinterDelegate>
+@interface RivgoshViewController () <UIAlertViewDelegate, ClientCardDelegate, DiscountsDelegate, ApplyDiscountsDelegate, PrinterDelegate, DTDeviceDelegate>
 {
     BOOL requestInProgress;
 }
@@ -29,6 +29,21 @@
 {
     [super viewDidLoad];
     self.navigationItem.hidesBackButton = YES;
+    
+    DTDevices* dtdev = [DTDevices sharedDevice];
+    [dtdev addDelegate:self];
+    [dtdev emsrConfigMaskedDataShowExpiration:TRUE showServiceCode:TRUE showTrack3:FALSE unmaskedDigitsAtStart:6 unmaskedDigitsAtEnd:2 unmaskedDigitsAfter:7 error:nil];
+    [dtdev emsrSetEncryption:ALG_PPAD_3DES_CBC keyID:3 params:nil error:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cleanNotificationHandler:) name:@"CleanAllData" object:nil];
+}
+- (void) cleanNotificationHandler:(NSNotification*) notification
+{
+    _nameLabel.text = @"5550012345678\n(Системная карта)";
+    self.currentReceiptId = nil;
+    [self.items removeAllObjects];
+    [self.itemsCount removeAllObjects];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self updateTotal];
 }
 
 - (void) viewWillDisappear:(BOOL)animated

@@ -106,7 +106,7 @@
     _nameLabel.text             = item.name;
     _priceLabel.text            = [NSString stringWithFormat:@"%.0f,-", item.price];
     _articleLabel.text          = item.article;
-    _descriptionLabel.text      = descriptionString;
+    //_descriptionLabel.text      = descriptionString;
     _bigSizeLabel.text          = size ? size.value:@"Б/р";
     _smallSizeLabel.text        = localSize.value;
     _dropLabel.text             = drop.value;
@@ -118,12 +118,7 @@
     _dateLabel.text = [dateFormatter stringFromDate:[NSDate date]];
     
     
-    double decimal = item.price - trunc(item.price);
-    NSString* barcode = nil;
-    if (decimal == 0)
-        barcode = [NSString stringWithFormat:@"%.0f=%@", item.price, item.barcode];
-    else
-        barcode = [NSString stringWithFormat:@"%.2f%@", item.price, item.barcode];
+    NSString* barcode = item.barcode;
     
     UIImage *barcodeImage = [self generateBarcodeFromString:barcode];
     _barcodeWidthConstraint.constant = barcodeImage.size.width;
@@ -142,8 +137,8 @@
                        fromRect:[[imageFilter outputImage] extent]];
     UIImage* finalImage = [UIImage imageWithCGImage:moi3];
     
-    NSData *myImageData = UIImagePNGRepresentation(finalImage);
-    finalImage = [UIImage imageWithData:myImageData];
+    //NSData *myImageData = UIImagePNGRepresentation(finalImage);
+    //finalImage = [UIImage imageWithData:myImageData];
     
     return finalImage;
 }

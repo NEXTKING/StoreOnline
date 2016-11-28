@@ -54,11 +54,15 @@
 {
     [super updateItemInfo:itemInfo];
     ParameterInformation *paramInfo = nil;
+    ParameterInformation *stockInfo;
     for (ParameterInformation* currentParam in itemInfo.additionalParameters) {
         if ([currentParam.name isEqualToString:@"sale"])
         {
             paramInfo = currentParam;
-            break;
+        }
+        if ([currentParam.name isEqualToString:@"stock"])
+        {
+            stockInfo = currentParam;
         }
     }
     
@@ -69,7 +73,17 @@
     }
     else
         self.itemPriceLabel.backgroundColor = [UIColor colorWithRed:113.0/255.0 green:113.0/255.0 blue:113.0/255.0 alpha:0.28];
+    
+    if (stockInfo)
+        _stockLabel.text = stockInfo.value;
         
+}
+
+- (void)clearInfo
+{
+    [super clearInfo];
+    _stockLabel.text = @"";
+    _imageView.image = nil;
 }
 
 - (IBAction)switchAction:(UISwitch*)sender
@@ -172,6 +186,12 @@
 {
    if (alertView.tag == 987)
        bindingInProgress = NO;
+}
+
+
+- (void) startLoadingImage:(NSString *)imageName
+{
+    _imageView.image = [UIImage imageNamed:imageName];
 }
 
 /*
