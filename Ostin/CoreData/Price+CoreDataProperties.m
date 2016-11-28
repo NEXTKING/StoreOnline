@@ -15,6 +15,7 @@
 }
 
 @dynamic catalogPrice;
+@dynamic dateModified;
 @dynamic retailPrice;
 @dynamic itemID;
 @dynamic discount;

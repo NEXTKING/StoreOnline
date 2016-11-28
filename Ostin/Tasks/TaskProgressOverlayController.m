@@ -12,6 +12,8 @@
 {
     NSInteger _completeItemsCount;
     NSInteger _totalItemsCount;
+    NSInteger _excessItemsCount;
+    NSInteger _printedCount;
     NSDate *_startDate;
     NSDate *_endDate;
     NSTimer *_timer;
@@ -24,6 +26,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *speedLabel;
+@property (weak, nonatomic) IBOutlet UILabel *excessLabel;
 
 @end
 
@@ -59,18 +62,21 @@
 
 #pragma mark Public setters
 
-- (void)setTitleText:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate totalItemsCount:(NSInteger)totalCount completeItemsCount:(NSInteger)completeCount timerIsRunning:(BOOL)timerIsRunning
+- (void)setTitleText:(NSString *)title startDate:(NSDate *)startDate endDate:(NSDate *)endDate totalItemsCount:(NSInteger)totalCount completeItemsCount:(NSInteger)completeCount excessItemsCount:(NSInteger)excessCount totalPrintedCount:(NSInteger)printedCount timerIsRunning:(BOOL)timerIsRunning
 {
     _titleLabel.text = title;
     _startDate = startDate;
     _endDate = endDate;
     _totalItemsCount = totalCount;
     _completeItemsCount = completeCount;
+    _excessItemsCount = excessCount;
+    _printedCount = printedCount;
     
     [self updateProgressBar];
     [self updateProgressLabel];
     [self updateTimeLabel];
     [self updateSpeedLabel];
+    [self updateExcessLabel];
     timerIsRunning ? [self initializeTimer] : [self destroyTimer];
 }
 
@@ -134,26 +140,33 @@
         
         if ((secondsPassed / (60 * 60 * 24)) > 1)
         {
-            CGFloat average = _completeItemsCount / (secondsPassed / (60 * 60 * 24));
+            CGFloat average = (_completeItemsCount + _excessItemsCount) / (secondsPassed / (60 * 60 * 24));
             self.speedLabel.text = [NSString stringWithFormat:@"%.f / день", average];
         }
         else if ((secondsPassed / (60 * 60)) > 1)
         {
-            CGFloat average = _completeItemsCount / (secondsPassed / (60 * 60));
+            CGFloat average = (_completeItemsCount + _excessItemsCount) / (secondsPassed / (60 * 60));
             self.speedLabel.text = [NSString stringWithFormat:@"%.02f / час", average];
         }
         else if ((secondsPassed / 60) > 1)
         {
-            CGFloat average = _completeItemsCount / (secondsPassed / 60);
+            CGFloat average = (_completeItemsCount + _excessItemsCount) / (secondsPassed / 60);
             self.speedLabel.text = [NSString stringWithFormat:@"%.02f / мин", average];
         }
         else
         {
-            self.speedLabel.text = [NSString stringWithFormat:@"%ld / мин", _completeItemsCount];
+            self.speedLabel.text = [NSString stringWithFormat:@"%ld / мин", (_completeItemsCount + _excessItemsCount)];
         }
     }
     else
         self.speedLabel.text = @"";
+}
+
+- (void)updateExcessLabel
+{
+    NSMutableString *excessLabelText = [[NSMutableString alloc] initWithString: (_excessItemsCount > 0 ? [NSString stringWithFormat:@"Излишки по ЗнП %ld", _excessItemsCount] : @"Излишек по ЗнП нет")];
+    [excessLabelText appendString:(_printedCount > 0 ? [NSString stringWithFormat:@", всего расп. %ld", _printedCount] : @"")];
+    _excessLabel.text = excessLabelText;
 }
 
 @end

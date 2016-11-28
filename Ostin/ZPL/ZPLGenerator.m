@@ -31,14 +31,18 @@
     NSString* size      =    [self paramFromItem:item name:@"size"];
     NSString* addSize   =    [self paramFromItem:item name:@"additionalSize"];
     NSString* addInfo   =    [self paramFromItem:item name:@"additionalInfo"];
-    NSString* userID    =    @"300";
-    NSString* shopID    =    @"123";
-    NSString* drop      =    @"";
+    NSString* key_user  =    [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
+    NSString* userID    =    key_user.length > 4 ? [key_user substringToIndex:4] : key_user;
+    NSString* shopID    =    [self paramFromItem:item name:@"storeNumber"];
+    if (shopID != nil && shopID.length > 4)
+        shopID = [shopID substringToIndex:4];
+    
+    NSString* drop      =    [self paramFromItem:item name:@"drop"];
     NSString* boxType   =    [self paramFromItem:item name:@"boxType"];
     NSString* discountNum  =    [self paramFromItem:item name:@"discount"];
     NSString* discount = (discountNum.integerValue > 0) ? [NSString stringWithFormat:@"Скидка %@%%", discountNum]:@"";
     NSString* retailPrice   = [self paramFromItem:item name:@"retailPrice"];
-    NSString* barcode       = [BarcodeFormatter generateCode128WithShopID:@"01234" code:item.barcode price:item.price];
+    NSString* barcode       = [BarcodeFormatter generateCode128WithShopID:(shopID?shopID:@"000") code:item.barcode price:MIN(item.price, [retailPrice doubleValue])];
     
     NSString* catalogPrice = @"";
     if (discountNum.integerValue > 0)
@@ -71,11 +75,14 @@
     {
         NSRange startRange = [fileContents rangeOfString:@"========С#=========="];
         NSRange endRange   = [fileContents rangeOfString:@"===================="];
-        NSRange contentsRange = NSMakeRange(startRange.location, (endRange.location+endRange.length) - startRange.location);
-        NSString* contentsString = [fileContents substringWithRange:contentsRange];
-        NSString* additionalZPL = [self additionalInfo:addInfo widht:75 y:214 dy:16 font:@"^A@N,12,0,ARI001.TTF"];
-    
-        fileContents = [fileContents stringByReplacingOccurrencesOfString:contentsString withString:additionalZPL];
+        if (startRange.location != NSNotFound && endRange.location != NSNotFound)
+        {
+            NSRange contentsRange = NSMakeRange(startRange.location, (endRange.location+endRange.length) - startRange.location);
+            NSString* contentsString = [fileContents substringWithRange:contentsRange];
+            NSString* additionalZPL = [self additionalInfo:addInfo widht:75 y:214 dy:16 font:@"^A@N,12,0,ARI001.TTF"];
+        
+            fileContents = [fileContents stringByReplacingOccurrencesOfString:contentsString withString:additionalZPL];
+        }
     }
     
     // Filling item description
@@ -83,27 +90,71 @@
     {
         NSRange startRange = [fileContents rangeOfString:@"========С#=========="];
         NSRange endRange   = [fileContents rangeOfString:@"===================="];
-        NSRange contentsRange = NSMakeRange(startRange.location, (endRange.location+endRange.length) - startRange.location);
-        NSString* contentsString = [fileContents substringWithRange:contentsRange];
-        NSString* additionalZPL = [self additionalInfo:item.name widht:50 y:92 dy:19 font:@"^A@N,17,0,ARI005.TTF"];
-        
-        fileContents = [fileContents stringByReplacingOccurrencesOfString:contentsString withString:additionalZPL];
+        if (startRange.location != NSNotFound && endRange.location != NSNotFound)
+        {
+            NSRange contentsRange = NSMakeRange(startRange.location, (endRange.location+endRange.length) - startRange.location);
+            NSString* contentsString = [fileContents substringWithRange:contentsRange];
+            NSString* additionalZPL = [self additionalInfo:item.name widht:50 y:92 dy:19 font:@"^A@N,17,0,ARI005.TTF"];
+            
+            fileContents = [fileContents stringByReplacingOccurrencesOfString:contentsString withString:additionalZPL];
+        }
     }
     
     if (discountNum.integerValue > 0)
     {
         NSRange startRange = [fileContents rangeOfString:@"========С#=========="];
         NSRange endRange   = [fileContents rangeOfString:@"===================="];
-        NSRange contentsRange = NSMakeRange(startRange.location, (endRange.location+endRange.length) - startRange.location);
-        NSString* contentsString = [fileContents substringWithRange:contentsRange];
-        NSString* additionalZPL = [self drawDLine:catalogPrice retailPrice:retailPrice fontWidth:25 fontHeight:35 thickness:10];
-        
-        fileContents = [fileContents stringByReplacingOccurrencesOfString:contentsString withString:additionalZPL];
+        if (startRange.location != NSNotFound && endRange.location != NSNotFound)
+        {
+            NSRange contentsRange = NSMakeRange(startRange.location, (endRange.location+endRange.length) - startRange.location);
+            NSString* contentsString = [fileContents substringWithRange:contentsRange];
+            NSString* additionalZPL = [self drawDLine:catalogPrice retailPrice:retailPrice fontWidth:25 fontHeight:35 thickness:10];
+            
+            fileContents = [fileContents stringByReplacingOccurrencesOfString:contentsString withString:additionalZPL];
+        }
     }
     
     
     return [fileContents dataUsingEncoding:outEncoding];
 };
+
++ (NSData*) generateEanZPLWithItem:(ItemInformation*) item patternPath:(NSString *)path
+{
+    
+    NSStringEncoding outEncoding;
+    NSError* error;
+    NSString *fileContents = [NSString stringWithContentsOfFile:path
+                                                   usedEncoding:&outEncoding
+                                                          error:&error];
+    NSString* size     =    [self paramFromItem:item name:@"size"];
+    NSString* barcode = [NSString stringWithFormat:@"09900%@", item.barcode];
+    NSString* upc = [NSString stringWithFormat:@"%@%ld", barcode, [self calculateUPCCheckSum:barcode]];
+    fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Ware.Code$" withString:item.article?item.article:@""];
+    fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Barcode_EAN13$" withString:upc];
+    fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Ware.SizeHeader$" withString:[NSString stringWithFormat:@"Размер:"]];
+    fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Ware.SizeValue$" withString:size?size:@""];
+    
+    // Filling item description
+    {
+        int y = 145;
+        int dy = 19;
+        NSString *font = @"^A@N,17,0,ARI005.TTF";
+        NSMutableString* result = [[NSMutableString alloc] initWithFormat:@"^FT3,%d^CI17^F8^FD^FS",y];
+        [result appendFormat:@"%@^FT8,%d%@^FD", font,(int)y,font];
+        NSArray *line = [ZPLGenerator wrapString:item.name maxLength:47];
+        for (int index = 0; index < line.count; index++)
+        {
+            [result appendFormat:@"%@^FS", line[index]];
+            if (index < line.count - 1)
+            {
+                [result appendFormat:@"%@^FT3,%d%@^FD", font,(int)(y + dy * (index + 1)),font];
+            }
+        }
+        fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Field.Ware.Description$" withString:result];
+    }
+    
+    return [fileContents dataUsingEncoding:outEncoding];
+}
 
 + (NSString*) paramFromItem:(ItemInformation*) item name:(NSString*)name
 {

@@ -19,7 +19,8 @@
 - (void) main
 {
     
-   _incValue = @"ware";
+    self.incValue   = @"ware";
+    self.coreDataId = @"Item";
     [super main];
     
 }
@@ -59,41 +60,49 @@
 
 }
 
-- (BOOL) saveItems: (NSArray*) items
+- (void) updateObject:(NSManagedObject *)obj csv:(NSArray *)csv
 {
+    Item* itemDB = (Item*)obj;
     
-    for (PI_MOBILE_SERVICEService_TROW_IntType *throw in items)
+    itemDB.itemID       = @([csv[1] integerValue]);
+    itemDB.itemCode     = csv[2];
+    itemDB.groupID      = @([csv[3] intValue]);
+    itemDB.subgroupID   = @([csv[4] intValue]);
+    itemDB.trademarkID  = @([csv[5] intValue]);
+    itemDB.color        = csv[6];
+    itemDB.certificationType    = csv[7];
+    itemDB.certificationAuthorittyCode  = csv[8];
+    itemDB.line1        = csv[9];
+    itemDB.line2        = csv[10];
+    itemDB.storeNumber  = csv[11];
+    itemDB.name         = csv[12];
+    itemDB.priceHeader  = csv[13];
+    itemDB.sizeHeader   = csv[14];
+    itemDB.size         = csv[15];
+    itemDB.additionalSize = csv[16];
+    itemDB.additionalInfo = csv[17];
+    itemDB.boxType = csv[18];
+    
+    if (csv.count >= 22)
     {
-        NSArray *csvSourse = [throw.VAL componentsSeparatedByString:@";"];
-        NSArray *csv       = [self removeQuotes:csvSourse];
-        Item *itemDB = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.privateContext];
-        
-        itemDB.itemID       = @([csv[1] integerValue]);
-        itemDB.itemCode     = csv[2];
-        itemDB.groupID      = @([csv[3] intValue]);
-        itemDB.subgroupID   = @([csv[4] intValue]);
-        itemDB.trademarkID  = @([csv[5] intValue]);
-        itemDB.color        = csv[6];
-        itemDB.certificationType    = csv[7];
-        itemDB.certificationAuthorittyCode  = csv[8];
-        itemDB.itemCode_2   = csv[9];
-        itemDB.line1        = csv[9]; // csv[10];
-        itemDB.line2        = csv[10]; // csv[11];
-        itemDB.storeNumber  = csv[11]; // csv[12];
-        itemDB.name         = csv[12]; // csv[13];
-        itemDB.priceHeader  = csv[13]; // csv[14];
-        itemDB.sizeHeader   = csv[14]; // csv[15];
-        itemDB.size         = csv[15]; // csv[16];
-        itemDB.additionalSize = csv[16];
-        itemDB.additionalInfo = csv[17];
-        itemDB.boxType = csv[18];
-        
+        itemDB.itemCode_2 = csv[19];
+        itemDB.drop = csv[20];
+        itemDB.collection = csv[21];
     }
+}
+
+- (NSManagedObject*) findObject:(NSArray *)csv
+{
+    NSInteger itemID = [csv[1] integerValue];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %@", @(itemID)]];
     
     NSError* error = nil;
-    [self.privateContext save:&error];
+    NSArray* results = [self.privateContext executeFetchRequest:request error:&error];
     
-    return error? NO:YES;
+    if (results.count > 0)
+        return results[0];
+    return nil;
 }
 
 

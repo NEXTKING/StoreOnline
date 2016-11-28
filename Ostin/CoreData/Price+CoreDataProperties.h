@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSFetchRequest<Price *> *)fetchRequest;
 
 @property (nullable, nonatomic, copy) NSNumber *catalogPrice;
+@property (nullable, nonatomic, copy) NSDate *dateModified;
 @property (nullable, nonatomic, copy) NSNumber *retailPrice;
 @property (nullable, nonatomic, copy) NSNumber *itemID;
 @property (nullable, nonatomic, copy) NSNumber *discount;
