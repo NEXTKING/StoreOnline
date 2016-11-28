@@ -115,6 +115,13 @@
     }
 }
 
+- (void)resetWindowToInitialView
+{
+    [self.window.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    UIStoryboard *initialStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController* initialScene = [initialStoryboard instantiateInitialViewController];
+    self.window.rootViewController = initialScene;
+}
 
 - (void)registerDefaultsFromSettingsBundle {
     // this function writes default settings as settings
@@ -146,6 +153,7 @@
     DTDevices *dtdev = [DTDevices sharedDevice];
     
     [dtdev prnRetractPaper:nil];
+    [dtdev btDisconnect:nil error:nil];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -209,6 +217,10 @@
     
     [symbols addObject:[UIKeyCommand keyCommandWithInput:@"A" modifierFlags:UIKeyModifierShift action:@selector(gsKey:)]];
     [symbols addObject:[UIKeyCommand keyCommandWithInput:@"D" modifierFlags:UIKeyModifierShift action:@selector(gsKey:)]];
+    [symbols addObject:[UIKeyCommand keyCommandWithInput:@"Ф" modifierFlags:UIKeyModifierShift action:@selector(gsKey:)]];
+    [symbols addObject:[UIKeyCommand keyCommandWithInput:@"В" modifierFlags:UIKeyModifierShift action:@selector(gsKey:)]];
+    [symbols addObject:[UIKeyCommand keyCommandWithInput:@"K" modifierFlags:UIKeyModifierShift action:@selector(gsKey:)]];
+    [symbols addObject:[UIKeyCommand keyCommandWithInput:@"Л" modifierFlags:UIKeyModifierShift action:@selector(gsKey:)]];
     [symbols addObject:[UIKeyCommand keyCommandWithInput:@"4" modifierFlags:UIKeyModifierShift action:@selector(gsKey:)]];
     [symbols addObject:[UIKeyCommand keyCommandWithInput:@"$" modifierFlags:0 action:@selector(gsKey:)]];
 }
@@ -235,17 +247,17 @@
 - (void) gsKey: (UIKeyCommand *) keyCommand {
     NSLog(@"%@", keyCommand.input);
     
-    if ([keyCommand.input isEqualToString:@"$"])
+    if ([keyCommand.input isEqualToString:@"+"])
     {
         ringBarcode = [NSMutableString new];
         ringBarcodeType = @"";
     }
-    else if ([keyCommand.input isEqualToString:@"#"])
+    else if ([keyCommand.input isEqualToString:@"="])
     {
         int type = 0;
-        if ([ringBarcodeType isEqualToString:@"A"])
+        if ([ringBarcodeType isEqualToString:@"A"] || [ringBarcodeType isEqualToString:@"Ф"])
             type = BAR_UPC;
-        else if ([ringBarcodeType isEqualToString:@"D"])
+        else if ([ringBarcodeType isEqualToString:@"D"] || [ringBarcodeType isEqualToString:@"В"] || [ringBarcodeType isEqualToString:@"K"] || [ringBarcodeType isEqualToString:@"Л"])
             type = BAR_CODE128;
         else
             type  = 0;

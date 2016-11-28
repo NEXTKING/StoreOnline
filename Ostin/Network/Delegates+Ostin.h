@@ -10,6 +10,7 @@
 #define Delegates_Ostin_h
 #import "Delegates.h"
 #import "TaskInformation.h"
+#import "UserInformation.h"
 
 typedef enum : NSUInteger
 {
@@ -19,6 +20,11 @@ typedef enum : NSUInteger
     ItemSearchAttributeBarcode = (1 << 3)
 }ItemSearchAttribute;
 
+@protocol ItemDescriptionDelegate_Ostin <ItemDescriptionDelegate>
+@property(nonatomic, strong) NSProgress *progress;
+- (void) resetDatabaseAndPortionsCountComplete:(int)result;
+@end
+
 @protocol GroupsDelegate <NSObject>
 - (void) groupsComplete: (int) result groups:(NSArray*) groups;
 - (void) subgroupsComplete: (int) result subgroups:(NSArray*) subgroups;
@@ -26,11 +32,17 @@ typedef enum : NSUInteger
 @end
 
 @protocol TasksDelegate <NSObject>
+@property(nonatomic, strong) NSProgress *progress;
 - (void) tasksComplete: (int) result tasks:(NSArray<TaskInformation*>*) tasks;
 @end
 
 @protocol SearchDelegate <NSObject>
 - (void) searchComplete: (int) result attribute:(ItemSearchAttribute) searchAttribute items:(NSArray *) items;
+@end
+
+@protocol UserDelegate <NSObject>
+@property(nonatomic, strong) NSProgress *progress;
+- (void) userComplete: (int) result user:(UserInformation *)userInformation;
 @end
 
 #endif /* Delegates_Ostin_h */

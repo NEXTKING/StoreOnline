@@ -18,6 +18,25 @@
 		21BB44C01DACF0D100ED67EE /* TaskProgressOverlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21BB44BE1DACF0D100ED67EE /* TaskProgressOverlayController.xib */; };
 		21BB44E61DAD224600ED67EE /* TasksNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BB44E51DAD224600ED67EE /* TasksNavigationController.m */; };
 		21C054451DBE20FB0094C7B1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21C054441DBE20FB0094C7B1 /* Settings.bundle */; };
+		21C054501DC238DA0094C7B1 /* Group+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C0544D1DC238DA0094C7B1 /* Group+CoreDataClass.m */; };
+		21C054511DC238DA0094C7B1 /* Group+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C0544F1DC238DA0094C7B1 /* Group+CoreDataProperties.m */; };
+		21C054561DC239220094C7B1 /* Subgroup+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C054531DC239220094C7B1 /* Subgroup+CoreDataClass.m */; };
+		21C054571DC239220094C7B1 /* Subgroup+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C054551DC239220094C7B1 /* Subgroup+CoreDataProperties.m */; };
+		21C0545A1DC23F8E0094C7B1 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C054591DC23F8E0094C7B1 /* AsyncImageView.m */; };
+		21C0545F1DC355550094C7B1 /* User+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C0545C1DC355550094C7B1 /* User+CoreDataClass.m */; };
+		21C054601DC355550094C7B1 /* User+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C0545E1DC355550094C7B1 /* User+CoreDataProperties.m */; };
+		21C054631DC355E20094C7B1 /* SOAPUsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C054621DC355E20094C7B1 /* SOAPUsers.m */; };
+		21C054661DC36D4D0094C7B1 /* UserInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C054651DC36D4D0094C7B1 /* UserInformation.m */; };
+		21C0546C1DC765800094C7B1 /* GradientTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C0546B1DC765800094C7B1 /* GradientTabBarController.m */; };
+		21C0546E1DC788F10094C7B1 /* producer_label.zpl in Resources */ = {isa = PBXBuildFile; fileRef = 21C0546D1DC788F10094C7B1 /* producer_label.zpl */; };
+		21C0549C1DCB8A0A0094C7B1 /* PrintServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C0549B1DCB8A0A0094C7B1 /* PrintServer.m */; };
+		21C0549D1DCB8A0A0094C7B1 /* PrintServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C0549B1DCB8A0A0094C7B1 /* PrintServer.m */; };
+		21D8381D1DD0A72800A98E0F /* SettingsViewController+Ostin.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D8381C1DD0A72800A98E0F /* SettingsViewController+Ostin.m */; };
+		21D838441DD4B47F00A98E0F /* SOAPResetIncDone.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D838431DD4B47F00A98E0F /* SOAPResetIncDone.m */; };
+		21D838471DDC57F800A98E0F /* AppSuspendingBlocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D838461DDC57F800A98E0F /* AppSuspendingBlocker.m */; };
+		21D838491DDC628B00A98E0F /* emptySound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 21D838481DDC628B00A98E0F /* emptySound.wav */; };
+		21D8385C1DE3499F00A98E0F /* ItemPrintFact+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D838591DE3499F00A98E0F /* ItemPrintFact+CoreDataClass.m */; };
+		21D8385D1DE3499F00A98E0F /* ItemPrintFact+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D8385B1DE3499F00A98E0F /* ItemPrintFact+CoreDataProperties.m */; };
 		23325335A97CCCACC42944AF /* libPods-Ostin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD3C223CF10EB177C6448781 /* libPods-Ostin.a */; };
 		5BADECA800A6702C5F474BB5 /* libPods-PriceTagDemoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1E01A49F9DF7B4A12A7407 /* libPods-PriceTagDemoUITests.a */; };
 		71454865FBE26CAE4A38F59F /* libPods-DesondoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D44F91159F3A6CCEC7C0AEB /* libPods-DesondoTests.a */; };
@@ -85,7 +104,7 @@
 		B9171DC61CF368E7004DB487 /* STMenuDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = B9171DBB1CF368E7004DB487 /* STMenuDataSource.m */; };
 		B9171DC71CF368E7004DB487 /* STMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9171DBD1CF368E7004DB487 /* STMenuViewController.m */; };
 		B9171DC81CF368E7004DB487 /* STMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9171DBE1CF368E7004DB487 /* STMenuViewController.xib */; };
-		B9171DCD1CF46738004DB487 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9171DCC1CF46738004DB487 /* SettingsViewController.m */; };
+		B9171DCD1CF46738004DB487 /* RivgoshSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9171DCC1CF46738004DB487 /* RivgoshSettingsViewController.m */; };
 		B9171DCF1CF4674A004DB487 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9171DCE1CF4674A004DB487 /* SettingsViewController.xib */; };
 		B9171DD11CF469B5004DB487 /* person.png in Resources */ = {isa = PBXBuildFile; fileRef = B9171DD01CF469B5004DB487 /* person.png */; };
 		B9171DD41CF4C624004DB487 /* DiscountCartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9171DD31CF4C624004DB487 /* DiscountCartCell.xib */; };
@@ -549,6 +568,40 @@
 		21BB44E41DAD224600ED67EE /* TasksNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksNavigationController.h; sourceTree = "<group>"; };
 		21BB44E51DAD224600ED67EE /* TasksNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TasksNavigationController.m; sourceTree = "<group>"; };
 		21C054441DBE20FB0094C7B1 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		21C0544C1DC238DA0094C7B1 /* Group+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Group+CoreDataClass.h"; sourceTree = "<group>"; };
+		21C0544D1DC238DA0094C7B1 /* Group+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Group+CoreDataClass.m"; sourceTree = "<group>"; };
+		21C0544E1DC238DA0094C7B1 /* Group+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Group+CoreDataProperties.h"; sourceTree = "<group>"; };
+		21C0544F1DC238DA0094C7B1 /* Group+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Group+CoreDataProperties.m"; sourceTree = "<group>"; };
+		21C054521DC239220094C7B1 /* Subgroup+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Subgroup+CoreDataClass.h"; sourceTree = "<group>"; };
+		21C054531DC239220094C7B1 /* Subgroup+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Subgroup+CoreDataClass.m"; sourceTree = "<group>"; };
+		21C054541DC239220094C7B1 /* Subgroup+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Subgroup+CoreDataProperties.h"; sourceTree = "<group>"; };
+		21C054551DC239220094C7B1 /* Subgroup+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Subgroup+CoreDataProperties.m"; sourceTree = "<group>"; };
+		21C054581DC23F8E0094C7B1 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
+		21C054591DC23F8E0094C7B1 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
+		21C0545B1DC355550094C7B1 /* User+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+CoreDataClass.h"; sourceTree = "<group>"; };
+		21C0545C1DC355550094C7B1 /* User+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+CoreDataClass.m"; sourceTree = "<group>"; };
+		21C0545D1DC355550094C7B1 /* User+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+CoreDataProperties.h"; sourceTree = "<group>"; };
+		21C0545E1DC355550094C7B1 /* User+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+CoreDataProperties.m"; sourceTree = "<group>"; };
+		21C054611DC355E20094C7B1 /* SOAPUsers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPUsers.h; sourceTree = "<group>"; };
+		21C054621DC355E20094C7B1 /* SOAPUsers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPUsers.m; sourceTree = "<group>"; };
+		21C054641DC36D4D0094C7B1 /* UserInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInformation.h; sourceTree = "<group>"; };
+		21C054651DC36D4D0094C7B1 /* UserInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInformation.m; sourceTree = "<group>"; };
+		21C0546A1DC765800094C7B1 /* GradientTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientTabBarController.h; sourceTree = "<group>"; };
+		21C0546B1DC765800094C7B1 /* GradientTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientTabBarController.m; sourceTree = "<group>"; };
+		21C0546D1DC788F10094C7B1 /* producer_label.zpl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = producer_label.zpl; sourceTree = "<group>"; };
+		21C0549A1DCB8A0A0094C7B1 /* PrintServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintServer.h; sourceTree = "<group>"; };
+		21C0549B1DCB8A0A0094C7B1 /* PrintServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintServer.m; sourceTree = "<group>"; };
+		21D8381B1DD0A72800A98E0F /* SettingsViewController+Ostin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SettingsViewController+Ostin.h"; sourceTree = "<group>"; };
+		21D8381C1DD0A72800A98E0F /* SettingsViewController+Ostin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SettingsViewController+Ostin.m"; sourceTree = "<group>"; };
+		21D838421DD4B47F00A98E0F /* SOAPResetIncDone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPResetIncDone.h; sourceTree = "<group>"; };
+		21D838431DD4B47F00A98E0F /* SOAPResetIncDone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPResetIncDone.m; sourceTree = "<group>"; };
+		21D838451DDC57F800A98E0F /* AppSuspendingBlocker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppSuspendingBlocker.h; path = Utilities/AppSuspendingBlocker.h; sourceTree = "<group>"; };
+		21D838461DDC57F800A98E0F /* AppSuspendingBlocker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppSuspendingBlocker.m; path = Utilities/AppSuspendingBlocker.m; sourceTree = "<group>"; };
+		21D838481DDC628B00A98E0F /* emptySound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = emptySound.wav; sourceTree = "<group>"; };
+		21D838581DE3499F00A98E0F /* ItemPrintFact+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ItemPrintFact+CoreDataClass.h"; sourceTree = "<group>"; };
+		21D838591DE3499F00A98E0F /* ItemPrintFact+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ItemPrintFact+CoreDataClass.m"; sourceTree = "<group>"; };
+		21D8385A1DE3499F00A98E0F /* ItemPrintFact+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ItemPrintFact+CoreDataProperties.h"; sourceTree = "<group>"; };
+		21D8385B1DE3499F00A98E0F /* ItemPrintFact+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ItemPrintFact+CoreDataProperties.m"; sourceTree = "<group>"; };
 		26E6677B3BC7955145425ED2 /* Pods-DesondoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesondoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DesondoTests/Pods-DesondoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		305BD8FF1EE07980B92BBA8D /* Pods-Tsum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tsum.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tsum/Pods-Tsum.debug.xcconfig"; sourceTree = "<group>"; };
 		3441ACD00F2A17AFBB7CD4CD /* Pods-PriceTagDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceTagDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PriceTagDemoTests/Pods-PriceTagDemoTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -615,8 +668,8 @@
 		B9171DBC1CF368E7004DB487 /* STMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMenuViewController.h; sourceTree = "<group>"; };
 		B9171DBD1CF368E7004DB487 /* STMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMenuViewController.m; sourceTree = "<group>"; };
 		B9171DBE1CF368E7004DB487 /* STMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STMenuViewController.xib; sourceTree = "<group>"; };
-		B9171DCB1CF46738004DB487 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
-		B9171DCC1CF46738004DB487 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		B9171DCB1CF46738004DB487 /* RivgoshSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RivgoshSettingsViewController.h; sourceTree = "<group>"; };
+		B9171DCC1CF46738004DB487 /* RivgoshSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RivgoshSettingsViewController.m; sourceTree = "<group>"; };
 		B9171DCE1CF4674A004DB487 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		B9171DD01CF469B5004DB487 /* person.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = person.png; path = ../person.png; sourceTree = "<group>"; };
 		B9171DD31CF4C624004DB487 /* DiscountCartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscountCartCell.xib; sourceTree = "<group>"; };
@@ -1148,6 +1201,8 @@
 			children = (
 				21B8DC791DB66CF900FD9161 /* BarcodeFormatter.h */,
 				21B8DC7A1DB66CF900FD9161 /* BarcodeFormatter.m */,
+				21D838451DDC57F800A98E0F /* AppSuspendingBlocker.h */,
+				21D838461DDC57F800A98E0F /* AppSuspendingBlocker.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1305,8 +1360,8 @@
 		B9171DCA1CF466ED004DB487 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				B9171DCB1CF46738004DB487 /* SettingsViewController.h */,
-				B9171DCC1CF46738004DB487 /* SettingsViewController.m */,
+				B9171DCB1CF46738004DB487 /* RivgoshSettingsViewController.h */,
+				B9171DCC1CF46738004DB487 /* RivgoshSettingsViewController.m */,
 				B9171DCE1CF4674A004DB487 /* SettingsViewController.xib */,
 				B9F3C3BE1D1426AC00938D92 /* ZReportViewController.h */,
 				B9F3C3BF1D1426AC00938D92 /* ZReportViewController.m */,
@@ -1332,6 +1387,10 @@
 				B92DCE261C845E60002AA184 /* LaunchScreen.storyboard */,
 				B92DCE3E1C845FF2002AA184 /* OstinPriceTag.h */,
 				B92DCE3F1C845FF2002AA184 /* OstinPriceTag.m */,
+				21C0546A1DC765800094C7B1 /* GradientTabBarController.h */,
+				21C0546B1DC765800094C7B1 /* GradientTabBarController.m */,
+				21C054581DC23F8E0094C7B1 /* AsyncImageView.h */,
+				21C054591DC23F8E0094C7B1 /* AsyncImageView.m */,
 				B90CE4861C89A05400DFB3E4 /* AntiAliasingLabel.h */,
 				B90CE4871C89A05400DFB3E4 /* AntiAliasingLabel.m */,
 				B90CE4891C89B44600DFB3E4 /* AntiAliasView.h */,
@@ -1340,6 +1399,9 @@
 				B90CE48D1C89B6DB00DFB3E4 /* AntiAliasTextLayer.m */,
 				B957B0D71D1C291B002A5256 /* OstinViewController.h */,
 				B957B0D81D1C291B002A5256 /* OstinViewController.m */,
+				21D8381B1DD0A72800A98E0F /* SettingsViewController+Ostin.h */,
+				21D8381C1DD0A72800A98E0F /* SettingsViewController+Ostin.m */,
+				21D838481DDC628B00A98E0F /* emptySound.wav */,
 				B92DCE411C846002002AA184 /* OstinPriceTag.xib */,
 				B92DCE291C845E60002AA184 /* Info.plist */,
 				21C054441DBE20FB0094C7B1 /* Settings.bundle */,
@@ -1418,6 +1480,8 @@
 				B93DB9B51C50DAA500C8A7A3 /* ViewController.m */,
 				B93DBA0E1C50E56E00C8A7A3 /* PrintViewController.h */,
 				B93DBA0F1C50E56E00C8A7A3 /* PrintViewController.m */,
+				21C0549A1DCB8A0A0094C7B1 /* PrintServer.h */,
+				21C0549B1DCB8A0A0094C7B1 /* PrintServer.m */,
 				B90CE4971C8A0CE400DFB3E4 /* AzbukaPriceTag.h */,
 				B90CE4981C8A0CE400DFB3E4 /* AzbukaPriceTag.m */,
 				B90CE49A1C8A0CFD00DFB3E4 /* AzbukaPriceTag.xib */,
@@ -1831,6 +1895,10 @@
 				2174D5801DB8CDDC00FCE9CE /* SOAPSavePrintFact.m */,
 				C68216301DB668FD00833751 /* SOAPSetTaskDone.h */,
 				C68216311DB668FD00833751 /* SOAPSetTaskDone.m */,
+				21C054611DC355E20094C7B1 /* SOAPUsers.h */,
+				21C054621DC355E20094C7B1 /* SOAPUsers.m */,
+				21D838421DD4B47F00A98E0F /* SOAPResetIncDone.h */,
+				21D838431DD4B47F00A98E0F /* SOAPResetIncDone.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1842,6 +1910,8 @@
 				C6069EE21D92D258008C3F58 /* Delegates+Ostin.h */,
 				C6069EE71D92D873008C3F58 /* GroupInformation.h */,
 				C6069EE81D92D873008C3F58 /* GroupInformation.m */,
+				21C054641DC36D4D0094C7B1 /* UserInformation.h */,
+				21C054651DC36D4D0094C7B1 /* UserInformation.m */,
 				C67BB3671DABE4BC0032F2A4 /* TaskInformation.h */,
 				C67BB3681DABE4BC0032F2A4 /* TaskInformation.m */,
 				218228681DAFCB2A00F04B70 /* TaskItemInformation.h */,
@@ -1976,6 +2046,7 @@
 			isa = PBXGroup;
 			children = (
 				C68216341DB66AFF00833751 /* label.zpl */,
+				21C0546D1DC788F10094C7B1 /* producer_label.zpl */,
 				C68216361DB66B1800833751 /* ZPLGenerator.h */,
 				C68216371DB66B1800833751 /* ZPLGenerator.m */,
 			);
@@ -2079,6 +2150,10 @@
 				C66723771DA81285001B30AC /* Item+CoreDataClass.m */,
 				C66723781DA81285001B30AC /* Item+CoreDataProperties.h */,
 				C66723791DA81285001B30AC /* Item+CoreDataProperties.m */,
+				21D838581DE3499F00A98E0F /* ItemPrintFact+CoreDataClass.h */,
+				21D838591DE3499F00A98E0F /* ItemPrintFact+CoreDataClass.m */,
+				21D8385A1DE3499F00A98E0F /* ItemPrintFact+CoreDataProperties.h */,
+				21D8385B1DE3499F00A98E0F /* ItemPrintFact+CoreDataProperties.m */,
 				C667237A1DA81285001B30AC /* Price+CoreDataClass.h */,
 				C667237B1DA81285001B30AC /* Price+CoreDataClass.m */,
 				C667237C1DA81285001B30AC /* Price+CoreDataProperties.h */,
@@ -2091,6 +2166,18 @@
 				C66723981DAAEEFB001B30AC /* TaskItemBinding+CoreDataClass.m */,
 				C66723991DAAEEFB001B30AC /* TaskItemBinding+CoreDataProperties.h */,
 				C667239A1DAAEEFB001B30AC /* TaskItemBinding+CoreDataProperties.m */,
+				21C0545B1DC355550094C7B1 /* User+CoreDataClass.h */,
+				21C0545C1DC355550094C7B1 /* User+CoreDataClass.m */,
+				21C0545D1DC355550094C7B1 /* User+CoreDataProperties.h */,
+				21C0545E1DC355550094C7B1 /* User+CoreDataProperties.m */,
+				21C0544C1DC238DA0094C7B1 /* Group+CoreDataClass.h */,
+				21C0544D1DC238DA0094C7B1 /* Group+CoreDataClass.m */,
+				21C0544E1DC238DA0094C7B1 /* Group+CoreDataProperties.h */,
+				21C0544F1DC238DA0094C7B1 /* Group+CoreDataProperties.m */,
+				21C054521DC239220094C7B1 /* Subgroup+CoreDataClass.h */,
+				21C054531DC239220094C7B1 /* Subgroup+CoreDataClass.m */,
+				21C054541DC239220094C7B1 /* Subgroup+CoreDataProperties.h */,
+				21C054551DC239220094C7B1 /* Subgroup+CoreDataProperties.m */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -2543,6 +2630,7 @@
 				B957B1001D1C2A2D002A5256 /* 99002774132.jpg in Resources */,
 				B957B1051D1C2A2D002A5256 /* 99002776863.jpg in Resources */,
 				B957B11D1D1D25D1002A5256 /* Icon.png in Resources */,
+				21C0546E1DC788F10094C7B1 /* producer_label.zpl in Resources */,
 				215EFF0A1DAB9ED600BE11C5 /* SearchTableViewCell.xib in Resources */,
 				B957B10D1D1C2A2D002A5256 /* 8813780299.jpg in Resources */,
 				C68216351DB66AFF00833751 /* label.zpl in Resources */,
@@ -2556,6 +2644,7 @@
 				C6979EAA1D9135AD00A0B51B /* tasks@2x.png in Resources */,
 				B957B1131D1C2A2D002A5256 /* MS4O9767M.jpg in Resources */,
 				B957B10B1D1C2A2D002A5256 /* 99002789530.jpg in Resources */,
+				21D838491DDC628B00A98E0F /* emptySound.wav in Resources */,
 				C6979EA91D9135AD00A0B51B /* search@2x.png in Resources */,
 				B92DCE281C845E60002AA184 /* LaunchScreen.storyboard in Resources */,
 				C6979EA81D9135AD00A0B51B /* relevance@2x.png in Resources */,
@@ -3237,8 +3326,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C667238F1DAABBA9001B30AC /* SOAPPrices.m in Sources */,
+				21C054631DC355E20094C7B1 /* SOAPUsers.m in Sources */,
 				21BB44E61DAD224600ED67EE /* TasksNavigationController.m in Sources */,
+				21C0546C1DC765800094C7B1 /* GradientTabBarController.m in Sources */,
 				C6F600C71D9C363C0095AE21 /* NSDate+ISO8601Parsing.m in Sources */,
+				21D838441DD4B47F00A98E0F /* SOAPResetIncDone.m in Sources */,
 				C66723891DA91614001B30AC /* SOAPWares.m in Sources */,
 				215EFF091DAB9ED600BE11C5 /* SearchTableViewCell.m in Sources */,
 				B9F5F0B61D0057710010E1EA /* DiscountInformation.m in Sources */,
@@ -3246,21 +3338,26 @@
 				C667239E1DAAEEFB001B30AC /* TaskItemBinding+CoreDataProperties.m in Sources */,
 				B9F5F0B71D0057710010E1EA /* NwobjDiscounts.m in Sources */,
 				C655B1BE1DA5399000EE7AB9 /* SynchronizationController.m in Sources */,
+				21D8385C1DE3499F00A98E0F /* ItemPrintFact+CoreDataClass.m in Sources */,
 				C6F600C91D9C363C0095AE21 /* PI_MOBILE_SERVICEService.m in Sources */,
 				C6F600C81D9C363C0095AE21 /* NSDate+ISO8601Unparsing.m in Sources */,
 				B9F5F0B11D0057650010E1EA /* NwobjInventoryItemDescription.m in Sources */,
 				B9F5F0B21D0057650010E1EA /* NwobjAuthorization.m in Sources */,
 				C6979E9A1D8FE6A800A0B51B /* LoginViewController.m in Sources */,
 				2182286A1DAFCB2A00F04B70 /* TaskItemInformation.m in Sources */,
+				21C054601DC355550094C7B1 /* User+CoreDataProperties.m in Sources */,
+				21D838471DDC57F800A98E0F /* AppSuspendingBlocker.m in Sources */,
 				B907ADDA1D095B8A00B44BF1 /* MelonViewController.m in Sources */,
 				C6F601AA1D9D1D800095AE21 /* ItemsModel.xcdatamodeld in Sources */,
 				B957B0D91D1C291B002A5256 /* OstinViewController.m in Sources */,
 				B9F5F0B31D0057650010E1EA /* NwobjClientCard.m in Sources */,
+				21D8385D1DE3499F00A98E0F /* ItemPrintFact+CoreDataProperties.m in Sources */,
 				C6F600CB1D9C363C0095AE21 /* USGlobals.m in Sources */,
 				B9F5F0B41D0057650010E1EA /* NwobjSendCart.m in Sources */,
 				B9F5F0B51D0057650010E1EA /* NwobjZones.m in Sources */,
 				B92DCE301C845E8F002AA184 /* PrintViewController.m in Sources */,
 				C66723821DA81285001B30AC /* Price+CoreDataClass.m in Sources */,
+				21C0545A1DC23F8E0094C7B1 /* AsyncImageView.m in Sources */,
 				C6F601AD1D9D63440095AE21 /* MCPOfflineInmpl+Ostin.m in Sources */,
 				B92DCE341C845F0A002AA184 /* MCPSimulatorImpl.m in Sources */,
 				B90CE4881C89A05400DFB3E4 /* AntiAliasingLabel.m in Sources */,
@@ -3271,10 +3368,14 @@
 				C667239C1DAAEEFB001B30AC /* Task+CoreDataProperties.m in Sources */,
 				C6069EE91D92D873008C3F58 /* GroupInformation.m in Sources */,
 				C66723921DAAEA87001B30AC /* SOAPTasks.m in Sources */,
+				21D8381D1DD0A72800A98E0F /* SettingsViewController+Ostin.m in Sources */,
+				21C054501DC238DA0094C7B1 /* Group+CoreDataClass.m in Sources */,
 				B92DCE371C845F13002AA184 /* NwRequest.m in Sources */,
 				B907ADDD1D095C3200B44BF1 /* WYStoryboardPopoverSegue.m in Sources */,
 				C66723861DA912CF001B30AC /* SOAPOperation.m in Sources */,
+				21C054661DC36D4D0094C7B1 /* UserInformation.m in Sources */,
 				B957B0D61D1BF5E0002A5256 /* MCPOfflineInmpl.m in Sources */,
+				21C054511DC238DA0094C7B1 /* Group+CoreDataProperties.m in Sources */,
 				B907ADDC1D095C2F00B44BF1 /* WYPopoverController.m in Sources */,
 				218228661DAF864000F04B70 /* TasksCell.m in Sources */,
 				B92DCE3D1C845FAB002AA184 /* Logger.m in Sources */,
@@ -3285,10 +3386,13 @@
 				B92DCE2E1C845E89002AA184 /* ViewController.m in Sources */,
 				21B8DC7B1DB66CF900FD9161 /* BarcodeFormatter.m in Sources */,
 				B957B0D51D1BF5AC002A5256 /* MenuViewController.m in Sources */,
+				21C0549D1DCB8A0A0094C7B1 /* PrintServer.m in Sources */,
 				C607A60B1DB0E0E000F3E5E9 /* SOAPTaskWareBinding.m in Sources */,
 				C667239B1DAAEEFB001B30AC /* Task+CoreDataClass.m in Sources */,
+				21C054561DC239220094C7B1 /* Subgroup+CoreDataClass.m in Sources */,
 				B92DCE1A1C845E60002AA184 /* main.m in Sources */,
 				C67103F91D93DFE5000AEC24 /* SearchViewController.m in Sources */,
+				21C0545F1DC355550094C7B1 /* User+CoreDataClass.m in Sources */,
 				C667238C1DA93A66001B30AC /* SOAPBarcodes.m in Sources */,
 				B90CE48E1C89B6DB00DFB3E4 /* AntiAliasTextLayer.m in Sources */,
 				C66723831DA81285001B30AC /* Price+CoreDataProperties.m in Sources */,
@@ -3306,6 +3410,7 @@
 				C68216321DB668FD00833751 /* SOAPSetTaskDone.m in Sources */,
 				B92DCE351C845F0C002AA184 /* MCPNetworkImpl.m in Sources */,
 				C667239D1DAAEEFB001B30AC /* TaskItemBinding+CoreDataClass.m in Sources */,
+				21C054571DC239220094C7B1 /* Subgroup+CoreDataProperties.m in Sources */,
 				C6F600CC1D9C363C0095AE21 /* xsd.m in Sources */,
 				C6F601CA1DA256A30095AE21 /* NwobjStock.m in Sources */,
 				C6979EAD1D91462C00A0B51B /* CategoriesViewController.m in Sources */,
@@ -3349,6 +3454,7 @@
 				B90CE4961C89FCC100DFB3E4 /* AntiAliasView.m in Sources */,
 				B92DCE061C78A600002AA184 /* WarehouseInformation.m in Sources */,
 				B93DBA6E1C5132BD00C8A7A3 /* NSString+MD5.m in Sources */,
+				21C0549C1DCB8A0A0094C7B1 /* PrintServer.m in Sources */,
 				B93DB9B31C50DAA500C8A7A3 /* AppDelegate.m in Sources */,
 				B982D7E91CEB1A7100071D9A /* MCPOfflineInmpl.m in Sources */,
 				B9950B681CDB8772005B4375 /* WYPopoverController.m in Sources */,
@@ -3477,7 +3583,7 @@
 				B9171DC61CF368E7004DB487 /* STMenuDataSource.m in Sources */,
 				B92B6EA11CEDC7DF00B94B21 /* DiscountInformation.m in Sources */,
 				B970B8101CD0EBAD0066A66A /* NwobjClientCard.m in Sources */,
-				B9171DCD1CF46738004DB487 /* SettingsViewController.m in Sources */,
+				B9171DCD1CF46738004DB487 /* RivgoshSettingsViewController.m in Sources */,
 				B989F4DC1CFEE44A00B59F5A /* NwobjPrintStatus.m in Sources */,
 				B968E7011CCE749E005F91FF /* NwobjAuthorization.m in Sources */,
 				B9F3C3BA1D13FBBE00938D92 /* NwobjZreport.m in Sources */,

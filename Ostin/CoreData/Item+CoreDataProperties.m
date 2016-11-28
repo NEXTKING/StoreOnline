@@ -20,7 +20,9 @@
 @dynamic boxType;
 @dynamic certificationAuthorittyCode;
 @dynamic certificationType;
+@dynamic collection;
 @dynamic color;
+@dynamic drop;
 @dynamic groupID;
 @dynamic itemCode;
 @dynamic itemCode_2;

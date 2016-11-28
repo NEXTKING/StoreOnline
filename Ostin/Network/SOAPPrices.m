@@ -14,7 +14,8 @@
 - (void) main
 {
     
-    _incValue = @"ware_price";
+    self.incValue = @"ware_price";
+    self.coreDataId = @"Price";
     [super main];
     
 }
@@ -55,25 +56,36 @@
     return nil;
 }
 
-- (BOOL) saveItems: (NSArray*) items
+- (void) updateObject:(NSManagedObject *)obj csv:(NSArray *)csv
 {
-    for (PI_MOBILE_SERVICEService_TROW_IntType *throw in items)
+    Price* priceDB = (Price*)obj;
+    
+    priceDB.itemID          = @([csv[1] integerValue]);
+    priceDB.catalogPrice    = @([csv[2] doubleValue]);
+    priceDB.retailPrice     = @([csv[3] doubleValue]);
+    priceDB.discount        = @([csv[4] doubleValue]);
+    
+    if (csv.count >= 9)
     {
-        NSArray *csvSourse = [throw.VAL componentsSeparatedByString:@";"];
-        NSArray *csv       = [self removeQuotes:csvSourse];
-        
-        Price *priceDB = [NSEntityDescription insertNewObjectForEntityForName:@"Price" inManagedObjectContext:self.privateContext];
-        
-        priceDB.itemID          = @([csv[1] integerValue]);
-        priceDB.catalogPrice    = @([csv[2] doubleValue]);
-        priceDB.retailPrice     = @([csv[3] doubleValue]);
-        priceDB.discount        = @([csv[4] doubleValue]);
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"dd.MM.yyyy hh:mm:ss"];
+        NSDate *date = [dateFormatter dateFromString:csv[8]];
+        priceDB.dateModified = date;
     }
+}
+
+- (NSManagedObject*) findObject:(NSArray *)csv
+{
+    NSInteger itemID = [csv[1] integerValue];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Price"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %@", @(itemID)]];
     
     NSError* error = nil;
-    [self.privateContext save:&error];
+    NSArray* results = [self.privateContext executeFetchRequest:request error:&error];
     
-    return error? NO:YES;
+    if (results.count > 0)
+        return results[0];
+    return nil;
 }
 
 @end
