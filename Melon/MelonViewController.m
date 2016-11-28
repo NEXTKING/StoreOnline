@@ -29,8 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initChangePriceTagTypePicker];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:_barcodeSwitch.on] forKey:@"ShouldPrintBarcode"];
-    
+    _barcodeSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShouldPrintBarcode"];
     // Do any additional setup after loading the view.
 }
 
@@ -76,7 +75,8 @@
 
 - (IBAction)switchAction:(UISwitch*)sender
 {
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:sender.on] forKey:@"ShouldPrintBarcode"];
+    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:@"ShouldPrintBarcode"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (IBAction)stepperAction:(UIStepper*)sender
@@ -186,12 +186,7 @@
     
     NSString *xibName = [[NSUserDefaults standardUserDefaults] valueForKey:@"PriceTagXibName"];
     __block NSUInteger index = 0;
-    if (xibName == nil)
-    {
-        [[NSUserDefaults standardUserDefaults] setValue:_priceTagTypes[index][@"xibName"] forKey:@"PriceTagXibName"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-    else
+    if (xibName != nil)
     {
         [_priceTagTypes indexOfObjectPassingTest:^BOOL(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
             
@@ -205,6 +200,8 @@
         }];
     }
     
+    [[NSUserDefaults standardUserDefaults] setValue:_priceTagTypes[index][@"xibName"] forKey:@"PriceTagXibName"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     _priceTagTypeLabel.text = [NSString stringWithFormat:@"Тип этикетки: %@", _priceTagTypes[index][@"name"]];
     
     UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];

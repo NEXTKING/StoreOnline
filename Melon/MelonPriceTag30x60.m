@@ -13,32 +13,15 @@
 
 - (void) setItemInformation:(ItemInformation*) item
 {
+    [super setItemInformation:item];
+    
     _nameLabel.text = item.name;
     _articleLabel.text = item.article;
     _colorLabel.text = item.color;
-//    _sizeLabel.text
-//    _manufactureDateLabel.text
-//    _manufactureLabel.text
-    _priceLabel.text = [NSString stringWithFormat:@"Цена: %.0fр.", item.price];
     
-    BarCodeView *barCodeView = [[BarCodeView alloc] initWithFrame:CGRectMake(0, 0, _barcodeView.frame.size.width, _barcodeView.frame.size.height)];
-    [_barcodeView addSubview:barCodeView];
-    [barCodeView setBarCode:item.barcode];
-    [_barcodeView setNeedsDisplay];
-    _barcodeLabel.text = item.barcode;
-}
-
-- (void) drawRect:(CGRect)r
-{
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSaveGState( context );
-    CGContextSetShouldSmoothFonts( context , false );
-    CGContextSetAllowsFontSmoothing(context, false);
-    CGContextSetAllowsAntialiasing( context , false );
-    CGContextSetShouldAntialias( context , false );
-    CGContextSetInterpolationQuality(context, kCGInterpolationNone);
-    [super drawRect:r];
-    CGContextRestoreGState( context );
+    _sizeLabel.text = @"170-88-96 S";
+    _manufactureDateLabel.text = @"17.12.2016";
+    _manufactureLabel.text = @"Изготовитель: Китай Сумек текстиле инстастриал";
 }
 
 @end

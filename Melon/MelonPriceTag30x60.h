@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ItemInformation.h"
+#import "MelonPriceTag.h"
 
-@interface MelonPriceTag30x60 : UIView
+@interface MelonPriceTag30x60 : MelonPriceTag
 
 @property (weak, nonatomic) IBOutlet UILabel *manufactureDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *manufactureLabel;
@@ -17,8 +17,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *articleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *colorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sizeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
-@property (weak, nonatomic) IBOutlet UIView *barcodeView;
-@property (weak, nonatomic) IBOutlet UILabel *barcodeLabel;
 
 @end

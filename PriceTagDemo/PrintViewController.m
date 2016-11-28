@@ -262,7 +262,8 @@ typedef enum PrintingTask
     [priceTag setNeedsDisplay];
     imageToPrint = [self imageWithView:priceTag];
 #elif defined (MELON)
-    MelonPriceTag* priceTag = [[[NSBundle mainBundle] loadNibNamed:@"MelonPriceTag" owner:nil options:nil] objectAtIndex:0];
+    NSString *xibName = [[NSUserDefaults standardUserDefaults] valueForKey:@"PriceTagXibName"];
+    MelonPriceTag* priceTag = [[[NSBundle mainBundle] loadNibNamed:(xibName?xibName:@"MelonPriceTag") owner:nil options:nil] objectAtIndex:0];
     [priceTag setItemInformation:_currentPrint];
     [priceTag setNeedsLayout];
     [priceTag layoutIfNeeded];

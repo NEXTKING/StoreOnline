@@ -13,21 +13,30 @@
 
 - (void) setItemInformation:(ItemInformation*) item
 {
+    if (_priceLabel)
+    {
+        _priceLabel.text = [NSString stringWithFormat:@"Цена: %.0fр.", item.price];
+    }
     
-    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:@"0 р."];
-    [attributeString addAttribute:NSStrikethroughStyleAttributeName
-                            value:@2
-                            range:NSMakeRange(0, [attributeString length])];
-    _oldPriceLabel.attributedText = attributeString;
+    if (_dateLabel)
+    {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateStyle = NSDateFormatterShortStyle;
+        dateFormatter.timeStyle = NSDateFormatterNoStyle;
+        _dateLabel.text = [dateFormatter stringFromDate:[NSDate date]];
+    }
     
-    _priceLabel.text = [NSString stringWithFormat:@"Цена: %.0fр.", item.price];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateStyle = NSDateFormatterShortStyle;
-    dateFormatter.timeStyle = NSDateFormatterNoStyle;
-    _dateLabel.text = [dateFormatter stringFromDate:[NSDate date]];
-    [self addOldPriceIfNeeded:item];
+    if (_oldPriceLabel)
+    {
+        NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:@"0 р."];
+        [attributeString addAttribute:NSStrikethroughStyleAttributeName
+                                value:@2
+                                range:NSMakeRange(0, [attributeString length])];
+        _oldPriceLabel.attributedText = attributeString;
+        [self addOldPriceIfNeeded:item];
+    }
     
-    BOOL shouldPrintBarcode = [[[NSUserDefaults standardUserDefaults] objectForKey:@"ShouldPrintBarcode"] boolValue];
+    BOOL shouldPrintBarcode = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShouldPrintBarcode"];
     
     if (!shouldPrintBarcode)
     {

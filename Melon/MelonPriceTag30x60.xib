@@ -12,159 +12,254 @@
             <rect key="frame" x="0.0" y="0.0" width="118" height="237"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CD1-bW-8Zp">
-                    <frame key="frameInset" width="118" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <string key="text">Россия, Санкт-Петербург,
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uY1-vT-IeM">
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w2t-zX-nl7">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="22" id="khs-0a-FKX"/>
+                            </constraints>
+                            <string key="text">Россия, Санкт-Петербург,
 10-я Красноармейская ул., д. 22
 АО "Мэлон Фэшн Груп"</string>
-                    <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="6"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KAw-VB-ZKQ">
-                    <frame key="frameInset" minY="23" width="118" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <string key="text">Изготовитель: Китай Чанджоукитомоногабоджиториния 32432 праопрлввалопр вапуоулрлорав олварповлар лвоаплаводо авплоавлпод авлпоавдлопвдлопав</string>
-                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Импортер: АО &quot;Мэлон Фешн Груп&quot;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v5i-ry-brU">
-                    <frame key="frameInset" minY="59" width="118" height="10"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Дата изгот.:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="McX-DT-OWK">
-                    <frame key="frameInset" minY="70" width="35" height="10"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Товар:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fCT-RS-n22">
-                    <frame key="frameInset" minY="81" width="30" height="10"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Артикул /" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="663-6l-hle">
-                    <frame key="frameInset" minY="92" width="30" height="10"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Модель:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yFA-gh-ERG">
-                    <frame key="frameInset" minY="102" width="30" height="10"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="№ цвета:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ki3-Vt-pXD">
-                    <frame key="frameInset" minY="113" width="30" height="10"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Состав:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPI-vd-yUi">
-                    <frame key="frameInset" minY="124" width="30" height="10"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Размер:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zo8-aG-kRP">
-                    <frame key="frameInset" minY="135" width="30" height="10"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="см. вшивной ярлык" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Pq-Mc-MoV">
-                    <frame key="frameInset" minX="30" minY="124" width="88" height="10"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a8F-1s-CMK">
-                    <frame key="frameInset" minX="14" minY="147" width="90" height="25"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="6"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOw-BF-bpb">
+                            <frame key="frameInset" minY="23" width="118" height="35"/>
+                            <string key="text">Изготовитель: Китай Чанджоукитомоногабоджиториния 32432 праопрлввалопр вапуоулрлорав олварповлар лвоаплаводо авплоавлпод авлпоавдлопвдлопав</string>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Импортер: АО &quot;Мэлон Фешн Груп&quot;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3EB-zq-dI2">
+                            <frame key="frameInset" minY="59" width="118" height="10"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="10" id="PVn-8H-C4c"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Дата изгот.:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FHu-63-3sJ">
+                            <frame key="frameInset" minY="70" width="35" height="10"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="10" id="RbJ-pK-mDC"/>
+                                <constraint firstAttribute="width" constant="35" id="owv-0v-bmC"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Товар:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d44-w4-QCh">
+                            <frame key="frameInset" minY="81" width="30" height="10"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="FjL-57-13Q"/>
+                                <constraint firstAttribute="height" constant="10" id="vWQ-ne-DsU"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Артикул /" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FCq-Fz-DXb">
+                            <frame key="frameInset" minY="92" width="30" height="10"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="D3d-8C-x8h"/>
+                                <constraint firstAttribute="height" constant="10" id="dOK-Fb-qm8"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Модель:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0GL-zf-rRQ">
+                            <frame key="frameInset" minY="102" width="30" height="10"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="b8U-Hn-m46"/>
+                                <constraint firstAttribute="height" constant="10" id="fnd-1Y-4QS"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="№ цвета:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Svm-Vw-da2">
+                            <frame key="frameInset" minY="113" width="30" height="10"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="Gbi-E8-Lyh"/>
+                                <constraint firstAttribute="height" constant="10" id="KNk-Vy-ari"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Состав:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ilq-QO-RDO">
+                            <frame key="frameInset" minY="124" width="30" height="10"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="enA-vp-ELf"/>
+                                <constraint firstAttribute="height" constant="10" id="iOP-d9-eac"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Размер:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQA-Ui-0e4">
+                            <frame key="frameInset" minY="135" width="30" height="10"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="Ojj-z4-LOT"/>
+                                <constraint firstAttribute="height" constant="10" id="obn-BT-6eG"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="см. вшивной ярлык" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eIu-Rk-aKY">
+                            <frame key="frameInset" minX="30" minY="124" width="88" height="10"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="88" id="eaB-CH-iHE"/>
+                                <constraint firstAttribute="height" constant="10" id="kHe-xh-imk"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="eac_black.png" translatesAutoresizingMaskIntoConstraints="NO" id="v0q-nT-M8J">
+                            <frame key="frameInset" minY="193" width="22" height="22"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="22" id="gl0-dv-fdL"/>
+                                <constraint firstAttribute="height" constant="22" id="kqk-mM-m5s"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="11.10.2016" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xx8-ex-b5K">
+                            <frame key="frameInset" minX="33" minY="70" width="85" height="10"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="10" id="834-7P-6k0"/>
+                                <constraint firstAttribute="width" constant="85" id="jLr-RM-yic"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="юбка" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bqv-am-0xg">
+                            <frame key="frameInset" minX="30" minY="81" width="88" height="10"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="88" id="LFB-7P-rPV"/>
+                                <constraint firstAttribute="height" constant="10" id="wXh-rS-omL"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="6"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1711002204" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cz8-ZZ-Ok6">
+                            <frame key="frameInset" minX="48" minY="92" width="70" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="RGZ-Ce-Ro4"/>
+                                <constraint firstAttribute="width" constant="70" id="lyq-cy-ogy"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="7"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="47" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ka6-PC-Mrq">
+                            <frame key="frameInset" minX="30" minY="113" width="88" height="10"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="88" id="gio-aT-QfU"/>
+                                <constraint firstAttribute="height" constant="10" id="wVD-EM-0Gu"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="170-88-96                    S" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRc-jJ-zIc">
+                            <frame key="frameInset" minX="30" minY="135" width="88" height="10"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="88" id="0cC-8r-v6X"/>
+                                <constraint firstAttribute="height" constant="10" id="dO8-OP-94C"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="7"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Цена: 999 р." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axF-gO-e41">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="10" id="1hz-fp-wGX"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="10"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X0a-h0-Vv5">
+                            <frame key="frameInset" minX="2" minY="147" width="114" height="38"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="114" id="B6d-rI-DB4"/>
+                                <constraint firstAttribute="height" constant="38" id="XLN-9s-pAG"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="3EB-zq-dI2" secondAttribute="trailing" id="1yq-IT-fSI"/>
+                        <constraint firstAttribute="trailing" secondItem="axF-gO-e41" secondAttribute="trailing" id="3cV-Ux-JRu"/>
+                        <constraint firstItem="eIu-Rk-aKY" firstAttribute="top" secondItem="ka6-PC-Mrq" secondAttribute="bottom" constant="1" id="6Af-ZB-UCc"/>
+                        <constraint firstItem="w2t-zX-nl7" firstAttribute="leading" secondItem="uY1-vT-IeM" secondAttribute="leading" id="6CT-Sf-JJQ"/>
+                        <constraint firstItem="axF-gO-e41" firstAttribute="leading" secondItem="uY1-vT-IeM" secondAttribute="leading" id="6gh-1O-nbT"/>
+                        <constraint firstItem="0GL-zf-rRQ" firstAttribute="leading" secondItem="uY1-vT-IeM" secondAttribute="leading" id="9DX-Fg-XEu"/>
+                        <constraint firstAttribute="height" constant="237" id="9gd-8z-ntU"/>
+                        <constraint firstItem="lQA-Ui-0e4" firstAttribute="top" secondItem="Ilq-QO-RDO" secondAttribute="bottom" constant="1" id="Bys-9A-KGq"/>
+                        <constraint firstItem="d44-w4-QCh" firstAttribute="leading" secondItem="uY1-vT-IeM" secondAttribute="leading" id="D1m-5e-yG1"/>
+                        <constraint firstItem="Bqv-am-0xg" firstAttribute="top" secondItem="Xx8-ex-b5K" secondAttribute="bottom" constant="1" id="FmR-qq-YLk"/>
+                        <constraint firstItem="Svm-Vw-da2" firstAttribute="top" secondItem="0GL-zf-rRQ" secondAttribute="bottom" constant="1" id="JBz-ML-MSb"/>
+                        <constraint firstItem="iRc-jJ-zIc" firstAttribute="top" secondItem="eIu-Rk-aKY" secondAttribute="bottom" constant="1" id="LmX-od-DRO"/>
+                        <constraint firstAttribute="trailing" secondItem="Bqv-am-0xg" secondAttribute="trailing" id="MIv-po-a0y"/>
+                        <constraint firstAttribute="trailing" secondItem="iRc-jJ-zIc" secondAttribute="trailing" id="NBU-Ac-bD7"/>
+                        <constraint firstItem="ka6-PC-Mrq" firstAttribute="top" secondItem="Cz8-ZZ-Ok6" secondAttribute="bottom" constant="1" id="Oop-Q6-XfP"/>
+                        <constraint firstItem="Ilq-QO-RDO" firstAttribute="leading" secondItem="uY1-vT-IeM" secondAttribute="leading" id="Os5-47-VVC"/>
+                        <constraint firstAttribute="trailing" secondItem="w2t-zX-nl7" secondAttribute="trailing" id="P0c-nU-h0q"/>
+                        <constraint firstItem="FCq-Fz-DXb" firstAttribute="leading" secondItem="uY1-vT-IeM" secondAttribute="leading" id="PA5-II-9un"/>
+                        <constraint firstItem="3EB-zq-dI2" firstAttribute="top" secondItem="SOw-BF-bpb" secondAttribute="bottom" constant="1" id="R5p-Rt-RlP"/>
+                        <constraint firstAttribute="trailing" secondItem="Cz8-ZZ-Ok6" secondAttribute="trailing" id="Sp8-hC-8cx"/>
+                        <constraint firstAttribute="trailing" secondItem="ka6-PC-Mrq" secondAttribute="trailing" id="TtQ-cu-R42"/>
+                        <constraint firstAttribute="bottom" secondItem="axF-gO-e41" secondAttribute="bottom" id="UGi-fN-6Oh"/>
+                        <constraint firstItem="X0a-h0-Vv5" firstAttribute="top" secondItem="iRc-jJ-zIc" secondAttribute="bottom" constant="2" id="UVY-88-IbW"/>
+                        <constraint firstItem="v0q-nT-M8J" firstAttribute="leading" secondItem="uY1-vT-IeM" secondAttribute="leading" id="X08-eg-G1e"/>
+                        <constraint firstAttribute="trailing" secondItem="SOw-BF-bpb" secondAttribute="trailing" id="YXK-Gp-r3Q"/>
+                        <constraint firstItem="Xx8-ex-b5K" firstAttribute="top" secondItem="3EB-zq-dI2" secondAttribute="bottom" constant="1" id="Zze-qC-WJP"/>
+                        <constraint firstItem="X0a-h0-Vv5" firstAttribute="centerX" secondItem="uY1-vT-IeM" secondAttribute="centerX" id="dGt-a5-odc"/>
+                        <constraint firstItem="w2t-zX-nl7" firstAttribute="top" secondItem="uY1-vT-IeM" secondAttribute="top" id="eX4-Pg-7Jw"/>
+                        <constraint firstItem="Ilq-QO-RDO" firstAttribute="top" secondItem="Svm-Vw-da2" secondAttribute="bottom" constant="1" id="iR9-H2-UyI"/>
+                        <constraint firstItem="FCq-Fz-DXb" firstAttribute="top" secondItem="d44-w4-QCh" secondAttribute="bottom" constant="1" id="jpz-FT-Oaf"/>
+                        <constraint firstItem="lQA-Ui-0e4" firstAttribute="leading" secondItem="uY1-vT-IeM" secondAttribute="leading" id="jqc-kf-cnP"/>
+                        <constraint firstItem="Cz8-ZZ-Ok6" firstAttribute="top" secondItem="Bqv-am-0xg" secondAttribute="bottom" constant="1" id="kf0-8F-2jR"/>
+                        <constraint firstAttribute="trailing" secondItem="eIu-Rk-aKY" secondAttribute="trailing" id="lGv-cE-c8l"/>
+                        <constraint firstItem="3EB-zq-dI2" firstAttribute="leading" secondItem="uY1-vT-IeM" secondAttribute="leading" id="p3F-6E-0B1"/>
+                        <constraint firstAttribute="trailing" secondItem="Xx8-ex-b5K" secondAttribute="trailing" id="p5o-ac-vQl"/>
+                        <constraint firstItem="d44-w4-QCh" firstAttribute="top" secondItem="FHu-63-3sJ" secondAttribute="bottom" constant="1" id="qAj-r9-1qa"/>
+                        <constraint firstItem="SOw-BF-bpb" firstAttribute="leading" secondItem="uY1-vT-IeM" secondAttribute="leading" id="qFD-O1-4Mi"/>
+                        <constraint firstItem="v0q-nT-M8J" firstAttribute="top" secondItem="X0a-h0-Vv5" secondAttribute="bottom" constant="8" id="sJG-ay-jsQ"/>
+                        <constraint firstItem="Svm-Vw-da2" firstAttribute="leading" secondItem="uY1-vT-IeM" secondAttribute="leading" id="sKa-QK-5Fh"/>
+                        <constraint firstAttribute="width" constant="118" id="tHt-aX-VtS"/>
+                        <constraint firstItem="FHu-63-3sJ" firstAttribute="leading" secondItem="uY1-vT-IeM" secondAttribute="leading" id="yUU-zI-uPd"/>
+                        <constraint firstItem="SOw-BF-bpb" firstAttribute="top" secondItem="w2t-zX-nl7" secondAttribute="bottom" constant="1" id="ykY-ba-PRu"/>
+                        <constraint firstItem="0GL-zf-rRQ" firstAttribute="top" secondItem="FCq-Fz-DXb" secondAttribute="bottom" id="yu6-7g-fG6"/>
+                        <constraint firstItem="FHu-63-3sJ" firstAttribute="top" secondItem="3EB-zq-dI2" secondAttribute="bottom" constant="1" id="zuo-ON-iCu"/>
+                    </constraints>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="eac_black.png" translatesAutoresizingMaskIntoConstraints="NO" id="tXe-J2-hwt">
-                    <frame key="frameInset" minY="193" width="22" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="11.10.2016" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hXW-u4-dxu">
-                    <frame key="frameInset" minX="33" minY="70" width="85" height="10"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="юбка" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPi-kT-bQ7">
-                    <frame key="frameInset" minX="30" minY="81" width="88" height="10"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="6"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1711002204" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agy-qV-gki">
-                    <frame key="frameInset" minX="48" minY="92" width="70" height="20"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="7"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="47" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAa-j7-LX4">
-                    <frame key="frameInset" minX="30" minY="113" width="88" height="10"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="170-88-96                    S" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qxe-3f-0M3">
-                    <frame key="frameInset" minX="30" minY="135" width="88" height="10"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="7"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Цена: 999 р." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fi4-It-AFG">
-                    <frame key="frameInset" minY="227" width="118" height="10"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="10"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="4603372262654" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zuS-to-eh8">
-                    <frame key="frameInset" minY="172" width="118" height="10"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="7"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="uY1-vT-IeM" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="GpU-Jl-4ir"/>
+                <constraint firstItem="uY1-vT-IeM" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="c4t-mS-6p3"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="articleLabel" destination="agy-qV-gki" id="GSf-o9-oOH"/>
-                <outlet property="barcodeLabel" destination="zuS-to-eh8" id="yhi-yt-lpT"/>
-                <outlet property="barcodeView" destination="a8F-1s-CMK" id="1DT-7g-cZd"/>
-                <outlet property="colorLabel" destination="kAa-j7-LX4" id="ht0-jZ-98d"/>
-                <outlet property="manufactureDateLabel" destination="hXW-u4-dxu" id="d9X-cN-Yv3"/>
-                <outlet property="manufactureLabel" destination="KAw-VB-ZKQ" id="yxw-c8-kTn"/>
-                <outlet property="nameLabel" destination="YPi-kT-bQ7" id="GV2-NR-qZI"/>
-                <outlet property="priceLabel" destination="Fi4-It-AFG" id="mxP-RD-lM1"/>
-                <outlet property="sizeLabel" destination="Qxe-3f-0M3" id="Zhn-h7-uyc"/>
+                <outlet property="articleLabel" destination="Cz8-ZZ-Ok6" id="6gx-za-8yb"/>
+                <outlet property="barcodeView" destination="X0a-h0-Vv5" id="Nhu-oo-Pt2"/>
+                <outlet property="colorLabel" destination="ka6-PC-Mrq" id="fEt-cq-ZqA"/>
+                <outlet property="manufactureDateLabel" destination="Xx8-ex-b5K" id="eOz-4W-npd"/>
+                <outlet property="manufactureLabel" destination="SOw-BF-bpb" id="yRG-qu-fQE"/>
+                <outlet property="nameLabel" destination="Bqv-am-0xg" id="XLe-5c-bHR"/>
+                <outlet property="priceLabel" destination="axF-gO-e41" id="ogm-ck-a45"/>
+                <outlet property="sizeLabel" destination="iRc-jJ-zIc" id="0yl-gH-W5I"/>
             </connections>
             <point key="canvasLocation" x="34" y="54.5"/>
         </view>
