@@ -61,8 +61,15 @@
             authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodingWithLineLength:80]];
         }
         
-        deviceID = @"305";
-        //990023135202
+        NSString *ID = [[NSUserDefaults standardUserDefaults] valueForKey:@"DeviceID"];
+        if (ID == nil)
+        {
+            ID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+            [[NSUserDefaults standardUserDefaults] setValue:ID forKey:@"DeviceID"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+        
+        deviceID = ID;
     }
     
     return self;
