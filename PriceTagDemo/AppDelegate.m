@@ -247,7 +247,7 @@
 - (void) gsKey: (UIKeyCommand *) keyCommand {
     NSLog(@"%@", keyCommand.input);
     
-    if ([keyCommand.input isEqualToString:@"+"])
+    if ([keyCommand.input isEqualToString:@"+"] || ([keyCommand.input isEqualToString:@"="] && ringBarcode.length==0))
     {
         ringBarcode = [NSMutableString new];
         ringBarcodeType = @"";
