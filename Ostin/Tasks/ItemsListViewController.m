@@ -28,6 +28,7 @@
     BOOL bindingInProgress;
     UIAlertView *bindingAlert;
     WYPopoverController *settingsPopover;
+    NSUInteger _tabBarIndex;
 }
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *actionButton;
@@ -42,6 +43,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 {
     [super viewDidLoad];
     _items = [[NSMutableArray alloc] init];
+    _tabBarIndex = self.tabBarController.selectedIndex;
     
     self.tableView.estimatedRowHeight = 44.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -177,7 +179,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
         [bindingAlert textFieldAtIndex:0].text = code;
         return;
     }
-    else if (_task.status == TaskInformationStatusInProgress)
+    else if (_task.status == TaskInformationStatusInProgress && self.tabBarController.selectedIndex == _tabBarIndex)
     {
         NSString *barcode = notification.object[@"barcode"];
         NSNumber *type = notification.object[@"type"];
@@ -187,7 +189,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 
 - (void)didReceiveFinishPrintNotification:(NSNotification *)notification
 {
-    if (_task.status == TaskInformationStatusInProgress)
+    if (_task.status == TaskInformationStatusInProgress && self.tabBarController.selectedIndex == _tabBarIndex)
     {
         ItemInformation *item = notification.object;
         TaskItemInformation *taskItemInfo = [self taskItemInfoForItemWithID:item.itemId];
