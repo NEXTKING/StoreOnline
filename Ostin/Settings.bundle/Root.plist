@@ -98,7 +98,7 @@
 			<key>Key</key>
 			<string>auth_user_preference</string>
 			<key>DefaultValue</key>
-			<string>OST170_WEB</string>
+			<string>TEST0_WEB</string>
 			<key>IsSecure</key>
 			<false/>
 			<key>KeyboardType</key>
@@ -125,6 +125,52 @@
 			<string>None</string>
 			<key>AutocorrectionType</key>
 			<string>No</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Image server</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Protocol</string>
+			<key>Key</key>
+			<string>protocol_image_preference</string>
+			<key>DefaultValue</key>
+			<string>http</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Host</string>
+			<key>Key</key>
+			<string>host_image_preference</string>
+			<key>DefaultValue</key>
+			<string>172.16.4.228</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Port</string>
+			<key>Key</key>
+			<string>port_image_preference</string>
+			<key>DefaultValue</key>
+			<string>2080</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Path</string>
+			<key>Key</key>
+			<string>path_image_preference</string>
+			<key>DefaultValue</key>
+			<string>MobileStick/api/Picture</string>
 		</dict>
 	</array>
 </dict>

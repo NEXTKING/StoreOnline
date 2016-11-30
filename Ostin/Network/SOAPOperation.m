@@ -17,6 +17,18 @@
 
 @implementation SOAPOperation
 
+- (id) init
+{
+    self = [super init];
+    
+    if (self)
+    {
+        self.progress = [NSProgress new];
+    }
+    
+    return self;
+}
+
 
 - (void) main
 {
@@ -30,11 +42,20 @@
     numberOfPortions = [self getPortions:_incValue];
     
     if (numberOfPortions == 0)
+    {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            _progress.totalUnitCount = 1;
+            _progress.completedUnitCount = 1;
+        });
         self.success = YES; // Nothing to download
+    }
     
     if (self.isCancelled || numberOfPortions <= 0)
         return;
     
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        _progress.totalUnitCount = numberOfPortions;
+    });
     
     while (numberOfPortions > 0) {
         
@@ -68,6 +89,11 @@
             return;
         
         numberOfPortions--;
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            _progress.completedUnitCount++;
+        });
+        NSLog(@"%@: %@", _incValue, _progress);
     }
     
     self.success = YES;
@@ -81,7 +107,40 @@
 
 - (BOOL) saveItems:(NSArray *)items
 {
-    return YES;
+    for (PI_MOBILE_SERVICEService_TROW_IntType *throw in items)
+    {
+        NSArray *csvSourse = [throw.VAL componentsSeparatedByString:@"\";\""];
+        NSArray *csv       = [self removeQuotes:csvSourse];
+        
+        if (csv.count < 1)
+            return NO;
+        
+        NSString* incrementValue = csv[0];
+        NSManagedObject* coreDataObject = nil;
+        
+        if ([incrementValue isEqualToString:@"I"])
+        {
+           coreDataObject = [NSEntityDescription insertNewObjectForEntityForName:_coreDataId inManagedObjectContext:self.privateContext];
+            [self updateObject:coreDataObject csv:csv];
+        }
+        else if ([incrementValue isEqualToString:@"U"])
+        {
+            coreDataObject = [self findObject:csv];
+            if (coreDataObject)
+                [self updateObject:coreDataObject csv:csv];
+        }
+        else if ([incrementValue isEqualToString:@"D"])
+        {
+            coreDataObject = [self findObject:csv];
+            [self.privateContext deleteObject:coreDataObject];
+        }
+        
+    }
+    
+    NSError* error = nil;
+    [self.privateContext save:&error];
+        
+    return error? NO:YES;
 }
 
 
@@ -163,5 +222,14 @@
     return noQuotes;
 }
 
+- (NSManagedObject*) findObject:(NSArray *)csv
+{
+    return nil;
+}
+
+- (void) updateObject:(NSManagedObject *)obj csv:(NSArray *)csv
+{
+    
+}
 
 @end

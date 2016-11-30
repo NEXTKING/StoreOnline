@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "MCPServer.h"
 #import "DTDevices.h"
+#import "PrintViewController.h"
 
-@interface ViewController : UIViewController <DTDeviceDelegate,ItemDescriptionDelegate>
+@interface ViewController : UIViewController <DTDeviceDelegate,ItemDescriptionDelegate, PrinterControllerDelegate>
 {
     @protected
     NSString* lastBarcode;

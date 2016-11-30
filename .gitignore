@@ -83,3 +83,5 @@ Carthage/Build.rbenv-vars
 ####
 # rbenv
 .rbenv-vars
+
+.DS_Store

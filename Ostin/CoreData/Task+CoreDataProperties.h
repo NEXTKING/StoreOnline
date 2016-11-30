@@ -15,10 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<Task *> *)fetchRequest;
 
+@property (nullable, nonatomic, copy) NSDate *dateCreated;
 @property (nullable, nonatomic, copy) NSNumber *taskID;
 @property (nullable, nonatomic, copy) NSString *name;
-@property (nullable, nonatomic, copy) NSNumber *userID;
-@property (nullable, nonatomic, copy) NSNumber *isCompleted;
+@property (nullable, nonatomic, copy) NSString *userID;
+@property (nullable, nonatomic, copy) NSNumber *totalPrintedCount;
 @property (nullable, nonatomic, copy) NSDate *startDate;
 @property (nullable, nonatomic, copy) NSDate *endDate;
 @end

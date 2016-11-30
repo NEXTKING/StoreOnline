@@ -2,8 +2,12 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="16A323" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Barcode" representedClassName="Barcode" syncable="YES">
         <attribute name="code128" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
-        <attribute name="ean" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ean" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="itemID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+    </entity>
+    <entity name="Group" representedClassName="Group" syncable="YES">
+        <attribute name="groupID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="groupTitle" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Item" representedClassName=".Item" syncable="YES">
         <attribute name="additionalInfo" optional="YES" attributeType="String" syncable="YES"/>
@@ -12,34 +16,47 @@
         <attribute name="boxType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="certificationAuthorittyCode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="certificationType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="collection" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="groupID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="itemCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="drop" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="groupID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="itemCode" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="itemCode_2" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="itemID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
         <attribute name="line1" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="line2" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="priceHeader" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="size" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sizeHeader" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="storeNumber" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="subgroupID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="trademarkID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="subgroupID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="trademarkID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="ItemPrintFact" representedClassName="ItemPrintFact" syncable="YES">
+        <attribute name="itemCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="taskName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="wasUploaded" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <entity name="Price" representedClassName="Price" syncable="YES">
         <attribute name="catalogPrice" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="dateModified" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="discount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="itemID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
         <attribute name="retailPrice" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
     </entity>
+    <entity name="Subgroup" representedClassName="Subgroup" syncable="YES">
+        <attribute name="subgroupID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="subgroupTitle" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Task" representedClassName="Task" syncable="YES">
+        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="isCompleted" optional="YES" attributeType="Integer 16" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="taskID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="userID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="totalPrintedCount" optional="YES" attributeType="Integer 32" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="TaskItemBinding" representedClassName="TaskItemBinding" syncable="YES">
         <attribute name="itemID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -47,11 +64,22 @@
         <attribute name="scanned" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="taskID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
     </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="barcode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="key_user" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="login" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Barcode" positionX="-47" positionY="-63" width="128" height="88"/>
-        <element name="Item" positionX="-207" positionY="-238" width="128" height="343"/>
-        <element name="Price" positionX="-207" positionY="125" width="128" height="103"/>
-        <element name="Task" positionX="-45" positionY="54" width="128" height="133"/>
-        <element name="TaskItemBinding" positionX="-47" positionY="216" width="128" height="103"/>
+        <element name="Barcode" positionX="-47" positionY="-63" width="128" height="90"/>
+        <element name="Group" positionX="-108" positionY="-72" width="128" height="75"/>
+        <element name="Item" positionX="-207" positionY="-238" width="128" height="375"/>
+        <element name="Price" positionX="-207" positionY="125" width="128" height="120"/>
+        <element name="Subgroup" positionX="-99" positionY="-63" width="128" height="75"/>
+        <element name="Task" positionX="-45" positionY="54" width="128" height="150"/>
+        <element name="TaskItemBinding" positionX="-47" positionY="216" width="128" height="105"/>
+        <element name="User" positionX="-90" positionY="-54" width="128" height="120"/>
+        <element name="ItemPrintFact" positionX="-117" positionY="-81" width="128" height="90"/>
     </elements>
 </model>

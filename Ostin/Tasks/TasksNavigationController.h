@@ -10,7 +10,7 @@
 #import "TaskProgressOverlayController.h"
 
 
-#define OSTIN_TASK_OVERLAY_HEIGHT 60
+#define OSTIN_TASK_OVERLAY_HEIGHT 96
 #define OSTIN_TASK_OVERLAY_ANIMATION_DURATION 0.2
 
 @interface TasksNavigationController : UINavigationController

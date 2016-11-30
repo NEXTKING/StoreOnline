@@ -12,6 +12,6 @@
 @interface ZPLGenerator : NSObject
 
 + (NSData*) generateZPLWithItem:(ItemInformation*) item patternPath:(NSString*) path;
-//+ (NSString*) additionalInfo;
++ (NSData*) generateEanZPLWithItem:(ItemInformation*) item patternPath:(NSString *)path;
 + (NSInteger) calculateUPCCheckSum:(NSString*) code;
 @end
