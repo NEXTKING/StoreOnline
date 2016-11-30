@@ -9,30 +9,74 @@
 #import "SynchronizationController.h"
 #import "MCPServer.h"
 #import "CoreDataController.h"
+#import "AppSuspendingBlocker.h"
 
 typedef enum SyncStages
 {
     SSItems = 1 << 0,
     SSTasks = 1 << 1,
+    SSUsers = 1 << 2,
     
-    SSCount = 1 << 2    //Should be the biggest significant bit
+    SSCount = 1 << 3    //Should be the biggest significant bit
 }SyncStages;
 
-@interface SynchronizationController() <ItemDescriptionDelegate, TasksDelegate>
+@interface SynchronizationController() <ItemDescriptionDelegate_Ostin, TasksDelegate, UserDelegate>
 {
     NSInteger updateMask;
+    NSProgress *_progress;
+    AppSuspendingBlocker *_suspendingBlocker;
 }
-
 @end
 
 @implementation SynchronizationController
 
+static void *ProgressObserverContext = &ProgressObserverContext;
+
 - (void) synchronize
 {
+    _progress = [NSProgress progressWithTotalUnitCount:5];
+    [_progress becomeCurrentWithPendingUnitCount:0];
+    [_progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionNew context:ProgressObserverContext];
+    
+    _suspendingBlocker = [AppSuspendingBlocker new];
+    [_suspendingBlocker startBlock];
+    
     [[MCPServer instance] itemDescription:self itemCode:nil shopCode:nil isoType:0];
     [[MCPServer instance] tasks:self userID:nil];
+    [[MCPServer instance] user:self login:nil password:nil];
     
     NSLog(@"%d", SSCount);
+}
+
+// avoid warning
+
+- (void)setProgress:(NSProgress *)progress
+{
+    
+}
+
+- (NSProgress *)progress
+{
+    return _progress;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (context == ProgressObserverContext)
+    {
+        NSProgress *progress = (NSProgress *)object;
+        NSLog(@"TOTAL PROGRESS IS: %f", progress.fractionCompleted);
+        [_delegate syncProgressChanged:progress.fractionCompleted];
+    }
+    else
+    {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
+
+- (void)resetPortions
+{
+    [[MCPServer instance] resetDatabaseAndPortionsCount:self];
 }
 
 #pragma mark - Network Delegates
@@ -56,11 +100,13 @@ typedef enum SyncStages
     }
     
     if (allBitsAreSet)
+    {
+        [_suspendingBlocker stopBlock];
+        [_progress resignCurrent];
         [_delegate syncCompleteWithResult:0];
-    
+        [_progress removeObserver:self forKeyPath:@"fractionCompleted" context:ProgressObserverContext];
+    }
 }
-
-
 
 - (void) itemDescriptionComplete:(int)result itemDescription:(ItemInformation *)itemDescription
 {
@@ -76,6 +122,7 @@ typedef enum SyncStages
     }
     else
     {
+        [_suspendingBlocker stopBlock];
         [_delegate syncCompleteWithResult:result];
     }
 }
@@ -86,7 +133,29 @@ typedef enum SyncStages
     {
         [self updateSyncStatus:SSTasks];
     }
+    else
+    {
+        [_suspendingBlocker stopBlock];
+        [_delegate syncCompleteWithResult:result];
+    }
+}
 
+- (void)userComplete:(int)result user:(id)user
+{
+    if (result == 0)
+    {
+        [self updateSyncStatus:SSUsers];
+    }
+    else
+    {
+        [_suspendingBlocker stopBlock];
+        [_delegate syncCompleteWithResult:result];
+    }
+}
+
+- (void)resetDatabaseAndPortionsCountComplete:(int)result
+{
+    [_delegate resetPortionsCompleteWithResult:result];
 }
 
 @end

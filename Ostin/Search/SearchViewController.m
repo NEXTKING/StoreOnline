@@ -11,6 +11,7 @@
 #import "MCPServer.h"
 #import "OstinViewController.h"
 #import "ZPLGenerator.h"
+#import "AsyncImageView.h"
 
 @interface SearchViewController () <UISearchBarDelegate, SearchDelegate, ItemDescriptionDelegate>
 {
@@ -53,8 +54,11 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
 
 - (void)showAlertWithMessage:(NSString*)message
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    [alert show];
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:ac animated:YES completion:nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [ac dismissViewControllerAnimated:YES completion:nil];
+    });
 }
 
 #pragma mark - Table view data source
@@ -71,7 +75,12 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
     
     cell.nameLabel.text = item.name;
     cell.itemCodeLabel.text = [item additionalParameterValueForName:@"itemCode"];
-
+    NSString *urlString = [item additionalParameterValueForName:@"imageURL"];
+    
+    cell.itemImageView.image = [UIImage imageNamed:@"no-image.png"];
+    if (urlString != nil)
+        cell.itemImageView.imageURL = [NSURL URLWithString:urlString];
+    
     return cell;
 }
 
@@ -79,6 +88,12 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
 {
     ItemInformation *item = [_searchResults objectAtIndex:indexPath.row];
     [[MCPServer instance] itemDescription:self itemID:item.itemId];
+}
+
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SearchTableViewCell *_cell = (SearchTableViewCell *)cell;
+    [[AsyncImageLoader sharedLoader] cancelLoadingImagesForTarget:_cell.itemImageView];
 }
 
 #pragma mark - UISearchBar delegate
@@ -108,13 +123,10 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
 {
     if (!isSearchRunning)
     {
+        ItemSearchAttribute searchAttribute = ItemSearchAttributeName | ItemSearchAttributeItemCode;
         isSearchRunning = YES;
         [self showActivityIndicator];
-        __weak typeof(self) wself = self;
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            ItemSearchAttribute searchAttribute = ItemSearchAttributeName | ItemSearchAttributeArticle | ItemSearchAttributeItemCode;
-            [[MCPServer instance] search:wself forQuery:searchBar.text withAttribute:searchAttribute];
-        });
+        [[MCPServer instance] search:self forQuery:searchBar.text withAttribute:searchAttribute];
     }
     [searchBar resignFirstResponder];
 }
@@ -123,24 +135,21 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
 
 - (void)searchComplete:(int)result attribute:(ItemSearchAttribute)searchAttribute items:(NSArray *)items
 {
-    __weak typeof(self) wself = self;
-    dispatch_async(dispatch_get_main_queue(), ^{
+    isSearchRunning = NO;
+    [self hideActivityIndicator];
+    
+    if (result == 0)
+    {
+        _searchResults = items;
+        [self.tableView reloadData];
         
-        isSearchRunning = NO;
-        [wself hideActivityIndicator];
-        if (result == 0)
-        {
-            _searchResults = items;
-            [wself.tableView reloadData];
-            
-            if (items.count == 0)
-                [wself showAlertWithMessage:@"По данному запросу не найдено ни одного товара."];
-        }
-        else
-        {
-            
-        }
-    });
+        if (items.count == 0)
+            [self showAlertWithMessage:@"По данному запросу не найдено ни одного товара."];
+    }
+    else
+    {
+        
+    }
 }
 
 #pragma mark - Item Description Delegate
@@ -178,7 +187,6 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
 
         ostinVC.currentItemInfo = itemInfo;
         ostinVC.externalBarcode = itemInfo.barcode;
-        [ZPLGenerator generateZPLWithItem:itemInfo patternPath:nil];
     }
 }
 
