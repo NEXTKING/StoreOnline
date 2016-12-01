@@ -312,7 +312,7 @@
 {
     NSManagedObjectContext *moc =_dataController.managedObjectContext;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"AcceptItem"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"date == %@ AND type == %@", date, @""]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"date == %@ AND type == %@ AND scanned > 0", date, @""]];
     NSArray* results = [moc executeFetchRequest:request error:nil];
     
     if (results.count < 1)
@@ -324,9 +324,10 @@
     }
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
-    [dateFormatter setLocale:enUSPOSIXLocale];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
+//    NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+//    [dateFormatter setLocale:enUSPOSIXLocale];
+//    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     
     NSMutableArray *acceptanes = [NSMutableArray new];
     for (AcceptItem *acceptItemDB in results)

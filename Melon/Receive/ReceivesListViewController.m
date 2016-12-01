@@ -28,7 +28,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"ReceivesListCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
     
     _dateFormatter = [NSDateFormatter new];
-    _dateFormatter.dateFormat = @"d MMMM yyyy, hh:mm";
+    _dateFormatter.dateFormat = @"d MMMM yyyy";
 }
 
 - (void)viewWillAppear:(BOOL)animated

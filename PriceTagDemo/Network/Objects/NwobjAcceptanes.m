@@ -182,6 +182,8 @@
         else
             acceptInfo.type = AcceptanesInformationItemTypeItem;
     }
+    else if (obj != Nil  && [obj isKindOfClass:[NSNull class]])
+        acceptInfo.type = AcceptanesInformationItemTypeItem;
     
     obj = [result objectForKey:@"QuantityCount"];
     if (obj && [obj isKindOfClass:[NSNumber class]])
@@ -194,7 +196,9 @@
     obj = [result objectForKey:@"DateOfOperation"];
     if (obj && [obj isKindOfClass:[NSString class]])
     {
-        NSISO8601DateFormatter *dateFormatter = [[NSISO8601DateFormatter alloc] init];
+        //NSISO8601DateFormatter *dateFormatter = [[NSISO8601DateFormatter alloc] init];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"yyyy-MM-dd";
         acceptInfo.date = [dateFormatter dateFromString:obj];
     }
     obj = [result objectForKey:@"IsScannedByHand"];

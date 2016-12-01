@@ -187,7 +187,9 @@ typedef enum : NSUInteger
         if ([acceptInfo.barcode isEqualToString:itemInfo.barcode])
         {
             NSUInteger section = [self numberOfSectionsInTableView:_tableView] - 1;
-            [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:i inSection:section]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            NSIndexPath *itemIndexPath = [NSIndexPath indexPathForRow:i inSection:section];
+            [_tableView reloadRowsAtIndexPaths:@[itemIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [_tableView scrollToRowAtIndexPath:itemIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
             return;
         }
     }
@@ -203,7 +205,9 @@ typedef enum : NSUInteger
     [_items addObject:acceptInfo];
     NSUInteger section = [self numberOfSectionsInTableView:_tableView] - 1;
     NSUInteger row = [_items indexOfObject:acceptInfo];
-    [_tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:section]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    NSIndexPath *itemIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
+    [_tableView insertRowsAtIndexPaths:@[itemIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [_tableView scrollToRowAtIndexPath:itemIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
 }
 
 - (void)acceptAllItems
@@ -434,7 +438,7 @@ typedef enum : NSUInteger
     else
     {
         NSDateFormatter *dateFormatter = [NSDateFormatter new];
-        dateFormatter.dateFormat = @"d MMMM yyyy, hh:mm";
+        dateFormatter.dateFormat = @"d MMMM yyyy";
         return [NSString stringWithFormat:@"Приёмка %@", [dateFormatter stringFromDate:self.date]];
     }
 }
