@@ -1,15 +1,14 @@
 //
-//  MelonPriceTag30x60.m
+//  MelonPriceTag29x28.m
 //  PriceTagDemo
 //
-//  Created by Evgeny Seliverstov on 25/11/2016.
+//  Created by Evgeny Seliverstov on 30/11/2016.
 //  Copyright © 2016 Dataphone. All rights reserved.
 //
 
-#import "MelonPriceTag30x60.h"
-#import "BarCodeView.h"
+#import "MelonPriceTag29x28.h"
 
-@implementation MelonPriceTag30x60
+@implementation MelonPriceTag29x28
 
 - (void) setItemInformation:(ItemInformation*) item
 {
@@ -19,7 +18,6 @@
     _articleLabel.text = item.article;
     _colorLabel.text = item.color;
     
-    _sizeLabel.text = @"170-88-96 S";
     _manufactureDateLabel.text = @"Дата изгот.: 17.12.2016";
     _manufactureLabel.text = @"Изготовитель: Китай Сумек текстиле инстастриал";
 }

@@ -14,189 +14,163 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uY1-vT-IeM">
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w2t-zX-nl7">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w2t-zX-nl7" customClass="AntiAliasingLabel">
                             <constraints>
-                                <constraint firstAttribute="height" constant="22" id="khs-0a-FKX"/>
+                                <constraint firstAttribute="height" constant="26" id="khs-0a-FKX"/>
                             </constraints>
                             <string key="text">Россия, Санкт-Петербург,
 10-я Красноармейская ул., д. 22
 АО "Мэлон Фэшн Груп"</string>
-                            <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="6"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOw-BF-bpb">
-                            <frame key="frameInset" minY="23" width="118" height="35"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOw-BF-bpb" customClass="AntiAliasingLabel">
                             <string key="text">Изготовитель: Китай Чанджоукитомоногабоджиториния 32432 праопрлввалопр вапуоулрлорав олварповлар лвоаплаводо авплоавлпод авлпоавдлопвдлопав</string>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Импортер: АО &quot;Мэлон Фешн Груп&quot;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3EB-zq-dI2">
-                            <frame key="frameInset" minY="59" width="118" height="10"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Импортер: АО &quot;Мэлон Фешн Груп&quot;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3EB-zq-dI2" customClass="AntiAliasingLabel">
                             <constraints>
                                 <constraint firstAttribute="height" constant="10" id="PVn-8H-C4c"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Дата изгот.:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FHu-63-3sJ">
-                            <frame key="frameInset" minY="70" width="35" height="10"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дата изгот.:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FHu-63-3sJ" customClass="AntiAliasingLabel">
                             <constraints>
                                 <constraint firstAttribute="height" constant="10" id="RbJ-pK-mDC"/>
-                                <constraint firstAttribute="width" constant="35" id="owv-0v-bmC"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Товар:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d44-w4-QCh">
-                            <frame key="frameInset" minY="81" width="30" height="10"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Товар:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d44-w4-QCh" customClass="AntiAliasingLabel">
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="FjL-57-13Q"/>
                                 <constraint firstAttribute="height" constant="10" id="vWQ-ne-DsU"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Артикул /" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FCq-Fz-DXb">
-                            <frame key="frameInset" minY="92" width="30" height="10"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Артикул /" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FCq-Fz-DXb" customClass="AntiAliasingLabel">
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="D3d-8C-x8h"/>
                                 <constraint firstAttribute="height" constant="10" id="dOK-Fb-qm8"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Модель:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0GL-zf-rRQ">
-                            <frame key="frameInset" minY="102" width="30" height="10"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Модель:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0GL-zf-rRQ" customClass="AntiAliasingLabel">
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="b8U-Hn-m46"/>
                                 <constraint firstAttribute="height" constant="10" id="fnd-1Y-4QS"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="№ цвета:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Svm-Vw-da2">
-                            <frame key="frameInset" minY="113" width="30" height="10"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="№ цвета:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Svm-Vw-da2" customClass="AntiAliasingLabel">
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="Gbi-E8-Lyh"/>
                                 <constraint firstAttribute="height" constant="10" id="KNk-Vy-ari"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Состав:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ilq-QO-RDO">
-                            <frame key="frameInset" minY="124" width="30" height="10"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Состав:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ilq-QO-RDO" customClass="AntiAliasingLabel">
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="enA-vp-ELf"/>
                                 <constraint firstAttribute="height" constant="10" id="iOP-d9-eac"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Размер:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQA-Ui-0e4">
-                            <frame key="frameInset" minY="135" width="30" height="10"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Размер:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQA-Ui-0e4" customClass="AntiAliasingLabel">
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="Ojj-z4-LOT"/>
                                 <constraint firstAttribute="height" constant="10" id="obn-BT-6eG"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="см. вшивной ярлык" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eIu-Rk-aKY">
-                            <frame key="frameInset" minX="30" minY="124" width="88" height="10"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="см. вшивной ярлык" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eIu-Rk-aKY" customClass="AntiAliasingLabel">
                             <constraints>
-                                <constraint firstAttribute="width" constant="88" id="eaB-CH-iHE"/>
+                                <constraint firstAttribute="width" constant="85" id="eaB-CH-iHE"/>
                                 <constraint firstAttribute="height" constant="10" id="kHe-xh-imk"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="eac_black.png" translatesAutoresizingMaskIntoConstraints="NO" id="v0q-nT-M8J">
-                            <frame key="frameInset" minY="193" width="22" height="22"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eac_black.png" translatesAutoresizingMaskIntoConstraints="NO" id="v0q-nT-M8J">
                             <constraints>
                                 <constraint firstAttribute="width" constant="22" id="gl0-dv-fdL"/>
-                                <constraint firstAttribute="height" constant="22" id="kqk-mM-m5s"/>
+                                <constraint firstAttribute="height" constant="18" id="kqk-mM-m5s"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="11.10.2016" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xx8-ex-b5K">
-                            <frame key="frameInset" minX="33" minY="70" width="85" height="10"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="юбка" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bqv-am-0xg" customClass="AntiAliasingLabel">
                             <constraints>
-                                <constraint firstAttribute="height" constant="10" id="834-7P-6k0"/>
-                                <constraint firstAttribute="width" constant="85" id="jLr-RM-yic"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="юбка" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bqv-am-0xg">
-                            <frame key="frameInset" minX="30" minY="81" width="88" height="10"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="88" id="LFB-7P-rPV"/>
+                                <constraint firstAttribute="width" constant="85" id="LFB-7P-rPV"/>
                                 <constraint firstAttribute="height" constant="10" id="wXh-rS-omL"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="6"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1711002204" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cz8-ZZ-Ok6">
-                            <frame key="frameInset" minX="48" minY="92" width="70" height="20"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1711002204" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cz8-ZZ-Ok6" customClass="AntiAliasingLabel">
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="RGZ-Ce-Ro4"/>
-                                <constraint firstAttribute="width" constant="70" id="lyq-cy-ogy"/>
+                                <constraint firstAttribute="width" constant="85" id="lyq-cy-ogy"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="7"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="47" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ka6-PC-Mrq">
-                            <frame key="frameInset" minX="30" minY="113" width="88" height="10"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="47" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ka6-PC-Mrq" customClass="AntiAliasingLabel">
                             <constraints>
-                                <constraint firstAttribute="width" constant="88" id="gio-aT-QfU"/>
+                                <constraint firstAttribute="width" constant="85" id="gio-aT-QfU"/>
                                 <constraint firstAttribute="height" constant="10" id="wVD-EM-0Gu"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="170-88-96                    S" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRc-jJ-zIc">
-                            <frame key="frameInset" minX="30" minY="135" width="88" height="10"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="170-88-96                    S" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRc-jJ-zIc" customClass="AntiAliasingLabel">
                             <constraints>
-                                <constraint firstAttribute="width" constant="88" id="0cC-8r-v6X"/>
+                                <constraint firstAttribute="width" constant="85" id="0cC-8r-v6X"/>
                                 <constraint firstAttribute="height" constant="10" id="dO8-OP-94C"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="7"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Цена: 999 р." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axF-gO-e41">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Цена: 999 р." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axF-gO-e41" customClass="AntiAliasingLabel">
                             <constraints>
-                                <constraint firstAttribute="height" constant="10" id="1hz-fp-wGX"/>
+                                <constraint firstAttribute="height" constant="16" id="1hz-fp-wGX"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="10"/>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="12"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X0a-h0-Vv5">
-                            <frame key="frameInset" minX="2" minY="147" width="114" height="38"/>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X0a-h0-Vv5" customClass="AntiAliasView">
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="114" id="B6d-rI-DB4"/>
+                                <constraint firstAttribute="width" constant="113" id="B6d-rI-DB4"/>
                                 <constraint firstAttribute="height" constant="38" id="XLN-9s-pAG"/>
                             </constraints>
                         </view>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="FHu-63-3sJ" secondAttribute="trailing" id="1xc-Md-ihk"/>
                         <constraint firstAttribute="trailing" secondItem="3EB-zq-dI2" secondAttribute="trailing" id="1yq-IT-fSI"/>
                         <constraint firstAttribute="trailing" secondItem="axF-gO-e41" secondAttribute="trailing" id="3cV-Ux-JRu"/>
                         <constraint firstItem="eIu-Rk-aKY" firstAttribute="top" secondItem="ka6-PC-Mrq" secondAttribute="bottom" constant="1" id="6Af-ZB-UCc"/>
@@ -206,7 +180,6 @@
                         <constraint firstAttribute="height" constant="237" id="9gd-8z-ntU"/>
                         <constraint firstItem="lQA-Ui-0e4" firstAttribute="top" secondItem="Ilq-QO-RDO" secondAttribute="bottom" constant="1" id="Bys-9A-KGq"/>
                         <constraint firstItem="d44-w4-QCh" firstAttribute="leading" secondItem="uY1-vT-IeM" secondAttribute="leading" id="D1m-5e-yG1"/>
-                        <constraint firstItem="Bqv-am-0xg" firstAttribute="top" secondItem="Xx8-ex-b5K" secondAttribute="bottom" constant="1" id="FmR-qq-YLk"/>
                         <constraint firstItem="Svm-Vw-da2" firstAttribute="top" secondItem="0GL-zf-rRQ" secondAttribute="bottom" constant="1" id="JBz-ML-MSb"/>
                         <constraint firstItem="iRc-jJ-zIc" firstAttribute="top" secondItem="eIu-Rk-aKY" secondAttribute="bottom" constant="1" id="LmX-od-DRO"/>
                         <constraint firstAttribute="trailing" secondItem="Bqv-am-0xg" secondAttribute="trailing" id="MIv-po-a0y"/>
@@ -219,10 +192,10 @@
                         <constraint firstAttribute="trailing" secondItem="Cz8-ZZ-Ok6" secondAttribute="trailing" id="Sp8-hC-8cx"/>
                         <constraint firstAttribute="trailing" secondItem="ka6-PC-Mrq" secondAttribute="trailing" id="TtQ-cu-R42"/>
                         <constraint firstAttribute="bottom" secondItem="axF-gO-e41" secondAttribute="bottom" id="UGi-fN-6Oh"/>
+                        <constraint firstItem="Bqv-am-0xg" firstAttribute="top" secondItem="FHu-63-3sJ" secondAttribute="bottom" constant="1" id="UJP-ao-Qub"/>
                         <constraint firstItem="X0a-h0-Vv5" firstAttribute="top" secondItem="iRc-jJ-zIc" secondAttribute="bottom" constant="2" id="UVY-88-IbW"/>
                         <constraint firstItem="v0q-nT-M8J" firstAttribute="leading" secondItem="uY1-vT-IeM" secondAttribute="leading" id="X08-eg-G1e"/>
                         <constraint firstAttribute="trailing" secondItem="SOw-BF-bpb" secondAttribute="trailing" id="YXK-Gp-r3Q"/>
-                        <constraint firstItem="Xx8-ex-b5K" firstAttribute="top" secondItem="3EB-zq-dI2" secondAttribute="bottom" constant="1" id="Zze-qC-WJP"/>
                         <constraint firstItem="X0a-h0-Vv5" firstAttribute="centerX" secondItem="uY1-vT-IeM" secondAttribute="centerX" id="dGt-a5-odc"/>
                         <constraint firstItem="w2t-zX-nl7" firstAttribute="top" secondItem="uY1-vT-IeM" secondAttribute="top" id="eX4-Pg-7Jw"/>
                         <constraint firstItem="Ilq-QO-RDO" firstAttribute="top" secondItem="Svm-Vw-da2" secondAttribute="bottom" constant="1" id="iR9-H2-UyI"/>
@@ -231,10 +204,9 @@
                         <constraint firstItem="Cz8-ZZ-Ok6" firstAttribute="top" secondItem="Bqv-am-0xg" secondAttribute="bottom" constant="1" id="kf0-8F-2jR"/>
                         <constraint firstAttribute="trailing" secondItem="eIu-Rk-aKY" secondAttribute="trailing" id="lGv-cE-c8l"/>
                         <constraint firstItem="3EB-zq-dI2" firstAttribute="leading" secondItem="uY1-vT-IeM" secondAttribute="leading" id="p3F-6E-0B1"/>
-                        <constraint firstAttribute="trailing" secondItem="Xx8-ex-b5K" secondAttribute="trailing" id="p5o-ac-vQl"/>
                         <constraint firstItem="d44-w4-QCh" firstAttribute="top" secondItem="FHu-63-3sJ" secondAttribute="bottom" constant="1" id="qAj-r9-1qa"/>
                         <constraint firstItem="SOw-BF-bpb" firstAttribute="leading" secondItem="uY1-vT-IeM" secondAttribute="leading" id="qFD-O1-4Mi"/>
-                        <constraint firstItem="v0q-nT-M8J" firstAttribute="top" secondItem="X0a-h0-Vv5" secondAttribute="bottom" constant="8" id="sJG-ay-jsQ"/>
+                        <constraint firstItem="v0q-nT-M8J" firstAttribute="top" secondItem="X0a-h0-Vv5" secondAttribute="bottom" constant="4" id="sJG-ay-jsQ"/>
                         <constraint firstItem="Svm-Vw-da2" firstAttribute="leading" secondItem="uY1-vT-IeM" secondAttribute="leading" id="sKa-QK-5Fh"/>
                         <constraint firstAttribute="width" constant="118" id="tHt-aX-VtS"/>
                         <constraint firstItem="FHu-63-3sJ" firstAttribute="leading" secondItem="uY1-vT-IeM" secondAttribute="leading" id="yUU-zI-uPd"/>
@@ -253,9 +225,9 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="articleLabel" destination="Cz8-ZZ-Ok6" id="6gx-za-8yb"/>
-                <outlet property="barcodeView" destination="X0a-h0-Vv5" id="Nhu-oo-Pt2"/>
+                <outlet property="barcodeView" destination="X0a-h0-Vv5" id="sVb-7Y-Hpk"/>
                 <outlet property="colorLabel" destination="ka6-PC-Mrq" id="fEt-cq-ZqA"/>
-                <outlet property="manufactureDateLabel" destination="Xx8-ex-b5K" id="eOz-4W-npd"/>
+                <outlet property="manufactureDateLabel" destination="FHu-63-3sJ" id="huO-PE-Xb1"/>
                 <outlet property="manufactureLabel" destination="SOw-BF-bpb" id="yRG-qu-fQE"/>
                 <outlet property="nameLabel" destination="Bqv-am-0xg" id="XLe-5c-bHR"/>
                 <outlet property="priceLabel" destination="axF-gO-e41" id="ogm-ck-a45"/>

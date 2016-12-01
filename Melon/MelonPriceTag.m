@@ -13,6 +13,8 @@
 
 - (void) setItemInformation:(ItemInformation*) item
 {
+    [self layoutIfNeeded];
+    
     if (_priceLabel)
     {
         _priceLabel.text = [NSString stringWithFormat:@"Цена: %.0fр.", item.price];

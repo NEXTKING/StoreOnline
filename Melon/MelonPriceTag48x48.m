@@ -1,15 +1,14 @@
 //
-//  MelonPriceTag30x60.m
+//  MelonPriceTag48x48.m
 //  PriceTagDemo
 //
-//  Created by Evgeny Seliverstov on 25/11/2016.
+//  Created by Evgeny Seliverstov on 30/11/2016.
 //  Copyright © 2016 Dataphone. All rights reserved.
 //
 
-#import "MelonPriceTag30x60.h"
-#import "BarCodeView.h"
+#import "MelonPriceTag48x48.h"
 
-@implementation MelonPriceTag30x60
+@implementation MelonPriceTag48x48
 
 - (void) setItemInformation:(ItemInformation*) item
 {

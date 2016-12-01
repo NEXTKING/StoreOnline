@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ItemInformation.h"
 #import "AntiAliasView.h"
+#import "AntiAliasingLabel.h"
 
 @interface MelonPriceTag : UIView
 
