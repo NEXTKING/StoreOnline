@@ -25,5 +25,6 @@
 @dynamic isComplete;
 @dynamic iD;
 @dynamic shopName;
+@dynamic name;
 
 @end

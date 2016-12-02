@@ -20,7 +20,7 @@ typedef enum : NSUInteger
     AcceptanesControllerKindRegular = (1 << 2)
 }AcceptanesControllerKind;
 
-@interface ReceiveViewController () <AcceptanesDelegate, ItemDescriptionDelegate>
+@interface ReceiveViewController () <AcceptanesDelegate>
 {
     NSMutableArray *_items;
     NSString *_lastBarcode;
@@ -107,51 +107,54 @@ typedef enum : NSUInteger
 
 - (void)loadData
 {
-    [[MCPServer instance] acceptanes:self date:self.date containerBarcode:self.rootItem.barcode];
+    [[MCPServer instance] acceptanes:self date:self.date itemBarcode:nil containerBarcode:self.rootItem.barcode];
 }
 
 - (void)acceptanesComplete:(int)result items:(NSArray <AcceptanesInformation *>*)items
 {
-    if (result == 0)
+    if (!_lastBarcode)
     {
-        if ([self kind] == AcceptanesControllerKindRoot)
+        if (result == 0)
         {
-            NSArray *boxes = [items objectsAtIndexes:[items indexesOfObjectsPassingTest:^BOOL(AcceptanesInformation *acceptInfo, NSUInteger idx, BOOL *stop) {
-                return acceptInfo.type == AcceptanesInformationItemTypeBox;
-            }]];
-            [_items addObjectsFromArray:boxes];
+            if ([self kind] == AcceptanesControllerKindRoot)
+            {
+                NSArray *boxes = [items objectsAtIndexes:[items indexesOfObjectsPassingTest:^BOOL(AcceptanesInformation *acceptInfo, NSUInteger idx, BOOL *stop) {
+                    return acceptInfo.type == AcceptanesInformationItemTypeBox;
+                }]];
+                [_items addObjectsFromArray:boxes];
+            }
+            else if ([self kind] == AcceptanesControllerKindExcesses)
+            {
+                NSArray *excessItems = [items objectsAtIndexes:[items indexesOfObjectsPassingTest:^BOOL(AcceptanesInformation *acceptInfo, NSUInteger idx, BOOL *stop) {
+                    return acceptInfo.type == AcceptanesInformationItemTypeItem;
+                }]];
+                [_items addObjectsFromArray:excessItems];
+            }
+            else
+            {
+                [_items addObjectsFromArray:items];
+                [self updateBottomBar];
+            }
+            
+            [self.tableView reloadData];
         }
-        else if ([self kind] == AcceptanesControllerKindExcesses)
-        {
-            NSArray *excessItems = [items objectsAtIndexes:[items indexesOfObjectsPassingTest:^BOOL(AcceptanesInformation *acceptInfo, NSUInteger idx, BOOL *stop) {
-                return acceptInfo.type == AcceptanesInformationItemTypeItem;
-            }]];
-            [_items addObjectsFromArray:excessItems];
-        }
-        else
-        {
-            [_items addObjectsFromArray:items];
-            [self updateBottomBar];
-        }
-        
-        [self.tableView reloadData];
-    }
-}
-
-- (void)itemDescriptionComplete:(int)result itemDescription:(ItemInformation *)itemDescription
-{
-    if (result == 0)
-    {
-        [self showExcessPickerForItem:itemDescription scanned:1 manually:NO];
     }
     else
     {
-        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Info" message:@"Не удалось найти товар в базе" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-        [ac addAction:cancelAction];
-        [self presentViewController:ac animated:YES completion:nil];
+        if (result == 0)
+        {
+            AcceptanesInformation *item = items[0];
+            [self showExcessPickerForItem:item scanned:1 manually:NO];
+        }
+        else
+        {
+            UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Info" message:@"Не удалось найти товар в базе" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+            [ac addAction:cancelAction];
+            [self presentViewController:ac animated:YES completion:nil];
+        }
+        _lastBarcode = nil;
     }
-    _lastBarcode = nil;
 }
 
 - (void)acceptanesHierarchyComplete:(int)result items:(NSArray<AcceptanesInformation *> *)items
@@ -162,7 +165,7 @@ typedef enum : NSUInteger
     }
     else if (_lastBarcode)
     {
-        [[MCPServer instance] itemDescription:self itemCode:_lastBarcode shopCode:nil isoType:0];
+        [[MCPServer instance] acceptanes:self date:self.date itemBarcode:_lastBarcode containerBarcode:nil];
     }
 }
 
@@ -172,13 +175,20 @@ typedef enum : NSUInteger
     {
         [self showCloseAcceptionAlert];
     }
+    else
+    {
+        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Info" message:@"Не удалось отправить данные приёмки" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [ac addAction:cancelAction];
+        [self presentViewController:ac animated:YES completion:nil];
+    }
 }
-- (void)addItemToAcception:(ItemInformation *)itemInfo containerBarcode:(NSString *)containerBarcode scanned:(NSUInteger)scanned manually:(BOOL)manually
+- (void)addItemToAcception:(AcceptanesInformation *)itemInfo containerBarcode:(NSString *)containerBarcode scanned:(NSUInteger)scanned manually:(BOOL)manually
 {
     [[MCPServer instance] addItem:itemInfo toAcceptionWithDate:_date containerBarcode:containerBarcode scannedCount:scanned manually:manually];
 }
 
-- (void)updateScreenForItem:(ItemInformation *)itemInfo
+- (void)updateScreenForItem:(AcceptanesInformation *)itemInfo animated:(BOOL)animated
 {
     for (int i = 0; i < _items.count; i++)
     {
@@ -189,7 +199,8 @@ typedef enum : NSUInteger
             NSUInteger section = [self numberOfSectionsInTableView:_tableView] - 1;
             NSIndexPath *itemIndexPath = [NSIndexPath indexPathForRow:i inSection:section];
             [_tableView reloadRowsAtIndexPaths:@[itemIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            [_tableView scrollToRowAtIndexPath:itemIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+            if (animated)
+                [_tableView scrollToRowAtIndexPath:itemIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
             return;
         }
     }
@@ -199,15 +210,16 @@ typedef enum : NSUInteger
     acceptInfo.containerBarcode = _rootItem.barcode;
     acceptInfo.quantity = @(0);
     acceptInfo.scanned = @(1);
-    acceptInfo.itemInformation = itemInfo;
     acceptInfo.type = AcceptanesInformationItemTypeItem;
+    acceptInfo.name = itemInfo.name;
     
     [_items addObject:acceptInfo];
     NSUInteger section = [self numberOfSectionsInTableView:_tableView] - 1;
     NSUInteger row = [_items indexOfObject:acceptInfo];
     NSIndexPath *itemIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
     [_tableView insertRowsAtIndexPaths:@[itemIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-    [_tableView scrollToRowAtIndexPath:itemIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    if (animated)
+        [_tableView scrollToRowAtIndexPath:itemIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
 }
 
 - (void)acceptAllItems
@@ -217,8 +229,8 @@ typedef enum : NSUInteger
         if ((acceptInfo.type == AcceptanesInformationItemTypeItem) && acceptInfo.scanned.integerValue < acceptInfo.quantity.integerValue)
         {
             acceptInfo.scanned = @(acceptInfo.quantity.integerValue);
-            [self addItemToAcception:acceptInfo.itemInformation containerBarcode:_rootItem.barcode scanned:acceptInfo.scanned.integerValue manually:YES];
-            [self updateScreenForItem:acceptInfo.itemInformation];
+            [self addItemToAcception:acceptInfo containerBarcode:_rootItem.barcode scanned:acceptInfo.scanned.integerValue manually:YES];
+            [self updateScreenForItem:acceptInfo animated:NO];
         }
     }
 }
@@ -266,12 +278,12 @@ typedef enum : NSUInteger
     [self showSendAcceptanesDataPicker];
 }
 
-- (void)showExcessPickerForItem:(ItemInformation *)itemInfo scanned:(NSUInteger)scanned manually:(BOOL)manually
+- (void)showExcessPickerForItem:(AcceptanesInformation *)itemInfo scanned:(NSUInteger)scanned manually:(BOOL)manually
 {
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:@"Отсканированный товар не относится к текущему набору товаров. Выберите действие, которое необходимо совершить" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *addToCurrentExcessAction = [UIAlertAction actionWithTitle:@"Добавить в излишки набора" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self addItemToAcception:itemInfo containerBarcode:_rootItem.barcode scanned:scanned manually:manually];
-        [self updateScreenForItem:itemInfo];
+        [self updateScreenForItem:itemInfo animated:YES];
     }];
     UIAlertAction *addToAllExcessAction = [UIAlertAction actionWithTitle:@"Добавить в общие излишки" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self addItemToAcception:itemInfo containerBarcode:nil scanned:scanned manually:manually];
@@ -388,8 +400,8 @@ typedef enum : NSUInteger
             else
             {
                 acceptInfo.scanned = @(acceptInfo.scanned.integerValue + 1);
-                [self addItemToAcception:acceptInfo.itemInformation containerBarcode:acceptInfo.containerBarcode scanned:acceptInfo.scanned.integerValue manually:NO];
-                [self updateScreenForItem:acceptInfo.itemInformation];
+                [self addItemToAcception:acceptInfo containerBarcode:acceptInfo.containerBarcode scanned:acceptInfo.scanned.integerValue manually:NO];
+                [self updateScreenForItem:acceptInfo animated:YES];
             }
             
             return;
@@ -507,7 +519,7 @@ typedef enum : NSUInteger
 
 - (void)configureItemCell:(ReceiveItemCell *)cell forItem:(AcceptanesInformation *)item
 {
-    cell.titleLabel.text = item.itemInformation.name;
+    cell.titleLabel.text = item.name;
     cell.barcodeLabel.text = item.barcode;
     cell.quantityLabel.text = [NSString stringWithFormat:@"%ld из %ld", item.scanned.integerValue, item.quantity.integerValue];
     

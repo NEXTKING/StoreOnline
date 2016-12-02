@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ItemInformation.h"
 
 typedef enum : NSUInteger
 {
@@ -23,7 +22,7 @@ typedef enum : NSUInteger
 @property (nonnull, nonatomic, copy) NSNumber *quantity;
 @property (nonnull, nonatomic, copy) NSNumber *scanned;
 @property (nonnull, nonatomic, copy) NSDate *date;
-@property (nullable, nonatomic) ItemInformation *itemInformation;
+@property (nonnull, nonatomic, copy) NSString *name;
 @property (assign, nonatomic) AcceptanesInformationItemType type;
 @property (assign, nonatomic) BOOL manually;
 

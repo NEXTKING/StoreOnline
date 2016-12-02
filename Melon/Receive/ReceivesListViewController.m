@@ -98,6 +98,21 @@
     [self performSegueWithIdentifier:@"receiveRootSegue" sender:indexPath];
 }
 
+- (NSString*) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    return _items.count < 1 ? @"Нет открытых приёмок" : nil;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayFooterView:(nonnull UIView *)view forSection:(NSInteger)section
+{
+    UITableViewHeaderFooterView *footer = (UITableViewHeaderFooterView *)view;
+    
+    footer.textLabel.textColor = [UIColor lightGrayColor];
+    footer.textLabel.font = [UIFont boldSystemFontOfSize:12];
+    footer.textLabel.frame = footer.frame;
+    footer.textLabel.textAlignment = NSTextAlignmentCenter;
+}
+
 #pragma mark navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

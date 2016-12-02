@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSNumber *isComplete;
 @property (nonatomic, copy) NSNumber *iD;
 @property (nonatomic, copy) NSString *shopName;
+@property (nonatomic, copy) NSString *name;
 @end
 
 NS_ASSUME_NONNULL_END

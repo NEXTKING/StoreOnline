@@ -217,6 +217,10 @@
     if (obj && [obj isKindOfClass:[NSString class]])
         acceptInfo.shopName = obj;
     
+    obj = [result objectForKey:@"ItemsName"];
+    if (obj && [obj isKindOfClass:[NSString class]])
+        acceptInfo.name = obj;
+    
     return acceptInfo;
 }
 

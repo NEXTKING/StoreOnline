@@ -114,7 +114,7 @@
 {
     if (result == 0)
     {
-        [[MCPServer instance] acceptanes:nil shopID:_currentShopID];
+        [[MCPServer instance] acceptanes:self shopID:_currentShopID];
     }
     else
     {
