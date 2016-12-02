@@ -18,8 +18,18 @@
     _articleLabel.text = item.article;
     _colorLabel.text = item.color;
     
-    _manufactureDateLabel.text = @"Дата изгот.: 17.12.2016";
-    _manufactureLabel.text = @"Изготовитель: Китай Сумек текстиле инстастриал";
+    ParameterInformation *manufacturerParam = nil;
+    ParameterInformation *manufactureDateParam = nil;
+    
+    for (ParameterInformation* currentParam in item.additionalParameters) {
+        if ([currentParam.name isEqualToString:@"Manufacturer"])
+            manufacturerParam = currentParam;
+        
+        if ([currentParam.name isEqualToString:@"ManufactureDate"])
+            manufactureDateParam = currentParam;
+    }
+    _manufactureDateLabel.text = manufactureDateParam ? [NSString stringWithFormat:@"Дата изгот.: %@", manufactureDateParam.value] : @"Дата изгот.:";
+    _manufactureLabel.text = manufacturerParam ? [NSString stringWithFormat:@"Изготовитель: %@", manufacturerParam.value] : @"Изготовитель:";
 }
 
 @end
