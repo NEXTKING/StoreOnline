@@ -26,11 +26,23 @@ typedef enum SyncStages
     NSProgress *_progress;
     AppSuspendingBlocker *_suspendingBlocker;
 }
+@property (nonatomic, readwrite) BOOL syncIsRunning;
+@property (nonatomic, readwrite) double syncProgress;
 @end
 
 @implementation SynchronizationController
 
 static void *ProgressObserverContext = &ProgressObserverContext;
+
++ (instancetype)sharedInstance
+{
+    static SynchronizationController *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[SynchronizationController alloc] init];
+    });
+    return sharedInstance;
+}
 
 - (void) synchronize
 {
@@ -40,6 +52,8 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     
     _suspendingBlocker = [AppSuspendingBlocker new];
     [_suspendingBlocker startBlock];
+    _syncIsRunning = YES;
+    _syncProgress = 0;
     
     [[MCPServer instance] itemDescription:self itemCode:nil shopCode:nil isoType:0];
     [[MCPServer instance] tasks:self userID:nil];
@@ -66,7 +80,10 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     {
         NSProgress *progress = (NSProgress *)object;
         NSLog(@"TOTAL PROGRESS IS: %f", progress.fractionCompleted);
-        [_delegate syncProgressChanged:progress.fractionCompleted];
+        _syncProgress = progress.fractionCompleted;
+        
+        if ([_delegate respondsToSelector:@selector(syncProgressChanged:)])
+            [_delegate syncProgressChanged:progress.fractionCompleted];
     }
     else
     {
@@ -76,6 +93,7 @@ static void *ProgressObserverContext = &ProgressObserverContext;
 
 - (void)resetPortions
 {
+    _syncIsRunning = YES;
     [[MCPServer instance] resetDatabaseAndPortionsCount:self];
 }
 
@@ -103,8 +121,12 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     {
         [_suspendingBlocker stopBlock];
         [_progress resignCurrent];
-        [_delegate syncCompleteWithResult:0];
         [_progress removeObserver:self forKeyPath:@"fractionCompleted" context:ProgressObserverContext];
+        _syncIsRunning = NO;
+        _syncProgress = 0;
+        
+        if ([_delegate respondsToSelector:@selector(syncCompleteWithResult:)])
+            [_delegate syncCompleteWithResult:0];
     }
 }
 
@@ -122,8 +144,11 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     }
     else
     {
+        _syncIsRunning = NO;
         [_suspendingBlocker stopBlock];
-        [_delegate syncCompleteWithResult:result];
+        
+        if ([_delegate respondsToSelector:@selector(syncCompleteWithResult:)])
+            [_delegate syncCompleteWithResult:result];
     }
 }
 
@@ -135,8 +160,11 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     }
     else
     {
+        _syncIsRunning = NO;
         [_suspendingBlocker stopBlock];
-        [_delegate syncCompleteWithResult:result];
+        
+        if ([_delegate respondsToSelector:@selector(syncCompleteWithResult:)])
+            [_delegate syncCompleteWithResult:result];
     }
 }
 
@@ -148,14 +176,20 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     }
     else
     {
+        _syncIsRunning = NO;
         [_suspendingBlocker stopBlock];
-        [_delegate syncCompleteWithResult:result];
+        
+        if ([_delegate respondsToSelector:@selector(syncCompleteWithResult:)])
+            [_delegate syncCompleteWithResult:result];
     }
 }
 
 - (void)resetDatabaseAndPortionsCountComplete:(int)result
 {
-    [_delegate resetPortionsCompleteWithResult:result];
+    _syncIsRunning = NO;
+    
+    if ([_delegate respondsToSelector:@selector(resetPortionsCompleteWithResult:)])
+        [_delegate resetPortionsCompleteWithResult:result];
 }
 
 @end

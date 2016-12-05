@@ -295,7 +295,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         
         SettingsViewController* destinationViewController = (SettingsViewController *)segue.destinationViewController;
-        destinationViewController.preferredContentSize = CGSizeMake(200, 280);
+        destinationViewController.preferredContentSize = CGSizeMake(260, 300);
         
         settingsPopover = [popoverSegue popoverControllerWithSender:sender permittedArrowDirections:WYPopoverArrowDirectionAny animated:YES];
         

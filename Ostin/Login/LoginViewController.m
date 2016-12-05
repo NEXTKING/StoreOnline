@@ -29,9 +29,26 @@
     _loginTextField.returnKeyType = UIReturnKeyNext;
     _passwordTextField.delegate = self;
     _passwordTextField.returnKeyType = UIReturnKeyDone;
-    _progressView.hidden = YES;
-    _progressLabel.hidden = YES;
     _scanLoginEnable = YES;
+    
+    SynchronizationController.sharedInstance.delegate = self;
+    if (SynchronizationController.sharedInstance.syncIsRunning)
+    {
+        _syncButton.enabled = NO;
+        _progressView.hidden = NO;
+        _progressLabel.hidden = NO;
+        _resetButton.enabled = NO;
+        _loginButton.enabled = NO;
+        
+        double progress = SynchronizationController.sharedInstance.syncProgress;
+        _progressView.progress = progress;
+        _progressLabel.text = [NSString stringWithFormat:@"%d %%", (int)(progress * 100)];
+    }
+    else
+    {
+        _progressView.hidden = YES;
+        _progressLabel.hidden = YES;
+    }
 }
 
 #pragma mark Notifications
@@ -123,9 +140,7 @@
     _progressView.progress = 0;
     _progressLabel.text = @"0 %";
     
-    SynchronizationController *sync = [SynchronizationController new];
-    sync.delegate = self;
-    [sync synchronize];
+    [SynchronizationController.sharedInstance synchronize];
 }
 
 - (IBAction)reset:(id)sender
@@ -134,9 +149,7 @@
     _resetButton.enabled = NO;
     _loginButton.enabled = NO;
     
-    SynchronizationController *sync = [SynchronizationController new];
-    sync.delegate = self;
-    [sync resetPortions];
+    [SynchronizationController.sharedInstance resetPortions];
 }
 
 - (void) viewWillAppear:(BOOL)animated
