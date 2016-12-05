@@ -49,6 +49,8 @@
         _progressView.hidden = YES;
         _progressLabel.hidden = YES;
     }
+    NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
+    _buildLabel.text = [NSString stringWithFormat:@"Build: %@", build];
 }
 
 #pragma mark Notifications

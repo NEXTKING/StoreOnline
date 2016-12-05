@@ -2319,6 +2319,7 @@
 				B92DCE141C845E60002AA184 /* Resources */,
 				E0CA20E89250DC1A5E67109D /* [CP] Embed Pods Frameworks */,
 				59F641E5AA698B5AD8E2AE42 /* [CP] Copy Pods Resources */,
+				210F2B7B1DF5A22A00818512 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2881,6 +2882,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PriceTagDemo/Pods-PriceTagDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		210F2B7B1DF5A22A00818512 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
 		};
 		21BEA0B1455CD3454F05A833 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
