@@ -26,10 +26,10 @@
         dateFormatter.dateStyle = NSDateFormatterShortStyle;
         dateFormatter.timeStyle = NSDateFormatterNoStyle;
         _dateLabel.text = [dateFormatter stringFromDate:[NSDate date]];
-    }
-    
-    if (_oldPriceLabel)
-    {
+//    }
+//    
+//    if (_oldPriceLabel)
+//    {
         NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:@"0 р."];
         [attributeString addAttribute:NSStrikethroughStyleAttributeName
                                 value:@2

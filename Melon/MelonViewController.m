@@ -185,26 +185,27 @@
 
 - (void)initChangePriceTagTypePicker
 {
-    _priceTagTypes = @[@{@"name":@"48x48 мм", @"xibName":@"MelonPriceTag48x48"},
+    _priceTagTypes = @[@{@"name":@"ценник", @"xibName":@"MelonPriceTag"},
+                       @{@"name":@"48x48 мм", @"xibName":@"MelonPriceTag48x48"},
                        @{@"name":@"30x60 мм", @"xibName":@"MelonPriceTag30x60"},
                        @{@"name":@"29x28 мм", @"xibName":@"MelonPriceTag29x28"}];
     
-    NSString *xibName = [[NSUserDefaults standardUserDefaults] valueForKey:@"PriceTagXibName"];
+//    NSString *xibName = [[NSUserDefaults standardUserDefaults] valueForKey:@"PriceTagXibName"];
     __block NSUInteger index = 0;
-    if (xibName != nil)
-    {
-        [_priceTagTypes indexOfObjectPassingTest:^BOOL(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
-            
-            if ([obj[@"xibName"] isEqualToString:xibName])
-            {
-                index = idx;
-                return (*stop = YES);
-            }
-            else
-                return NO;
-        }];
-    }
-    
+//    if (xibName != nil)
+//    {
+//        [_priceTagTypes indexOfObjectPassingTest:^BOOL(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
+//            
+//            if ([obj[@"xibName"] isEqualToString:xibName])
+//            {
+//                index = idx;
+//                return (*stop = YES);
+//            }
+//            else
+//                return NO;
+//        }];
+//    }
+//    
     [[NSUserDefaults standardUserDefaults] setValue:_priceTagTypes[index][@"xibName"] forKey:@"PriceTagXibName"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     _priceTagTypeLabel.text = [NSString stringWithFormat:@"Тип этикетки: %@", _priceTagTypes[index][@"name"]];
