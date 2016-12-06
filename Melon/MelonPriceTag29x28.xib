@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,8 +16,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HzB-ig-QVf">
+                    <rect key="frame" x="0.0" y="0.0" width="114" height="110"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bld-8d-vKw" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="0.0" y="0.0" width="114" height="9"/>
                             <string key="text">Россия, Санкт-Петербург, 10-я Красноармейская ул.,
 д. 22, АО "Мэлон Фэшн Груп"</string>
                             <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="4"/>
@@ -22,11 +27,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Изготовитель: Китай Аророл Ко ко КО лоыадодв Леджинг Технолоджис" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vCo-AQ-7SE" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="0.0" y="9" width="114" height="12"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="5"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Импортер: АО &quot;Мэлон Фешн Груп&quot;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HkE-v0-fPu" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="0.0" y="21" width="114" height="6"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="6" id="mXj-hG-rlP"/>
                             </constraints>
@@ -35,6 +42,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дата изгот.: 11.12.2016" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QbC-Dw-XG6" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="0.0" y="27" width="114" height="6"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="6" id="JOc-Uh-8ea"/>
                             </constraints>
@@ -43,6 +51,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Товар:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFM-UW-fCO" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="0.0" y="35" width="25" height="6"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="6" id="LAP-UM-vlg"/>
                                 <constraint firstAttribute="width" constant="25" id="eFX-4F-SJP"/>
@@ -52,6 +61,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Артикул:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CJP-Fx-wma" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="0.0" y="41" width="25" height="6"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="25" id="Eql-Rh-bh6"/>
                                 <constraint firstAttribute="height" constant="6" id="oUf-3Q-M3c"/>
@@ -61,6 +71,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Цвет" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kC1-E6-iKG" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="47" y="41" width="14" height="6"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="14" id="o41-Ld-Tnx"/>
                                 <constraint firstAttribute="height" constant="6" id="xFc-hC-TrZ"/>
@@ -70,6 +81,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Размер Один размер" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1CG-p3-Afn" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="0.0" y="58" width="59" height="6"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="6" id="IVO-jW-oGf"/>
                             </constraints>
@@ -78,18 +90,21 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4zD-PN-dwi" customClass="AntiAliasView">
+                            <rect key="frame" x="0.0" y="64" width="113" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="9bD-yW-FcQ"/>
                                 <constraint firstAttribute="width" constant="113" id="rIT-cn-L6s"/>
                             </constraints>
                         </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eac_black.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ge7-Fs-vbO">
+                            <rect key="frame" x="0.0" y="48" width="14" height="10"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="10" id="03r-iv-pBd"/>
                                 <constraint firstAttribute="width" constant="14" id="dfK-kQ-FlE"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5r-hZ-HYE" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="27" y="35" width="87" height="6"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="6" id="uVi-uz-bfz"/>
                             </constraints>
@@ -98,6 +113,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3m2-Xu-OKC" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="27" y="41" width="16" height="6"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="6" id="4f1-x1-AeY"/>
                             </constraints>
@@ -106,6 +122,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U5X-Zy-dk5" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="62" y="41" width="16" height="6"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="6" id="VPi-Mf-e0o"/>
                             </constraints>
@@ -114,6 +131,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Цена: 999р." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNY-1s-jp7" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="0.0" y="94" width="33" height="7"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="7" id="9pe-xq-Ccn"/>
                             </constraints>
@@ -122,6 +140,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Состав:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r0c-o5-ZQN" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="27" y="50" width="22" height="6"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="6" id="adH-OQ-7hM"/>
                             </constraints>
@@ -180,13 +199,13 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="articleLabel" destination="3m2-Xu-OKC" id="84O-QG-cFE"/>
-                <outlet property="barcodeView" destination="4zD-PN-dwi" id="gqu-CD-Y6B"/>
-                <outlet property="colorLabel" destination="U5X-Zy-dk5" id="cXW-Ym-AKA"/>
-                <outlet property="manufactureDateLabel" destination="QbC-Dw-XG6" id="gju-Zf-eYV"/>
-                <outlet property="manufactureLabel" destination="vCo-AQ-7SE" id="HXv-hI-FgM"/>
-                <outlet property="nameLabel" destination="h5r-hZ-HYE" id="I9c-eU-OFV"/>
-                <outlet property="priceLabel" destination="iNY-1s-jp7" id="dTB-Rp-nsl"/>
+                <outlet property="articleLabel" destination="3m2-Xu-OKC" id="8Ux-wa-2nJ"/>
+                <outlet property="barcodeView" destination="4zD-PN-dwi" id="Ot4-Db-uVp"/>
+                <outlet property="colorLabel" destination="U5X-Zy-dk5" id="sGf-Zb-IyQ"/>
+                <outlet property="manufactureDateLabel" destination="QbC-Dw-XG6" id="ChQ-bb-JWA"/>
+                <outlet property="manufactureLabel" destination="vCo-AQ-7SE" id="9j7-pi-V2h"/>
+                <outlet property="nameLabel" destination="h5r-hZ-HYE" id="780-pf-f4b"/>
+                <outlet property="priceLabel" destination="iNY-1s-jp7" id="bcd-Ik-7MR"/>
             </connections>
             <point key="canvasLocation" x="50" y="279"/>
         </view>

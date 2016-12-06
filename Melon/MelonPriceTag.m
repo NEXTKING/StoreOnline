@@ -44,16 +44,86 @@
     {
         _barcodeLabel.hidden = YES;
         _barcodeView.hidden = YES;
-        return;
     }
-    _barcodeLabel.text = item.barcode;
-    //UIImage *barcodeImage = [self generateBarcodeFromString:item.barcode];
-    //_barcodeView.image = barcodeImage;
-    BarCodeView *barCodeView = [[BarCodeView alloc] initWithFrame:CGRectMake(0, 0, _barcodeView.frame.size.width, _barcodeView.frame.size.height)];
-    [_barcodeView addSubview:barCodeView];
-    [barCodeView setBarCode:item.barcode];
+    else
+    {
+        _barcodeLabel.text = item.barcode;
+        BarCodeView *barCodeView = [[BarCodeView alloc] initWithFrame:CGRectMake(0, 0, _barcodeView.frame.size.width, _barcodeView.frame.size.height)];
+        [_barcodeView addSubview:barCodeView];
+        [barCodeView setBarCode:item.barcode];
 
-    [_barcodeView setNeedsDisplay];
+        [_barcodeView setNeedsDisplay];
+    }
+    
+    if (_nameLabel)
+    {
+        _nameLabel.text = item.name;
+    }
+    
+    if (_articleLabel)
+    {
+        _articleLabel.text = item.article;
+    }
+    
+    if (_manufactureLabel)
+    {
+        ParameterInformation *manufacturerParam = nil;
+        
+        for (ParameterInformation* currentParam in item.additionalParameters)
+        {
+            if ([currentParam.name isEqualToString:@"Manufacturer"])
+                manufacturerParam = currentParam;
+        }
+        _manufactureLabel.text = manufacturerParam ? [NSString stringWithFormat:@"Изготовитель: %@", manufacturerParam.value] : @"Изготовитель:";
+    }
+    
+    if (_manufactureDateLabel)
+    {
+        ParameterInformation *manufactureDateParam = nil;
+        
+        for (ParameterInformation* currentParam in item.additionalParameters)
+        {
+            if ([currentParam.name isEqualToString:@"ProductionDate"])
+                manufactureDateParam = currentParam;
+        }
+        
+        if (manufactureDateParam)
+            _manufactureDateLabel.text = [NSString stringWithFormat:@"Дата изгот.: %@", [manufactureDateParam.value stringByReplacingOccurrencesOfString:@" 0:00:00" withString:@""]];
+        else
+            _manufactureDateLabel.text = @"Дата изгот.:";
+    }
+    
+    NSString *color = @"";
+    NSString *size1 = @"";
+    NSString *size2 = @"";
+    
+    for (ParameterInformation* currentParam in item.additionalParameters)
+    {
+        if ([currentParam.name isEqualToString:@"Описание"])
+        {
+            NSString *string = currentParam.value;
+            NSRange searchedRange = NSMakeRange(0, [string length]);
+            NSString *pattern = @".* арт\\..* цв\\.(.*) р-р\\.(.*) р\\.(.*)";
+            
+            NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:nil];
+            NSTextCheckingResult *match = [regex firstMatchInString:string options:0 range: searchedRange];
+            color = [string substringWithRange:[match rangeAtIndex:1]];
+            size1 = [string substringWithRange:[match rangeAtIndex:2]];
+            size2 = [string substringWithRange:[match rangeAtIndex:3]];
+            
+            break;
+        }
+    }
+    
+    if (_colorLabel)
+    {
+        _colorLabel.text = color;
+    }
+    
+    if (_sizeLabel)
+    {
+        _sizeLabel.text = [NSString stringWithFormat:@"%@ %@", size1, size2];
+    }
 }
 
 - (void) addOldPriceIfNeeded:(ItemInformation*) item

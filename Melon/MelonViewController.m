@@ -29,6 +29,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initChangePriceTagTypePicker];
+    if (![[NSUserDefaults standardUserDefaults] valueForKey:@"ShouldPrintBarcode"])
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ShouldPrintBarcode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
     _barcodeSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShouldPrintBarcode"];
     // Do any additional setup after loading the view.
 }

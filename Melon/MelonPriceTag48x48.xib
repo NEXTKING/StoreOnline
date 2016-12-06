@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,18 +16,22 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cXg-nB-QOm">
+                    <rect key="frame" x="1" y="0.0" width="188" height="190"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Россия, Санкт-Петербург, 10-я Красноармейская ул., д. 22, АО &quot;Мэлон Фэшн Груп&quot;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2G-Mk-g52" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="0.0" y="0.0" width="188" height="17"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Изготовитель: Китай Аророл Ко ко КО лоыадодв Леджинг Технолоджис" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyi-yy-7Jf" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="0.0" y="18" width="188" height="16"/>
                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Импортер: АО &quot;Мэлон Фешн Груп&quot;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tpf-8H-uHh" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="0.0" y="35" width="188" height="10"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="10" id="LKP-7T-mk6"/>
                             </constraints>
@@ -33,6 +40,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дата изгот.: 11.12.2016" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bnj-oF-TZb" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="0.0" y="46" width="188" height="10"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="10" id="VRw-DV-jse"/>
                             </constraints>
@@ -41,6 +49,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Товар:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8VG-jZ-9ux" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="0.0" y="57" width="60" height="10"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="60" id="RIe-Y7-F9Z"/>
                                 <constraint firstAttribute="height" constant="10" id="cme-wO-8Sx"/>
@@ -50,6 +59,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Артикул / Модель:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tmA-4v-WPQ" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="0.0" y="68" width="60" height="10"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="60" id="4SU-Oc-42h"/>
                                 <constraint firstAttribute="height" constant="10" id="JYn-mS-yQH"/>
@@ -59,6 +69,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="№ цвета:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kM3-uc-4FT" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="0.0" y="79" width="60" height="10"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="10" id="0dT-Mw-dRT"/>
                                 <constraint firstAttribute="width" constant="60" id="IIU-0D-DWf"/>
@@ -68,6 +79,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Размер:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3A-gE-us7" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="0.0" y="90" width="60" height="10"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="60" id="CUL-a6-n86"/>
                                 <constraint firstAttribute="height" constant="10" id="nAU-ll-BdO"/>
@@ -77,18 +89,21 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0QT-aI-Wxp" customClass="AntiAliasView">
+                            <rect key="frame" x="0.0" y="102" width="113" height="38"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="113" id="rXN-Nw-d4N"/>
                                 <constraint firstAttribute="height" constant="38" id="yLo-WX-ikD"/>
                             </constraints>
                         </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eac_black.png" translatesAutoresizingMaskIntoConstraints="NO" id="aDw-Gd-7Zq">
+                            <rect key="frame" x="0.0" y="142" width="22" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="IRM-ZU-NEn"/>
                                 <constraint firstAttribute="width" constant="22" id="dqs-dd-AQz"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Цена: 9999 р." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lav-2h-kCn" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="0.0" y="168" width="188" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="Ti7-4H-at9"/>
                             </constraints>
@@ -97,6 +112,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yOp-BR-gKq" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="62" y="57" width="126" height="10"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="10" id="asI-a1-DsE"/>
                             </constraints>
@@ -105,6 +121,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Khx-xW-j74" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="62" y="68" width="126" height="10"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="10" id="r14-Od-Pox"/>
                             </constraints>
@@ -113,6 +130,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XUi-bj-ptj" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="62" y="79" width="126" height="10"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="10" id="Wxw-3t-dga"/>
                             </constraints>
@@ -121,6 +139,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QeU-i8-bes" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="62" y="90" width="126" height="10"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="10" id="DDb-P7-9tX"/>
                             </constraints>
@@ -137,7 +156,7 @@
                         <constraint firstItem="cyi-yy-7Jf" firstAttribute="leading" secondItem="cXg-nB-QOm" secondAttribute="leading" id="3aH-ww-toA"/>
                         <constraint firstItem="bnj-oF-TZb" firstAttribute="leading" secondItem="cXg-nB-QOm" secondAttribute="leading" id="6MW-BU-aE4"/>
                         <constraint firstItem="bnj-oF-TZb" firstAttribute="top" secondItem="Tpf-8H-uHh" secondAttribute="bottom" constant="1" id="83M-ib-YnJ"/>
-                        <constraint firstAttribute="width" constant="190" id="9oE-av-AYn"/>
+                        <constraint firstAttribute="width" constant="188" id="9oE-av-AYn"/>
                         <constraint firstAttribute="trailing" secondItem="e2G-Mk-g52" secondAttribute="trailing" id="AWY-WS-JPg"/>
                         <constraint firstAttribute="trailing" secondItem="Khx-xW-j74" secondAttribute="trailing" id="DYn-k3-lIv"/>
                         <constraint firstItem="kM3-uc-4FT" firstAttribute="leading" secondItem="cXg-nB-QOm" secondAttribute="leading" id="Dod-jE-Emz"/>
@@ -183,14 +202,14 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="articleLabel" destination="Khx-xW-j74" id="Rzs-ub-88Y"/>
-                <outlet property="barcodeView" destination="0QT-aI-Wxp" id="4pU-yW-Eaa"/>
-                <outlet property="colorLabel" destination="XUi-bj-ptj" id="6Wb-nr-xk8"/>
-                <outlet property="manufactureDateLabel" destination="bnj-oF-TZb" id="0YQ-pC-ei8"/>
-                <outlet property="manufactureLabel" destination="cyi-yy-7Jf" id="pll-1m-gKz"/>
-                <outlet property="nameLabel" destination="yOp-BR-gKq" id="hfe-nf-hC6"/>
-                <outlet property="priceLabel" destination="lav-2h-kCn" id="cpv-hy-BZd"/>
-                <outlet property="sizeLabel" destination="QeU-i8-bes" id="yA2-2n-ykm"/>
+                <outlet property="articleLabel" destination="Khx-xW-j74" id="OfF-Kl-WAj"/>
+                <outlet property="barcodeView" destination="0QT-aI-Wxp" id="wSa-Vc-ECl"/>
+                <outlet property="colorLabel" destination="XUi-bj-ptj" id="fxm-bv-llc"/>
+                <outlet property="manufactureDateLabel" destination="bnj-oF-TZb" id="4tM-Lq-WmJ"/>
+                <outlet property="manufactureLabel" destination="cyi-yy-7Jf" id="Ffo-Ol-9YX"/>
+                <outlet property="nameLabel" destination="yOp-BR-gKq" id="3oi-Qe-d2p"/>
+                <outlet property="priceLabel" destination="lav-2h-kCn" id="e0M-4u-JSo"/>
+                <outlet property="sizeLabel" destination="QeU-i8-bes" id="49J-el-uBs"/>
             </connections>
         </view>
     </objects>
