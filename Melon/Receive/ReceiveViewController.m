@@ -524,14 +524,12 @@ typedef enum : NSUInteger
 
 - (void)configureBoxCell:(ReceiveBoxCell *)cell forItem:(AcceptanesInformation *)item
 {
-    cell.iconImageView.image = ([self kind] == AcceptanesControllerKindRoot) ? nil : [UIImage imageNamed:@"receive_box_icon"];
     cell.titleLabel.text = ([self kind] == AcceptanesControllerKindRoot) ? @"Накладная" : @"Короб";
     cell.barcodeLabel.text = item.barcode;
 }
 
 - (void)configureSetCell:(ReceiveBoxCell *)cell forItem:(AcceptanesInformation *)item
 {
-    cell.iconImageView.image = [UIImage imageNamed:@"receive_group_icon"];
     cell.titleLabel.text = @"Набор товаров";
     cell.barcodeLabel.text = item.barcode;
 }

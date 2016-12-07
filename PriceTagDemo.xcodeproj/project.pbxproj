@@ -47,8 +47,6 @@
 		21D838311DD334FE00A98E0F /* ReceiveBoxCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D8382F1DD334FE00A98E0F /* ReceiveBoxCell.xib */; };
 		21D838351DD3353200A98E0F /* ReceiveItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D838331DD3353200A98E0F /* ReceiveItemCell.m */; };
 		21D838361DD3353200A98E0F /* ReceiveItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D838341DD3353200A98E0F /* ReceiveItemCell.xib */; };
-		21D8383D1DD3366D00A98E0F /* receive_group_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21D8383B1DD3366D00A98E0F /* receive_group_icon@2x.png */; };
-		21D8383E1DD3366D00A98E0F /* receive_box_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21D8383C1DD3366D00A98E0F /* receive_box_icon@2x.png */; };
 		21D838411DD34B7000A98E0F /* ReceiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D838401DD34B7000A98E0F /* ReceiveViewController.m */; };
 		21D838441DD4B47F00A98E0F /* SOAPResetIncDone.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D838431DD4B47F00A98E0F /* SOAPResetIncDone.m */; };
 		21D838471DDC57F800A98E0F /* AppSuspendingBlocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D838461DDC57F800A98E0F /* AppSuspendingBlocker.m */; };
@@ -637,8 +635,6 @@
 		21D838321DD3353200A98E0F /* ReceiveItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReceiveItemCell.h; path = Receive/ReceiveItemCell.h; sourceTree = "<group>"; };
 		21D838331DD3353200A98E0F /* ReceiveItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReceiveItemCell.m; path = Receive/ReceiveItemCell.m; sourceTree = "<group>"; };
 		21D838341DD3353200A98E0F /* ReceiveItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ReceiveItemCell.xib; path = Receive/ReceiveItemCell.xib; sourceTree = "<group>"; };
-		21D8383B1DD3366D00A98E0F /* receive_group_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "receive_group_icon@2x.png"; sourceTree = "<group>"; };
-		21D8383C1DD3366D00A98E0F /* receive_box_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "receive_box_icon@2x.png"; sourceTree = "<group>"; };
 		21D8383F1DD34B7000A98E0F /* ReceiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReceiveViewController.h; path = Receive/ReceiveViewController.h; sourceTree = "<group>"; };
 		21D838401DD34B7000A98E0F /* ReceiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReceiveViewController.m; path = Receive/ReceiveViewController.m; sourceTree = "<group>"; };
 		21D838421DD4B47F00A98E0F /* SOAPResetIncDone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPResetIncDone.h; sourceTree = "<group>"; };
@@ -1790,8 +1786,6 @@
 				B9950B721CE1E5A0005B4375 /* Barcode manual@2x.png */,
 				B9950B6C1CDBACAE005B4375 /* settings_icon@2x.png */,
 				B970B85C1CD2A0150066A66A /* send@2x.png */,
-				21D8383B1DD3366D00A98E0F /* receive_group_icon@2x.png */,
-				21D8383C1DD3366D00A98E0F /* receive_box_icon@2x.png */,
 				B970B8571CD296820066A66A /* CartCell.xib */,
 				B970B84A1CD288460066A66A /* CommonConfirmButton.h */,
 				B970B84B1CD288460066A66A /* CommonConfirmButton.m */,
@@ -2822,13 +2816,11 @@
 				B970B8271CD209830066A66A /* LaunchScreen.storyboard in Resources */,
 				214AD0F81DE87FE600FE0345 /* MelonPriceTag30x60.xib in Resources */,
 				C6F601C91D9E71090095AE21 /* StockCell.xib in Resources */,
-				21D8383D1DD3366D00A98E0F /* receive_group_icon@2x.png in Resources */,
 				21D838311DD334FE00A98E0F /* ReceiveBoxCell.xib in Resources */,
 				21532CF61DEEDAFE005E36F1 /* MelonPriceTag48x48.xib in Resources */,
 				21D838261DD32BF700A98E0F /* ReceivesListCell.xib in Resources */,
 				B9950B6D1CDBACAE005B4375 /* settings_icon@2x.png in Resources */,
 				B970B8241CD209830066A66A /* Assets.xcassets in Resources */,
-				21D8383E1DD3366D00A98E0F /* receive_box_icon@2x.png in Resources */,
 				B970B8431CD21D040066A66A /* MelonPriceTag.xib in Resources */,
 				B970B8221CD209830066A66A /* Main.storyboard in Resources */,
 			);

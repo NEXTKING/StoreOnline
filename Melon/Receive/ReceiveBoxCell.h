@@ -11,5 +11,4 @@
 @interface ReceiveBoxCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *barcodeLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 @end
