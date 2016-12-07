@@ -88,11 +88,7 @@ typedef enum : NSUInteger
     if ([self kind] != AcceptanesControllerKindExcesses)
         [self subscribeToScanNotifications];
     
-    if (!_items)
-    {
-        _items = [[NSMutableArray alloc] init];
-        [self loadData];
-    }
+    [self loadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -116,6 +112,8 @@ typedef enum : NSUInteger
     {
         if (result == 0)
         {
+            _items = [[NSMutableArray alloc] init];
+            
             if ([self kind] == AcceptanesControllerKindRoot)
             {
                 NSArray *boxes = [items objectsAtIndexes:[items indexesOfObjectsPassingTest:^BOOL(AcceptanesInformation *acceptInfo, NSUInteger idx, BOOL *stop) {
@@ -524,14 +522,24 @@ typedef enum : NSUInteger
 
 - (void)configureBoxCell:(ReceiveBoxCell *)cell forItem:(AcceptanesInformation *)item
 {
-    cell.titleLabel.text = ([self kind] == AcceptanesControllerKindRoot) ? @"Накладная" : @"Короб";
+    if ([self kind] == AcceptanesControllerKindRoot)
+    {
+        cell.titleLabel.text = @"Накладная";
+        cell.backgroundColor = [UIColor whiteColor];
+    }
+    else
+    {
+        cell.titleLabel.text = [NSString stringWithFormat:@"Короб (%ld/%ld)", item.scanned.integerValue, item.quantity.integerValue];
+        cell.backgroundColor = (item.scanned.integerValue == item.quantity.integerValue) ? [UIColor colorWithRed:126/255.0 green:211/255.0 blue:33/255.0 alpha:0.5] : [UIColor whiteColor];
+    }
     cell.barcodeLabel.text = item.barcode;
 }
 
 - (void)configureSetCell:(ReceiveBoxCell *)cell forItem:(AcceptanesInformation *)item
 {
-    cell.titleLabel.text = @"Набор товаров";
+    cell.titleLabel.text = [NSString stringWithFormat:@"Набор товаров (%ld/%ld)", item.scanned.integerValue, item.quantity.integerValue];
     cell.barcodeLabel.text = item.barcode;
+    cell.backgroundColor = (item.scanned.integerValue == item.quantity.integerValue) ? [UIColor colorWithRed:126/255.0 green:211/255.0 blue:33/255.0 alpha:0.5] : [UIColor whiteColor];
 }
 
 - (void)configureItemCell:(ReceiveItemCell *)cell forItem:(AcceptanesInformation *)item

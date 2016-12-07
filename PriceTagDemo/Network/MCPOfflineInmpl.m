@@ -174,21 +174,32 @@
         AcceptanesInformation *acceptInfo = [[AcceptanesInformation alloc] init];
         acceptInfo.barcode = acceptItemDB.barcode;
         acceptInfo.containerBarcode = acceptItemDB.containerBarcode;
-        acceptInfo.quantity = acceptItemDB.quantity;
-        acceptInfo.scanned = acceptItemDB.scanned;
         acceptInfo.date = acceptItemDB.date;
         acceptInfo.manually = acceptItemDB.manually.boolValue;
-        
         acceptInfo.isComplete = acceptItemDB.isComplete.boolValue;
         acceptInfo.ID = acceptItemDB.iD;
         acceptInfo.shopName = acceptItemDB.shopName;
         
         if ([acceptItemDB.type isEqualToString:@"B"])
+        {
             acceptInfo.type = AcceptanesInformationItemTypeBox;
+            NSDictionary *countDictionary = [self calculateItemsCountForContainerBarcode:acceptItemDB.barcode acceptionDate:date];
+            acceptInfo.scanned = countDictionary[@"scanned"];
+            acceptInfo.quantity = countDictionary[@"quantity"];
+        }
         else if ([acceptItemDB.type isEqualToString:@"S"])
+        {
             acceptInfo.type = AcceptanesInformationItemTypeSet;
+            NSDictionary *countDictionary = [self calculateItemsCountForContainerBarcode:acceptItemDB.barcode acceptionDate:date];
+            acceptInfo.scanned = countDictionary[@"scanned"];
+            acceptInfo.quantity = countDictionary[@"quantity"];
+        }
         else
+        {
             acceptInfo.type = AcceptanesInformationItemTypeItem;
+            acceptInfo.quantity = acceptItemDB.quantity;
+            acceptInfo.scanned = acceptItemDB.scanned;
+        }
         
         acceptInfo.name = acceptItemDB.name;
         
@@ -198,6 +209,37 @@
     NSSortDescriptor *sorter = [[NSSortDescriptor alloc] initWithKey:@"type" ascending:YES];
     [itemsToReturn sortUsingDescriptors:@[sorter]];
     [delegate acceptanesComplete:0 items:itemsToReturn];
+}
+
+- (NSDictionary *)calculateItemsCountForContainerBarcode:(NSString *)containerBarcode acceptionDate:(NSDate*)date
+{
+    NSManagedObjectContext *moc =_dataController.managedObjectContext;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"AcceptItem"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"date == %@ AND containerBarcode == %@", date, containerBarcode]];
+    
+    NSArray* results = [moc executeFetchRequest:request error:nil];
+    if (results.count < 1)
+    {
+        return @{@"scanned": @(0), @"quantity": @(0)};
+    }
+    
+    NSInteger scanned = 0;
+    NSInteger quantity = 0;
+    for (AcceptItem *acceptItemDB in results)
+    {
+        if ([acceptItemDB.type isEqualToString:@"B"] || [acceptItemDB.type isEqualToString:@"S"])
+        {
+            NSDictionary *countDictionary = [self calculateItemsCountForContainerBarcode:acceptItemDB.barcode acceptionDate:date];
+            scanned += [countDictionary[@"scanned"] integerValue];
+            quantity += [countDictionary[@"quantity"] integerValue];
+        }
+        else
+        {
+            scanned += (acceptItemDB.quantity.integerValue > 0 ? acceptItemDB.scanned.integerValue : 0);
+            quantity += acceptItemDB.quantity.integerValue;
+        }
+    }
+    return @{@"scanned": @(scanned), @"quantity": @(quantity)};
 }
 
 - (void) addItem:(AcceptanesInformation*)item toAcceptionWithDate:(NSDate*)date containerBarcode:(NSString*)containerBarcode scannedCount:(NSUInteger)scannedCount manually:(BOOL)manually;
