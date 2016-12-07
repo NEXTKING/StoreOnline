@@ -23,8 +23,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.tableView setBackgroundView:nil];
-    [self.tableView setBackgroundColor:[UIColor whiteColor]];
     [self.tableView registerNib:[UINib nibWithNibName:@"ReceivesListCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
     
     _dateFormatter = [NSDateFormatter new];
@@ -107,7 +105,6 @@
 {
     UITableViewHeaderFooterView *footer = (UITableViewHeaderFooterView *)view;
     
-    footer.textLabel.textColor = [UIColor lightGrayColor];
     footer.textLabel.font = [UIFont boldSystemFontOfSize:12];
     footer.textLabel.frame = footer.frame;
     footer.textLabel.textAlignment = NSTextAlignmentCenter;

@@ -28,6 +28,7 @@ typedef enum : NSUInteger
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *totalQuantityLabel;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet UIButton *acceptAllButton;
 
 @end
 
@@ -36,8 +37,6 @@ typedef enum : NSUInteger
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.tableView setBackgroundView:nil];
-    [self.tableView setBackgroundColor:[UIColor whiteColor]];
     [self.tableView registerNib:[UINib nibWithNibName:@"ReceivesListCell" bundle:nil] forCellReuseIdentifier:@"ListCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"ReceiveBoxCell" bundle:nil] forCellReuseIdentifier:@"BoxCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"ReceiveItemCell" bundle:nil] forCellReuseIdentifier:@"ItemCell"];
@@ -62,6 +61,7 @@ typedef enum : NSUInteger
     {
         _bottomView.hidden = NO;
         _bottomView.userInteractionEnabled = YES;
+        _acceptAllButton.enabled = NO;
         
         UIImage *barcodeImage = [UIImage imageNamed:@"Barcode manual"];
         UIBarButtonItem *manualInputButton = [[UIBarButtonItem alloc] initWithImage:barcodeImage style:UIBarButtonItemStylePlain target:self action:@selector(showManualInputAlert)];
@@ -133,11 +133,11 @@ typedef enum : NSUInteger
             else
             {
                 [_items addObjectsFromArray:items];
-                [self updateBottomBar];
             }
             
             [self.tableView reloadData];
         }
+        [self updateBottomBar];
     }
     else
     {
@@ -226,13 +226,14 @@ typedef enum : NSUInteger
 {
     for (AcceptanesInformation *acceptInfo in _items)
     {
-        if ((acceptInfo.type == AcceptanesInformationItemTypeItem) && acceptInfo.scanned.integerValue < acceptInfo.quantity.integerValue)
+        if ((acceptInfo.type == AcceptanesInformationItemTypeItem) && acceptInfo.scanned.integerValue < acceptInfo.quantity.integerValue && acceptInfo.quantity.integerValue != 0)
         {
             acceptInfo.scanned = @(acceptInfo.quantity.integerValue);
             [self addItemToAcception:acceptInfo containerBarcode:_rootItem.barcode scanned:acceptInfo.scanned.integerValue manually:YES];
             [self updateScreenForItem:acceptInfo animated:NO];
         }
     }
+    [self updateBottomBar];
 }
 
 - (void)navigateToBoxHierarhy:(NSArray<AcceptanesInformation*>*)boxHierarhy
@@ -284,6 +285,7 @@ typedef enum : NSUInteger
     UIAlertAction *addToCurrentExcessAction = [UIAlertAction actionWithTitle:@"Добавить в излишки набора" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self addItemToAcception:itemInfo containerBarcode:_rootItem.barcode scanned:scanned manually:manually];
         [self updateScreenForItem:itemInfo animated:YES];
+        [self updateBottomBar];
     }];
     UIAlertAction *addToAllExcessAction = [UIAlertAction actionWithTitle:@"Добавить в общие излишки" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self addItemToAcception:itemInfo containerBarcode:nil scanned:scanned manually:manually];
@@ -299,7 +301,7 @@ typedef enum : NSUInteger
 
 - (void)showNavigateToOtherBoxAlert:(NSArray<AcceptanesInformation*>*)boxHierarhy
 {
-    NSString *message = [NSString stringWithFormat:@"Отсканирована коробка %@", [boxHierarhy lastObject].barcode];
+    NSString *message = [NSString stringWithFormat:@"Отсканирован короб %@", [boxHierarhy lastObject].barcode];
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *navigateAction = [UIAlertAction actionWithTitle:@"Перейти" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self navigateToBoxHierarhy:boxHierarhy];
@@ -314,8 +316,8 @@ typedef enum : NSUInteger
 
 - (void)showAcceptAllPicker
 {
-    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:@"Вы уверены, что хотите отметить все товары без сканирования?" preferredStyle:UIAlertControllerStyleActionSheet];
-    UIAlertAction *acceptAllAction = [UIAlertAction actionWithTitle:@"Отметить все без сканирования" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:@"Вы уверены, что хотите применить все товары без сканирования?" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *acceptAllAction = [UIAlertAction actionWithTitle:@"Применить все без сканирования" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self acceptAllItems];
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleCancel handler:nil];
@@ -402,6 +404,7 @@ typedef enum : NSUInteger
                 acceptInfo.scanned = @(acceptInfo.scanned.integerValue + 1);
                 [self addItemToAcception:acceptInfo containerBarcode:acceptInfo.containerBarcode scanned:acceptInfo.scanned.integerValue manually:NO];
                 [self updateScreenForItem:acceptInfo animated:YES];
+                [self updateBottomBar];
             }
             
             return;
@@ -418,12 +421,28 @@ typedef enum : NSUInteger
 - (void)updateBottomBar
 {
     __block NSInteger itemsCount = 0;
+    __block NSInteger itemsWithoutExcessCount = 0;
+    __block NSInteger totalItemsCount = 0;
     
     [_items enumerateObjectsUsingBlock:^(AcceptanesInformation *acceptInfo, NSUInteger idx, BOOL *stop) {
         if (acceptInfo.type == AcceptanesInformationItemTypeItem)
-            itemsCount += acceptInfo.quantity.integerValue;
+        {
+            itemsCount += acceptInfo.scanned.integerValue;
+            totalItemsCount += acceptInfo.quantity.integerValue;
+            if (acceptInfo.quantity.integerValue != 0)
+                itemsWithoutExcessCount += acceptInfo.scanned.integerValue;
+        }
     }];
-    _totalQuantityLabel.text = [NSString stringWithFormat:@"Итого: %ld товара(ов)", itemsCount];
+    
+    if (totalItemsCount > 0)
+    {
+        _totalQuantityLabel.text = [NSString stringWithFormat:@"Итого: %ld из %ld товаров", itemsCount, totalItemsCount];
+        _acceptAllButton.enabled = (itemsWithoutExcessCount != totalItemsCount);
+    }
+    else
+    {
+        _totalQuantityLabel.text = @"Нет товаров";
+    }
 }
 
 - (NSString *)titleText
@@ -433,7 +452,7 @@ typedef enum : NSUInteger
         switch (_rootItem.type)
         {
             case AcceptanesInformationItemTypeBox:
-                return [NSString stringWithFormat:@"Коробка %@", _rootItem.barcode];
+                return [NSString stringWithFormat:@"Короб %@", _rootItem.barcode];
                 break;
             case AcceptanesInformationItemTypeSet:
                 return [NSString stringWithFormat:@"Набор товаров %@", _rootItem.barcode];
@@ -445,7 +464,7 @@ typedef enum : NSUInteger
     }
     else if ([self kind] == AcceptanesControllerKindExcesses)
     {
-        return @"Излишки";
+        return @"Общие излишки";
     }
     else
     {
@@ -505,8 +524,8 @@ typedef enum : NSUInteger
 
 - (void)configureBoxCell:(ReceiveBoxCell *)cell forItem:(AcceptanesInformation *)item
 {
-    cell.iconImageView.image = [UIImage imageNamed:@"receive_box_icon"];
-    cell.titleLabel.text = @"Коробка";
+    cell.iconImageView.image = ([self kind] == AcceptanesControllerKindRoot) ? nil : [UIImage imageNamed:@"receive_box_icon"];
+    cell.titleLabel.text = ([self kind] == AcceptanesControllerKindRoot) ? @"Накладная" : @"Короб";
     cell.barcodeLabel.text = item.barcode;
 }
 
@@ -530,7 +549,7 @@ typedef enum : NSUInteger
     else if (item.scanned.integerValue == item.quantity.integerValue)
         backgroundColor = [UIColor colorWithRed:126/255.0 green:211/255.0 blue:33/255.0 alpha:0.5];
     else
-        backgroundColor = [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:0.3];
+        backgroundColor = [UIColor whiteColor];
     
     cell.backgroundColor = backgroundColor;
 }
@@ -559,8 +578,7 @@ typedef enum : NSUInteger
 {
     UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
     
-    header.textLabel.text = [header.textLabel.text capitalizedString];
-    header.textLabel.textColor = [UIColor lightGrayColor];
+    header.textLabel.text = [self titleText];
     header.textLabel.font = [UIFont boldSystemFontOfSize:12];
     header.textLabel.frame = header.frame;
     header.textLabel.textAlignment = NSTextAlignmentCenter;
