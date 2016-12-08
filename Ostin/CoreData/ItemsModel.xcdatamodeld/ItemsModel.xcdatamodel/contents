@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="16A323" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16A323" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Barcode" representedClassName="Barcode" syncable="YES">
         <attribute name="code128" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="ean" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
@@ -59,6 +59,7 @@
         <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="TaskItemBinding" representedClassName="TaskItemBinding" syncable="YES">
+        <attribute name="bindingKey" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="itemID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="scanned" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -75,11 +76,11 @@
         <element name="Barcode" positionX="-47" positionY="-63" width="128" height="90"/>
         <element name="Group" positionX="-108" positionY="-72" width="128" height="75"/>
         <element name="Item" positionX="-207" positionY="-238" width="128" height="375"/>
+        <element name="ItemPrintFact" positionX="-117" positionY="-81" width="128" height="90"/>
         <element name="Price" positionX="-207" positionY="125" width="128" height="120"/>
         <element name="Subgroup" positionX="-99" positionY="-63" width="128" height="75"/>
         <element name="Task" positionX="-45" positionY="54" width="128" height="150"/>
-        <element name="TaskItemBinding" positionX="-47" positionY="216" width="128" height="105"/>
+        <element name="TaskItemBinding" positionX="-47" positionY="216" width="128" height="120"/>
         <element name="User" positionX="-90" positionY="-54" width="128" height="120"/>
-        <element name="ItemPrintFact" positionX="-117" positionY="-81" width="128" height="90"/>
     </elements>
 </model>

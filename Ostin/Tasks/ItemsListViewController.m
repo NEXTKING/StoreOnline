@@ -49,11 +49,11 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"ItemsListCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
-    [self requestData];
     [self subscribeToScanNotifications];
     [self subscribeToPrinterNotifications];
     [self updateActionButton];
     [self updateOverlayInfo];
+    [self requestData];
 }
 
 - (void)dealloc
@@ -87,7 +87,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     if (!_tasksMode)
     {
         self.actionButton.title = @"";
-        self.actionButton.enabled = YES;
+        self.actionButton.enabled = NO;
     }
     else
     {
@@ -114,13 +114,15 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     if (_activityIndicator == nil)
     {
         _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        _activityIndicator.frame = CGRectMake(0, 0, 40, 40);
         _activityIndicator.center = self.tableView.center;
+        _activityIndicator.frame = CGRectMake(_activityIndicator.frame.origin.x, _activityIndicator.frame.origin.y - 180, 40, 40);
     }
     
     [self.view addSubview:_activityIndicator];
     [_activityIndicator startAnimating];
     [self.tableView setScrollEnabled:NO];
+    [self.navigationItem setHidesBackButton:YES animated:YES];
+    [self.actionButton setEnabled:NO];
 }
 
 - (void)hideLoadingIndicator
@@ -128,6 +130,8 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     [_activityIndicator stopAnimating];
     [_activityIndicator removeFromSuperview];
     [self.tableView setScrollEnabled:YES];
+    [self.navigationItem setHidesBackButton:NO animated:YES];
+    [self updateActionButton];
 }
 
 - (void)showAlertWithMessage:(NSString*)message
@@ -323,6 +327,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 
 - (void) allItemsDescription:(int)result items:(NSArray<ItemInformation *> *)items
 {
+    [self hideLoadingIndicator];
     if (result == 0)
     {
         [_items removeAllObjects];
@@ -341,6 +346,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 {
     if (_tasksMode)
     {
+        [self showLoadingIndicator];
         NSMutableArray *itemsIDs = [NSMutableArray new];
         for (TaskItemInformation *taskItemInformation in _task.items)
         {
