@@ -59,7 +59,22 @@
     
     while (numberOfPortions > 0) {
         
-        NSArray* items = [self downloadItems];
+        NSArray* items = nil;
+        
+        int tries = 0; int maxTries = 5; BOOL needStop = NO;
+        while (needStop != YES)
+        {
+            @try
+            {
+                items = [self downloadItems];
+                needStop = YES;
+            }
+            @catch (NSException *exception)
+            {
+                if (++tries == maxTries)
+                    needStop = YES;
+            }
+        }
         
         if (self.isCancelled || !items)
             return;
