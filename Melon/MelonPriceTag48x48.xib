@@ -16,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cXg-nB-QOm">
-                    <rect key="frame" x="1" y="0.0" width="188" height="190"/>
+                    <rect key="frame" x="2" y="0.0" width="188" height="190"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Россия, Санкт-Петербург, 10-я Красноармейская ул., д. 22, АО &quot;Мэлон Фэшн Груп&quot;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2G-Mk-g52" customClass="AntiAliasingLabel">
                             <rect key="frame" x="0.0" y="0.0" width="188" height="17"/>
@@ -196,8 +196,8 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="cXg-nB-QOm" secondAttribute="trailing" id="EtR-yW-vkP"/>
                 <constraint firstItem="cXg-nB-QOm" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="GUC-0k-t5R"/>
-                <constraint firstItem="cXg-nB-QOm" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Vy1-2i-zwQ"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
