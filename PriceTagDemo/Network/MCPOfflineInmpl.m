@@ -546,13 +546,19 @@
     
     NSError *error = nil;
     NSArray *dictionaries = [moc executeFetchRequest:request error:&error];
-    NSMutableArray *dates = [NSMutableArray new];
-    
-    for (NSDictionary *dic in dictionaries)
-        [dates addObject:dic[@"date"]];
-    
+
     if (!error)
+    {
+        NSMutableArray *dates = [NSMutableArray new];
         [delegate acceptanesComplete:0 items:dates];
+        
+        for (NSDictionary *dic in dictionaries)
+            [dates addObject:dic[@"date"]];
+        
+        NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"self" ascending:NO];
+        [dates sortUsingDescriptors:@[descriptor]];
+        [delegate acceptanesComplete:0 items:dates];
+    }
     else
         [delegate acceptanesComplete:1 items:nil];
 }
