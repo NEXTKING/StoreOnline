@@ -8,8 +8,9 @@
 
 #import "ZReportViewController.h"
 #import "MCPServer.h"
+#import "PLManager.h"
 
-@interface ZReportViewController () <PrinterDelegate>
+@interface ZReportViewController () <PrinterDelegate, PLManagerDelegate>
 {
     BOOL shouldShowControls;
     BOOL lastRequest;
@@ -30,11 +31,7 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [[MCPServer instance] zReport:self receiptID:nil amount:nil reqID:nil];
-    loadingActivity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    loadingActivity.hidesWhenStopped = YES;
-    [loadingActivity startAnimating];
-    self.tableView.tableFooterView = loadingActivity;
+    [self requestData];
     
     zreportActivity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     zreportActivity.hidesWhenStopped = YES;
@@ -43,6 +40,20 @@
 
 - (void) requestData
 {
+    
+    PLManager* manager = [PLManager instance];
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    double amount = [[defaults objectForKey:@"Balance"]doubleValue];
+    NSError* error;
+    manager.delegate = self;
+    [manager reconciliation:amount error:&error];
+    
+    if (error)
+    {
+        [self showInfoMessage:error.localizedDescription];
+        return;
+    }
+    
     shouldShowControls = NO;
     NSRange sectionsRange = {.location = 0, .length = self.tableView.numberOfSections};
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:sectionsRange] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -72,7 +83,7 @@
     
     switch (section) {
         case 0:
-            return 3;
+            return 4;
         case 1:
             return 1;
             
@@ -148,6 +159,10 @@
                 cell.detailTextLabel.text = [NSString stringWithFormat:@"%.2f", currentReport.fiscalAmount];
                 break;
             case 2:
+                cell.textLabel.text = @"Сумма в банке";
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"%.2f", currentReport.fiscalAmount];
+                break;
+            case 3:
                 cell.textLabel.text = @"Отрицательные остатки";
                 cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)currentReport.items.count];
                 break;
@@ -180,6 +195,10 @@
         lastRequest = YES;
         [[MCPServer instance] zReport:self receiptID:nil amount:[NSNumber numberWithDouble:currentReport.dbAmount] reqID:[NSNull null]];
     }
+}
+
+- (void) paymentManagerDidFinishOperation:(PLOperationType)operation result:(PLOperationResult *)result
+{
 }
 
 /*

@@ -503,6 +503,7 @@
 		C6F601C81D9E71090095AE21 /* StockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F601C61D9E71090095AE21 /* StockCell.m */; };
 		C6F601C91D9E71090095AE21 /* StockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6F601C71D9E71090095AE21 /* StockCell.xib */; };
 		C6F601CA1DA256A30095AE21 /* NwobjStock.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F601B41D9E5BD70095AE21 /* NwobjStock.m */; };
+		C6FCFF2E1DF181FF00B1B2AD /* Config in Resources */ = {isa = PBXBuildFile; fileRef = C6FCFF2D1DF181FF00B1B2AD /* Config */; };
 		C6FFF3FB1D79785100947948 /* ItemsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C6FFF3F91D79785100947948 /* ItemsModel.xcdatamodeld */; };
 		C6FFF40A1D797A2E00947948 /* Item+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FFF4031D797A2E00947948 /* Item+CoreDataProperties.m */; };
 		C6FFF40B1D797A2E00947948 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FFF4051D797A2E00947948 /* Item.m */; };
@@ -1021,7 +1022,6 @@
 		C6B3C9861D93E7F400730D9F /* TasksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TasksViewController.m; sourceTree = "<group>"; };
 		C6E776EF1D747B00000FEAC8 /* OperationResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OperationResult.h; sourceTree = "<group>"; };
 		C6E776F01D747B00000FEAC8 /* PLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLManager.h; sourceTree = "<group>"; };
-		C6E776F21D747B00000FEAC8 /* ZebraLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZebraLibrary.h; sourceTree = "<group>"; };
 		C6E776F31D747B00000FEAC8 /* libPaymentLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPaymentLibrary.a; sourceTree = "<group>"; };
 		C6F600BB1D9C363C0095AE21 /* NSDate+ISO8601Parsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ISO8601Parsing.h"; sourceTree = "<group>"; };
 		C6F600BC1D9C363C0095AE21 /* NSDate+ISO8601Parsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ISO8601Parsing.m"; sourceTree = "<group>"; };
@@ -1055,6 +1055,7 @@
 		C6F601C51D9E71090095AE21 /* StockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StockCell.h; sourceTree = "<group>"; };
 		C6F601C61D9E71090095AE21 /* StockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StockCell.m; sourceTree = "<group>"; };
 		C6F601C71D9E71090095AE21 /* StockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StockCell.xib; sourceTree = "<group>"; };
+		C6FCFF2D1DF181FF00B1B2AD /* Config */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Config; sourceTree = "<group>"; };
 		C6FFF3FA1D79785100947948 /* ItemsModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ItemsModel.xcdatamodel; sourceTree = "<group>"; };
 		C6FFF4021D797A2E00947948 /* Item+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Item+CoreDataProperties.h"; sourceTree = "<group>"; };
 		C6FFF4031D797A2E00947948 /* Item+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Item+CoreDataProperties.m"; sourceTree = "<group>"; };
@@ -2085,6 +2086,7 @@
 		C6E776EC1D747B00000FEAC8 /* PaymentLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				C6FCFF2D1DF181FF00B1B2AD /* Config */,
 				C6E776ED1D747B00000FEAC8 /* include */,
 				C6E776F31D747B00000FEAC8 /* libPaymentLibrary.a */,
 			);
@@ -2095,7 +2097,6 @@
 			isa = PBXGroup;
 			children = (
 				C6E776EE1D747B00000FEAC8 /* PaymentLibrary */,
-				C6E776F11D747B00000FEAC8 /* ZebraLibrary */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -2107,14 +2108,6 @@
 				C6E776F01D747B00000FEAC8 /* PLManager.h */,
 			);
 			path = PaymentLibrary;
-			sourceTree = "<group>";
-		};
-		C6E776F11D747B00000FEAC8 /* ZebraLibrary */ = {
-			isa = PBXGroup;
-			children = (
-				C6E776F21D747B00000FEAC8 /* ZebraLibrary.h */,
-			);
-			path = ZebraLibrary;
 			sourceTree = "<group>";
 		};
 		C6F600BA1D9C363C0095AE21 /* Generated Classes */ = {
@@ -2740,6 +2733,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6FCFF2E1DF181FF00B1B2AD /* Config in Resources */,
 				B9171DD11CF469B5004DB487 /* person.png in Resources */,
 				B9171DC51CF368E7004DB487 /* DSPF_Workspace.xib in Resources */,
 				B9171DC31CF368E7004DB487 /* DSPF_SideMenuHeader_technopark.xib in Resources */,

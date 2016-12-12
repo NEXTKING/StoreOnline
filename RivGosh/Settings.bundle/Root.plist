@@ -38,7 +38,7 @@
 			<key>Key</key>
 			<string>host_preference</string>
 			<key>DefaultValue</key>
-			<string>10.20.1.129</string>
+			<string>10.101.42.61</string>
 			<key>IsSecure</key>
 			<false/>
 			<key>KeyboardType</key>
@@ -74,7 +74,7 @@
 			<key>Key</key>
 			<string>path_preference</string>
 			<key>DefaultValue</key>
-			<string>1cash2/hs/json</string>
+			<string>MobileIB/hs/json</string>
 			<key>IsSecure</key>
 			<false/>
 			<key>KeyboardType</key>
@@ -86,15 +86,21 @@
 		</dict>
 		<dict>
 			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Master Password</string>
+		</dict>
+		<dict>
+			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
 			<key>Title</key>
-			<string>Method</string>
+			<string>Password</string>
 			<key>Key</key>
-			<string>method_preference</string>
+			<string>master_password_preference</string>
 			<key>DefaultValue</key>
-			<string>Price</string>
+			<string></string>
 			<key>IsSecure</key>
-			<false/>
+			<true/>
 			<key>KeyboardType</key>
 			<string>Alphabet</string>
 			<key>AutocapitalizationType</key>

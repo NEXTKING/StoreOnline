@@ -45,7 +45,9 @@
     NSString *host     = [[NSUserDefaults standardUserDefaults] valueForKey:@"host_preference"];
     NSString *port     = [[NSUserDefaults standardUserDefaults] valueForKey:@"port_preference"];
     NSString *path     = [[NSUserDefaults standardUserDefaults] valueForKey:@"path_preference"];
+    NSString *pwd      = [[NSUserDefaults  standardUserDefaults]valueForKey:@"master_password_preference"];
     NSMutableString *mutableString = [NSMutableString stringWithFormat:@"%@://%@%@",protocol, host, port.length > 0?[NSString stringWithFormat:@":%@", port]:@""];
+    NSLog(@"password:%@", pwd);
     if (path.length > 0)
         [mutableString appendFormat:@"/%@", path];
     
@@ -124,6 +126,11 @@
 }
 
 - (void) zones:(id<ZonesDelegate>)delegate shopID:(NSString *)shopID
+{
+    
+}
+
+- (void) stock:(id<StockDelegate>)delegate itemCode:(NSString *)code shopID:(NSString *)shopID
 {
     
 }

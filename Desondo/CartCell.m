@@ -20,6 +20,8 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    [super awakeFromNib];
+    
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     //topBorder = [CALayer layer];

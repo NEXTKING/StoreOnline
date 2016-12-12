@@ -6,7 +6,7 @@
 //  Copyright © 2016 Dataphone. All rights reserved.
 //
 
-#import "SettingsViewController.h"
+#import "RivgoshSettingsViewController.h"
 #import "ZReportViewController.h"
 #import "MCPServer.h"
 

@@ -334,7 +334,10 @@
         
         NSString* errorMessage = [NSString stringWithFormat:@"Ошибка выполнения платежа. %@", result.errorLocalizedDescription];
         [self showInfoMessage:errorMessage];
-        [self performBankPayment];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self performBankPayment];
+        });
     }
     else
     {
@@ -347,6 +350,44 @@
         _restartPayment.hidden = YES;
         [self sendPaymentInfo:result];
         _placeholderLabel.hidden = YES;
+    }
+    
+    [self changeTerminalBalance:operation amount:_amount.doubleValue];
+}
+
+- (void) changeTerminalBalance:(PLOperationType) operation amount:(double) amount
+{
+    switch (operation) {
+        case PLOperationTypePayment:
+        {
+            NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+            NSNumber *balance = [defaults objectForKey:@"Balance"];
+            NSNumber* newBalance = @(balance.doubleValue+amount);
+            [defaults setObject:newBalance forKey:@"Balance"];
+            
+            
+        }
+            break;
+        case PLOperationTypeReversal:
+        {
+            NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+            NSNumber *balance = [defaults objectForKey:@"Balance"];
+            NSNumber* newBalance = @(balance.doubleValue-amount);
+            [defaults setObject:newBalance forKey:@"Balance"];
+        }
+            break;
+        case PLOperationTypeCutover:
+            
+        {
+            NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+            NSNumber* newBalance = @(0);
+            [defaults setObject:newBalance forKey:@"Balance"];
+            
+        }
+            break;
+            
+        default:
+            break;
     }
 }
 
