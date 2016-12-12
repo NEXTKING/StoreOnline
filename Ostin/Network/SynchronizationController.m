@@ -46,9 +46,15 @@ static void *ProgressObserverContext = &ProgressObserverContext;
 
 - (void) synchronize
 {
-    _progress = [NSProgress progressWithTotalUnitCount:5];
-    [_progress becomeCurrentWithPendingUnitCount:0];
-    [_progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionNew context:ProgressObserverContext];
+    runOnMainThread(^
+    {
+        if (_progress)
+            [_progress removeObserver:self forKeyPath:@"fractionCompleted" context:ProgressObserverContext];
+        
+        _progress = [NSProgress progressWithTotalUnitCount:5];
+        [_progress becomeCurrentWithPendingUnitCount:0];
+        [_progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionNew context:ProgressObserverContext];
+    });
     
     _suspendingBlocker = [AppSuspendingBlocker new];
     [_suspendingBlocker startBlock];
@@ -120,8 +126,11 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     if (allBitsAreSet)
     {
         [_suspendingBlocker stopBlock];
-        [_progress resignCurrent];
-        [_progress removeObserver:self forKeyPath:@"fractionCompleted" context:ProgressObserverContext];
+        runOnMainThread(^
+        {
+            if ([[NSProgress currentProgress] isEqual:_progress])
+                [_progress resignCurrent];
+        });
         _syncIsRunning = NO;
         _syncProgress = 0;
         
@@ -190,6 +199,14 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     
     if ([_delegate respondsToSelector:@selector(resetPortionsCompleteWithResult:)])
         [_delegate resetPortionsCompleteWithResult:result];
+}
+
+void runOnMainThread(void (^block)(void))
+{
+    if ([NSThread isMainThread])
+        block();
+    else
+        dispatch_sync(dispatch_get_main_queue(), block);
 }
 
 @end
