@@ -57,51 +57,39 @@
         _progress.totalUnitCount = numberOfPortions;
     });
     
-    while (numberOfPortions > 0) {
-        
-        NSArray* items = nil;
-        
-        int tries = 0; int maxTries = 5; BOOL needStop = NO;
-        while (needStop != YES)
+    while (numberOfPortions > 0)
+    {
+        @autoreleasepool
         {
-            @try
-            {
-                items = [self downloadItems];
-                needStop = YES;
-            }
-            @catch (NSException *exception)
-            {
-                if (++tries == maxTries)
-                    needStop = YES;
-            }
-        }
-        
-        if (self.isCancelled || !items)
-            return;
-        
-        __block BOOL localSuccess = NO;
-        
-        [_privateContext performBlockAndWait:^{
-            localSuccess = [self saveItems:items];
+            NSArray* items = [self downloadItems];
+
+            if (self.isCancelled || !items)
+                return;
             
-            if (localSuccess)
-            {
-                [self.dataController.managedObjectContext performBlockAndWait:^{
+            __block BOOL localSuccess = NO;
+            
+            [_privateContext performBlockAndWait:^{
+                localSuccess = [self saveItems:items];
                 
-                    localSuccess = [_dataController.managedObjectContext save:nil];
+                if (localSuccess)
+                {
+                    [self.dataController.managedObjectContext performBlockAndWait:^{
+                    
+                        localSuccess = [_dataController.managedObjectContext save:nil];
+                
+                    }];
+                }
+            }];
+        
             
-                }];
-            }
-        }];
-    
-        
-        if (!localSuccess || self.isCancelled)
-            return;
-        
-        localSuccess = [self commitPortion:_incValue portionID:@(currentPortionID)];
-        
-        if (!localSuccess || self.isCancelled)
-            return;
+            if (!localSuccess || self.isCancelled)
+                return;
+            
+            localSuccess = [self commitPortion:_incValue portionID:@(currentPortionID)];
+            
+            if (!localSuccess || self.isCancelled)
+                return;
+        }
         
         numberOfPortions--;
         
@@ -147,7 +135,8 @@
         else if ([incrementValue isEqualToString:@"D"])
         {
             coreDataObject = [self findObject:csv];
-            [self.privateContext deleteObject:coreDataObject];
+            if (coreDataObject)
+                [self.privateContext deleteObject:coreDataObject];
         }
         
     }
