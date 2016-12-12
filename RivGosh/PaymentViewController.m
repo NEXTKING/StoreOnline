@@ -64,6 +64,7 @@
 
 - (IBAction) switchBackToCart:(id) sender
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"CleanAllData" object:nil];
     [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
 }
 

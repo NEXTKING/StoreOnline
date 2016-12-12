@@ -30,7 +30,19 @@
 {
     [super viewDidLoad];
     self.navigationItem.hidesBackButton = YES;
+    
     dtdev = [DTDevices sharedDevice];
+    [dtdev addDelegate:self];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cleanNotificationHandler:) name:@"CleanAllData" object:nil];
+}
+- (void) cleanNotificationHandler:(NSNotification*) notification
+{
+    _nameLabel.text = @"5550012345678\n(Системная карта)";
+    self.currentReceiptId = nil;
+    [self.items removeAllObjects];
+    [self.itemsCount removeAllObjects];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self updateTotal];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
