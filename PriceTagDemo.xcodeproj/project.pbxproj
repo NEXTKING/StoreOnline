@@ -11,6 +11,7 @@
 		214AD0F01DE4881F00FE0345 /* NwobjSendAcceptanes.m in Sources */ = {isa = PBXBuildFile; fileRef = 214AD0EE1DE4881F00FE0345 /* NwobjSendAcceptanes.m */; };
 		214AD0F61DE87FD200FE0345 /* MelonPriceTag30x60.m in Sources */ = {isa = PBXBuildFile; fileRef = 214AD0F51DE87FD200FE0345 /* MelonPriceTag30x60.m */; };
 		214AD0F81DE87FE600FE0345 /* MelonPriceTag30x60.xib in Resources */ = {isa = PBXBuildFile; fileRef = 214AD0F71DE87FE600FE0345 /* MelonPriceTag30x60.xib */; };
+		215004791DFEA89600BD5C12 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2150047B1DFEA89600BD5C12 /* Localizable.strings */; };
 		21532CF41DEEDAE7005E36F1 /* MelonPriceTag48x48.m in Sources */ = {isa = PBXBuildFile; fileRef = 21532CF31DEEDAE7005E36F1 /* MelonPriceTag48x48.m */; };
 		21532CF61DEEDAFE005E36F1 /* MelonPriceTag48x48.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21532CF51DEEDAFE005E36F1 /* MelonPriceTag48x48.xib */; };
 		21532CF91DEF0B98005E36F1 /* MelonPriceTag29x28.m in Sources */ = {isa = PBXBuildFile; fileRef = 21532CF81DEF0B98005E36F1 /* MelonPriceTag29x28.m */; };
@@ -575,6 +576,9 @@
 		214AD0F41DE87FD200FE0345 /* MelonPriceTag30x60.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MelonPriceTag30x60.h; sourceTree = "<group>"; };
 		214AD0F51DE87FD200FE0345 /* MelonPriceTag30x60.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MelonPriceTag30x60.m; sourceTree = "<group>"; };
 		214AD0F71DE87FE600FE0345 /* MelonPriceTag30x60.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MelonPriceTag30x60.xib; sourceTree = "<group>"; };
+		2150047C1DFEA8CC00BD5C12 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2150047D1DFEA93F00BD5C12 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2150047F1DFEA97200BD5C12 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		21532CF21DEEDAE7005E36F1 /* MelonPriceTag48x48.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MelonPriceTag48x48.h; sourceTree = "<group>"; };
 		21532CF31DEEDAE7005E36F1 /* MelonPriceTag48x48.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MelonPriceTag48x48.m; sourceTree = "<group>"; };
 		21532CF51DEEDAFE005E36F1 /* MelonPriceTag48x48.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MelonPriceTag48x48.xib; sourceTree = "<group>"; };
@@ -1796,6 +1800,7 @@
 				B970B8231CD209830066A66A /* Assets.xcassets */,
 				B970B8251CD209830066A66A /* LaunchScreen.storyboard */,
 				B970B8281CD209830066A66A /* Info.plist */,
+				2150047B1DFEA89600BD5C12 /* Localizable.strings */,
 				B970B8171CD209830066A66A /* Supporting Files */,
 				B970B83F1CD21CF30066A66A /* MelonPriceTag.h */,
 				B970B8401CD21CF30066A66A /* MelonPriceTag.m */,
@@ -2656,6 +2661,8 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
+				pl,
 			);
 			mainGroup = B93DB9A21C50DAA500C8A7A3;
 			productRefGroup = B93DB9AC1C50DAA500C8A7A3 /* Products */;
@@ -2809,6 +2816,7 @@
 				B970B8591CD296820066A66A /* CartCell.xib in Resources */,
 				B970B8481CD273870066A66A /* MFG_Bar@2x.png in Resources */,
 				B970B83E1CD21C200066A66A /* PrintViewController.xib in Resources */,
+				215004791DFEA89600BD5C12 /* Localizable.strings in Resources */,
 				B9950B731CE1E5A0005B4375 /* Barcode manual@2x.png in Resources */,
 				B970B85D1CD2A0150066A66A /* send@2x.png in Resources */,
 				21D838361DD3353200A98E0F /* ReceiveItemCell.xib in Resources */,
@@ -3855,6 +3863,16 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		2150047B1DFEA89600BD5C12 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2150047C1DFEA8CC00BD5C12 /* ru */,
+				2150047D1DFEA93F00BD5C12 /* pl */,
+				2150047F1DFEA97200BD5C12 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		B90710BF1C96E26500268CE8 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -4072,6 +4090,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -4117,6 +4136,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;

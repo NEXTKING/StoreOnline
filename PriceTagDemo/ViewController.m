@@ -103,13 +103,13 @@
 - (IBAction)manualInputAction:(id)sender
 {
    
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Ручной ввод"
-                                                                   message:@"Введите штрих-код"
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Ручной ввод", nil)
+                                                                   message:NSLocalizedString(@"Введите штрих-код", nil)
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleCancel
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Отмена", nil) style:UIAlertActionStyleCancel
                                                           handler:^(UIAlertAction * action) {}];
-    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Отправить" style:UIAlertActionStyleDefault
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Отправить", nil) style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * action) {
                                                           
                                                               NSDictionary* params = @{@"barcode":alert.textFields[0].text,@"type":@(0)};
@@ -349,7 +349,7 @@
     else if (result == 1)
     {
         [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"LastBarcode"];
-        [self showInfoMessage:@"Не удалось найти товар в базе"];
+        [self showInfoMessage:NSLocalizedString(@"Не удалось найти товар в базе", nil)];
         [self clearInfo];
         
         DTDevices* dtDev = [DTDevices sharedDevice];
@@ -359,7 +359,7 @@
     else
     {
         [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"LastBarcode"];
-        [self showInfoMessage:@"Ошибка при выполнении запроса."];
+        [self showInfoMessage:NSLocalizedString(@"Ошибка при выполнении запроса.", nil)];
         [self clearInfo];
     }
 }
@@ -461,7 +461,7 @@
     _itemNameLabel.text = itemDescription.name;
     _itemArticleLabel.text = itemDescription.article;
     _barcodeLabel.text = itemDescription.barcode;
-    _itemPriceLabel.text = [NSString stringWithFormat:@"%.2f р.", itemDescription.price];
+    _itemPriceLabel.text = [NSString stringWithFormat:@"%.2f %@", itemDescription.price, NSLocalizedString(@"р.", nil)];
     
     DTDevices* dtDev = [DTDevices sharedDevice];
     _printButton.enabled = (dtDev.connstate == CONN_CONNECTED) && _currentItemInfo;

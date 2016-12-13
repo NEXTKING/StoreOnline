@@ -98,7 +98,7 @@
 
 - (NSString*) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    return _items.count < 1 ? @"Нет открытых приёмок" : nil;
+    return _items.count < 1 ? NSLocalizedString(@"Нет открытых приёмок", nil) : nil;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayFooterView:(nonnull UIView *)view forSection:(NSInteger)section

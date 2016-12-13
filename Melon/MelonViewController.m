@@ -21,7 +21,11 @@
     UIPickerView *_priceTagTypePicker;
     NSArray<NSDictionary*> *_priceTagTypes;
 }
-
+@property (weak, nonatomic) IBOutlet UILabel *itemPreTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *itemPreArticleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *itemPreBarcodeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *itemPrePriceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *itemPrePrintBarcodeLabel;
 @end
 
 @implementation MelonViewController
@@ -30,7 +34,16 @@
     [super viewDidLoad];
     [self initChangePriceTagTypePicker];
     _barcodeSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShouldPrintBarcode"];
-    // Do any additional setup after loading the view.
+    
+    _itemPreTitleLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Наименование", nil)];
+    _itemPreArticleLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Артикул", nil)];
+    _itemPreBarcodeLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Штрих-код", nil)];
+    _itemPrePriceLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Цена", nil)];
+    _itemPrePrintBarcodeLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Печатать Штрих-код", nil)];
+    _copiesLabel.text = [NSString stringWithFormat:@"%@: 1", NSLocalizedString(@"Количество копий", nil)];
+    _priceTagChangeTypeTextField.text = NSLocalizedString(@"Изменить", nil);
+    [self.printButton setTitle:NSLocalizedString(@"Печать", nil) forState:UIControlStateNormal];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -81,7 +94,7 @@
 
 - (IBAction)stepperAction:(UIStepper*)sender
 {
-    _copiesLabel.text = [NSString stringWithFormat:@"Количество копий: %.0f", sender.value];
+    _copiesLabel.text = [NSString stringWithFormat:@"%@: %.0f", NSLocalizedString(@"Количество копий", nil), sender.value];
     self.numberOfCopies = sender.value;
     self.shouldRetrack = (self.numberOfCopies > 1);
 }
@@ -117,7 +130,7 @@
 - (void) bindPrinter
 {
     bindingInProgress = YES;
-    bindingAlert = [[UIAlertView alloc] initWithTitle:@"Привязка принтера" message:@"Отсканируйте или введите штрих-код принтера" delegate:self cancelButtonTitle:@"Отмена" otherButtonTitles:@"Оk", nil];
+    bindingAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Привязка принтера", nil) message:NSLocalizedString(@"Отсканируйте или введите штрих-код принтера", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Отмена", nil) otherButtonTitles:NSLocalizedString(@"Оk", nil), nil];
     bindingAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
     //[bindingAlert textFieldAtIndex:0].keyboardType = UIKeyboardTypeNumberPad;
     bindingAlert.tag = 987;
@@ -180,10 +193,10 @@
 
 - (void)initChangePriceTagTypePicker
 {
-    _priceTagTypes = @[@{@"name":@"ценник", @"xibName":@"MelonPriceTag"},
-                       @{@"name":@"48x48 мм", @"xibName":@"MelonPriceTag48x48"},
-                       @{@"name":@"30x60 мм", @"xibName":@"MelonPriceTag30x60"},
-                       @{@"name":@"29x28 мм", @"xibName":@"MelonPriceTag29x28"}];
+    _priceTagTypes = @[@{@"name":NSLocalizedString(@"ценник", nil), @"xibName":@"MelonPriceTag"},
+                       @{@"name":NSLocalizedString(@"48x48 мм", nil), @"xibName":@"MelonPriceTag48x48"},
+                       @{@"name":NSLocalizedString(@"30x60 мм", nil), @"xibName":@"MelonPriceTag30x60"},
+                       @{@"name":NSLocalizedString(@"29x28 мм", nil), @"xibName":@"MelonPriceTag29x28"}];
     
 //    NSString *xibName = [[NSUserDefaults standardUserDefaults] valueForKey:@"PriceTagXibName"];
     __block NSUInteger index = 0;
@@ -203,12 +216,12 @@
 //    
     [[NSUserDefaults standardUserDefaults] setValue:_priceTagTypes[index][@"xibName"] forKey:@"PriceTagXibName"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    _priceTagTypeLabel.text = [NSString stringWithFormat:@"Тип этикетки: %@", _priceTagTypes[index][@"name"]];
+    _priceTagTypeLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Тип этикетки", nil), _priceTagTypes[index][@"name"]];
     
     UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Отмена" style:UIBarButtonItemStylePlain target:self action:@selector(cancelChangePriceTagType:)];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Отмена", nil) style:UIBarButtonItemStylePlain target:self action:@selector(cancelChangePriceTagType:)];
     UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Выбрать" style:UIBarButtonItemStyleDone target:self action:@selector(doneChangePriceTagType:)];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Выбрать", nil) style:UIBarButtonItemStyleDone target:self action:@selector(doneChangePriceTagType:)];
     toolBar.items = @[cancelButton, flexibleSpace, doneButton];
     
     _priceTagTypePicker = [[UIPickerView alloc] init];
@@ -234,7 +247,7 @@
     [[NSUserDefaults standardUserDefaults] setValue:_priceTagTypes[type][@"xibName"] forKey:@"PriceTagXibName"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    _priceTagTypeLabel.text = [NSString stringWithFormat:@"Тип этикетки: %@", _priceTagTypes[type][@"name"]];
+    _priceTagTypeLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Тип этикетки", nil), _priceTagTypes[type][@"name"]];
     [_priceTagChangeTypeTextField resignFirstResponder];
 }
 

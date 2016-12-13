@@ -62,7 +62,7 @@
   
     _titleLabel.text = item.name;
     
-    _descriptionLabel.text = [NSString stringWithFormat:@"Арт. %@", item.article?item.article:@""];
+    _descriptionLabel.text = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Арт.", nil), item.article?item.article:@""];
     _barcodeLabel.text = item.barcode;
     _priceLabel.text = [NSString stringWithFormat:@"x%lu", (unsigned long)quantity];
 }

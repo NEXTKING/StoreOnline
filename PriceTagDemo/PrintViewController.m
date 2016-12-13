@@ -73,7 +73,7 @@ typedef enum PrintingTask
 {
     if (![[NSUserDefaults standardUserDefaults] valueForKey:@"PrinterID"] && _delegate)
     {
-        NSError *error = [NSError errorWithDomain:@"0" code:0 userInfo:@{NSLocalizedDescriptionKey:@"Необходимо привязать принтер"}];
+        NSError *error = [NSError errorWithDomain:@"0" code:0 userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Необходимо привязать принтер", nil)}];
         [_delegate printerDidFailPrinting:error];
         return;
     }
@@ -129,7 +129,7 @@ typedef enum PrintingTask
 - (void) calibrate
 {
     currentTask = PrintingTaskCalibrate;
-    _statusLabel.text = @"Подключение к принтеру...";
+    _statusLabel.text = NSLocalizedString(@"Подключение к принтеру...", nil);
     shouldContinueDiscover = YES;
     [self tryConnectAndPrint];
     
@@ -138,7 +138,7 @@ typedef enum PrintingTask
 - (void) temporaryFeed
 {
     currentTask = PrintingTaskRetract;
-    _statusLabel.text = @"Подключение к принтеру...";
+    _statusLabel.text = NSLocalizedString(@"Подключение к принтеру...", nil);
     shouldContinueDiscover = YES;
     [self tryConnectAndPrint];
 }
@@ -147,7 +147,7 @@ typedef enum PrintingTask
 {
     currentTask = PrintingTaskPrintLabel;
     numberOfCopies = MAX(copies, 1);
-    _statusLabel.text = @"Подключение к принтеру...";
+    _statusLabel.text = NSLocalizedString(@"Подключение к принтеру...", nil);
     self.currentPrint = itemInfo;
     shouldContinueDiscover = YES;
     [self tryConnectAndPrint];
@@ -172,7 +172,7 @@ typedef enum PrintingTask
 - (void) printZPL:(NSData*) data copies:(NSInteger) copies{
     currentTask = PrintingTaskZPL;
     numberOfCopies = MAX(copies, 1);
-    _statusLabel.text = @"Подключение к принтеру...";
+    _statusLabel.text = NSLocalizedString(@"Подключение к принтеру...", nil);
     currentZpl = data;
     shouldContinueDiscover = YES;
     
@@ -394,7 +394,7 @@ if (_shouldRetrack)
     dispatch_async(dispatch_get_main_queue(), ^{
         
         [self performSelector:@selector(performCallback) withObject:nil afterDelay:0.0];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Внимание" message:@"Оторвите ценник и нажмите \"Продолжить\"" delegate:self cancelButtonTitle:@"Продолжить" otherButtonTitles: nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Внимание", nil) message:NSLocalizedString(@"Оторвите ценник и нажмите \"Продолжить\"", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Продолжить", nil) otherButtonTitles: nil];
         [alert show];
     });
     });
@@ -416,7 +416,7 @@ if (_shouldRetrack)
 
 - (void) showInfoMessage:(NSString*) info
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Info" message:info delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Info", nil) message:info delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
     [alert show];
 }
 

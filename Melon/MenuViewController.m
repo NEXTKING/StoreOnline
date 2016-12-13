@@ -9,11 +9,17 @@
 #import "MenuViewController.h"
 #import "MCPServer.h"
 #import "DTDevices.h"
+#import "CommonConfirmButton.h"
 
 @interface MenuViewController () <ItemDescriptionDelegate, UIAlertViewDelegate, DTDeviceDelegate, ZonesDelegate, AcceptanesDelegate>
 {
     NSInteger *reqCount;
 }
+@property (weak, nonatomic) IBOutlet CommonConfirmButton *revaluationButton;
+@property (weak, nonatomic) IBOutlet CommonConfirmButton *inventoryButton;
+@property (weak, nonatomic) IBOutlet CommonConfirmButton *stockButton;
+@property (weak, nonatomic) IBOutlet CommonConfirmButton *acceptancesButton;
+
 @property (nonatomic, weak) UIAlertView* syncAlertView;
 @property (nonatomic, copy) NSString* currentShopID;
 @end
@@ -23,11 +29,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSString *lastSyncString = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastSync"];
-    _lastSyncLabel.text = lastSyncString ? [NSString stringWithFormat:@"Последняя синхронизация: %@", lastSyncString]:@"Нет данных о последней синхронизации";
+    _lastSyncLabel.text = lastSyncString ? [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Последняя синхронизация", nil), lastSyncString]:@"Нет данных о последней синхронизации";
     
     NSString * build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
     _buildLabel.text = [NSString stringWithFormat:@"Build: %@", build];
-    // Do any additional setup after loading the view.
+    [_revaluationButton setTitle:NSLocalizedString(@"Переоценка", nil) forState:UIControlStateNormal];
+    [_inventoryButton setTitle:NSLocalizedString(@"Инвентаризация", nil) forState:UIControlStateNormal];
+    [_stockButton setTitle:NSLocalizedString(@"Остатки товара", nil) forState:UIControlStateNormal];
+    [_acceptancesButton setTitle:NSLocalizedString(@"Приёмка", nil) forState:UIControlStateNormal];
+    [_syncButton setTitle:NSLocalizedString(@"Синхронизация", nil) forState:UIControlStateNormal];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -61,7 +71,7 @@
 
 - (IBAction)syncButtonAction:(id)sender
 {
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Синхронизация" message:@"Отсканируйте штрих-код магазина или введите его вручную" delegate:self cancelButtonTitle:@"Отмена" otherButtonTitles:@"Продолжить", nil];
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Синхронизация", nil) message:NSLocalizedString(@"Отсканируйте штрих-код магазина или введите его вручную", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Отмена", nil) otherButtonTitles:NSLocalizedString(@"Продолжить", nil), nil];
     alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
     [alertView textFieldAtIndex:0].keyboardType = UIKeyboardTypeNumberPad;
     [alertView show];
@@ -85,13 +95,13 @@
         dateFormatter.dateStyle = NSDateFormatterLongStyle;
         dateFormatter.timeStyle = NSDateFormatterShortStyle;
         NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
-        _lastSyncLabel.text = [NSString stringWithFormat:@"Последняя синхронизация: %@", dateString];
+        _lastSyncLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Последняя синхронизация", nil), dateString];
         [[NSUserDefaults standardUserDefaults] setObject:dateString forKey:@"lastSync"];
         [[NSUserDefaults standardUserDefaults] setObject:_currentShopID forKey:@"shopID"];
     }
     else
     {
-        [self showInfoMessage:@"Ошика во время синхронизации"];
+        [self showInfoMessage:NSLocalizedString(@"Ошибка во время синхронизации", nil)];
     }
     
     reqCount = 0;
@@ -136,7 +146,7 @@
 
 - (void) showInfoMessage:(NSString*) info
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Info" message:info delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Info", nil) message:info delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
     [alert show];
 }
 

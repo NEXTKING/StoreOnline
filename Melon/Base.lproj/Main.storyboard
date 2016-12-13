@@ -153,10 +153,14 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="b1V-p6-gXH"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="acceptancesButton" destination="Pys-uY-g3w" id="Fzc-HP-z0G"/>
                         <outlet property="buildLabel" destination="pLq-dr-Rtk" id="BKq-GV-nxK"/>
+                        <outlet property="inventoryButton" destination="ezg-95-ib3" id="MNX-NG-IhU"/>
                         <outlet property="lastSyncLabel" destination="6XE-22-e6a" id="Pz7-gA-o2V"/>
+                        <outlet property="revaluationButton" destination="iBx-mD-yDo" id="ILv-F5-B4U"/>
+                        <outlet property="stockButton" destination="A6j-gt-rjW" id="HUd-eJ-kUn"/>
                         <outlet property="syncActivityIndicator" destination="iQh-v2-JOM" id="MC5-Eu-gEo"/>
-                        <outlet property="syncButton" destination="hYl-l8-T3c" id="B4A-4A-yNl"/>
+                        <outlet property="syncButton" destination="hYl-l8-T3c" id="Ysu-YT-EaI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6XG-pp-W8k" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -608,6 +612,11 @@
                         <outlet property="copiesLabel" destination="Qnx-6S-SVw" id="TiZ-1a-aMx"/>
                         <outlet property="itemArticleLabel" destination="uqu-hI-vtt" id="uYC-w9-hgh"/>
                         <outlet property="itemNameLabel" destination="FYW-U8-eSX" id="Vwf-xZ-TdS"/>
+                        <outlet property="itemPreArticleLabel" destination="Wgp-hl-fJY" id="4H4-U9-XDd"/>
+                        <outlet property="itemPreBarcodeLabel" destination="1bq-gW-Ta1" id="dZw-3c-Ld6"/>
+                        <outlet property="itemPrePriceLabel" destination="xrU-Kf-pJ8" id="w0p-3b-GRg"/>
+                        <outlet property="itemPrePrintBarcodeLabel" destination="XUi-i3-mij" id="B8c-Th-UaC"/>
+                        <outlet property="itemPreTitleLabel" destination="4kb-mS-7qr" id="0e4-Xv-KXh"/>
                         <outlet property="itemPriceLabel" destination="mIr-Z9-9yZ" id="wK1-Iz-NbE"/>
                         <outlet property="loadingActivity" destination="Ebm-xR-0Gi" id="XPb-s0-9XG"/>
                         <outlet property="priceTagChangeTypeTextField" destination="Mi8-zk-luX" id="4Uw-ni-xhe"/>
@@ -727,9 +736,11 @@
                     <connections>
                         <outlet property="bindPrinterButton" destination="dJC-Xk-Ja2" id="yYy-TI-WWS"/>
                         <outlet property="calibrateBlackMarkButton" destination="vkW-k5-uQJ" id="P2q-tj-fk6"/>
+                        <outlet property="enableScanSoundLabel" destination="KwB-Hh-xey" id="w3q-ld-ll7"/>
                         <outlet property="feedPaperButton" destination="tTj-X8-6xq" id="WR8-zM-ltu"/>
                         <outlet property="resetBarcodeEngineButton" destination="KpX-CZ-F3H" id="zGF-X5-HCc"/>
                         <outlet property="scanSoundSwitch" destination="NcY-VK-ffp" id="KIS-Ns-y3F"/>
+                        <outlet property="temporaryFeedButton" destination="7kY-FP-EbZ" id="0fT-RZ-NGF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MCa-tn-YkE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -781,6 +792,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="startInventoryButton" destination="rms-fK-Qc1" id="d34-7p-yRX"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uwP-lU-zXb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -844,6 +858,7 @@
                         <outlet property="cartHeader" destination="DVo-Tl-30y" id="111-FX-4Dj"/>
                         <outlet property="countLabel" destination="BvS-Rn-3k1" id="l1I-qL-Azd"/>
                         <outlet property="footerView" destination="9Pr-7V-r4e" id="LWL-PX-MhY"/>
+                        <outlet property="placeholderLabel" destination="aVg-7L-RWA" id="a1N-jw-oY4"/>
                         <outlet property="sectionLabel" destination="8g2-Yh-C3s" id="sJa-V0-FcZ"/>
                         <outlet property="shieldView" destination="qE3-bf-Val" id="VXP-ip-Vpw"/>
                         <outlet property="statusView" destination="RIv-dB-S0Q" id="jtn-vC-6ct"/>

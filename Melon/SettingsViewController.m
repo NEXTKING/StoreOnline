@@ -52,7 +52,12 @@ enum SETTINGS{
     
     dtdev = [DTDevices sharedDevice];
     
-    // Do any additional setup after loading the view.
+    [_feedPaperButton setTitle:NSLocalizedString(@"Подача этикетки", nil) forState:UIControlStateNormal];
+    [_resetBarcodeEngineButton setTitle:NSLocalizedString(@"Сбросить сканер", nil) forState:UIControlStateNormal];
+    [_calibrateBlackMarkButton setTitle:NSLocalizedString(@"Калибровка", nil) forState:UIControlStateNormal];
+    [_bindPrinterButton setTitle:NSLocalizedString(@"Привязка принтера", nil) forState:UIControlStateNormal];
+    [_temporaryFeedButton setTitle:NSLocalizedString(@"Подача для отрыва", nil) forState:UIControlStateNormal];
+    _enableScanSoundLabel.text = NSLocalizedString(@"Звук при сканировании", nil);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,12 +75,12 @@ enum SETTINGS{
 {
     if (dtdev.connstate != CONN_CONNECTED)
     {
-        [self showInfoMessage:@"Чехол не подключен"];
+        [self showInfoMessage:NSLocalizedString(@"Чехол не подключен", nil)];
         return;
     }
     
     [dtdev barcodeEngineResetToDefaults:nil];
-    [self showInfoMessage:@"Сканер успешно сброшен"];
+    [self showInfoMessage:NSLocalizedString(@"Сканер успешно сброшен", nil)];
 }
 
 - (IBAction)bindPrinterAction:(id)sender
@@ -95,7 +100,7 @@ enum SETTINGS{
     if (dtdev.connstate != CONN_CONNECTED)
     {
         [sender setOn:!sender.on animated:YES];
-        [self showInfoMessage:@"Чехол не подключен"];
+        [self showInfoMessage:NSLocalizedString(@"Чехол не подключен", nil)];
         return;
     }
     
@@ -116,7 +121,7 @@ enum SETTINGS{
 
 - (void) showInfoMessage:(NSString*) info
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Info" message:info delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Info", nil) message:info delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
     [alert show];
 }
 

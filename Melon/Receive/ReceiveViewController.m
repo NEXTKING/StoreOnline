@@ -79,6 +79,7 @@ typedef enum : NSUInteger
             self.navigationItem.rightBarButtonItem = sendButton;
         }
     }
+    [_acceptAllButton setTitle:NSLocalizedString(@"Применить все без сканирования", nil) forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -146,8 +147,8 @@ typedef enum : NSUInteger
         }
         else
         {
-            UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Info" message:@"Не удалось найти товар в базе" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+            UIAlertController *ac = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Info", nil) message:NSLocalizedString(@"Не удалось найти товар в базе", nil) preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil) style:UIAlertActionStyleDefault handler:nil];
             [ac addAction:cancelAction];
             [self presentViewController:ac animated:YES completion:nil];
         }
@@ -175,8 +176,8 @@ typedef enum : NSUInteger
     }
     else
     {
-        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Info" message:@"Не удалось отправить данные приёмки" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        UIAlertController *ac = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Info", nil) message:NSLocalizedString(@"Не удалось отправить данные приёмки", nil) preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil) style:UIAlertActionStyleDefault handler:nil];
         [ac addAction:cancelAction];
         [self presentViewController:ac animated:YES completion:nil];
     }
@@ -279,16 +280,16 @@ typedef enum : NSUInteger
 
 - (void)showExcessPickerForItem:(AcceptanesInformation *)itemInfo scanned:(NSUInteger)scanned manually:(BOOL)manually
 {
-    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:@"Отсканированный товар не относится к текущему набору товаров. Выберите действие, которое необходимо совершить" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *addToCurrentExcessAction = [UIAlertAction actionWithTitle:@"Добавить в излишки набора" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"Отсканированный товар не относится к текущему набору товаров. Выберите действие, которое необходимо совершить", nil) preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *addToCurrentExcessAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Добавить в излишки набора", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self addItemToAcception:itemInfo containerBarcode:_rootItem.barcode scanned:scanned manually:manually];
         [self updateScreenForItem:itemInfo animated:YES];
         [self updateBottomBar];
     }];
-    UIAlertAction *addToAllExcessAction = [UIAlertAction actionWithTitle:@"Добавить в общие излишки" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertAction *addToAllExcessAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Добавить в общие излишки", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self addItemToAcception:itemInfo containerBarcode:nil scanned:scanned manually:manually];
     }];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Отмена", nil) style:UIAlertActionStyleCancel handler:nil];
     
     [ac addAction:addToCurrentExcessAction];
     [ac addAction:addToAllExcessAction];
@@ -299,12 +300,12 @@ typedef enum : NSUInteger
 
 - (void)showNavigateToOtherBoxAlert:(NSArray<AcceptanesInformation*>*)boxHierarhy
 {
-    NSString *message = [NSString stringWithFormat:@"Отсканирован короб %@", [boxHierarhy lastObject].barcode];
+    NSString *message = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Отсканирован короб", nil), [boxHierarhy lastObject].barcode];
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *navigateAction = [UIAlertAction actionWithTitle:@"Перейти" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertAction *navigateAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Перейти", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self navigateToBoxHierarhy:boxHierarhy];
     }];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Отмена", nil) style:UIAlertActionStyleCancel handler:nil];
     
     [ac addAction:navigateAction];
     [ac addAction:cancelAction];
@@ -314,11 +315,11 @@ typedef enum : NSUInteger
 
 - (void)showAcceptAllPicker
 {
-    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:@"Вы уверены, что хотите применить все товары без сканирования?" preferredStyle:UIAlertControllerStyleActionSheet];
-    UIAlertAction *acceptAllAction = [UIAlertAction actionWithTitle:@"Применить все без сканирования" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"Вы уверены, что хотите применить все товары без сканирования?", nil) preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *acceptAllAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Применить все без сканирования", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self acceptAllItems];
     }];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Отмена", nil) style:UIAlertActionStyleCancel handler:nil];
     
     [ac addAction:acceptAllAction];
     [ac addAction:cancelAction];
@@ -328,11 +329,11 @@ typedef enum : NSUInteger
 
 - (void)showSendAcceptanesDataPicker
 {
-    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:@"Отправить данные приёмки на сервер?" preferredStyle:UIAlertControllerStyleActionSheet];
-    UIAlertAction *sendAction = [UIAlertAction actionWithTitle:@"Отправить" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"Отправить данные приёмки на сервер?", nil) preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *sendAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Отправить", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self sendAcceptanesData];
     }];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Отмена", nil) style:UIAlertActionStyleCancel handler:nil];
     
     [ac addAction:sendAction];
     [ac addAction:cancelAction];
@@ -342,11 +343,11 @@ typedef enum : NSUInteger
 
 - (void)showCloseAcceptionAlert
 {
-    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:@"Данные переданы успешно. Завершить приёмку?" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *closeAction = [UIAlertAction actionWithTitle:@"Завершить" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"Данные переданы успешно. Завершить приёмку?", nil) preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *closeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Завершить", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         [self closeAcception];
     }];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Продолжить" style:UIAlertActionStyleDefault handler:nil];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Продолжить", nil) style:UIAlertActionStyleDefault handler:nil];
     
     [ac addAction:closeAction];
     [ac addAction:cancelAction];
@@ -356,9 +357,9 @@ typedef enum : NSUInteger
 
 - (void)showManualInputAlert
 {
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Ручной ввод" message:@"Введите штрих-код" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {}];
-    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Отправить" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Ручной ввод", nil) message:NSLocalizedString(@"Введите штрих-код", nil) preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Отмена", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {}];
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Отправить", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         
         NSDictionary* params = @{@"barcode":alert.textFields[0].text, @"type":@(0)};
         [[NSNotificationCenter defaultCenter] postNotificationName:@"BarcodeScanNotification"object:params];
@@ -434,12 +435,12 @@ typedef enum : NSUInteger
     
     if (totalItemsCount > 0)
     {
-        _totalQuantityLabel.text = [NSString stringWithFormat:@"Итого: %ld из %ld товаров", itemsCount, totalItemsCount];
+        _totalQuantityLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Итого: %ld из %ld товаров", nil), itemsCount, totalItemsCount];
         _acceptAllButton.enabled = (itemsWithoutExcessCount != totalItemsCount);
     }
     else
     {
-        _totalQuantityLabel.text = @"Нет товаров";
+        _totalQuantityLabel.text = NSLocalizedString(@"Нет товаров", nil);
     }
 }
 
@@ -450,10 +451,10 @@ typedef enum : NSUInteger
         switch (_rootItem.type)
         {
             case AcceptanesInformationItemTypeBox:
-                return [NSString stringWithFormat:@"Короб %@", _rootItem.barcode];
+                return [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Короб", nil), _rootItem.barcode];
                 break;
             case AcceptanesInformationItemTypeSet:
-                return [NSString stringWithFormat:@"Набор товаров %@", _rootItem.barcode];
+                return [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Набор товаров", nil), _rootItem.barcode];
                 break;
             default:
                 return nil;
@@ -468,7 +469,7 @@ typedef enum : NSUInteger
     {
         NSDateFormatter *dateFormatter = [NSDateFormatter new];
         dateFormatter.dateFormat = @"d MMMM yyyy";
-        return [NSString stringWithFormat:@"Приёмка %@", [dateFormatter stringFromDate:self.date]];
+        return [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Приёмка", nil), [dateFormatter stringFromDate:self.date]];
     }
 }
 
@@ -491,7 +492,7 @@ typedef enum : NSUInteger
     {
         ReceivesListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ListCell" forIndexPath:indexPath];
         
-        cell.titleLabel.text = @"Общие излишки";
+        cell.titleLabel.text = NSLocalizedString(@"Общие излишки", nil);
         
         return cell;
     }
@@ -524,12 +525,12 @@ typedef enum : NSUInteger
 {
     if ([self kind] == AcceptanesControllerKindRoot)
     {
-        cell.titleLabel.text = @"Накладная";
+        cell.titleLabel.text = NSLocalizedString(@"Накладная", nil);
         cell.backgroundColor = [UIColor whiteColor];
     }
     else
     {
-        cell.titleLabel.text = [NSString stringWithFormat:@"Короб (%ld/%ld)", item.scanned.integerValue, item.quantity.integerValue];
+        cell.titleLabel.text = [NSString stringWithFormat:@"%@ (%ld/%ld)", NSLocalizedString(@"Короб", nil), item.scanned.integerValue, item.quantity.integerValue];
         cell.backgroundColor = (item.scanned.integerValue == item.quantity.integerValue) ? [UIColor colorWithRed:126/255.0 green:211/255.0 blue:33/255.0 alpha:0.5] : [UIColor whiteColor];
     }
     cell.barcodeLabel.text = item.barcode;
@@ -537,7 +538,7 @@ typedef enum : NSUInteger
 
 - (void)configureSetCell:(ReceiveBoxCell *)cell forItem:(AcceptanesInformation *)item
 {
-    cell.titleLabel.text = [NSString stringWithFormat:@"Набор товаров (%ld/%ld)", item.scanned.integerValue, item.quantity.integerValue];
+    cell.titleLabel.text = [NSString stringWithFormat:@"%@ (%ld/%ld)", NSLocalizedString(@"Набор товаров", nil), item.scanned.integerValue, item.quantity.integerValue];
     cell.barcodeLabel.text = item.barcode;
     cell.backgroundColor = (item.scanned.integerValue == item.quantity.integerValue) ? [UIColor colorWithRed:126/255.0 green:211/255.0 blue:33/255.0 alpha:0.5] : [UIColor whiteColor];
 }
@@ -546,7 +547,7 @@ typedef enum : NSUInteger
 {
     cell.titleLabel.text = item.name;
     cell.barcodeLabel.text = item.barcode;
-    cell.quantityLabel.text = [NSString stringWithFormat:@"%ld из %ld", item.scanned.integerValue, item.quantity.integerValue];
+    cell.quantityLabel.text = [NSString stringWithFormat:@"%ld %@ %ld", item.scanned.integerValue, NSLocalizedString(@"из", nil), item.quantity.integerValue];
     
     UIColor *backgroundColor;
     
