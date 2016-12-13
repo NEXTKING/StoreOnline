@@ -15,7 +15,4 @@
 @property (weak, nonatomic) IBOutlet UILabel *revaluationLabel;
 @property (weak, nonatomic) IBOutlet UIView *testView;
 
-@property (weak, nonatomic) IBOutlet UILabel *priceTagTypeLabel;
-@property (weak, nonatomic) IBOutlet UITextField *priceTagChangeTypeTextField;
-
 @end

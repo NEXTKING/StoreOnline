@@ -80,8 +80,8 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Размер Один размер" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1CG-p3-Afn" customClass="AntiAliasingLabel">
-                            <rect key="frame" x="0.0" y="58" width="59" height="6"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Размер:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1CG-p3-Afn" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="0.0" y="58" width="22.5" height="6"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="6" id="IVO-jW-oGf"/>
                             </constraints>
@@ -148,6 +148,15 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Один размер" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W2U-lL-Xqg" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="27" y="58" width="37" height="6"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="6" id="peK-ht-7YM"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="6"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -166,9 +175,11 @@
                         <constraint firstItem="4zD-PN-dwi" firstAttribute="top" secondItem="1CG-p3-Afn" secondAttribute="bottom" id="QLb-dD-JRP"/>
                         <constraint firstItem="Ge7-Fs-vbO" firstAttribute="top" secondItem="CJP-Fx-wma" secondAttribute="bottom" constant="1" id="RDa-rP-109"/>
                         <constraint firstItem="1CG-p3-Afn" firstAttribute="top" secondItem="Ge7-Fs-vbO" secondAttribute="bottom" id="XE2-fh-qOb"/>
+                        <constraint firstItem="W2U-lL-Xqg" firstAttribute="leading" secondItem="HzB-ig-QVf" secondAttribute="leading" constant="27" id="YyP-YO-BPP"/>
                         <constraint firstItem="HkE-v0-fPu" firstAttribute="top" secondItem="vCo-AQ-7SE" secondAttribute="bottom" id="Z9l-Qd-TTl"/>
                         <constraint firstAttribute="height" constant="110" id="aUe-O5-94z"/>
                         <constraint firstItem="bld-8d-vKw" firstAttribute="top" secondItem="HzB-ig-QVf" secondAttribute="top" id="aal-Rv-z7l"/>
+                        <constraint firstItem="W2U-lL-Xqg" firstAttribute="centerY" secondItem="1CG-p3-Afn" secondAttribute="centerY" id="bJu-kM-3dL"/>
                         <constraint firstItem="3m2-Xu-OKC" firstAttribute="leading" secondItem="CJP-Fx-wma" secondAttribute="trailing" constant="2" id="bdq-x9-ZKg"/>
                         <constraint firstItem="Ge7-Fs-vbO" firstAttribute="leading" secondItem="HzB-ig-QVf" secondAttribute="leading" id="e5K-iM-xYy"/>
                         <constraint firstItem="h5r-hZ-HYE" firstAttribute="centerY" secondItem="sFM-UW-fCO" secondAttribute="centerY" id="enX-MQ-iWW"/>
@@ -206,6 +217,7 @@
                 <outlet property="manufactureLabel" destination="vCo-AQ-7SE" id="9j7-pi-V2h"/>
                 <outlet property="nameLabel" destination="h5r-hZ-HYE" id="780-pf-f4b"/>
                 <outlet property="priceLabel" destination="iNY-1s-jp7" id="bcd-Ik-7MR"/>
+                <outlet property="sizeLabel" destination="W2U-lL-Xqg" id="2fF-xD-PDn"/>
             </connections>
             <point key="canvasLocation" x="50" y="279"/>
         </view>

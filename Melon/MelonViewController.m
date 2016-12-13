@@ -11,15 +11,13 @@
 #import "SettingsViewController.h"
 #import "BarCodeView.h"
 
-@interface MelonViewController () <WYPopoverControllerDelegate, UIAlertViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
+@interface MelonViewController () <WYPopoverControllerDelegate, UIAlertViewDelegate>
 {
     WYPopoverController* settingsPopover;
     NSString *temporaryCode;
     BOOL secondRequest;
     BOOL bindingInProgress;
     UIAlertView* bindingAlert;
-    UIPickerView *_priceTagTypePicker;
-    NSArray<NSDictionary*> *_priceTagTypes;
 }
 @property (weak, nonatomic) IBOutlet UILabel *itemPreTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *itemPreArticleLabel;
@@ -30,9 +28,9 @@
 
 @implementation MelonViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    [self initChangePriceTagTypePicker];
     _barcodeSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShouldPrintBarcode"];
     
     _itemPreTitleLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Наименование", nil)];
@@ -41,14 +39,15 @@
     _itemPrePriceLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Цена", nil)];
     _itemPrePrintBarcodeLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Печатать Штрих-код", nil)];
     _copiesLabel.text = [NSString stringWithFormat:@"%@: 1", NSLocalizedString(@"Количество копий", nil)];
-    _priceTagChangeTypeTextField.text = NSLocalizedString(@"Изменить", nil);
     [self.printButton setTitle:NSLocalizedString(@"Печать", nil) forState:UIControlStateNormal];
-    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)printButtonAction:(id)sender
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"PriceTagXibName"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [super printButtonAction:sender];
 }
 
 - (void) requestItemInfoWithCode:(NSString *)code isoType:(int)type
@@ -187,83 +186,6 @@
 {
    if (alertView.tag == 987)
        bindingInProgress = NO;
-}
-
-#pragma mark - price tag type
-
-- (void)initChangePriceTagTypePicker
-{
-    _priceTagTypes = @[@{@"name":NSLocalizedString(@"ценник", nil), @"xibName":@"MelonPriceTag"},
-                       @{@"name":NSLocalizedString(@"48x48 мм", nil), @"xibName":@"MelonPriceTag48x48"},
-                       @{@"name":NSLocalizedString(@"30x60 мм", nil), @"xibName":@"MelonPriceTag30x60"},
-                       @{@"name":NSLocalizedString(@"29x28 мм", nil), @"xibName":@"MelonPriceTag29x28"}];
-    
-//    NSString *xibName = [[NSUserDefaults standardUserDefaults] valueForKey:@"PriceTagXibName"];
-    __block NSUInteger index = 0;
-//    if (xibName != nil)
-//    {
-//        [_priceTagTypes indexOfObjectPassingTest:^BOOL(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
-//            
-//            if ([obj[@"xibName"] isEqualToString:xibName])
-//            {
-//                index = idx;
-//                return (*stop = YES);
-//            }
-//            else
-//                return NO;
-//        }];
-//    }
-//    
-    [[NSUserDefaults standardUserDefaults] setValue:_priceTagTypes[index][@"xibName"] forKey:@"PriceTagXibName"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    _priceTagTypeLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Тип этикетки", nil), _priceTagTypes[index][@"name"]];
-    
-    UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Отмена", nil) style:UIBarButtonItemStylePlain target:self action:@selector(cancelChangePriceTagType:)];
-    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Выбрать", nil) style:UIBarButtonItemStyleDone target:self action:@selector(doneChangePriceTagType:)];
-    toolBar.items = @[cancelButton, flexibleSpace, doneButton];
-    
-    _priceTagTypePicker = [[UIPickerView alloc] init];
-    _priceTagTypePicker.delegate = self;
-    _priceTagTypePicker.dataSource = self;
-    
-    _priceTagChangeTypeTextField.inputView = _priceTagTypePicker;
-    _priceTagChangeTypeTextField.inputAccessoryView = toolBar;
-    _priceTagChangeTypeTextField.tintColor = [UIColor clearColor];
-    _priceTagChangeTypeTextField.layer.cornerRadius = 3;
-    _priceTagChangeTypeTextField.layer.borderColor = [UIColor blackColor].CGColor;
-    _priceTagChangeTypeTextField.layer.borderWidth = 1;
-}
-
-- (void)cancelChangePriceTagType:(id)sender
-{
-    [_priceTagChangeTypeTextField resignFirstResponder];
-}
-
-- (void)doneChangePriceTagType:(id)sender
-{
-    NSUInteger type = [_priceTagTypePicker selectedRowInComponent:0];
-    [[NSUserDefaults standardUserDefaults] setValue:_priceTagTypes[type][@"xibName"] forKey:@"PriceTagXibName"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    _priceTagTypeLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Тип этикетки", nil), _priceTagTypes[type][@"name"]];
-    [_priceTagChangeTypeTextField resignFirstResponder];
-}
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return _priceTagTypes.count;
-}
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    return _priceTagTypes[row][@"name"];
 }
 
 @end
