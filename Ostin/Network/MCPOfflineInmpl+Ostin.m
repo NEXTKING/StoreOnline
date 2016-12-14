@@ -531,7 +531,7 @@
     }
 }
 
-- (void) savePrintItemFactForItemCode:(NSString *)itemCode taskName:(NSString *)taskName
+- (void) savePrintItemFactForItemCode:(NSString *)itemCode taskName:(NSString *)taskName userID:(NSString *)userID
 {
     NSManagedObjectContext *moc = self.dataController.managedObjectContext;
     
@@ -540,7 +540,61 @@
     itemPrintFactDB.taskName = taskName;
     itemPrintFactDB.itemCode = itemCode;
     itemPrintFactDB.wasUploaded = @NO;
-    [moc save:nil];
+    
+    __block NSError *err = nil;
+    
+    [moc performBlockAndWait:^{
+        [moc save:&err];
+    }];
+    
+    if (!err)
+    {
+        NSOperationQueue *setPrintFactQueue = [NSOperationQueue new];
+        
+        SOAPSavePrintFact *savePrintFact = [SOAPSavePrintFact new];
+        __weak SOAPSavePrintFact *_savePrintFact = savePrintFact;
+        savePrintFact.taskName = taskName;
+        savePrintFact.taskType = @"pasting";
+        savePrintFact.wareCodes = @[itemCode];
+        savePrintFact.authValue = authValue;
+        savePrintFact.deviceID  = deviceID;
+        savePrintFact.userID = userID;
+        
+        NSBlockOperation *savePrintFactLocal = [NSBlockOperation blockOperationWithBlock:^{
+            
+            if (_savePrintFact.success)
+            {
+                NSManagedObjectContext *privateMoc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+                [privateMoc setParentContext:moc];
+                
+                NSFetchRequest *taskItemRequest = [NSFetchRequest fetchRequestWithEntityName:@"ItemPrintFact"];
+                [taskItemRequest setPredicate:[NSPredicate predicateWithFormat:@"taskName == %@ AND wasUploaded == %@", taskName, @NO]];
+                NSArray *results = [privateMoc executeFetchRequest:taskItemRequest error:nil];
+                
+                if (results.count > 0)
+                {
+                    ItemPrintFact *itemPrintFactDB = results[0];
+                    itemPrintFactDB.wasUploaded = @YES;
+                    
+                    __block NSError *error = nil;
+                    
+                    [privateMoc performBlockAndWait:^{
+                        [privateMoc save:&error];
+                    }];
+                    
+                    if (!error)
+                    {
+                        [moc performBlockAndWait:^{
+                            [moc save:&error];
+                        }];
+                    }
+                }
+            }
+        }];
+        
+        [savePrintFactLocal addDependency:savePrintFact];
+        [setPrintFactQueue addOperations:@[savePrintFact, savePrintFactLocal] waitUntilFinished:NO];
+    }
 }
 
 - (void) savePrintItemsCount:(NSInteger)count inTaskWithID:(NSInteger)taskID
