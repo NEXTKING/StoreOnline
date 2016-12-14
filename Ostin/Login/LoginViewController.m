@@ -112,6 +112,7 @@
     if (result == 0)
     {
         [[NSUserDefaults standardUserDefaults] setValue:userInformation.key_user forKey:@"UserID"];
+        [[NSUserDefaults standardUserDefaults] setValue:userInformation.login forKey:@"UserLogin"];
         [[NSUserDefaults standardUserDefaults] setValue:userInformation.name forKey:@"UserName"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self performSegueWithIdentifier:@"LoginSegue" sender:nil];

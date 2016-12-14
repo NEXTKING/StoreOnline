@@ -1113,6 +1113,7 @@
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"additionalSize" value:itemDB.additionalSize]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"boxType" value:itemDB.boxType]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"certificationAuthorittyCode" value:itemDB.certificationAuthorittyCode]];
+    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"certificationType" value:itemDB.certificationType]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"groupID" value:itemDB.groupID.stringValue]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"itemCode" value:itemDB.itemCode]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"itemCode_2" value:itemDB.itemCode_2]];

@@ -31,8 +31,8 @@
     NSString* size      =    [self paramFromItem:item name:@"size"];
     NSString* addSize   =    [self paramFromItem:item name:@"additionalSize"];
     NSString* addInfo   =    [self paramFromItem:item name:@"additionalInfo"];
-    NSString* key_user  =    [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
-    NSString* userID    =    key_user.length > 4 ? [key_user substringToIndex:4] : key_user;
+    NSString* userLogin  =   [[NSUserDefaults standardUserDefaults] valueForKey:@"UserLogin"];
+    NSString* userID    =    userLogin.length > 4 ? [userLogin substringToIndex:4] : userLogin;
     NSString* shopID    =    [self paramFromItem:item name:@"storeNumber"];
     if (shopID != nil && shopID.length > 4)
         shopID = [shopID substringToIndex:4];
@@ -53,6 +53,16 @@
         retailPrice  = @"";
     }
     
+    NSString *certificationZPLImage = nil;
+    NSString *certificationType = [self paramFromItem:item name:@"certificationType"];
+    if (certificationType && [certificationType isEqualToString:@"3"]) // 3 - EAC, 1 - РСТ
+        certificationZPLImage = @"0400,08,\n0000000000000000\n00000007F9FFCFE0\n00000007F9FFCFE0\n00000007F9FFCFE0\n0000000781E3CF00\n0000000781E3CF00\n0000000781E3CF00\n0000000781E3CF00\n0000000781E3CF00\n0000000781E3CF00\n0000000781E3CF00\n0000000781E3CF00\n00000007F9FFCF00\n00000007F9FFCF00\n00000007F9FFCF00\n0000000781E3CF00\n0000000781E3CF00\n0000000781E3CF00\n0000000781E3CF00\n0000000781E3CF00\n0000000781E3CF00\n0000000781E3CF00\n0000000781E3CF00\n00000007F9E3CFE0\n00000007F9E3CFE0\n00000007F9E3CFE0\n0000000000000000\n0000000000000000\n0000000000000000\n0000000000000000\n0000000000000000\n0000000000000000\n0000000000000000\n0000000000000000\n0000000000000000\n0000000000000000\n0000000000000000\n0000000000000000\n0000000000000000\n0000000000000000\n0000000000000000\n0000000000000000\n0000000000000000\n0000000000000000\n0000000000000000\n0000000000000000\n0000000000000000\n0000000000000000\n0000000000000000\n0000000000000000";
+    else if (certificationType && [certificationType isEqualToString:@"1"])
+        certificationZPLImage = @"00768,012,\n,:::::Q0IF80,P070H078,O0180I02,O070K0C0,O0C0K020,N0180K030,N010L020,N031F001F030,N063F8080320,N047FC10H0F0,N08F1E20H020,N08E0E40,N08E0E0H07FF80,N08E0E80060080,O0E0E80060080,O0EFC80078780,O0EFC80H084,O0EF080H084,N08E0080H084,N09E0040H0FC,N09E0040,N05E0060H010,N04E0010H070,N02E001C0730,N0H2I01F830,N010L030,O080K020,O040K070,O030K0C0,O01C0I03,P0380038,Q07FFC0,,:::::::::::::::::::::::::";
+    else
+        certificationZPLImage = @"0100,05,\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000";
+    
+    fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$CertificationImage$" withString:certificationZPLImage];
     fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Ware.PriceHeader$" withString:[NSString stringWithFormat:@"Цены указаны в рублях:"]];
     fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Ware.CatalogPrice$" withString:catalogPrice];
     fileContents = [fileContents stringByReplacingOccurrencesOfString:@"$Ware.SizeHeader$" withString:[NSString stringWithFormat:@"Размер:"]];
