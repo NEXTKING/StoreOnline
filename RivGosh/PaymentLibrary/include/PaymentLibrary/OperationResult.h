@@ -23,6 +23,7 @@
 @property (nonatomic, copy) NSString* referenceNumber;
 @property (nonatomic, copy) NSString* cardholderName;
 @property (nonatomic, assign) double balance;
+@property (nonatomic, assign) double reconciliationAmount;
 @property (nonatomic, copy) NSString *errorLocalizedDescription;
 @property (nonatomic, copy) NSString* aid;
 @property (nonatomic, copy) NSString* terminalID;

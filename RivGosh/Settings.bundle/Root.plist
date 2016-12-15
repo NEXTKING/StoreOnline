@@ -38,7 +38,7 @@
 			<key>Key</key>
 			<string>host_preference</string>
 			<key>DefaultValue</key>
-			<string>10.101.42.61</string>
+			<string>10.20.1.129</string>
 			<key>IsSecure</key>
 			<false/>
 			<key>KeyboardType</key>
@@ -74,7 +74,7 @@
 			<key>Key</key>
 			<string>path_preference</string>
 			<key>DefaultValue</key>
-			<string>MobileIB/hs/json</string>
+			<string>1cash2/hs/json</string>
 			<key>IsSecure</key>
 			<false/>
 			<key>KeyboardType</key>

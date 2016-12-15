@@ -9,12 +9,15 @@
 #import "ZReportViewController.h"
 #import "MCPServer.h"
 #import "PLManager.h"
+#import "CloseDayOperation.h"
+#import "ObtainAmountOperation.h"
 
-@interface ZReportViewController () <PrinterDelegate, PLManagerDelegate>
+@interface ZReportViewController ()
 {
     BOOL shouldShowControls;
     BOOL lastRequest;
     ZReport *currentReport;
+    NSNumber *bankAmount;
     UIActivityIndicatorView* loadingActivity;
     UIActivityIndicatorView* zreportActivity;
 }
@@ -41,23 +44,41 @@
 - (void) requestData
 {
     
-    PLManager* manager = [PLManager instance];
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     double amount = [[defaults objectForKey:@"Balance"]doubleValue];
-    NSError* error;
-    manager.delegate = self;
-    [manager reconciliation:amount error:&error];
-    
-    if (error)
-    {
-        [self showInfoMessage:error.localizedDescription];
-        return;
-    }
-    
     shouldShowControls = NO;
-    NSRange sectionsRange = {.location = 0, .length = self.tableView.numberOfSections};
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:sectionsRange] withRowAnimation:UITableViewRowAnimationAutomatic];
-    [[MCPServer instance] zReport:self receiptID:nil amount:nil reqID:nil];
+   
+    ObtainAmountOperation *obtainAmount = [ObtainAmountOperation new];
+    obtainAmount.terminalAmount = amount;
+    __weak ObtainAmountOperation* _obtainAmount = obtainAmount;
+    
+    NSBlockOperation* delegateCallOperation = [NSBlockOperation blockOperationWithBlock:^{
+        
+        BOOL success = _obtainAmount.success;
+        bankAmount = _obtainAmount.bankAmount;
+        
+        if (!success)
+            [self showInfoMessage:_obtainAmount.error.localizedDescription];
+        else
+        {
+            shouldShowControls = YES;
+            NSRange sectionsRange = {.location = 0, .length = self.tableView.numberOfSections};
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:sectionsRange] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+        
+        [loadingActivity stopAnimating];
+        
+    }];
+    
+    [delegateCallOperation addDependency:obtainAmount];
+    
+    NSOperationQueue *obtainAmountQueue = [NSOperationQueue new];
+    [obtainAmountQueue setMaxConcurrentOperationCount:3];
+    obtainAmountQueue.name = @"obtainAmountQueue";
+    [[NSOperationQueue mainQueue] addOperation:delegateCallOperation];
+    [obtainAmountQueue addOperation:obtainAmount];
+    
+    
     loadingActivity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     loadingActivity.hidesWhenStopped = YES;
     [loadingActivity startAnimating];
@@ -95,41 +116,6 @@
 }
 
 
-- (void) zReportComplete:(int)result zReport:(ZReport *)report reqID:(id)reqID
-{
-    [zreportActivity stopAnimating];
-    
-    if (result == 0)
-    {
-        if (!lastRequest)
-        {
-            lastRequest = YES;
-            [[MCPServer instance] zReport:self receiptID:report.receiptID amount:nil reqID:nil];
-        }
-        else
-        {
-            lastRequest = NO;
-            currentReport = report;
-            shouldShowControls = YES;
-            [loadingActivity stopAnimating];
-            
-            if (!reqID)
-            {
-                NSRange sectionsRange = {.location = 0, .length = self.tableView.numberOfSections};
-                [self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:sectionsRange] withRowAnimation:UITableViewRowAnimationAutomatic];
-            }
-        }
-    }
-    else
-    {
-        shouldShowControls = NO;
-        lastRequest = NO;
-        
-        NSString* errorDescription = [[NSUserDefaults standardUserDefaults] objectForKey:@"NetworkErrorDescription"];
-        NSString* message = errorDescription?errorDescription:@"Ошибка снятия Z отчета";
-        [self showInfoMessage:message];
-    }
-}
 
 - (void) showInfoMessage:(NSString*) message
 {
@@ -160,7 +146,7 @@
                 break;
             case 2:
                 cell.textLabel.text = @"Сумма в банке";
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"%.2f", currentReport.fiscalAmount];
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"%.2f", bankAmount.doubleValue/100];
                 break;
             case 3:
                 cell.textLabel.text = @"Отрицательные остатки";
@@ -193,72 +179,35 @@
         [zreportActivity startAnimating];
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         lastRequest = YES;
-        [[MCPServer instance] zReport:self receiptID:nil amount:[NSNumber numberWithDouble:currentReport.dbAmount] reqID:[NSNull null]];
+        
+        
+        CloseDayOperation *closeDay = [CloseDayOperation new];
+        closeDay.dbAmount = [NSNumber numberWithDouble:currentReport.dbAmount];
+        __weak CloseDayOperation *closeDayBlock = closeDay;
+       
+        NSBlockOperation* delegateCallOperation = [NSBlockOperation blockOperationWithBlock:^{
+            
+            BOOL success = closeDayBlock.success;
+            
+            if (success)
+                [self showInfoMessage:@"День успешно закрыт"];
+            else
+                [self showInfoMessage:closeDayBlock.error.localizedDescription];
+            [zreportActivity stopAnimating];
+            
+        }];
+        
+        [delegateCallOperation addDependency:closeDay];
+        
+        NSOperationQueue *closeDayQueue = [NSOperationQueue new];
+        [closeDayQueue setMaxConcurrentOperationCount:3];
+        closeDayQueue.name = @"closeDayQueue";
+        [[NSOperationQueue mainQueue] addOperation:delegateCallOperation];
+        [closeDayQueue addOperation:closeDay];
+        
     }
 }
 
-- (void) paymentManagerDidFinishOperation:(PLOperationType)operation result:(PLOperationResult *)result
-{
-}
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Table view delegate
-
-// In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
-    
-    // Pass the selected object to the new view controller.
-    
-    // Push the view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -333,7 +333,23 @@
     {
         [_activityIndicator stopAnimating];
         
-        NSString* errorMessage = [NSString stringWithFormat:@"Ошибка выполнения платежа. %@", result.errorLocalizedDescription];
+        NSString* errorMessage =  nil;
+        switch (result.resultCode) {
+            case 504:
+                errorMessage = @"Ошибка. На счету клиента недостаточно средств.";
+                break;
+            case 508:
+                errorMessage = @"Ошибка. Неверно введен ПИН.";
+                break;
+            case 509:
+                errorMessage = @"Ошибка. Неверно введен ПИН. Осталась последняя попытка.";
+                break;
+                
+            default:
+                errorMessage = [NSString stringWithFormat:@"Ошибка выполнения платежа. %@", result.errorLocalizedDescription];
+                break;
+        }
+        
         [self showInfoMessage:errorMessage];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

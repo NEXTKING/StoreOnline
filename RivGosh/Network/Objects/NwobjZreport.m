@@ -63,7 +63,9 @@
     if (_receiptID)
         [urlString appendFormat:@"?id=%@", _receiptID];
     else if (_amount)
+    {
         [urlString appendFormat:@"?sum=%f", _amount.doubleValue];
+    }
     
     nwReq.URL = urlString;
     //#endif

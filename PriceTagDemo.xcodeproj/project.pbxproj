@@ -469,6 +469,7 @@
 		C67663691D7DACB500398D58 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C67663681D7DACB500398D58 /* Settings.bundle */; };
 		C676636E1D7DB15100398D58 /* x5Bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C676636C1D7DB15100398D58 /* x5Bar@2x.png */; };
 		C6770FCD1D994188002A60D9 /* NwobjItemDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = C6770FCC1D994188002A60D9 /* NwobjItemDescription.m */; };
+		C67A44941DFF11E9005951FD /* CloseDayOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C67A44931DFF11E9005951FD /* CloseDayOperation.m */; };
 		C67BB3691DABE4BC0032F2A4 /* TaskInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = C67BB3681DABE4BC0032F2A4 /* TaskInformation.m */; };
 		C68216321DB668FD00833751 /* SOAPSetTaskDone.m in Sources */ = {isa = PBXBuildFile; fileRef = C68216311DB668FD00833751 /* SOAPSetTaskDone.m */; };
 		C68216351DB66AFF00833751 /* label.zpl in Resources */ = {isa = PBXBuildFile; fileRef = C68216341DB66AFF00833751 /* label.zpl */; };
@@ -482,6 +483,7 @@
 		C6979EA91D9135AD00A0B51B /* search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6979EA51D9135AD00A0B51B /* search@2x.png */; };
 		C6979EAA1D9135AD00A0B51B /* tasks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6979EA61D9135AD00A0B51B /* tasks@2x.png */; };
 		C6979EAD1D91462C00A0B51B /* CategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6979EAC1D91462C00A0B51B /* CategoriesViewController.m */; };
+		C69BA4D21E01515F00523727 /* ObtainAmountOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C69BA4D11E01515F00523727 /* ObtainAmountOperation.m */; };
 		C6B3C9871D93E7F400730D9F /* TasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6B3C9861D93E7F400730D9F /* TasksViewController.m */; };
 		C6E776F41D747B00000FEAC8 /* libPaymentLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E776F31D747B00000FEAC8 /* libPaymentLibrary.a */; };
 		C6F600C71D9C363C0095AE21 /* NSDate+ISO8601Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F600BC1D9C363C0095AE21 /* NSDate+ISO8601Parsing.m */; };
@@ -1000,6 +1002,8 @@
 		C676636C1D7DB15100398D58 /* x5Bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "x5Bar@2x.png"; sourceTree = "<group>"; };
 		C6770FCB1D994188002A60D9 /* NwobjItemDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NwobjItemDescription.h; sourceTree = "<group>"; };
 		C6770FCC1D994188002A60D9 /* NwobjItemDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NwobjItemDescription.m; sourceTree = "<group>"; };
+		C67A44921DFF11E9005951FD /* CloseDayOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloseDayOperation.h; sourceTree = "<group>"; };
+		C67A44931DFF11E9005951FD /* CloseDayOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloseDayOperation.m; sourceTree = "<group>"; };
 		C67BB3671DABE4BC0032F2A4 /* TaskInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskInformation.h; sourceTree = "<group>"; };
 		C67BB3681DABE4BC0032F2A4 /* TaskInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskInformation.m; sourceTree = "<group>"; };
 		C68216301DB668FD00833751 /* SOAPSetTaskDone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPSetTaskDone.h; sourceTree = "<group>"; };
@@ -1018,6 +1022,8 @@
 		C6979EA61D9135AD00A0B51B /* tasks@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tasks@2x.png"; sourceTree = "<group>"; };
 		C6979EAB1D91462C00A0B51B /* CategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesViewController.h; sourceTree = "<group>"; };
 		C6979EAC1D91462C00A0B51B /* CategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesViewController.m; sourceTree = "<group>"; };
+		C69BA4D01E01515F00523727 /* ObtainAmountOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObtainAmountOperation.h; sourceTree = "<group>"; };
+		C69BA4D11E01515F00523727 /* ObtainAmountOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObtainAmountOperation.m; sourceTree = "<group>"; };
 		C6B3C9851D93E7F400730D9F /* TasksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksViewController.h; sourceTree = "<group>"; };
 		C6B3C9861D93E7F400730D9F /* TasksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TasksViewController.m; sourceTree = "<group>"; };
 		C6E776EF1D747B00000FEAC8 /* OperationResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OperationResult.h; sourceTree = "<group>"; };
@@ -1374,6 +1380,10 @@
 				B9F3C3BE1D1426AC00938D92 /* ZReportViewController.h */,
 				B9F3C3BF1D1426AC00938D92 /* ZReportViewController.m */,
 				B9F3C3C01D1426AC00938D92 /* ZReportViewController.xib */,
+				C67A44921DFF11E9005951FD /* CloseDayOperation.h */,
+				C67A44931DFF11E9005951FD /* CloseDayOperation.m */,
+				C69BA4D01E01515F00523727 /* ObtainAmountOperation.h */,
+				C69BA4D11E01515F00523727 /* ObtainAmountOperation.m */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -3601,6 +3611,7 @@
 				B9BE90ED1D0AE499008CBD56 /* NwobjPrintRepeat.m in Sources */,
 				B9A3FE3D1CA1A4150060483D /* ItemInformation.m in Sources */,
 				B9171DC71CF368E7004DB487 /* STMenuViewController.m in Sources */,
+				C67A44941DFF11E9005951FD /* CloseDayOperation.m in Sources */,
 				B9A3FE3A1CA1A4090060483D /* NwObject.m in Sources */,
 				B9A3FE381CA1A3E90060483D /* MCPSimulatorImpl.m in Sources */,
 				B934597D1CCE9140001F4417 /* AuthorizationViewController.m in Sources */,
@@ -3609,6 +3620,7 @@
 				B9A3FE411CA1A5840060483D /* AppDelegate.m in Sources */,
 				B9F3C3BD1D13FC0200938D92 /* ZReport.m in Sources */,
 				B9A3FE421CA1A5940060483D /* PrintViewController.m in Sources */,
+				C69BA4D21E01515F00523727 /* ObtainAmountOperation.m in Sources */,
 				B970B8071CCE9AD30066A66A /* CartFooterView.m in Sources */,
 				B9171DC21CF368E7004DB487 /* DSPF_SideMenuHeader_technopark.m in Sources */,
 				B9F5F0BC1D0060750010E1EA /* NwobjSendLoyalty.m in Sources */,
