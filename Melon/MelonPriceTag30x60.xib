@@ -26,149 +26,149 @@
                             <string key="text">Россия, Санкт-Петербург,
 10-я Красноармейская ул., д. 22
 АО "Мэлон Фэшн Груп"</string>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="7"/>
+                            <fontDescription key="fontDescription" name="TamilSangamMN-Bold" family="Tamil Sangam MN" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOw-BF-bpb" customClass="AntiAliasingLabel">
-                            <rect key="frame" x="0.0" y="27" width="118" height="47"/>
+                            <rect key="frame" x="0.0" y="27" width="118" height="42"/>
                             <string key="text">Изготовитель: Китай Чанджоукитомоногабоджиториния 32432 праопрлввалопр вапуоулрлорав олварповлар лвоаплаводо авплоавлпод авлпоавдлопвдлопав</string>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="7"/>
+                            <fontDescription key="fontDescription" name="TamilSangamMN-Bold" family="Tamil Sangam MN" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Импортер: АО &quot;Мэлон Фешн Груп&quot;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3EB-zq-dI2" customClass="AntiAliasingLabel">
-                            <rect key="frame" x="0.0" y="75" width="118" height="10"/>
+                            <rect key="frame" x="0.0" y="70" width="118" height="10"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="10" id="PVn-8H-C4c"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="7"/>
+                            <fontDescription key="fontDescription" name="TamilSangamMN-Bold" family="Tamil Sangam MN" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дата изгот.:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FHu-63-3sJ" customClass="AntiAliasingLabel">
-                            <rect key="frame" x="0.0" y="86" width="118" height="10"/>
+                            <rect key="frame" x="0.0" y="81" width="118" height="10"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="10" id="RbJ-pK-mDC"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="7"/>
+                            <fontDescription key="fontDescription" name="TamilSangamMN-Bold" family="Tamil Sangam MN" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Товар:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d44-w4-QCh" customClass="AntiAliasingLabel">
-                            <rect key="frame" x="0.0" y="97" width="30" height="10"/>
+                            <rect key="frame" x="0.0" y="92" width="35" height="10"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="30" id="FjL-57-13Q"/>
+                                <constraint firstAttribute="width" constant="35" id="FjL-57-13Q"/>
                                 <constraint firstAttribute="height" constant="10" id="vWQ-ne-DsU"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="7"/>
+                            <fontDescription key="fontDescription" name="TamilSangamMN-Bold" family="Tamil Sangam MN" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Артикул /" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FCq-Fz-DXb" customClass="AntiAliasingLabel">
-                            <rect key="frame" x="0.0" y="108" width="30" height="10"/>
+                            <rect key="frame" x="0.0" y="103" width="35" height="10"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="30" id="D3d-8C-x8h"/>
+                                <constraint firstAttribute="width" constant="35" id="D3d-8C-x8h"/>
                                 <constraint firstAttribute="height" constant="10" id="dOK-Fb-qm8"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="7"/>
+                            <fontDescription key="fontDescription" name="TamilSangamMN-Bold" family="Tamil Sangam MN" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Модель:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0GL-zf-rRQ" customClass="AntiAliasingLabel">
-                            <rect key="frame" x="0.0" y="118" width="30" height="10"/>
+                            <rect key="frame" x="0.0" y="113" width="35" height="10"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="30" id="b8U-Hn-m46"/>
+                                <constraint firstAttribute="width" constant="35" id="b8U-Hn-m46"/>
                                 <constraint firstAttribute="height" constant="10" id="fnd-1Y-4QS"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="7"/>
+                            <fontDescription key="fontDescription" name="TamilSangamMN-Bold" family="Tamil Sangam MN" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="№ цвета:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Svm-Vw-da2" customClass="AntiAliasingLabel">
-                            <rect key="frame" x="0.0" y="129" width="30" height="10"/>
+                            <rect key="frame" x="0.0" y="124" width="35" height="10"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="30" id="Gbi-E8-Lyh"/>
+                                <constraint firstAttribute="width" constant="35" id="Gbi-E8-Lyh"/>
                                 <constraint firstAttribute="height" constant="10" id="KNk-Vy-ari"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="7"/>
+                            <fontDescription key="fontDescription" name="TamilSangamMN-Bold" family="Tamil Sangam MN" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Состав:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ilq-QO-RDO" customClass="AntiAliasingLabel">
-                            <rect key="frame" x="0.0" y="140" width="30" height="10"/>
+                            <rect key="frame" x="0.0" y="135" width="35" height="10"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="30" id="enA-vp-ELf"/>
+                                <constraint firstAttribute="width" constant="35" id="enA-vp-ELf"/>
                                 <constraint firstAttribute="height" constant="10" id="iOP-d9-eac"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="7"/>
+                            <fontDescription key="fontDescription" name="TamilSangamMN-Bold" family="Tamil Sangam MN" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Размер:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQA-Ui-0e4" customClass="AntiAliasingLabel">
-                            <rect key="frame" x="0.0" y="151" width="30" height="10"/>
+                            <rect key="frame" x="0.0" y="146" width="35" height="10"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="30" id="Ojj-z4-LOT"/>
+                                <constraint firstAttribute="width" constant="35" id="Ojj-z4-LOT"/>
                                 <constraint firstAttribute="height" constant="10" id="obn-BT-6eG"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="7"/>
+                            <fontDescription key="fontDescription" name="TamilSangamMN-Bold" family="Tamil Sangam MN" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="см. вшивной ярлык" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eIu-Rk-aKY" customClass="AntiAliasingLabel">
-                            <rect key="frame" x="33" y="140" width="85" height="10"/>
+                            <rect key="frame" x="43" y="135" width="75" height="10"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="85" id="eaB-CH-iHE"/>
+                                <constraint firstAttribute="width" constant="75" id="eaB-CH-iHE"/>
                                 <constraint firstAttribute="height" constant="10" id="kHe-xh-imk"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="7"/>
+                            <fontDescription key="fontDescription" name="TamilSangamMN-Bold" family="Tamil Sangam MN" pointSize="7"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eac_black.png" translatesAutoresizingMaskIntoConstraints="NO" id="v0q-nT-M8J">
-                            <rect key="frame" x="0.0" y="205" width="22" height="18"/>
+                            <rect key="frame" x="0.0" y="200" width="22" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="22" id="gl0-dv-fdL"/>
                                 <constraint firstAttribute="height" constant="18" id="kqk-mM-m5s"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="юбка" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bqv-am-0xg" customClass="AntiAliasingLabel">
-                            <rect key="frame" x="33" y="97" width="85" height="10"/>
+                            <rect key="frame" x="43" y="92" width="75" height="10"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="85" id="LFB-7P-rPV"/>
+                                <constraint firstAttribute="width" constant="75" id="LFB-7P-rPV"/>
                                 <constraint firstAttribute="height" constant="10" id="wXh-rS-omL"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="7"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="9"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1711002204" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cz8-ZZ-Ok6" customClass="AntiAliasingLabel">
-                            <rect key="frame" x="33" y="108" width="85" height="20"/>
+                            <rect key="frame" x="43" y="103" width="75" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="RGZ-Ce-Ro4"/>
-                                <constraint firstAttribute="width" constant="85" id="lyq-cy-ogy"/>
+                                <constraint firstAttribute="width" constant="75" id="lyq-cy-ogy"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="7"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="9"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="47" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ka6-PC-Mrq" customClass="AntiAliasingLabel">
-                            <rect key="frame" x="33" y="129" width="85" height="10"/>
+                            <rect key="frame" x="43" y="124" width="75" height="10"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="85" id="gio-aT-QfU"/>
+                                <constraint firstAttribute="width" constant="75" id="gio-aT-QfU"/>
                                 <constraint firstAttribute="height" constant="10" id="wVD-EM-0Gu"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="7"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="9"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="170-88-96                    S" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRc-jJ-zIc" customClass="AntiAliasingLabel">
-                            <rect key="frame" x="33" y="151" width="85" height="10"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="170-88-96 S" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRc-jJ-zIc" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="43" y="146" width="75" height="10"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="85" id="0cC-8r-v6X"/>
+                                <constraint firstAttribute="width" constant="75" id="0cC-8r-v6X"/>
                                 <constraint firstAttribute="height" constant="10" id="dO8-OP-94C"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="7"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="9"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -177,12 +177,12 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="1hz-fp-wGX"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="12"/>
+                            <fontDescription key="fontDescription" name="TamilSangamMN-Bold" family="Tamil Sangam MN" pointSize="14"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X0a-h0-Vv5" customClass="AntiAliasView">
-                            <rect key="frame" x="2.5" y="163" width="113" height="38"/>
+                            <rect key="frame" x="2.5" y="158" width="113" height="38"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="113" id="B6d-rI-DB4"/>
@@ -192,7 +192,6 @@
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="FHu-63-3sJ" secondAttribute="trailing" id="1xc-Md-ihk"/>
                         <constraint firstAttribute="trailing" secondItem="3EB-zq-dI2" secondAttribute="trailing" id="1yq-IT-fSI"/>
                         <constraint firstAttribute="trailing" secondItem="axF-gO-e41" secondAttribute="trailing" id="3cV-Ux-JRu"/>
                         <constraint firstItem="eIu-Rk-aKY" firstAttribute="top" secondItem="ka6-PC-Mrq" secondAttribute="bottom" constant="1" id="6Af-ZB-UCc"/>
@@ -202,6 +201,7 @@
                         <constraint firstAttribute="height" constant="237" id="9gd-8z-ntU"/>
                         <constraint firstItem="lQA-Ui-0e4" firstAttribute="top" secondItem="Ilq-QO-RDO" secondAttribute="bottom" constant="1" id="Bys-9A-KGq"/>
                         <constraint firstItem="d44-w4-QCh" firstAttribute="leading" secondItem="uY1-vT-IeM" secondAttribute="leading" id="D1m-5e-yG1"/>
+                        <constraint firstAttribute="trailing" secondItem="FHu-63-3sJ" secondAttribute="trailing" id="G1K-Oy-6Mv"/>
                         <constraint firstItem="Svm-Vw-da2" firstAttribute="top" secondItem="0GL-zf-rRQ" secondAttribute="bottom" constant="1" id="JBz-ML-MSb"/>
                         <constraint firstItem="iRc-jJ-zIc" firstAttribute="top" secondItem="eIu-Rk-aKY" secondAttribute="bottom" constant="1" id="LmX-od-DRO"/>
                         <constraint firstAttribute="trailing" secondItem="Bqv-am-0xg" secondAttribute="trailing" id="MIv-po-a0y"/>
