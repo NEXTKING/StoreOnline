@@ -202,13 +202,27 @@ enum : NSUInteger
     }
     else if (indexPath.section == SettingsSectionSyncActions && indexPath.row == 1 && !SynchronizationController.sharedInstance.syncIsRunning)
     {
-        [SynchronizationController.sharedInstance resetPortions];
-        [self reloadSyncActionsSection];
+        [self showResetPortionsAlert];
     }
     else if (indexPath.section == SettingsSectionUserActions && indexPath.row == 0)
     {
         [self logout];
     }
+}
+
+- (void)showResetPortionsAlert
+{
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Сброс порций" message:@"Сброс порций приведет к удалению с устройства базы товаров. Продолжить?" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *resetAction = [UIAlertAction actionWithTitle:@"Сбросить порции" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [SynchronizationController.sharedInstance resetPortions];
+        [self reloadSyncActionsSection];
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleCancel handler:nil];
+    
+    [ac addAction:resetAction];
+    [ac addAction:cancelAction];
+    
+    [self presentViewController:ac animated:YES completion:nil];
 }
 
 #pragma mark - Syncronization Delegate

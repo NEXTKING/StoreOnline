@@ -151,6 +151,20 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     [self presentViewController:ac animated:YES completion:nil];
 }
 
+- (void)showConfirmCompleteTaskAlert
+{
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Завершение ЗнП" message:@"Вы уверены, что хотите завершить ЗнП?" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *completeAction = [UIAlertAction actionWithTitle:@"Завершить" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self changeTaskStatus];
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleCancel handler:nil];
+    
+    [ac addAction:completeAction];
+    [ac addAction:cancelAction];
+    
+    [self presentViewController:ac animated:YES completion:nil];
+}
+
 #pragma mark Notifications
 
 - (void)subscribeToScanNotifications
@@ -414,37 +428,49 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 {
     if (_tasksMode)
     {
-        NSDate *now = [NSDate date];
-        TaskInformationStatus nextStatus;
-        
         if (_task.status == TaskInformationStatusNotStarted)
-            nextStatus = TaskInformationStatusInProgress;
+        {
+            [self changeTaskStatus];
+        }
         else if (_task.status == TaskInformationStatusInProgress)
-            nextStatus = TaskInformationStatusComplete;
-        
-        [self showLoadingIndicator];
-        
-        __weak typeof(self) wself = self;
-        [[MCPServer instance] saveTaskWithID:_task.taskID userID:_task.userID status:nextStatus date:now completion:^(BOOL success, NSString *errorMessage) {
-            
-            [self hideLoadingIndicator];
-            if (success)
-            {
-                if (wself.task.status == TaskInformationStatusNotStarted)
-                    wself.task.startDate = now;
-                else if (wself.task.status == TaskInformationStatusInProgress)
-                    wself.task.endDate = now;
-                    
-                wself.task.status = nextStatus;
-                [wself updateActionButton];
-                [wself updateOverlayInfo];
-            }
-            else if (errorMessage != nil)
-            {
-                [wself showInfoAlertWithMessage:errorMessage];
-            }
-        }];
+        {
+            [self showConfirmCompleteTaskAlert];
+        }
     }
+}
+
+- (void)changeTaskStatus
+{
+    NSDate *now = [NSDate date];
+    TaskInformationStatus nextStatus;
+    
+    if (_task.status == TaskInformationStatusNotStarted)
+        nextStatus = TaskInformationStatusInProgress;
+    else if (_task.status == TaskInformationStatusInProgress)
+        nextStatus = TaskInformationStatusComplete;
+    
+    [self showLoadingIndicator];
+    
+    __weak typeof(self) wself = self;
+    [[MCPServer instance] saveTaskWithID:_task.taskID userID:_task.userID status:nextStatus date:now completion:^(BOOL success, NSString *errorMessage) {
+        
+        [self hideLoadingIndicator];
+        if (success)
+        {
+            if (wself.task.status == TaskInformationStatusNotStarted)
+                wself.task.startDate = now;
+            else if (wself.task.status == TaskInformationStatusInProgress)
+                wself.task.endDate = now;
+            
+            wself.task.status = nextStatus;
+            [wself updateActionButton];
+            [wself updateOverlayInfo];
+        }
+        else if (errorMessage != nil)
+        {
+            [wself showInfoAlertWithMessage:errorMessage];
+        }
+    }];
 }
 
 - (void)printItem:(ItemInformation *)itemInfo
