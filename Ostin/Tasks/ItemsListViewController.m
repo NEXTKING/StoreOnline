@@ -195,12 +195,13 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 {
     if (_task.status == TaskInformationStatusInProgress && self.tabBarController.selectedIndex == _tabBarIndex)
     {
-        ItemInformation *item = notification.object;
+        id format = notification.object[@"format"];
+        ItemInformation *item = notification.object[@"item"];
         TaskItemInformation *taskItemInfo = [self taskItemInfoForItemWithID:item.itemId];
         _task.totalPrintedCount += 1;
         [[MCPServer instance] savePrintItemsCount:_task.totalPrintedCount inTaskWithID:_task.taskID];
         
-        if (taskItemInfo != nil)
+        if (taskItemInfo != nil && [format isKindOfClass:[NSString class]] && [format isEqualToString:@"mainZPL"])
         {
             taskItemInfo.scanned += 1;
             [[MCPServer instance] saveTaskItem:nil taskID:_task.taskID itemID:taskItemInfo.itemID scanned:taskItemInfo.scanned];
