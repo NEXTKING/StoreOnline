@@ -30,7 +30,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Импортер: АО &quot;Мэлон Фешн Груп&quot;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tpf-8H-uHh" customClass="AntiAliasingLabel">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Импортер: АО &quot;Мэлон Фэшн Груп&quot;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tpf-8H-uHh" customClass="AntiAliasingLabel">
                             <rect key="frame" x="0.0" y="30" width="186" height="10"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="10" id="LKP-7T-mk6"/>

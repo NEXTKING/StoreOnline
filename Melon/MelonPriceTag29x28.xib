@@ -32,7 +32,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Импортер: АО &quot;Мэлон Фешн Груп&quot;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HkE-v0-fPu" customClass="AntiAliasingLabel">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Импортер: АО &quot;Мэлон Фэшн Груп&quot;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HkE-v0-fPu" customClass="AntiAliasingLabel">
                             <rect key="frame" x="0.0" y="18" width="114" height="6"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="6" id="mXj-hG-rlP"/>
