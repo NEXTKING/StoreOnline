@@ -27,5 +27,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *articleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *colorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sizeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *importerLabel;
 
 @end

@@ -24,7 +24,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Изготовитель: Китай Аророл Ко ко КО лоыадодв Леджинг Технолоджис" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyi-yy-7Jf" customClass="AntiAliasingLabel">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Изготовитель: Китай Аророл Ко ко КО лоыадодв Леджинг Технолоджис" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyi-yy-7Jf" customClass="AntiAliasingLabel">
                             <rect key="frame" x="0.0" y="15" width="186" height="14"/>
                             <fontDescription key="fontDescription" name="TamilSangamMN-Bold" family="Tamil Sangam MN" pointSize="7"/>
                             <nil key="textColor"/>
@@ -78,8 +78,18 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Размер:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3A-gE-us7" customClass="AntiAliasingLabel">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Состав:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x97-4a-S3p" customClass="AntiAliasingLabel">
                             <rect key="frame" x="0.0" y="85" width="65" height="10"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="65" id="747-gw-SKE"/>
+                                <constraint firstAttribute="height" constant="10" id="jUA-ad-iIq"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="TamilSangamMN-Bold" family="Tamil Sangam MN" pointSize="7"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Размер:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3A-gE-us7" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="0.0" y="96" width="65" height="10"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="65" id="CUL-a6-n86"/>
                                 <constraint firstAttribute="height" constant="10" id="nAU-ll-BdO"/>
@@ -89,21 +99,21 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0QT-aI-Wxp" customClass="AntiAliasView">
-                            <rect key="frame" x="0.0" y="97" width="113" height="38"/>
+                            <rect key="frame" x="0.0" y="108" width="113" height="38"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="113" id="rXN-Nw-d4N"/>
                                 <constraint firstAttribute="height" constant="38" id="yLo-WX-ikD"/>
                             </constraints>
                         </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eac_black.png" translatesAutoresizingMaskIntoConstraints="NO" id="aDw-Gd-7Zq">
-                            <rect key="frame" x="0.0" y="137" width="22" height="18"/>
+                            <rect key="frame" x="0.0" y="148" width="22" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="IRM-ZU-NEn"/>
                                 <constraint firstAttribute="width" constant="22" id="dqs-dd-AQz"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Цена: 9999 р." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lav-2h-kCn" customClass="AntiAliasingLabel">
-                            <rect key="frame" x="0.0" y="163" width="186" height="15"/>
+                            <rect key="frame" x="0.0" y="174" width="186" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="Ti7-4H-at9"/>
                             </constraints>
@@ -139,9 +149,18 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QeU-i8-bes" customClass="AntiAliasingLabel">
-                            <rect key="frame" x="67" y="85" width="119" height="10"/>
+                            <rect key="frame" x="67" y="96" width="119" height="10"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="10" id="DDb-P7-9tX"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="9"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="см. вшивной ярлык" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRV-eU-fFR" customClass="AntiAliasingLabel">
+                            <rect key="frame" x="67" y="85" width="119" height="10"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="10" id="LN6-z4-f1F"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="9"/>
                             <nil key="textColor"/>
@@ -155,12 +174,15 @@
                         <constraint firstItem="Khx-xW-j74" firstAttribute="centerY" secondItem="tmA-4v-WPQ" secondAttribute="centerY" id="2zF-1F-9Wr"/>
                         <constraint firstItem="cyi-yy-7Jf" firstAttribute="leading" secondItem="cXg-nB-QOm" secondAttribute="leading" id="3aH-ww-toA"/>
                         <constraint firstItem="bnj-oF-TZb" firstAttribute="leading" secondItem="cXg-nB-QOm" secondAttribute="leading" id="6MW-BU-aE4"/>
+                        <constraint firstItem="x97-4a-S3p" firstAttribute="top" secondItem="kM3-uc-4FT" secondAttribute="bottom" constant="1" id="7HJ-VB-bgP"/>
                         <constraint firstItem="bnj-oF-TZb" firstAttribute="top" secondItem="Tpf-8H-uHh" secondAttribute="bottom" constant="1" id="83M-ib-YnJ"/>
                         <constraint firstAttribute="width" constant="186" id="9oE-av-AYn"/>
                         <constraint firstAttribute="trailing" secondItem="e2G-Mk-g52" secondAttribute="trailing" id="AWY-WS-JPg"/>
                         <constraint firstAttribute="trailing" secondItem="Khx-xW-j74" secondAttribute="trailing" id="DYn-k3-lIv"/>
+                        <constraint firstAttribute="trailing" secondItem="fRV-eU-fFR" secondAttribute="trailing" id="Dau-Rs-7N2"/>
                         <constraint firstItem="kM3-uc-4FT" firstAttribute="leading" secondItem="cXg-nB-QOm" secondAttribute="leading" id="Dod-jE-Emz"/>
                         <constraint firstAttribute="height" constant="190" id="EjD-Kj-uJb"/>
+                        <constraint firstItem="fRV-eU-fFR" firstAttribute="centerY" secondItem="x97-4a-S3p" secondAttribute="centerY" id="Eov-n3-izP"/>
                         <constraint firstItem="XUi-bj-ptj" firstAttribute="leading" secondItem="kM3-uc-4FT" secondAttribute="trailing" constant="2" id="FOr-JD-ehY"/>
                         <constraint firstItem="kM3-uc-4FT" firstAttribute="top" secondItem="tmA-4v-WPQ" secondAttribute="bottom" constant="1" id="Fna-am-Re2"/>
                         <constraint firstAttribute="trailing" secondItem="yOp-BR-gKq" secondAttribute="trailing" id="HpO-hZ-fmi"/>
@@ -170,7 +192,6 @@
                         <constraint firstItem="XUi-bj-ptj" firstAttribute="centerY" secondItem="kM3-uc-4FT" secondAttribute="centerY" id="MwG-Cb-HIV"/>
                         <constraint firstItem="yOp-BR-gKq" firstAttribute="centerY" secondItem="8VG-jZ-9ux" secondAttribute="centerY" id="NIm-Iy-zvm"/>
                         <constraint firstAttribute="trailing" secondItem="XUi-bj-ptj" secondAttribute="trailing" id="OB8-Ek-gPT"/>
-                        <constraint firstItem="b3A-gE-us7" firstAttribute="top" secondItem="kM3-uc-4FT" secondAttribute="bottom" constant="1" id="OeD-GR-iXD"/>
                         <constraint firstItem="lav-2h-kCn" firstAttribute="leading" secondItem="cXg-nB-QOm" secondAttribute="leading" id="PfC-Z7-Lkf"/>
                         <constraint firstAttribute="trailing" secondItem="QeU-i8-bes" secondAttribute="trailing" id="UWS-a5-e8Q"/>
                         <constraint firstItem="Tpf-8H-uHh" firstAttribute="top" secondItem="cyi-yy-7Jf" secondAttribute="bottom" constant="1" id="Wl6-b8-SPa"/>
@@ -184,10 +205,13 @@
                         <constraint firstItem="e2G-Mk-g52" firstAttribute="top" secondItem="cXg-nB-QOm" secondAttribute="top" id="jVe-VG-TfZ"/>
                         <constraint firstItem="aDw-Gd-7Zq" firstAttribute="top" secondItem="0QT-aI-Wxp" secondAttribute="bottom" constant="2" id="kPZ-PA-GA9"/>
                         <constraint firstItem="b3A-gE-us7" firstAttribute="leading" secondItem="cXg-nB-QOm" secondAttribute="leading" id="kdX-iW-SoJ"/>
+                        <constraint firstItem="b3A-gE-us7" firstAttribute="top" secondItem="x97-4a-S3p" secondAttribute="bottom" constant="1" id="n5g-Dg-JI6"/>
                         <constraint firstItem="Khx-xW-j74" firstAttribute="leading" secondItem="tmA-4v-WPQ" secondAttribute="trailing" constant="2" id="oUi-K7-zTo"/>
+                        <constraint firstItem="x97-4a-S3p" firstAttribute="leading" secondItem="cXg-nB-QOm" secondAttribute="leading" id="q4x-dr-7Bv"/>
                         <constraint firstItem="lav-2h-kCn" firstAttribute="top" secondItem="aDw-Gd-7Zq" secondAttribute="bottom" constant="8" id="q59-ae-HoD"/>
                         <constraint firstItem="0QT-aI-Wxp" firstAttribute="leading" secondItem="cXg-nB-QOm" secondAttribute="leading" id="sBV-fE-VM5"/>
                         <constraint firstItem="Tpf-8H-uHh" firstAttribute="leading" secondItem="cXg-nB-QOm" secondAttribute="leading" id="sMW-d3-HPh"/>
+                        <constraint firstItem="fRV-eU-fFR" firstAttribute="leading" secondItem="x97-4a-S3p" secondAttribute="trailing" constant="2" id="sa4-07-p0K"/>
                         <constraint firstItem="tmA-4v-WPQ" firstAttribute="top" secondItem="8VG-jZ-9ux" secondAttribute="bottom" constant="1" id="vUd-gG-jMV"/>
                         <constraint firstItem="e2G-Mk-g52" firstAttribute="leading" secondItem="cXg-nB-QOm" secondAttribute="leading" id="wa4-jv-Pmo"/>
                         <constraint firstItem="0QT-aI-Wxp" firstAttribute="top" secondItem="b3A-gE-us7" secondAttribute="bottom" constant="2" id="wte-RB-eQ1"/>
@@ -205,6 +229,7 @@
                 <outlet property="articleLabel" destination="Khx-xW-j74" id="OfF-Kl-WAj"/>
                 <outlet property="barcodeView" destination="0QT-aI-Wxp" id="wSa-Vc-ECl"/>
                 <outlet property="colorLabel" destination="XUi-bj-ptj" id="fxm-bv-llc"/>
+                <outlet property="importerLabel" destination="Tpf-8H-uHh" id="ixo-Kr-JTB"/>
                 <outlet property="manufactureDateLabel" destination="bnj-oF-TZb" id="4tM-Lq-WmJ"/>
                 <outlet property="manufactureLabel" destination="cyi-yy-7Jf" id="Ffo-Ol-9YX"/>
                 <outlet property="nameLabel" destination="yOp-BR-gKq" id="3oi-Qe-d2p"/>

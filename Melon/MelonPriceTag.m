@@ -124,6 +124,22 @@
     {
         _sizeLabel.text = [NSString stringWithFormat:@"%@ %@", size1, size2];
     }
+    
+    if (_importerLabel)
+    {
+        ParameterInformation *importerParam = nil;
+        
+        for (ParameterInformation* currentParam in item.additionalParameters)
+        {
+            if ([currentParam.name isEqualToString:@"Importer"])
+                importerParam = currentParam;
+        }
+        
+        if (importerParam)
+            _importerLabel.text = [NSString stringWithFormat:@"Импортер: %@", importerParam.value];
+        else
+            _importerLabel.text = @"Импортер:";
+    }
 }
 
 - (void) addOldPriceIfNeeded:(ItemInformation*) item

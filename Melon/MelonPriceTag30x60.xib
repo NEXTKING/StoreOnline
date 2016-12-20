@@ -30,7 +30,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOw-BF-bpb" customClass="AntiAliasingLabel">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOw-BF-bpb" customClass="AntiAliasingLabel">
                             <rect key="frame" x="0.0" y="27" width="118" height="42"/>
                             <string key="text">Изготовитель: Китай Чанджоукитомоногабоджиториния 32432 праопрлввалопр вапуоулрлорав олварповлар лвоаплаводо авплоавлпод авлпоавдлопвдлопав</string>
                             <fontDescription key="fontDescription" name="TamilSangamMN-Bold" family="Tamil Sangam MN" pointSize="7"/>
@@ -249,6 +249,7 @@
                 <outlet property="articleLabel" destination="Cz8-ZZ-Ok6" id="USy-ut-Lqc"/>
                 <outlet property="barcodeView" destination="X0a-h0-Vv5" id="ezx-Q7-wh6"/>
                 <outlet property="colorLabel" destination="ka6-PC-Mrq" id="V1g-OT-NdD"/>
+                <outlet property="importerLabel" destination="3EB-zq-dI2" id="tTw-jm-jVJ"/>
                 <outlet property="manufactureDateLabel" destination="FHu-63-3sJ" id="6g8-tz-Liq"/>
                 <outlet property="manufactureLabel" destination="SOw-BF-bpb" id="z8N-uy-LJH"/>
                 <outlet property="nameLabel" destination="Bqv-am-0xg" id="dNp-mC-SZE"/>
