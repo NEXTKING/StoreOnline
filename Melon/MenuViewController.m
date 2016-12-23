@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet CommonConfirmButton *inventoryButton;
 @property (weak, nonatomic) IBOutlet CommonConfirmButton *stockButton;
 @property (weak, nonatomic) IBOutlet CommonConfirmButton *acceptancesButton;
+@property (weak, nonatomic) IBOutlet CommonConfirmButton *labelsButton;
 
 @property (nonatomic, weak) UIAlertView* syncAlertView;
 @property (nonatomic, copy) NSString* currentShopID;
@@ -37,6 +38,7 @@
     [_inventoryButton setTitle:NSLocalizedString(@"Инвентаризация", nil) forState:UIControlStateNormal];
     [_stockButton setTitle:NSLocalizedString(@"Остатки товара", nil) forState:UIControlStateNormal];
     [_acceptancesButton setTitle:NSLocalizedString(@"Приёмка", nil) forState:UIControlStateNormal];
+    [_labelsButton setTitle:NSLocalizedString(@"Печать ярлыков", nil) forState:UIControlStateNormal];
     [_syncButton setTitle:NSLocalizedString(@"Синхронизация", nil) forState:UIControlStateNormal];
 }
 

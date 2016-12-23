@@ -169,6 +169,7 @@
                         <outlet property="acceptancesButton" destination="Pys-uY-g3w" id="Fzc-HP-z0G"/>
                         <outlet property="buildLabel" destination="pLq-dr-Rtk" id="BKq-GV-nxK"/>
                         <outlet property="inventoryButton" destination="ezg-95-ib3" id="MNX-NG-IhU"/>
+                        <outlet property="labelsButton" destination="cyE-s5-cMr" id="LLT-6i-vcW"/>
                         <outlet property="lastSyncLabel" destination="6XE-22-e6a" id="Pz7-gA-o2V"/>
                         <outlet property="revaluationButton" destination="iBx-mD-yDo" id="ILv-F5-B4U"/>
                         <outlet property="stockButton" destination="A6j-gt-rjW" id="HUd-eJ-kUn"/>
