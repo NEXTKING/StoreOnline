@@ -122,7 +122,18 @@
     
     if (_sizeLabel)
     {
-        _sizeLabel.text = [NSString stringWithFormat:@"%@ %@", size1, size2];
+        ParameterInformation *sizeParam = nil;
+        
+        for (ParameterInformation* currentParam in item.additionalParameters)
+        {
+            if ([currentParam.name isEqualToString:@"Size"])
+                sizeParam = currentParam;
+        }
+        
+        if (sizeParam)
+            _sizeLabel.text = sizeParam.value;
+        else
+            _sizeLabel.text = @"";
     }
     
     if (_importerLabel)
