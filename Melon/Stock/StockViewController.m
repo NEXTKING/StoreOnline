@@ -58,13 +58,13 @@ static NSString * const reuseIdentifier = @"StockCell";
 
 - (IBAction)manualInputAction:(id)sender
 {
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Ручной ввод"
-                                                                   message:@"Введите штрих-код"
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Ручной ввод", nil)
+                                                                   message:NSLocalizedString(@"Введите штрих-код", nil)
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleCancel
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Отмена", nil) style:UIAlertActionStyleCancel
                                                          handler:^(UIAlertAction * action) {}];
-    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Отправить" style:UIAlertActionStyleDefault
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Отправить", nil) style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * action) {
                                                               
                                                               [self barcodeData:alert.textFields[0].text type:0];
@@ -83,7 +83,7 @@ static NSString * const reuseIdentifier = @"StockCell";
 
 - (void) showInfoMessage:(NSString*) info
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Info" message:info delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Info", nil) message:info delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
     [alert show];
 }
 
@@ -122,7 +122,7 @@ static NSString * const reuseIdentifier = @"StockCell";
     //if ( tableView.numberOfSections > 0 && [tableView numberOfRowsInSection:0] == 0)
     //    return @"Отсканируйте штрих-код товара";
     if (stocks.count < 1)
-        return @"Отсканируйте штрих-код товара";
+        return NSLocalizedString(@"Отсканируйте штрих-код товара", nil);
     
     return nil;
 }
@@ -138,7 +138,7 @@ static NSString * const reuseIdentifier = @"StockCell";
     else
     {
         stocks = nil;
-        [self showInfoMessage:@"Не удалось найти товар в базе"];
+        [self showInfoMessage:NSLocalizedString(@"Не удалось найти товар в базе", nil)];
     }
     
     [self.tableView reloadData];

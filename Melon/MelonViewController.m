@@ -19,22 +19,35 @@
     BOOL bindingInProgress;
     UIAlertView* bindingAlert;
 }
-
+@property (weak, nonatomic) IBOutlet UILabel *itemPreTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *itemPreArticleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *itemPreBarcodeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *itemPrePriceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *itemPrePrintBarcodeLabel;
 @end
 
 @implementation MelonViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    _barcodeSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShouldPrintBarcode"];
     
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:_barcodeSwitch.on] forKey:@"ShouldPrintBarcode"];
-    
-    // Do any additional setup after loading the view.
+    _itemPreTitleLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Наименование", nil)];
+    _itemPreArticleLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Артикул", nil)];
+    _itemPreBarcodeLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Штрих-код", nil)];
+    _itemPrePriceLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Цена", nil)];
+    _itemPrePrintBarcodeLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Печатать Штрих-код", nil)];
+    _copiesLabel.text = [NSString stringWithFormat:@"%@: 1", NSLocalizedString(@"Количество копий", nil)];
+    [self.printButton setTitle:NSLocalizedString(@"Печать", nil) forState:UIControlStateNormal];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)printButtonAction:(id)sender
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"PriceTagXibName"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [super printButtonAction:sender];
 }
 
 - (void) requestItemInfoWithCode:(NSString *)code isoType:(int)type
@@ -74,12 +87,13 @@
 
 - (IBAction)switchAction:(UISwitch*)sender
 {
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:sender.on] forKey:@"ShouldPrintBarcode"];
+    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:@"ShouldPrintBarcode"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (IBAction)stepperAction:(UIStepper*)sender
 {
-    _copiesLabel.text = [NSString stringWithFormat:@"Количество копий: %.0f", sender.value];
+    _copiesLabel.text = [NSString stringWithFormat:@"%@: %.0f", NSLocalizedString(@"Количество копий", nil), sender.value];
     self.numberOfCopies = sender.value;
     self.shouldRetrack = (self.numberOfCopies > 1);
 }
@@ -115,7 +129,7 @@
 - (void) bindPrinter
 {
     bindingInProgress = YES;
-    bindingAlert = [[UIAlertView alloc] initWithTitle:@"Привязка принтера" message:@"Отсканируйте или введите штрих-код принтера" delegate:self cancelButtonTitle:@"Отмена" otherButtonTitles:@"Оk", nil];
+    bindingAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Привязка принтера", nil) message:NSLocalizedString(@"Отсканируйте или введите штрих-код принтера", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Отмена", nil) otherButtonTitles:NSLocalizedString(@"Оk", nil), nil];
     bindingAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
     //[bindingAlert textFieldAtIndex:0].keyboardType = UIKeyboardTypeNumberPad;
     bindingAlert.tag = 987;
@@ -173,15 +187,5 @@
    if (alertView.tag == 987)
        bindingInProgress = NO;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

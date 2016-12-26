@@ -1,0 +1,116 @@
+/*
+ Localizable.strings
+ 
+ Created by Evgeny Seliverstov on 12/12/2016.
+ Copyright © 2016 Dataphone. All rights reserved.
+ */
+
+/* Меню */
+
+"Переоценка" = "Revaluation";
+"Инвентаризация" = "Inventory";
+"Остатки товара" = "Stock on hand";
+"Приёмка" = "Takeover";
+"Печать ярлыков" = "Print Labels";
+"Синхронизация" = "Synchronizing";
+"Последняя синхронизация" = "Final synchronizing";
+"Нет данных о последней синхронизации" = "No data on final synchronizing";
+"Отсканируйте штрих-код магазина или введите его вручную" = "Scan the store bar code or enter it manually";
+"Отмена" = "Cancel";
+"Продолжить" = "Continue";
+"Ошибка во время синхронизации" = "Error while synchronizing";
+
+/* Переоценка */
+
+"Наименование" = "Name";
+"Артикул" = "Article";
+"Штрих-код" = "Bar-code";
+"Цена" = "Price";
+"р." = "rubles";
+"Печатать Штрих-код" = "Print bar-code";
+"Количество копий" = "Quantity of copies";
+"Введите количество" = "Enter the quantity";
+"Оk" = "Ok";
+"Тип этикетки" = "Label type";
+"Изменить" = "Change";
+"Выбрать" = "Select";
+"ценник" = "Price tag";
+"48x48 мм" = "48x48 mm";
+"30x60 мм" = "30x60 mm";
+"29x28 мм" = "29x28 mm";
+"Печать" = "Print";
+"Подача этикетки" = "Label feed";
+"Сбросить сканер" = "Reset scanner";
+"Калибровка" = "Calibration";
+"Привязка принтера" = "Printer binding";
+"Подача для отрыва" = "Feed for breakdown";
+"Звук при сканировании" = "Scanning sound";
+"Ручной ввод" = "Manual input";
+"Введите штрих-код" = "Enter bar-code";
+"Отправить" = "Send";
+"Не удалось найти товар в базе" = "Failure to find item in database";
+"Ошибка при выполнении запроса." = "Error at run query";
+"Отсканируйте или введите штрих-код принтера" = "Scan and enter printer bar-code";
+"Необходимо привязать принтер" = "It is necessary to bind the printer";
+"Подключение к принтеру..." = "Connecting to printer…";
+"Печать..." = "Print…";
+"Калибровка..." = "Calibration….";
+"Подача ценника..." = "Price tag feed…";
+"Внимание" = "Attention";
+"Оторвите ценник и нажмите \"Продолжить\"" = "Tear off price tag, and click \"Continue \"";
+"Чехол не подключен" = "Cover is not connected";
+"Сканер успешно сброшен" = "Successful scanner reset";
+
+
+/* Инвентаризация */
+
+"Отсканируйте штрих-код товара" = "Scan item bar-code";
+"Зона" = "Zone";
+"Продолжить существующий список?" = "Continue the existing list?";
+"Очистить" = "Clear";
+"Начать новую инвентаризацию" = "Start new inventory";
+"Вы действительно хотите начать новую инвентаризацию?" = "Do you really want to start a new inventory?";
+"Нет" = "No";
+"Да" = "Yes";
+"Инфо" = "Info";
+"Отправить товары на сервер?" = "Send items to the server?";
+"Необходимо выполнить синхронизацию" = "It is necessary to synchronize";
+"Перед отправкой необходимо отсканировать хотя бы один товар" = "Before sending scan at least one item";
+"Товары успешно отправлены!" = "Items are successfully send";
+"Не удалось отправить товары. Убедитесь в наличии подключения к сети." = "Failed to send items. Check the network connection.";
+"Новая инвентаризация успешно начата" = "New inventory is successfully started";
+"Не удалось завершить инвентаризацию. Убедитесь в наличии подключения к сети." = "Failed to complete inventory.";
+"Секция с таким штрих-кодом не найдена" = "Failure to find such bar-code section";
+"Количество" = "Quantity";
+"Товар не найден в базе" = "No items found in database";
+"Ok" = "Ok";
+"Арт." = "Art.";
+
+/* Остатки */
+
+/* Приёмка */
+
+"Нет открытых приёмок" = "No open takeover";
+"Info" = "Info";
+"Не удалось отправить данные приёмки" = "Failure to send takeover data";
+"Отсканированный товар не относится к текущему набору товаров. Выберите действие, которое необходимо совершить" = "Scanned item does not refer to the current set of items. Select an action to be performed";
+"Добавить в излишки набора" = "Add to excess set";
+"Добавить в общие излишки" = "Add to total excess";
+"Отсканирован короб" = "Scanned box";
+"Перейти" = "Switch to";
+"Вы уверены, что хотите применить все товары без сканирования?" = "Are you sure you want to apply all items without scanning?";
+"Применить все без сканирования" = "Apply all without scanning";
+"Отправить данные приёмки на сервер?" = "Send takeover data  to the server?";
+"Данные переданы успешно. Завершить приёмку?" = "Successful data transfer. Complete takeover";
+"Завершить" = "Complete";
+"Нет товаров" = "No items";
+"Короб" = "Box";
+"Набор товаров" = "Items set";
+"Общие излишки" = "Total excess";
+"Накладная" = "Invoice";
+"Итого: %ld из %ld товаров" = "Total: %ld of %ld items";
+"из" = "of";
+
+/* Печать ярлыков */
+
+"Тип ярлыка" = "Type Label";

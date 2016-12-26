@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ItemInformation.h"
 #import "AntiAliasView.h"
+#import "AntiAliasingLabel.h"
 
 @interface MelonPriceTag : UIView
 
@@ -19,5 +20,13 @@
 @property (weak, nonatomic) IBOutlet UIView *barcodeView;
 @property (weak, nonatomic) IBOutlet UILabel *barcodeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *eacImage;
+
+@property (weak, nonatomic) IBOutlet UILabel *manufactureDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *manufactureLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *articleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *colorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sizeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *importerLabel;
 
 @end
