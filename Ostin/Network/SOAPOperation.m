@@ -110,9 +110,11 @@
 
 - (BOOL) saveItems:(NSArray *)items
 {
-    for (PI_MOBILE_SERVICEService_TROW_IntType *throw in items)
+    //for (PI_MOBILE_SERVICEService_TROW_IntType *throw in items)
+    for (NSString *throw in items)
     {
-        NSArray *csvSourse = [throw.VAL componentsSeparatedByString:@"\";\""];
+        //NSArray *csvSourse = [throw.VAL componentsSeparatedByString:@"\";\""];
+        NSArray *csvSourse = [throw componentsSeparatedByString:@"\";\""];
         NSArray *csv       = [self removeQuotes:csvSourse];
         
         if (csv.count < 1)
@@ -150,34 +152,51 @@
 
 - (NSInteger) getPortions:(NSString*) code
 {
-    __block NSInteger count = -1;
+//    __block NSInteger count = -1;
+//    
+//    PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBinding *binding = [PI_MOBILE_SERVICEService PI_MOBILE_SERVICEBinding];
+//    binding.logXMLInOut = YES;
+//    binding.timeout = 300;
+//    
+//    PI_MOBILE_SERVICEService_ElementGET_PORTION_INFOInput* request = [PI_MOBILE_SERVICEService_ElementGET_PORTION_INFOInput new];
+//    
+//    request.A_INC_CODEVARCHAR2IN = code;
+//    request.A_DEVICE_UIDVARCHAR2IN = _deviceID;
+//    request.A_TOTAL_SIZE_KBNUMBEROUT = [PI_MOBILE_SERVICEService_SequenceElement_A_TOTAL_SIZE_KBNUMBEROUT new];
+//    request.A_STR_COUNTNUMBEROUT = [PI_MOBILE_SERVICEService_SequenceElement_A_STR_COUNTNUMBEROUT new];
+//    request.A_COUNTNUMBEROUT = [PI_MOBILE_SERVICEService_SequenceElement_A_COUNTNUMBEROUT new];
+//    
+//    [binding.customHeaders setObject:self.authValue forKey:@"Authorization"];
+//    
+//    
+//    PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBindingResponse* response = [binding GET_PORTION_INFOUsingGET_PORTION_INFOInput:request];
+//    
+//    if (response.bodyParts.count < 1 || response.error)
+//        return -1;
+//    
+//    if ([response.bodyParts[0] isKindOfClass:[PI_MOBILE_SERVICEService_ElementGET_PORTION_INFOOutput class]])
+//    {
+//        PI_MOBILE_SERVICEService_ElementGET_PORTION_INFOOutput *output = response.bodyParts[0];
+//        count = output.A_COUNT.integerValue;
+//    }
     
-    PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBinding *binding = [PI_MOBILE_SERVICEService PI_MOBILE_SERVICEBinding];
-    binding.logXMLInOut = YES;
-    binding.timeout = 300;
+    NSInteger count = -1;
     
-    PI_MOBILE_SERVICEService_ElementGET_PORTION_INFOInput* request = [PI_MOBILE_SERVICEService_ElementGET_PORTION_INFOInput new];
+    NSDictionary *params = @{@"00A_TOTAL_SIZE_KB-NUMBER-OUT":[NSNull null],
+                             @"01A_STR_COUNT-NUMBER-OUT":[NSNull null],
+                             @"02A_INC_CODE-VARCHAR2-IN":code,
+                             @"03A_DEVICE_UID-VARCHAR2-IN":_deviceID,
+                             @"04A_COUNT-NUMBER-OUT":[NSNull null]};
+    SOAPRequest *request = [[SOAPRequest alloc] init];
+    SOAPRequestResponse *response = [request soapRequestWithMethod:@"GET_PORTION_INFO" prefix:nil params:params authValue:self.authValue];
     
-    request.A_INC_CODEVARCHAR2IN = code;
-    request.A_DEVICE_UIDVARCHAR2IN = _deviceID;
-    request.A_TOTAL_SIZE_KBNUMBEROUT = [PI_MOBILE_SERVICEService_SequenceElement_A_TOTAL_SIZE_KBNUMBEROUT new];
-    request.A_STR_COUNTNUMBEROUT = [PI_MOBILE_SERVICEService_SequenceElement_A_STR_COUNTNUMBEROUT new];
-    request.A_COUNTNUMBEROUT = [PI_MOBILE_SERVICEService_SequenceElement_A_COUNTNUMBEROUT new];
-    
-    [binding.customHeaders setObject:self.authValue forKey:@"Authorization"];
-    
-    
-    PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBindingResponse* response = [binding GET_PORTION_INFOUsingGET_PORTION_INFOInput:request];
-    
-    if (response.bodyParts.count < 1 || response.error)
+    if (response.error)
         return -1;
     
-    if ([response.bodyParts[0] isKindOfClass:[PI_MOBILE_SERVICEService_ElementGET_PORTION_INFOOutput class]])
-    {
-        PI_MOBILE_SERVICEService_ElementGET_PORTION_INFOOutput *output = response.bodyParts[0];
-        count = output.A_COUNT.integerValue;
-    }
-    
+    NSString *aCount = [response valueForParam:@"A_COUNT"];
+    if (aCount)
+        count = aCount.integerValue;
+
     return count;
     
 }
@@ -185,30 +204,42 @@
 - (BOOL) commitPortion:(NSString*) incCode portionID:(NSNumber*) portion
 {
     BOOL success = NO;
+//
+//    PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBinding *binding = [PI_MOBILE_SERVICEService PI_MOBILE_SERVICEBinding];
+//    binding.logXMLInOut = YES;
+//    binding.timeout = 300;
+//    
+//    PI_MOBILE_SERVICEService_ElementSVARCHAR2SET_INC_DONEInput* request = [PI_MOBILE_SERVICEService_ElementSVARCHAR2SET_INC_DONEInput new];
+//    
+//    request.A_INC_CODEVARCHAR2IN    = incCode;
+//    request.A_ID_PORTIONNUMBERIN    = portion;
+//    request.A_DEVICE_UIDVARCHAR2IN  = _deviceID;
+//    
+//    [binding.customHeaders setObject:_authValue forKey:@"Authorization"];
+//    
+//    PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBindingResponse* response = [binding SET_INC_DONEUsingSVARCHAR2_SET_INC_DONEInput:request];
+//    
+//    if (response.bodyParts.count < 1 || response.error)
+//        return NO;
+//    
+//    if ([response.bodyParts[0] isKindOfClass:[PI_MOBILE_SERVICEService_ElementSET_INC_DONEOutput class]])
+//    {
+//        PI_MOBILE_SERVICEService_ElementSET_INC_DONEOutput *output = response.bodyParts[0];
+//        success = [output.RETURN isEqualToString:@"SUCCESS"];
+//    }
     
-    PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBinding *binding = [PI_MOBILE_SERVICEService PI_MOBILE_SERVICEBinding];
-    binding.logXMLInOut = YES;
-    binding.timeout = 300;
+    NSDictionary *params = @{@"00A_INC_CODE-VARCHAR2-IN":incCode,
+                             @"01A_ID_PORTION-NUMBER-IN":portion.stringValue,
+                             @"02A_DEVICE_UID-VARCHAR2-IN":_deviceID};
+    SOAPRequest *request = [[SOAPRequest alloc] init];
+    SOAPRequestResponse *response = [request soapRequestWithMethod:@"SET_INC_DONE" prefix:@"SVARCHAR2-" params:params authValue:self.authValue];
     
-    PI_MOBILE_SERVICEService_ElementSVARCHAR2SET_INC_DONEInput* request = [PI_MOBILE_SERVICEService_ElementSVARCHAR2SET_INC_DONEInput new];
-    
-    request.A_INC_CODEVARCHAR2IN    = incCode;
-    request.A_ID_PORTIONNUMBERIN    = portion;
-    request.A_DEVICE_UIDVARCHAR2IN  = _deviceID;
-    
-    [binding.customHeaders setObject:_authValue forKey:@"Authorization"];
-    
-    PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBindingResponse* response = [binding SET_INC_DONEUsingSVARCHAR2_SET_INC_DONEInput:request];
-    
-    if (response.bodyParts.count < 1 || response.error)
+    if (response.error)
         return NO;
     
-    if ([response.bodyParts[0] isKindOfClass:[PI_MOBILE_SERVICEService_ElementSET_INC_DONEOutput class]])
-    {
-        PI_MOBILE_SERVICEService_ElementSET_INC_DONEOutput *output = response.bodyParts[0];
-        success = [output.RETURN isEqualToString:@"SUCCESS"];
-    }
-    
+    NSString *RETURN = [response valueForParam:@"RETURN"];
+    if (RETURN)
+        success = [RETURN isEqualToString:@"SUCCESS"];
     
     return success;
 }

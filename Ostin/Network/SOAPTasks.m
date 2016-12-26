@@ -20,49 +20,70 @@
 
 - (NSArray*) downloadItems
 {
-    PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBinding *binding = [PI_MOBILE_SERVICEService PI_MOBILE_SERVICEBinding];
-    binding.logXMLInOut = YES;
-    binding.timeout = 300;
+//    PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBinding *binding = [PI_MOBILE_SERVICEService PI_MOBILE_SERVICEBinding];
+//    binding.logXMLInOut = YES;
+//    binding.timeout = 300;
+//    
+//    PI_MOBILE_SERVICEService_ElementPASTING_TASK_INFOInput* request = [PI_MOBILE_SERVICEService_ElementPASTING_TASK_INFOInput new];
+//    request.A_DEVICE_UIDVARCHAR2IN = self.deviceID;
+//    request.A_ID_PORTIONNUMBEROUT = [PI_MOBILE_SERVICEService_SequenceElement_A_ID_PORTIONNUMBEROUT10 new];
+//    request.AO_DATATROWARRAYCOUT = [PI_MOBILE_SERVICEService_SequenceElement_AO_DATATROWARRAYCOUT10 new];
+//    
+//    [binding.customHeaders setObject:self.authValue forKey:@"Authorization"];
+//    
+//    
+//    PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBindingResponse *response = [binding PASTING_TASK_INFOUsingPASTING_TASK_INFOInput:request];
+//    
+//    if (!response.error && response.bodyParts.count > 0 )
+//        
+//    {
+//        if ([response.bodyParts[0] isKindOfClass:[PI_MOBILE_SERVICEService_ElementPASTING_TASK_INFOOutput class]])
+//        {
+//            PI_MOBILE_SERVICEService_ElementPASTING_TASK_INFOOutput *output = response.bodyParts[0];
+//            PI_MOBILE_SERVICEService_TROWARRAYType* data = output.AO_DATA;
+//            
+//            currentPortionID = [output.A_ID_PORTION integerValue];
+//            return data.TROWARRAY.CSV_ROWS;
+//            
+//            
+//        }
+//    }
+//    else
+//        return nil;
     
-    PI_MOBILE_SERVICEService_ElementPASTING_TASK_INFOInput* request = [PI_MOBILE_SERVICEService_ElementPASTING_TASK_INFOInput new];
-    request.A_DEVICE_UIDVARCHAR2IN = self.deviceID;
-    request.A_ID_PORTIONNUMBEROUT = [PI_MOBILE_SERVICEService_SequenceElement_A_ID_PORTIONNUMBEROUT10 new];
-    request.AO_DATATROWARRAYCOUT = [PI_MOBILE_SERVICEService_SequenceElement_AO_DATATROWARRAYCOUT10 new];
+    NSDictionary *params = @{@"00A_ID_PORTION-NUMBER-OUT":[NSNull null],
+                             @"01A_DEVICE_UID-VARCHAR2-IN":self.deviceID,
+                             @"02AO_DATA-TROWARRAY-COUT":[NSNull null]};
+    SOAPRequest *request = [[SOAPRequest alloc] init];
+    SOAPRequestResponse *response = [request soapRequestWithMethod:@"PASTING_TASK_INFO" prefix:nil params:params authValue:self.authValue];
     
-    [binding.customHeaders setObject:self.authValue forKey:@"Authorization"];
-    
-    
-    PI_MOBILE_SERVICEService_PI_MOBILE_SERVICEBindingResponse *response = [binding PASTING_TASK_INFOUsingPASTING_TASK_INFOInput:request];
-    
-    if (!response.error && response.bodyParts.count > 0 )
-        
+    if (!response.error)
     {
-        if ([response.bodyParts[0] isKindOfClass:[PI_MOBILE_SERVICEService_ElementPASTING_TASK_INFOOutput class]])
+        NSString *portionID = [response valueForParam:@"A_ID_PORTION"];
+        NSArray *csvRows = [response valuesForParam:@"VAL"];
+        
+        if (portionID && csvRows)
         {
-            PI_MOBILE_SERVICEService_ElementPASTING_TASK_INFOOutput *output = response.bodyParts[0];
-            PI_MOBILE_SERVICEService_TROWARRAYType* data = output.AO_DATA;
-            
-            currentPortionID = [output.A_ID_PORTION integerValue];
-            return data.TROWARRAY.CSV_ROWS;
-            
-            
+            currentPortionID = portionID.integerValue;
+            return csvRows;
         }
+        else
+            return nil;
     }
     else
         return nil;
-    
-    return nil;
 }
 
 - (void) updateObject:(NSManagedObject *)obj csv:(NSArray *)csv
 {
     Task* taskDB = (Task*)obj;
     
-    taskDB.taskID = @([csv[1] integerValue]);
-    taskDB.name = csv[2];
-    taskDB.userID = csv[3];
-    if (csv.count >= 4)
+    if (csv.count >= 5)
     {
+        taskDB.taskID = @([csv[1] integerValue]);
+        taskDB.name = csv[2];
+        taskDB.userID = csv[3];
+    
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"dd.MM.yyyy hh:mm:ss"];
         NSDate *date = [dateFormatter dateFromString:csv[4]];

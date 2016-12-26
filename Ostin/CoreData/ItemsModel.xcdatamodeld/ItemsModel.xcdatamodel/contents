@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16A323" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16A323" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Barcode" representedClassName="Barcode" syncable="YES">
         <attribute name="code128" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="ean" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
@@ -9,7 +9,7 @@
         <attribute name="groupID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="groupTitle" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Item" representedClassName=".Item" syncable="YES">
+    <entity name="Item" representedClassName="Item" syncable="YES">
         <attribute name="additionalInfo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="additionalSize" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="barcode" optional="YES" attributeType="String" syncable="YES"/>

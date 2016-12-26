@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PI_MOBILE_SERVICEService.h"
+#import "SOAPRequest.h"
 #import "CoreDataController.h"
 
 @interface SOAPOperation : NSOperation <NSProgressReporting>
