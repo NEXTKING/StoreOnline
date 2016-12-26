@@ -31,14 +31,12 @@
             return substring;
         }
     }
-    #ifdef OSTIN
     else if (type == BAR_CODE128 && barcodeString.length >=25)
     {
         NSString *barcode = [barcodeString substringWithRange:NSMakeRange(barcodeString.length - 17, 7)];
         
         return barcode;
     }
-    #endif
     else
         return barcodeString;
 }
@@ -62,7 +60,6 @@
 
 + (NSDictionary *)dataFromBarcode:(NSString *)barcodeString isoType:(int)type
 {
-    #ifdef OSTIN
     if (type == BAR_CODE128 && barcodeString.length >=25)
     {
         NSString *rawPrice = [barcodeString substringWithRange:NSMakeRange(barcodeString.length - 10, 10)];
@@ -74,7 +71,6 @@
         
         return @{@"shopNumber":shopNumber, @"date":date, @"barcode":barcode, @"price":price};
     }
-    #endif
     return nil;
 }
 

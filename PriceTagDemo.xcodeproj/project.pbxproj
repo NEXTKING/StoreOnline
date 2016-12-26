@@ -25,6 +25,177 @@
 		215A027D1E11254B00CCAA2C /* NwobjAcceptanes.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D838561DDDACC200A98E0F /* NwobjAcceptanes.m */; };
 		215A027E1E11254E00CCAA2C /* NwobjSendAcceptanes.m in Sources */ = {isa = PBXBuildFile; fileRef = 214AD0EE1DE4881F00FE0345 /* NwobjSendAcceptanes.m */; };
 		215A027F1E11256A00CCAA2C /* AcceptanesInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D838531DDD9A4E00A98E0F /* AcceptanesInformation.m */; };
+		215A02831E1127B400CCAA2C /* NwobjSendAcceptanes.m in Sources */ = {isa = PBXBuildFile; fileRef = 214AD0EE1DE4881F00FE0345 /* NwobjSendAcceptanes.m */; };
+		215A02841E1127B400CCAA2C /* SOAPPrices.m in Sources */ = {isa = PBXBuildFile; fileRef = C667238E1DAABBA9001B30AC /* SOAPPrices.m */; };
+		215A02851E1127B400CCAA2C /* SOAPUsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C054621DC355E20094C7B1 /* SOAPUsers.m */; };
+		215A02861E1127B400CCAA2C /* TasksNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BB44E51DAD224600ED67EE /* TasksNavigationController.m */; };
+		215A02871E1127B400CCAA2C /* GradientTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C0546B1DC765800094C7B1 /* GradientTabBarController.m */; };
+		215A02881E1127B400CCAA2C /* NSDate+ISO8601Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F600BC1D9C363C0095AE21 /* NSDate+ISO8601Parsing.m */; };
+		215A02891E1127B400CCAA2C /* SOAPResetIncDone.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D838431DD4B47F00A98E0F /* SOAPResetIncDone.m */; };
+		215A028A1E1127B400CCAA2C /* SOAPWares.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723881DA91614001B30AC /* SOAPWares.m */; };
+		215A028B1E1127B400CCAA2C /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 215EFF071DAB9ED600BE11C5 /* SearchTableViewCell.m */; };
+		215A028C1E1127B400CCAA2C /* DiscountInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = C690B4161CE8BB3100F4DF95 /* DiscountInformation.m */; };
+		215A028D1E1127B400CCAA2C /* TasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6B3C9861D93E7F400730D9F /* TasksViewController.m */; };
+		215A028E1E1127B400CCAA2C /* AcceptanesInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D838531DDD9A4E00A98E0F /* AcceptanesInformation.m */; };
+		215A028F1E1127B400CCAA2C /* TaskItemBinding+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C667239A1DAAEEFB001B30AC /* TaskItemBinding+CoreDataProperties.m */; };
+		215A02901E1127B400CCAA2C /* NwobjDiscounts.m in Sources */ = {isa = PBXBuildFile; fileRef = B9171DA01CF311A3004DB487 /* NwobjDiscounts.m */; };
+		215A02911E1127B400CCAA2C /* SynchronizationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C655B1BD1DA5399000EE7AB9 /* SynchronizationController.m */; };
+		215A02921E1127B400CCAA2C /* ItemPrintFact+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D838591DE3499F00A98E0F /* ItemPrintFact+CoreDataClass.m */; };
+		215A02931E1127B400CCAA2C /* PI_MOBILE_SERVICEService.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F600C01D9C363C0095AE21 /* PI_MOBILE_SERVICEService.m */; };
+		215A02941E1127B400CCAA2C /* NSDate+ISO8601Unparsing.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F600BE1D9C363C0095AE21 /* NSDate+ISO8601Unparsing.m */; };
+		215A02951E1127B400CCAA2C /* NwobjInventoryItemDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = B9950B5F1CD9F5EC005B4375 /* NwobjInventoryItemDescription.m */; };
+		215A02961E1127B400CCAA2C /* NwobjAuthorization.m in Sources */ = {isa = PBXBuildFile; fileRef = B968E6FF1CCE7499005F91FF /* NwobjAuthorization.m */; };
+		215A02971E1127B400CCAA2C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6979E991D8FE6A800A0B51B /* LoginViewController.m */; };
+		215A02981E1127B400CCAA2C /* TaskItemInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 218228691DAFCB2A00F04B70 /* TaskItemInformation.m */; };
+		215A02991E1127B400CCAA2C /* User+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C0545E1DC355550094C7B1 /* User+CoreDataProperties.m */; };
+		215A029A1E1127B400CCAA2C /* AppSuspendingBlocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D838461DDC57F800A98E0F /* AppSuspendingBlocker.m */; };
+		215A029B1E1127B400CCAA2C /* MelonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C60F6F811CD3754E003949CE /* MelonViewController.m */; };
+		215A029C1E1127B400CCAA2C /* ItemsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C6F601A81D9D1D800095AE21 /* ItemsModel.xcdatamodeld */; };
+		215A029D1E1127B400CCAA2C /* OstinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B957B0D81D1C291B002A5256 /* OstinViewController.m */; };
+		215A029E1E1127B400CCAA2C /* NwobjClientCard.m in Sources */ = {isa = PBXBuildFile; fileRef = B970B80E1CD0EB860066A66A /* NwobjClientCard.m */; };
+		215A029F1E1127B400CCAA2C /* ItemPrintFact+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D8385B1DE3499F00A98E0F /* ItemPrintFact+CoreDataProperties.m */; };
+		215A02A01E1127B400CCAA2C /* SettingsSyncCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F2B721DF5655500818512 /* SettingsSyncCell.m */; };
+		215A02A11E1127B400CCAA2C /* USGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F600C41D9C363C0095AE21 /* USGlobals.m */; };
+		215A02A21E1127B400CCAA2C /* NwobjSendCart.m in Sources */ = {isa = PBXBuildFile; fileRef = B9950B5B1CD2A9CB005B4375 /* NwobjSendCart.m */; };
+		215A02A31E1127B400CCAA2C /* NwobjZones.m in Sources */ = {isa = PBXBuildFile; fileRef = B92B6E941CEB85A000B94B21 /* NwobjZones.m */; };
+		215A02A41E1127B400CCAA2C /* NwobjAcceptanes.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D838561DDDACC200A98E0F /* NwobjAcceptanes.m */; };
+		215A02A51E1127B400CCAA2C /* PrintViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B93DBA0F1C50E56E00C8A7A3 /* PrintViewController.m */; };
+		215A02A61E1127B400CCAA2C /* Price+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C667237B1DA81285001B30AC /* Price+CoreDataClass.m */; };
+		215A02A71E1127B400CCAA2C /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C054591DC23F8E0094C7B1 /* AsyncImageView.m */; };
+		215A02A81E1127B400CCAA2C /* MCPOfflineInmpl+Ostin.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F601AC1D9D63440095AE21 /* MCPOfflineInmpl+Ostin.m */; };
+		215A02A91E1127B400CCAA2C /* MCPSimulatorImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = B93DBA1D1C5132BD00C8A7A3 /* MCPSimulatorImpl.m */; };
+		215A02AA1E1127B400CCAA2C /* AntiAliasingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B90CE4871C89A05400DFB3E4 /* AntiAliasingLabel.m */; };
+		215A02AB1E1127B400CCAA2C /* TaskInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = C67BB3681DABE4BC0032F2A4 /* TaskInformation.m */; };
+		215A02AC1E1127B400CCAA2C /* NwObject.m in Sources */ = {isa = PBXBuildFile; fileRef = B93DBA221C5132BD00C8A7A3 /* NwObject.m */; };
+		215A02AD1E1127B400CCAA2C /* CategoriesCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C6069EEB1D92F06D008C3F58 /* CategoriesCollectionCell.m */; };
+		215A02AE1E1127B400CCAA2C /* MCPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B93DBA1B1C5132BD00C8A7A3 /* MCPServer.m */; };
+		215A02AF1E1127B400CCAA2C /* Task+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723961DAAEEFB001B30AC /* Task+CoreDataProperties.m */; };
+		215A02B01E1127B400CCAA2C /* GroupInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = C6069EE81D92D873008C3F58 /* GroupInformation.m */; };
+		215A02B11E1127B400CCAA2C /* SOAPTasks.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723911DAAEA87001B30AC /* SOAPTasks.m */; };
+		215A02B21E1127B400CCAA2C /* SettingsViewController+Ostin.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D8381C1DD0A72800A98E0F /* SettingsViewController+Ostin.m */; };
+		215A02B31E1127B400CCAA2C /* Group+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C0544D1DC238DA0094C7B1 /* Group+CoreDataClass.m */; };
+		215A02B41E1127B400CCAA2C /* NwRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B93DBA3A1C5132BD00C8A7A3 /* NwRequest.m */; };
+		215A02B51E1127B400CCAA2C /* WYStoryboardPopoverSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = B9950B671CDB8772005B4375 /* WYStoryboardPopoverSegue.m */; };
+		215A02B61E1127B400CCAA2C /* SOAPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723851DA912CF001B30AC /* SOAPOperation.m */; };
+		215A02B71E1127B400CCAA2C /* UserInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C054651DC36D4D0094C7B1 /* UserInformation.m */; };
+		215A02B81E1127B400CCAA2C /* MCPOfflineInmpl.m in Sources */ = {isa = PBXBuildFile; fileRef = B982D7E81CEB1A7100071D9A /* MCPOfflineInmpl.m */; };
+		215A02B91E1127B400CCAA2C /* Group+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C0544F1DC238DA0094C7B1 /* Group+CoreDataProperties.m */; };
+		215A02BA1E1127B400CCAA2C /* WYPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9950B651CDB8772005B4375 /* WYPopoverController.m */; };
+		215A02BB1E1127B400CCAA2C /* TasksCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 218228641DAF864000F04B70 /* TasksCell.m */; };
+		215A02BC1E1127B400CCAA2C /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = B93DBA741C5133D800C8A7A3 /* Logger.m */; };
+		215A02BD1E1127B400CCAA2C /* ItemInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = B93DBA781C51393B00C8A7A3 /* ItemInformation.m */; };
+		215A02BE1E1127B400CCAA2C /* TaskProgressOverlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BB44BD1DACF0D100ED67EE /* TaskProgressOverlayController.m */; };
+		215A02BF1E1127B400CCAA2C /* ItemsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C67103F01D93CB59000AEC24 /* ItemsListCell.m */; };
+		215A02C01E1127B400CCAA2C /* DetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B92DCE0E1C805F27002AA184 /* DetailsTableViewController.m */; };
+		215A02C11E1127B400CCAA2C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B93DB9B51C50DAA500C8A7A3 /* ViewController.m */; };
+		215A02C21E1127B400CCAA2C /* BarcodeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B8DC7A1DB66CF900FD9161 /* BarcodeFormatter.m */; };
+		215A02C31E1127B400CCAA2C /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B92B6E901CEB483C00B94B21 /* MenuViewController.m */; };
+		215A02C41E1127B400CCAA2C /* PrintServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C0549B1DCB8A0A0094C7B1 /* PrintServer.m */; };
+		215A02C51E1127B400CCAA2C /* SOAPTaskWareBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = C607A60A1DB0E0E000F3E5E9 /* SOAPTaskWareBinding.m */; };
+		215A02C61E1127B400CCAA2C /* Task+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723941DAAEEFB001B30AC /* Task+CoreDataClass.m */; };
+		215A02C71E1127B400CCAA2C /* Subgroup+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C054531DC239220094C7B1 /* Subgroup+CoreDataClass.m */; };
+		215A02C81E1127B400CCAA2C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B92DCE191C845E60002AA184 /* main.m */; };
+		215A02C91E1127B400CCAA2C /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C67103F81D93DFE5000AEC24 /* SearchViewController.m */; };
+		215A02CA1E1127B400CCAA2C /* User+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C0545C1DC355550094C7B1 /* User+CoreDataClass.m */; };
+		215A02CB1E1127B400CCAA2C /* SOAPBarcodes.m in Sources */ = {isa = PBXBuildFile; fileRef = C667238B1DA93A66001B30AC /* SOAPBarcodes.m */; };
+		215A02CC1E1127B400CCAA2C /* AntiAliasTextLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B90CE48D1C89B6DB00DFB3E4 /* AntiAliasTextLayer.m */; };
+		215A02CD1E1127B400CCAA2C /* Price+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C667237D1DA81285001B30AC /* Price+CoreDataProperties.m */; };
+		215A02CE1E1127B400CCAA2C /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F600D41D9C486D0095AE21 /* NSData+Base64.m */; };
+		215A02CF1E1127B400CCAA2C /* MCPSimulatorImpl+Ostin.m in Sources */ = {isa = PBXBuildFile; fileRef = C6069EE41D92D2E7008C3F58 /* MCPSimulatorImpl+Ostin.m */; };
+		215A02D01E1127B400CCAA2C /* Item+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723771DA81285001B30AC /* Item+CoreDataClass.m */; };
+		215A02D11E1127B400CCAA2C /* AntiAliasView.m in Sources */ = {isa = PBXBuildFile; fileRef = B90CE48A1C89B44600DFB3E4 /* AntiAliasView.m */; };
+		215A02D21E1127B400CCAA2C /* Item+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723791DA81285001B30AC /* Item+CoreDataProperties.m */; };
+		215A02D31E1127B400CCAA2C /* ItemsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C67103ED1D93CAE7000AEC24 /* ItemsListViewController.m */; };
+		215A02D41E1127B400CCAA2C /* Barcode+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723751DA81285001B30AC /* Barcode+CoreDataProperties.m */; };
+		215A02D51E1127B400CCAA2C /* CoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FFF40F1D797C0500947948 /* CoreDataController.m */; };
+		215A02D61E1127B400CCAA2C /* Barcode+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723731DA81285001B30AC /* Barcode+CoreDataClass.m */; };
+		215A02D71E1127B400CCAA2C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B93DB9B21C50DAA500C8A7A3 /* AppDelegate.m */; };
+		215A02D81E1127B400CCAA2C /* SettingsSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F2B6C1DF561EB00818512 /* SettingsSwitchCell.m */; };
+		215A02D91E1127B400CCAA2C /* SettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F2B771DF566A900818512 /* SettingsCell.m */; };
+		215A02DA1E1127B400CCAA2C /* NwobjItemDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = B90A19131C513C920024FF23 /* NwobjItemDescription.m */; };
+		215A02DB1E1127B400CCAA2C /* SOAPSetTaskDone.m in Sources */ = {isa = PBXBuildFile; fileRef = C68216311DB668FD00833751 /* SOAPSetTaskDone.m */; };
+		215A02DC1E1127B400CCAA2C /* MCPNetworkImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = B93DBA191C5132BD00C8A7A3 /* MCPNetworkImpl.m */; };
+		215A02DD1E1127B400CCAA2C /* TaskItemBinding+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C66723981DAAEEFB001B30AC /* TaskItemBinding+CoreDataClass.m */; };
+		215A02DE1E1127B400CCAA2C /* Subgroup+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C054551DC239220094C7B1 /* Subgroup+CoreDataProperties.m */; };
+		215A02DF1E1127B400CCAA2C /* xsd.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F600C61D9C363C0095AE21 /* xsd.m */; };
+		215A02E01E1127B400CCAA2C /* NwobjStock.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F601B41D9E5BD70095AE21 /* NwobjStock.m */; };
+		215A02E11E1127B400CCAA2C /* CategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6979EAC1D91462C00A0B51B /* CategoriesViewController.m */; };
+		215A02E21E1127B400CCAA2C /* ZPLGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = C68216371DB66B1800833751 /* ZPLGenerator.m */; };
+		215A02E31E1127B400CCAA2C /* WarehouseInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = B92DCE041C786C1D002AA184 /* WarehouseInformation.m */; };
+		215A02E41E1127B400CCAA2C /* SOAPSavePrintFact.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174D5801DB8CDDC00FCE9CE /* SOAPSavePrintFact.m */; };
+		215A02E51E1127B400CCAA2C /* OstinPriceTag.m in Sources */ = {isa = PBXBuildFile; fileRef = B92DCE3F1C845FF2002AA184 /* OstinPriceTag.m */; };
+		215A02E61E1127B400CCAA2C /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9950B6F1CDBAF69005B4375 /* SettingsViewController.m */; };
+		215A02E71E1127B400CCAA2C /* CommonConfirmButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B970B84B1CD288460066A66A /* CommonConfirmButton.m */; };
+		215A02E81E1127B400CCAA2C /* USAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F600C21D9C363C0095AE21 /* USAdditions.m */; };
+		215A02EA1E1127B400CCAA2C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6F600D81D9C48F70095AE21 /* Security.framework */; };
+		215A02EB1E1127B400CCAA2C /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C6F600CD1D9C37490095AE21 /* libxml2.tbd */; };
+		215A02EC1E1127B400CCAA2C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B90CE4801C898DFE00DFB3E4 /* CoreGraphics.framework */; };
+		215A02ED1E1127B400CCAA2C /* libdtdev.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B93DBA041C50DFC200C8A7A3 /* libdtdev.a */; };
+		215A02EE1E1127B400CCAA2C /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B93DBA0C1C50DFD600C8A7A3 /* ExternalAccessory.framework */; };
+		215A02EF1E1127B400CCAA2C /* libPods-Ostin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD3C223CF10EB177C6448781 /* libPods-Ostin.a */; };
+		215A02F11E1127B400CCAA2C /* navigation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C67103E91D93271C000AEC24 /* navigation@2x.png */; };
+		215A02F21E1127B400CCAA2C /* Barcode manual@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9950B721CE1E5A0005B4375 /* Barcode manual@2x.png */; };
+		215A02F31E1127B400CCAA2C /* 99002520874.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0DE1D1C2A2D002A5256 /* 99002520874.jpg */; };
+		215A02F41E1127B400CCAA2C /* MP4O9864G.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0F21D1C2A2D002A5256 /* MP4O9864G.jpg */; };
+		215A02F51E1127B400CCAA2C /* eac.png in Resources */ = {isa = PBXBuildFile; fileRef = B90CE4931C89F15100DFB3E4 /* eac.png */; };
+		215A02F61E1127B400CCAA2C /* 99002776879.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0E61D1C2A2D002A5256 /* 99002776879.jpg */; };
+		215A02F71E1127B400CCAA2C /* settings_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9950B6C1CDBACAE005B4375 /* settings_icon@2x.png */; };
+		215A02F81E1127B400CCAA2C /* TasksCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 218228651DAF864000F04B70 /* TasksCell.xib */; };
+		215A02F91E1127B400CCAA2C /* 99002776883.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0E71D1C2A2D002A5256 /* 99002776883.jpg */; };
+		215A02FA1E1127B400CCAA2C /* 99002776898.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0E81D1C2A2D002A5256 /* 99002776898.jpg */; };
+		215A02FB1E1127B400CCAA2C /* 299101040151.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0DC1D1C2A2D002A5256 /* 299101040151.jpg */; };
+		215A02FC1E1127B400CCAA2C /* 7459030299.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0ED1D1C2A2D002A5256 /* 7459030299.jpg */; };
+		215A02FD1E1127B400CCAA2C /* send@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B970B85C1CD2A0150066A66A /* send@2x.png */; };
+		215A02FE1E1127B400CCAA2C /* MS2O9267M.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0F31D1C2A2D002A5256 /* MS2O9267M.jpg */; };
+		215A02FF1E1127B400CCAA2C /* filter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6979EA31D9135AD00A0B51B /* filter@2x.png */; };
+		215A03001E1127B400CCAA2C /* 299101040167.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0DD1D1C2A2D002A5256 /* 299101040167.jpg */; };
+		215A03011E1127B400CCAA2C /* MT2O93N3M.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0F71D1C2A2D002A5256 /* MT2O93N3M.jpg */; };
+		215A03021E1127B400CCAA2C /* PrintViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B93DBA101C50E56E00C8A7A3 /* PrintViewController.xib */; };
+		215A03031E1127B400CCAA2C /* 99002774683.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0E31D1C2A2D002A5256 /* 99002774683.jpg */; };
+		215A03041E1127B400CCAA2C /* MT1O9869M.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0F61D1C2A2D002A5256 /* MT1O9869M.jpg */; };
+		215A03051E1127B400CCAA2C /* 99002775678.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0E41D1C2A2D002A5256 /* 99002775678.jpg */; };
+		215A03071E1127B400CCAA2C /* 99002774132.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0E01D1C2A2D002A5256 /* 99002774132.jpg */; };
+		215A03081E1127B400CCAA2C /* 99002776863.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0E51D1C2A2D002A5256 /* 99002776863.jpg */; };
+		215A03091E1127B400CCAA2C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B957B11B1D1D25D1002A5256 /* Icon.png */; };
+		215A030A1E1127B400CCAA2C /* producer_label.zpl in Resources */ = {isa = PBXBuildFile; fileRef = 21C0546D1DC788F10094C7B1 /* producer_label.zpl */; };
+		215A030B1E1127B400CCAA2C /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 215EFF081DAB9ED600BE11C5 /* SearchTableViewCell.xib */; };
+		215A030C1E1127B400CCAA2C /* 8813780299.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0EE1D1C2A2D002A5256 /* 8813780299.jpg */; };
+		215A030D1E1127B400CCAA2C /* label.zpl in Resources */ = {isa = PBXBuildFile; fileRef = C68216341DB66AFF00833751 /* label.zpl */; };
+		215A030E1E1127B400CCAA2C /* ItemsListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C67103F11D93CB59000AEC24 /* ItemsListCell.xib */; };
+		215A030F1E1127B400CCAA2C /* OstinPriceTag.xib in Resources */ = {isa = PBXBuildFile; fileRef = B92DCE411C846002002AA184 /* OstinPriceTag.xib */; };
+		215A03101E1127B400CCAA2C /* MT4O9765M.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0F91D1C2A2D002A5256 /* MT4O9765M.jpg */; };
+		215A03111E1127B400CCAA2C /* MT1O9102M.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0F51D1C2A2D002A5256 /* MT1O9102M.jpg */; };
+		215A03121E1127B400CCAA2C /* LR9O8241L.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0F01D1C2A2D002A5256 /* LR9O8241L.jpg */; };
+		215A03131E1127B400CCAA2C /* CategoriesCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6069EEC1D92F06D008C3F58 /* CategoriesCollectionCell.xib */; };
+		215A03141E1127B400CCAA2C /* 99002777306.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0EA1D1C2A2D002A5256 /* 99002777306.jpg */; };
+		215A03151E1127B400CCAA2C /* tasks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6979EA61D9135AD00A0B51B /* tasks@2x.png */; };
+		215A03161E1127B400CCAA2C /* MS4O9767M.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0F41D1C2A2D002A5256 /* MS4O9767M.jpg */; };
+		215A03171E1127B400CCAA2C /* 99002789530.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0EB1D1C2A2D002A5256 /* 99002789530.jpg */; };
+		215A03181E1127B400CCAA2C /* emptySound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 21D838481DDC628B00A98E0F /* emptySound.wav */; };
+		215A03191E1127B400CCAA2C /* search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6979EA51D9135AD00A0B51B /* search@2x.png */; };
+		215A031A1E1127B400CCAA2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B92DCE261C845E60002AA184 /* LaunchScreen.storyboard */; };
+		215A031B1E1127B400CCAA2C /* relevance@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6979EA41D9135AD00A0B51B /* relevance@2x.png */; };
+		215A031C1E1127B400CCAA2C /* SettingsSyncCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 210F2B731DF5655500818512 /* SettingsSyncCell.xib */; };
+		215A031D1E1127B400CCAA2C /* MT6O9195M.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0FA1D1C2A2D002A5256 /* MT6O9195M.jpg */; };
+		215A031E1E1127B400CCAA2C /* catalog@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6979EA11D91348000A0B51B /* catalog@2x.png */; };
+		215A031F1E1127B400CCAA2C /* TaskProgressOverlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21BB44BE1DACF0D100ED67EE /* TaskProgressOverlayController.xib */; };
+		215A03201E1127B400CCAA2C /* MP4O9264G.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0F11D1C2A2D002A5256 /* MP4O9264G.jpg */; };
+		215A03211E1127B400CCAA2C /* 99002777294.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0E91D1C2A2D002A5256 /* 99002777294.jpg */; };
+		215A03221E1127B400CCAA2C /* MT2O9469M.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0F81D1C2A2D002A5256 /* MT2O9469M.jpg */; };
+		215A03231E1127B400CCAA2C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21C054441DBE20FB0094C7B1 /* Settings.bundle */; };
+		215A03241E1127B400CCAA2C /* 99002774407.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0E21D1C2A2D002A5256 /* 99002774407.jpg */; };
+		215A03251E1127B400CCAA2C /* 99002774088.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0DF1D1C2A2D002A5256 /* 99002774088.jpg */; };
+		215A03261E1127B400CCAA2C /* SettingsSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 210F2B6D1DF561EB00818512 /* SettingsSwitchCell.xib */; };
+		215A03271E1127B400CCAA2C /* SettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 210F2B781DF566A900818512 /* SettingsCell.xib */; };
+		215A03281E1127B400CCAA2C /* 9941170299.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0EF1D1C2A2D002A5256 /* 9941170299.jpg */; };
+		215A03291E1127B400CCAA2C /* 299101026771.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0DB1D1C2A2D002A5256 /* 299101026771.jpg */; };
+		215A032A1E1127B400CCAA2C /* no-image.png in Resources */ = {isa = PBXBuildFile; fileRef = C67103F41D93CDD3000AEC24 /* no-image.png */; };
+		215A032B1E1127B400CCAA2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B92DCE241C845E60002AA184 /* Assets.xcassets */; };
+		215A032C1E1127B400CCAA2C /* 99002774256.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B957B0E11D1C2A2D002A5256 /* 99002774256.jpg */; };
+		215A03361E1128B800CCAA2C /* IM_Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 215A03351E1128B800CCAA2C /* IM_Info.plist */; };
+		215A03381E112B7B00CCAA2C /* IM_Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 215A03371E112B7B00CCAA2C /* IM_Main.storyboard */; };
+		215A033B1E112D0600CCAA2C /* SOAPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A033A1E112D0600CCAA2C /* SOAPRequest.m */; };
+		215A033C1E112D0600CCAA2C /* SOAPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A033A1E112D0600CCAA2C /* SOAPRequest.m */; };
 		215EFF091DAB9ED600BE11C5 /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 215EFF071DAB9ED600BE11C5 /* SearchTableViewCell.m */; };
 		215EFF0A1DAB9ED600BE11C5 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 215EFF081DAB9ED600BE11C5 /* SearchTableViewCell.xib */; };
 		2174D5811DB8CDDC00FCE9CE /* SOAPSavePrintFact.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174D5801DB8CDDC00FCE9CE /* SOAPSavePrintFact.m */; };
@@ -604,6 +775,11 @@
 		21532CF71DEF0B98005E36F1 /* MelonPriceTag29x28.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MelonPriceTag29x28.h; sourceTree = "<group>"; };
 		21532CF81DEF0B98005E36F1 /* MelonPriceTag29x28.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MelonPriceTag29x28.m; sourceTree = "<group>"; };
 		21532CFA1DEF0BA8005E36F1 /* MelonPriceTag29x28.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MelonPriceTag29x28.xib; sourceTree = "<group>"; };
+		215A03331E1127B400CCAA2C /* Ostin_IM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ostin_IM.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		215A03351E1128B800CCAA2C /* IM_Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = IM_Info.plist; sourceTree = "<group>"; };
+		215A03371E112B7B00CCAA2C /* IM_Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IM_Main.storyboard; sourceTree = "<group>"; };
+		215A03391E112D0600CCAA2C /* SOAPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPRequest.h; sourceTree = "<group>"; };
+		215A033A1E112D0600CCAA2C /* SOAPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPRequest.m; sourceTree = "<group>"; };
 		215EFF061DAB9ED600BE11C5 /* SearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableViewCell.h; sourceTree = "<group>"; };
 		215EFF071DAB9ED600BE11C5 /* SearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewCell.m; sourceTree = "<group>"; };
 		215EFF081DAB9ED600BE11C5 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
@@ -1147,6 +1323,19 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		215A02E91E1127B400CCAA2C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				215A02EA1E1127B400CCAA2C /* Security.framework in Frameworks */,
+				215A02EB1E1127B400CCAA2C /* libxml2.tbd in Frameworks */,
+				215A02EC1E1127B400CCAA2C /* CoreGraphics.framework in Frameworks */,
+				215A02ED1E1127B400CCAA2C /* libdtdev.a in Frameworks */,
+				215A02EE1E1127B400CCAA2C /* ExternalAccessory.framework in Frameworks */,
+				215A02EF1E1127B400CCAA2C /* libPods-Ostin.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B90710AC1C96E26500268CE8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1506,6 +1695,7 @@
 				C6979E9E1D8FF67200A0B51B /* Catalog */,
 				C6979E971D8FE67900A0B51B /* Login */,
 				B907ADD71D0959CA00B44BF1 /* Main.storyboard */,
+				215A03371E112B7B00CCAA2C /* IM_Main.storyboard */,
 				B90CE4921C89F15100DFB3E4 /* Graphics */,
 				B92DCE241C845E60002AA184 /* Assets.xcassets */,
 				B92DCE261C845E60002AA184 /* LaunchScreen.storyboard */,
@@ -1527,6 +1717,7 @@
 				21D838481DDC628B00A98E0F /* emptySound.wav */,
 				B92DCE411C846002002AA184 /* OstinPriceTag.xib */,
 				B92DCE291C845E60002AA184 /* Info.plist */,
+				215A03351E1128B800CCAA2C /* IM_Info.plist */,
 				21C054441DBE20FB0094C7B1 /* Settings.bundle */,
 				B92DCE181C845E60002AA184 /* Supporting Files */,
 			);
@@ -1584,6 +1775,7 @@
 				B970B8151CD209820066A66A /* StoreOnline.app */,
 				B9551CBB1D0187DC000F7736 /* Azbuka.app */,
 				C67663321D7D976200398D58 /* X5.app */,
+				215A03331E1127B400CCAA2C /* Ostin_IM.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2020,6 +2212,8 @@
 				C6F601AC1D9D63440095AE21 /* MCPOfflineInmpl+Ostin.m */,
 				C655B1BC1DA5399000EE7AB9 /* SynchronizationController.h */,
 				C655B1BD1DA5399000EE7AB9 /* SynchronizationController.m */,
+				215A03391E112D0600CCAA2C /* SOAPRequest.h */,
+				215A033A1E112D0600CCAA2C /* SOAPRequest.m */,
 				C66723841DA912CF001B30AC /* SOAPOperation.h */,
 				C66723851DA912CF001B30AC /* SOAPOperation.m */,
 				C66723871DA91614001B30AC /* SOAPWares.h */,
@@ -2402,6 +2596,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		215A02801E1127B400CCAA2C /* Ostin_IM */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 215A03301E1127B400CCAA2C /* Build configuration list for PBXNativeTarget "Ostin_IM" */;
+			buildPhases = (
+				215A02811E1127B400CCAA2C /* [CP] Check Pods Manifest.lock */,
+				215A02821E1127B400CCAA2C /* Sources */,
+				215A02E91E1127B400CCAA2C /* Frameworks */,
+				215A02F01E1127B400CCAA2C /* Resources */,
+				215A032D1E1127B400CCAA2C /* [CP] Embed Pods Frameworks */,
+				215A032E1E1127B400CCAA2C /* [CP] Copy Pods Resources */,
+				215A032F1E1127B400CCAA2C /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Ostin_IM;
+			productName = Ostin;
+			productReference = 215A03331E1127B400CCAA2C /* Ostin_IM.app */;
+			productType = "com.apple.product-type.application";
+		};
 		B90710AE1C96E26500268CE8 /* Tsum */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B90710C51C96E26500268CE8 /* Build configuration list for PBXNativeTarget "Tsum" */;
@@ -2653,6 +2868,9 @@
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Dataphone;
 				TargetAttributes = {
+					215A02801E1127B400CCAA2C = {
+						DevelopmentTeam = QR4V9984C7;
+					};
 					B90710AE1C96E26500268CE8 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = QR4V9984C7;
@@ -2725,6 +2943,7 @@
 				B9DA04381C7210870051DF00 /* DesondoTests */,
 				B9DA04431C7210870051DF00 /* DesondoUITests */,
 				B92DCE151C845E60002AA184 /* Ostin */,
+				215A02801E1127B400CCAA2C /* Ostin_IM */,
 				B90710AE1C96E26500268CE8 /* Tsum */,
 				B9A3FE171CA19E200060483D /* RivGosh */,
 				B970B8141CD209820066A66A /* Melon */,
@@ -2735,6 +2954,74 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		215A02F01E1127B400CCAA2C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				215A02F11E1127B400CCAA2C /* navigation@2x.png in Resources */,
+				215A02F21E1127B400CCAA2C /* Barcode manual@2x.png in Resources */,
+				215A02F31E1127B400CCAA2C /* 99002520874.jpg in Resources */,
+				215A03361E1128B800CCAA2C /* IM_Info.plist in Resources */,
+				215A02F41E1127B400CCAA2C /* MP4O9864G.jpg in Resources */,
+				215A02F51E1127B400CCAA2C /* eac.png in Resources */,
+				215A02F61E1127B400CCAA2C /* 99002776879.jpg in Resources */,
+				215A02F71E1127B400CCAA2C /* settings_icon@2x.png in Resources */,
+				215A02F81E1127B400CCAA2C /* TasksCell.xib in Resources */,
+				215A02F91E1127B400CCAA2C /* 99002776883.jpg in Resources */,
+				215A02FA1E1127B400CCAA2C /* 99002776898.jpg in Resources */,
+				215A02FB1E1127B400CCAA2C /* 299101040151.jpg in Resources */,
+				215A02FC1E1127B400CCAA2C /* 7459030299.jpg in Resources */,
+				215A02FD1E1127B400CCAA2C /* send@2x.png in Resources */,
+				215A02FE1E1127B400CCAA2C /* MS2O9267M.jpg in Resources */,
+				215A02FF1E1127B400CCAA2C /* filter@2x.png in Resources */,
+				215A03001E1127B400CCAA2C /* 299101040167.jpg in Resources */,
+				215A03011E1127B400CCAA2C /* MT2O93N3M.jpg in Resources */,
+				215A03021E1127B400CCAA2C /* PrintViewController.xib in Resources */,
+				215A03031E1127B400CCAA2C /* 99002774683.jpg in Resources */,
+				215A03041E1127B400CCAA2C /* MT1O9869M.jpg in Resources */,
+				215A03051E1127B400CCAA2C /* 99002775678.jpg in Resources */,
+				215A03071E1127B400CCAA2C /* 99002774132.jpg in Resources */,
+				215A03081E1127B400CCAA2C /* 99002776863.jpg in Resources */,
+				215A03091E1127B400CCAA2C /* Icon.png in Resources */,
+				215A030A1E1127B400CCAA2C /* producer_label.zpl in Resources */,
+				215A030B1E1127B400CCAA2C /* SearchTableViewCell.xib in Resources */,
+				215A030C1E1127B400CCAA2C /* 8813780299.jpg in Resources */,
+				215A030D1E1127B400CCAA2C /* label.zpl in Resources */,
+				215A030E1E1127B400CCAA2C /* ItemsListCell.xib in Resources */,
+				215A030F1E1127B400CCAA2C /* OstinPriceTag.xib in Resources */,
+				215A03101E1127B400CCAA2C /* MT4O9765M.jpg in Resources */,
+				215A03111E1127B400CCAA2C /* MT1O9102M.jpg in Resources */,
+				215A03121E1127B400CCAA2C /* LR9O8241L.jpg in Resources */,
+				215A03131E1127B400CCAA2C /* CategoriesCollectionCell.xib in Resources */,
+				215A03141E1127B400CCAA2C /* 99002777306.jpg in Resources */,
+				215A03151E1127B400CCAA2C /* tasks@2x.png in Resources */,
+				215A03161E1127B400CCAA2C /* MS4O9767M.jpg in Resources */,
+				215A03171E1127B400CCAA2C /* 99002789530.jpg in Resources */,
+				215A03181E1127B400CCAA2C /* emptySound.wav in Resources */,
+				215A03191E1127B400CCAA2C /* search@2x.png in Resources */,
+				215A031A1E1127B400CCAA2C /* LaunchScreen.storyboard in Resources */,
+				215A031B1E1127B400CCAA2C /* relevance@2x.png in Resources */,
+				215A031C1E1127B400CCAA2C /* SettingsSyncCell.xib in Resources */,
+				215A031D1E1127B400CCAA2C /* MT6O9195M.jpg in Resources */,
+				215A031E1E1127B400CCAA2C /* catalog@2x.png in Resources */,
+				215A031F1E1127B400CCAA2C /* TaskProgressOverlayController.xib in Resources */,
+				215A03201E1127B400CCAA2C /* MP4O9264G.jpg in Resources */,
+				215A03211E1127B400CCAA2C /* 99002777294.jpg in Resources */,
+				215A03221E1127B400CCAA2C /* MT2O9469M.jpg in Resources */,
+				215A03381E112B7B00CCAA2C /* IM_Main.storyboard in Resources */,
+				215A03231E1127B400CCAA2C /* Settings.bundle in Resources */,
+				215A03241E1127B400CCAA2C /* 99002774407.jpg in Resources */,
+				215A03251E1127B400CCAA2C /* 99002774088.jpg in Resources */,
+				215A03261E1127B400CCAA2C /* SettingsSwitchCell.xib in Resources */,
+				215A03271E1127B400CCAA2C /* SettingsCell.xib in Resources */,
+				215A03281E1127B400CCAA2C /* 9941170299.jpg in Resources */,
+				215A03291E1127B400CCAA2C /* 299101026771.jpg in Resources */,
+				215A032A1E1127B400CCAA2C /* no-image.png in Resources */,
+				215A032B1E1127B400CCAA2C /* Assets.xcassets in Resources */,
+				215A032C1E1127B400CCAA2C /* 99002774256.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B90710AD1C96E26500268CE8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3006,6 +3293,64 @@
 			showEnvVarsInLog = 0;
 		};
 		210F2B7B1DF5A22A00818512 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
+		};
+		215A02811E1127B400CCAA2C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		215A032D1E1127B400CCAA2C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ostin/Pods-Ostin-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		215A032E1E1127B400CCAA2C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ostin/Pods-Ostin-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		215A032F1E1127B400CCAA2C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3467,6 +3812,116 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		215A02821E1127B400CCAA2C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				215A02831E1127B400CCAA2C /* NwobjSendAcceptanes.m in Sources */,
+				215A02841E1127B400CCAA2C /* SOAPPrices.m in Sources */,
+				215A02851E1127B400CCAA2C /* SOAPUsers.m in Sources */,
+				215A02861E1127B400CCAA2C /* TasksNavigationController.m in Sources */,
+				215A02871E1127B400CCAA2C /* GradientTabBarController.m in Sources */,
+				215A02881E1127B400CCAA2C /* NSDate+ISO8601Parsing.m in Sources */,
+				215A02891E1127B400CCAA2C /* SOAPResetIncDone.m in Sources */,
+				215A028A1E1127B400CCAA2C /* SOAPWares.m in Sources */,
+				215A028B1E1127B400CCAA2C /* SearchTableViewCell.m in Sources */,
+				215A028C1E1127B400CCAA2C /* DiscountInformation.m in Sources */,
+				215A028D1E1127B400CCAA2C /* TasksViewController.m in Sources */,
+				215A028E1E1127B400CCAA2C /* AcceptanesInformation.m in Sources */,
+				215A028F1E1127B400CCAA2C /* TaskItemBinding+CoreDataProperties.m in Sources */,
+				215A02901E1127B400CCAA2C /* NwobjDiscounts.m in Sources */,
+				215A02911E1127B400CCAA2C /* SynchronizationController.m in Sources */,
+				215A02921E1127B400CCAA2C /* ItemPrintFact+CoreDataClass.m in Sources */,
+				215A02931E1127B400CCAA2C /* PI_MOBILE_SERVICEService.m in Sources */,
+				215A02941E1127B400CCAA2C /* NSDate+ISO8601Unparsing.m in Sources */,
+				215A02951E1127B400CCAA2C /* NwobjInventoryItemDescription.m in Sources */,
+				215A02961E1127B400CCAA2C /* NwobjAuthorization.m in Sources */,
+				215A02971E1127B400CCAA2C /* LoginViewController.m in Sources */,
+				215A02981E1127B400CCAA2C /* TaskItemInformation.m in Sources */,
+				215A02991E1127B400CCAA2C /* User+CoreDataProperties.m in Sources */,
+				215A029A1E1127B400CCAA2C /* AppSuspendingBlocker.m in Sources */,
+				215A029B1E1127B400CCAA2C /* MelonViewController.m in Sources */,
+				215A029C1E1127B400CCAA2C /* ItemsModel.xcdatamodeld in Sources */,
+				215A029D1E1127B400CCAA2C /* OstinViewController.m in Sources */,
+				215A029E1E1127B400CCAA2C /* NwobjClientCard.m in Sources */,
+				215A029F1E1127B400CCAA2C /* ItemPrintFact+CoreDataProperties.m in Sources */,
+				215A02A01E1127B400CCAA2C /* SettingsSyncCell.m in Sources */,
+				215A02A11E1127B400CCAA2C /* USGlobals.m in Sources */,
+				215A02A21E1127B400CCAA2C /* NwobjSendCart.m in Sources */,
+				215A02A31E1127B400CCAA2C /* NwobjZones.m in Sources */,
+				215A02A41E1127B400CCAA2C /* NwobjAcceptanes.m in Sources */,
+				215A02A51E1127B400CCAA2C /* PrintViewController.m in Sources */,
+				215A02A61E1127B400CCAA2C /* Price+CoreDataClass.m in Sources */,
+				215A02A71E1127B400CCAA2C /* AsyncImageView.m in Sources */,
+				215A02A81E1127B400CCAA2C /* MCPOfflineInmpl+Ostin.m in Sources */,
+				215A02A91E1127B400CCAA2C /* MCPSimulatorImpl.m in Sources */,
+				215A02AA1E1127B400CCAA2C /* AntiAliasingLabel.m in Sources */,
+				215A02AB1E1127B400CCAA2C /* TaskInformation.m in Sources */,
+				215A02AC1E1127B400CCAA2C /* NwObject.m in Sources */,
+				215A02AD1E1127B400CCAA2C /* CategoriesCollectionCell.m in Sources */,
+				215A02AE1E1127B400CCAA2C /* MCPServer.m in Sources */,
+				215A02AF1E1127B400CCAA2C /* Task+CoreDataProperties.m in Sources */,
+				215A02B01E1127B400CCAA2C /* GroupInformation.m in Sources */,
+				215A02B11E1127B400CCAA2C /* SOAPTasks.m in Sources */,
+				215A02B21E1127B400CCAA2C /* SettingsViewController+Ostin.m in Sources */,
+				215A02B31E1127B400CCAA2C /* Group+CoreDataClass.m in Sources */,
+				215A02B41E1127B400CCAA2C /* NwRequest.m in Sources */,
+				215A02B51E1127B400CCAA2C /* WYStoryboardPopoverSegue.m in Sources */,
+				215A02B61E1127B400CCAA2C /* SOAPOperation.m in Sources */,
+				215A02B71E1127B400CCAA2C /* UserInformation.m in Sources */,
+				215A02B81E1127B400CCAA2C /* MCPOfflineInmpl.m in Sources */,
+				215A02B91E1127B400CCAA2C /* Group+CoreDataProperties.m in Sources */,
+				215A02BA1E1127B400CCAA2C /* WYPopoverController.m in Sources */,
+				215A02BB1E1127B400CCAA2C /* TasksCell.m in Sources */,
+				215A02BC1E1127B400CCAA2C /* Logger.m in Sources */,
+				215A02BD1E1127B400CCAA2C /* ItemInformation.m in Sources */,
+				215A02BE1E1127B400CCAA2C /* TaskProgressOverlayController.m in Sources */,
+				215A02BF1E1127B400CCAA2C /* ItemsListCell.m in Sources */,
+				215A02C01E1127B400CCAA2C /* DetailsTableViewController.m in Sources */,
+				215A02C11E1127B400CCAA2C /* ViewController.m in Sources */,
+				215A02C21E1127B400CCAA2C /* BarcodeFormatter.m in Sources */,
+				215A02C31E1127B400CCAA2C /* MenuViewController.m in Sources */,
+				215A02C41E1127B400CCAA2C /* PrintServer.m in Sources */,
+				215A02C51E1127B400CCAA2C /* SOAPTaskWareBinding.m in Sources */,
+				215A033C1E112D0600CCAA2C /* SOAPRequest.m in Sources */,
+				215A02C61E1127B400CCAA2C /* Task+CoreDataClass.m in Sources */,
+				215A02C71E1127B400CCAA2C /* Subgroup+CoreDataClass.m in Sources */,
+				215A02C81E1127B400CCAA2C /* main.m in Sources */,
+				215A02C91E1127B400CCAA2C /* SearchViewController.m in Sources */,
+				215A02CA1E1127B400CCAA2C /* User+CoreDataClass.m in Sources */,
+				215A02CB1E1127B400CCAA2C /* SOAPBarcodes.m in Sources */,
+				215A02CC1E1127B400CCAA2C /* AntiAliasTextLayer.m in Sources */,
+				215A02CD1E1127B400CCAA2C /* Price+CoreDataProperties.m in Sources */,
+				215A02CE1E1127B400CCAA2C /* NSData+Base64.m in Sources */,
+				215A02CF1E1127B400CCAA2C /* MCPSimulatorImpl+Ostin.m in Sources */,
+				215A02D01E1127B400CCAA2C /* Item+CoreDataClass.m in Sources */,
+				215A02D11E1127B400CCAA2C /* AntiAliasView.m in Sources */,
+				215A02D21E1127B400CCAA2C /* Item+CoreDataProperties.m in Sources */,
+				215A02D31E1127B400CCAA2C /* ItemsListViewController.m in Sources */,
+				215A02D41E1127B400CCAA2C /* Barcode+CoreDataProperties.m in Sources */,
+				215A02D51E1127B400CCAA2C /* CoreDataController.m in Sources */,
+				215A02D61E1127B400CCAA2C /* Barcode+CoreDataClass.m in Sources */,
+				215A02D71E1127B400CCAA2C /* AppDelegate.m in Sources */,
+				215A02D81E1127B400CCAA2C /* SettingsSwitchCell.m in Sources */,
+				215A02D91E1127B400CCAA2C /* SettingsCell.m in Sources */,
+				215A02DA1E1127B400CCAA2C /* NwobjItemDescription.m in Sources */,
+				215A02DB1E1127B400CCAA2C /* SOAPSetTaskDone.m in Sources */,
+				215A02DC1E1127B400CCAA2C /* MCPNetworkImpl.m in Sources */,
+				215A02DD1E1127B400CCAA2C /* TaskItemBinding+CoreDataClass.m in Sources */,
+				215A02DE1E1127B400CCAA2C /* Subgroup+CoreDataProperties.m in Sources */,
+				215A02DF1E1127B400CCAA2C /* xsd.m in Sources */,
+				215A02E01E1127B400CCAA2C /* NwobjStock.m in Sources */,
+				215A02E11E1127B400CCAA2C /* CategoriesViewController.m in Sources */,
+				215A02E21E1127B400CCAA2C /* ZPLGenerator.m in Sources */,
+				215A02E31E1127B400CCAA2C /* WarehouseInformation.m in Sources */,
+				215A02E41E1127B400CCAA2C /* SOAPSavePrintFact.m in Sources */,
+				215A02E51E1127B400CCAA2C /* OstinPriceTag.m in Sources */,
+				215A02E61E1127B400CCAA2C /* SettingsViewController.m in Sources */,
+				215A02E71E1127B400CCAA2C /* CommonConfirmButton.m in Sources */,
+				215A02E81E1127B400CCAA2C /* USAdditions.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B90710AB1C96E26500268CE8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3563,6 +4018,7 @@
 				B957B0D51D1BF5AC002A5256 /* MenuViewController.m in Sources */,
 				21C0549D1DCB8A0A0094C7B1 /* PrintServer.m in Sources */,
 				C607A60B1DB0E0E000F3E5E9 /* SOAPTaskWareBinding.m in Sources */,
+				215A033B1E112D0600CCAA2C /* SOAPRequest.m in Sources */,
 				C667239B1DAAEEFB001B30AC /* Task+CoreDataClass.m in Sources */,
 				21C054561DC239220094C7B1 /* Subgroup+CoreDataClass.m in Sources */,
 				B92DCE1A1C845E60002AA184 /* main.m in Sources */,
@@ -4044,6 +4500,78 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		215A03311E1127B400CCAA2C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3858CD9F96198DD4706F715 /* Pods-Ostin.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = QR4V9984C7;
+				ENABLE_BITCODE = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"OSTIN_IM=1",
+					"OFFLINE=1",
+					"ZPL=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/GHODictionary\"",
+					"\"${PODS_ROOT}/Headers/Public/MPMessagePack\"",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Ostin/IM_Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PriceTagDemo/DTDevicesLib",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dataphone.Ostin-IM";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		215A03321E1127B400CCAA2C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0B99DA259F160F2DA2D1470 /* Pods-Ostin.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = QR4V9984C7;
+				ENABLE_BITCODE = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"OSTIN_IM=1",
+					"OFFLINE=1",
+					"ZPL=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/GHODictionary\"",
+					"\"${PODS_ROOT}/Headers/Public/MPMessagePack\"",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Ostin/IM_Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PriceTagDemo/DTDevicesLib",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dataphone.Ostin-IM";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		B90710C31C96E26500268CE8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 305BD8FF1EE07980B92BBA8D /* Pods-Tsum.debug.xcconfig */;
@@ -4648,6 +5176,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		215A03301E1127B400CCAA2C /* Build configuration list for PBXNativeTarget "Ostin_IM" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				215A03311E1127B400CCAA2C /* Debug */,
+				215A03321E1127B400CCAA2C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B90710C51C96E26500268CE8 /* Build configuration list for PBXNativeTarget "Tsum" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

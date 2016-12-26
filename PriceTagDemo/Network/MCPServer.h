@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MCProtocol+RivGosh.h"
 
-#if defined (OSTIN)
+#if defined (OSTIN) || defined(OSTIN_IM)
 #import "MCProtocol+Ostin.h"
 #endif
 
@@ -21,7 +21,7 @@
 
 #if defined(RIVGOSH) || defined(MELON)
 + (id<MCProtocolRivGosh>) instance;
-#elif defined (OSTIN)
+#elif defined (OSTIN) || defined(OSTIN_IM)
 + (id<MCProtocolOstin>) instance;
 #else
 + (id<MCProtocol>) instance;
