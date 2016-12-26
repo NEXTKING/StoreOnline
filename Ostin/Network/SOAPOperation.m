@@ -57,36 +57,39 @@
         _progress.totalUnitCount = numberOfPortions;
     });
     
-    while (numberOfPortions > 0) {
-        
-        NSArray* items = [self downloadItems];
-        
-        if (self.isCancelled || !items)
-            return;
-        
-        __block BOOL localSuccess = NO;
-        
-        [_privateContext performBlockAndWait:^{
-            localSuccess = [self saveItems:items];
+    while (numberOfPortions > 0)
+    {
+        @autoreleasepool
+        {
+            NSArray* items = [self downloadItems];
+
+            if (self.isCancelled || !items)
+                return;
             
-            if (localSuccess)
-            {
-                [self.dataController.managedObjectContext performBlockAndWait:^{
+            __block BOOL localSuccess = NO;
+            
+            [_privateContext performBlockAndWait:^{
+                localSuccess = [self saveItems:items];
                 
-                    localSuccess = [_dataController.managedObjectContext save:nil];
+                if (localSuccess)
+                {
+                    [self.dataController.managedObjectContext performBlockAndWait:^{
+                    
+                        localSuccess = [_dataController.managedObjectContext save:nil];
+                
+                    }];
+                }
+            }];
+        
             
-                }];
-            }
-        }];
-    
-        
-        if (!localSuccess || self.isCancelled)
-            return;
-        
-        localSuccess = [self commitPortion:_incValue portionID:@(currentPortionID)];
-        
-        if (!localSuccess || self.isCancelled)
-            return;
+            if (!localSuccess || self.isCancelled)
+                return;
+            
+            localSuccess = [self commitPortion:_incValue portionID:@(currentPortionID)];
+            
+            if (!localSuccess || self.isCancelled)
+                return;
+        }
         
         numberOfPortions--;
         
@@ -132,7 +135,8 @@
         else if ([incrementValue isEqualToString:@"D"])
         {
             coreDataObject = [self findObject:csv];
-            [self.privateContext deleteObject:coreDataObject];
+            if (coreDataObject)
+                [self.privateContext deleteObject:coreDataObject];
         }
         
     }

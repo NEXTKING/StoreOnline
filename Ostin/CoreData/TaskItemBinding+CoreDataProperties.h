@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<TaskItemBinding *> *)fetchRequest;
 
+@property (nullable, nonatomic, copy) NSNumber *bindingKey;
 @property (nullable, nonatomic, copy) NSNumber *taskID;
 @property (nullable, nonatomic, copy) NSNumber *quantity;
 @property (nullable, nonatomic, copy) NSNumber *itemID;

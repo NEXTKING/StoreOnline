@@ -58,6 +58,7 @@
 {
     TaskItemBinding* taskDB = (TaskItemBinding*)obj;
     
+    taskDB.bindingKey = @([csv[1] integerValue]);
     taskDB.taskID = @([csv[2] integerValue]);
     taskDB.itemID = @([csv[3] integerValue]);
     taskDB.quantity = @([csv[4] integerValue]);
@@ -65,10 +66,9 @@
 
 - (NSManagedObject*) findObject:(NSArray *)csv
 {
-    NSInteger taskID = [csv[1] integerValue];
-    NSInteger itemID = [csv[2] integerValue];
+    NSInteger bindingKey = [csv[1] integerValue];
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"TaskItemBinding"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"taskID == %@ AND itemID == %@", @(taskID), @(itemID)]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"bindingKey == %@", @(bindingKey)]];
     
     NSError* error = nil;
     NSArray* results = [self.privateContext executeFetchRequest:request error:&error];

@@ -32,6 +32,6 @@
 - (void) saveTaskWithID:(NSInteger)taskID userID:(NSString *)userID status:(NSInteger)status date:(NSDate *)date completion:(void (^)(BOOL success, NSString *errorMessage))completion;
 - (void) saveTaskItem:(id<TasksDelegate>) delegate taskID:(NSInteger)taskID itemID:(NSInteger)itemID scanned:(NSUInteger)scanned;
 - (void) savePrintItemsCount:(NSInteger)count inTaskWithID:(NSInteger)taskID;
-- (void) savePrintItemFactForItemCode:(NSString *)itemCode taskName:(NSString *)taskName;
+- (void) savePrintItemFactForItemCode:(NSString *)itemCode taskName:(NSString *)taskName userID:(NSString *)userID;
 
 @end

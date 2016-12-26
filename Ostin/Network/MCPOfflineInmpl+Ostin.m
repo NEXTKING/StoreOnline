@@ -61,8 +61,15 @@
             authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodingWithLineLength:80]];
         }
         
-        deviceID = @"305";
-        //990023135202
+        NSString *ID = [[NSUserDefaults standardUserDefaults] valueForKey:@"DeviceID"];
+        if (ID == nil)
+        {
+            ID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+            [[NSUserDefaults standardUserDefaults] setValue:ID forKey:@"DeviceID"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+        
+        deviceID = ID;
     }
     
     return self;
@@ -524,7 +531,7 @@
     }
 }
 
-- (void) savePrintItemFactForItemCode:(NSString *)itemCode taskName:(NSString *)taskName
+- (void) savePrintItemFactForItemCode:(NSString *)itemCode taskName:(NSString *)taskName userID:(NSString *)userID
 {
     NSManagedObjectContext *moc = self.dataController.managedObjectContext;
     
@@ -533,7 +540,61 @@
     itemPrintFactDB.taskName = taskName;
     itemPrintFactDB.itemCode = itemCode;
     itemPrintFactDB.wasUploaded = @NO;
-    [moc save:nil];
+    
+    __block NSError *err = nil;
+    
+    [moc performBlockAndWait:^{
+        [moc save:&err];
+    }];
+    
+    if (!err)
+    {
+        NSOperationQueue *setPrintFactQueue = [NSOperationQueue new];
+        
+        SOAPSavePrintFact *savePrintFact = [SOAPSavePrintFact new];
+        __weak SOAPSavePrintFact *_savePrintFact = savePrintFact;
+        savePrintFact.taskName = taskName;
+        savePrintFact.taskType = @"pasting";
+        savePrintFact.wareCodes = @[itemCode];
+        savePrintFact.authValue = authValue;
+        savePrintFact.deviceID  = deviceID;
+        savePrintFact.userID = userID;
+        
+        NSBlockOperation *savePrintFactLocal = [NSBlockOperation blockOperationWithBlock:^{
+            
+            if (_savePrintFact.success)
+            {
+                NSManagedObjectContext *privateMoc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+                [privateMoc setParentContext:moc];
+                
+                NSFetchRequest *taskItemRequest = [NSFetchRequest fetchRequestWithEntityName:@"ItemPrintFact"];
+                [taskItemRequest setPredicate:[NSPredicate predicateWithFormat:@"taskName == %@ AND wasUploaded == %@", taskName, @NO]];
+                NSArray *results = [privateMoc executeFetchRequest:taskItemRequest error:nil];
+                
+                if (results.count > 0)
+                {
+                    ItemPrintFact *itemPrintFactDB = results[0];
+                    itemPrintFactDB.wasUploaded = @YES;
+                    
+                    __block NSError *error = nil;
+                    
+                    [privateMoc performBlockAndWait:^{
+                        [privateMoc save:&error];
+                    }];
+                    
+                    if (!error)
+                    {
+                        [moc performBlockAndWait:^{
+                            [moc save:&error];
+                        }];
+                    }
+                }
+            }
+        }];
+        
+        [savePrintFactLocal addDependency:savePrintFact];
+        [setPrintFactQueue addOperations:@[savePrintFact, savePrintFactLocal] waitUntilFinished:NO];
+    }
 }
 
 - (void) savePrintItemsCount:(NSInteger)count inTaskWithID:(NSInteger)taskID
@@ -1106,6 +1167,7 @@
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"additionalSize" value:itemDB.additionalSize]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"boxType" value:itemDB.boxType]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"certificationAuthorittyCode" value:itemDB.certificationAuthorittyCode]];
+    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"certificationType" value:itemDB.certificationType]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"groupID" value:itemDB.groupID.stringValue]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"itemCode" value:itemDB.itemCode]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"itemCode_2" value:itemDB.itemCode_2]];

@@ -13,36 +13,144 @@
 
 - (void) setItemInformation:(ItemInformation*) item
 {
+    [self layoutIfNeeded];
     
-    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:@"0 р."];
-    [attributeString addAttribute:NSStrikethroughStyleAttributeName
-                            value:@2
-                            range:NSMakeRange(0, [attributeString length])];
-    _oldPriceLabel.attributedText = attributeString;
+    if (_priceLabel)
+    {
+        _priceLabel.text = [NSString stringWithFormat:@"Цена: %.0fр.", item.price];
+    }
     
-    _priceLabel.text = [NSString stringWithFormat:@"Цена: %.0fр.", item.price];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateStyle = NSDateFormatterShortStyle;
-    dateFormatter.timeStyle = NSDateFormatterNoStyle;
-    _dateLabel.text = [dateFormatter stringFromDate:[NSDate date]];
-    [self addOldPriceIfNeeded:item];
+    if (_dateLabel)
+    {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateStyle = NSDateFormatterShortStyle;
+        dateFormatter.timeStyle = NSDateFormatterNoStyle;
+        _dateLabel.text = [dateFormatter stringFromDate:[NSDate date]];
+//    }
+//    
+//    if (_oldPriceLabel)
+//    {
+        NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:@"0 р."];
+        [attributeString addAttribute:NSStrikethroughStyleAttributeName
+                                value:@2
+                                range:NSMakeRange(0, [attributeString length])];
+        _oldPriceLabel.attributedText = attributeString;
+        [self addOldPriceIfNeeded:item];
+    }
     
-    BOOL shouldPrintBarcode = [[[NSUserDefaults standardUserDefaults] objectForKey:@"ShouldPrintBarcode"] boolValue];
+    BOOL shouldPrintBarcode = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShouldPrintBarcode"];
     
     if (!shouldPrintBarcode)
     {
         _barcodeLabel.hidden = YES;
         _barcodeView.hidden = YES;
-        return;
     }
-    _barcodeLabel.text = item.barcode;
-    //UIImage *barcodeImage = [self generateBarcodeFromString:item.barcode];
-    //_barcodeView.image = barcodeImage;
-    BarCodeView *barCodeView = [[BarCodeView alloc] initWithFrame:CGRectMake(0, 0, _barcodeView.frame.size.width, _barcodeView.frame.size.height)];
-    [_barcodeView addSubview:barCodeView];
-    [barCodeView setBarCode:item.barcode];
+    else
+    {
+        _barcodeLabel.text = item.barcode;
+        BarCodeView *barCodeView = [[BarCodeView alloc] initWithFrame:CGRectMake(0, 0, _barcodeView.frame.size.width, _barcodeView.frame.size.height)];
+        [_barcodeView addSubview:barCodeView];
+        [barCodeView setBarCode:item.barcode];
 
-    [_barcodeView setNeedsDisplay];
+        [_barcodeView setNeedsDisplay];
+    }
+    
+    if (_nameLabel)
+    {
+        _nameLabel.text = item.name;
+    }
+    
+    if (_articleLabel)
+    {
+        _articleLabel.text = item.article;
+    }
+    
+    if (_manufactureLabel)
+    {
+        ParameterInformation *manufacturerParam = nil;
+        
+        for (ParameterInformation* currentParam in item.additionalParameters)
+        {
+            if ([currentParam.name isEqualToString:@"Manufacturer"])
+                manufacturerParam = currentParam;
+        }
+        _manufactureLabel.text = manufacturerParam ? [NSString stringWithFormat:@"Изготовитель: %@", manufacturerParam.value] : @"Изготовитель:";
+    }
+    
+    if (_manufactureDateLabel)
+    {
+        ParameterInformation *manufactureDateParam = nil;
+        
+        for (ParameterInformation* currentParam in item.additionalParameters)
+        {
+            if ([currentParam.name isEqualToString:@"ProductionDate"])
+                manufactureDateParam = currentParam;
+        }
+        
+        if (manufactureDateParam)
+            _manufactureDateLabel.text = [NSString stringWithFormat:@"Дата изгот.: %@", [manufactureDateParam.value stringByReplacingOccurrencesOfString:@" 0:00:00" withString:@""]];
+        else
+            _manufactureDateLabel.text = @"Дата изгот.:";
+    }
+    
+    NSString *color = @"";
+    NSString *size1 = @"";
+    NSString *size2 = @"";
+    
+    for (ParameterInformation* currentParam in item.additionalParameters)
+    {
+        if ([currentParam.name isEqualToString:@"Описание"])
+        {
+            NSString *string = currentParam.value;
+            NSRange searchedRange = NSMakeRange(0, [string length]);
+            NSString *pattern = @".* арт\\..* цв\\.(.*) р-р\\.(.*) р\\.(.*)";
+            
+            NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:nil];
+            NSTextCheckingResult *match = [regex firstMatchInString:string options:0 range: searchedRange];
+            color = [string substringWithRange:[match rangeAtIndex:1]];
+            size1 = [string substringWithRange:[match rangeAtIndex:2]];
+            size2 = [string substringWithRange:[match rangeAtIndex:3]];
+            
+            break;
+        }
+    }
+    
+    if (_colorLabel)
+    {
+        _colorLabel.text = color;
+    }
+    
+    if (_sizeLabel)
+    {
+        ParameterInformation *sizeParam = nil;
+        
+        for (ParameterInformation* currentParam in item.additionalParameters)
+        {
+            if ([currentParam.name isEqualToString:@"Size"])
+                sizeParam = currentParam;
+        }
+        
+        if (sizeParam)
+            _sizeLabel.text = sizeParam.value;
+        else
+            _sizeLabel.text = @"";
+    }
+    
+    if (_importerLabel)
+    {
+        ParameterInformation *importerParam = nil;
+        
+        for (ParameterInformation* currentParam in item.additionalParameters)
+        {
+            if ([currentParam.name isEqualToString:@"Importer"])
+                importerParam = currentParam;
+        }
+        
+        if (importerParam)
+            _importerLabel.text = [NSString stringWithFormat:@"Импортер: %@", importerParam.value];
+        else
+            _importerLabel.text = @"Импортер:";
+    }
 }
 
 - (void) addOldPriceIfNeeded:(ItemInformation*) item

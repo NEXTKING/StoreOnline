@@ -14,6 +14,7 @@
 	return [[NSFetchRequest alloc] initWithEntityName:@"TaskItemBinding"];
 }
 
+@dynamic bindingKey;
 @dynamic taskID;
 @dynamic quantity;
 @dynamic itemID;

@@ -18,10 +18,17 @@
 
 @property (nonatomic, strong) NSArray* sections;
 @property (nonatomic, strong) NSIndexPath* selectedIndexPath;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *startInventoryButton;
 
 @end
 
 @implementation InventorySectionsViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    _startInventoryButton.title = NSLocalizedString(@"Начать новую инвентаризацию", nil);
+}
 
 - (void) viewWillAppear:(BOOL)animated
 {
@@ -78,7 +85,7 @@
     }
     
     if (number == NSNotFound)
-        [self showInfoMessage:@"Секция с таким штрих-кодом не найдена"];
+        [self showInfoMessage:NSLocalizedString(@"Секция с таким штрих-кодом не найдена", nil)];
     else
         [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:number inSection:0]];
 }
@@ -119,16 +126,6 @@
     }
     
     self.sections = staticSectionsArray;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -222,13 +219,13 @@
 
 - (IBAction)startNewInventory:(id)sender
 {
-    UIAlertController* secondaryAlert = [UIAlertController alertControllerWithTitle:@"Вы действительно хотите начать новую инвентаризацию?"
+    UIAlertController* secondaryAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Вы действительно хотите начать новую инвентаризацию?", nil)
                                                                             message:nil
                                                                      preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction* decline = [UIAlertAction actionWithTitle:@"Нет" style:UIAlertActionStyleDefault
+    UIAlertAction* decline = [UIAlertAction actionWithTitle:NSLocalizedString(@"Нет", nil) style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * action) {}];
-    UIAlertAction* confirm = [UIAlertAction actionWithTitle:@"Да" style:UIAlertActionStyleDestructive
+    UIAlertAction* confirm = [UIAlertAction actionWithTitle:NSLocalizedString(@"Да", nil) style:UIAlertActionStyleDestructive
                                                     handler:^(UIAlertAction * action) {[self endOfInventory];}];
     
     [secondaryAlert addAction:decline];
@@ -240,7 +237,7 @@
 - (void) sendInventory
 {
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Инфо" message:@"Отправить товары на сервер?" delegate:self cancelButtonTitle:@"Нет" otherButtonTitles:@"Да", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Инфо", nil) message:NSLocalizedString(@"Отправить товары на сервер?", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Нет", nil) otherButtonTitles:NSLocalizedString(@"Да", nil), nil];
         [alert show];
     }
 }
@@ -250,7 +247,7 @@
     NSString* currentShopId = [[NSUserDefaults standardUserDefaults] objectForKey:@"shopID"];
     if (!currentShopId)
     {
-        [self showInfoMessage:@"Необходимо выполнить синхронизацию"];
+        [self showInfoMessage:NSLocalizedString(@"Необходимо выполнить синхронизацию", nil)];
         return;
     }
     
@@ -306,11 +303,11 @@
             if (array.count > 0)
                 [[MCPServer instance] sendCart:self cartData:toSend];
             else
-                [self showInfoMessage:@"Перед отправкой необходимо отсканировать хотя бы один товар"];
+                [self showInfoMessage:NSLocalizedString(@"Перед отправкой необходимо отсканировать хотя бы один товар", nil)];
                 
         }
         else
-            [self showInfoMessage:@"Перед отправкой необходимо отсканировать хотя бы один товар"];
+            [self showInfoMessage:NSLocalizedString(@"Перед отправкой необходимо отсканировать хотя бы один товар", nil)];
     }
 }
 
@@ -330,11 +327,11 @@
 {
     if (result == 0)
     {
-        [self showInfoMessage:@"Товары успешно отправлены!"];
+        [self showInfoMessage:NSLocalizedString(@"Товары успешно отправлены!", nil)];
     }
     else
     {
-        [self showInfoMessage:@"Не удалось отправить товары. Убедитесь в наличии подключения к сети."];
+        [self showInfoMessage:NSLocalizedString(@"Не удалось отправить товары. Убедитесь в наличии подключения к сети.", nil)];
     }
 }
 
@@ -344,13 +341,13 @@
     {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setObject:nil forKey:@"inventoryCache"];
-        [self showInfoMessage:@"Новая инвентаризация успешно начата"];
+        [self showInfoMessage:NSLocalizedString(@"Новая инвентаризация успешно начата", nil)];
         [self.tableView reloadData];
         
     }
     else
     {
-        [self showInfoMessage:@"Не удалось завершить инвентаризацию. Убедитесь в наличии подключения к сети."];
+        [self showInfoMessage:NSLocalizedString(@"Не удалось завершить инвентаризацию. Убедитесь в наличии подключения к сети.", nil)];
     }
 }
 

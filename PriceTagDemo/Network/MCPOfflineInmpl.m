@@ -13,8 +13,11 @@
 #import "NwobjZones.h"
 #import "NwobjSendCart.h"
 #import "NwobjStock.h"
+#import "NwobjAcceptanes.h"
+#import "NwobjSendAcceptanes.h"
 #import "Item.h"
 #import "AdditionalParameter.h"
+#import "AcceptItem+CoreDataClass.h"
 
 @interface MCPOfflineInmpl()
 @property (nonatomic, strong) NSDictionary* itemsDictionary;
@@ -127,6 +130,258 @@
         
         [nwobjStock run:_serverAddress];
     }
+}
+
+- (void) acceptanes:(id<AcceptanesDelegate>)delegate shopID:(NSString*)shopID
+{
+    if (shopID)
+    {
+        NwobjAcceptanes *nwobjAcceptanes = [NwobjAcceptanes new];
+        nwobjAcceptanes.delegate = delegate;
+        nwobjAcceptanes.shopId = shopID;
+        nwobjAcceptanes.completionHandler = ^(NSArray* items){
+            [self saveAcceptanesToCoreData:items];
+        };
+        
+        [nwobjAcceptanes run:_serverAddress];
+    }
+    else
+    {
+        [self acceptanesOffline:delegate];
+    }
+}
+
+- (void)acceptanes:(id<AcceptanesDelegate>)delegate date:(NSDate*)date itemBarcode:(NSString *)itemBarcode containerBarcode:(NSString*)containerBarcode
+{
+    NSManagedObjectContext *moc =_dataController.managedObjectContext;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"AcceptItem"];
+    if (itemBarcode != nil)
+        [request setPredicate:[NSPredicate predicateWithFormat:@"date == %@ AND barcode == %@", date, itemBarcode]];
+    else
+        [request setPredicate:[NSPredicate predicateWithFormat:@"date == %@ AND containerBarcode == %@", date, containerBarcode]];
+    
+    NSArray* results = [moc executeFetchRequest:request error:nil];
+    
+    if (results.count < 1)
+    {
+        [delegate acceptanesComplete:1 items:nil];
+        return;
+    }
+    
+    NSMutableArray *itemsToReturn = [[NSMutableArray alloc] initWithCapacity:results.count];
+    for (AcceptItem *acceptItemDB in results)
+    {
+        AcceptanesInformation *acceptInfo = [[AcceptanesInformation alloc] init];
+        acceptInfo.barcode = acceptItemDB.barcode;
+        acceptInfo.containerBarcode = acceptItemDB.containerBarcode;
+        acceptInfo.date = acceptItemDB.date;
+        acceptInfo.manually = acceptItemDB.manually.boolValue;
+        acceptInfo.isComplete = acceptItemDB.isComplete.boolValue;
+        acceptInfo.ID = acceptItemDB.iD;
+        acceptInfo.shopName = acceptItemDB.shopName;
+        
+        if ([acceptItemDB.type isEqualToString:@"B"])
+        {
+            acceptInfo.type = AcceptanesInformationItemTypeBox;
+            NSDictionary *countDictionary = [self calculateItemsCountForContainerBarcode:acceptItemDB.barcode acceptionDate:date];
+            acceptInfo.scanned = countDictionary[@"scanned"];
+            acceptInfo.quantity = countDictionary[@"quantity"];
+        }
+        else if ([acceptItemDB.type isEqualToString:@"S"])
+        {
+            acceptInfo.type = AcceptanesInformationItemTypeSet;
+            NSDictionary *countDictionary = [self calculateItemsCountForContainerBarcode:acceptItemDB.barcode acceptionDate:date];
+            acceptInfo.scanned = countDictionary[@"scanned"];
+            acceptInfo.quantity = countDictionary[@"quantity"];
+        }
+        else
+        {
+            acceptInfo.type = AcceptanesInformationItemTypeItem;
+            acceptInfo.quantity = acceptItemDB.quantity;
+            acceptInfo.scanned = acceptItemDB.scanned;
+        }
+        
+        acceptInfo.name = acceptItemDB.name;
+        
+        [itemsToReturn addObject:acceptInfo];
+    }
+    
+    NSSortDescriptor *sorter = [[NSSortDescriptor alloc] initWithKey:@"type" ascending:YES];
+    [itemsToReturn sortUsingDescriptors:@[sorter]];
+    [delegate acceptanesComplete:0 items:itemsToReturn];
+}
+
+- (NSDictionary *)calculateItemsCountForContainerBarcode:(NSString *)containerBarcode acceptionDate:(NSDate*)date
+{
+    NSManagedObjectContext *moc =_dataController.managedObjectContext;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"AcceptItem"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"date == %@ AND containerBarcode == %@", date, containerBarcode]];
+    
+    NSArray* results = [moc executeFetchRequest:request error:nil];
+    if (results.count < 1)
+    {
+        return @{@"scanned": @(0), @"quantity": @(0)};
+    }
+    
+    NSInteger scanned = 0;
+    NSInteger quantity = 0;
+    for (AcceptItem *acceptItemDB in results)
+    {
+        if ([acceptItemDB.type isEqualToString:@"B"] || [acceptItemDB.type isEqualToString:@"S"])
+        {
+            NSDictionary *countDictionary = [self calculateItemsCountForContainerBarcode:acceptItemDB.barcode acceptionDate:date];
+            scanned += [countDictionary[@"scanned"] integerValue];
+            quantity += [countDictionary[@"quantity"] integerValue];
+        }
+        else
+        {
+            scanned += (acceptItemDB.quantity.integerValue > 0 ? acceptItemDB.scanned.integerValue : 0);
+            quantity += acceptItemDB.quantity.integerValue;
+        }
+    }
+    return @{@"scanned": @(scanned), @"quantity": @(quantity)};
+}
+
+- (void) addItem:(AcceptanesInformation*)item toAcceptionWithDate:(NSDate*)date containerBarcode:(NSString*)containerBarcode scannedCount:(NSUInteger)scannedCount manually:(BOOL)manually;
+{
+    NSManagedObjectContext *moc =_dataController.managedObjectContext;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"AcceptItem"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"date == %@ AND barcode == %@ AND containerBarcode == %@", date, item.barcode, containerBarcode]];
+    NSArray* results = [moc executeFetchRequest:request error:nil];
+    
+    if (results.count < 1)
+    {
+        AcceptItem *acceptItemDB = [NSEntityDescription insertNewObjectForEntityForName:@"AcceptItem" inManagedObjectContext:_dataController.managedObjectContext];
+        
+        acceptItemDB.barcode = item.barcode;
+        acceptItemDB.name = item.name;
+        acceptItemDB.containerBarcode = containerBarcode;
+        acceptItemDB.type = @"";
+        acceptItemDB.date = date;
+        acceptItemDB.quantity = @(0);
+        acceptItemDB.scanned = @(scannedCount);
+        acceptItemDB.manually = @(manually);
+
+        [request setPredicate:[NSPredicate predicateWithFormat:@"date == %@", date]];
+        [request setFetchLimit:1];
+        results = [moc executeFetchRequest:request error:nil];
+        if (results.count > 0)
+        {
+            AcceptItem *secondAcceptItemDB = results[0];
+            acceptItemDB.shopName = secondAcceptItemDB.shopName;
+        }
+    }
+    else
+    {
+        AcceptItem *acceptItemDB = results[0];
+        acceptItemDB.scanned = @(scannedCount);
+        acceptItemDB.manually = @(manually);
+    }
+    
+    [moc save:nil];
+}
+
+- (void) acceptanesHierarchy:(id<AcceptanesDelegate>)delegate date:(NSDate*)date barcode:(NSString*)barcode
+{
+    NSManagedObjectContext *moc =_dataController.managedObjectContext;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"AcceptItem"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"date == %@ AND barcode == %@ AND type == %@", date, barcode, @"B"]];
+    
+    AcceptanesInformation* (^generateAcceptInfo)(AcceptItem *item) = ^(AcceptItem *acceptItemDB)
+    {
+        AcceptanesInformation *acceptInfo = [[AcceptanesInformation alloc] init];
+        acceptInfo.barcode = acceptItemDB.barcode;
+        acceptInfo.containerBarcode = acceptItemDB.containerBarcode;
+        acceptInfo.quantity = acceptItemDB.quantity;
+        acceptInfo.scanned = acceptItemDB.scanned;
+        acceptInfo.date = acceptItemDB.date;
+        acceptInfo.manually = acceptItemDB.manually.boolValue;
+        
+        acceptInfo.isComplete = acceptItemDB.isComplete.boolValue;
+        acceptInfo.ID = acceptItemDB.iD;
+        acceptInfo.shopName = acceptItemDB.shopName;
+        acceptInfo.name = acceptItemDB.name;
+        
+        if ([acceptItemDB.type isEqualToString:@"B"])
+            acceptInfo.type = AcceptanesInformationItemTypeBox;
+        else if ([acceptItemDB.type isEqualToString:@"S"])
+            acceptInfo.type = AcceptanesInformationItemTypeSet;
+        else
+            acceptInfo.type = AcceptanesInformationItemTypeItem;
+        
+        return acceptInfo;
+    };
+    
+    NSMutableArray *hierarchy = [NSMutableArray new];
+    NSArray* results = [moc executeFetchRequest:request error:nil];
+    while (results.count > 0)
+    {
+        AcceptItem *acceptItemDB = results[0];
+        AcceptanesInformation *acceptInfo = generateAcceptInfo(acceptItemDB);
+        [hierarchy insertObject:acceptInfo atIndex:0];
+        
+        if (acceptInfo.containerBarcode)
+        {
+            [request setPredicate:[NSPredicate predicateWithFormat:@"date == %@ AND barcode == %@", date, acceptInfo.containerBarcode]];
+            results = [moc executeFetchRequest:request error:nil];
+        }
+        else
+            break;
+    }
+    
+    if (hierarchy.count > 0)
+        [delegate acceptanesHierarchyComplete:0 items:hierarchy];
+    else
+        [delegate acceptanesHierarchyComplete:1 items:nil];
+}
+
+- (void) sendAcceptanes:(id<AcceptanesDelegate>)delegate date:(NSDate *)date shopID:(NSString *)shopID
+{
+    NSManagedObjectContext *moc =_dataController.managedObjectContext;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"AcceptItem"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"date == %@ AND type == %@ AND scanned > 0", date, @""]];
+    NSArray* results = [moc executeFetchRequest:request error:nil];
+    
+    if (results.count < 1)
+    {
+        if ([delegate respondsToSelector:@selector(sendAcceptanesComplete:)])
+            [delegate sendAcceptanesComplete:1];
+        
+        return;
+    }
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+//    [dateFormatter setLocale:enUSPOSIXLocale];
+//    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSMutableArray *acceptanes = [NSMutableArray new];
+    for (AcceptItem *acceptItemDB in results)
+    {
+        NSMutableDictionary *itemDictionary = [NSMutableDictionary new];
+        itemDictionary[@"ContainerBarCode"] = acceptItemDB.containerBarcode ? acceptItemDB.containerBarcode : [NSNull null];
+        itemDictionary[@"DateOfOperation"] = [dateFormatter stringFromDate:acceptItemDB.date];
+        itemDictionary[@"IsScannedByHand"] = acceptItemDB.manually;
+        itemDictionary[@"ItemBarCode"] = acceptItemDB.barcode;
+        itemDictionary[@"QuantityCount"] = acceptItemDB.quantity;
+        itemDictionary[@"QuantityScanned"] = acceptItemDB.scanned;
+        itemDictionary[@"ShopName"] = acceptItemDB.shopName;
+        itemDictionary[@"TypeOfPacage"] = acceptItemDB.type;
+        itemDictionary[@"isComplete"] = acceptItemDB.isComplete;
+        itemDictionary[@"ItemsName"] = acceptItemDB.name ? acceptItemDB.name : [NSNull null];
+        
+        if (acceptItemDB.iD.integerValue > 0)
+            itemDictionary[@"ID"] = acceptItemDB.iD;
+        
+        [acceptanes addObject:itemDictionary];
+    }
+    
+    NwobjSendAcceptanes *nwobjSendAcceptanes = [NwobjSendAcceptanes new];
+    nwobjSendAcceptanes.delegate = delegate;
+    nwobjSendAcceptanes.acceptanesData = @{@"All_AcceptanceS":acceptanes};
+    nwobjSendAcceptanes.shopId = shopID;
+    [nwobjSendAcceptanes run:_serverAddress];
 }
 
 #pragma mark - Internal Methods
@@ -278,6 +533,36 @@
 
 }
 
+- (void)acceptanesOffline:(id<AcceptanesDelegate>)delegate
+{
+    NSManagedObjectContext *moc =_dataController.managedObjectContext;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"AcceptItem"];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"AcceptItem" inManagedObjectContext:moc];
+    
+    // Unless you set the resultType to NSDictionaryResultType, distinct can't work.
+    request.resultType = NSDictionaryResultType;
+    request.propertiesToFetch = [NSArray arrayWithObject:[[entity propertiesByName] objectForKey:@"date"]];
+    request.returnsDistinctResults = YES;
+    
+    NSError *error = nil;
+    NSArray *dictionaries = [moc executeFetchRequest:request error:&error];
+
+    if (!error)
+    {
+        NSMutableArray *dates = [NSMutableArray new];
+        [delegate acceptanesComplete:0 items:dates];
+        
+        for (NSDictionary *dic in dictionaries)
+            [dates addObject:dic[@"date"]];
+        
+        NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"self" ascending:NO];
+        [dates sortUsingDescriptors:@[descriptor]];
+        [delegate acceptanesComplete:0 items:dates];
+    }
+    else
+        [delegate acceptanesComplete:1 items:nil];
+}
+
 #pragma mark Saving methods
 
 - (void) saveItemsToCoreData:(NSArray*) items
@@ -314,6 +599,29 @@
         
         Item* itemDB = results[0];
         itemDB.stock = @(currentItem.stock);
+    }
+    
+    [_dataController.managedObjectContext save:nil];
+}
+
+- (void) saveAcceptanesToCoreData:(NSArray *)items
+{
+    for (AcceptanesInformation *acceptInfo in items)
+    {
+        AcceptItem *acceptItemDB = [NSEntityDescription insertNewObjectForEntityForName:@"AcceptItem" inManagedObjectContext:_dataController.managedObjectContext];
+        
+        acceptItemDB.barcode = acceptInfo.barcode;
+        acceptItemDB.containerBarcode = acceptInfo.containerBarcode;
+        acceptItemDB.type = acceptInfo.type == AcceptanesInformationItemTypeBox ? @"B" : (acceptInfo.type == AcceptanesInformationItemTypeSet ? @"S" : @"");
+        acceptItemDB.date = acceptInfo.date;
+        acceptItemDB.quantity = acceptInfo.quantity;
+        acceptItemDB.scanned = acceptInfo.scanned;
+        acceptItemDB.manually = @(acceptInfo.manually);
+        
+        acceptItemDB.isComplete = @(acceptInfo.isComplete);
+        acceptItemDB.iD = acceptInfo.ID;
+        acceptItemDB.shopName = acceptInfo.shopName;
+        acceptItemDB.name = acceptInfo.name;
     }
     
     [_dataController.managedObjectContext save:nil];

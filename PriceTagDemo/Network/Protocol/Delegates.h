@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ItemInformation.h"
 #import "DiscountInformation.h"
+#import "AcceptanesInformation.h"
 
 @protocol HelloDelegate <NSObject>
 - (void) helloComplete:(NSString*)text;
@@ -39,6 +40,11 @@
 - (void) stockComplete:(int) result items:(NSArray<ItemInformation*>*) items;
 - (void) allStocksComplete:(int) result items:(NSArray<ItemInformation*>*) items;
 @end
-
+@protocol AcceptanesDelegate <NSObject>
+- (void) acceptanesComplete:(int) result items:(NSArray*)items;
+- (void) acceptanesHierarchyComplete:(int)result items:(NSArray<AcceptanesInformation*>*)items;
+@optional
+- (void) sendAcceptanesComplete:(int)result;
+@end
 
 

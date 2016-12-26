@@ -14,6 +14,7 @@
 @interface InventoryViewController () <UIAlertViewDelegate>
 {
 }
+@property (weak, nonatomic) IBOutlet UILabel *placeholderLabel;
 
 @end
 
@@ -26,7 +27,7 @@
     [dtDevice connect];
     [self connectionState:dtDevice.connstate];
     
-    _sectionLabel.text = [NSString stringWithFormat:@"Зона: %@", _section.name];
+    _sectionLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Зона", nil), _section.name];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary* inventoryCache = [defaults objectForKey:@"inventoryCache"];
@@ -53,7 +54,7 @@
             _shieldView.hidden = YES;
             [self updateTotalQuantity];
             
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Внимание" message:@"Продолжить существующий список?" delegate:self cancelButtonTitle:@"Очистить" otherButtonTitles:@"Продолжить", nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Внимание", nil) message:NSLocalizedString(@"Продолжить существующий список?", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Очистить", nil) otherButtonTitles:NSLocalizedString(@"Продолжить", nil), nil];
             alert.tag = 10;
             [alert show];
         }
@@ -72,7 +73,7 @@
      postNotificationName:@"BarcodeScanNotification"
      object:params];*/
     
-    // Do any additional setup after loading the view.
+    _placeholderLabel.text = NSLocalizedString(@"Отсканируйте штрих-код товара", nil);
 }
 
 - (void) save
@@ -133,11 +134,11 @@
 
 - (IBAction)manualInputAction:(id)sender
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ручной ввод"
-                                                    message:@"Введите штрих-код"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Ручной ввод", nil)
+                                                    message:NSLocalizedString(@"Введите штрих-код", nil)
                                                    delegate:self
-                                          cancelButtonTitle:@"Отмена"
-                                          otherButtonTitles:@"Отправить",nil];
+                                          cancelButtonTitle:NSLocalizedString(@"Отмена", nil)
+                                          otherButtonTitles:NSLocalizedString(@"Отправить", nil), nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     alert.tag = 1;
     [alert textFieldAtIndex:0].keyboardType = UIKeyboardTypeNumberPad;
@@ -201,7 +202,7 @@
         finalQuan+=[[self.itemsCount objectForKey:currentKey]integerValue];
     }
     
-    _countLabel.text = [NSString stringWithFormat:@"Количество: %ld", (long)finalQuan];
+    _countLabel.text = [NSString stringWithFormat:@"%@: %ld", NSLocalizedString(@"Количество", nil), (long)finalQuan];
 
 }
 
@@ -227,7 +228,7 @@
     {
         
         
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Внимание" message:@"Товар не найден в базе" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Внимание", nil) message:NSLocalizedString(@"Товар не найден в базе", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
             alert.tag = 0;
             [alert show];
     
@@ -281,7 +282,7 @@
 
 - (void) showInfoMessage:(NSString*) info
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Info" message:info delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Info", nil) message:info delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
     [alert show];
 }
 

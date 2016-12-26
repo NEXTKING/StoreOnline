@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *calibrateBlackMarkButton;
 @property (weak, nonatomic) IBOutlet UISwitch *scanSoundSwitch;
 @property (weak, nonatomic) IBOutlet UIButton *bindPrinterButton;
+@property (weak, nonatomic) IBOutlet UIButton *temporaryFeedButton;
+@property (weak, nonatomic) IBOutlet UILabel *enableScanSoundLabel;
 
 @property (nonatomic, copy) void (^feedPaperAction)();
 @property (nonatomic, copy) void (^calibrateAction)();

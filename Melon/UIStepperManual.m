@@ -37,7 +37,7 @@
     if (sender.state != UIGestureRecognizerStateBegan)
         return;
     
-    UIAlertView* bindingAlert = [[UIAlertView alloc] initWithTitle:@"Введите количество" message:nil delegate:self cancelButtonTitle:@"Отмена" otherButtonTitles:@"Оk", nil];
+    UIAlertView* bindingAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Введите количество", nil) message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Отмена", nil) otherButtonTitles:NSLocalizedString(@"Оk", nil), nil];
     bindingAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
     //[bindingAlert textFieldAtIndex:0].text = [NSString stringWithFormat:@"%.0f", self.value];
     [bindingAlert textFieldAtIndex:0].keyboardType = UIKeyboardTypeNumberPad;
