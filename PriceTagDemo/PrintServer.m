@@ -104,7 +104,7 @@
 
 - (void)printerDidFinishPrinting
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"PrinterDidFinishPrinting" object:_queue[0][@"item"]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"PrinterDidFinishPrinting" object:_queue[0]];
     
     [_queue removeObjectAtIndex:0];
     _isPrinting = NO;
@@ -131,7 +131,7 @@
     _isPrinting = NO;
     [self hidePrintView];
     [_suspendingBlocker stopBlock];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"PrinterDidFailPrinting" object:_queue[0][@"item"]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"PrinterDidFailPrinting" object:_queue[0]];
     
     [_queue removeObjectAtIndex:0];
     

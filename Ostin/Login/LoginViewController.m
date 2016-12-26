@@ -29,9 +29,28 @@
     _loginTextField.returnKeyType = UIReturnKeyNext;
     _passwordTextField.delegate = self;
     _passwordTextField.returnKeyType = UIReturnKeyDone;
-    _progressView.hidden = YES;
-    _progressLabel.hidden = YES;
     _scanLoginEnable = YES;
+    
+    SynchronizationController.sharedInstance.delegate = self;
+    if (SynchronizationController.sharedInstance.syncIsRunning)
+    {
+        _syncButton.enabled = NO;
+        _progressView.hidden = NO;
+        _progressLabel.hidden = NO;
+        _resetButton.enabled = NO;
+        _loginButton.enabled = NO;
+        
+        double progress = SynchronizationController.sharedInstance.syncProgress;
+        _progressView.progress = progress;
+        _progressLabel.text = [NSString stringWithFormat:@"%d %%", (int)(progress * 100)];
+    }
+    else
+    {
+        _progressView.hidden = YES;
+        _progressLabel.hidden = YES;
+    }
+    NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
+    _buildLabel.text = [NSString stringWithFormat:@"Build: %@", build];
 }
 
 #pragma mark Notifications
@@ -93,6 +112,7 @@
     if (result == 0)
     {
         [[NSUserDefaults standardUserDefaults] setValue:userInformation.key_user forKey:@"UserID"];
+        [[NSUserDefaults standardUserDefaults] setValue:userInformation.login forKey:@"UserLogin"];
         [[NSUserDefaults standardUserDefaults] setValue:userInformation.name forKey:@"UserName"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
@@ -123,9 +143,7 @@
     _progressView.progress = 0;
     _progressLabel.text = @"0 %";
     
-    SynchronizationController *sync = [SynchronizationController new];
-    sync.delegate = self;
-    [sync synchronize];
+    [SynchronizationController.sharedInstance synchronize];
 }
 
 - (IBAction)reset:(id)sender
@@ -134,9 +152,7 @@
     _resetButton.enabled = NO;
     _loginButton.enabled = NO;
     
-    SynchronizationController *sync = [SynchronizationController new];
-    sync.delegate = self;
-    [sync resetPortions];
+    [SynchronizationController.sharedInstance resetPortions];
 }
 
 - (void) viewWillAppear:(BOOL)animated

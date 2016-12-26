@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -339,13 +338,23 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Rr-Yk-CTv">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="evv-QI-RCu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="td5-p1-eab" firstAttribute="top" secondItem="Xnz-tH-tqM" secondAttribute="bottom" constant="8" id="4Ei-6f-SkG"/>
                             <constraint firstItem="sf8-X2-67E" firstAttribute="top" secondItem="cu8-JH-aLy" secondAttribute="bottom" constant="8" id="IJK-zz-1gN"/>
+                            <constraint firstAttribute="trailing" secondItem="6Rr-Yk-CTv" secondAttribute="trailing" constant="8" id="LVk-Z6-Mhr"/>
                             <constraint firstAttribute="trailing" secondItem="cu8-JH-aLy" secondAttribute="trailing" constant="16" id="Vgn-w5-pUq"/>
                             <constraint firstItem="WHj-Gm-6Bi" firstAttribute="centerY" secondItem="ehb-6u-CqD" secondAttribute="centerY" id="XQP-IR-KlY"/>
+                            <constraint firstItem="6Rr-Yk-CTv" firstAttribute="top" secondItem="Ysv-vj-7zj" secondAttribute="bottom" constant="8" id="bsK-ag-B4K"/>
                             <constraint firstItem="cu8-JH-aLy" firstAttribute="top" secondItem="td5-p1-eab" secondAttribute="bottom" constant="8" id="eZ9-EA-XTN"/>
                             <constraint firstItem="cu8-JH-aLy" firstAttribute="leading" secondItem="ehb-6u-CqD" secondAttribute="leading" constant="16" id="gia-7J-aNu"/>
                             <constraint firstItem="Xnz-tH-tqM" firstAttribute="centerX" secondItem="ehb-6u-CqD" secondAttribute="centerX" id="iVg-Xh-brG"/>
@@ -357,6 +366,7 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="sJF-gh-pHZ"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="buildLabel" destination="6Rr-Yk-CTv" id="5WQ-ox-aXi"/>
                         <outlet property="loginButton" destination="bHC-W2-dJA" id="SoG-jB-f1d"/>
                         <outlet property="loginTextField" destination="ShL-2P-8JI" id="bSt-ow-e5Q"/>
                         <outlet property="passwordTextField" destination="mKG-2H-NtO" id="Et9-aC-wG6"/>
@@ -607,102 +617,36 @@
                         <viewControllerLayoutGuide type="bottom" id="Okm-CI-19c"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="eIm-uD-fYn">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="280"/>
+                        <rect key="frame" x="0.0" y="0.0" width="260" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EqG-NR-Zsy">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="WtI-30-Pzi"/>
-                                    <constraint firstAttribute="width" constant="156" id="uiV-Vq-5eE"/>
-                                </constraints>
-                                <state key="normal" title="Сбросить сканер"/>
-                                <connections>
-                                    <action selector="resetBarcodeEngine:" destination="e9B-d6-2V2" eventType="touchUpInside" id="N74-AX-6GL"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Звук при сканировании" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q0O-2W-smB">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="107" id="1Q3-87-gxe"/>
-                                    <constraint firstAttribute="height" constant="40" id="ogA-zZ-vCH"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YTm-wc-B6w">
-                                <connections>
-                                    <action selector="soundSwitchAction:" destination="e9B-d6-2V2" eventType="valueChanged" id="app-aD-4lv"/>
-                                </connections>
-                            </switch>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRH-fu-sVT">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="156" id="i64-5f-Y8z"/>
-                                    <constraint firstAttribute="height" constant="30" id="xjD-q1-eqd"/>
-                                </constraints>
-                                <state key="normal" title="Привязка принтера"/>
-                                <connections>
-                                    <action selector="bindPrinterAction:" destination="e9B-d6-2V2" eventType="touchUpInside" id="Jrl-kr-8Ur"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fnW-AK-0wq">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="156" id="JQn-Q1-2er"/>
-                                    <constraint firstAttribute="height" constant="30" id="Xqs-9x-LRU"/>
-                                </constraints>
-                                <state key="normal" title="Выйти"/>
-                                <connections>
-                                    <action selector="logoutButtonPressed:" destination="e9B-d6-2V2" eventType="touchUpInside" id="LQc-6u-6zm"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Печатать доп. этикетку" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rX4-xJ-7ov">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="HfV-1O-Yzz"/>
-                                    <constraint firstAttribute="width" constant="107" id="U5t-sj-liz"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jLh-fl-yh4">
-                                <connections>
-                                    <action selector="additionalLabelSwitchDidChanged:" destination="e9B-d6-2V2" eventType="valueChanged" id="TLb-7h-KrT"/>
-                                </connections>
-                            </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="go0-RX-Gwi">
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="WEz-PK-g6w">
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Vbl-3N-OZp">
+                                        <rect key="frame" x="0.0" y="56" width="260" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vbl-3N-OZp" id="GJl-Ja-fti">
+                                            <frame key="frameInset" width="260" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="EqG-NR-Zsy" firstAttribute="top" secondItem="vxx-Lm-iOU" secondAttribute="bottom" constant="16" id="1qm-8e-ZO8"/>
-                            <constraint firstItem="cRH-fu-sVT" firstAttribute="top" secondItem="EqG-NR-Zsy" secondAttribute="bottom" constant="8" id="3Fv-f2-DpJ"/>
-                            <constraint firstItem="cRH-fu-sVT" firstAttribute="centerX" secondItem="eIm-uD-fYn" secondAttribute="centerX" id="5qh-12-Iid"/>
-                            <constraint firstItem="go0-RX-Gwi" firstAttribute="leading" secondItem="eIm-uD-fYn" secondAttribute="leading" constant="16" id="5ug-pZ-A4e"/>
-                            <constraint firstItem="YTm-wc-B6w" firstAttribute="top" secondItem="cRH-fu-sVT" secondAttribute="bottom" constant="11" id="6jC-lI-bQb"/>
-                            <constraint firstAttribute="trailing" secondItem="go0-RX-Gwi" secondAttribute="trailing" constant="16" id="7qc-Io-hoq"/>
-                            <constraint firstItem="fnW-AK-0wq" firstAttribute="centerX" secondItem="eIm-uD-fYn" secondAttribute="centerX" id="8eI-c2-HpN"/>
-                            <constraint firstItem="Q0O-2W-smB" firstAttribute="leading" secondItem="eIm-uD-fYn" secondAttribute="leadingMargin" id="Pb5-b9-mtI"/>
-                            <constraint firstItem="EqG-NR-Zsy" firstAttribute="centerX" secondItem="eIm-uD-fYn" secondAttribute="centerX" id="U5v-C5-M0B"/>
-                            <constraint firstItem="jLh-fl-yh4" firstAttribute="top" secondItem="YTm-wc-B6w" secondAttribute="bottom" constant="13" id="Zpi-JV-QjZ"/>
-                            <constraint firstItem="go0-RX-Gwi" firstAttribute="top" secondItem="rX4-xJ-7ov" secondAttribute="bottom" constant="16" id="cP7-zO-teu"/>
-                            <constraint firstItem="Q0O-2W-smB" firstAttribute="top" secondItem="cRH-fu-sVT" secondAttribute="bottom" constant="6" id="eoW-xf-TJx"/>
-                            <constraint firstItem="rX4-xJ-7ov" firstAttribute="leading" secondItem="eIm-uD-fYn" secondAttribute="leading" constant="16" id="gE9-Xi-VpG"/>
-                            <constraint firstItem="fnW-AK-0wq" firstAttribute="top" secondItem="go0-RX-Gwi" secondAttribute="bottom" constant="8" id="m64-Mw-XSH"/>
-                            <constraint firstItem="rX4-xJ-7ov" firstAttribute="top" secondItem="Q0O-2W-smB" secondAttribute="bottom" constant="4" id="mzt-45-wz0"/>
-                            <constraint firstAttribute="trailing" secondItem="jLh-fl-yh4" secondAttribute="trailing" constant="16" id="nmK-h5-b7w"/>
-                            <constraint firstAttribute="trailing" secondItem="YTm-wc-B6w" secondAttribute="trailing" constant="16" id="xpA-GI-btU"/>
+                            <constraint firstAttribute="bottom" secondItem="WEz-PK-g6w" secondAttribute="bottom" id="6jP-sh-VN9"/>
+                            <constraint firstItem="WEz-PK-g6w" firstAttribute="top" secondItem="eIm-uD-fYn" secondAttribute="top" id="NS3-9E-TJ7"/>
+                            <constraint firstAttribute="trailing" secondItem="WEz-PK-g6w" secondAttribute="trailing" id="OLy-UJ-0h7"/>
+                            <constraint firstItem="WEz-PK-g6w" firstAttribute="leading" secondItem="eIm-uD-fYn" secondAttribute="leading" id="QhT-9Z-VMq"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="200" height="280"/>
+                    <size key="freeformSize" width="260" height="300"/>
                     <connections>
-                        <outlet property="additionalLabelSwitch" destination="jLh-fl-yh4" id="bTF-5X-N6s"/>
-                        <outlet property="bindPrinterButton" destination="cRH-fu-sVT" id="d6Y-Sb-8Mc"/>
-                        <outlet property="nameLabel" destination="go0-RX-Gwi" id="Ja8-Dj-zxP"/>
-                        <outlet property="resetBarcodeEngineButton" destination="EqG-NR-Zsy" id="CDh-IS-tGN"/>
-                        <outlet property="scanSoundSwitch" destination="YTm-wc-B6w" id="2N1-lg-1Qk"/>
+                        <outlet property="tableView" destination="WEz-PK-g6w" id="2pb-m2-wow"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s8K-Vw-iPM" userLabel="First Responder" sceneMemberID="firstResponder"/>

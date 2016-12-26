@@ -19,7 +19,10 @@
 @interface SynchronizationController : NSObject
 
 @property (nonatomic, weak) id<SyncronizationDelegate> delegate;
+@property (nonatomic, readonly) BOOL syncIsRunning;
+@property (nonatomic, readonly) double syncProgress;
 
++ (instancetype)sharedInstance;
 - (void) synchronize;
 - (void) resetPortions;
 

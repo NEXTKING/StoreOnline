@@ -28,6 +28,7 @@
     BOOL bindingInProgress;
     UIAlertView *bindingAlert;
     WYPopoverController *settingsPopover;
+    NSUInteger _tabBarIndex;
 }
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *actionButton;
@@ -42,16 +43,17 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 {
     [super viewDidLoad];
     _items = [[NSMutableArray alloc] init];
+    _tabBarIndex = self.tabBarController.selectedIndex;
     
     self.tableView.estimatedRowHeight = 44.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"ItemsListCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
-    [self requestData];
     [self subscribeToScanNotifications];
     [self subscribeToPrinterNotifications];
     [self updateActionButton];
     [self updateOverlayInfo];
+    [self requestData];
 }
 
 - (void)dealloc
@@ -85,7 +87,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     if (!_tasksMode)
     {
         self.actionButton.title = @"";
-        self.actionButton.enabled = YES;
+        self.actionButton.enabled = NO;
     }
     else
     {
@@ -112,13 +114,15 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     if (_activityIndicator == nil)
     {
         _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        _activityIndicator.frame = CGRectMake(0, 0, 40, 40);
         _activityIndicator.center = self.tableView.center;
+        _activityIndicator.frame = CGRectMake(_activityIndicator.frame.origin.x, _activityIndicator.frame.origin.y - 180, 40, 40);
     }
     
     [self.view addSubview:_activityIndicator];
     [_activityIndicator startAnimating];
     [self.tableView setScrollEnabled:NO];
+    [self.navigationItem setHidesBackButton:YES animated:YES];
+    [self.actionButton setEnabled:NO];
 }
 
 - (void)hideLoadingIndicator
@@ -126,6 +130,8 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     [_activityIndicator stopAnimating];
     [_activityIndicator removeFromSuperview];
     [self.tableView setScrollEnabled:YES];
+    [self.navigationItem setHidesBackButton:NO animated:YES];
+    [self updateActionButton];
 }
 
 - (void)showAlertWithMessage:(NSString*)message
@@ -177,7 +183,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
         [bindingAlert textFieldAtIndex:0].text = code;
         return;
     }
-    else if (_task.status == TaskInformationStatusInProgress)
+    else if (_task.status == TaskInformationStatusInProgress && self.tabBarController.selectedIndex == _tabBarIndex)
     {
         NSString *barcode = notification.object[@"barcode"];
         NSNumber *type = notification.object[@"type"];
@@ -187,18 +193,19 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 
 - (void)didReceiveFinishPrintNotification:(NSNotification *)notification
 {
-    if (_task.status == TaskInformationStatusInProgress)
+    if (_task.status == TaskInformationStatusInProgress && self.tabBarController.selectedIndex == _tabBarIndex)
     {
-        ItemInformation *item = notification.object;
+        id format = notification.object[@"format"];
+        ItemInformation *item = notification.object[@"item"];
         TaskItemInformation *taskItemInfo = [self taskItemInfoForItemWithID:item.itemId];
         _task.totalPrintedCount += 1;
         [[MCPServer instance] savePrintItemsCount:_task.totalPrintedCount inTaskWithID:_task.taskID];
         
-        if (taskItemInfo != nil)
+        if (taskItemInfo != nil && [format isKindOfClass:[NSString class]] && [format isEqualToString:@"mainZPL"])
         {
             taskItemInfo.scanned += 1;
             [[MCPServer instance] saveTaskItem:nil taskID:_task.taskID itemID:taskItemInfo.itemID scanned:taskItemInfo.scanned];
-            [[MCPServer instance] savePrintItemFactForItemCode:item.article taskName:_task.name];
+            [[MCPServer instance] savePrintItemFactForItemCode:item.article taskName:_task.name userID:_task.userID];
             
             NSUInteger index = [_items indexOfObject:[self itemInfoForTaskItemWithID:taskItemInfo.itemID]];
             [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -293,7 +300,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         
         SettingsViewController* destinationViewController = (SettingsViewController *)segue.destinationViewController;
-        destinationViewController.preferredContentSize = CGSizeMake(200, 280);
+        destinationViewController.preferredContentSize = CGSizeMake(260, 300);
         
         settingsPopover = [popoverSegue popoverControllerWithSender:sender permittedArrowDirections:WYPopoverArrowDirectionAny animated:YES];
         
@@ -321,6 +328,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 
 - (void) allItemsDescription:(int)result items:(NSArray<ItemInformation *> *)items
 {
+    [self hideLoadingIndicator];
     if (result == 0)
     {
         [_items removeAllObjects];
@@ -339,6 +347,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 {
     if (_tasksMode)
     {
+        [self showLoadingIndicator];
         NSMutableArray *itemsIDs = [NSMutableArray new];
         for (TaskItemInformation *taskItemInformation in _task.items)
         {

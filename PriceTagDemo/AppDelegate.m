@@ -95,6 +95,9 @@
 #ifdef MELON
             [dtDevice setCharging:YES error:nil];
             [dtDevice setPassThroughSync:YES error:nil];
+#elif defined (OSTIN)
+            [dtDevice setCharging:YES error:nil];
+            [dtDevice setPassThroughSync:YES error:nil];
 #endif
             
             //[dtDevice emsrConfigMaskedDataShowExpiration:TRUE showServiceCode:TRUE showTrack3:FALSE unmaskedDigitsAtStart:6 unmaskedDigitsAtEnd:2 unmaskedDigitsAfter:7 error:nil];
@@ -247,7 +250,7 @@
 - (void) gsKey: (UIKeyCommand *) keyCommand {
     NSLog(@"%@", keyCommand.input);
     
-    if ([keyCommand.input isEqualToString:@"+"])
+    if ([keyCommand.input isEqualToString:@"+"] || ([keyCommand.input isEqualToString:@"="] && ringBarcode.length==0))
     {
         ringBarcode = [NSMutableString new];
         ringBarcodeType = @"";

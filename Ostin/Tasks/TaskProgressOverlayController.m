@@ -136,7 +136,8 @@
 {
     if ((_completeItemsCount > 0) && (_startDate != nil))
     {
-        NSTimeInterval secondsPassed = [[NSDate date] timeIntervalSinceDate:_startDate];
+        NSDate *endDate = _endDate != nil ? _endDate : [NSDate date];
+        NSTimeInterval secondsPassed = [endDate timeIntervalSinceDate:_startDate];
         
         if ((secondsPassed / (60 * 60 * 24)) > 1)
         {
