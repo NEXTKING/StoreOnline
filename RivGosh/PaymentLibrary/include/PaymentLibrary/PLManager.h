@@ -45,6 +45,7 @@ typedef enum : NSInteger
 @interface PLManager : NSObject
 
 @property (nonatomic, weak) id<PLManagerDelegate> delegate;
+@property (nonatomic, copy) NSString* serverAddress;
 
 + (instancetype) instance;
 

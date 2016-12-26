@@ -49,18 +49,23 @@
     
     for (NSDictionary* currentDiscount in (NSArray*)param.value) {
         NSString *name   = [currentDiscount objectForKey:@"Номенклатура"];
-        [self addDicsountField:name amount:[NSString stringWithFormat:@"%.2f", [[currentDiscount objectForKey:@"Сумма"] doubleValue]]];
+        NSString* discountAmount = [NSString stringWithFormat:@"%.2f", [[currentDiscount objectForKey:@"Сумма"] doubleValue]];
+        NSString* price = [NSString stringWithFormat:@"%.2f", item.price + [[currentDiscount objectForKey:@"Сумма"] doubleValue]];
+        [self addDicsountField:name amount:discountAmount price:price];
     }
 }
 
-- (void) addDicsountField:(NSString*) name amount:(NSString*) amount
+- (void) addDicsountField:(NSString*) name amount:(NSString*) discountAmount price:(NSString*) price
 {
     
     //if (topView != self.titleLabel)
     //    return;
     
+    self.priceLabel.font = [UIFont systemFontOfSize:self.priceLabel.font.pointSize];
+    
     UILabel* discountTitleLabel     = [UILabel new];
     UILabel* discountAmountLabel    = [UILabel new];
+    UILabel* totalLabel             = [UILabel new];
     
     discountTitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     discountTitleLabel.numberOfLines = 0;
@@ -75,11 +80,18 @@
     
     discountAmountLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [discountAmountLabel setTextColor:[UIColor redColor]];
-    discountAmountLabel.text = amount;
+    discountAmountLabel.text = discountAmount;
     discountAmountLabel.textAlignment = NSTextAlignmentRight;
     [discountAmountLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     [discountAmountLabel setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     [self.contentView addSubview:discountAmountLabel];
+    
+    
+    totalLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    totalLabel.font = [UIFont boldSystemFontOfSize:totalLabel.font.pointSize];
+    totalLabel.text = [NSString stringWithFormat:@"Подитог: %@", price];
+    totalLabel.textAlignment = NSTextAlignmentRight;
+    [self.contentView addSubview:totalLabel];
     
     
     
@@ -169,6 +181,51 @@
                                                                   constant:-15.0]];
     
     
+    //Total label constraints
+    
+    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:totalLabel
+                                                                 attribute:NSLayoutAttributeTop
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:discountAmountLabel
+                                                                 attribute:NSLayoutAttributeBottom
+                                                                multiplier:1.0
+                                                                  constant:8.0]];
+    
+    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:totalLabel
+                                                                 attribute:NSLayoutAttributeLeading
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.contentView
+                                                                 attribute:NSLayoutAttributeLeading
+                                                                multiplier:1.0
+                                                                  constant:36.0]];
+    
+    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:totalLabel
+                                                                 attribute:NSLayoutAttributeTrailing
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.contentView
+                                                                 attribute:NSLayoutAttributeTrailing
+                                                                multiplier:1.0
+                                                                  constant:-15.0]];
+    
+    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:totalLabel
+                                                                 attribute:NSLayoutAttributeHeight
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:nil
+                                                                 attribute:NSLayoutAttributeNotAnAttribute
+                                                                multiplier:1.0
+                                                                  constant:21.0]];
+    
+    
+    self.bottomConstraint = [NSLayoutConstraint constraintWithItem:totalLabel
+                                                         attribute:NSLayoutAttributeBottom
+                                                         relatedBy:NSLayoutRelationEqual
+                                                            toItem:self.contentView
+                                                         attribute:NSLayoutAttributeBottom
+                                                        multiplier:1.0
+                                                          constant:-8.0];
+    
+    [self.contentView addConstraint:self.bottomConstraint];
+    topView = totalLabel;
     
 }
 

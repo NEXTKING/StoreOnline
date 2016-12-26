@@ -61,6 +61,7 @@ static int receiptWidth = 36;
     timeForatter.dateStyle = NSDateFormatterNoStyle;
     timeForatter.timeStyle = NSDateFormatterMediumStyle;
     NSString *time = [timeForatter stringFromDate:[NSDate date]];
+    NSString* receiptNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"ReceiptNumber"];
     
     NSString *ips;
     switch (bin.integerValue) {
@@ -70,15 +71,34 @@ static int receiptWidth = 36;
         case 5:
             ips = @"MASTERCARD";
             break;
-            
+        case 6:
+            ips = @"CHINA UNIONPAY";
+            break;
+        case 3:
+            ips = @"JCB";
+            break;
         default:
             ips = @"";
             break;
     }
+    
+    NSString* cvmDescription = nil;
+    switch (_cvm) {
+        case 1:
+            cvmDescription = @"ВВЕДЕН ONLINE-PIN";
+            break;
+        case 8:
+            cvmDescription = @"ВВЕДЕН OFFLINE-PIN";
+            break;
+        default:
+            cvmDescription = @"";
+            break;
+    }
+    
 
     [slipString appendFormat:@"\n"];
     [slipString appendFormat:@"Терминал: %@\n", _terminalID];
-    [slipString appendFormat:@"Чек %@\n", _receiptID];
+    [slipString appendFormat:@"Чек %@\n", receiptNumber];
     [slipString appendFormat:@"Мерчант: %@\n", _merchantID];
     [slipString appendFormat:@"%@\n", [self centeredValue:@"ОПЛАТА"]];
     [slipString appendFormat:@"%@\n", [self centeredValue:@"ОДОБРЕНО"]];
@@ -88,7 +108,8 @@ static int receiptWidth = 36;
     [slipString appendFormat:@"РУБ\n"];
     [slipString appendFormat:@"%@\n", [self keyValueFormattedString:@"ИТОГО:" value:amountString]];
     [slipString appendFormat:@"РУБ\n"];
-    [slipString appendFormat:@"AID: %@\n", _aid];
+    if (_aid.length > 0)
+        [slipString appendFormat:@"AID: %@\n", _aid];
     [slipString appendFormat:@"Карта: %@\n", ips];
     [slipString appendFormat:@"%@\n", [self centeredValue:_card]];
     [slipString appendFormat:@"%@\n", [self centeredValue:_cardholderName]];
@@ -100,13 +121,17 @@ static int receiptWidth = 36;
     [slipString appendFormat:@"Дата ПЦ  %@\n", [dateFormatter stringFromDate:[NSDate date]]];
     [slipString appendFormat:@"                 ВРЕМЯ ПЦ:\n"];
     [slipString appendFormat:@"%@\n", time];
-    [slipString appendFormat:@"ВВЕДЕН OFFLINE-PIN\n"];
+    [slipString appendFormat:@"%@\n", cvmDescription];
     [slipString appendFormat:@"=======================\n"];
-    [slipString appendFormat:@"\n"];
-    [slipString appendFormat:@"\n"];
-    [slipString appendFormat:@"\n"];
-    [slipString appendFormat:@"__________________________\n"];
-    [slipString appendFormat:@"подпись клиента\n"];
+    
+    if (_cvm == 3)
+    {
+        [slipString appendFormat:@"\n"];
+        [slipString appendFormat:@"\n"];
+        [slipString appendFormat:@"\n"];
+        [slipString appendFormat:@"__________________________\n"];
+        [slipString appendFormat:@"подпись клиента\n"];
+    }
     
     
     [finalMutable appendString:slipString];

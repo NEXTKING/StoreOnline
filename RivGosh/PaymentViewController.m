@@ -9,6 +9,7 @@
 #import "PaymentViewController.h"
 #import "MCPServer.h"
 #import "PLManager.h"
+#import "AppDelegate.h"
 
 @interface PaymentViewController () <PrinterDelegate, SendPaymentDelegate, PLManagerDelegate>
 {
@@ -300,6 +301,10 @@
 - (void) paymentManagerWillRequestPINEntry
 {
     _placeholderLabel.text = @"Введинте ПИН с клавиатуры терминала.";
+    
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    appDelegate.workspace.sideBarGestureEnabled = NO;
+    self.navigationItem.hidesBackButton = YES;
 }
 
 - (void) paymentManagerDidReceivePINEntry:(BOOL)success
@@ -329,6 +334,10 @@
 
 - (void) paymentManagerDidFinishOperation:(PLOperationType)operation result:(PLOperationResult *)result
 {
+    self.navigationItem.hidesBackButton = NO;
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    appDelegate.workspace.sideBarGestureEnabled = YES;
+    
     if (!result.success)
     {
         [_activityIndicator stopAnimating];
@@ -351,9 +360,12 @@
         }
         
         [self showInfoMessage:errorMessage];
+        _restartPayment.hidden = NO;
+        _restartPayment.enabled = YES;
+        _placeholderLabel.text = @"Для повроторного платежа нажмите \"Поврторить платеж\"";
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self performBankPayment];
+            //[self performBankPayment];
         });
     }
     else

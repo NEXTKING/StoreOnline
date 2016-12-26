@@ -14,8 +14,13 @@
 {
     BOOL zReportComplete;
     BOOL cutoverComplete;
+    BOOL historyComplete;
+    BOOL historyPrintComplete;
+    
     BOOL zReportSuccess;
     BOOL cutoverSuccess;
+    BOOL historySuccess;
+    BOOL historyPrintSuccess;
     
     BOOL executing;
     BOOL finished;
@@ -43,7 +48,7 @@
     PLManager *plManager = [PLManager instance];
     plManager.delegate = self;
     NSError* error = nil;
-    [plManager endOfDay:&error];
+    [plManager operationsHistory:&error];
     if (error)
     {
         self.error = error;
@@ -85,7 +90,7 @@
 
 - (void) signalIfFinished
 {
-    if (!zReportComplete || !cutoverComplete)
+    if (!zReportComplete || !cutoverComplete || !historyComplete || !historyPrintComplete)
         return;
     
     
@@ -131,17 +136,76 @@
     
 }
 
+- (void) printTextComplete:(int)result
+{
+    historyPrintComplete = YES;
+    if (result == 0)
+    {
+        historyPrintSuccess = YES;
+    }
+    else
+    {
+        NSString* errorDescription = [[NSUserDefaults standardUserDefaults] objectForKey:@"NetworkErrorDescription"];
+        
+        NSString* message = errorDescription?errorDescription:@"Ошибка печати истории";
+        [self commitError:message];
+    }
+    
+    [self signalIfFinished];
+}
+
 - (void) paymentManagerDidFinishOperation:(PLOperationType)operation result:(PLOperationResult *)result
 {
-    cutoverComplete = YES;
-    cutoverSuccess = result.success;
     if (!result.success)
     {
         [self commitError:result.errorLocalizedDescription];
     }
+    else
+    {
+        
+    }
     
-    [self signalIfFinished];
+    if (operation == PLOperationTypeHistory)
+        [self handleHistoryResult:result];
+    else
+        [self handleCutoverResult:result];
     
+    if (cutoverComplete && historyComplete)
+        [self signalIfFinished];
+    
+}
+
+- (void) handleCutoverResult:(PLOperationResult*) result
+{
+    cutoverComplete = YES;
+    cutoverSuccess = result.success;
+}
+
+- (void) handleHistoryResult:(PLOperationResult*) result
+{
+    historyComplete = YES;
+    historySuccess = result.success;
+    
+    if (result.success)
+    {
+        PLManager* plManager = [PLManager instance];
+        NSError* error = nil;
+        [plManager endOfDay:&error];
+        if (error)
+        {
+            self.error = error;
+            self.success = NO;
+            [self finish];
+            return;
+        }
+        
+        [[MCPServer instance] printHistory:self history:result.operationsHistory];
+    }
+    else
+    {
+        cutoverComplete = NO;
+        cutoverSuccess = NO;
+    }
 }
 
 @end

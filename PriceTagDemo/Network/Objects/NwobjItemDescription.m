@@ -385,6 +385,14 @@
                 param.value = obj;
                 [additionalParams addObject:param];
             }
+            obj = [HDR objectForKey:@"Number"];
+            if (obj && [obj isKindOfClass:[NSNumber class]])
+            {
+                ParameterInformation *param = [ParameterInformation new];
+                param.name = @"ReceiptNumber";
+                param.value = obj;
+                [additionalParams addObject:param];
+            }
         }
         
         itemInfo.additionalParameters = additionalParams;

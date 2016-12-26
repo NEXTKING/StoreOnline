@@ -50,6 +50,7 @@
     nwobjSendPayment.terminalID = operation.terminalID;
     nwobjSendPayment.merchantID = operation.merchantID;
     nwobjSendPayment.aid = operation.aid;
+    nwobjSendPayment.cvm = operation.cvm;
     
     [nwobjSendPayment run:self.serverAddress];
 }

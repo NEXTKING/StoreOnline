@@ -10,6 +10,7 @@
 #import "MCPServer.h"
 #import "DTDevices.h"
 #import "AboutLoginViewController.h"
+#import "AppDelegate.h"
 
 @interface AuthorizationViewController () <AuthorizationDelegate, UITextFieldDelegate>
 {
@@ -42,6 +43,8 @@
     [button addTarget:self action:@selector(showAppInfo) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.rightBarButtonItem = infoButton;
+    
+    //[self performSegueWithIdentifier:@"AuthorizationSegue" sender:nil];
     
 }
 
@@ -153,6 +156,8 @@
     [_authActivity stopAnimating];
     if (result == 0)
     {
+        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        [delegate.workspace updateSideBar];
         [self performSegueWithIdentifier:@"AuthorizationSegue" sender:nil];
     }
     else if (result == 403)

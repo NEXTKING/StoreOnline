@@ -357,11 +357,11 @@ static const double _longitude_scale_factor = 0.55;
 - (void) delayedClentCard:(id<ClientCardDelegate>)delegate
 {
     if ([self.currentClientCard isEqualToString:@"123456789"])
-        [delegate clientCardComplete:0 description:@"Smbd" hint:nil receiptID:nil];
+        [delegate clientCardComplete:0 description:@"Smbd" hint:nil receiptID:nil receiptNumber:nil];
     else if ([self.currentClientCard isEqualToString:@"987654321"])
-        [delegate clientCardComplete:0 description:@"Moron" hint:@"That's the sample hint" receiptID:nil];
+        [delegate clientCardComplete:0 description:@"Moron" hint:@"That's the sample hint" receiptID:nil receiptNumber:nil];
     else
-        [delegate clientCardComplete:1 description:nil hint:nil receiptID:nil];
+        [delegate clientCardComplete:1 description:nil hint:nil receiptID:nil receiptNumber:nil];
         
 }
 

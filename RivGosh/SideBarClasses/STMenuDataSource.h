@@ -13,4 +13,6 @@
 @property (nonatomic, strong, readonly) NSArray* cells;
 @property (nonatomic, strong, readonly) UIView* headerView;
 
+-(void) update;
+
 @end

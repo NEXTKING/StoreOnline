@@ -11,7 +11,7 @@
 #import "DTDevices.h"
 #import "DiscountsViewController.h"
 
-@interface RivgoshViewController () <UIAlertViewDelegate, ClientCardDelegate, DiscountsDelegate, ApplyDiscountsDelegate, PrinterDelegate, DTDeviceDelegate>
+@interface RivgoshViewController () <UIAlertViewDelegate, ClientCardDelegate, DiscountsDelegate, ApplyDiscountsDelegate, PrinterDelegate, DTDeviceDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 {
     BOOL requestInProgress;
     DTDevices* dtdev;
@@ -78,7 +78,8 @@
     if (    [barcode hasPrefix:@"5550"]
         ||  [barcode hasPrefix:@"5000"]
         ||  [barcode hasPrefix:@"9990"]
-        ||  [barcode hasPrefix:@"8888"])
+        ||  [barcode hasPrefix:@"8888"]
+        ||  [barcode hasPrefix:@"9991"])
         [self requestClientInfoWithCode:barcode];
     else
         [self requestItemInformation:barcode];
@@ -232,12 +233,16 @@
         if (itemDescription.additionalParameters.count > 0)
         {
             ParameterInformation*param = nil;
+            ParameterInformation* numberParam = nil;
             for (ParameterInformation* currentParam in itemDescription.additionalParameters) {
                 if ([currentParam.name isEqualToString:@"ReceiptID"])
                     param = currentParam;
+                if ([currentParam.name isEqualToString:@"ReceiptNumber"])
+                    numberParam = currentParam;
             }
             if (param)
                 self.currentReceiptId = param.value;
+            [[NSUserDefaults standardUserDefaults] setObject:numberParam.value forKey:@"ReceiptNumber"];
         }
         //if (![itemDescription.barcode isEqualToString:@"788800"])
         //    [self barcodeData:@"788800" type:0];
@@ -256,7 +261,7 @@
     }
 }
 
-- (void) clientCardComplete:(int)result description:(NSString *)description hint:(NSString *)hint receiptID:(NSString *)receiptID
+- (void) clientCardComplete:(int)result description:(NSString *)description hint:(NSString *)hint receiptID:(NSString *)receiptID receiptNumber:(NSNumber *)receiptNumber
 {
     requestInProgress = NO;
     [_headerActivity stopAnimating];
@@ -268,6 +273,7 @@
         if (hint.length > 0)
             [self showInfoMessage:hint];
         self.currentReceiptId = receiptID;
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d", receiptNumber.integerValue] forKey:@"ReceiptNumber"];
     }
     else if (result == 500)
     {

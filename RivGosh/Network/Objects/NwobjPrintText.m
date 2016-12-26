@@ -50,9 +50,16 @@
     NSMutableString* finalString = [[NSMutableString alloc] init];
     [finalString appendFormat:@"\n\r"];
     
-    for (int i = 0; i < _operationsHistory.count; ++i)
+    NSArray *sortedArray;
+    sortedArray = [_operationsHistory sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+        NSNumber *first = [(NSArray*)a objectAtIndex:6];
+        NSNumber *second = [(NSArray*)b objectAtIndex:6];
+        return [first compare:second];
+    }];
+
+    for (int i = 0; i < sortedArray.count; ++i)
     {
-        NSArray* currentOperation = _operationsHistory[i];
+        NSArray* currentOperation = sortedArray[i];
         NSNumber* mti       = currentOperation[0];
         NSString* pan       = currentOperation[2];
         NSString* reference = currentOperation[3];
@@ -60,12 +67,29 @@
         NSString* authCode  = currentOperation[5];
         NSNumber* amount    = currentOperation[6];
         
-        [finalString appendFormat:@"Тип операции: %ld\n", mti.integerValue];
+        NSString*operationType = nil;
+        
+        switch (mti.integerValue) {
+            case 200:
+                if (authCode.length > 0)
+                    operationType = @"Продажа";
+                else
+                    operationType = @"Продажа (ОТКЛОНЕНА)";
+                break;
+            case 400:
+                operationType = @"Отмена";
+                break;
+                
+            default:
+                break;
+        }
+        
+        [finalString appendFormat:@"Тип операции: %@\n", operationType];
         [finalString appendFormat:@"Карта: %@\n", pan];
         [finalString appendFormat:@"Ссылка: %@\n", reference];
         [finalString appendFormat:@"Код авторизации: %@\n", authCode];
         [finalString appendFormat:@"Сумма: %.2f РУБ\n", amount.doubleValue];
-        [finalString appendFormat:@"Дата: %@\n", authCode];
+        [finalString appendFormat:@"Дата: %@\n", @""];
         
          [finalString appendFormat:@" \n\r"];
          [finalString appendFormat:@" \n\r"];
@@ -73,6 +97,8 @@
     
     return finalString;
 }
+
+
 
 - (void) run: (NSString*) url
 {

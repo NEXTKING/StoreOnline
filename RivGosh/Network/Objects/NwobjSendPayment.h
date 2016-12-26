@@ -21,6 +21,7 @@
 @property (nonatomic, copy) NSString* cardholderName;
 @property (nonatomic, copy) NSString* aid;
 @property (nonatomic, copy) NSString* card;
+@property (nonatomic, assign) int cvm;
 @property (nonatomic, assign) double amount;
 
 // result parameters:

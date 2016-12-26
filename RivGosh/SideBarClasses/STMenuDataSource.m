@@ -117,15 +117,24 @@
         //HeaderView
         DSPF_SideMenuHeader_technopark* header = [[[NSBundle mainBundle] loadNibNamed:@"DSPF_SideMenuHeader_technopark" owner:nil options:nil] objectAtIndex:0];
        // User* currentUser = [User userWithUserID:[NSUserDefaults currentUserID] inCtx:ctx()];
-        header.nameLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"Username"];
-        header.cashLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"CashName"]?[[NSUserDefaults standardUserDefaults] objectForKey:@"CashName"]:@"-";
-        header.cashboxLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"CashboxName"]?[[NSUserDefaults standardUserDefaults] objectForKey:@"CashboxName"]:@"-";
-        header.storeLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"StoreName"]?[[NSUserDefaults standardUserDefaults] objectForKey:@"StoreName"]:@"-";
         
         _headerView = header;
+        [self update];
+        
         _cells = cellsArray;
     }
     return self;
+}
+
+
+- (void) update
+{
+    DSPF_SideMenuHeader_technopark* header = (DSPF_SideMenuHeader_technopark*)_headerView;
+    
+    header.nameLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"Username"];
+    header.cashLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"CashName"]?[[NSUserDefaults standardUserDefaults] objectForKey:@"CashName"]:@"-";
+    header.cashboxLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"CashboxName"]?[[NSUserDefaults standardUserDefaults] objectForKey:@"CashboxName"]:@"-";
+    header.storeLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"StoreName"]?[[NSUserDefaults standardUserDefaults] objectForKey:@"StoreName"]:@"-";
 }
 
 - (void) dealloc

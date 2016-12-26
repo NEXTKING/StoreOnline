@@ -180,10 +180,10 @@
                         NSDictionary* bd = obj[0];
                         obj = [bd objectForKey:@"Сумма"];
                         if (obj && [obj isKindOfClass:[NSNumber class]])
-                            report.dbAmount = [obj doubleValue];
+                            report.dbAmount = obj;
                         obj = [bd objectForKey:@"СуммаФР"];
                         if (obj && [obj isKindOfClass:[NSNumber class]])
-                            report.fiscalAmount = [obj doubleValue];
+                            report.fiscalAmount = obj;
                     }
                     
                 }

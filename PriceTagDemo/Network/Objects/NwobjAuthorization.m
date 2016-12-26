@@ -103,7 +103,7 @@
     
     _succeeded = isSuccessfull;
     
-    _resultCode = -1;
+    _resultCode = -1; 
     
     if ( _succeeded )
     {   // Request successfully performed

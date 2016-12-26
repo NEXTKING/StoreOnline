@@ -55,7 +55,8 @@
     NSBlockOperation* delegateCallOperation = [NSBlockOperation blockOperationWithBlock:^{
         
         BOOL success = _obtainAmount.success;
-        bankAmount = _obtainAmount.bankAmount;
+        bankAmount      = _obtainAmount.bankAmount;
+        currentReport   = _obtainAmount.zReport;
         
         if (!success)
             [self showInfoMessage:_obtainAmount.error.localizedDescription];
@@ -137,12 +138,18 @@
     {
         switch (indexPath.row) {
             case 0:
+            {
                 cell.textLabel.text = @"Сумма БД";
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"%.2f", currentReport.dbAmount];
+                NSString* dbAmount = currentReport.dbAmount ? [NSString stringWithFormat:@"%.2f", currentReport.dbAmount.doubleValue] : @"-";
+                cell.detailTextLabel.text = dbAmount;
+            }
                 break;
             case 1:
+            {
                 cell.textLabel.text = @"Сумма ФР";
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"%.2f", currentReport.fiscalAmount];
+                NSString* fiscalAmount = currentReport.fiscalAmount ? [NSString stringWithFormat:@"%.2f", currentReport.fiscalAmount.doubleValue] : @"-";
+                cell.detailTextLabel.text = fiscalAmount;
+            }
                 break;
             case 2:
                 cell.textLabel.text = @"Сумма в банке";
@@ -163,7 +170,8 @@
     else
     {
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
-        cell.textLabel.textColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
+        cell.textLabel.textColor = currentReport.items.count > 0 ? [UIColor lightGrayColor] : [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
+        cell.selectionStyle = currentReport.items.count > 0 ? UITableViewCellSelectionStyleNone:UITableViewCellSelectionStyleDefault;
         cell.accessoryView = zreportActivity;
         cell.textLabel.text = @"Снять Z отчет";
     }
@@ -174,7 +182,7 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1)
+    if (indexPath.section == 1 && currentReport.items.count < 1)
     {
         [zreportActivity startAnimating];
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -182,7 +190,7 @@
         
         
         CloseDayOperation *closeDay = [CloseDayOperation new];
-        closeDay.dbAmount = [NSNumber numberWithDouble:currentReport.dbAmount];
+        closeDay.dbAmount = [NSNumber numberWithDouble:currentReport.dbAmount.doubleValue];
         __weak CloseDayOperation *closeDayBlock = closeDay;
        
         NSBlockOperation* delegateCallOperation = [NSBlockOperation blockOperationWithBlock:^{

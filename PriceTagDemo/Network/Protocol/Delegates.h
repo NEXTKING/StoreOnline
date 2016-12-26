@@ -22,7 +22,7 @@
 - (void) authorizationComplete:(int) result rights:(NSDictionary*) rights;
 @end
 @protocol ClientCardDelegate <NSObject>
-- (void) clientCardComplete:(int) result description:(NSString*)description hint:(NSString*)hint receiptID:(NSString*) receiptID;
+- (void) clientCardComplete:(int) result description:(NSString*)description hint:(NSString*)hint receiptID:(NSString*) receiptID receiptNumber:(NSNumber*) receiptNumber;
 @end
 @protocol SendCartDelegate <NSObject>
 @optional

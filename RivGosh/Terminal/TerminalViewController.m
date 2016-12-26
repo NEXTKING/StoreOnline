@@ -135,12 +135,12 @@
 - (void) paymentManagerWillRequestPINEntry
 {
     infoAlert.message = @"Введите ПИН на клавиатуре терминала";
-    [self presentViewController:infoAlert animated:YES completion:nil];
+    if (self.presentedViewController != infoAlert)
+        [self presentViewController:infoAlert animated:YES completion:nil];
 }
 
 - (void) paymentManagerDidReceivePINEntry:(BOOL)success
 {
-    [infoAlert dismissViewControllerAnimated:YES completion:nil];
     if (success)
     {
     }
@@ -158,7 +158,6 @@
 
 - (void) paymentManagerDidReceiveCardSwipe
 {
-    [infoAlert dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) paymentManagerWillStartOperation:(PLOperationType)operation
@@ -198,7 +197,8 @@
     }
     
     infoAlert.message = message;
-    [self presentViewController:infoAlert animated:YES completion:nil];
+    if (self.presentedViewController != infoAlert)
+        [self presentViewController:infoAlert animated:YES completion:nil];
 }
 
 - (void) paymentManagerDidFinishOperation:(PLOperationType)operation result:(PLOperationResult *)result

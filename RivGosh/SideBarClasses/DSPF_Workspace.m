@@ -13,7 +13,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-//#define STATIC_MENU
+#define STATIC_MENU
 //#define MENU_ABOVE
 
 @interface DSPF_Workspace ()
@@ -153,10 +153,20 @@
     _menuCtrl.menuDataSource = menuDataSource;
     [self.view insertSubview:_menuCtrl.view belowSubview:_navigationController.view];
     
-    CGRect favoritesFrame = _menuCtrl.view.frame;
+    /*CGRect favoritesFrame = _menuCtrl.view.frame;
     CGRect mainFrame = _navigationController.view.frame;
     //int coffs = (_startOfAnimation.x - _endOfAnimation.x);
     favoritesFrame.origin.x = mainFrame.origin.x+mainFrame.size.width;
+    _menuCtrl.view.frame = favoritesFrame;*/
+    
+    CGRect favoritesFrame = _menuCtrl.view.frame;
+    //CGRect mainFrame = _navigationController.view.frame;
+    //int coffs = (_startOfAnimation.x - _endOfAnimation.x);
+    favoritesFrame.origin.x = 0;
+    favoritesFrame.origin.y = 0;
+    favoritesFrame.size.width = self.view.bounds.size.width*0.81;
+    favoritesFrame.size.height = self.view.bounds.size.height;
+    
     _menuCtrl.view.frame = favoritesFrame;
     
     // Create a temporary status bar overlay
@@ -252,14 +262,15 @@
     {   // show menu
         if ( !_menuCtrl )
         {
-            TWMenuViewController* controller = [[TWMenuViewController alloc] initWithNibName:@"TWMenuView" bundle:Nil];
-            controller.delegate = self;
+            STMenuViewController* controller = [[STMenuViewController alloc] init];
+            //controller.delegate = self;
+            controller.menuDataSource = [STMenuDataSource new];
             _menuCtrl = controller;
         }
         CGRect menuFrame = _menuCtrl.view.frame;
         menuFrame.origin.x = -1*_hiddenWidth;
-        menuFrame.origin.y = 20;
-        menuFrame.size.height = self.view.bounds.size.height-_tabBar.frame.size.height;
+        menuFrame.origin.y = 0;
+        menuFrame.size.height = self.view.bounds.size.height;
 #ifdef MENU_ABOVE
         [self.view insertSubview:_menuCtrl.view aboveSubview:_navigationController.view];
 #else
@@ -496,7 +507,8 @@
         CGRect menuFrame = _menuCtrl.view.frame;
         CGRect mainFrame = _navigationController.view.frame;
         int coffs = (_startOfAnimation.x - _endOfAnimation.x);
-        mainFrame.origin.x -= menuFrame.size.width-coffs-(_hiddenWidth+_overlapWidth);
+        //mainFrame.origin.x -= menuFrame.size.width-coffs-(_hiddenWidth+_overlapWidth);
+        mainFrame.origin.x = 0;
         menuFrame.origin.x = mainFrame.origin.x-menuFrame.size.width;
         
         void (^animations_block)() = ^{
@@ -774,6 +786,7 @@
 - (void) updateSideBar
 {
     [_menuCtrl.tableView.tableHeaderView setNeedsDisplay];
+    [_menuCtrl.menuDataSource update];
 }
 
 - (void) switchBackToWorkspace

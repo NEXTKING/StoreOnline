@@ -112,6 +112,7 @@
     NSString *description = nil;
     NSString *hint        = nil;
     NSString *receiptID   = nil;
+    NSString *receiptNumber = nil;
     
     if ( _succeeded )
     {   // Request successfully performed
@@ -171,6 +172,10 @@
                      if (obj && [obj isKindOfClass:[NSString class]])
                          receiptID = obj;
                      
+                     obj = [HDR objectForKey:@"Number"];
+                     if (obj && [obj isKindOfClass:[NSString class]])
+                         receiptNumber = obj;
+                     
                      obj = [HDR objectForKey:@"Client"];
                      if (obj && [obj isKindOfClass:[NSDictionary class]])
                      {
@@ -207,7 +212,7 @@
     // Send signal to delegate
     // If delegate is not NIL, it conforms to correct protocol
     if ( _delegate )
-        [_delegate clientCardComplete:_resultCode description:description hint:hint receiptID:receiptID];
+        [_delegate clientCardComplete:_resultCode description:description hint:hint receiptID:receiptID receiptNumber:@(receiptNumber.integerValue)];
 }
 
 @end
