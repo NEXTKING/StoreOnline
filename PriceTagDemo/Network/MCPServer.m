@@ -14,7 +14,7 @@
 #if __has_include("MCPNetworkImpl+RivGosh.h")
 #import "MCPNetworkImpl+RivGosh.h"
 #endif
-#if defined(OSTIN)
+#if defined(OSTIN) || defined(OSTIN_IM)
 #import "MCPOfflineInmpl+Ostin.h"
 #import "MCPSimulatorImpl+Ostin.h"
 #endif
@@ -32,7 +32,7 @@ static id<MCProtocol> __inst = Nil;
         
 #if defined(RIVGOSH)
         __inst = [[MCPNetworkImpl_RivGosh alloc] init];
-#elif defined(OSTIN)
+#elif defined(OSTIN) || defined(OSTIN_IM)
         __inst = [[MCPOfflineInmpl_Ostin alloc] init];
         //__inst = [[MCPSimulatorImpl_Ostin alloc] init];
 #else

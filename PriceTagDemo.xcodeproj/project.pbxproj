@@ -50,7 +50,6 @@
 		215A02991E1127B400CCAA2C /* User+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C0545E1DC355550094C7B1 /* User+CoreDataProperties.m */; };
 		215A029A1E1127B400CCAA2C /* AppSuspendingBlocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D838461DDC57F800A98E0F /* AppSuspendingBlocker.m */; };
 		215A029B1E1127B400CCAA2C /* MelonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C60F6F811CD3754E003949CE /* MelonViewController.m */; };
-		215A029C1E1127B400CCAA2C /* ItemsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C6F601A81D9D1D800095AE21 /* ItemsModel.xcdatamodeld */; };
 		215A029D1E1127B400CCAA2C /* OstinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B957B0D81D1C291B002A5256 /* OstinViewController.m */; };
 		215A029E1E1127B400CCAA2C /* NwobjClientCard.m in Sources */ = {isa = PBXBuildFile; fileRef = B970B80E1CD0EB860066A66A /* NwobjClientCard.m */; };
 		215A029F1E1127B400CCAA2C /* ItemPrintFact+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D8385B1DE3499F00A98E0F /* ItemPrintFact+CoreDataProperties.m */; };
@@ -196,6 +195,19 @@
 		215A03381E112B7B00CCAA2C /* IM_Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 215A03371E112B7B00CCAA2C /* IM_Main.storyboard */; };
 		215A033B1E112D0600CCAA2C /* SOAPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A033A1E112D0600CCAA2C /* SOAPRequest.m */; };
 		215A033C1E112D0600CCAA2C /* SOAPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A033A1E112D0600CCAA2C /* SOAPRequest.m */; };
+		215A03421E11402A00CCAA2C /* ltemsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 215A03401E11402A00CCAA2C /* ltemsModel.xcdatamodeld */; };
+		215A034B1E1144BD00CCAA2C /* ClaimBinding+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A03441E1144BD00CCAA2C /* ClaimBinding+CoreDataClass.m */; };
+		215A034C1E1144BD00CCAA2C /* ClaimBinding+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A03461E1144BD00CCAA2C /* ClaimBinding+CoreDataProperties.m */; };
+		215A034D1E1144BD00CCAA2C /* Claim+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A03481E1144BD00CCAA2C /* Claim+CoreDataClass.m */; };
+		215A034E1E1144BD00CCAA2C /* Claim+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A034A1E1144BD00CCAA2C /* Claim+CoreDataProperties.m */; };
+		215A034F1E1144DB00CCAA2C /* ClaimBinding+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A03441E1144BD00CCAA2C /* ClaimBinding+CoreDataClass.m */; };
+		215A03501E1144DF00CCAA2C /* ClaimBinding+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A03461E1144BD00CCAA2C /* ClaimBinding+CoreDataProperties.m */; };
+		215A03511E1144E200CCAA2C /* Claim+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A03481E1144BD00CCAA2C /* Claim+CoreDataClass.m */; };
+		215A03521E1144E400CCAA2C /* Claim+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A034A1E1144BD00CCAA2C /* Claim+CoreDataProperties.m */; };
+		215A03551E11458100CCAA2C /* SOAPClaim.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A03541E11458100CCAA2C /* SOAPClaim.m */; };
+		215A03561E11458100CCAA2C /* SOAPClaim.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A03541E11458100CCAA2C /* SOAPClaim.m */; };
+		215A03591E11459B00CCAA2C /* SOAPClaimBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A03581E11459B00CCAA2C /* SOAPClaimBinding.m */; };
+		215A035A1E11459B00CCAA2C /* SOAPClaimBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A03581E11459B00CCAA2C /* SOAPClaimBinding.m */; };
 		215EFF091DAB9ED600BE11C5 /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 215EFF071DAB9ED600BE11C5 /* SearchTableViewCell.m */; };
 		215EFF0A1DAB9ED600BE11C5 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 215EFF081DAB9ED600BE11C5 /* SearchTableViewCell.xib */; };
 		2174D5811DB8CDDC00FCE9CE /* SOAPSavePrintFact.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174D5801DB8CDDC00FCE9CE /* SOAPSavePrintFact.m */; };
@@ -780,6 +792,20 @@
 		215A03371E112B7B00CCAA2C /* IM_Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IM_Main.storyboard; sourceTree = "<group>"; };
 		215A03391E112D0600CCAA2C /* SOAPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPRequest.h; sourceTree = "<group>"; };
 		215A033A1E112D0600CCAA2C /* SOAPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPRequest.m; sourceTree = "<group>"; };
+		215A03411E11402A00CCAA2C /* ltemsModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ltemsModel.xcdatamodel; sourceTree = "<group>"; };
+		215A03431E1144BD00CCAA2C /* ClaimBinding+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ClaimBinding+CoreDataClass.h"; sourceTree = "<group>"; };
+		215A03441E1144BD00CCAA2C /* ClaimBinding+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ClaimBinding+CoreDataClass.m"; sourceTree = "<group>"; };
+		215A03451E1144BD00CCAA2C /* ClaimBinding+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ClaimBinding+CoreDataProperties.h"; sourceTree = "<group>"; };
+		215A03461E1144BD00CCAA2C /* ClaimBinding+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ClaimBinding+CoreDataProperties.m"; sourceTree = "<group>"; };
+		215A03471E1144BD00CCAA2C /* Claim+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Claim+CoreDataClass.h"; sourceTree = "<group>"; };
+		215A03481E1144BD00CCAA2C /* Claim+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Claim+CoreDataClass.m"; sourceTree = "<group>"; };
+		215A03491E1144BD00CCAA2C /* Claim+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Claim+CoreDataProperties.h"; sourceTree = "<group>"; };
+		215A034A1E1144BD00CCAA2C /* Claim+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Claim+CoreDataProperties.m"; sourceTree = "<group>"; };
+		215A03531E11458100CCAA2C /* SOAPClaim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPClaim.h; sourceTree = "<group>"; };
+		215A03541E11458100CCAA2C /* SOAPClaim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPClaim.m; sourceTree = "<group>"; };
+		215A03571E11459B00CCAA2C /* SOAPClaimBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPClaimBinding.h; sourceTree = "<group>"; };
+		215A03581E11459B00CCAA2C /* SOAPClaimBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPClaimBinding.m; sourceTree = "<group>"; };
+		215A035B1E1269CC00CCAA2C /* AcceptancesProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AcceptancesProtocol.h; sourceTree = "<group>"; };
 		215EFF061DAB9ED600BE11C5 /* SearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableViewCell.h; sourceTree = "<group>"; };
 		215EFF071DAB9ED600BE11C5 /* SearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewCell.m; sourceTree = "<group>"; };
 		215EFF081DAB9ED600BE11C5 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
@@ -1480,6 +1506,14 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
+		215A033F1E11400500CCAA2C /* IM */ = {
+			isa = PBXGroup;
+			children = (
+				215A03401E11402A00CCAA2C /* ltemsModel.xcdatamodeld */,
+			);
+			name = IM;
+			sourceTree = "<group>";
+		};
 		21B8DC781DB66BFD00FD9161 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -1917,6 +1951,7 @@
 				B989F4CB1CFC37C300B59F5A /* UserSessionInformation.m */,
 				21D838521DDD9A4E00A98E0F /* AcceptanesInformation.h */,
 				21D838531DDD9A4E00A98E0F /* AcceptanesInformation.m */,
+				215A035B1E1269CC00CCAA2C /* AcceptancesProtocol.h */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -2234,6 +2269,10 @@
 				21C054621DC355E20094C7B1 /* SOAPUsers.m */,
 				21D838421DD4B47F00A98E0F /* SOAPResetIncDone.h */,
 				21D838431DD4B47F00A98E0F /* SOAPResetIncDone.m */,
+				215A03531E11458100CCAA2C /* SOAPClaim.h */,
+				215A03541E11458100CCAA2C /* SOAPClaim.m */,
+				215A03571E11459B00CCAA2C /* SOAPClaimBinding.h */,
+				215A03581E11459B00CCAA2C /* SOAPClaimBinding.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -2476,6 +2515,7 @@
 		C6F601A71D9D1D060095AE21 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				215A033F1E11400500CCAA2C /* IM */,
 				C6F601A81D9D1D800095AE21 /* ItemsModel.xcdatamodeld */,
 				C66723721DA81285001B30AC /* Barcode+CoreDataClass.h */,
 				C66723731DA81285001B30AC /* Barcode+CoreDataClass.m */,
@@ -2513,6 +2553,14 @@
 				21C054531DC239220094C7B1 /* Subgroup+CoreDataClass.m */,
 				21C054541DC239220094C7B1 /* Subgroup+CoreDataProperties.h */,
 				21C054551DC239220094C7B1 /* Subgroup+CoreDataProperties.m */,
+				215A03471E1144BD00CCAA2C /* Claim+CoreDataClass.h */,
+				215A03481E1144BD00CCAA2C /* Claim+CoreDataClass.m */,
+				215A03491E1144BD00CCAA2C /* Claim+CoreDataProperties.h */,
+				215A034A1E1144BD00CCAA2C /* Claim+CoreDataProperties.m */,
+				215A03431E1144BD00CCAA2C /* ClaimBinding+CoreDataClass.h */,
+				215A03441E1144BD00CCAA2C /* ClaimBinding+CoreDataClass.m */,
+				215A03451E1144BD00CCAA2C /* ClaimBinding+CoreDataProperties.h */,
+				215A03461E1144BD00CCAA2C /* ClaimBinding+CoreDataProperties.m */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -3831,6 +3879,7 @@
 				215A028F1E1127B400CCAA2C /* TaskItemBinding+CoreDataProperties.m in Sources */,
 				215A02901E1127B400CCAA2C /* NwobjDiscounts.m in Sources */,
 				215A02911E1127B400CCAA2C /* SynchronizationController.m in Sources */,
+				215A03421E11402A00CCAA2C /* ltemsModel.xcdatamodeld in Sources */,
 				215A02921E1127B400CCAA2C /* ItemPrintFact+CoreDataClass.m in Sources */,
 				215A02931E1127B400CCAA2C /* PI_MOBILE_SERVICEService.m in Sources */,
 				215A02941E1127B400CCAA2C /* NSDate+ISO8601Unparsing.m in Sources */,
@@ -3841,9 +3890,9 @@
 				215A02991E1127B400CCAA2C /* User+CoreDataProperties.m in Sources */,
 				215A029A1E1127B400CCAA2C /* AppSuspendingBlocker.m in Sources */,
 				215A029B1E1127B400CCAA2C /* MelonViewController.m in Sources */,
-				215A029C1E1127B400CCAA2C /* ItemsModel.xcdatamodeld in Sources */,
 				215A029D1E1127B400CCAA2C /* OstinViewController.m in Sources */,
 				215A029E1E1127B400CCAA2C /* NwobjClientCard.m in Sources */,
+				215A034B1E1144BD00CCAA2C /* ClaimBinding+CoreDataClass.m in Sources */,
 				215A029F1E1127B400CCAA2C /* ItemPrintFact+CoreDataProperties.m in Sources */,
 				215A02A01E1127B400CCAA2C /* SettingsSyncCell.m in Sources */,
 				215A02A11E1127B400CCAA2C /* USGlobals.m in Sources */,
@@ -3865,6 +3914,7 @@
 				215A02B11E1127B400CCAA2C /* SOAPTasks.m in Sources */,
 				215A02B21E1127B400CCAA2C /* SettingsViewController+Ostin.m in Sources */,
 				215A02B31E1127B400CCAA2C /* Group+CoreDataClass.m in Sources */,
+				215A035A1E11459B00CCAA2C /* SOAPClaimBinding.m in Sources */,
 				215A02B41E1127B400CCAA2C /* NwRequest.m in Sources */,
 				215A02B51E1127B400CCAA2C /* WYStoryboardPopoverSegue.m in Sources */,
 				215A02B61E1127B400CCAA2C /* SOAPOperation.m in Sources */,
@@ -3877,6 +3927,7 @@
 				215A02BD1E1127B400CCAA2C /* ItemInformation.m in Sources */,
 				215A02BE1E1127B400CCAA2C /* TaskProgressOverlayController.m in Sources */,
 				215A02BF1E1127B400CCAA2C /* ItemsListCell.m in Sources */,
+				215A034E1E1144BD00CCAA2C /* Claim+CoreDataProperties.m in Sources */,
 				215A02C01E1127B400CCAA2C /* DetailsTableViewController.m in Sources */,
 				215A02C11E1127B400CCAA2C /* ViewController.m in Sources */,
 				215A02C21E1127B400CCAA2C /* BarcodeFormatter.m in Sources */,
@@ -3885,6 +3936,7 @@
 				215A02C51E1127B400CCAA2C /* SOAPTaskWareBinding.m in Sources */,
 				215A033C1E112D0600CCAA2C /* SOAPRequest.m in Sources */,
 				215A02C61E1127B400CCAA2C /* Task+CoreDataClass.m in Sources */,
+				215A03561E11458100CCAA2C /* SOAPClaim.m in Sources */,
 				215A02C71E1127B400CCAA2C /* Subgroup+CoreDataClass.m in Sources */,
 				215A02C81E1127B400CCAA2C /* main.m in Sources */,
 				215A02C91E1127B400CCAA2C /* SearchViewController.m in Sources */,
@@ -3911,6 +3963,7 @@
 				215A02DE1E1127B400CCAA2C /* Subgroup+CoreDataProperties.m in Sources */,
 				215A02DF1E1127B400CCAA2C /* xsd.m in Sources */,
 				215A02E01E1127B400CCAA2C /* NwobjStock.m in Sources */,
+				215A034D1E1144BD00CCAA2C /* Claim+CoreDataClass.m in Sources */,
 				215A02E11E1127B400CCAA2C /* CategoriesViewController.m in Sources */,
 				215A02E21E1127B400CCAA2C /* ZPLGenerator.m in Sources */,
 				215A02E31E1127B400CCAA2C /* WarehouseInformation.m in Sources */,
@@ -3919,6 +3972,7 @@
 				215A02E61E1127B400CCAA2C /* SettingsViewController.m in Sources */,
 				215A02E71E1127B400CCAA2C /* CommonConfirmButton.m in Sources */,
 				215A02E81E1127B400CCAA2C /* USAdditions.m in Sources */,
+				215A034C1E1144BD00CCAA2C /* ClaimBinding+CoreDataProperties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3979,6 +4033,7 @@
 				C6F601AA1D9D1D800095AE21 /* ItemsModel.xcdatamodeld in Sources */,
 				B957B0D91D1C291B002A5256 /* OstinViewController.m in Sources */,
 				B9F5F0B31D0057650010E1EA /* NwobjClientCard.m in Sources */,
+				215A034F1E1144DB00CCAA2C /* ClaimBinding+CoreDataClass.m in Sources */,
 				21D8385D1DE3499F00A98E0F /* ItemPrintFact+CoreDataProperties.m in Sources */,
 				210F2B741DF5655500818512 /* SettingsSyncCell.m in Sources */,
 				C6F600CB1D9C363C0095AE21 /* USGlobals.m in Sources */,
@@ -4000,6 +4055,7 @@
 				C66723921DAAEA87001B30AC /* SOAPTasks.m in Sources */,
 				21D8381D1DD0A72800A98E0F /* SettingsViewController+Ostin.m in Sources */,
 				21C054501DC238DA0094C7B1 /* Group+CoreDataClass.m in Sources */,
+				215A03591E11459B00CCAA2C /* SOAPClaimBinding.m in Sources */,
 				B92DCE371C845F13002AA184 /* NwRequest.m in Sources */,
 				B907ADDD1D095C3200B44BF1 /* WYStoryboardPopoverSegue.m in Sources */,
 				C66723861DA912CF001B30AC /* SOAPOperation.m in Sources */,
@@ -4012,6 +4068,7 @@
 				B92DCE391C845F1E002AA184 /* ItemInformation.m in Sources */,
 				21BB44BF1DACF0D100ED67EE /* TaskProgressOverlayController.m in Sources */,
 				C67103F21D93CB59000AEC24 /* ItemsListCell.m in Sources */,
+				215A03521E1144E400CCAA2C /* Claim+CoreDataProperties.m in Sources */,
 				B92DCE311C845E92002AA184 /* DetailsTableViewController.m in Sources */,
 				B92DCE2E1C845E89002AA184 /* ViewController.m in Sources */,
 				21B8DC7B1DB66CF900FD9161 /* BarcodeFormatter.m in Sources */,
@@ -4020,6 +4077,7 @@
 				C607A60B1DB0E0E000F3E5E9 /* SOAPTaskWareBinding.m in Sources */,
 				215A033B1E112D0600CCAA2C /* SOAPRequest.m in Sources */,
 				C667239B1DAAEEFB001B30AC /* Task+CoreDataClass.m in Sources */,
+				215A03551E11458100CCAA2C /* SOAPClaim.m in Sources */,
 				21C054561DC239220094C7B1 /* Subgroup+CoreDataClass.m in Sources */,
 				B92DCE1A1C845E60002AA184 /* main.m in Sources */,
 				C67103F91D93DFE5000AEC24 /* SearchViewController.m in Sources */,
@@ -4046,6 +4104,7 @@
 				21C054571DC239220094C7B1 /* Subgroup+CoreDataProperties.m in Sources */,
 				C6F600CC1D9C363C0095AE21 /* xsd.m in Sources */,
 				C6F601CA1DA256A30095AE21 /* NwobjStock.m in Sources */,
+				215A03511E1144E200CCAA2C /* Claim+CoreDataClass.m in Sources */,
 				C6979EAD1D91462C00A0B51B /* CategoriesViewController.m in Sources */,
 				C68216381DB66B1800833751 /* ZPLGenerator.m in Sources */,
 				B92DCE3A1C845F21002AA184 /* WarehouseInformation.m in Sources */,
@@ -4054,6 +4113,7 @@
 				B907ADD91D095B8600B44BF1 /* SettingsViewController.m in Sources */,
 				B907ADDB1D095C0000B44BF1 /* CommonConfirmButton.m in Sources */,
 				C6F600CA1D9C363C0095AE21 /* USAdditions.m in Sources */,
+				215A03501E1144DF00CCAA2C /* ClaimBinding+CoreDataProperties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5305,6 +5365,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		215A03401E11402A00CCAA2C /* ltemsModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				215A03411E11402A00CCAA2C /* ltemsModel.xcdatamodel */,
+			);
+			currentVersion = 215A03411E11402A00CCAA2C /* ltemsModel.xcdatamodel */;
+			name = ltemsModel.xcdatamodeld;
+			path = IM/ltemsModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		B953278B1C91CA9500A6A4A6 /* AzbukaDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

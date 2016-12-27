@@ -34,4 +34,5 @@
 - (void) savePrintItemsCount:(NSInteger)count inTaskWithID:(NSInteger)taskID;
 - (void) savePrintItemFactForItemCode:(NSString *)itemCode taskName:(NSString *)taskName userID:(NSString *)userID;
 
+- (void) claim:(id<ClaimDelegate>)delegate claimID:(NSNumber *)claimID;
 @end

@@ -13,7 +13,11 @@
 
 - (void) main
 {
+#if defined (OSTIN_IM)
+    self.incValue = @"user_orzim";
+#else
     self.incValue = @"user";
+#endif
     self.coreDataId = @"User";
     [super main];
     
@@ -52,7 +56,11 @@
                              @"A_DEVICE_UID-VARCHAR2-IN":self.deviceID,
                              @"AO_DATA-TROWARRAY-COUT":[NSNull null]};
     SOAPRequest *request = [[SOAPRequest alloc] init];
+#if defined (OSTIN_IM)
+    SOAPRequestResponse *response = [request soapRequestWithMethod:@"USER_ORZIM_INFO" prefix:nil params:params authValue:self.authValue];
+#else
     SOAPRequestResponse *response = [request soapRequestWithMethod:@"USER_INFO" prefix:nil params:params authValue:self.authValue];
+#endif
     
     if (!response.error)
     {

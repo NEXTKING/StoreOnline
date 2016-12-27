@@ -31,6 +31,8 @@
 #import "SOAPSetTaskDone.h"
 #import "SOAPUsers.h"
 #import "SOAPResetIncDone.h"
+#import "SOAPClaim.h"
+#import "SOAPClaimBinding.h"
 #import "DTDevices.h"
 #import <CommonCrypto/CommonDigest.h>
 
@@ -55,7 +57,8 @@
         NSString *authPassword = [[NSUserDefaults standardUserDefaults] valueForKey:@"auth_password_preference"];
         if (authUser != nil && authPassword != nil)
         {
-            NSString *authStr = [NSString stringWithFormat:@"%@:%@", authUser, authPassword];
+            //NSString *authStr = [NSString stringWithFormat:@"%@:%@", authUser, authPassword];
+            NSString *authStr = [NSString stringWithFormat:@"SHOP_WEB:q1w2e3r4t5@web"];
             NSData *authData = [authStr dataUsingEncoding:NSASCIIStringEncoding];
             
             authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodingWithLineLength:80]];
@@ -817,6 +820,52 @@
     
 }
 
+- (void) claim:(id<ClaimDelegate>)delegate claimID:(NSNumber *)claimID
+{
+    if (claimID)
+    {
+        
+    }
+    else
+    {
+        NSProgress *claimProgress = [NSProgress progressWithTotalUnitCount:2 parent:delegate.progress pendingUnitCount:1];
+        
+        NSOperationQueue *claimsQueue = [NSOperationQueue new];
+        claimsQueue.name = @"claimQueue";
+        
+        SOAPClaim *claims = [SOAPClaim new];
+        __weak SOAPClaim* _claims = claims;
+        claims.dataController = self.dataController;
+        claims.authValue = authValue;
+        claims.deviceID  = deviceID;
+        
+        SOAPClaimBinding *claimsBinding = [SOAPClaimBinding new];
+        __weak SOAPClaimBinding* _claimsBinding = claimsBinding;
+        claimsBinding.dataController = self.dataController;
+        claimsBinding.authValue = authValue;
+        claimsBinding.deviceID  = deviceID;
+        
+        [claimProgress addChild:claims.progress withPendingUnitCount:1];
+        [claimProgress addChild:claimsBinding.progress withPendingUnitCount:1];
+        
+        NSBlockOperation* delegateCallOperation = [NSBlockOperation blockOperationWithBlock:^{
+            
+            BOOL success = _claims.success && _claimsBinding.success;
+            
+            if (success)
+                [delegate claimComplete:0];
+            else
+                [delegate claimComplete:1];
+            
+        }];
+        
+        [delegateCallOperation addDependency:claims];
+        [delegateCallOperation addDependency:claimsBinding];
+        
+        [claimsQueue addOperations:@[claims, claimsBinding] waitUntilFinished:NO];
+        [[NSOperationQueue mainQueue] addOperation:delegateCallOperation];
+    }
+}
 
 #pragma mark Internal Metdods
 

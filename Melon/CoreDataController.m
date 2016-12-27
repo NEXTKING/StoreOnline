@@ -24,8 +24,8 @@
 
 - (void)initializeCoreData
 {
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"ItemsModel" withExtension:@"momd"];
-    NSManagedObjectModel *mom = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    //NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"ItemsModel" withExtension:@"momd"];
+    NSManagedObjectModel *mom = [NSManagedObjectModel mergedModelFromBundles:nil];//[[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     NSAssert(mom != nil, @"Error initializing Managed Object Model");
     
     NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];

@@ -20,7 +20,7 @@ typedef enum SyncStages
     SSCount = 1 << 3    //Should be the biggest significant bit
 }SyncStages;
 
-@interface SynchronizationController() <ItemDescriptionDelegate_Ostin, TasksDelegate, UserDelegate>
+@interface SynchronizationController() <ItemDescriptionDelegate_Ostin, TasksDelegate, UserDelegate, ClaimDelegate>
 {
     NSInteger updateMask;
     NSProgress *_progress;
@@ -62,7 +62,11 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     _syncProgress = 0;
     
     [[MCPServer instance] itemDescription:self itemCode:nil shopCode:nil isoType:0];
+#if defined(OSTIN_IM)
+    [[MCPServer instance] claim:self claimID:nil];
+#elif defined (OSTIN)
     [[MCPServer instance] tasks:self userID:nil];
+#endif
     [[MCPServer instance] user:self login:nil password:nil];
     
     NSLog(@"%d", SSCount);
@@ -162,6 +166,22 @@ static void *ProgressObserverContext = &ProgressObserverContext;
 }
 
 - (void) tasksComplete:(int)result tasks:(NSArray<TaskInformation *> *)tasks
+{
+    if (result == 0)
+    {
+        [self updateSyncStatus:SSTasks];
+    }
+    else
+    {
+        _syncIsRunning = NO;
+        [_suspendingBlocker stopBlock];
+        
+        if ([_delegate respondsToSelector:@selector(syncCompleteWithResult:)])
+            [_delegate syncCompleteWithResult:result];
+    }
+}
+
+- (void) claimComplete: (int) result
 {
     if (result == 0)
     {

@@ -45,4 +45,9 @@ typedef enum : NSUInteger
 - (void) userComplete: (int) result user:(UserInformation *)userInformation;
 @end
 
+@protocol ClaimDelegate <NSObject>
+@property(nonatomic, strong) NSProgress *progress;
+- (void) claimComplete: (int) result;
+@end
+
 #endif /* Delegates_Ostin_h */
