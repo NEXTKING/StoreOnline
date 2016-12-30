@@ -121,7 +121,11 @@
 - (void)resetWindowToInitialView
 {
     [self.window.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+#if defined (OSTIN_IM)
+    UIStoryboard *initialStoryboard = [UIStoryboard storyboardWithName:@"IM_Main" bundle:nil];
+#else
     UIStoryboard *initialStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+#endif
     UIViewController* initialScene = [initialStoryboard instantiateInitialViewController];
     self.window.rootViewController = initialScene;
 }

@@ -76,7 +76,11 @@ enum : NSUInteger
     switch (section)
     {
         case SettingsSectionPrinterActions:
+#if defined (OSTIN_IM)
+            return 0;
+#else
             return 2;
+#endif
             break;
         case SettingsSectionScanerActions:
             return 2;
@@ -97,7 +101,11 @@ enum : NSUInteger
     switch (section)
     {
         case SettingsSectionPrinterActions:
+#if defined (OSTIN_IM)
+            return nil;
+#else
             return @"Настройки принтера";
+#endif
             break;
         case SettingsSectionScanerActions:
             return @"Настройки чехла";

@@ -19,5 +19,7 @@
 @dynamic claimID;
 @dynamic itemID;
 @dynamic quantity;
+@dynamic scanned;
+@dynamic cancelReason;
 
 @end

@@ -57,13 +57,13 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     });
     
     _suspendingBlocker = [AppSuspendingBlocker new];
-    [_suspendingBlocker startBlock];
+//    [_suspendingBlocker startBlock];
     _syncIsRunning = YES;
     _syncProgress = 0;
     
     [[MCPServer instance] itemDescription:self itemCode:nil shopCode:nil isoType:0];
 #if defined(OSTIN_IM)
-    [[MCPServer instance] claim:self claimID:nil];
+    [[MCPServer instance] claim:self userID:nil];
 #elif defined (OSTIN)
     [[MCPServer instance] tasks:self userID:nil];
 #endif
@@ -181,7 +181,7 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     }
 }
 
-- (void) claimComplete: (int) result
+- (void) claimComplete:(int)result items:(NSArray *)items
 {
     if (result == 0)
     {

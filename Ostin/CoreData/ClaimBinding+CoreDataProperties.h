@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSNumber *claimID;
 @property (nullable, nonatomic, copy) NSNumber *itemID;
 @property (nullable, nonatomic, copy) NSNumber *quantity;
+@property (nullable, nonatomic, copy) NSNumber *scanned;
+@property (nullable, nonatomic, copy) NSString *cancelReason;
 
 @end
 

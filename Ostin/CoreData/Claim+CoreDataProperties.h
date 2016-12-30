@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *claimNumber;
 @property (nullable, nonatomic, copy) NSNumber *userID;
 @property (nullable, nonatomic, copy) NSDate *incomingDate;
+@property (nullable, nonatomic, copy) NSDate *startDate;
+@property (nullable, nonatomic, copy) NSDate *endDate;
 
 @end
 

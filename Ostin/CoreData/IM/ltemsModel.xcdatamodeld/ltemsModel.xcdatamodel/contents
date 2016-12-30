@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16A323" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16A323" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Barcode" representedClassName="Barcode" syncable="YES">
         <attribute name="code128" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="ean" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="itemID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
     </entity>
-    <entity name="Claim" representedClassName=".Claim" syncable="YES">
+    <entity name="Claim" representedClassName="Claim" syncable="YES">
         <attribute name="claimID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="claimNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="incomingDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="userID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
-    <entity name="ClaimBinding" representedClassName=".ClaimBinding" syncable="YES">
+    <entity name="ClaimBinding" representedClassName="ClaimBinding" syncable="YES">
+        <attribute name="cancelReason" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="claimBindingID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="claimID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="itemID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="scanned" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
-    <entity name="Item" representedClassName=".Item" syncable="YES">
+    <entity name="Item" representedClassName="Item" syncable="YES">
         <attribute name="additionalInfo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="additionalSize" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="barcode" optional="YES" attributeType="String" syncable="YES"/>
@@ -57,10 +61,10 @@
     </entity>
     <elements>
         <element name="Barcode" positionX="-47" positionY="-63" width="128" height="90"/>
+        <element name="Claim" positionX="-126" positionY="-90" width="128" height="135"/>
+        <element name="ClaimBinding" positionX="-117" positionY="-81" width="128" height="135"/>
         <element name="Item" positionX="-207" positionY="-238" width="128" height="375"/>
         <element name="Price" positionX="-207" positionY="125" width="128" height="120"/>
         <element name="User" positionX="-90" positionY="-54" width="128" height="120"/>
-        <element name="Claim" positionX="-126" positionY="-90" width="128" height="105"/>
-        <element name="ClaimBinding" positionX="-117" positionY="-81" width="128" height="105"/>
     </elements>
 </model>

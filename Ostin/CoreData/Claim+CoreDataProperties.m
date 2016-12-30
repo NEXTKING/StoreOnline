@@ -19,5 +19,7 @@
 @dynamic claimNumber;
 @dynamic userID;
 @dynamic incomingDate;
+@dynamic startDate;
+@dynamic endDate;
 
 @end

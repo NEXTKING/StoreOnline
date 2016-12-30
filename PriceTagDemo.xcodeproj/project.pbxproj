@@ -13,6 +13,10 @@
 		210F2B751DF5655500818512 /* SettingsSyncCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 210F2B731DF5655500818512 /* SettingsSyncCell.xib */; };
 		210F2B791DF566A900818512 /* SettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F2B771DF566A900818512 /* SettingsCell.m */; };
 		210F2B7A1DF566A900818512 /* SettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 210F2B781DF566A900818512 /* SettingsCell.xib */; };
+		2118ABA71E140262002F7E93 /* SOAPProcessClaim.m in Sources */ = {isa = PBXBuildFile; fileRef = 2118ABA61E140262002F7E93 /* SOAPProcessClaim.m */; };
+		2118ABA81E140262002F7E93 /* SOAPProcessClaim.m in Sources */ = {isa = PBXBuildFile; fileRef = 2118ABA61E140262002F7E93 /* SOAPProcessClaim.m */; };
+		2118ABAA1E1537B5002F7E93 /* icon_pencil@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2118ABA91E1537B5002F7E93 /* icon_pencil@2x.png */; };
+		2118ABAB1E1537B5002F7E93 /* icon_pencil@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2118ABA91E1537B5002F7E93 /* icon_pencil@2x.png */; };
 		214AD0EF1DE4881F00FE0345 /* NwobjSendAcceptanes.m in Sources */ = {isa = PBXBuildFile; fileRef = 214AD0EE1DE4881F00FE0345 /* NwobjSendAcceptanes.m */; };
 		214AD0F01DE4881F00FE0345 /* NwobjSendAcceptanes.m in Sources */ = {isa = PBXBuildFile; fileRef = 214AD0EE1DE4881F00FE0345 /* NwobjSendAcceptanes.m */; };
 		214AD0F61DE87FD200FE0345 /* MelonPriceTag30x60.m in Sources */ = {isa = PBXBuildFile; fileRef = 214AD0F51DE87FD200FE0345 /* MelonPriceTag30x60.m */; };
@@ -208,6 +212,20 @@
 		215A03561E11458100CCAA2C /* SOAPClaim.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A03541E11458100CCAA2C /* SOAPClaim.m */; };
 		215A03591E11459B00CCAA2C /* SOAPClaimBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A03581E11459B00CCAA2C /* SOAPClaimBinding.m */; };
 		215A035A1E11459B00CCAA2C /* SOAPClaimBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A03581E11459B00CCAA2C /* SOAPClaimBinding.m */; };
+		215A035E1E126D2A00CCAA2C /* ClaimListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A035D1E126D2A00CCAA2C /* ClaimListViewController.m */; };
+		215A03621E126DA600CCAA2C /* ClaimDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A03611E126DA600CCAA2C /* ClaimDataSource.m */; };
+		215A03651E12741C00CCAA2C /* ClaimItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A03641E12741C00CCAA2C /* ClaimItem.m */; };
+		215A03661E12741C00CCAA2C /* ClaimItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A03641E12741C00CCAA2C /* ClaimItem.m */; };
+		215A03691E128A0F00CCAA2C /* ClaimItemInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A03681E128A0F00CCAA2C /* ClaimItemInformation.m */; };
+		215A036A1E128A0F00CCAA2C /* ClaimItemInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A03681E128A0F00CCAA2C /* ClaimItemInformation.m */; };
+		215A036E1E129B7100CCAA2C /* ClaimItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A036C1E129B7100CCAA2C /* ClaimItemCell.m */; };
+		215A036F1E129B7100CCAA2C /* ClaimItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A036C1E129B7100CCAA2C /* ClaimItemCell.m */; };
+		215A03701E129B7100CCAA2C /* ClaimItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 215A036D1E129B7100CCAA2C /* ClaimItemCell.xib */; };
+		215A03711E129B7100CCAA2C /* ClaimItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 215A036D1E129B7100CCAA2C /* ClaimItemCell.xib */; };
+		215A03761E129BAB00CCAA2C /* ClaimItemInformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A03741E129BAB00CCAA2C /* ClaimItemInformationCell.m */; };
+		215A03771E129BAB00CCAA2C /* ClaimItemInformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A03741E129BAB00CCAA2C /* ClaimItemInformationCell.m */; };
+		215A03781E129BAB00CCAA2C /* ClaimItemInformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 215A03751E129BAB00CCAA2C /* ClaimItemInformationCell.xib */; };
+		215A03791E129BAB00CCAA2C /* ClaimItemInformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 215A03751E129BAB00CCAA2C /* ClaimItemInformationCell.xib */; };
 		215EFF091DAB9ED600BE11C5 /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 215EFF071DAB9ED600BE11C5 /* SearchTableViewCell.m */; };
 		215EFF0A1DAB9ED600BE11C5 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 215EFF081DAB9ED600BE11C5 /* SearchTableViewCell.xib */; };
 		2174D5811DB8CDDC00FCE9CE /* SOAPSavePrintFact.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174D5801DB8CDDC00FCE9CE /* SOAPSavePrintFact.m */; };
@@ -773,6 +791,9 @@
 		210F2B761DF566A900818512 /* SettingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsCell.h; path = Settings/SettingsCell.h; sourceTree = "<group>"; };
 		210F2B771DF566A900818512 /* SettingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsCell.m; path = Settings/SettingsCell.m; sourceTree = "<group>"; };
 		210F2B781DF566A900818512 /* SettingsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsCell.xib; path = Settings/SettingsCell.xib; sourceTree = "<group>"; };
+		2118ABA51E140262002F7E93 /* SOAPProcessClaim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPProcessClaim.h; sourceTree = "<group>"; };
+		2118ABA61E140262002F7E93 /* SOAPProcessClaim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPProcessClaim.m; sourceTree = "<group>"; };
+		2118ABA91E1537B5002F7E93 /* icon_pencil@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_pencil@2x.png"; sourceTree = "<group>"; };
 		214AD0ED1DE4881F00FE0345 /* NwobjSendAcceptanes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NwobjSendAcceptanes.h; sourceTree = "<group>"; };
 		214AD0EE1DE4881F00FE0345 /* NwobjSendAcceptanes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NwobjSendAcceptanes.m; sourceTree = "<group>"; };
 		214AD0F41DE87FD200FE0345 /* MelonPriceTag30x60.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MelonPriceTag30x60.h; sourceTree = "<group>"; };
@@ -806,6 +827,20 @@
 		215A03571E11459B00CCAA2C /* SOAPClaimBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPClaimBinding.h; sourceTree = "<group>"; };
 		215A03581E11459B00CCAA2C /* SOAPClaimBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPClaimBinding.m; sourceTree = "<group>"; };
 		215A035B1E1269CC00CCAA2C /* AcceptancesProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AcceptancesProtocol.h; sourceTree = "<group>"; };
+		215A035C1E126D2A00CCAA2C /* ClaimListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClaimListViewController.h; path = Claim/ClaimListViewController.h; sourceTree = "<group>"; };
+		215A035D1E126D2A00CCAA2C /* ClaimListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClaimListViewController.m; path = Claim/ClaimListViewController.m; sourceTree = "<group>"; };
+		215A03601E126DA600CCAA2C /* ClaimDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClaimDataSource.h; path = Claim/ClaimDataSource.h; sourceTree = "<group>"; };
+		215A03611E126DA600CCAA2C /* ClaimDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClaimDataSource.m; path = Claim/ClaimDataSource.m; sourceTree = "<group>"; };
+		215A03631E12741C00CCAA2C /* ClaimItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClaimItem.h; path = Claim/ClaimItem.h; sourceTree = "<group>"; };
+		215A03641E12741C00CCAA2C /* ClaimItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClaimItem.m; path = Claim/ClaimItem.m; sourceTree = "<group>"; };
+		215A03671E128A0F00CCAA2C /* ClaimItemInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClaimItemInformation.h; path = Claim/ClaimItemInformation.h; sourceTree = "<group>"; };
+		215A03681E128A0F00CCAA2C /* ClaimItemInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClaimItemInformation.m; path = Claim/ClaimItemInformation.m; sourceTree = "<group>"; };
+		215A036B1E129B7100CCAA2C /* ClaimItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClaimItemCell.h; path = Claim/UITableViewCells/ClaimItemCell.h; sourceTree = "<group>"; };
+		215A036C1E129B7100CCAA2C /* ClaimItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClaimItemCell.m; path = Claim/UITableViewCells/ClaimItemCell.m; sourceTree = "<group>"; };
+		215A036D1E129B7100CCAA2C /* ClaimItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ClaimItemCell.xib; path = Claim/UITableViewCells/ClaimItemCell.xib; sourceTree = "<group>"; };
+		215A03731E129BAB00CCAA2C /* ClaimItemInformationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClaimItemInformationCell.h; path = Claim/UITableViewCells/ClaimItemInformationCell.h; sourceTree = "<group>"; };
+		215A03741E129BAB00CCAA2C /* ClaimItemInformationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClaimItemInformationCell.m; path = Claim/UITableViewCells/ClaimItemInformationCell.m; sourceTree = "<group>"; };
+		215A03751E129BAB00CCAA2C /* ClaimItemInformationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ClaimItemInformationCell.xib; path = Claim/UITableViewCells/ClaimItemInformationCell.xib; sourceTree = "<group>"; };
 		215EFF061DAB9ED600BE11C5 /* SearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableViewCell.h; sourceTree = "<group>"; };
 		215EFF071DAB9ED600BE11C5 /* SearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewCell.m; sourceTree = "<group>"; };
 		215EFF081DAB9ED600BE11C5 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
@@ -1514,6 +1549,35 @@
 			name = IM;
 			sourceTree = "<group>";
 		};
+		215A035F1E126D2F00CCAA2C /* Claim */ = {
+			isa = PBXGroup;
+			children = (
+				215A03721E129B7700CCAA2C /* UITableViewCells */,
+				215A03631E12741C00CCAA2C /* ClaimItem.h */,
+				215A03641E12741C00CCAA2C /* ClaimItem.m */,
+				215A03671E128A0F00CCAA2C /* ClaimItemInformation.h */,
+				215A03681E128A0F00CCAA2C /* ClaimItemInformation.m */,
+				215A03601E126DA600CCAA2C /* ClaimDataSource.h */,
+				215A03611E126DA600CCAA2C /* ClaimDataSource.m */,
+				215A035C1E126D2A00CCAA2C /* ClaimListViewController.h */,
+				215A035D1E126D2A00CCAA2C /* ClaimListViewController.m */,
+			);
+			name = Claim;
+			sourceTree = "<group>";
+		};
+		215A03721E129B7700CCAA2C /* UITableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				215A036B1E129B7100CCAA2C /* ClaimItemCell.h */,
+				215A036C1E129B7100CCAA2C /* ClaimItemCell.m */,
+				215A036D1E129B7100CCAA2C /* ClaimItemCell.xib */,
+				215A03731E129BAB00CCAA2C /* ClaimItemInformationCell.h */,
+				215A03741E129BAB00CCAA2C /* ClaimItemInformationCell.m */,
+				215A03751E129BAB00CCAA2C /* ClaimItemInformationCell.xib */,
+			);
+			name = UITableViewCells;
+			sourceTree = "<group>";
+		};
 		21B8DC781DB66BFD00FD9161 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -1604,6 +1668,7 @@
 				C6979EA31D9135AD00A0B51B /* filter@2x.png */,
 				C6979EA41D9135AD00A0B51B /* relevance@2x.png */,
 				C6979EA51D9135AD00A0B51B /* search@2x.png */,
+				2118ABA91E1537B5002F7E93 /* icon_pencil@2x.png */,
 				C6979EA61D9135AD00A0B51B /* tasks@2x.png */,
 				C6979EA11D91348000A0B51B /* catalog@2x.png */,
 				B957B11B1D1D25D1002A5256 /* Icon.png */,
@@ -1728,6 +1793,7 @@
 				C6069EDF1D92CE7C008C3F58 /* Network */,
 				C6979E9E1D8FF67200A0B51B /* Catalog */,
 				C6979E971D8FE67900A0B51B /* Login */,
+				215A035F1E126D2F00CCAA2C /* Claim */,
 				B907ADD71D0959CA00B44BF1 /* Main.storyboard */,
 				215A03371E112B7B00CCAA2C /* IM_Main.storyboard */,
 				B90CE4921C89F15100DFB3E4 /* Graphics */,
@@ -2273,6 +2339,8 @@
 				215A03541E11458100CCAA2C /* SOAPClaim.m */,
 				215A03571E11459B00CCAA2C /* SOAPClaimBinding.h */,
 				215A03581E11459B00CCAA2C /* SOAPClaimBinding.m */,
+				2118ABA51E140262002F7E93 /* SOAPProcessClaim.h */,
+				2118ABA61E140262002F7E93 /* SOAPProcessClaim.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -3029,6 +3097,7 @@
 				215A03041E1127B400CCAA2C /* MT1O9869M.jpg in Resources */,
 				215A03051E1127B400CCAA2C /* 99002775678.jpg in Resources */,
 				215A03071E1127B400CCAA2C /* 99002774132.jpg in Resources */,
+				215A03711E129B7100CCAA2C /* ClaimItemCell.xib in Resources */,
 				215A03081E1127B400CCAA2C /* 99002776863.jpg in Resources */,
 				215A03091E1127B400CCAA2C /* Icon.png in Resources */,
 				215A030A1E1127B400CCAA2C /* producer_label.zpl in Resources */,
@@ -3054,6 +3123,8 @@
 				215A031E1E1127B400CCAA2C /* catalog@2x.png in Resources */,
 				215A031F1E1127B400CCAA2C /* TaskProgressOverlayController.xib in Resources */,
 				215A03201E1127B400CCAA2C /* MP4O9264G.jpg in Resources */,
+				215A03791E129BAB00CCAA2C /* ClaimItemInformationCell.xib in Resources */,
+				2118ABAB1E1537B5002F7E93 /* icon_pencil@2x.png in Resources */,
 				215A03211E1127B400CCAA2C /* 99002777294.jpg in Resources */,
 				215A03221E1127B400CCAA2C /* MT2O9469M.jpg in Resources */,
 				215A03381E112B7B00CCAA2C /* IM_Main.storyboard in Resources */,
@@ -3094,6 +3165,7 @@
 				B957B1111D1C2A2D002A5256 /* MP4O9864G.jpg in Resources */,
 				B90CE4941C89F15100DFB3E4 /* eac.png in Resources */,
 				B957B1061D1C2A2D002A5256 /* 99002776879.jpg in Resources */,
+				2118ABAA1E1537B5002F7E93 /* icon_pencil@2x.png in Resources */,
 				B907ADDE1D095C7700B44BF1 /* settings_icon@2x.png in Resources */,
 				218228671DAF864000F04B70 /* TasksCell.xib in Resources */,
 				B957B1071D1C2A2D002A5256 /* 99002776883.jpg in Resources */,
@@ -3104,9 +3176,11 @@
 				B957B1121D1C2A2D002A5256 /* MS2O9267M.jpg in Resources */,
 				C6979EA71D9135AD00A0B51B /* filter@2x.png in Resources */,
 				B957B0FD1D1C2A2D002A5256 /* 299101040167.jpg in Resources */,
+				215A03701E129B7100CCAA2C /* ClaimItemCell.xib in Resources */,
 				B957B1161D1C2A2D002A5256 /* MT2O93N3M.jpg in Resources */,
 				B92DCE321C845EA0002AA184 /* PrintViewController.xib in Resources */,
 				B957B1031D1C2A2D002A5256 /* 99002774683.jpg in Resources */,
+				215A03781E129BAB00CCAA2C /* ClaimItemInformationCell.xib in Resources */,
 				B957B1151D1C2A2D002A5256 /* MT1O9869M.jpg in Resources */,
 				B957B1041D1C2A2D002A5256 /* 99002775678.jpg in Resources */,
 				B907ADD81D0959CA00B44BF1 /* Main.storyboard in Resources */,
@@ -3875,7 +3949,9 @@
 				215A028B1E1127B400CCAA2C /* SearchTableViewCell.m in Sources */,
 				215A028C1E1127B400CCAA2C /* DiscountInformation.m in Sources */,
 				215A028D1E1127B400CCAA2C /* TasksViewController.m in Sources */,
+				215A03661E12741C00CCAA2C /* ClaimItem.m in Sources */,
 				215A028E1E1127B400CCAA2C /* AcceptanesInformation.m in Sources */,
+				2118ABA81E140262002F7E93 /* SOAPProcessClaim.m in Sources */,
 				215A028F1E1127B400CCAA2C /* TaskItemBinding+CoreDataProperties.m in Sources */,
 				215A02901E1127B400CCAA2C /* NwobjDiscounts.m in Sources */,
 				215A02911E1127B400CCAA2C /* SynchronizationController.m in Sources */,
@@ -3891,6 +3967,7 @@
 				215A029A1E1127B400CCAA2C /* AppSuspendingBlocker.m in Sources */,
 				215A029B1E1127B400CCAA2C /* MelonViewController.m in Sources */,
 				215A029D1E1127B400CCAA2C /* OstinViewController.m in Sources */,
+				215A035E1E126D2A00CCAA2C /* ClaimListViewController.m in Sources */,
 				215A029E1E1127B400CCAA2C /* NwobjClientCard.m in Sources */,
 				215A034B1E1144BD00CCAA2C /* ClaimBinding+CoreDataClass.m in Sources */,
 				215A029F1E1127B400CCAA2C /* ItemPrintFact+CoreDataProperties.m in Sources */,
@@ -3910,6 +3987,7 @@
 				215A02AD1E1127B400CCAA2C /* CategoriesCollectionCell.m in Sources */,
 				215A02AE1E1127B400CCAA2C /* MCPServer.m in Sources */,
 				215A02AF1E1127B400CCAA2C /* Task+CoreDataProperties.m in Sources */,
+				215A03621E126DA600CCAA2C /* ClaimDataSource.m in Sources */,
 				215A02B01E1127B400CCAA2C /* GroupInformation.m in Sources */,
 				215A02B11E1127B400CCAA2C /* SOAPTasks.m in Sources */,
 				215A02B21E1127B400CCAA2C /* SettingsViewController+Ostin.m in Sources */,
@@ -3924,6 +4002,7 @@
 				215A02BA1E1127B400CCAA2C /* WYPopoverController.m in Sources */,
 				215A02BB1E1127B400CCAA2C /* TasksCell.m in Sources */,
 				215A02BC1E1127B400CCAA2C /* Logger.m in Sources */,
+				215A036F1E129B7100CCAA2C /* ClaimItemCell.m in Sources */,
 				215A02BD1E1127B400CCAA2C /* ItemInformation.m in Sources */,
 				215A02BE1E1127B400CCAA2C /* TaskProgressOverlayController.m in Sources */,
 				215A02BF1E1127B400CCAA2C /* ItemsListCell.m in Sources */,
@@ -3960,6 +4039,7 @@
 				215A02DB1E1127B400CCAA2C /* SOAPSetTaskDone.m in Sources */,
 				215A02DC1E1127B400CCAA2C /* MCPNetworkImpl.m in Sources */,
 				215A02DD1E1127B400CCAA2C /* TaskItemBinding+CoreDataClass.m in Sources */,
+				215A03771E129BAB00CCAA2C /* ClaimItemInformationCell.m in Sources */,
 				215A02DE1E1127B400CCAA2C /* Subgroup+CoreDataProperties.m in Sources */,
 				215A02DF1E1127B400CCAA2C /* xsd.m in Sources */,
 				215A02E01E1127B400CCAA2C /* NwobjStock.m in Sources */,
@@ -3967,6 +4047,7 @@
 				215A02E11E1127B400CCAA2C /* CategoriesViewController.m in Sources */,
 				215A02E21E1127B400CCAA2C /* ZPLGenerator.m in Sources */,
 				215A02E31E1127B400CCAA2C /* WarehouseInformation.m in Sources */,
+				215A036A1E128A0F00CCAA2C /* ClaimItemInformation.m in Sources */,
 				215A02E41E1127B400CCAA2C /* SOAPSavePrintFact.m in Sources */,
 				215A02E51E1127B400CCAA2C /* OstinPriceTag.m in Sources */,
 				215A02E61E1127B400CCAA2C /* SettingsViewController.m in Sources */,
@@ -4023,6 +4104,7 @@
 				21D8385C1DE3499F00A98E0F /* ItemPrintFact+CoreDataClass.m in Sources */,
 				C6F600C91D9C363C0095AE21 /* PI_MOBILE_SERVICEService.m in Sources */,
 				C6F600C81D9C363C0095AE21 /* NSDate+ISO8601Unparsing.m in Sources */,
+				215A03691E128A0F00CCAA2C /* ClaimItemInformation.m in Sources */,
 				B9F5F0B11D0057650010E1EA /* NwobjInventoryItemDescription.m in Sources */,
 				B9F5F0B21D0057650010E1EA /* NwobjAuthorization.m in Sources */,
 				C6979E9A1D8FE6A800A0B51B /* LoginViewController.m in Sources */,
@@ -4035,6 +4117,7 @@
 				B9F5F0B31D0057650010E1EA /* NwobjClientCard.m in Sources */,
 				215A034F1E1144DB00CCAA2C /* ClaimBinding+CoreDataClass.m in Sources */,
 				21D8385D1DE3499F00A98E0F /* ItemPrintFact+CoreDataProperties.m in Sources */,
+				215A036E1E129B7100CCAA2C /* ClaimItemCell.m in Sources */,
 				210F2B741DF5655500818512 /* SettingsSyncCell.m in Sources */,
 				C6F600CB1D9C363C0095AE21 /* USGlobals.m in Sources */,
 				B9F5F0B41D0057650010E1EA /* NwobjSendCart.m in Sources */,
@@ -4045,6 +4128,7 @@
 				21C0545A1DC23F8E0094C7B1 /* AsyncImageView.m in Sources */,
 				C6F601AD1D9D63440095AE21 /* MCPOfflineInmpl+Ostin.m in Sources */,
 				B92DCE341C845F0A002AA184 /* MCPSimulatorImpl.m in Sources */,
+				215A03761E129BAB00CCAA2C /* ClaimItemInformationCell.m in Sources */,
 				B90CE4881C89A05400DFB3E4 /* AntiAliasingLabel.m in Sources */,
 				C67BB3691DABE4BC0032F2A4 /* TaskInformation.m in Sources */,
 				B92DCE361C845F11002AA184 /* NwObject.m in Sources */,
@@ -4060,8 +4144,10 @@
 				B907ADDD1D095C3200B44BF1 /* WYStoryboardPopoverSegue.m in Sources */,
 				C66723861DA912CF001B30AC /* SOAPOperation.m in Sources */,
 				21C054661DC36D4D0094C7B1 /* UserInformation.m in Sources */,
+				215A03651E12741C00CCAA2C /* ClaimItem.m in Sources */,
 				B957B0D61D1BF5E0002A5256 /* MCPOfflineInmpl.m in Sources */,
 				21C054511DC238DA0094C7B1 /* Group+CoreDataProperties.m in Sources */,
+				2118ABA71E140262002F7E93 /* SOAPProcessClaim.m in Sources */,
 				B907ADDC1D095C2F00B44BF1 /* WYPopoverController.m in Sources */,
 				218228661DAF864000F04B70 /* TasksCell.m in Sources */,
 				B92DCE3D1C845FAB002AA184 /* Logger.m in Sources */,

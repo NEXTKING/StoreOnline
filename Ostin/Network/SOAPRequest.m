@@ -60,7 +60,13 @@
         if (end.location != NSNotFound)
         {
             NSString *str = [tempXMLString substringToIndex:end.location];
-            [values addObject:[str stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""]];
+            NSString *decodedStr = [[[[[[str stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"]
+                                    stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""]
+                                   stringByReplacingOccurrencesOfString:@"&#39;" withString:@"'"]
+                                  stringByReplacingOccurrencesOfString:@"&gt;" withString:@">"]
+                                 stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"]
+                                stringByReplacingOccurrencesOfString:@"&apos;" withString:@"'"];
+            [values addObject:decodedStr];
             [tempXMLString deleteCharactersInRange:NSMakeRange(0, end.location + param.length + 3)];
             range = [tempXMLString rangeOfString:[NSString stringWithFormat:@"<%@>", param]];
         }
@@ -127,36 +133,47 @@
                 stringByReplacingOccurrencesOfString:@"<" withString:@"&lt;"];
     };
     
+    NSString* (^removeOrderPrefix)(NSString *) = ^(NSString *_string)
+    {
+        if (_string.length > 3)
+        {
+            NSRange r = [_string rangeOfCharacterFromSet:[NSCharacterSet decimalDigitCharacterSet]];
+            return (r.location == NSNotFound) ? _string : [_string substringFromIndex:2];
+        }
+        else
+            return _string;
+    };
+    
     NSString* (^bodyForParams)(NSDictionary *_params);
     NSString* (^ __block __weak weakBodyForParams)(NSDictionary *_params);
     weakBodyForParams = bodyForParams = ^(NSDictionary *_params)
     {
         NSMutableString *element = [[NSMutableString alloc] init];
         
-        NSArray *paramKeys = [_params allKeys];
+        NSArray *paramKeys = [[_params allKeys] sortedArrayUsingSelector:@selector(compare:)];
         for (NSString *paramKey in paramKeys)
         {
             id paramValue = [_params objectForKey:paramKey];
             
             if ([paramValue isKindOfClass:[NSString class]])
-                [element appendFormat:@"<pi:%@>%@</pi:%@>", paramKey, xmlEscape(paramValue), paramKey];
+                [element appendFormat:@"<pi:%@>%@</pi:%@>", removeOrderPrefix(paramKey), xmlEscape(paramValue), removeOrderPrefix(paramKey)];
             else if ([paramValue isKindOfClass:[NSNull class]])
-                [element appendFormat:@"<pi:%@/>", paramKey];
+                [element appendFormat:@"<pi:%@/>", removeOrderPrefix(paramKey)];
             else if ([paramValue isKindOfClass:[NSDictionary class]])
-                [element appendFormat:@"<pi:%@>%@</pi:%@>", paramKey, weakBodyForParams(paramValue), paramKey];
+                [element appendFormat:@"<pi:%@>%@</pi:%@>", removeOrderPrefix(paramKey), weakBodyForParams(paramValue), removeOrderPrefix(paramKey)];
             else if ([paramValue isKindOfClass:[NSArray class]])
             {
-                [element appendFormat:@"<pi:%@>", paramKey];
+                [element appendFormat:@"<pi:%@>", removeOrderPrefix(paramKey)];
                 for (id child in paramValue)
                     [element appendString:weakBodyForParams(child)];
-                [element appendFormat:@"</pi:%@>", paramKey];
+                [element appendFormat:@"</pi:%@>", removeOrderPrefix(paramKey)];
             }
         }
         return element;
     };
     
     NSMutableString *bodyString = [[NSMutableString alloc] init];
-    [bodyString appendString:@"<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:pi=\"http://xmlns.oracle.com/orawsv/OST170_WEB/PI_MOBILE_SERVICE\">"];
+    [bodyString appendString:@"<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:pi=\"http://xmlns.oracle.com/orawsv/SHOP_WEB/PI_MOBILE_SERVICE\">"];
     [bodyString appendString:@"<soapenv:Header/>"];
     [bodyString appendString:@"<soapenv:Body>"];
     [bodyString appendFormat:@"<pi:%@%@Input>", prefix?prefix:@"", method];
@@ -164,7 +181,7 @@
     [bodyString appendFormat:@"</pi:%@%@Input>", prefix?prefix:@"", method];
     [bodyString appendString:@"</soapenv:Body>"];
     [bodyString appendString:@"</soapenv:Envelope>"];
-    
+
     return [bodyString dataUsingEncoding:NSUTF8StringEncoding];
 }
 

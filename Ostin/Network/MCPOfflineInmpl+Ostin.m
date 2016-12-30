@@ -22,6 +22,10 @@
 #import "ItemPrintFact+CoreDataClass.h"
 #import "Group+CoreDataClass.h"
 #import "Subgroup+CoreDataClass.h"
+#import "Claim+CoreDataClass.h"
+#import "ClaimBinding+CoreDataClass.h"
+#import "ClaimItem.h"
+#import "ClaimItemInformation.h"
 #import "SOAPWares.h"
 #import "SOAPBarcodes.h"
 #import "SOAPPrices.h"
@@ -33,6 +37,7 @@
 #import "SOAPResetIncDone.h"
 #import "SOAPClaim.h"
 #import "SOAPClaimBinding.h"
+#import "SOAPProcessClaim.h"
 #import "DTDevices.h"
 #import <CommonCrypto/CommonDigest.h>
 
@@ -64,15 +69,15 @@
             authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodingWithLineLength:80]];
         }
         
-        NSString *ID = [[NSUserDefaults standardUserDefaults] valueForKey:@"DeviceID"];
-        if (ID == nil)
-        {
-            ID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-            [[NSUserDefaults standardUserDefaults] setValue:ID forKey:@"DeviceID"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-        }
+//        NSString *ID = [[NSUserDefaults standardUserDefaults] valueForKey:@"DeviceID"];
+//        if (ID == nil)
+//        {
+//            ID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+//            [[NSUserDefaults standardUserDefaults] setValue:ID forKey:@"DeviceID"];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+//        }
         
-        deviceID = ID;
+        deviceID = @"38475643286";//ID;
     }
     
     return self;
@@ -820,9 +825,9 @@
     
 }
 
-- (void) claim:(id<ClaimDelegate>)delegate claimID:(NSNumber *)claimID
+- (void) claim:(id<ClaimDelegate>)delegate userID:(NSNumber *)userID
 {
-    if (claimID)
+    if (userID)
     {
         
     }
@@ -853,9 +858,9 @@
             BOOL success = _claims.success && _claimsBinding.success;
             
             if (success)
-                [delegate claimComplete:0];
+                [delegate claimComplete:0 items:nil];
             else
-                [delegate claimComplete:1];
+                [delegate claimComplete:1 items:nil];
             
         }];
         
@@ -865,6 +870,205 @@
         [claimsQueue addOperations:@[claims, claimsBinding] waitUntilFinished:NO];
         [[NSOperationQueue mainQueue] addOperation:delegateCallOperation];
     }
+}
+
+- (void) claim:(id<ClaimDelegate>)delegate claimID:(NSNumber *)claimID
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        if (claimID)
+        {
+            NSManagedObjectContext *moc = self.dataController.managedObjectContext;
+            NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ClaimBinding"];
+            [request setPredicate:[NSPredicate predicateWithFormat:@"claimID == %@", claimID]];
+            
+            NSError* error = nil;
+            NSArray* results = [moc executeFetchRequest:request error:&error];
+            NSMutableArray *claimItems = [NSMutableArray new];
+            
+            for (ClaimBinding *bindingDB in results)
+            {
+                NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+                [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", bindingDB.itemID.integerValue]];
+                NSArray *results = [moc executeFetchRequest:request error:nil];
+                if (results.count < 1)
+                    continue;
+                
+                Item *itemDB = results[0];
+                
+                request = [NSFetchRequest fetchRequestWithEntityName:@"Price"];
+                [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", bindingDB.itemID.integerValue]];
+                results = [moc executeFetchRequest:request error:nil];
+                if (results.count < 1)
+                    continue;
+                
+                Price *priceDB = results[0];
+                
+                request = [NSFetchRequest fetchRequestWithEntityName:@"Barcode"];
+                [request setPredicate:[NSPredicate predicateWithFormat:@"itemID == %ld", bindingDB.itemID.integerValue]];
+                results = [moc executeFetchRequest:request error:nil];
+                if (results.count < 1)
+                    continue;
+                
+                Barcode *barcodeDB = results[0];
+                
+                ItemInformation *item = [self itemInfoFromDBEntities:itemDB barcode:barcodeDB price:priceDB];
+                ClaimItemInformation *claimItemInfo = [[ClaimItemInformation alloc] initWithClaimBindingID:bindingDB.claimBindingID itemInformation:item totalCount:bindingDB.quantity scannedCount:bindingDB.scanned cancelReason:bindingDB.cancelReason];
+                [claimItems addObject:claimItemInfo];
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if ([delegate respondsToSelector:@selector(claimComplete:items:)])
+                    [delegate claimComplete:0 items:claimItems];
+            });
+        }
+        else
+        {
+            NSManagedObjectContext *moc = self.dataController.managedObjectContext;
+            NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Claim"];
+            
+            NSError* error = nil;
+            NSArray* results = [moc executeFetchRequest:request error:&error];
+            NSMutableArray *claimItems = [NSMutableArray new];
+            
+            for (Claim *claimDB in results)
+            {
+                ClaimItem *claimItem = [[ClaimItem alloc] initWithClaimID:claimDB.claimID claimNumber:claimDB.claimNumber incomingDate:claimDB.incomingDate startDate:claimDB.startDate endDate:claimDB.endDate userID:claimDB.userID];
+                [claimItems addObject:claimItem];
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if ([delegate respondsToSelector:@selector(claimComplete:items:)])
+                    [delegate claimComplete:0 items:claimItems];
+            });
+        }
+    });
+}
+
+- (void) saveClaimWithID:(NSNumber *)claimID userID:(NSString *)userID startDate:(NSDate *)startDate endDate:(NSDate *)endDate completion:(void (^)(BOOL success, NSString *errorMessage))completion
+{
+    NSManagedObjectContext *moc = self.dataController.managedObjectContext;
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Claim"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"claimID == %@", claimID]];
+    NSArray *results = [moc executeFetchRequest:request error:nil];
+    if (results.count < 1)
+    {
+        completion(NO, nil);
+        return;
+    }
+    Claim *claimDB = results[0];
+    
+    if (claimDB.startDate == nil)
+    {
+        claimDB.startDate = startDate;
+        [moc save:nil];
+        completion(YES, nil);
+    }
+    else if (claimDB.endDate == nil)
+    {
+        request = [NSFetchRequest fetchRequestWithEntityName:@"ClaimBinding"];
+        NSPredicate *doneClaimsPredicate = [NSPredicate predicateWithFormat:@"claimID == %@ AND scanned == quantity", claimID];
+        NSPredicate *canceledClaimsPredicate = [NSPredicate predicateWithFormat:@"claimID == %@ AND cancelReason != nil", claimID];
+        [request setPredicate:[NSCompoundPredicate orPredicateWithSubpredicates:@[doneClaimsPredicate, canceledClaimsPredicate]]];
+        
+        NSError* error = nil;
+        NSArray* results = [moc executeFetchRequest:request error:&error];
+        NSMutableArray *claimItems = [NSMutableArray new];
+        
+        for (ClaimBinding *bindingDB in results)
+        {
+            ClaimItemInformation *claimItemInfo = [[ClaimItemInformation alloc] initWithClaimBindingID:bindingDB.claimBindingID itemInformation:nil totalCount:bindingDB.quantity scannedCount:bindingDB.scanned cancelReason:(bindingDB.cancelReason?bindingDB.cancelReason:@"")];
+            [claimItems addObject:claimItemInfo];
+        }
+        
+        NSOperationQueue *processClaimQueue = [NSOperationQueue new];
+        processClaimQueue.name = @"processClaimQueue";
+        
+        SOAPProcessClaim *processClaim = [SOAPProcessClaim new];
+        __weak SOAPProcessClaim *_processClaim = processClaim;
+        processClaim.claimID = [claimID stringValue];
+        processClaim.claimItems = claimItems;
+        processClaim.authValue = authValue;
+        processClaim.deviceID  = deviceID;
+        processClaim.userID = @"300";//userID;
+        
+        NSBlockOperation *saveClaimLocal = [NSBlockOperation blockOperationWithBlock:^{
+            
+            if (_processClaim.success)
+            {
+                NSManagedObjectContext *privateMoc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+                [privateMoc setParentContext:moc];
+                
+                NSFetchRequest *taskItemRequest = [NSFetchRequest fetchRequestWithEntityName:@"Claim"];
+                [taskItemRequest setPredicate:[NSPredicate predicateWithFormat:@"claimID == %@", claimID]];
+                NSArray *results = [privateMoc executeFetchRequest:taskItemRequest error:nil];
+                
+                if (results.count > 0)
+                {
+                    Claim *claimDB = results[0];
+                    claimDB.endDate = endDate;
+                    
+                    __block NSError *error = nil;
+                    
+                    [privateMoc performBlockAndWait:^{
+                        [privateMoc save:&error];
+                    }];
+                    
+                    if (!error)
+                    {
+                        [moc performBlockAndWait:^{
+                            [moc save:&error];
+                        }];
+                    }
+                }
+            }
+        }];
+        
+        NSBlockOperation *delegateOperation = [NSBlockOperation blockOperationWithBlock:^{
+            
+            if (_processClaim.success)
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(YES, nil);
+                });
+            else
+            {
+                NSString *msg = [NSString stringWithString:_processClaim.errorMessage];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(NO, msg);
+                });
+            }
+        }];
+        
+        [saveClaimLocal addDependency:processClaim];
+        [delegateOperation addDependency:saveClaimLocal];
+        [processClaimQueue addOperations:@[processClaim, saveClaimLocal] waitUntilFinished:NO];
+        
+        [[NSOperationQueue mainQueue] addOperation:delegateOperation];
+    }
+    else
+        completion(NO, nil);
+}
+
+- (void) saveClaimBindingWithID:(NSNumber *)claimBindingID scanned:(NSNumber *)scanned cancelReason:(NSString *)cancelReason completion:(void (^)(BOOL success))completion
+{
+    NSManagedObjectContext *moc = self.dataController.managedObjectContext;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ClaimBinding"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"claimBindingID == %@", claimBindingID]];
+    
+    NSArray *results = [moc executeFetchRequest:request error:nil];
+    if (results.count > 0)
+    {
+        ClaimBinding *claimBindingDB = results[0];
+        claimBindingDB.scanned = scanned;
+        claimBindingDB.cancelReason = cancelReason;
+        [moc save:nil];
+        
+        if (completion)
+            completion(YES);
+    }
+    else if (completion)
+        completion(NO);
 }
 
 #pragma mark Internal Metdods

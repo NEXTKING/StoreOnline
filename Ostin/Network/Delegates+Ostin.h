@@ -47,7 +47,7 @@ typedef enum : NSUInteger
 
 @protocol ClaimDelegate <NSObject>
 @property(nonatomic, strong) NSProgress *progress;
-- (void) claimComplete: (int) result;
+- (void) claimComplete: (int) result items:(NSArray *) items;
 @end
 
 #endif /* Delegates_Ostin_h */

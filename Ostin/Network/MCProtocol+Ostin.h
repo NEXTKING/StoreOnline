@@ -34,5 +34,9 @@
 - (void) savePrintItemsCount:(NSInteger)count inTaskWithID:(NSInteger)taskID;
 - (void) savePrintItemFactForItemCode:(NSString *)itemCode taskName:(NSString *)taskName userID:(NSString *)userID;
 
+- (void) claim:(id<ClaimDelegate>)delegate userID:(NSNumber *)userID;
 - (void) claim:(id<ClaimDelegate>)delegate claimID:(NSNumber *)claimID;
+- (void) saveClaimWithID:(NSNumber *)claimID userID:(NSString *)userID startDate:(NSDate *)startDate endDate:(NSDate *)endDate completion:(void (^)(BOOL success, NSString *errorMessage))completion;
+- (void) saveClaimBindingWithID:(NSNumber *)claimBindingID scanned:(NSNumber *)scanned cancelReason:(NSString *)cancelReason completion:(void (^)(BOOL success))completion;
+
 @end

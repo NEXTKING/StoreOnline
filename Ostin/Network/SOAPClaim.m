@@ -53,9 +53,11 @@
     claimDB.userID    = @([csv[3] integerValue]);
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"yyyy-MM-dd hh:mm:ss";
-    
+    dateFormatter.dateFormat = @"dd.MM.yyyy HH:mm:ss";
     claimDB.incomingDate = [dateFormatter dateFromString:csv[4]];
+    
+    claimDB.startDate = nil;
+    claimDB.endDate = nil;
 }
 
 - (NSManagedObject*) findObject:(NSArray *)csv

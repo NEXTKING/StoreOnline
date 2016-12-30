@@ -52,6 +52,8 @@
     claimBindingDB.claimID = @([csv[2] integerValue]);
     claimBindingDB.itemID = @([csv[3] integerValue]);
     claimBindingDB.quantity = @([csv[4] integerValue]);
+    claimBindingDB.scanned = @(0);
+    claimBindingDB.cancelReason = nil;
 }
 
 - (NSManagedObject*) findObject:(NSArray *)csv
