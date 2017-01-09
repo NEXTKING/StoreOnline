@@ -101,7 +101,7 @@
     if (_scanned.unsignedIntegerValue < _total.unsignedIntegerValue)
         return [NSString stringWithFormat:@"Причина отклонения: %@", [self cancelReasonDescriptionForID:_cancelReason]];
     else
-        return @"Причина отклонения не требуется";
+        return @"";
 }
 
 - (NSString *)pictureURLString

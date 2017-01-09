@@ -47,9 +47,12 @@
     
     if (!(item.scannedCount < item.totalCount))
     {
-        _changeCancelReasonButton.tintColor = [UIColor grayColor];
+        _changeCancelReasonButton.hidden = YES;
         _changeCancelReasonButton.enabled = NO;
-        _cancelReasonLabel.textColor = [UIColor grayColor];
+    }
+    else
+    {
+        _changeCancelReasonButton.hidden = NO;
     }
 }
 
