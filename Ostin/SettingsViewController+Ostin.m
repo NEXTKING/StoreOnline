@@ -15,6 +15,7 @@
 
 enum : NSUInteger
 {
+    SettingsSectionManualInputActions = 0,
     SettingsSectionPrinterActions = 0,
     SettingsSectionScanerActions = 1,
     SettingsSectionSyncActions = 2,
@@ -75,13 +76,15 @@ enum : NSUInteger
 {
     switch (section)
     {
-        case SettingsSectionPrinterActions:
 #if defined (OSTIN_IM)
-            return 0;
-#else
-            return 2;
-#endif
+        case SettingsSectionManualInputActions:
+            return self.manualInputAction ? 1 : 0;
             break;
+#else
+        case SettingsSectionPrinterActions:
+            return 2;
+            break;
+#endif
         case SettingsSectionScanerActions:
             return 2;
             break;
@@ -100,13 +103,15 @@ enum : NSUInteger
 {
     switch (section)
     {
-        case SettingsSectionPrinterActions:
 #if defined (OSTIN_IM)
-            return nil;
-#else
-            return @"Настройки принтера";
-#endif
+        case SettingsSectionManualInputActions:
+            return self.manualInputAction ? @"Ручной ввод" : nil;
             break;
+#else
+        case SettingsSectionPrinterActions:
+            return @"Настройки принтера";
+            break;
+#endif
         case SettingsSectionScanerActions:
             return @"Настройки чехла";
             break;
@@ -123,6 +128,15 @@ enum : NSUInteger
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+#if defined (OSTIN_IM)
+    if (indexPath.section == SettingsSectionManualInputActions && indexPath.row == 0)
+    {
+        SettingsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingsCell" forIndexPath:indexPath];
+        cell.titleLabel.text = @"Отметить товар вручную";
+        cell.titleLabel.textColor = [UIColor colorWithRed:0 green:122/255.0 blue:1 alpha:1];
+        return cell;
+    }
+#else
     if (indexPath.section == SettingsSectionPrinterActions && indexPath.row == 0)
     {
         SettingsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingsCell" forIndexPath:indexPath];
@@ -138,6 +152,7 @@ enum : NSUInteger
         [cell.switchControl addTarget:self action:@selector(additionalLabelSwitchDidChanged:) forControlEvents:UIControlEventValueChanged];
         return cell;
     }
+#endif
     else if (indexPath.section == SettingsSectionScanerActions && indexPath.row == 0)
     {
         SettingsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingsCell" forIndexPath:indexPath];
@@ -195,10 +210,17 @@ enum : NSUInteger
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+#if defined (OSTIN_IM)
+    if (indexPath.section == SettingsSectionManualInputActions && indexPath.row == 0)
+    {
+        self.manualInputAction();
+    }
+#else
     if (indexPath.section == SettingsSectionPrinterActions && indexPath.row == 0)
     {
         self.bindPrinterAction();
     }
+#endif
     else if (indexPath.section == SettingsSectionScanerActions && indexPath.row == 0)
     {
         [self performSelector:@selector(resetBarcodeEngine:) withObject:nil];

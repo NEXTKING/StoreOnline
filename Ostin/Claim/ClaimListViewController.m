@@ -14,12 +14,14 @@
 #import "BarcodeFormatter.h"
 #import "MCPServer.h"
 #import "WYStoryboardPopoverSegue.h"
-#import "SettingsViewController.h"
+#import "SettingsViewController+Ostin.h"
 
 @interface ClaimListViewController () <UITableViewDelegate, UITableViewDataSource, AcceptancesDataSourceDelegate>
 {
     UIActivityIndicatorView *_activityIndicator;
     WYPopoverController *_settingsPopover;
+    NSTimer *_timer;
+    BOOL scrolingInProgress;
 }
 @property (nonatomic, strong) ClaimDataSource *dataSource;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -50,12 +52,18 @@
     [super viewWillAppear:animated];
     [self subscribeToScanNotifications];
     [self.dataSource update];
+    
+    if (!self.dataSource.rootItem)
+        [self initializeTimer];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [self unsubscribeFromScanNotifications];
+    
+    if (!self.dataSource.rootItem)
+        [self destroyTimer];
 }
 
 - (void)initializeView
@@ -71,7 +79,23 @@
     else
     {
         self.navigationItem.rightBarButtonItem = menuButton;
-        // timer
+    }
+}
+
+- (void)initializeTimer
+{
+    if (_timer)
+        [_timer invalidate];
+    
+    _timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
+}
+
+- (void)destroyTimer
+{
+    if (_timer)
+    {
+        [_timer invalidate];
+        _timer = nil;
     }
 }
 
@@ -150,6 +174,16 @@
     }
 }
 
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
+{
+    scrolingInProgress = YES;
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    scrolingInProgress = NO;
+}
+
 #pragma mark - AcceptancesDataSource delegate
 
 - (void)acceptancesDataSourceDidUpdate
@@ -164,6 +198,11 @@
     
     [self.tableView reloadRowsAtIndexPaths:@[indexPathForUpdatedItem] withRowAnimation:UITableViewRowAnimationNone];
     [self.tableView scrollToRowAtIndexPath:indexPathForUpdatedItem atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+}
+
+- (void)acceptancesDataSourceErrorOccurred:(NSString *)errorMessage
+{
+    [self showAlertWithMessage:errorMessage];
 }
 
 #pragma mark - Actions
@@ -211,10 +250,22 @@
     {
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         
-        SettingsViewController* destinationViewController = (SettingsViewController *)segue.destinationViewController;
+        SettingsViewController_Ostin* destinationViewController = (SettingsViewController_Ostin *)segue.destinationViewController;
         destinationViewController.preferredContentSize = CGSizeMake(260, 300);
+        if (self.dataSource.rootItem)
+            destinationViewController.manualInputAction = ^
+            {
+                [self showManualInputAlert];
+                [_settingsPopover dismissPopoverAnimated:YES];
+            };
         _settingsPopover = [popoverSegue popoverControllerWithSender:sender permittedArrowDirections:WYPopoverArrowDirectionAny animated:YES];
     }
+}
+
+- (void)timerAction
+{
+    if (!scrolingInProgress)
+        [self updateVisibleRows];
 }
 
 #pragma mark - UI
@@ -290,6 +341,22 @@
     [self presentViewController:ac animated:YES completion:nil];
 }
 
+- (void)showManualInputAlert
+{
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Ручной ввод" message:@"Введите код товара" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {}];
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Отправить" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        
+        [self.dataSource processItemCode:alert.textFields[0].text];
+    }];
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField* textField){}];
+    
+    [alert addAction:cancelAction];
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 - (void)updateVisibleRows
 {
     [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
@@ -323,7 +390,7 @@
 {
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:ac animated:YES completion:nil];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [ac dismissViewControllerAnimated:YES completion:nil];
     });
 }

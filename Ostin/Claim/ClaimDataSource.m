@@ -69,10 +69,37 @@
             {
                 [item setScannedCount:(item.scannedCount + 1)];
                 [_delegate acceptancesDataSourceDidUpdateItemAtIndex:i];
+                
+                return;
             }
-            break;
         }
     }
+    
+    if ([_delegate respondsToSelector:@selector(acceptancesDataSourceErrorOccurred:)])
+        [_delegate acceptancesDataSourceErrorOccurred:@"Отсканированного товара нет в заявке или его количество превышает нужное"];
+}
+
+- (void)processItemCode:(NSString *)itemCode
+{
+    for (int i = 0; i < _items.count; i++)
+    {
+        id<AcceptancesItem> item = _items[i];
+        
+        if ([item isKindOfClass:[ClaimItemInformation class]])
+        {
+            NSString *_itemCode = [item descriptionForKey:@"articleDescription"];
+            if ([[itemCode uppercaseString] isEqualToString:[_itemCode uppercaseString]] && (item.scannedCount < item.totalCount))
+            {
+                [item setScannedCount:(item.scannedCount + 1)];
+                [_delegate acceptancesDataSourceDidUpdateItemAtIndex:i];
+                
+                return;
+            }
+        }
+    }
+    
+    if ([_delegate respondsToSelector:@selector(acceptancesDataSourceErrorOccurred:)])
+        [_delegate acceptancesDataSourceErrorOccurred:@"Отсканированного товара нет в заявке или его количество превышает нужное"];
 }
 
 - (void)didInteractWithItemAtIndex:(NSUInteger)index

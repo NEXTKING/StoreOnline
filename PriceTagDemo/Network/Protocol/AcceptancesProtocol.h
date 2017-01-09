@@ -28,4 +28,6 @@
 @protocol AcceptancesDataSourceDelegate <NSObject>
 - (void)acceptancesDataSourceDidUpdate;
 - (void)acceptancesDataSourceDidUpdateItemAtIndex:(NSUInteger)index;
+@optional
+- (void)acceptancesDataSourceErrorOccurred:(NSString *)errorMessage;
 @end

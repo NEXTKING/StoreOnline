@@ -15,5 +15,5 @@
 @property (nonatomic, weak) id<AcceptancesDataSourceDelegate> delegate;
 
 - (void)update;
-
+- (void)processItemCode:(NSString *)itemCode;
 @end
