@@ -15,6 +15,7 @@
 #import "MCPServer.h"
 #import "WYStoryboardPopoverSegue.h"
 #import "SettingsViewController+Ostin.h"
+#import "DTDevices.h"
 
 @interface ClaimListViewController () <UITableViewDelegate, UITableViewDataSource, AcceptancesDataSourceDelegate>
 {
@@ -194,14 +195,21 @@
 
 - (void)acceptancesDataSourceDidUpdateItemAtIndex:(NSUInteger)index
 {
-    NSIndexPath *indexPathForUpdatedItem = [NSIndexPath indexPathForRow:index inSection:0];
+    DTDevices *dtDev = [DTDevices sharedDevice];
+    int data[]={300,70,500,70,700,70,900,70};
+    [dtDev playSound:100 beepData:data length:sizeof(data) error:nil];
     
+    NSIndexPath *indexPathForUpdatedItem = [NSIndexPath indexPathForRow:index inSection:0];
     [self.tableView reloadRowsAtIndexPaths:@[indexPathForUpdatedItem] withRowAnimation:UITableViewRowAnimationNone];
     [self.tableView scrollToRowAtIndexPath:indexPathForUpdatedItem atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
 }
 
 - (void)acceptancesDataSourceErrorOccurred:(NSString *)errorMessage
 {
+    DTDevices *dtDev = [DTDevices sharedDevice];
+    int data[]={800,400,0,200,800,400};
+    [dtDev playSound:100 beepData:data length:sizeof(data) error:nil];
+    
     [self showAlertWithMessage:errorMessage];
 }
 
