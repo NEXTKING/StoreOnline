@@ -70,17 +70,17 @@
     NSMutableArray *printWareInfos = [[NSMutableArray alloc] init];
     for (NSString *wareCode in self.wareCodes)
     {
-        NSDictionary *printWareInfo = @{@"PASTINGBILLPRINTWAREINFO":@{@"TASK_NUM":self.taskName,
-                                                                      @"TASK_TYPE":self.taskType,
-                                                                      @"WARE_CODE":wareCode,
-                                                                      @"IS_LABEL_PRINTED": @"Y",
-                                                                      @"EXECUTED_USER": self.userID}};
+        NSDictionary *printWareInfo = @{@"00PASTINGBILLPRINTWAREINFO":@{@"00TASK_NUM":self.taskName,
+                                                                        @"01TASK_TYPE":self.taskType,
+                                                                        @"02WARE_CODE":wareCode,
+                                                                        @"03IS_LABEL_PRINTED": @"Y",
+                                                                        @"04EXECUTED_USER": self.userID}};
         [printWareInfos addObject:printWareInfo];
     }
     
-    NSDictionary *params = @{@"A_MESSAGE-VARCHAR2-OUT":[NSNull null],
-                             @"A_DEVICE_UID-VARCHAR2-IN":self.deviceID,
-                             @"AT_PRINT_INFO-PASTINGBILLPRINTINFO-CIN":@{@"PASTINGBILLPRINTINFO":@{@"WARE_INFO":printWareInfos}}};
+    NSDictionary *params = @{@"00A_MESSAGE-VARCHAR2-OUT":[NSNull null],
+                             @"01A_DEVICE_UID-VARCHAR2-IN":self.deviceID,
+                             @"02AT_PRINT_INFO-PASTINGBILLPRINTINFO-CIN":@{@"00PASTINGBILLPRINTINFO":@{@"00WARE_INFO":printWareInfos}}};
     
     SOAPRequest *request = [[SOAPRequest alloc] init];
     SOAPRequestResponse *response = [request soapRequestWithMethod:@"PASTING_SAVE_PRINT_FACT" prefix:@"SNUMBER-" params:params authValue:self.authValue];

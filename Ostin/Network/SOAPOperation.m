@@ -182,11 +182,11 @@
     
     NSInteger count = -1;
     
-    NSDictionary *params = @{@"A_TOTAL_SIZE_KB-NUMBER-OUT":[NSNull null],
-                             @"A_STR_COUNT-NUMBER-OUT":[NSNull null],
-                             @"A_INC_CODE-VARCHAR2-IN":code,
-                             @"A_DEVICE_UID-VARCHAR2-IN":_deviceID,
-                             @"A_COUNT-NUMBER-OUT":[NSNull null]};
+    NSDictionary *params = @{@"00A_TOTAL_SIZE_KB-NUMBER-OUT":[NSNull null],
+                             @"01A_STR_COUNT-NUMBER-OUT":[NSNull null],
+                             @"02A_INC_CODE-VARCHAR2-IN":code,
+                             @"03A_DEVICE_UID-VARCHAR2-IN":_deviceID,
+                             @"04A_COUNT-NUMBER-OUT":[NSNull null]};
     SOAPRequest *request = [[SOAPRequest alloc] init];
     SOAPRequestResponse *response = [request soapRequestWithMethod:@"GET_PORTION_INFO" prefix:nil params:params authValue:self.authValue];
     
@@ -228,9 +228,9 @@
 //        success = [output.RETURN isEqualToString:@"SUCCESS"];
 //    }
     
-    NSDictionary *params = @{@"A_INC_CODE-VARCHAR2-IN":incCode,
-                             @"A_ID_PORTION-NUMBER-IN":portion.stringValue,
-                             @"A_DEVICE_UID-VARCHAR2-IN":_deviceID};
+    NSDictionary *params = @{@"00A_INC_CODE-VARCHAR2-IN":incCode,
+                             @"01A_ID_PORTION-NUMBER-IN":portion.stringValue,
+                             @"02A_DEVICE_UID-VARCHAR2-IN":_deviceID};
     SOAPRequest *request = [[SOAPRequest alloc] init];
     SOAPRequestResponse *response = [request soapRequestWithMethod:@"SET_INC_DONE" prefix:@"SVARCHAR2-" params:params authValue:self.authValue];
     

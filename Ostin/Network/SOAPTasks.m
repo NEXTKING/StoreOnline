@@ -51,9 +51,9 @@
 //    else
 //        return nil;
     
-    NSDictionary *params = @{@"A_ID_PORTION-NUMBER-OUT":[NSNull null],
-                             @"A_DEVICE_UID-VARCHAR2-IN":self.deviceID,
-                             @"AO_DATA-TROWARRAY-COUT":[NSNull null]};
+    NSDictionary *params = @{@"00A_ID_PORTION-NUMBER-OUT":[NSNull null],
+                             @"01A_DEVICE_UID-VARCHAR2-IN":self.deviceID,
+                             @"02AO_DATA-TROWARRAY-COUT":[NSNull null]};
     SOAPRequest *request = [[SOAPRequest alloc] init];
     SOAPRequestResponse *response = [request soapRequestWithMethod:@"PASTING_TASK_INFO" prefix:nil params:params authValue:self.authValue];
     

@@ -54,11 +54,11 @@
 //        self.errorMessage = @"Неверный ответ со стороны сервера при передаче статуса выполнения задания";
 //    }
     
-    NSDictionary *params = @{@"A_TASK_TYPE-VARCHAR2-IN":self.taskType,
-                             @"A_TASK_NUM-VARCHAR2-IN":self.taskName,
-                             @"A_MESSAGE-VARCHAR2-OUT":[NSNull null],
-                             @"A_EXECUTED_USER-VARCHAR2-IN":self.userID,
-                             @"A_DEVICE_UID-VARCHAR2-IN":self.deviceID};
+    NSDictionary *params = @{@"00A_TASK_TYPE-VARCHAR2-IN":self.taskType,
+                             @"01A_TASK_NUM-VARCHAR2-IN":self.taskName,
+                             @"02A_MESSAGE-VARCHAR2-OUT":[NSNull null],
+                             @"03A_EXECUTED_USER-VARCHAR2-IN":self.userID,
+                             @"04A_DEVICE_UID-VARCHAR2-IN":self.deviceID};
     SOAPRequest *request = [[SOAPRequest alloc] init];
     SOAPRequestResponse *response = [request soapRequestWithMethod:@"PASTING_SET_TASK_DONE" prefix:@"SNUMBER-" params:params authValue:self.authValue];
     

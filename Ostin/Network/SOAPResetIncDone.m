@@ -41,9 +41,9 @@
 //    }
 //    else
 //        self.success = NO;
-    NSDictionary *params = @{@"A_INC_CODE-VARCHAR2-IN":@"all",
-                             @"A_DEVICE_UID-VARCHAR2-IN":self.deviceID,
-                             @"A_ID_PORTION-NUMBER-IN":@"0"};
+    NSDictionary *params = @{@"00A_INC_CODE-VARCHAR2-IN":@"all",
+                             @"01A_DEVICE_UID-VARCHAR2-IN":self.deviceID,
+                             @"02A_ID_PORTION-NUMBER-IN":@"0"};
     SOAPRequest *request = [[SOAPRequest alloc] init];
     SOAPRequestResponse *response = [request soapRequestWithMethod:@"RESET_INC_DONE" prefix:@"SVARCHAR2-" params:params authValue:self.authValue];
     
