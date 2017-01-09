@@ -13,6 +13,7 @@
 @interface ClaimItem : NSObject <AcceptancesItem>
 
 @property (nonatomic, readonly) NSNumber *claimID;
+@property (nonatomic, readonly) NSDate *incomingDate;
 @property (nonatomic, strong) NSDate *startDate;
 @property (nonatomic, strong) NSDate *endDate;
 

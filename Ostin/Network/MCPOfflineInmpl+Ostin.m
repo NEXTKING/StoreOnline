@@ -929,13 +929,22 @@
             
             NSError* error = nil;
             NSArray* results = [moc executeFetchRequest:request error:&error];
-            NSMutableArray *claimItems = [NSMutableArray new];
+            
+            NSMutableArray *newClaims = [NSMutableArray new];
+            NSMutableArray *finishedClaims = [NSMutableArray new];
             
             for (Claim *claimDB in results)
             {
                 ClaimItem *claimItem = [[ClaimItem alloc] initWithClaimID:claimDB.claimID claimNumber:claimDB.claimNumber incomingDate:claimDB.incomingDate startDate:claimDB.startDate endDate:claimDB.endDate userID:claimDB.userID];
-                [claimItems addObject:claimItem];
+                claimItem.endDate ? [finishedClaims addObject:claimItem] : [newClaims addObject:claimItem];
             }
+            [newClaims sortUsingComparator:^NSComparisonResult(ClaimItem *obj1, ClaimItem *obj2) {
+                return [obj1.incomingDate compare:obj2.incomingDate];
+            }];
+            [finishedClaims sortUsingComparator:^NSComparisonResult(ClaimItem *obj1, ClaimItem *obj2) {
+                return [obj1.incomingDate compare:obj2.incomingDate];
+            }];
+            NSArray *claimItems = [newClaims arrayByAddingObjectsFromArray:finishedClaims];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 if ([delegate respondsToSelector:@selector(claimComplete:items:)])
