@@ -38,7 +38,7 @@
 			<key>Key</key>
 			<string>host_preference</string>
 			<key>DefaultValue</key>
-			<string>172.16.0.124</string>
+			<string>172.16.1.93</string>
 			<key>IsSecure</key>
 			<false/>
 			<key>KeyboardType</key>
@@ -74,7 +74,7 @@
 			<key>Key</key>
 			<string>path_preference</string>
 			<key>DefaultValue</key>
-			<string>orawsv/TEST0_WEB/PI_MOBILE_SERVICE</string>
+			<string>orawsv/SHOP_WEB/PI_MOBILE_SERVICE</string>
 			<key>IsSecure</key>
 			<false/>
 			<key>KeyboardType</key>
@@ -98,7 +98,7 @@
 			<key>Key</key>
 			<string>auth_user_preference</string>
 			<key>DefaultValue</key>
-			<string>TEST0_WEB</string>
+			<string>SHOP_WEB</string>
 			<key>IsSecure</key>
 			<false/>
 			<key>KeyboardType</key>

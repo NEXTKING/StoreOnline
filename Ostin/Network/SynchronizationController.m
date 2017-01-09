@@ -57,7 +57,7 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     });
     
     _suspendingBlocker = [AppSuspendingBlocker new];
-//    [_suspendingBlocker startBlock];
+    [_suspendingBlocker startBlock];
     _syncIsRunning = YES;
     _syncProgress = 0;
     

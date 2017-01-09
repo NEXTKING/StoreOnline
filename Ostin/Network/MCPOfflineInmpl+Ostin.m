@@ -62,22 +62,21 @@
         NSString *authPassword = [[NSUserDefaults standardUserDefaults] valueForKey:@"auth_password_preference"];
         if (authUser != nil && authPassword != nil)
         {
-            //NSString *authStr = [NSString stringWithFormat:@"%@:%@", authUser, authPassword];
-            NSString *authStr = [NSString stringWithFormat:@"SHOP_WEB:q1w2e3r4t5@web"];
+            NSString *authStr = [NSString stringWithFormat:@"%@:%@", authUser, authPassword];
             NSData *authData = [authStr dataUsingEncoding:NSASCIIStringEncoding];
             
             authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodingWithLineLength:80]];
         }
         
-//        NSString *ID = [[NSUserDefaults standardUserDefaults] valueForKey:@"DeviceID"];
-//        if (ID == nil)
-//        {
-//            ID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-//            [[NSUserDefaults standardUserDefaults] setValue:ID forKey:@"DeviceID"];
-//            [[NSUserDefaults standardUserDefaults] synchronize];
-//        }
+        NSString *ID = [[NSUserDefaults standardUserDefaults] valueForKey:@"DeviceID"];
+        if (ID == nil)
+        {
+            ID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+            [[NSUserDefaults standardUserDefaults] setValue:ID forKey:@"DeviceID"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
         
-        deviceID = @"38475643286";//ID;
+        deviceID = ID;
     }
     
     return self;

@@ -195,9 +195,9 @@
     if (path.length > 0)
         [address appendFormat:@"/%@", path];
     
-    //return [NSURL URLWithString:address];
+    return [NSURL URLWithString:address];
     //return [NSURL URLWithString:@"http://172.16.4.234:8080/orawsv/OST170_WEB/PI_MOBILE_SERVICE"];
-    return [NSURL URLWithString:@"http://172.16.1.93:8080/orawsv/SHOP_WEB/PI_MOBILE_SERVICE"];
+    //return [NSURL URLWithString:@"http://172.16.1.93:8080/orawsv/SHOP_WEB/PI_MOBILE_SERVICE"];
 }
 
 @end
