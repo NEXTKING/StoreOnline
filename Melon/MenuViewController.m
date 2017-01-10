@@ -10,10 +10,12 @@
 #import "MCPServer.h"
 #import "DTDevices.h"
 #import "CommonConfirmButton.h"
+#import "AppSuspendingBlocker.h"
 
 @interface MenuViewController () <ItemDescriptionDelegate, UIAlertViewDelegate, DTDeviceDelegate, ZonesDelegate, AcceptanesDelegate>
 {
     NSInteger *reqCount;
+    AppSuspendingBlocker *_suspendingBlocker;
 }
 @property (weak, nonatomic) IBOutlet CommonConfirmButton *revaluationButton;
 @property (weak, nonatomic) IBOutlet CommonConfirmButton *inventoryButton;
@@ -82,6 +84,9 @@
 
 - (void) startSyncing
 {
+    _suspendingBlocker = [AppSuspendingBlocker new];
+    [_suspendingBlocker startBlock];
+    
     _syncButton.enabled = NO;
     [_syncActivityIndicator startAnimating];
     [[MCPServer instance] itemDescription:self itemCode:nil shopCode:_currentShopID isoType:0];
@@ -89,6 +94,8 @@
 
 - (void) finishSyncing:(BOOL) success
 {
+    [_suspendingBlocker stopBlock];
+    
     _syncButton.enabled = YES;
     [_syncActivityIndicator stopAnimating];
     if (success)

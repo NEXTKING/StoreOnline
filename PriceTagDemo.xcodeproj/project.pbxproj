@@ -18,6 +18,8 @@
 		21532CFB1DEF0BA8005E36F1 /* MelonPriceTag29x28.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21532CFA1DEF0BA8005E36F1 /* MelonPriceTag29x28.xib */; };
 		215EFF091DAB9ED600BE11C5 /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 215EFF071DAB9ED600BE11C5 /* SearchTableViewCell.m */; };
 		215EFF0A1DAB9ED600BE11C5 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 215EFF081DAB9ED600BE11C5 /* SearchTableViewCell.xib */; };
+		216439EA1E251065001EA089 /* AppSuspendingBlocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D838461DDC57F800A98E0F /* AppSuspendingBlocker.m */; };
+		216439EB1E251143001EA089 /* emptySound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 21D838481DDC628B00A98E0F /* emptySound.wav */; };
 		2174D5811DB8CDDC00FCE9CE /* SOAPSavePrintFact.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174D5801DB8CDDC00FCE9CE /* SOAPSavePrintFact.m */; };
 		218228661DAF864000F04B70 /* TasksCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 218228641DAF864000F04B70 /* TasksCell.m */; };
 		218228671DAF864000F04B70 /* TasksCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 218228651DAF864000F04B70 /* TasksCell.xib */; };
@@ -2833,6 +2835,7 @@
 				B9950B731CE1E5A0005B4375 /* Barcode manual@2x.png in Resources */,
 				B970B85D1CD2A0150066A66A /* send@2x.png in Resources */,
 				21D838361DD3353200A98E0F /* ReceiveItemCell.xib in Resources */,
+				216439EB1E251143001EA089 /* emptySound.wav in Resources */,
 				B970B83D1CD217C10066A66A /* Settings.bundle in Resources */,
 				B970B8271CD209830066A66A /* LaunchScreen.storyboard in Resources */,
 				214AD0F81DE87FE600FE0345 /* MelonPriceTag30x60.xib in Resources */,
@@ -3703,6 +3706,7 @@
 				B970B8521CD294A90066A66A /* RivgoshViewController.m in Sources */,
 				B9950B701CDBAF69005B4375 /* SettingsViewController.m in Sources */,
 				214AD0F61DE87FD200FE0345 /* MelonPriceTag30x60.m in Sources */,
+				216439EA1E251065001EA089 /* AppSuspendingBlocker.m in Sources */,
 				C63011091D35335A00D3DD57 /* BarCodeEAN13.m in Sources */,
 				B970B8381CD214D20066A66A /* NwobjAuthorization.m in Sources */,
 				B970B83A1CD214E00066A66A /* ItemInformation.m in Sources */,
