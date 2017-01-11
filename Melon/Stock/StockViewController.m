@@ -10,21 +10,37 @@
 #import "MCPServer.h"
 #import "DTDevices.h"
 #import "StockCell.h"
+#import "AppAppearance.h"
 
 @interface StockViewController () <StockDelegate, DTDeviceDelegate>
 {
     NSArray* stocks;
     DTDevices* dtDev;
 }
-
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *shieldView;
+@property (weak, nonatomic) IBOutlet UILabel *placeholderLabel;
 @end
 
 @implementation StockViewController
 
 static NSString * const reuseIdentifier = @"StockCell";
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    
+    UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithImage:AppAppearance.sharedApperance.navigationBarManualInputImage style:UIBarButtonItemStylePlain target:self action:@selector(manualInputAction:)];
+    self.navigationItem.rightBarButtonItem = sendButton;
+    
+    self.tableView.separatorColor = AppAppearance.sharedApperance.tableViewSeparatorColor;
+    self.tableView.separatorStyle = AppAppearance.sharedApperance.tableViewSeparatorStyle;
+    self.tableView.backgroundColor = AppAppearance.sharedApperance.tableViewBackgroundColor;
+    self.tableView.tableFooterView = [UIView new];
+    _shieldView.backgroundColor = AppAppearance.sharedApperance.tableViewBackgroundColor;
+    
+    _placeholderLabel.text = NSLocalizedString(@"Отсканируйте штрих-код товара", nil);
+    _placeholderLabel.font = AppAppearance.sharedApperance.tableViewSectionHeaderTitle1Font;
     
     dtDev = [DTDevices sharedDevice];
     
@@ -32,11 +48,6 @@ static NSString * const reuseIdentifier = @"StockCell";
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"StockCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -111,20 +122,10 @@ static NSString * const reuseIdentifier = @"StockCell";
     ItemInformation* item = stocks[indexPath.row];
     
     cell.nameLabel.text     = item.name;
-    cell.articleLabel.text  = item.article;
+    cell.articleLabel.text  = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Арт.", nil), item.article?item.article:@""];
     cell.stockLabel.text    = [NSString stringWithFormat:@"%ld", (long)item.stock];
     
     return cell;
-}
-
-- (NSString*) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
-{
-    //if ( tableView.numberOfSections > 0 && [tableView numberOfRowsInSection:0] == 0)
-    //    return @"Отсканируйте штрих-код товара";
-    if (stocks.count < 1)
-        return NSLocalizedString(@"Отсканируйте штрих-код товара", nil);
-    
-    return nil;
 }
 
 #pragma mark - Network Delegate
@@ -139,6 +140,17 @@ static NSString * const reuseIdentifier = @"StockCell";
     {
         stocks = nil;
         [self showInfoMessage:NSLocalizedString(@"Не удалось найти товар в базе", nil)];
+    }
+    
+    if (stocks.count > 0)
+    {
+        _shieldView.hidden = YES;
+        _tableView.scrollEnabled = YES;
+    }
+    else
+    {
+        _shieldView.hidden = NO;
+        _tableView.scrollEnabled = NO;
     }
     
     [self.tableView reloadData];

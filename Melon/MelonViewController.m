@@ -10,6 +10,7 @@
 #import "WYStoryboardPopoverSegue.h"
 #import "SettingsViewController.h"
 #import "BarCodeView.h"
+#import "AppAppearance.h"
 
 @interface MelonViewController () <WYPopoverControllerDelegate, UIAlertViewDelegate>
 {
@@ -19,11 +20,9 @@
     BOOL bindingInProgress;
     UIAlertView* bindingAlert;
 }
-@property (weak, nonatomic) IBOutlet UILabel *itemPreTitleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *itemPreArticleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *itemPreBarcodeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *itemPrePriceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *itemPrePrintBarcodeLabel;
+@property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *preLabels;
+@property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *mainLabels;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @end
 
 @implementation MelonViewController
@@ -31,14 +30,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _barcodeSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShouldPrintBarcode"];
     
-    _itemPreTitleLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Наименование", nil)];
-    _itemPreArticleLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Артикул", nil)];
-    _itemPreBarcodeLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Штрих-код", nil)];
-    _itemPrePriceLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Цена", nil)];
-    _itemPrePrintBarcodeLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Печатать Штрих-код", nil)];
-    _copiesLabel.text = [NSString stringWithFormat:@"%@: 1", NSLocalizedString(@"Количество копий", nil)];
+    _scrollView.backgroundColor = AppAppearance.sharedApperance.tableViewBackgroundColor;
+    
+    for (UILabel *label in self.preLabels)
+    {
+        label.font = AppAppearance.sharedApperance.tableViewCellTitle3Font;
+        label.textColor = AppAppearance.sharedApperance.tableViewCellTitle1Color;
+        label.text = NSLocalizedString(label.text, nil);
+    }
+    
+    for (UILabel *label in self.mainLabels)
+    {
+        label.font = AppAppearance.sharedApperance.tableViewCellTitle1Font;
+        label.textColor = AppAppearance.sharedApperance.tableViewCellTitle1Color;
+        label.text = NSLocalizedString(label.text, nil);
+    }
+    
+    _barcodeSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShouldPrintBarcode"];
+    _copiesLabel.text = @"1";
     [self.printButton setTitle:NSLocalizedString(@"Печать", nil) forState:UIControlStateNormal];
 }
 
@@ -78,11 +88,12 @@
     if (paramInfo)
     {
         BOOL isSale = [paramInfo.value isEqualToString:@"1"];
-        self.itemPriceLabel.backgroundColor = isSale ? [UIColor redColor]:[UIColor colorWithRed:113.0/255.0 green:113.0/255.0 blue:113.0/255.0 alpha:0.28];
+        //self.itemPriceLabel.backgroundColor = isSale ? [UIColor redColor]:[UIColor colorWithRed:113.0/255.0 green:113.0/255.0 blue:113.0/255.0 alpha:0.28];
+        self.itemPriceLabel.textColor = isSale ? [UIColor redColor] : [UIColor blackColor];
     }
     else
-        self.itemPriceLabel.backgroundColor = [UIColor colorWithRed:113.0/255.0 green:113.0/255.0 blue:113.0/255.0 alpha:0.28];
-        
+        //self.itemPriceLabel.backgroundColor = [UIColor colorWithRed:113.0/255.0 green:113.0/255.0 blue:113.0/255.0 alpha:0.28];
+        self.itemPriceLabel.textColor = [UIColor blackColor];
 }
 
 - (IBAction)switchAction:(UISwitch*)sender
@@ -93,7 +104,7 @@
 
 - (IBAction)stepperAction:(UIStepper*)sender
 {
-    _copiesLabel.text = [NSString stringWithFormat:@"%@: %.0f", NSLocalizedString(@"Количество копий", nil), sender.value];
+    _copiesLabel.text = [NSString stringWithFormat:@"%.0f", sender.value];
     self.numberOfCopies = sender.value;
     self.shouldRetrack = (self.numberOfCopies > 1);
 }

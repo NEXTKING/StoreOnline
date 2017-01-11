@@ -28,13 +28,12 @@
     [super viewDidLoad];
     [self initChangePriceTagTypePicker];
     _priceTagChangeTypeTextField.text = NSLocalizedString(@"Изменить", nil);
-    self.printButton.enabled = YES;
 }
 
 - (void) updateItemInfo:(ItemInformation *)itemInfo
 {
     [super updateItemInfo:itemInfo];
-    self.itemPriceLabel.backgroundColor = [UIColor whiteColor];
+    self.itemPriceLabel.textColor = [UIColor blackColor];
 }
 
 - (IBAction)printButtonAction:(id)sender
@@ -57,7 +56,7 @@
                        @{@"name":NSLocalizedString(@"29x28 мм", nil), @"xibName":@"MelonPriceTag29x28"}];
     
     _selectedPriceTagType = 0;
-    _priceTagTypeLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Тип ярлыка", nil), _priceTagTypes[_selectedPriceTagType][@"name"]];
+    _priceTagTypeLabel.text = _priceTagTypes[_selectedPriceTagType][@"name"];
     
     UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Отмена", nil) style:UIBarButtonItemStylePlain target:self action:@selector(cancelChangePriceTagType:)];
@@ -72,9 +71,10 @@
     _priceTagChangeTypeTextField.inputView = _priceTagTypePicker;
     _priceTagChangeTypeTextField.inputAccessoryView = toolBar;
     _priceTagChangeTypeTextField.tintColor = [UIColor clearColor];
-    _priceTagChangeTypeTextField.layer.cornerRadius = 3;
-    _priceTagChangeTypeTextField.layer.borderColor = [UIColor blackColor].CGColor;
-    _priceTagChangeTypeTextField.layer.borderWidth = 1;
+    _priceTagChangeTypeTextField.layer.cornerRadius = 4;
+    _priceTagChangeTypeTextField.layer.borderColor = [UIColor colorWithRed:205.0/255.0 green:205.0/255.0 blue:205.0/255.0 alpha:1].CGColor;
+    _priceTagChangeTypeTextField.backgroundColor = [UIColor colorWithRed:205.0/255.0 green:205.0/255.0 blue:205.0/255.0 alpha:1];
+    _priceTagChangeTypeTextField.textColor = [UIColor whiteColor];
 }
 
 - (void)cancelChangePriceTagType:(id)sender
@@ -85,7 +85,7 @@
 - (void)doneChangePriceTagType:(id)sender
 {
     _selectedPriceTagType = [_priceTagTypePicker selectedRowInComponent:0];
-    _priceTagTypeLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Тип ярлыка", nil), _priceTagTypes[_selectedPriceTagType][@"name"]];
+    _priceTagTypeLabel.text = _priceTagTypes[_selectedPriceTagType][@"name"];
     [_priceTagChangeTypeTextField resignFirstResponder];
 }
 

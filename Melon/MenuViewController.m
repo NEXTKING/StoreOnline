@@ -9,17 +9,19 @@
 #import "MenuViewController.h"
 #import "MCPServer.h"
 #import "DTDevices.h"
-#import "CommonConfirmButton.h"
+#import "DPButton.h"
+#import "DPSyncButton.h"
 
 @interface MenuViewController () <ItemDescriptionDelegate, UIAlertViewDelegate, DTDeviceDelegate, ZonesDelegate, AcceptanesDelegate>
 {
     NSInteger *reqCount;
 }
-@property (weak, nonatomic) IBOutlet CommonConfirmButton *revaluationButton;
-@property (weak, nonatomic) IBOutlet CommonConfirmButton *inventoryButton;
-@property (weak, nonatomic) IBOutlet CommonConfirmButton *stockButton;
-@property (weak, nonatomic) IBOutlet CommonConfirmButton *acceptancesButton;
-@property (weak, nonatomic) IBOutlet CommonConfirmButton *labelsButton;
+@property (weak, nonatomic) IBOutlet DPSyncButton *syncButton;
+@property (weak, nonatomic) IBOutlet DPButton *revaluationButton;
+@property (weak, nonatomic) IBOutlet DPButton *inventoryButton;
+@property (weak, nonatomic) IBOutlet DPButton *stockButton;
+@property (weak, nonatomic) IBOutlet DPButton *acceptancesButton;
+@property (weak, nonatomic) IBOutlet DPButton *labelsButton;
 
 @property (nonatomic, weak) UIAlertView* syncAlertView;
 @property (nonatomic, copy) NSString* currentShopID;
@@ -27,13 +29,26 @@
 
 @implementation MenuViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    NSString *lastSyncString = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastSync"];
-    _lastSyncLabel.text = lastSyncString ? [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Последняя синхронизация", nil), lastSyncString]:@"Нет данных о последней синхронизации";
+    NSDate *lastSyncDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastSyncDate"];
+    if (lastSyncDate)
+    {
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        dateFormatter.dateStyle = NSDateFormatterLongStyle;
+        dateFormatter.timeStyle = NSDateFormatterShortStyle;
+        NSString *dateString = [dateFormatter stringFromDate:lastSyncDate];
+        
+        _lastSyncDateLabel.text = dateString;
+    }
+    else
+        _lastSyncDateLabel.text = NSLocalizedString(@"Нет данных о последней синхронизации", nil);
+    
+    _lastSyncLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Последняя синхронизация", nil)];
     
     NSString * build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
-    _buildLabel.text = [NSString stringWithFormat:@"Build: %@", build];
+    _buildLabel.text = [NSString stringWithFormat:@"Build %@", build];
     [_revaluationButton setTitle:NSLocalizedString(@"Переоценка", nil) forState:UIControlStateNormal];
     [_inventoryButton setTitle:NSLocalizedString(@"Инвентаризация", nil) forState:UIControlStateNormal];
     [_stockButton setTitle:NSLocalizedString(@"Остатки товара", nil) forState:UIControlStateNormal];
@@ -83,22 +98,25 @@
 - (void) startSyncing
 {
     _syncButton.enabled = NO;
-    [_syncActivityIndicator startAnimating];
+    [_syncButton startAnimation];
     [[MCPServer instance] itemDescription:self itemCode:nil shopCode:_currentShopID isoType:0];
 }
 
 - (void) finishSyncing:(BOOL) success
 {
     _syncButton.enabled = YES;
-    [_syncActivityIndicator stopAnimating];
+    [_syncButton stopAnimation];
     if (success)
     {
+        NSDate *now = [NSDate date];
+        
         NSDateFormatter *dateFormatter = [NSDateFormatter new];
         dateFormatter.dateStyle = NSDateFormatterLongStyle;
         dateFormatter.timeStyle = NSDateFormatterShortStyle;
-        NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+        NSString *dateString = [dateFormatter stringFromDate:now];
+        
         _lastSyncLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Последняя синхронизация", nil), dateString];
-        [[NSUserDefaults standardUserDefaults] setObject:dateString forKey:@"lastSync"];
+        [[NSUserDefaults standardUserDefaults] setObject:now forKey:@"lastSyncDate"];
         [[NSUserDefaults standardUserDefaults] setObject:_currentShopID forKey:@"shopID"];
     }
     else

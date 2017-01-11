@@ -106,7 +106,8 @@
         for (NSString *key in [self propertyKeys])
         {
             id value = [aDecoder decodeObjectForKey:key];
-            [self setValue:value forKey:key];
+            if (value)
+                [self setValue:value forKey:key];
         }
     }
     return self;

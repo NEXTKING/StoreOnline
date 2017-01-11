@@ -8,17 +8,19 @@
 
 #import "InventorySectionsViewController.h"
 #import "InventoryViewController.h"
-#import "DTDevices.h"
 #import "MCPServer.h"
+#import "AppAppearance.h"
+#import "InventorySectionCell.h"
 
 @implementation SectionDescription
 @end
 
-@interface InventorySectionsViewController () <DTDeviceDelegate, UIAlertViewDelegate, SendCartDelegate>
+@interface InventorySectionsViewController () <UIAlertViewDelegate, SendCartDelegate>
 
 @property (nonatomic, strong) NSArray* sections;
 @property (nonatomic, strong) NSIndexPath* selectedIndexPath;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *startInventoryButton;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIButton *startInventoryButton;
 
 @end
 
@@ -27,7 +29,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _startInventoryButton.title = NSLocalizedString(@"Начать новую инвентаризацию", nil);
+    [_startInventoryButton setTitle:NSLocalizedString(@"Начать новую инвентаризацию", nil) forState:UIControlStateNormal];
+    [self.tableView registerNib:[UINib nibWithNibName:@"InventorySectionCell" bundle:nil] forCellReuseIdentifier:@"InventorySectionCell"];
+    [self.tableView setRowHeight:UITableViewAutomaticDimension];
+    [self.tableView setEstimatedRowHeight:44];
+    
+    self.tableView.separatorColor = AppAppearance.sharedApperance.tableViewSeparatorColor;
+    self.tableView.separatorStyle = AppAppearance.sharedApperance.tableViewSeparatorStyle;
+    self.tableView.backgroundColor = AppAppearance.sharedApperance.tableViewBackgroundColor;
+    self.tableView.tableFooterView = [UIView new];
+    
+    UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithImage:AppAppearance.sharedApperance.navigationBarSendButtonImage style:UIBarButtonItemStylePlain target:self action:@selector(sendButtonAction:)];
+    self.navigationItem.rightBarButtonItem = sendButton;
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -38,10 +51,6 @@
                                              selector:@selector(scanNotification:)
                                                  name:@"BarcodeScanNotification"
                                                object:nil];
-    
-    //DTDevices *dtdev = [DTDevices sharedDevice];
-    //[dtdev addDelegate:self];
-    [self.navigationController setToolbarHidden:NO animated:YES];
     
     if (_selectedIndexPath)
     {
@@ -54,14 +63,11 @@
 - (void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.navigationController setToolbarHidden:YES animated:YES];
 }
 
 - (void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    //DTDevices *dtdev = [DTDevices sharedDevice];
-    //[dtdev removeDelegate:self];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
 }
@@ -148,12 +154,7 @@
     
     static NSString* CellIdentifier = @"InventorySectionCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (!cell)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-    }
+    InventorySectionCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary* inventoryCache = [defaults objectForKey:@"inventoryCache"];
@@ -161,14 +162,11 @@
     SectionDescription *currentSection = _sections[indexPath.row];
     NSArray *currentSectionCache = [inventoryCache objectForKey:currentSection.barcode];
     
-    cell.textLabel.text = currentSection.name;
-    cell.detailTextLabel.text = currentSection.barcode;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.titleLabel.text = currentSection.name;
+    cell.barcodeLabel.text = currentSection.barcode;
+    cell.positionLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row + 1];
     
-    
-    cell.backgroundColor = (currentSectionCache.count>0) ? [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.2]:[UIColor whiteColor];
-    
-    // Configure the cell...
+    cell.backgroundColor = (currentSectionCache.count>0) ? AppAppearance.sharedApperance.tableViewCellBackgroundGreenColor : AppAppearance.sharedApperance.tableViewCellBackgroundColor;
     
     return cell;
 }
@@ -176,6 +174,7 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     _selectedIndexPath = indexPath;
+    [self performSegueWithIdentifier:@"InventorySegue" sender:nil];
 }
 
 /*
@@ -361,7 +360,7 @@
     // Pass the selected object to the new view controller.
     InventoryViewController *inventoryVC = segue.destinationViewController;
     
-    NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
+    NSIndexPath* indexPath = _selectedIndexPath;//[self.tableView indexPathForCell:sender];
     
     SectionDescription *description = _sections[indexPath.row];
     inventoryVC.section = description;

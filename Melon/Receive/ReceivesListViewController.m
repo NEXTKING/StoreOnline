@@ -10,12 +10,14 @@
 #import "ReceivesListCell.h"
 #import "ReceiveViewController.h"
 #import "MCPServer.h"
+#import "AppAppearance.h"
 
 @interface ReceivesListViewController () <AcceptanesDelegate>
 {
     NSArray *_items;
     NSDateFormatter *_dateFormatter;
 }
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
 
 @implementation ReceivesListViewController
@@ -23,6 +25,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.tableView.separatorColor = AppAppearance.sharedApperance.tableViewSeparatorColor;
+    self.tableView.separatorStyle = AppAppearance.sharedApperance.tableViewSeparatorStyle;
+    self.tableView.backgroundColor = AppAppearance.sharedApperance.tableViewBackgroundColor;
+    self.tableView.tableFooterView = [UIView new];
+    
     [self.tableView registerNib:[UINib nibWithNibName:@"ReceivesListCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
     
     _dateFormatter = [NSDateFormatter new];
@@ -87,7 +95,7 @@
     NSDate *date = _items[indexPath.row];
     
     cell.titleLabel.text = [_dateFormatter stringFromDate:date];
-    
+    cell.positionLabel.text = [NSString stringWithFormat:@"%ld", (indexPath.row + 1)];
     return cell;
 }
 

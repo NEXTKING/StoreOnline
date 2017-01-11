@@ -7,18 +7,27 @@
 //
 
 #import "StockCell.h"
+#import "AppAppearance.h"
 
 @implementation StockCell
 
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
     [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.backgroundColor = AppAppearance.sharedApperance.tableViewCellBackgroundColor;
+    
+    _nameLabel.textColor = AppAppearance.sharedApperance.tableViewCellTitle1Color;
+    _nameLabel.font = AppAppearance.sharedApperance.tableViewCellTitle1Font;
+    
+    _articleLabel.textColor = AppAppearance.sharedApperance.tableViewCellTitle2Color;
+    _articleLabel.font = AppAppearance.sharedApperance.tableViewCellTitle2Font;
+    
+    _stockLabel.textColor = AppAppearance.sharedApperance.tableViewCellTitle1Color;
+    _stockLabel.font = AppAppearance.sharedApperance.tableViewCellTitle1Font;
+    
+    _positionLabel.textColor = AppAppearance.sharedApperance.tableViewCellTitle2Color;
+    _positionLabel.font = AppAppearance.sharedApperance.tableViewCellTitle2Font;
 }
 
 @end

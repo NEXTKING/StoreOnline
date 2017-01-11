@@ -86,6 +86,9 @@
     printVC.view.frame = printFrame;
     printVC.view.center = self.view.center;
     
+    if (![[UINavigationBar appearance] isTranslucent])
+        printVC.view.frame = CGRectMake(printVC.view.frame.origin.x, printVC.view.frame.origin.y - 64, 200, 100);
+    
     _statusView.layer.cornerRadius = _statusView.frame.size.height/2;
 }
 

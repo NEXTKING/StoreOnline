@@ -12,4 +12,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *barcodeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *quantityLabel;
+@property (weak, nonatomic) IBOutlet UILabel *positionLabel;
+
+- (void)setExcessStyle;
+- (void)setCompleteStyle;
+- (void)setDefaultStyle;
+
 @end

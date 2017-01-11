@@ -11,4 +11,9 @@
 @interface ReceiveBoxCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *barcodeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *positionLabel;
+
+- (void)setCompleteStyle;
+- (void)setDefaultStyle;
+
 @end
