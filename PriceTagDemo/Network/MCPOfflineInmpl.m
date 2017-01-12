@@ -339,7 +339,7 @@
 {
     NSManagedObjectContext *moc =_dataController.managedObjectContext;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"AcceptItem"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"date == %@ AND type == %@ AND scanned > 0", date, @""]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"date == %@ AND scanned > 0", date]];
     NSArray* results = [moc executeFetchRequest:request error:nil];
     
     if (results.count < 1)

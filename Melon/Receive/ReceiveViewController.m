@@ -397,7 +397,12 @@ typedef enum : NSUInteger
         if ([acceptInfo.barcode isEqualToString:barcode])
         {
             if (acceptInfo.type == AcceptanesInformationItemTypeBox || acceptInfo.type == AcceptanesInformationItemTypeSet)
+            {
+                acceptInfo.scanned = @(acceptInfo.scanned.integerValue + 1);
+                [self addItemToAcception:acceptInfo containerBarcode:acceptInfo.containerBarcode scanned:acceptInfo.scanned.integerValue manually:NO];
+                
                 [self pushToAcceptItem:acceptInfo];
+            }
             else
             {
                 acceptInfo.scanned = @(acceptInfo.scanned.integerValue + 1);
