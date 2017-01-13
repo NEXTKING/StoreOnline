@@ -183,14 +183,14 @@
         if ([acceptItemDB.type isEqualToString:@"B"])
         {
             acceptInfo.type = AcceptanesInformationItemTypeBox;
-            NSDictionary *countDictionary = [self calculateItemsCountForContainerBarcode:acceptItemDB.barcode acceptionDate:date];
+            NSDictionary *countDictionary = [self calculateItemsCountForContainerBarcode:acceptItemDB.barcode acceptionDate:date n:0];
             acceptInfo.scanned = countDictionary[@"scanned"];
             acceptInfo.quantity = countDictionary[@"quantity"];
         }
         else if ([acceptItemDB.type isEqualToString:@"S"])
         {
             acceptInfo.type = AcceptanesInformationItemTypeSet;
-            NSDictionary *countDictionary = [self calculateItemsCountForContainerBarcode:acceptItemDB.barcode acceptionDate:date];
+            NSDictionary *countDictionary = [self calculateItemsCountForContainerBarcode:acceptItemDB.barcode acceptionDate:date n:0];
             acceptInfo.scanned = countDictionary[@"scanned"];
             acceptInfo.quantity = countDictionary[@"quantity"];
         }
@@ -211,8 +211,11 @@
     [delegate acceptanesComplete:0 items:itemsToReturn];
 }
 
-- (NSDictionary *)calculateItemsCountForContainerBarcode:(NSString *)containerBarcode acceptionDate:(NSDate*)date
+- (NSDictionary *)calculateItemsCountForContainerBarcode:(NSString *)containerBarcode acceptionDate:(NSDate*)date n:(int)n
 {
+    if (n == 100) // break infinite recursion
+        return @{@"scanned": @(0), @"quantity": @(0)};
+    
     NSManagedObjectContext *moc =_dataController.managedObjectContext;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"AcceptItem"];
     [request setPredicate:[NSPredicate predicateWithFormat:@"date == %@ AND containerBarcode == %@", date, containerBarcode]];
@@ -229,7 +232,7 @@
     {
         if ([acceptItemDB.type isEqualToString:@"B"] || [acceptItemDB.type isEqualToString:@"S"])
         {
-            NSDictionary *countDictionary = [self calculateItemsCountForContainerBarcode:acceptItemDB.barcode acceptionDate:date];
+            NSDictionary *countDictionary = [self calculateItemsCountForContainerBarcode:acceptItemDB.barcode acceptionDate:date n:(n+1)];
             scanned += [countDictionary[@"scanned"] integerValue];
             quantity += [countDictionary[@"quantity"] integerValue];
         }
@@ -312,10 +315,18 @@
         return acceptInfo;
     };
     
+    int n = 0;
     NSMutableArray *hierarchy = [NSMutableArray new];
     NSArray* results = [moc executeFetchRequest:request error:nil];
     while (results.count > 0)
     {
+        if (n == 100)
+        {
+            // break infinite recursion
+            [delegate acceptanesHierarchyComplete:1 items:nil];
+            return;
+        }
+        
         AcceptItem *acceptItemDB = results[0];
         AcceptanesInformation *acceptInfo = generateAcceptInfo(acceptItemDB);
         [hierarchy insertObject:acceptInfo atIndex:0];
@@ -324,6 +335,7 @@
         {
             [request setPredicate:[NSPredicate predicateWithFormat:@"date == %@ AND barcode == %@", date, acceptInfo.containerBarcode]];
             results = [moc executeFetchRequest:request error:nil];
+            n = n + 1;
         }
         else
             break;
