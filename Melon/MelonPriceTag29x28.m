@@ -27,6 +27,7 @@
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"ShouldPrintBarcode"])
     {
+        [self.barcodeView setHidden:NO];
         BarCodeView *barCodeView = [[BarCodeView alloc] initWithFrame:CGRectMake(0, 0, self.barcodeView.frame.size.width, self.barcodeView.frame.size.height)];
         [self.barcodeView addSubview:barCodeView];
         [barCodeView setBarCode:item.barcode];
