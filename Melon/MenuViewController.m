@@ -31,8 +31,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSString *lastSyncString = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastSync"];
-    _lastSyncLabel.text = lastSyncString ? [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Последняя синхронизация", nil), lastSyncString]:@"Нет данных о последней синхронизации";
+    NSDate *lastSyncDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastSyncDate"];
+    if (lastSyncDate)
+    {
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        dateFormatter.dateStyle = NSDateFormatterLongStyle;
+        dateFormatter.timeStyle = NSDateFormatterShortStyle;
+        NSString *dateString = [dateFormatter stringFromDate:lastSyncDate];
+        
+        _lastSyncLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Последняя синхронизация", nil), dateString];
+    }
+    else
+        _lastSyncLabel.text = NSLocalizedString(@"Нет данных о последней синхронизации", nil);
     
     NSString * build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
     _buildLabel.text = [NSString stringWithFormat:@"Build: %@", build];
@@ -100,12 +110,16 @@
     [_syncActivityIndicator stopAnimating];
     if (success)
     {
+        NSDate *now = [NSDate date];
+        
         NSDateFormatter *dateFormatter = [NSDateFormatter new];
         dateFormatter.dateStyle = NSDateFormatterLongStyle;
         dateFormatter.timeStyle = NSDateFormatterShortStyle;
-        NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+        NSString *dateString = [dateFormatter stringFromDate:now];
+        
         _lastSyncLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Последняя синхронизация", nil), dateString];
-        [[NSUserDefaults standardUserDefaults] setObject:dateString forKey:@"lastSync"];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:now forKey:@"lastSyncDate"];
         [[NSUserDefaults standardUserDefaults] setObject:_currentShopID forKey:@"shopID"];
     }
     else
