@@ -132,6 +132,20 @@
     });
 }
 
+- (void)showResetPortionsAlert
+{
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Сброс порций" message:@"Сброс порций приведет к удалению с устройства базы товаров. Продолжить?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *resetAction = [UIAlertAction actionWithTitle:@"Сбросить порции" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self resetPortions];
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleCancel handler:nil];
+    
+    [ac addAction:resetAction];
+    [ac addAction:cancelAction];
+    
+    [self presentViewController:ac animated:YES completion:nil];
+}
+
 - (IBAction)sync:(id)sender
 {
     _syncButton.enabled = NO;
@@ -147,6 +161,11 @@
 }
 
 - (IBAction)reset:(id)sender
+{
+    [self showResetPortionsAlert];
+}
+
+- (void)resetPortions
 {
     _syncButton.enabled = NO;
     _resetButton.enabled = NO;

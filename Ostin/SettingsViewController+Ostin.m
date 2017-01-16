@@ -212,7 +212,7 @@ enum : NSUInteger
 
 - (void)showResetPortionsAlert
 {
-    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Сброс порций" message:@"Сброс порций приведет к удалению с устройства базы товаров. Продолжить?" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Сброс порций" message:@"Сброс порций приведет к удалению с устройства базы товаров. Продолжить?" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *resetAction = [UIAlertAction actionWithTitle:@"Сбросить порции" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [SynchronizationController.sharedInstance resetPortions];
         [self reloadSyncActionsSection];

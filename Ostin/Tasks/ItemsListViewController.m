@@ -153,7 +153,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
 
 - (void)showConfirmCompleteTaskAlert
 {
-    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Завершение ЗнП" message:@"Вы уверены, что хотите завершить ЗнП?" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Завершение ЗнП" message:@"Вы уверены, что хотите завершить ЗнП?" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *completeAction = [UIAlertAction actionWithTitle:@"Завершить" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self changeTaskStatus];
     }];
