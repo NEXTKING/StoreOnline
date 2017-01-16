@@ -1189,6 +1189,7 @@
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"imageURL" value:[self imageURLForItemID:itemDB.itemID.integerValue]]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"ean" value:barcodeDB.ean]];
     [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"drop" value:itemDB.drop]];
+    [additionalParameters addObject:[[ParameterInformation alloc] initWithName:@"collection" value:itemDB.collection]];
     
     itemInfo.itemId     = itemDB.itemID.integerValue;
     itemInfo.barcode    = barcodeDB.code128;

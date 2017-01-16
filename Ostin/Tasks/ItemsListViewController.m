@@ -479,7 +479,7 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     {
         [[PrintServer instance] addItemToPrintQueue:itemInfo printFormat:@"mainZPL"];
         
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PrintAdditionalLabel"])
+        if ([self shouldPrintAdditionalLabelForItem:itemInfo])
             [[PrintServer instance] addItemToPrintQueue:itemInfo printFormat:@"additionalZPL"];
     }
     else
@@ -538,6 +538,16 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
             return taskItemInfo;
     
     return nil;
+}
+
+- (BOOL)shouldPrintAdditionalLabelForItem:(ItemInformation *)item
+{
+    NSString *collection = [item additionalParameterValueForName:@"collection"];
+    
+    if (collection && ([collection isEqualToString:@"SS16"] || [collection isEqualToString:@"SS17"] || [collection isEqualToString:@"AW17"]))
+        return YES;
+    else
+        return NO;
 }
 
 - (void)playSound:(int)number

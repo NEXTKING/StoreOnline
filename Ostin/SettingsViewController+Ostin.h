@@ -9,5 +9,5 @@
 #import "SettingsViewController.h"
 
 @interface SettingsViewController_Ostin : SettingsViewController
-
+@property (nonatomic, assign) BOOL showPrintAdditionalLabelSwitch;
 @end

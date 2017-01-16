@@ -8,7 +8,7 @@
 
 #import "OstinViewController.h"
 #import "WYStoryboardPopoverSegue.h"
-#import "SettingsViewController.h"
+#import "SettingsViewController+Ostin.h"
 #import "ZPLGenerator.h"
 #import "BarcodeFormatter.h"
 #import "AsyncImageView.h"
@@ -297,9 +297,10 @@
     {
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         
-        SettingsViewController* destinationViewController = (SettingsViewController *)segue.destinationViewController;
-        destinationViewController.preferredContentSize = CGSizeMake(260, 300);       // Deprecated in iOS7. Use 'preferredContentSize' instead.
-               
+        SettingsViewController_Ostin* destinationViewController = (SettingsViewController_Ostin *)segue.destinationViewController;
+        destinationViewController.preferredContentSize = CGSizeMake(260, 300);
+        destinationViewController.showPrintAdditionalLabelSwitch = YES;
+        
         settingsPopover = [popoverSegue popoverControllerWithSender:sender permittedArrowDirections:WYPopoverArrowDirectionAny animated:YES];
         
         destinationViewController.bindPrinterAction = ^

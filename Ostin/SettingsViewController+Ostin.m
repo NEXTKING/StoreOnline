@@ -76,7 +76,7 @@ enum : NSUInteger
     switch (section)
     {
         case SettingsSectionPrinterActions:
-            return 2;
+            return _showPrintAdditionalLabelSwitch ? 2 : 1;
             break;
         case SettingsSectionScanerActions:
             return 2;
