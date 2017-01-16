@@ -31,14 +31,16 @@
             return substring;
         }
     }
-    #ifdef OSTIN
+    else if (type == BAR_CODE128 && [barcodeString hasPrefix:@"29900"] && barcodeString.length > 12)
+    {
+        return [barcodeString substringToIndex:barcodeString.length-1];
+    }
     else if (type == BAR_CODE128 && barcodeString.length >=25)
     {
         NSString *barcode = [barcodeString substringWithRange:NSMakeRange(barcodeString.length - 17, 7)];
         
         return barcode;
     }
-    #endif
     else
         return barcodeString;
 }

@@ -110,9 +110,20 @@
         if (isAllDigit && text.length > 10)
         {
             if ([text hasPrefix:@"09900"])
-                text = [text substringFromIndex:1];
-            NSString *code = [BarcodeFormatter normalizedBarcodeFromString:text isoType:BAR_UPC];
-            [wself requestItemInfoWithCode:code isoType:BAR_UPC];
+            {
+                NSString *code = [BarcodeFormatter normalizedBarcodeFromString:[text substringFromIndex:1] isoType:BAR_UPC];
+                [wself requestItemInfoWithCode:code isoType:BAR_UPC];
+            }
+            else if ([text hasPrefix:@"9900"])
+            {
+                NSString *code = [BarcodeFormatter normalizedBarcodeFromString:text isoType:BAR_UPC];
+                [wself requestItemInfoWithCode:code isoType:BAR_UPC];
+            }
+            else
+            {
+                NSString *code = [BarcodeFormatter normalizedBarcodeFromString:text isoType:BAR_CODE128];
+                [wself requestItemInfoWithCode:code isoType:BAR_CODE128];
+            }
         }
         else
             [wself requestItemInfoWithArticle:text];

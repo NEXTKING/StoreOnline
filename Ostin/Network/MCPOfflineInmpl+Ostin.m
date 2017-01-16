@@ -905,7 +905,12 @@
             [request setPredicate:[NSPredicate predicateWithFormat:@"ean LIKE[c] %@", codeWithoutChecksum]];
             results = [moc executeFetchRequest:request error:nil];
         }
-            
+        else if (results.count < 1 && type == BAR_CODE128 && code.length > 8)
+        {
+            [request setPredicate:[NSPredicate predicateWithFormat:@"ean LIKE[c] %@", code]];
+            results = [moc executeFetchRequest:request error:nil];
+        }
+        
         if (results.count < 1)
         {
             returnBlock(1, nil);
