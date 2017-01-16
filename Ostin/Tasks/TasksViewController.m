@@ -78,6 +78,27 @@ static NSString * const reuseIdentifier = @"TableCellIdentifier";
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    TasksCell *_cell = (TasksCell *)cell;
+    TaskInformation *task = [_tasks objectAtIndex:indexPath.row];
+    
+    __block NSInteger totalCount = 0;
+    __block NSInteger completeCount = 0;
+    
+    [task.items enumerateObjectsUsingBlock:^(TaskItemInformation *item, NSUInteger idx, BOOL *stop) {
+        totalCount += item.quantity;
+        completeCount += item.scanned > item.quantity ? item.quantity : item.scanned;
+    }];
+    
+    if (task.status == TaskInformationStatusNotStarted)
+        _cell.statusLabel.text = [NSString stringWithFormat:@"Новое (%ld/%ld)", completeCount, totalCount];
+    else if (task.status == TaskInformationStatusInProgress)
+        _cell.statusLabel.text = [NSString stringWithFormat:@"Не завершено (%ld/%ld)", completeCount, totalCount];
+    else
+        _cell.statusLabel.text = [NSString stringWithFormat:@"Завершено (%ld/%ld)", completeCount, totalCount];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self performSegueWithIdentifier:@"TaskItemsListSegue" sender:indexPath];
