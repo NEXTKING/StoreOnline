@@ -7,6 +7,7 @@
 //
 
 #import "SOAPOperation.h"
+#import "SynchronizationController.h"
 
 @interface SOAPOperation()
 {
@@ -50,7 +51,7 @@
         self.success = YES; // Nothing to download
     }
     
-    if (self.isCancelled || numberOfPortions <= 0)
+    if (self.isCancelled || numberOfPortions <= 0 || !SynchronizationController.sharedInstance.syncIsRunning)
         return;
     
     dispatch_sync(dispatch_get_main_queue(), ^{
@@ -82,12 +83,12 @@
             }];
         
             
-            if (!localSuccess || self.isCancelled)
+            if (!localSuccess || self.isCancelled || !SynchronizationController.sharedInstance.syncIsRunning)
                 return;
             
             localSuccess = [self commitPortion:_incValue portionID:@(currentPortionID)];
             
-            if (!localSuccess || self.isCancelled)
+            if (!localSuccess || self.isCancelled || !SynchronizationController.sharedInstance.syncIsRunning)
                 return;
         }
         

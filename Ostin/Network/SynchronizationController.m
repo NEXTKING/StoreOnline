@@ -25,6 +25,7 @@ typedef enum SyncStages
     NSInteger updateMask;
     NSProgress *_progress;
     AppSuspendingBlocker *_suspendingBlocker;
+    NSTimer *_timer;
 }
 @property (nonatomic, readwrite) BOOL syncIsRunning;
 @property (nonatomic, readwrite) double syncProgress;
@@ -40,36 +41,40 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[SynchronizationController alloc] init];
+        sharedInstance->_suspendingBlocker = [AppSuspendingBlocker new];
+        [sharedInstance->_suspendingBlocker startBlock];
+        sharedInstance->_timer = [NSTimer scheduledTimerWithTimeInterval:60 target:sharedInstance selector:@selector(synchronize) userInfo:nil repeats:NO];
     });
     return sharedInstance;
 }
 
 - (void) synchronize
 {
-    runOnMainThread(^
+    if (!_syncIsRunning)
     {
-        if (_progress)
-            [_progress removeObserver:self forKeyPath:@"fractionCompleted" context:ProgressObserverContext];
+        runOnMainThread(^
+        {
+            if (_progress)
+                [_progress removeObserver:self forKeyPath:@"fractionCompleted" context:ProgressObserverContext];
+            
+            _progress = [NSProgress progressWithTotalUnitCount:5];
+            [_progress becomeCurrentWithPendingUnitCount:0];
+            [_progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionNew context:ProgressObserverContext];
+        });
+
+        _syncIsRunning = YES;
+        _syncProgress = 0;
         
-        _progress = [NSProgress progressWithTotalUnitCount:5];
-        [_progress becomeCurrentWithPendingUnitCount:0];
-        [_progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionNew context:ProgressObserverContext];
-    });
-    
-    _suspendingBlocker = [AppSuspendingBlocker new];
-    [_suspendingBlocker startBlock];
-    _syncIsRunning = YES;
-    _syncProgress = 0;
-    
-    [[MCPServer instance] itemDescription:self itemCode:nil shopCode:nil isoType:0];
+        [[MCPServer instance] itemDescription:self itemCode:nil shopCode:nil isoType:0];
 #if defined(OSTIN_IM)
-    [[MCPServer instance] claim:self userID:nil];
+        [[MCPServer instance] claim:self userID:nil];
 #elif defined (OSTIN)
-    [[MCPServer instance] tasks:self userID:nil];
+        [[MCPServer instance] tasks:self userID:nil];
 #endif
-    [[MCPServer instance] user:self login:nil password:nil];
-    
-    NSLog(@"%d", SSCount);
+        [[MCPServer instance] user:self login:nil password:nil];
+        
+        NSLog(@"%d", SSCount);
+    }
 }
 
 // avoid warning
@@ -129,14 +134,13 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     
     if (allBitsAreSet)
     {
-        [_suspendingBlocker stopBlock];
         runOnMainThread(^
         {
             if ([[NSProgress currentProgress] isEqual:_progress])
                 [_progress resignCurrent];
         });
-        _syncIsRunning = NO;
-        _syncProgress = 0;
+        
+        [self stop];
         
         if ([_delegate respondsToSelector:@selector(syncCompleteWithResult:)])
             [_delegate syncCompleteWithResult:0];
@@ -157,8 +161,7 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     }
     else
     {
-        _syncIsRunning = NO;
-        [_suspendingBlocker stopBlock];
+        [self stop];
         
         if ([_delegate respondsToSelector:@selector(syncCompleteWithResult:)])
             [_delegate syncCompleteWithResult:result];
@@ -173,8 +176,7 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     }
     else
     {
-        _syncIsRunning = NO;
-        [_suspendingBlocker stopBlock];
+        [self stop];
         
         if ([_delegate respondsToSelector:@selector(syncCompleteWithResult:)])
             [_delegate syncCompleteWithResult:result];
@@ -189,8 +191,7 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     }
     else
     {
-        _syncIsRunning = NO;
-        [_suspendingBlocker stopBlock];
+        [self stop];
         
         if ([_delegate respondsToSelector:@selector(syncCompleteWithResult:)])
             [_delegate syncCompleteWithResult:result];
@@ -205,8 +206,7 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     }
     else
     {
-        _syncIsRunning = NO;
-        [_suspendingBlocker stopBlock];
+        [self stop];
         
         if ([_delegate respondsToSelector:@selector(syncCompleteWithResult:)])
             [_delegate syncCompleteWithResult:result];
@@ -215,10 +215,21 @@ static void *ProgressObserverContext = &ProgressObserverContext;
 
 - (void)resetDatabaseAndPortionsCountComplete:(int)result
 {
-    _syncIsRunning = NO;
+    [self stop];
     
     if ([_delegate respondsToSelector:@selector(resetPortionsCompleteWithResult:)])
         [_delegate resetPortionsCompleteWithResult:result];
+}
+
+- (void)stop
+{
+    if ([_timer isValid])
+        [_timer invalidate];
+    
+    _syncIsRunning = NO;
+    _syncProgress = 0;
+    _timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(synchronize) userInfo:nil repeats:NO];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SynchronizationControllerDidFinishSync" object:nil];
 }
 
 void runOnMainThread(void (^block)(void))

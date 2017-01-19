@@ -9,6 +9,9 @@
 #import "SOAPClaim.h"
 #import "Claim+CoreDataClass.h"
 
+@import UIKit;
+@import UserNotifications;
+
 @implementation SOAPClaim
 
 - (void) main
@@ -56,8 +59,18 @@
     dateFormatter.dateFormat = @"dd.MM.yyyy HH:mm:ss";
     claimDB.incomingDate = [dateFormatter dateFromString:csv[4]];
     
-    claimDB.startDate = nil;
-    claimDB.endDate = nil;
+    if ([csv[0] isEqualToString:@"I"])
+    {
+        claimDB.startDate = nil;
+        claimDB.endDate = nil;
+        
+        if (UIApplication.sharedApplication.applicationState == UIApplicationStateBackground)
+            [self notifity:csv[2]];
+    }
+    else if ([csv[0] isEqualToString:@"D"])
+    {
+        [self cancelNotifity:csv[2]];
+    }
 }
 
 - (NSManagedObject*) findObject:(NSArray *)csv
@@ -72,6 +85,47 @@
     if (results.count > 0)
         return results[0];
     return nil;
+}
+
+- (void)notifity:(NSString *)claimNumber
+{
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0)
+    {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        __weak typeof(center) _center = center;
+        [center getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings *settings) {
+            
+            if (settings.authorizationStatus == UNAuthorizationStatusAuthorized)
+            {
+                UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
+                content.title = @"Новая заявка";
+                content.body = [NSString stringWithFormat:@"Заявка %@ поступила в интернет магазин", claimNumber];
+                content.sound = [UNNotificationSound defaultSound];
+                
+                UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:1.f repeats:NO];
+                UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:claimNumber content:content trigger:trigger];
+                
+                [_center addNotificationRequest:request withCompletionHandler:^(NSError *error){}];
+            }
+        }];
+    }
+}
+
+- (void)cancelNotifity:(NSString *)claimNumber
+{
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0)
+    {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        __weak typeof(center) _center = center;
+        [center getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings *settings) {
+            
+            if (settings.authorizationStatus == UNAuthorizationStatusAuthorized)
+            {
+                [_center removePendingNotificationRequestsWithIdentifiers:@[claimNumber]];
+                [_center removeDeliveredNotificationsWithIdentifiers:@[claimNumber]];
+            }
+        }];
+    }
 }
 
 @end

@@ -25,8 +25,29 @@
     if (self)
     {
         _rootItem = acceptancesItem;
+        
+        if ([_rootItem isKindOfClass:[ClaimItem class]])
+        {
+            
+        }
+        else
+        {
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:@"SynchronizationControllerDidFinishSync" object:nil];
+        }
     }
     return self;
+}
+
+- (void)dealloc
+{
+    if ([_rootItem isKindOfClass:[ClaimItem class]])
+    {
+        
+    }
+    else
+    {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"SynchronizationControllerDidFinishSync" object:nil];
+    }
 }
 
 - (void)update

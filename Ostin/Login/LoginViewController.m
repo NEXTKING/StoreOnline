@@ -10,6 +10,7 @@
 #import "DTDevices.h"
 #import "SynchronizationController.h"
 #import "MCPServer.h"
+#import <UserNotifications/UserNotifications.h>
 
 @interface LoginViewController () <DTDeviceDelegate, SyncronizationDelegate, UserDelegate, UITextFieldDelegate>
 {
@@ -143,6 +144,11 @@
     _progressView.progress = 0;
     _progressLabel.text = @"0 %";
     
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0)
+    {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert) completionHandler:^(BOOL granted, NSError *error) {}];
+    }
     [SynchronizationController.sharedInstance synchronize];
 }
 
