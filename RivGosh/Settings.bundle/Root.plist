@@ -88,17 +88,53 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Master Password</string>
+			<string>Bank Info</string>
 		</dict>
 		<dict>
 			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
 			<key>Title</key>
-			<string>Password</string>
+			<string>Host</string>
+			<key>Key</key>
+			<string>bank_host_preference</string>
+			<key>DefaultValue</key>
+			<string>https://10.20.17.174</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>KeyboardType</key>
+			<string>Alphabet</string>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Port</string>
+			<key>Key</key>
+			<string>bank_port_preference</string>
+			<key>DefaultValue</key>
+			<string>48080</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>KeyboardType</key>
+			<string>Alphabet</string>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Master Password</string>
 			<key>Key</key>
 			<string>master_password_preference</string>
 			<key>DefaultValue</key>
-			<string></string>
+			<string>7HkpM0AXQW5LUSd7</string>
 			<key>IsSecure</key>
 			<true/>
 			<key>KeyboardType</key>

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "DTDevices.h"
+#import "PLManager.h"
 
 @interface AppDelegate () <DTDeviceDelegate>
 {
@@ -30,6 +31,8 @@
     [dtDevice connect];
     [self initializeRing];
     
+    [self registerDefaultsFromSettingsBundle];
+    
 #ifdef DESONDO
     [[UINavigationBar appearance] setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor clearColor]}];
@@ -37,6 +40,7 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UITabBar appearance] setSelectedImageTintColor:[UIColor blackColor]];
+    
 #elif defined (RIVGOSH)
     [[UINavigationBar appearance] setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor clearColor]}];
@@ -50,6 +54,21 @@
     _workspace.navigationController = rootViewController;
     [self.window setRootViewController:_workspace];
     [self.window makeKeyAndVisible];
+    
+    PLManager* plManager = [PLManager instance];
+    NSMutableString* serverAddress = [NSMutableString new];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSString *host     = [[NSUserDefaults standardUserDefaults] valueForKey:@"bank_host_preference"];
+    NSString *port     = [[NSUserDefaults standardUserDefaults] valueForKey:@"bank_port_preference"];
+    
+    
+    [serverAddress appendString:host];
+    if (port.length > 0)
+        [serverAddress appendFormat:@":%@", port];
+    
+    plManager.serverAddress = serverAddress;
+    
 #elif defined (OSTIN)
     [[UINavigationBar appearance] setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor clearColor]}];
@@ -71,7 +90,6 @@
     
      //NSString *settingsString = [[NSUserDefaults standardUserDefaults] valueForKey:@"host_preference"];
     //if (!settingsString)
-        [self registerDefaultsFromSettingsBundle];
     
     return YES;
 }
