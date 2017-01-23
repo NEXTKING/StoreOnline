@@ -344,10 +344,24 @@ typedef enum : NSUInteger
 - (void)showCloseAcceptionAlert
 {
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"Данные переданы успешно. Завершить приёмку?", nil) preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *closeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Завершить", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self showConfirmCloseAcceptionAlert];
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Продолжить", nil) style:UIAlertActionStyleDefault handler:nil];
+    
+    [ac addAction:closeAction];
+    [ac addAction:cancelAction];
+    
+    [self presentViewController:ac animated:YES completion:nil];
+}
+
+- (void)showConfirmCloseAcceptionAlert
+{
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"Вы уверены, что хотите завершить приёмку?", nil) preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *closeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Завершить", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         [self closeAcception];
     }];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Продолжить", nil) style:UIAlertActionStyleDefault handler:nil];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Отмена", nil) style:UIAlertActionStyleCancel handler:nil];
     
     [ac addAction:closeAction];
     [ac addAction:cancelAction];
