@@ -9,7 +9,8 @@
 #import "MenuViewController.h"
 #import "MCPServer.h"
 #import "DTDevices.h"
-#import "CommonConfirmButton.h"
+#import "DPButton.h"
+#import "DPSyncButton.h"
 #import "AppSuspendingBlocker.h"
 
 @interface MenuViewController () <ItemDescriptionDelegate, UIAlertViewDelegate, DTDeviceDelegate, ZonesDelegate, AcceptanesDelegate>
@@ -17,11 +18,12 @@
     NSInteger *reqCount;
     AppSuspendingBlocker *_suspendingBlocker;
 }
-@property (weak, nonatomic) IBOutlet CommonConfirmButton *revaluationButton;
-@property (weak, nonatomic) IBOutlet CommonConfirmButton *inventoryButton;
-@property (weak, nonatomic) IBOutlet CommonConfirmButton *stockButton;
-@property (weak, nonatomic) IBOutlet CommonConfirmButton *acceptancesButton;
-@property (weak, nonatomic) IBOutlet CommonConfirmButton *labelsButton;
+@property (weak, nonatomic) IBOutlet DPSyncButton *syncButton;
+@property (weak, nonatomic) IBOutlet DPButton *revaluationButton;
+@property (weak, nonatomic) IBOutlet DPButton *inventoryButton;
+@property (weak, nonatomic) IBOutlet DPButton *stockButton;
+@property (weak, nonatomic) IBOutlet DPButton *acceptancesButton;
+@property (weak, nonatomic) IBOutlet DPButton *labelsButton;
 
 @property (nonatomic, weak) UIAlertView* syncAlertView;
 @property (nonatomic, copy) NSString* currentShopID;
@@ -29,7 +31,8 @@
 
 @implementation MenuViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     NSDate *lastSyncDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastSyncDate"];
     if (lastSyncDate)
@@ -39,13 +42,15 @@
         dateFormatter.timeStyle = NSDateFormatterShortStyle;
         NSString *dateString = [dateFormatter stringFromDate:lastSyncDate];
         
-        _lastSyncLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Последняя синхронизация", nil), dateString];
+        _lastSyncDateLabel.text = dateString;
     }
     else
-        _lastSyncLabel.text = NSLocalizedString(@"Нет данных о последней синхронизации", nil);
+        _lastSyncDateLabel.text = NSLocalizedString(@"Нет данных о последней синхронизации", nil);
+    
+    _lastSyncLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Последняя синхронизация", nil)];
     
     NSString * build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
-    _buildLabel.text = [NSString stringWithFormat:@"Build: %@", build];
+    _buildLabel.text = [NSString stringWithFormat:@"Build %@", build];
     [_revaluationButton setTitle:NSLocalizedString(@"Переоценка", nil) forState:UIControlStateNormal];
     [_inventoryButton setTitle:NSLocalizedString(@"Инвентаризация", nil) forState:UIControlStateNormal];
     [_stockButton setTitle:NSLocalizedString(@"Остатки товара", nil) forState:UIControlStateNormal];
@@ -98,7 +103,7 @@
     [_suspendingBlocker startBlock];
     
     _syncButton.enabled = NO;
-    [_syncActivityIndicator startAnimating];
+    [_syncButton startAnimation];
     [[MCPServer instance] itemDescription:self itemCode:nil shopCode:_currentShopID isoType:0];
 }
 
@@ -107,7 +112,7 @@
     [_suspendingBlocker stopBlock];
     
     _syncButton.enabled = YES;
-    [_syncActivityIndicator stopAnimating];
+    [_syncButton stopAnimation];
     if (success)
     {
         NSDate *now = [NSDate date];
@@ -118,7 +123,6 @@
         NSString *dateString = [dateFormatter stringFromDate:now];
         
         _lastSyncLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Последняя синхронизация", nil), dateString];
-        
         [[NSUserDefaults standardUserDefaults] setObject:now forKey:@"lastSyncDate"];
         [[NSUserDefaults standardUserDefaults] setObject:_currentShopID forKey:@"shopID"];
     }

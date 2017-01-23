@@ -8,8 +8,8 @@
 
 #import "InventoryViewController.h"
 #import "MCPServer.h"
-#import "DTDevices.h"
 #import "CartCell.h"
+#import "AppAppearance.h"
 
 @interface InventoryViewController () <UIAlertViewDelegate>
 {
@@ -20,14 +20,31 @@
 
 @implementation InventoryViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-     _statusView.layer.cornerRadius = _statusView.frame.size.height/2;
-    DTDevices *dtDevice = [DTDevices sharedDevice];
-    [dtDevice connect];
-    [self connectionState:dtDevice.connstate];
+- (void)viewDidLoad
+{
+    // [super viewDidLoad];
     
-    _sectionLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Зона", nil), _section.name];
+    self.tableView.estimatedRowHeight = 44.0;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
+    UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithImage:AppAppearance.sharedApperance.navigationBarManualInputImage style:UIBarButtonItemStylePlain target:self action:@selector(manualInputAction:)];
+    self.navigationItem.rightBarButtonItem = sendButton;
+    
+    self.tableView.separatorColor = AppAppearance.sharedApperance.tableViewSeparatorColor;
+    self.tableView.separatorStyle = AppAppearance.sharedApperance.tableViewSeparatorStyle;
+    self.tableView.backgroundColor = AppAppearance.sharedApperance.tableViewBackgroundColor;
+    self.tableView.tableFooterView = [UIView new];
+    _shieldView.backgroundColor = AppAppearance.sharedApperance.tableViewBackgroundColor;
+    self.cartHeader.backgroundColor = AppAppearance.sharedApperance.tableViewSectionHeaderBackgroundColor;
+    self.sectionLabel.font = AppAppearance.sharedApperance.tableViewSectionHeaderTitle1Font;
+    self.sectionLabel.textColor = AppAppearance.sharedApperance.tableViewSectionHeaderTitle1Color;
+    self.countLabel.font = AppAppearance.sharedApperance.tableViewSectionHeaderTitle2Font;
+    self.countLabel.textColor = AppAppearance.sharedApperance.tableViewSectionHeaderTitle2Color;
+    self.countTitleLabel.font = AppAppearance.sharedApperance.tableViewSectionHeaderTitle3Font;
+    self.countTitleLabel.textColor = AppAppearance.sharedApperance.tableViewSectionHeaderTitle3Color;
+    
+    _sectionLabel.text = _section.name;//[NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Зона", nil), _section.name];
+    _countTitleLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Количество", nil)];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary* inventoryCache = [defaults objectForKey:@"inventoryCache"];
@@ -74,6 +91,7 @@
      object:params];*/
     
     _placeholderLabel.text = NSLocalizedString(@"Отсканируйте штрих-код товара", nil);
+    _placeholderLabel.font = AppAppearance.sharedApperance.tableViewSectionHeaderTitle1Font;
 }
 
 - (void) save
@@ -104,32 +122,6 @@
     [defaults setObject:inventoryCache forKey:@"inventoryCache"];
     [defaults synchronize];
     
-}
-
-- (void) connectionState:(int)state
-{
-    switch (state) {
-        case CONN_CONNECTED:
-        {
-            _statusView.backgroundColor = [UIColor greenColor];
-            //[dtDevice emsrConfigMaskedDataShowExpiration:TRUE showServiceCode:TRUE showTrack3:FALSE unmaskedDigitsAtStart:6 unmaskedDigitsAtEnd:2 unmaskedDigitsAfter:7 error:nil];
-            //[dtDevice emsrSetEncryption:7 keyID:2 params:nil error:nil];
-            //[printVC startSearchingPtinter];
-            
-        }
-            break;
-        case CONN_CONNECTING:
-            _statusView.backgroundColor = [UIColor redColor];
-            //_printerStatusLabel.hidden = YES;
-            break;
-        case CONN_DISCONNECTED:
-            _statusView.backgroundColor = [UIColor redColor];
-            //_printerStatusLabel.hidden = YES;
-            break;
-            
-        default:
-            break;
-    }
 }
 
 - (IBAction)manualInputAction:(id)sender
@@ -202,7 +194,7 @@
         finalQuan+=[[self.itemsCount objectForKey:currentKey]integerValue];
     }
     
-    _countLabel.text = [NSString stringWithFormat:@"%@: %ld", NSLocalizedString(@"Количество", nil), (long)finalQuan];
+    _countLabel.text = [NSString stringWithFormat:@"%ld", (long)finalQuan];
 
 }
 

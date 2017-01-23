@@ -20,11 +20,13 @@
 - (void) awakeFromNib
 {
     [super awakeFromNib];
-    
+
+#ifdef MELON
+#else
     TopBorder = [CALayer layer];
     TopBorder.backgroundColor = [UIColor blackColor].CGColor;
     [self.layer addSublayer:TopBorder];
-    
+#endif
 }
 
 - (void) layoutSubviews

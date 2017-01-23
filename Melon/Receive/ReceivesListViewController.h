@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ReceivesListViewController : UITableViewController
+@interface ReceivesListViewController : UIViewController
 - (void)createViewControllersHierarhyWithAcceptanesInfos:(NSArray *)acceptInfos;
 @end

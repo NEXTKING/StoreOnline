@@ -7,45 +7,35 @@
 //
 
 #import "CartCell.h"
+#import "AppAppearance.h"
 
 @interface CartCell ()
-{
-    CALayer *topBorder;
-    CALayer *bottomBorder;
-}
-
 @end
 
 @implementation CartCell
 
-- (void)awakeFromNib {
-    // Initialization code
-    
-    [super awakeFromNib];
-    
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    //topBorder = [CALayer layer];
-    //topBorder.backgroundColor = [UIColor blackColor].CGColor;
-    //[self.layer addSublayer:topBorder];
-    
-    bottomBorder = [CALayer layer];
-    bottomBorder.backgroundColor = [UIColor blackColor].CGColor;
-    [self.layer addSublayer:bottomBorder];
-    bottomBorder.hidden = YES;
-}
-
-- (void) layoutSubviews
+- (void)awakeFromNib
 {
-    topBorder.frame = CGRectMake(20, 0, self.frame.size.width-40, 1);
-    bottomBorder.hidden = !_showBottomSeparator;
-    bottomBorder.frame = CGRectMake(20, self.frame.size.height-1, self.frame.size.width-40, 1);
+    [super awakeFromNib];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.backgroundColor = AppAppearance.sharedApperance.tableViewCellBackgroundColor;
+    
+    _titleLabel.textColor = AppAppearance.sharedApperance.tableViewCellTitle1Color;
+    _titleLabel.font = AppAppearance.sharedApperance.tableViewCellTitle1Font;
+    
+    _descriptionLabel.textColor = AppAppearance.sharedApperance.tableViewCellTitle2Color;
+    _descriptionLabel.font = AppAppearance.sharedApperance.tableViewCellTitle2Font;
+    
+    _barcodeLabel.textColor = AppAppearance.sharedApperance.tableViewCellTitle2Color;
+    _barcodeLabel.font = AppAppearance.sharedApperance.tableViewCellTitle2Font;
+    
+    _positionLabel.textColor = AppAppearance.sharedApperance.tableViewCellTitle2Color;
+    _positionLabel.font = AppAppearance.sharedApperance.tableViewCellTitle2Font;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 - (void) setItemInfo:(ItemInformation *)item quantity:(NSUInteger)quantity
@@ -64,12 +54,12 @@
     
     _descriptionLabel.text = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Арт.", nil), item.article?item.article:@""];
     _barcodeLabel.text = item.barcode;
-    _priceLabel.text = [NSString stringWithFormat:@"x%lu", (unsigned long)quantity];
+    [_stepper setValue:quantity];
 }
 
 - (IBAction)stepperAction:(UIStepper*)sender
 {
-    _priceLabel.text = [NSString stringWithFormat:@"x%lu", (unsigned long)sender.value];
+    
 }
 
 

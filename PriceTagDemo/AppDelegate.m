@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "DTDevices.h"
+#import "AppAppearance.h"
 
 @interface AppDelegate () <DTDeviceDelegate>
 {
@@ -56,11 +57,19 @@
 //    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigation.png"] forBarMetrics:UIBarMetricsDefault];
     
 #elif defined (MELON)
-    [[UINavigationBar appearance] setTitleTextAttributes:
-     @{NSForegroundColorAttributeName:[UIColor clearColor]}];
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"MFG_Bar.png"] forBarMetrics:UIBarMetricsDefault];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+//    [[UINavigationBar appearance] setTitleTextAttributes:
+//     @{NSForegroundColorAttributeName:[UIColor clearColor]}];
+//    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"MFG_Bar.png"] forBarMetrics:UIBarMetricsDefault];
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+//    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setBarTintColor:AppAppearance.sharedApperance.navigationBarBackgroundColor];
+    [[UINavigationBar appearance] setTintColor:AppAppearance.sharedApperance.navigationBarTintColor];
+    [[UINavigationBar appearance] setTranslucent:AppAppearance.sharedApperance.navigationBarisTranslucent];
+    [[UINavigationBar appearance] setBackIndicatorImage:AppAppearance.sharedApperance.navigationBarBackButtonImage];
+    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:AppAppearance.sharedApperance.navigationBarBackButtonImage];
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
 #elif defined (X5)
     [[UINavigationBar appearance] setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor clearColor]}];

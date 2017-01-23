@@ -13,6 +13,6 @@
 @property (nonatomic, strong) NSString *barcode;
 @end
 
-@interface InventorySectionsViewController : UITableViewController
+@interface InventorySectionsViewController : UIViewController
 
 @end

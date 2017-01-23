@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StockViewController : UITableViewController
+@interface StockViewController : UIViewController
 
 @end

@@ -12,6 +12,7 @@
 #import "ReceiveItemCell.h"
 #import "ReceivesListViewController.h"
 #import "MCPServer.h"
+#import "AppAppearance.h"
 
 typedef enum : NSUInteger
 {
@@ -25,9 +26,11 @@ typedef enum : NSUInteger
     NSMutableArray *_items;
     NSString *_lastBarcode;
 }
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UILabel *totalQuantityLabel;
-@property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *acceptAllButton;
 
 @end
@@ -37,6 +40,17 @@ typedef enum : NSUInteger
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.tableView.separatorColor = AppAppearance.sharedApperance.tableViewSeparatorColor;
+    self.tableView.separatorStyle = AppAppearance.sharedApperance.tableViewSeparatorStyle;
+    self.tableView.backgroundColor = AppAppearance.sharedApperance.tableViewBackgroundColor;
+    self.tableView.tableFooterView = [UIView new];
+    self.headerView.backgroundColor = AppAppearance.sharedApperance.tableViewSectionHeaderBackgroundColor;
+    self.titleLabel.font = AppAppearance.sharedApperance.tableViewSectionHeaderTitle1Font;
+    self.titleLabel.textColor = AppAppearance.sharedApperance.tableViewSectionHeaderTitle1Color;
+    self.totalQuantityLabel.font = AppAppearance.sharedApperance.tableViewSectionHeaderTitle2Font;
+    self.totalQuantityLabel.textColor = AppAppearance.sharedApperance.tableViewSectionHeaderTitle2Color;
+    
     [self.tableView registerNib:[UINib nibWithNibName:@"ReceivesListCell" bundle:nil] forCellReuseIdentifier:@"ListCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"ReceiveBoxCell" bundle:nil] forCellReuseIdentifier:@"BoxCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"ReceiveItemCell" bundle:nil] forCellReuseIdentifier:@"ItemCell"];
@@ -59,24 +73,41 @@ typedef enum : NSUInteger
 {
     if ([self kind] == AcceptanesControllerKindRegular)
     {
-        _bottomView.hidden = NO;
-        _bottomView.userInteractionEnabled = YES;
+        _acceptAllButton.hidden = NO;
         _acceptAllButton.enabled = NO;
         
-        UIImage *barcodeImage = [UIImage imageNamed:@"Barcode manual"];
-        UIBarButtonItem *manualInputButton = [[UIBarButtonItem alloc] initWithImage:barcodeImage style:UIBarButtonItemStylePlain target:self action:@selector(showManualInputAlert)];
+        UIBarButtonItem *manualInputButton = [[UIBarButtonItem alloc] initWithImage:AppAppearance.sharedApperance.navigationBarManualInputImage style:UIBarButtonItemStylePlain target:self action:@selector(showManualInputAlert)];
         self.navigationItem.rightBarButtonItem = manualInputButton;
+        
+        switch (_rootItem.type)
+        {
+            case AcceptanesInformationItemTypeBox:
+                _titleLabel.text = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Короб", nil), _rootItem.barcode];
+                break;
+            case AcceptanesInformationItemTypeSet:
+                _titleLabel.text = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Набор товаров", nil), _rootItem.barcode];
+                break;
+            default:
+                break;
+        }
     }
     else
     {
-        _bottomView.hidden = YES;
-        _bottomView.userInteractionEnabled = NO;
+        _acceptAllButton.hidden = YES;
         
         if ([self kind] == AcceptanesControllerKindRoot)
         {
-            UIImage *sendImage = [UIImage imageNamed:@"send"];
-            UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithImage:sendImage style:UIBarButtonItemStylePlain target:self action:@selector(sendButtonPressed:)];
+            UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithImage:AppAppearance.sharedApperance.navigationBarSendButtonImage style:UIBarButtonItemStylePlain target:self action:@selector(sendButtonPressed:)];
             self.navigationItem.rightBarButtonItem = sendButton;
+            
+            NSDateFormatter *dateFormatter = [NSDateFormatter new];
+            dateFormatter.dateFormat = @"d MMMM yyyy";
+            
+            _titleLabel.text = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Приёмка", nil), [dateFormatter stringFromDate:self.date]];
+        }
+        else
+        {
+            _titleLabel.text = NSLocalizedString(@"Общие излишки", nil);
         }
     }
     [_acceptAllButton setTitle:NSLocalizedString(@"Применить все без сканирования", nil) forState:UIControlStateNormal];
@@ -120,6 +151,10 @@ typedef enum : NSUInteger
                 NSArray *boxes = [items objectsAtIndexes:[items indexesOfObjectsPassingTest:^BOOL(AcceptanesInformation *acceptInfo, NSUInteger idx, BOOL *stop) {
                     return acceptInfo.type == AcceptanesInformationItemTypeBox;
                 }]];
+                
+                AcceptanesInformation *excessBox = [AcceptanesInformation new];
+                excessBox.type = AcceptanesInformationItemTypeBox;
+                [_items addObject:excessBox];
                 [_items addObjectsFromArray:boxes];
             }
             else if ([self kind] == AcceptanesControllerKindExcesses)
@@ -136,7 +171,7 @@ typedef enum : NSUInteger
             
             [self.tableView reloadData];
         }
-        [self updateBottomBar];
+        [self updateTotalQuantity];
     }
     else
     {
@@ -232,7 +267,7 @@ typedef enum : NSUInteger
             [self updateScreenForItem:acceptInfo animated:NO];
         }
     }
-    [self updateBottomBar];
+    [self updateTotalQuantity];
 }
 
 - (void)navigateToBoxHierarhy:(NSArray<AcceptanesInformation*>*)boxHierarhy
@@ -284,7 +319,7 @@ typedef enum : NSUInteger
     UIAlertAction *addToCurrentExcessAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Добавить в излишки набора", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self addItemToAcception:itemInfo containerBarcode:_rootItem.barcode scanned:scanned manually:manually];
         [self updateScreenForItem:itemInfo animated:YES];
-        [self updateBottomBar];
+        [self updateTotalQuantity];
     }];
     UIAlertAction *addToAllExcessAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Добавить в общие излишки", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self addItemToAcception:itemInfo containerBarcode:nil scanned:scanned manually:manually];
@@ -422,7 +457,7 @@ typedef enum : NSUInteger
                 acceptInfo.scanned = @(acceptInfo.scanned.integerValue + 1);
                 [self addItemToAcception:acceptInfo containerBarcode:acceptInfo.containerBarcode scanned:acceptInfo.scanned.integerValue manually:NO];
                 [self updateScreenForItem:acceptInfo animated:YES];
-                [self updateBottomBar];
+                [self updateTotalQuantity];
             }
             
             return;
@@ -436,7 +471,7 @@ typedef enum : NSUInteger
 
 #pragma mark - Table view data source
 
-- (void)updateBottomBar
+- (void)updateTotalQuantity
 {
     __block NSInteger itemsCount = 0;
     __block NSInteger itemsWithoutExcessCount = 0;
@@ -459,79 +494,48 @@ typedef enum : NSUInteger
     }
     else
     {
-        _totalQuantityLabel.text = NSLocalizedString(@"Нет товаров", nil);
-    }
-}
-
-- (NSString *)titleText
-{
-    if ([self kind] == AcceptanesControllerKindRegular)
-    {
-        switch (_rootItem.type)
-        {
-            case AcceptanesInformationItemTypeBox:
-                return [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Короб", nil), _rootItem.barcode];
-                break;
-            case AcceptanesInformationItemTypeSet:
-                return [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Набор товаров", nil), _rootItem.barcode];
-                break;
-            default:
-                return nil;
-                break;
-        }
-    }
-    else if ([self kind] == AcceptanesControllerKindExcesses)
-    {
-        return @"Общие излишки";
-    }
-    else
-    {
-        NSDateFormatter *dateFormatter = [NSDateFormatter new];
-        dateFormatter.dateFormat = @"d MMMM yyyy";
-        return [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Приёмка", nil), [dateFormatter stringFromDate:self.date]];
+        _totalQuantityLabel.text = ([self kind] == AcceptanesControllerKindRegular) ? NSLocalizedString(@"Нет товаров", nil) : @"";
     }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [self kind] == AcceptanesControllerKindRoot ? 2 : 1;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([self kind] == AcceptanesControllerKindRoot)
-        return section == 0 ? 1 : _items.count;
-    else
-        return _items.count;
+    return _items.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self kind] == AcceptanesControllerKindRoot && indexPath.section == 0)
+    if ([self kind] == AcceptanesControllerKindRoot && indexPath.row == 0)
     {
         ReceivesListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ListCell" forIndexPath:indexPath];
         
         cell.titleLabel.text = NSLocalizedString(@"Общие излишки", nil);
-        
+        cell.positionLabel.text = @"";
         return cell;
     }
     else
     {
+        NSUInteger row = ([self kind] == AcceptanesControllerKindRoot) ? indexPath.row : indexPath.row + 1;
         id cell;
         AcceptanesInformation *item = _items[indexPath.row];
         switch (item.type)
         {
             case AcceptanesInformationItemTypeBox:
                 cell = [tableView dequeueReusableCellWithIdentifier:@"BoxCell" forIndexPath:indexPath];
-                [self configureBoxCell:cell forItem:item];
+                [self configureBoxCell:cell forItem:item rowNum:row];
                 break;
             case AcceptanesInformationItemTypeSet:
                 cell = [tableView dequeueReusableCellWithIdentifier:@"BoxCell" forIndexPath:indexPath];
-                [self configureSetCell:cell forItem:item];
+                [self configureSetCell:cell forItem:item rowNum:row];
                 break;
             case AcceptanesInformationItemTypeItem:
                 cell = [tableView dequeueReusableCellWithIdentifier:@"ItemCell" forIndexPath:indexPath];
-                [self configureItemCell:cell forItem:item];
+                [self configureItemCell:cell forItem:item rowNum:row];
                 break;
             default:
                 break;
@@ -540,74 +544,60 @@ typedef enum : NSUInteger
     }
 }
 
-- (void)configureBoxCell:(ReceiveBoxCell *)cell forItem:(AcceptanesInformation *)item
+- (void)configureBoxCell:(ReceiveBoxCell *)cell forItem:(AcceptanesInformation *)item rowNum:(NSUInteger)rowNum
 {
     if ([self kind] == AcceptanesControllerKindRoot)
     {
         cell.titleLabel.text = NSLocalizedString(@"Накладная", nil);
-        cell.backgroundColor = [UIColor whiteColor];
+        [cell setDefaultStyle];
     }
     else
     {
         cell.titleLabel.text = [NSString stringWithFormat:@"%@ (%ld/%ld)", NSLocalizedString(@"Короб", nil), item.scanned.integerValue, item.quantity.integerValue];
-        cell.backgroundColor = (item.scanned.integerValue == item.quantity.integerValue) ? [UIColor colorWithRed:126/255.0 green:211/255.0 blue:33/255.0 alpha:0.5] : [UIColor whiteColor];
+        (item.scanned.integerValue == item.quantity.integerValue) ? [cell setCompleteStyle] : [cell setDefaultStyle];
     }
     cell.barcodeLabel.text = item.barcode;
+    cell.positionLabel.text = [NSString stringWithFormat:@"%ld", rowNum];
 }
 
-- (void)configureSetCell:(ReceiveBoxCell *)cell forItem:(AcceptanesInformation *)item
+- (void)configureSetCell:(ReceiveBoxCell *)cell forItem:(AcceptanesInformation *)item rowNum:(NSUInteger)rowNum
 {
     cell.titleLabel.text = [NSString stringWithFormat:@"%@ (%ld/%ld)", NSLocalizedString(@"Набор товаров", nil), item.scanned.integerValue, item.quantity.integerValue];
     cell.barcodeLabel.text = item.barcode;
-    cell.backgroundColor = (item.scanned.integerValue == item.quantity.integerValue) ? [UIColor colorWithRed:126/255.0 green:211/255.0 blue:33/255.0 alpha:0.5] : [UIColor whiteColor];
+    cell.positionLabel.text = [NSString stringWithFormat:@"%ld", rowNum];
+    
+    (item.scanned.integerValue == item.quantity.integerValue) ? [cell setCompleteStyle] : [cell setDefaultStyle];
 }
 
-- (void)configureItemCell:(ReceiveItemCell *)cell forItem:(AcceptanesInformation *)item
+- (void)configureItemCell:(ReceiveItemCell *)cell forItem:(AcceptanesInformation *)item rowNum:(NSUInteger)rowNum
 {
     cell.titleLabel.text = item.name;
     cell.barcodeLabel.text = item.barcode;
     cell.quantityLabel.text = [NSString stringWithFormat:@"%ld %@ %ld", item.scanned.integerValue, NSLocalizedString(@"из", nil), item.quantity.integerValue];
-    
-    UIColor *backgroundColor;
-    
+    cell.positionLabel.text = [NSString stringWithFormat:@"%ld", rowNum];
+
     if (item.scanned.integerValue > item.quantity.integerValue)
-        backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.5];
+        [cell setExcessStyle];
     else if (item.scanned.integerValue == item.quantity.integerValue)
-        backgroundColor = [UIColor colorWithRed:126/255.0 green:211/255.0 blue:33/255.0 alpha:0.5];
+        [cell setCompleteStyle];
     else
-        backgroundColor = [UIColor whiteColor];
-    
-    cell.backgroundColor = backgroundColor;
+        [cell setDefaultStyle];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self kind] == AcceptanesControllerKindRoot && indexPath.section == 0)
-    {
-        AcceptanesInformation *excessBox = [AcceptanesInformation new];
-        excessBox.type = AcceptanesInformationItemTypeBox;
-        [self pushToAcceptItem:excessBox];
-    }
-    else
-    {
-        AcceptanesInformation *item = _items[indexPath.row];
-        [self pushToAcceptItem:item];
-    }
+    AcceptanesInformation *item = _items[indexPath.row];
+    [self pushToAcceptItem:item];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return section == 0 ? self.titleText : nil;
+    return section == 0 ? self.headerView : nil;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
-    
-    header.textLabel.text = [self titleText];
-    header.textLabel.font = [UIFont boldSystemFontOfSize:12];
-    header.textLabel.frame = header.frame;
-    header.textLabel.textAlignment = NSTextAlignmentCenter;
+    return section == 0 ? self.headerView.frame.size.height : 0;
 }
 
 #pragma mark Navigation

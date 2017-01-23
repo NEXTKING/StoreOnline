@@ -12,6 +12,7 @@
 #import "AzbukaPriceTag.h"
 #import "TsumPriceTag.h"
 #import "MelonPriceTag.h"
+#import "AppAppearance.h"
 #import <QuartzCore/QuartzCore.h>
 
 typedef enum PrintingTask
@@ -48,7 +49,13 @@ typedef enum PrintingTask
     [dtDevice addDelegate:self];
     [_activityIndicator startAnimating];
     // Do any additional setup after loading the view from its nib.
-    
+#ifdef MELON
+    self.view.layer.cornerRadius = 8.0;
+    self.view.backgroundColor = AppAppearance.sharedApperance.tableViewSectionHeaderBackgroundColor;
+    self.statusLabel.font = AppAppearance.sharedApperance.tableViewSectionHeaderTitle1Font;
+    self.statusLabel.textColor = AppAppearance.sharedApperance.tableViewSectionHeaderTitle1Color;
+    self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+#else
     self.view.layer.masksToBounds = NO;
     self.view.layer.shadowOffset = CGSizeMake(-5, 10);
     self.view.layer.shadowRadius = 5;
@@ -56,7 +63,7 @@ typedef enum PrintingTask
     self.view.layer.borderWidth = 1.0;
     self.view.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.view.layer.cornerRadius = 8.0;
-    
+#endif
     //[self fillBarcodeView];
     
     
