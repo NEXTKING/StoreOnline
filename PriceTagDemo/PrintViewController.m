@@ -243,7 +243,7 @@ typedef enum PrintingTask
 
 - (void) printLabel
 {
-    _statusLabel.text = @"Печать...";
+    _statusLabel.text = NSLocalizedString(@"Печать...", nil);
     
     if (!_currentPrint)
     {
