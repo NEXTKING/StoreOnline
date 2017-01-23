@@ -102,6 +102,12 @@
     _suspendingBlocker = [AppSuspendingBlocker new];
     [_suspendingBlocker startBlock];
     
+    _revaluationButton.enabled = NO;
+    _inventoryButton.enabled = NO;
+    _stockButton.enabled = NO;
+    _acceptancesButton.enabled = NO;
+    _labelsButton.enabled = NO;
+    
     _syncButton.enabled = NO;
     [_syncButton startAnimation];
     [[MCPServer instance] itemDescription:self itemCode:nil shopCode:_currentShopID isoType:0];
@@ -110,6 +116,12 @@
 - (void) finishSyncing:(BOOL) success
 {
     [_suspendingBlocker stopBlock];
+    
+    _revaluationButton.enabled = YES;
+    _inventoryButton.enabled = YES;
+    _stockButton.enabled = YES;
+    _acceptancesButton.enabled = YES;
+    _labelsButton.enabled = YES;
     
     _syncButton.enabled = YES;
     [_syncButton stopAnimation];
