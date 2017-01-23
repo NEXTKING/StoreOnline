@@ -338,6 +338,11 @@ typedef enum : NSUInteger
     NSString *message = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Отсканирован короб", nil), [boxHierarhy lastObject].barcode];
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *navigateAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Перейти", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        AcceptanesInformation *acceptInfo = [boxHierarhy lastObject];
+        acceptInfo.scanned = @(acceptInfo.scanned.integerValue + 1);
+        [self addItemToAcception:acceptInfo containerBarcode:acceptInfo.containerBarcode scanned:acceptInfo.scanned.integerValue manually:NO];
+        
         [self navigateToBoxHierarhy:boxHierarhy];
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Отмена", nil) style:UIAlertActionStyleCancel handler:nil];
