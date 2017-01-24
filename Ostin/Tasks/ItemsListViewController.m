@@ -393,7 +393,8 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
         if (MIN(retailPrice, catalogPrice) != barcodePrice)
         {
             [self playSound:1];
-            [self printItem:item];
+            BOOL needAdditionalLabel = ((type.intValue == BAR_EAN13 || type.intValue == BAR_UPC) ? [self shouldPrintAdditionalLabelForItem:item] : NO);
+            [self printItem:item withAdditionalLabel:needAdditionalLabel];
         }
         else
             [self playSound:0];
@@ -415,7 +416,8 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
                 if (MIN(retailPrice, catalogPrice) != barcodePrice)
                 {
                     [wself playSound:1];
-                    [wself printItem:item];
+                    BOOL needAdditionalLabel = ((type.intValue == BAR_EAN13 || type.intValue == BAR_UPC) ? [wself shouldPrintAdditionalLabelForItem:item] : NO);
+                    [wself printItem:item withAdditionalLabel:needAdditionalLabel];
                 }
                 else
                     [wself playSound:0];
@@ -473,13 +475,13 @@ static NSString * const reuseIdentifier = @"AllItemsIdentifier";
     }];
 }
 
-- (void)printItem:(ItemInformation *)itemInfo
+- (void)printItem:(ItemInformation *)itemInfo withAdditionalLabel:(BOOL)needAdditionalLabel
 {
     if ([[NSUserDefaults standardUserDefaults] valueForKey:@"PrinterID"] != nil)
     {
         [[PrintServer instance] addItemToPrintQueue:itemInfo printFormat:@"mainZPL"];
         
-        if ([self shouldPrintAdditionalLabelForItem:itemInfo])
+        if (needAdditionalLabel)
             [[PrintServer instance] addItemToPrintQueue:itemInfo printFormat:@"additionalZPL"];
     }
     else
