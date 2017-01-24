@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *name;
 @property (nullable, nonatomic, retain) NSString *article;
 @property (nullable, nonatomic, retain) NSString *barcode;
+@property (nullable, nonatomic, retain) NSString *material;
 @property (nullable, nonatomic, retain) NSNumber *itemId;
 @property (nullable, nonatomic, retain) NSNumber *price;
 @property (nullable, nonatomic, retain) NSNumber* stock;

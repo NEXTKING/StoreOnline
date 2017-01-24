@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="vr3-a7-OT2" customClass="MelonPriceTag48x48">
+        <view contentMode="scaleToFill" id="vr3-a7-OT2" customClass="MelonPriceTag29x28">
             <rect key="frame" x="0.0" y="0.0" width="114" height="110"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -217,6 +217,7 @@
                 <outlet property="importerLabel" destination="HkE-v0-fPu" id="pAW-mt-UdP"/>
                 <outlet property="manufactureDateLabel" destination="QbC-Dw-XG6" id="ChQ-bb-JWA"/>
                 <outlet property="manufactureLabel" destination="vCo-AQ-7SE" id="9j7-pi-V2h"/>
+                <outlet property="materialLabel" destination="r0c-o5-ZQN" id="FCw-E0-7fT"/>
                 <outlet property="nameLabel" destination="h5r-hZ-HYE" id="780-pf-f4b"/>
                 <outlet property="priceLabel" destination="iNY-1s-jp7" id="bcd-Ik-7MR"/>
                 <outlet property="sizeLabel" destination="W2U-lL-Xqg" id="2fF-xD-PDn"/>

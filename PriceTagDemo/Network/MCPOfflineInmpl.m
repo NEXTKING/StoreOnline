@@ -423,6 +423,7 @@
             itemInfo.barcode    = itemDB.barcode;
             itemInfo.price      = itemDB.price.doubleValue;
             itemInfo.stock      = [itemDB.stock integerValue];
+            itemInfo.material   = itemDB.material;
             
             NSMutableArray* addParams = [NSMutableArray new];
             for (AdditionalParameter* paramDB in itemDB.additionalParams)
@@ -590,6 +591,7 @@
         itemDB.itemId   = [NSNumber numberWithInteger:currentItem.itemId];
         itemDB.barcode  = currentItem.barcode;
         itemDB.stock    = @(currentItem.stock);
+        itemDB.material = currentItem.material;
         [itemDB setAdditionalParameters:currentItem.additionalParameters];
         
     }

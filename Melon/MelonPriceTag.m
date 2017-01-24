@@ -151,6 +151,11 @@
         else
             _importerLabel.text = @"Импортер:";
     }
+    
+    if (_materialLabel)
+    {
+        _materialLabel.text = item.material;
+    }
 }
 
 - (void) addOldPriceIfNeeded:(ItemInformation*) item

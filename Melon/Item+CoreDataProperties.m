@@ -16,6 +16,7 @@
 @dynamic name;
 @dynamic article;
 @dynamic barcode;
+@dynamic material;
 @dynamic itemId;
 @dynamic price;
 @dynamic additionalParams;

@@ -33,6 +33,8 @@
         [barCodeView setBarCode:item.barcode];
         [self.barcodeView setNeedsDisplay];
     }
+    
+    self.materialLabel.text = [NSString stringWithFormat:@"Состав: %@", item.material];
 }
 
 @end

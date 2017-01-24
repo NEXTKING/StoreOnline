@@ -134,7 +134,8 @@
         dateFormatter.timeStyle = NSDateFormatterShortStyle;
         NSString *dateString = [dateFormatter stringFromDate:now];
         
-        _lastSyncLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Последняя синхронизация", nil), dateString];
+        _lastSyncDateLabel.text = dateString;
+        _lastSyncLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Последняя синхронизация", nil)];
         [[NSUserDefaults standardUserDefaults] setObject:now forKey:@"lastSyncDate"];
         [[NSUserDefaults standardUserDefaults] setObject:_currentShopID forKey:@"shopID"];
     }

@@ -249,7 +249,11 @@
         itemInfo.height = obj;
     obj = [result objectForKey:@"paramValue1"];
     if (obj && [obj isKindOfClass:[NSString class]])
+#if defined MELON
+        itemInfo.material = obj;
+#else
         itemInfo.unit = obj;
+#endif
     obj = [result objectForKey:@"remains"];
     if (obj && [obj isKindOfClass:[NSString class]])
         itemInfo.stock = [obj integerValue];

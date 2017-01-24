@@ -28,5 +28,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *colorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sizeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *importerLabel;
+@property (weak, nonatomic) IBOutlet UILabel *materialLabel;
 
 @end

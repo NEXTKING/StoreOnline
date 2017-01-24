@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="16A323" minimumToolsVersion="Xcode 7.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16A323" minimumToolsVersion="Xcode 7.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="AcceptItem" representedClassName="AcceptItem" syncable="YES">
         <attribute name="barcode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="containerBarcode" optional="YES" attributeType="String" syncable="YES"/>
@@ -21,6 +21,7 @@
         <attribute name="article" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="barcode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="itemId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="material" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="stock" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -29,6 +30,6 @@
     <elements>
         <element name="AcceptItem" positionX="-108" positionY="108" width="128" height="210"/>
         <element name="AdditionalParameter" positionX="43" positionY="132" width="128" height="73"/>
-        <element name="Item" positionX="-252" positionY="45" width="128" height="150"/>
+        <element name="Item" positionX="-252" positionY="45" width="128" height="165"/>
     </elements>
 </model>
