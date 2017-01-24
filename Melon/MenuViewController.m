@@ -16,6 +16,7 @@
 @interface MenuViewController () <ItemDescriptionDelegate, UIAlertViewDelegate, DTDeviceDelegate, ZonesDelegate, AcceptanesDelegate>
 {
     NSInteger *reqCount;
+    NSProgress *_progress;
     AppSuspendingBlocker *_suspendingBlocker;
 }
 @property (weak, nonatomic) IBOutlet DPSyncButton *syncButton;
@@ -30,6 +31,8 @@
 @end
 
 @implementation MenuViewController
+
+static void *ProgressObserverContext = &ProgressObserverContext;
 
 - (void)viewDidLoad
 {
@@ -108,6 +111,10 @@
     _acceptancesButton.enabled = NO;
     _labelsButton.enabled = NO;
     
+    _progress = [NSProgress progressWithTotalUnitCount:3];
+    [_progress becomeCurrentWithPendingUnitCount:0];
+    [_progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionNew context:ProgressObserverContext];
+    
     _syncButton.enabled = NO;
     [_syncButton startAnimation];
     [[MCPServer instance] itemDescription:self itemCode:nil shopCode:_currentShopID isoType:0];
@@ -122,6 +129,9 @@
     _stockButton.enabled = YES;
     _acceptancesButton.enabled = YES;
     _labelsButton.enabled = YES;
+    
+    [_progress resignCurrent];
+    [_progress removeObserver:self forKeyPath:@"fractionCompleted" context:ProgressObserverContext];
     
     _syncButton.enabled = YES;
     [_syncButton stopAnimation];
@@ -181,6 +191,19 @@
     else
     {
         [self finishSyncing:NO];
+    }
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (context == ProgressObserverContext)
+    {
+        NSProgress *progress = (NSProgress *)object;
+        NSLog(@"TOTAL PROGRESS IS: %f", progress.fractionCompleted);
+    }
+    else
+    {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
 

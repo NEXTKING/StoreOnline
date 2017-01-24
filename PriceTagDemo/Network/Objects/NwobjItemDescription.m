@@ -88,6 +88,13 @@
         nwReq.URL = [NSMutableString stringWithFormat:@"%@/Price", url];
         [nwReq addParam:@"barcode" withValue:_barcode];
     }
+    else if (_page)
+    {
+        nwReq.URL = [NSMutableString stringWithFormat:@"%@/PricesCH", url];
+        [nwReq addParam:@"shopcode" withValue:_shopId];
+        [nwReq addParam:@"page" withValue:_page];
+        [nwReq addParam:@"cr" withValue:@"5000"];
+    }
     else
     {
         nwReq.URL = [NSMutableString stringWithFormat:@"%@/Prices", url];
@@ -140,7 +147,9 @@
         
         //Parse JSON
          NSDictionary *result = [NSJSONSerialization JSONObjectWithData:_exec_data options:0 error:nil];
-    
+        
+        _result = result;
+        
         if ( result )
         {
             if ( [result objectForKey:@"result"] != Nil )

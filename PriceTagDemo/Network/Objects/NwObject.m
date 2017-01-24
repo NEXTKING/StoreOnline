@@ -31,6 +31,7 @@
         _exec_data = [[NSMutableData alloc] initWithLength:0];
         
         _cookies = [[NSMutableDictionary alloc] initWithCapacity:1];
+        _progress = [[NSProgress alloc] init];
     }
     return self;
 }
@@ -110,6 +111,7 @@
     } 
     else 
     {
+        _progress.totalUnitCount = [httpResponse expectedContentLength];
         // Check cookies
         NSDictionary *dictionary = [httpResponse allHeaderFields];
         if ( dictionary )
@@ -149,7 +151,7 @@
     assert(theConnection == _exec_connection);
     
     [_exec_data appendData:data];
-    
+    _progress.completedUnitCount = _exec_data.length;
 }
 
 - (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error

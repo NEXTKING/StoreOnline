@@ -24,6 +24,7 @@
 }
 
 @property(nonatomic, copy) NSError* error;
+@property(nonatomic, strong) NSProgress *progress;
 
 - (NSString*) percentEncode:(NSString*)clearValue;
 - (NSString*) percentDecode:(NSString*)percentValue;

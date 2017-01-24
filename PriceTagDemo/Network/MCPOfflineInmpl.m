@@ -18,6 +18,7 @@
 #import "Item.h"
 #import "AdditionalParameter.h"
 #import "AcceptItem+CoreDataClass.h"
+#import "NwpobjItemDescription.h"
 
 @interface MCPOfflineInmpl()
 @property (nonatomic, strong) NSDictionary* itemsDictionary;
@@ -66,7 +67,11 @@
     else
     {
         self.itemsDictionary = nil;
+#ifdef MELON
+        NwpobjItemDescription *nwobjItemDescription = [NwpobjItemDescription new];
+#else
         NwobjItemDescription *nwobjItemDescription = [NwobjItemDescription new];
+#endif
         nwobjItemDescription.barcode = code;
         nwobjItemDescription.shopId = shopCode;
         nwobjItemDescription.delegate = delegate;

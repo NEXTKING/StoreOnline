@@ -23,10 +23,12 @@ typedef void (^SaveCompletion) (NSArray<ItemInformation*>*);
 
 @property (nonatomic, copy) NSString* barcode;
 @property (nonatomic, copy) NSString* shopId;
+@property (nonatomic, copy) NSString* page;
 
 // result parameters:
 @property (readonly, getter = isSucceeded, assign) BOOL succeeded;
 @property (readonly, assign) int resultCode;
+@property (readonly, strong) NSDictionary *result;
 @property (readwrite, copy) NSString* accessToken;
 @property (readwrite, copy) NSString* userId;
 

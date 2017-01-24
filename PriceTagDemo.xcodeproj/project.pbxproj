@@ -95,6 +95,8 @@
 		218228661DAF864000F04B70 /* TasksCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 218228641DAF864000F04B70 /* TasksCell.m */; };
 		218228671DAF864000F04B70 /* TasksCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 218228651DAF864000F04B70 /* TasksCell.xib */; };
 		2182286A1DAFCB2A00F04B70 /* TaskItemInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 218228691DAFCB2A00F04B70 /* TaskItemInformation.m */; };
+		2193C8961E362405001C653E /* NwpobjItemDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193C8951E362405001C653E /* NwpobjItemDescription.m */; };
+		2193C8971E362405001C653E /* NwpobjItemDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193C8951E362405001C653E /* NwpobjItemDescription.m */; };
 		21B8DC7B1DB66CF900FD9161 /* BarcodeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B8DC7A1DB66CF900FD9161 /* BarcodeFormatter.m */; };
 		21BB44BF1DACF0D100ED67EE /* TaskProgressOverlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BB44BD1DACF0D100ED67EE /* TaskProgressOverlayController.m */; };
 		21BB44C01DACF0D100ED67EE /* TaskProgressOverlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21BB44BE1DACF0D100ED67EE /* TaskProgressOverlayController.xib */; };
@@ -719,6 +721,8 @@
 		218228651DAF864000F04B70 /* TasksCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TasksCell.xib; sourceTree = "<group>"; };
 		218228681DAFCB2A00F04B70 /* TaskItemInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskItemInformation.h; sourceTree = "<group>"; };
 		218228691DAFCB2A00F04B70 /* TaskItemInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskItemInformation.m; sourceTree = "<group>"; };
+		2193C8941E362405001C653E /* NwpobjItemDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NwpobjItemDescription.h; sourceTree = "<group>"; };
+		2193C8951E362405001C653E /* NwpobjItemDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NwpobjItemDescription.m; sourceTree = "<group>"; };
 		21B8DC791DB66CF900FD9161 /* BarcodeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarcodeFormatter.h; path = Utilities/BarcodeFormatter.h; sourceTree = "<group>"; };
 		21B8DC7A1DB66CF900FD9161 /* BarcodeFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BarcodeFormatter.m; path = Utilities/BarcodeFormatter.m; sourceTree = "<group>"; };
 		21BB44BC1DACF0D100ED67EE /* TaskProgressOverlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskProgressOverlayController.h; sourceTree = "<group>"; };
@@ -1849,6 +1853,8 @@
 				B93DBA3A1C5132BD00C8A7A3 /* NwRequest.m */,
 				B90A19121C513C920024FF23 /* NwobjItemDescription.h */,
 				B90A19131C513C920024FF23 /* NwobjItemDescription.m */,
+				2193C8941E362405001C653E /* NwpobjItemDescription.h */,
+				2193C8951E362405001C653E /* NwpobjItemDescription.m */,
 				B9950B5E1CD9F5EC005B4375 /* NwobjInventoryItemDescription.h */,
 				B9950B5F1CD9F5EC005B4375 /* NwobjInventoryItemDescription.m */,
 				B968E6FE1CCE7499005F91FF /* NwobjAuthorization.h */,
@@ -3835,6 +3841,7 @@
 				B93DBA6E1C5132BD00C8A7A3 /* NSString+MD5.m in Sources */,
 				216439CA1E25026D001EA089 /* DPStepper.m in Sources */,
 				21C0549C1DCB8A0A0094C7B1 /* PrintServer.m in Sources */,
+				2193C8961E362405001C653E /* NwpobjItemDescription.m in Sources */,
 				B93DB9B31C50DAA500C8A7A3 /* AppDelegate.m in Sources */,
 				B982D7E91CEB1A7100071D9A /* MCPOfflineInmpl.m in Sources */,
 				21643A5C1E28CE60001EA089 /* DPCaseStatusIndicatorView.m in Sources */,
@@ -3954,6 +3961,7 @@
 				B9D2B99C1D0718B8009C4824 /* NwobjRestartPrintQueue.m in Sources */,
 				216439F71E262538001EA089 /* InventorySectionCell.m in Sources */,
 				B970B8331CD214C70066A66A /* MCPServer.m in Sources */,
+				2193C8971E362405001C653E /* NwpobjItemDescription.m in Sources */,
 				C630110A1D35335A00D3DD57 /* BarCodeView.m in Sources */,
 				B970B8461CD222AF0066A66A /* AntiAliasingLabel.m in Sources */,
 				C6F601C01D9E63D80095AE21 /* CartCell.m in Sources */,

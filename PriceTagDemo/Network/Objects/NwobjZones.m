@@ -40,6 +40,8 @@
         [Logger log:self method:@"setDelegate" format: @"\n\t Set new delegate"];
         
         _delegate = delegate;
+        if ([delegate respondsToSelector:@selector(progress)] && [delegate.progress isKindOfClass:[NSProgress class]])
+            [delegate.progress addChild:self.progress withPendingUnitCount:1];
     }
     else
         [Logger log:self method:@"setDelegate" format: @"\n\t New delegate doesn't conform to protocol"];
