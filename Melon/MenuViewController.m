@@ -20,6 +20,7 @@
     AppSuspendingBlocker *_suspendingBlocker;
 }
 @property (weak, nonatomic) IBOutlet DPSyncButton *syncButton;
+@property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 @property (weak, nonatomic) IBOutlet DPButton *revaluationButton;
 @property (weak, nonatomic) IBOutlet DPButton *inventoryButton;
 @property (weak, nonatomic) IBOutlet DPButton *stockButton;
@@ -51,6 +52,7 @@ static void *ProgressObserverContext = &ProgressObserverContext;
         _lastSyncDateLabel.text = NSLocalizedString(@"Нет данных о последней синхронизации", nil);
     
     _lastSyncLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Последняя синхронизация", nil)];
+    _progressView.hidden = YES;
     
     NSString * build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
     _buildLabel.text = [NSString stringWithFormat:@"Build %@", build];
@@ -115,6 +117,9 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     [_progress becomeCurrentWithPendingUnitCount:0];
     [_progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionNew context:ProgressObserverContext];
     
+    _progressView.hidden = NO;
+    _progressView.progress = 0;
+    
     _syncButton.enabled = NO;
     [_syncButton startAnimation];
     [[MCPServer instance] itemDescription:self itemCode:nil shopCode:_currentShopID isoType:0];
@@ -132,6 +137,8 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     
     [_progress resignCurrent];
     [_progress removeObserver:self forKeyPath:@"fractionCompleted" context:ProgressObserverContext];
+    
+    _progressView.hidden = YES;
     
     _syncButton.enabled = YES;
     [_syncButton stopAnimation];
@@ -194,12 +201,26 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     }
 }
 
+- (NSProgress *)progress
+{
+    return _progress;
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if (context == ProgressObserverContext)
     {
-        NSProgress *progress = (NSProgress *)object;
-        NSLog(@"TOTAL PROGRESS IS: %f", progress.fractionCompleted);
+        __weak UIProgressView *progressView = self.progressView;
+        double progress = ((NSProgress *)object).fractionCompleted;
+        
+        void (^changeProgress)() = ^{
+            progressView.progress = progress;
+        };
+        
+        if (![NSThread isMainThread])
+            dispatch_async(dispatch_get_main_queue(), changeProgress);
+        else
+            changeProgress();
     }
     else
     {

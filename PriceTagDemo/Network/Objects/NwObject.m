@@ -113,9 +113,12 @@
     } 
     else 
     {
-        _progress.totalUnitCount = [httpResponse expectedContentLength];
+        // _progress.totalUnitCount = [httpResponse expectedContentLength];
         // Check cookies
         NSDictionary *dictionary = [httpResponse allHeaderFields];
+        if (dictionary && dictionary[@"Content-Length"])
+            _progress.totalUnitCount = [dictionary[@"Content-Length"] unsignedIntegerValue];
+        
         if ( dictionary )
         {
 #ifdef DEBUG

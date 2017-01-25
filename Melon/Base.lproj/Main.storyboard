@@ -73,15 +73,23 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="showDisconectLabel" value="NO"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="xJa-rX-tbF">
+                                        <rect key="frame" x="0.0" y="42" width="375" height="2"/>
+                                        <color key="progressTintColor" red="0.0" green="0.59999999999999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="trackTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </progressView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="nct-EX-pJU" firstAttribute="leading" secondItem="JMU-0g-PAj" secondAttribute="trailing" constant="8" id="Kim-qU-19Z"/>
+                                    <constraint firstAttribute="trailing" secondItem="xJa-rX-tbF" secondAttribute="trailing" id="Pst-gS-JxW"/>
                                     <constraint firstItem="JMU-0g-PAj" firstAttribute="centerY" secondItem="8Ke-Kl-Oi6" secondAttribute="centerY" id="Rne-uR-sgU"/>
                                     <constraint firstItem="JMU-0g-PAj" firstAttribute="leading" secondItem="8Ke-Kl-Oi6" secondAttribute="leading" constant="16" id="U5J-hc-7uT"/>
                                     <constraint firstItem="nct-EX-pJU" firstAttribute="centerY" secondItem="8Ke-Kl-Oi6" secondAttribute="centerY" id="XGc-VT-8XG"/>
                                     <constraint firstAttribute="height" constant="44" id="aee-DL-bFR"/>
                                     <constraint firstAttribute="trailing" secondItem="nct-EX-pJU" secondAttribute="trailing" constant="16" id="gLy-eY-Nbv"/>
+                                    <constraint firstAttribute="bottom" secondItem="xJa-rX-tbF" secondAttribute="bottom" id="ytp-RE-njp"/>
+                                    <constraint firstItem="xJa-rX-tbF" firstAttribute="leading" secondItem="8Ke-Kl-Oi6" secondAttribute="leading" id="zYa-8z-0nP"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last sync: 20 Mar 2016" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XE-22-e6a">
@@ -271,6 +279,7 @@
                         <outlet property="labelsButton" destination="cyE-s5-cMr" id="LLT-6i-vcW"/>
                         <outlet property="lastSyncDateLabel" destination="6XE-22-e6a" id="V89-Zy-sFm"/>
                         <outlet property="lastSyncLabel" destination="fJk-9N-l3f" id="u79-nc-ban"/>
+                        <outlet property="progressView" destination="xJa-rX-tbF" id="xCD-hD-b3l"/>
                         <outlet property="revaluationButton" destination="iBx-mD-yDo" id="ILv-F5-B4U"/>
                         <outlet property="stockButton" destination="A6j-gt-rjW" id="HUd-eJ-kUn"/>
                         <outlet property="syncButton" destination="JMU-0g-PAj" id="wr4-nZ-A7v"/>
