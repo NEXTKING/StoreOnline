@@ -61,7 +61,7 @@
 #endif
 }
 
-- (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString *)code shopCode:(NSString *)shopCode isoType:(int)type
+- (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString *)code shopCode:(NSString *)shopCode isoType:(int)type progress:(NSProgress **)progress
 {
     if (code)
         [self itemDescriptionOffline:delegate itemCode:code];
@@ -74,6 +74,7 @@
 #else
         NwobjItemDescription *nwobjItemDescription = [NwobjItemDescription new];
 #endif
+        nwobjItemDescription.progress = *progress;
         nwobjItemDescription.barcode = code;
         nwobjItemDescription.shopId = shopCode;
         nwobjItemDescription.delegate = delegate;
@@ -97,9 +98,10 @@
     }
 }
 
-- (void) zones:(id<ZonesDelegate>)delegate shopID:(NSString *)shopID
+- (void) zones:(id<ZonesDelegate>)delegate shopID:(NSString *)shopID progress:(NSProgress **)progress
 {
     NwobjZones *nwobjSendCart = [NwobjZones new];
+    nwobjSendCart.progress = *progress;
     nwobjSendCart.delegate = delegate;
     nwobjSendCart.shopID = shopID;
     [nwobjSendCart run:_serverAddress];
@@ -139,11 +141,12 @@
     }
 }
 
-- (void) acceptanes:(id<AcceptanesDelegate>)delegate shopID:(NSString*)shopID
+- (void) acceptanes:(id<AcceptanesDelegate>)delegate shopID:(NSString*)shopID progress:(NSProgress **)progress
 {
     if (shopID)
     {
         NwobjAcceptanes *nwobjAcceptanes = [NwobjAcceptanes new];
+        nwobjAcceptanes.progress = *progress;
         nwobjAcceptanes.delegate = delegate;
         nwobjAcceptanes.shopId = shopID;
         nwobjAcceptanes.completionHandler = ^(NSArray* items){

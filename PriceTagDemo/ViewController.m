@@ -330,7 +330,7 @@
 #elif defined (INVENTORY)
     [[MCPServer instance] inventoryItemDescription:self itemCode:code];
 #else
-    [[MCPServer instance] itemDescription:self itemCode:code shopCode:nil isoType:type];
+    [[MCPServer instance] itemDescription:self itemCode:code shopCode:nil isoType:type progress:nil];
 #endif
 }
 

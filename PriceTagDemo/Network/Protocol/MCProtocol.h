@@ -29,16 +29,16 @@
 // Functions
 @required
 - (void) hello:(id<HelloDelegate>) delegate;
-- (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString*) code shopCode:(NSString*) shopCode isoType:(int) type;
+- (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString*) code shopCode:(NSString*) shopCode isoType:(int) type progress:(NSProgress **)progress;
 - (void) inventoryItemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString*) code;
 - (void) authorization:(id<AuthorizationDelegate>)delegate code:(NSString*) code;
 - (void) clinetCard:(id<ClientCardDelegate>)delegate cardNumber:(NSString*) card;
 - (void) sendCart:(id<SendCartDelegate>)delegate cartData:(NSDictionary*) cartData;
 - (void) endOfInvent:(id<SendCartDelegate>)delegate shopID:(NSString*) shopID password:(NSString*)pwd;
 - (void) discounts:(id<DiscountsDelegate>)delegate receiptId:(NSString*)receiptID;
-- (void) zones:(id<ZonesDelegate>)delegate shopID:(NSString*)shopID;
+- (void) zones:(id<ZonesDelegate>)delegate shopID:(NSString*)shopID progress:(NSProgress **)progress;
 - (void) stock:(id<StockDelegate>)delegate itemCode:(NSString*) code shopID:(NSString*)shopID;
-- (void) acceptanes:(id<AcceptanesDelegate>)delegate shopID:(NSString*)shopID;
+- (void) acceptanes:(id<AcceptanesDelegate>)delegate shopID:(NSString*)shopID progress:(NSProgress **)progress;
 - (void) acceptanes:(id<AcceptanesDelegate>)delegate date:(NSDate*)date itemBarcode:(NSString *)itemBarcode containerBarcode:(NSString*)containerBarcode;
 - (void) addItem:(AcceptanesInformation*)item toAcceptionWithDate:(NSDate*)date containerBarcode:(NSString*)containerBarcode scannedCount:(NSUInteger)scannedCount manually:(BOOL)manually;
 - (void) acceptanesHierarchy:(id<AcceptanesDelegate>)delegate date:(NSDate*)date barcode:(NSString*)barcode;

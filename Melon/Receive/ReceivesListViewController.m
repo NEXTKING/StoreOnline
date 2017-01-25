@@ -48,7 +48,7 @@
 
 - (void)loadData
 {
-    [[MCPServer instance] acceptanes:self shopID:nil];
+    [[MCPServer instance] acceptanes:self shopID:nil progress:nil];
 }
 
 - (void)acceptanesComplete:(int)result items:(NSArray<NSDate*>*)items

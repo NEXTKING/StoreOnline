@@ -49,8 +49,6 @@
 #ifdef DEBUG
         [Logger log:self method:@"init" format:@""];
 #endif
-        self.progress = [[NSProgress alloc] init];
-        
         _resultCode = -1;
         _delegate = nil;
         helpers = [NSMutableArray new];
@@ -77,8 +75,6 @@
         [Logger log:self method:@"setDelegate" format: @"\n\t Set new delegate"];
         
         _delegate = delegate;
-        if ([delegate respondsToSelector:@selector(progress)] && [delegate.progress isKindOfClass:[NSProgress class]])
-            [delegate.progress addChild:self.progress withPendingUnitCount:1];
     }
     else
         [Logger log:self method:@"setDelegate" format: @"\n\t New delegate doesn't conform to protocol"];
@@ -139,14 +135,16 @@
         if (obj && [obj isKindOfClass:[NSNumber class]])
         {
             _totalCount = [obj unsignedIntegerValue];
-            self.progress.totalUnitCount = _totalCount;
+            if (self.progress)
+                self.progress.totalUnitCount = _totalCount;
         }
         
         obj = [nwobjItemDescription.result objectForKey:@"All_Items"];
         if (obj && [obj isKindOfClass:[NSArray class]])
         {
             _completeCount = _completeCount + [obj count];
-            self.progress.completedUnitCount = _completeCount;
+            if (self.progress)
+                self.progress.completedUnitCount = _completeCount;
         }
         
         if (_completeCount < _totalCount && isFisrtRequest)

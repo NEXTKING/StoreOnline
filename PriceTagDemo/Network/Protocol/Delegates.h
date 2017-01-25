@@ -17,8 +17,6 @@
 @protocol ItemDescriptionDelegate <NSObject>
 - (void) itemDescriptionComplete:(int) result itemDescription:(ItemInformation*) itemDescription;
 - (void) allItemsDescription:(int) result items:(NSArray<ItemInformation*>*) items;
-@optional
-@property NSProgress *progress;
 @end
 
 @protocol AuthorizationDelegate <NSObject>
@@ -37,8 +35,6 @@
 @end
 @protocol ZonesDelegate <NSObject>
 - (void) zonesComplete:(int) result zones:(NSArray*)zones;
-@optional
-@property NSProgress *progress;
 @end
 @protocol StockDelegate <NSObject>
 - (void) stockComplete:(int) result items:(NSArray<ItemInformation*>*) items;
@@ -48,7 +44,6 @@
 - (void) acceptanesComplete:(int) result items:(NSArray*)items;
 - (void) acceptanesHierarchyComplete:(int)result items:(NSArray<AcceptanesInformation*>*)items;
 @optional
-@property NSProgress *progress;
 - (void) sendAcceptanesComplete:(int)result;
 @end
 

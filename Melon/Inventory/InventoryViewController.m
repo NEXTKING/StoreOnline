@@ -200,7 +200,7 @@
 
 - (void) requestItemInformation:(NSString*) code
 {
-    [[MCPServer instance] itemDescription:self itemCode:code shopCode:nil isoType:0];
+    [[MCPServer instance] itemDescription:self itemCode:code shopCode:nil isoType:0 progress:nil];
 }
 
 - (void) itemDescriptionComplete:(int)result itemDescription:(ItemInformation *)itemDescription

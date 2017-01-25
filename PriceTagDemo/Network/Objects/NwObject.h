@@ -16,7 +16,7 @@
 - (void) cancel;
 
 @property(nonatomic, copy) NSError* error;
-@property(nonatomic, strong) NSProgress *progress;
+@property(nonatomic, weak) NSProgress* progress;
 
 @end
 

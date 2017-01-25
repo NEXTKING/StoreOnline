@@ -33,7 +33,6 @@
         _exec_data = [[NSMutableData alloc] initWithLength:0];
         
         _cookies = [[NSMutableDictionary alloc] initWithCapacity:1];
-        _progress = [[NSProgress alloc] init];
     }
     return self;
 }
@@ -117,7 +116,7 @@
         // Check cookies
         NSDictionary *dictionary = [httpResponse allHeaderFields];
         if (dictionary && dictionary[@"Content-Length"])
-            _progress.totalUnitCount = [dictionary[@"Content-Length"] unsignedIntegerValue];
+            _progress.totalUnitCount = [dictionary[@"Content-Length"] integerValue];
         
         if ( dictionary )
         {

@@ -16,7 +16,7 @@
 @interface MenuViewController () <ItemDescriptionDelegate, UIAlertViewDelegate, DTDeviceDelegate, ZonesDelegate, AcceptanesDelegate>
 {
     NSInteger *reqCount;
-    NSProgress *_progress;
+    NSProgress *_syncProgress;
     AppSuspendingBlocker *_suspendingBlocker;
 }
 @property (weak, nonatomic) IBOutlet DPSyncButton *syncButton;
@@ -112,17 +112,19 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     _stockButton.enabled = NO;
     _acceptancesButton.enabled = NO;
     _labelsButton.enabled = NO;
-    
-    _progress = [NSProgress progressWithTotalUnitCount:3];
-    [_progress becomeCurrentWithPendingUnitCount:0];
-    [_progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionNew context:ProgressObserverContext];
-    
+
     _progressView.hidden = NO;
     _progressView.progress = 0;
     
     _syncButton.enabled = NO;
     [_syncButton startAnimation];
-    [[MCPServer instance] itemDescription:self itemCode:nil shopCode:_currentShopID isoType:0];
+    
+    _syncProgress = [NSProgress progressWithTotalUnitCount:10];
+    [_syncProgress becomeCurrentWithPendingUnitCount:0];
+    [_syncProgress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionNew context:ProgressObserverContext];
+    
+    NSProgress *itemsProgress = [NSProgress progressWithTotalUnitCount:1 parent:_syncProgress pendingUnitCount:8];
+    [[MCPServer instance] itemDescription:self itemCode:nil shopCode:_currentShopID isoType:0 progress:&itemsProgress];
 }
 
 - (void) finishSyncing:(BOOL) success
@@ -135,8 +137,8 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     _acceptancesButton.enabled = YES;
     _labelsButton.enabled = YES;
     
-    [_progress resignCurrent];
-    [_progress removeObserver:self forKeyPath:@"fractionCompleted" context:ProgressObserverContext];
+    [_syncProgress resignCurrent];
+    [_syncProgress removeObserver:self forKeyPath:@"fractionCompleted" context:ProgressObserverContext];
     
     _progressView.hidden = YES;
     
@@ -168,8 +170,8 @@ static void *ProgressObserverContext = &ProgressObserverContext;
 {
     if (result == 0)
     {
-        
-        [[MCPServer instance] zones:self shopID:_currentShopID];
+        NSProgress *zonesProgress = [NSProgress progressWithTotalUnitCount:1 parent:_syncProgress pendingUnitCount:1];
+        [[MCPServer instance] zones:self shopID:_currentShopID progress:&zonesProgress];
     }
     else
     {
@@ -181,7 +183,8 @@ static void *ProgressObserverContext = &ProgressObserverContext;
 {
     if (result == 0)
     {
-        [[MCPServer instance] acceptanes:self shopID:_currentShopID];
+        NSProgress *acceptancesProgress = [NSProgress progressWithTotalUnitCount:1 parent:_syncProgress pendingUnitCount:1];
+        [[MCPServer instance] acceptanes:self shopID:_currentShopID progress:&acceptancesProgress];
     }
     else
     {
@@ -199,11 +202,6 @@ static void *ProgressObserverContext = &ProgressObserverContext;
     {
         [self finishSyncing:NO];
     }
-}
-
-- (NSProgress *)progress
-{
-    return _progress;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
