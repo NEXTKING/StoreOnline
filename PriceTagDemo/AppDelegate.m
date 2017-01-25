@@ -58,7 +58,7 @@
     
 #elif defined (MELON)
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor],
-                                                           NSFontAttributeName : [UIFont fontWithName:@"Roboto-Thin" size:18.0]}];
+                                                           NSFontAttributeName : [UIFont fontWithName:@"Roboto-Light" size:18.0]}];
     [[UINavigationBar appearance] setBarTintColor:AppAppearance.sharedApperance.navigationBarBackgroundColor];
     [[UINavigationBar appearance] setTintColor:AppAppearance.sharedApperance.navigationBarTintColor];
     [[UINavigationBar appearance] setTranslucent:AppAppearance.sharedApperance.navigationBarisTranslucent];

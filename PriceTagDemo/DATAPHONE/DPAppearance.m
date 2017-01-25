@@ -46,7 +46,7 @@
 
 - (UIColor *)tableViewSeparatorColor
 {
-    return [UIColor colorWithRed:237.0/255.0 green:237.0/255.0 blue:237.0/255.0 alpha:1];
+    return [UIColor colorWithRed:190.0/255.0 green:190.0/255.0 blue:190.0/255.0 alpha:1];
 }
 
 - (UITableViewCellSeparatorStyle)tableViewSeparatorStyle
@@ -68,7 +68,7 @@
 
 - (UIFont *)tableViewSectionHeaderTitle1Font
 {
-    return [UIFont fontWithName:@"Roboto-Light" size:15];
+    return [UIFont fontWithName:@"Roboto-Regular" size:15];
 }
 
 - (UIColor *)tableViewSectionHeaderTitle1Color
@@ -78,7 +78,7 @@
 
 - (UIFont *)tableViewSectionHeaderTitle2Font
 {
-    return [UIFont fontWithName:@"Roboto-Light" size:12];
+    return [UIFont fontWithName:@"Roboto-Regular" size:12];
 }
 
 - (UIColor *)tableViewSectionHeaderTitle2Color
@@ -88,7 +88,7 @@
 
 - (UIFont *)tableViewSectionHeaderTitle3Font
 {
-    return [UIFont fontWithName:@"Roboto-Thin" size:12];
+    return [UIFont fontWithName:@"Roboto-Light" size:12];
 }
 
 - (UIColor *)tableViewSectionHeaderTitle3Color
@@ -120,7 +120,7 @@
 
 - (UIFont *)tableViewCellTitle1Font
 {
-    return [UIFont fontWithName:@"Roboto-Thin" size:15];
+    return [UIFont fontWithName:@"Roboto-Regular" size:15];
 }
 
 - (UIColor *)tableViewCellTitle1Color
@@ -135,7 +135,7 @@
 
 - (UIFont *)tableViewCellTitle2Font
 {
-    return [UIFont fontWithName:@"Roboto-Thin" size:11];
+    return [UIFont fontWithName:@"Roboto-Light" size:12];
 }
 
 - (UIColor *)tableViewCellTitle2Color
@@ -150,7 +150,7 @@
 
 - (UIFont *)tableViewCellTitle3Font
 {
-    return [UIFont fontWithName:@"Roboto-Light" size:15];
+    return [UIFont fontWithName:@"Roboto-Regular" size:15];
 }
 
 - (UIColor *)tableViewCellTitle3Color
@@ -177,7 +177,7 @@
 
 - (UIFont *)buttonTitleLabelFont
 {
-    return [UIFont fontWithName:@"Roboto-Thin" size:15];
+    return [UIFont fontWithName:@"Roboto-Light" size:15];
 }
 
 - (UIColor *)buttonTitleLabelNormalColor

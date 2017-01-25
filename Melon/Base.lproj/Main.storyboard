@@ -93,19 +93,19 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last sync: 20 Mar 2016" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XE-22-e6a">
-                                <rect key="frame" x="16" y="607" width="343" height="12"/>
-                                <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="10"/>
+                                <rect key="frame" x="16" y="604.5" width="343" height="14.5"/>
+                                <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="12"/>
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJk-9N-l3f">
-                                <rect key="frame" x="16" y="591" width="343" height="12"/>
-                                <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="10"/>
+                                <rect key="frame" x="16" y="586" width="343" height="14.5"/>
+                                <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="12"/>
                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Y4-Lb-RWq">
-                                <rect key="frame" x="0.0" y="92" width="375" height="499"/>
+                                <rect key="frame" x="0.0" y="94.5" width="375" height="491.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ad-3H-Y0E">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="310"/>
@@ -241,11 +241,11 @@
                                 </constraints>
                             </scrollView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORc-6p-gW5">
-                                <rect key="frame" x="259" y="72" width="100" height="12"/>
+                                <rect key="frame" x="259" y="72" width="100" height="14.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="N2e-Vp-Rna"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="10"/>
+                                <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="12"/>
                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
