@@ -14,6 +14,7 @@
 
 @interface NwobjItemDescription ()
 @property (nonatomic, copy) NSString* path;
+@property (readwrite, strong) NSDictionary* result;
 
 @end
 
@@ -93,7 +94,6 @@
         nwReq.URL = [NSMutableString stringWithFormat:@"%@/PricesCH", url];
         [nwReq addParam:@"shopcode" withValue:_shopId];
         [nwReq addParam:@"page" withValue:_page];
-        [nwReq addParam:@"cr" withValue:@"5000"];
     }
     else
     {
@@ -148,7 +148,7 @@
         //Parse JSON
          NSDictionary *result = [NSJSONSerialization JSONObjectWithData:_exec_data options:0 error:nil];
         
-        _result = result;
+        self.result = result;
         
         if ( result )
         {
@@ -192,6 +192,7 @@
     // If delegate is not NIL, it conforms to correct protocol
     if ( _delegate )
         [_delegate itemDescriptionComplete:_resultCode itemDescription:itemInfo];
+    self.delegate = nil;
 }
 
 - (void) saveAllItems:(NSArray*)allItems

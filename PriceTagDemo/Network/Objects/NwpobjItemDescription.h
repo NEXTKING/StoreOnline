@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "MCProtocol.h"
 #import "NwRequest.h"
+#import "NwobjItemDescription.h"
 
-@interface NwpobjItemDescription : NSObject
+@interface NwpobjItemDescription : NSObject <INwObject>
 
 @property (nonatomic, weak) id <ItemDescriptionDelegate> delegate;
 
@@ -20,8 +21,6 @@
 @property (nonatomic, copy) NSString* shopId;
 
 // result parameters:
-@property (nonatomic, copy) NSError* error;
-@property (readonly, nonatomic, strong) NSProgress *progress;
 @property (readonly, getter = isSucceeded, assign) BOOL succeeded;
 @property (readonly, assign) int resultCode;
 

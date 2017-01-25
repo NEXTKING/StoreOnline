@@ -13,6 +13,8 @@
 #import "Logger.h"
 
 @implementation NwObject
+@synthesize progress = _progress;
+@synthesize error    = _error;
 
 #pragma mark * NwObject
 
@@ -151,7 +153,7 @@
     assert(theConnection == _exec_connection);
     
     [_exec_data appendData:data];
-    _progress.completedUnitCount = _exec_data.length;
+    self.progress.completedUnitCount = _exec_data.length;
 }
 
 - (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error

@@ -9,8 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "NwRequest.h"
 
+@protocol INwObject <NSObject>
+
+- (void) run: (const NSString*) url;
+- (void) complete: (BOOL) isSuccessfull;
+- (void) cancel;
+
+@property(nonatomic, copy) NSError* error;
+@property(nonatomic, strong) NSProgress *progress;
+
+@end
+
 @interface NwObject : NSObject
-    <NSURLConnectionDelegate>
+    <NSURLConnectionDelegate, INwObject>
 {
 @protected
     HTTPMethod              _http_method;
@@ -23,14 +34,9 @@
     NSDictionary*         _unsortedCookies;
 }
 
-@property(nonatomic, copy) NSError* error;
-@property(nonatomic, strong) NSProgress *progress;
 
 - (NSString*) percentEncode:(NSString*)clearValue;
 - (NSString*) percentDecode:(NSString*)percentValue;
 
-- (void) run: (const NSString*) url;
-- (void) complete: (BOOL) isSuccessfull;
-- (void) cancel;
 
 @end

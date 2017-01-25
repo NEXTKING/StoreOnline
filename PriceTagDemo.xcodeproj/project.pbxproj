@@ -2846,7 +2846,7 @@
 					};
 					B970B8141CD209820066A66A = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = QR4V9984C7;
+						DevelopmentTeam = 2JU4R9GNPS;
 						ProvisioningStyle = Automatic;
 					};
 					B9A3FE171CA19E200060483D = {
@@ -4620,7 +4620,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = QR4V9984C7;
+				DEVELOPMENT_TEAM = 2JU4R9GNPS;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -4635,7 +4635,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/PriceTagDemo/DTDevicesLib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dataphone.Melon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MelonFashion.StoreOnline;
 				PRODUCT_NAME = StoreOnline;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -4651,7 +4651,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = QR4V9984C7;
+				DEVELOPMENT_TEAM = 2JU4R9GNPS;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"MELON=1",
@@ -4664,7 +4664,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/PriceTagDemo/DTDevicesLib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dataphone.Melon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MelonFashion.StoreOnline;
 				PRODUCT_NAME = StoreOnline;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

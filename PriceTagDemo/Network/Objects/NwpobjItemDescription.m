@@ -10,7 +10,6 @@
 #import "Logger.h"
 #import "AppDelegate.h"
 #import "WarehouseInformation.h"
-#import "NwobjItemDescription.h"
 
 @interface NwpobjItemDescription () <ItemDescriptionDelegate>
 {
@@ -19,11 +18,14 @@
     NSUInteger _completeCount;
     
     NSString*  _url;
-    NwobjItemDescription* _nwobjItemDescription;
 }
+@property (nonatomic, strong) NwobjItemDescription* nwobjItemDescription;
 @end
 
 @implementation NwpobjItemDescription
+
+@synthesize progress = _progress;
+@synthesize error    = _error;
 
 - (id)init
 {
@@ -33,7 +35,7 @@
 #ifdef DEBUG
         [Logger log:self method:@"init" format:@""];
 #endif
-        _progress = [[NSProgress alloc] init];
+        self.progress = [[NSProgress alloc] init];
         
         _resultCode = -1;
         _delegate = nil;
@@ -75,9 +77,19 @@
     [self runNext];
 }
 
+- (void) cancel
+{
+    
+}
+
+- (void) complete:(BOOL)isSuccessfull
+{
+    
+}
+
 - (void)runNext
 {
-    _nwobjItemDescription = [NwobjItemDescription new];
+    self.nwobjItemDescription = [NwobjItemDescription new];
     _nwobjItemDescription.page = [NSString stringWithFormat:@"%ld", _page];
     _nwobjItemDescription.barcode = self.barcode;
     _nwobjItemDescription.shopId = self.shopId;
@@ -90,7 +102,7 @@
 {
     if (_nwobjItemDescription.result)
     {
-        id obj = [_nwobjItemDescription.result objectForKey:@"All_Items"];
+        id obj = [_nwobjItemDescription.result objectForKey:@"itemcount"];
         if (obj && [obj isKindOfClass:[NSNumber class]])
         {
             _totalCount = [obj unsignedIntegerValue];
@@ -116,6 +128,11 @@
     }
     else if (_delegate)
         [_delegate itemDescriptionComplete:result itemDescription:nil];
+}
+
+- (void) allItemsDescription:(int)result items:(NSArray<ItemInformation *> *)items
+{
+    
 }
 
 @end
