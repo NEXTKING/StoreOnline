@@ -36,15 +36,15 @@
     
     for (UILabel *label in self.preLabels)
     {
-        label.font = AppAppearance.sharedApperance.tableViewCellTitle3Font;
+        label.font = AppAppearance.sharedApperance.tableViewCellTitle2Font;
         label.textColor = AppAppearance.sharedApperance.tableViewCellTitle1Color;
         label.text = NSLocalizedString(label.text, nil);
     }
     
     for (UILabel *label in self.mainLabels)
     {
-        label.font = AppAppearance.sharedApperance.tableViewCellTitle1Font;
-        label.textColor = AppAppearance.sharedApperance.tableViewCellTitle1Color;
+        label.font = AppAppearance.sharedApperance.tableViewCellTitle3Font;
+        label.textColor = AppAppearance.sharedApperance.tableViewCellTitle3Color;
         label.text = NSLocalizedString(label.text, nil);
     }
     

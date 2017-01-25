@@ -150,12 +150,12 @@
 
 - (UIFont *)tableViewCellTitle3Font
 {
-    return [UIFont fontWithName:@"Roboto-Thin" size:11];
+    return [UIFont fontWithName:@"Roboto-Light" size:15];
 }
 
 - (UIColor *)tableViewCellTitle3Color
 {
-    return [UIColor colorWithRed:153.0/255.0 green:153.0/255.0 blue:153.0/255.0 alpha:1];
+    return [UIColor blackColor];
 }
 
 - (UIColor *)tableViewCellTitle3SelectedColor
