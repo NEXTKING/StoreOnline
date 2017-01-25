@@ -35,6 +35,8 @@
     
     _dateFormatter = [NSDateFormatter new];
     _dateFormatter.dateFormat = @"d MMMM yyyy";
+    
+    self.title = NSLocalizedString(@"Приёмка", nil);
 }
 
 - (void)viewWillAppear:(BOOL)animated

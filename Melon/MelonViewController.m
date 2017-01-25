@@ -30,6 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = NSLocalizedString(@"Переоценка", nil);
     
     _scrollView.backgroundColor = AppAppearance.sharedApperance.tableViewBackgroundColor;
     

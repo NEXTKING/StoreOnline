@@ -28,6 +28,7 @@
     [super viewDidLoad];
     [self initChangePriceTagTypePicker];
     _priceTagChangeTypeTextField.text = NSLocalizedString(@"Изменить", nil);
+    self.title = NSLocalizedString(@"Печать ярлыков", nil);
 }
 
 - (void) updateItemInfo:(ItemInformation *)itemInfo

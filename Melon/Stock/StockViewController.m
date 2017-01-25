@@ -29,6 +29,7 @@ static NSString * const reuseIdentifier = @"StockCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = NSLocalizedString(@"Остатки товара", nil);
     
     UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithImage:AppAppearance.sharedApperance.navigationBarManualInputImage style:UIBarButtonItemStylePlain target:self action:@selector(manualInputAction:)];
     self.navigationItem.rightBarButtonItem = sendButton;

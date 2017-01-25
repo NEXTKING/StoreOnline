@@ -57,6 +57,8 @@ typedef enum : NSUInteger
     [self.tableView setRowHeight:UITableViewAutomaticDimension];
     [self.tableView setEstimatedRowHeight:60];
     [self setupView];
+    
+    self.title = NSLocalizedString(@"Приёмка", nil);
 }
 
 - (AcceptanesControllerKind)kind
@@ -90,6 +92,11 @@ typedef enum : NSUInteger
             default:
                 break;
         }
+        
+        NSUInteger selfIndex = [self.navigationController.viewControllers indexOfObject:self];
+        ReceiveViewController *prevVC = self.navigationController.viewControllers[selfIndex - 1];
+        if ([prevVC kind] == AcceptanesControllerKindRoot)
+            _titleLabel.text = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Накладная", nil), _rootItem.barcode];
     }
     else
     {

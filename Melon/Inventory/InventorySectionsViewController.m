@@ -29,6 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = NSLocalizedString(@"Инвентаризация", nil);
     [_startInventoryButton setTitle:NSLocalizedString(@"Начать новую инвентаризацию", nil) forState:UIControlStateNormal];
     [self.tableView registerNib:[UINib nibWithNibName:@"InventorySectionCell" bundle:nil] forCellReuseIdentifier:@"InventorySectionCell"];
     [self.tableView setRowHeight:UITableViewAutomaticDimension];
