@@ -95,8 +95,6 @@
 		218228661DAF864000F04B70 /* TasksCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 218228641DAF864000F04B70 /* TasksCell.m */; };
 		218228671DAF864000F04B70 /* TasksCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 218228651DAF864000F04B70 /* TasksCell.xib */; };
 		2182286A1DAFCB2A00F04B70 /* TaskItemInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 218228691DAFCB2A00F04B70 /* TaskItemInformation.m */; };
-		2193C8961E362405001C653E /* NwpobjItemDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193C8951E362405001C653E /* NwpobjItemDescription.m */; };
-		2193C8971E362405001C653E /* NwpobjItemDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193C8951E362405001C653E /* NwpobjItemDescription.m */; };
 		21B8DC7B1DB66CF900FD9161 /* BarcodeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B8DC7A1DB66CF900FD9161 /* BarcodeFormatter.m */; };
 		21BB44BF1DACF0D100ED67EE /* TaskProgressOverlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BB44BD1DACF0D100ED67EE /* TaskProgressOverlayController.m */; };
 		21BB44C01DACF0D100ED67EE /* TaskProgressOverlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21BB44BE1DACF0D100ED67EE /* TaskProgressOverlayController.xib */; };
@@ -578,6 +576,8 @@
 		C6979EAA1D9135AD00A0B51B /* tasks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6979EA61D9135AD00A0B51B /* tasks@2x.png */; };
 		C6979EAD1D91462C00A0B51B /* CategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6979EAC1D91462C00A0B51B /* CategoriesViewController.m */; };
 		C6B3C9871D93E7F400730D9F /* TasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6B3C9861D93E7F400730D9F /* TasksViewController.m */; };
+		C6C3654D1E38A5BD006C71FE /* NwpobjItemDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C3654C1E38A5BD006C71FE /* NwpobjItemDescription.m */; };
+		C6C365511E38A9CB006C71FE /* NwpsobjItemDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C3654F1E38A5E6006C71FE /* NwpsobjItemDescription.m */; };
 		C6E776F41D747B00000FEAC8 /* libPaymentLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E776F31D747B00000FEAC8 /* libPaymentLibrary.a */; };
 		C6F600C71D9C363C0095AE21 /* NSDate+ISO8601Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F600BC1D9C363C0095AE21 /* NSDate+ISO8601Parsing.m */; };
 		C6F600C81D9C363C0095AE21 /* NSDate+ISO8601Unparsing.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F600BE1D9C363C0095AE21 /* NSDate+ISO8601Unparsing.m */; };
@@ -721,8 +721,6 @@
 		218228651DAF864000F04B70 /* TasksCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TasksCell.xib; sourceTree = "<group>"; };
 		218228681DAFCB2A00F04B70 /* TaskItemInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskItemInformation.h; sourceTree = "<group>"; };
 		218228691DAFCB2A00F04B70 /* TaskItemInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskItemInformation.m; sourceTree = "<group>"; };
-		2193C8941E362405001C653E /* NwpobjItemDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NwpobjItemDescription.h; sourceTree = "<group>"; };
-		2193C8951E362405001C653E /* NwpobjItemDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NwpobjItemDescription.m; sourceTree = "<group>"; };
 		21B8DC791DB66CF900FD9161 /* BarcodeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarcodeFormatter.h; path = Utilities/BarcodeFormatter.h; sourceTree = "<group>"; };
 		21B8DC7A1DB66CF900FD9161 /* BarcodeFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BarcodeFormatter.m; path = Utilities/BarcodeFormatter.m; sourceTree = "<group>"; };
 		21BB44BC1DACF0D100ED67EE /* TaskProgressOverlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskProgressOverlayController.h; sourceTree = "<group>"; };
@@ -1200,6 +1198,10 @@
 		C6979EAC1D91462C00A0B51B /* CategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesViewController.m; sourceTree = "<group>"; };
 		C6B3C9851D93E7F400730D9F /* TasksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksViewController.h; sourceTree = "<group>"; };
 		C6B3C9861D93E7F400730D9F /* TasksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TasksViewController.m; sourceTree = "<group>"; };
+		C6C3654B1E38A5BD006C71FE /* NwpobjItemDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NwpobjItemDescription.h; sourceTree = "<group>"; };
+		C6C3654C1E38A5BD006C71FE /* NwpobjItemDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NwpobjItemDescription.m; sourceTree = "<group>"; };
+		C6C3654E1E38A5E6006C71FE /* NwpsobjItemDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NwpsobjItemDescription.h; sourceTree = "<group>"; };
+		C6C3654F1E38A5E6006C71FE /* NwpsobjItemDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NwpsobjItemDescription.m; sourceTree = "<group>"; };
 		C6E776EF1D747B00000FEAC8 /* OperationResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OperationResult.h; sourceTree = "<group>"; };
 		C6E776F01D747B00000FEAC8 /* PLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLManager.h; sourceTree = "<group>"; };
 		C6E776F21D747B00000FEAC8 /* ZebraLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZebraLibrary.h; sourceTree = "<group>"; };
@@ -1847,14 +1849,13 @@
 		B93DBA1E1C5132BD00C8A7A3 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				C6C3654A1E38A5BD006C71FE /* Decorators */,
 				B93DBA211C5132BD00C8A7A3 /* NwObject.h */,
 				B93DBA221C5132BD00C8A7A3 /* NwObject.m */,
 				B93DBA391C5132BD00C8A7A3 /* NwRequest.h */,
 				B93DBA3A1C5132BD00C8A7A3 /* NwRequest.m */,
 				B90A19121C513C920024FF23 /* NwobjItemDescription.h */,
 				B90A19131C513C920024FF23 /* NwobjItemDescription.m */,
-				2193C8941E362405001C653E /* NwpobjItemDescription.h */,
-				2193C8951E362405001C653E /* NwpobjItemDescription.m */,
 				B9950B5E1CD9F5EC005B4375 /* NwobjInventoryItemDescription.h */,
 				B9950B5F1CD9F5EC005B4375 /* NwobjInventoryItemDescription.m */,
 				B968E6FE1CCE7499005F91FF /* NwobjAuthorization.h */,
@@ -2378,6 +2379,17 @@
 				C6069EEC1D92F06D008C3F58 /* CategoriesCollectionCell.xib */,
 			);
 			path = Catalog;
+			sourceTree = "<group>";
+		};
+		C6C3654A1E38A5BD006C71FE /* Decorators */ = {
+			isa = PBXGroup;
+			children = (
+				C6C3654B1E38A5BD006C71FE /* NwpobjItemDescription.h */,
+				C6C3654C1E38A5BD006C71FE /* NwpobjItemDescription.m */,
+				C6C3654E1E38A5E6006C71FE /* NwpsobjItemDescription.h */,
+				C6C3654F1E38A5E6006C71FE /* NwpsobjItemDescription.m */,
+			);
+			path = Decorators;
 			sourceTree = "<group>";
 		};
 		C6E776EC1D747B00000FEAC8 /* PaymentLibrary */ = {
@@ -3841,7 +3853,7 @@
 				B93DBA6E1C5132BD00C8A7A3 /* NSString+MD5.m in Sources */,
 				216439CA1E25026D001EA089 /* DPStepper.m in Sources */,
 				21C0549C1DCB8A0A0094C7B1 /* PrintServer.m in Sources */,
-				2193C8961E362405001C653E /* NwpobjItemDescription.m in Sources */,
+				C6C3654D1E38A5BD006C71FE /* NwpobjItemDescription.m in Sources */,
 				B93DB9B31C50DAA500C8A7A3 /* AppDelegate.m in Sources */,
 				B982D7E91CEB1A7100071D9A /* MCPOfflineInmpl.m in Sources */,
 				21643A5C1E28CE60001EA089 /* DPCaseStatusIndicatorView.m in Sources */,
@@ -3937,6 +3949,7 @@
 				B970B8371CD214D20066A66A /* NwobjItemDescription.m in Sources */,
 				C6FFF4101D797C0500947948 /* CoreDataController.m in Sources */,
 				216439D71E2506B9001EA089 /* DPStepper.m in Sources */,
+				C6C365511E38A9CB006C71FE /* NwpsobjItemDescription.m in Sources */,
 				B970B84C1CD288460066A66A /* CommonConfirmButton.m in Sources */,
 				B970B8321CD214C40066A66A /* MCPNetworkImpl.m in Sources */,
 				C6F601BD1D9E635A0095AE21 /* InventoryViewController.m in Sources */,
@@ -3961,7 +3974,6 @@
 				B9D2B99C1D0718B8009C4824 /* NwobjRestartPrintQueue.m in Sources */,
 				216439F71E262538001EA089 /* InventorySectionCell.m in Sources */,
 				B970B8331CD214C70066A66A /* MCPServer.m in Sources */,
-				2193C8971E362405001C653E /* NwpobjItemDescription.m in Sources */,
 				C630110A1D35335A00D3DD57 /* BarCodeView.m in Sources */,
 				B970B8461CD222AF0066A66A /* AntiAliasingLabel.m in Sources */,
 				C6F601C01D9E63D80095AE21 /* CartCell.m in Sources */,

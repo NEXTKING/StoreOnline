@@ -19,6 +19,7 @@
 #import "AdditionalParameter.h"
 #import "AcceptItem+CoreDataClass.h"
 #import "NwpobjItemDescription.h"
+#import "NwpsobjItemDescription.h"
 
 @interface MCPOfflineInmpl()
 @property (nonatomic, strong) NSDictionary* itemsDictionary;
@@ -68,7 +69,8 @@
     {
         self.itemsDictionary = nil;
 #ifdef MELON
-        NwpobjItemDescription *nwobjItemDescription = [NwpobjItemDescription new];
+        //NwpobjItemDescription *nwobjItemDescription = [NwpobjItemDescription new];
+        NwpsobjItemDescription *nwobjItemDescription = [NwpsobjItemDescription new];
 #else
         NwobjItemDescription *nwobjItemDescription = [NwobjItemDescription new];
 #endif
@@ -587,8 +589,13 @@
 {
     [self deleteOldObjects];
     
+    
+    NSManagedObjectContext *privateContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    [privateContext setParentContext:_dataController.managedObjectContext];
+    [privateContext performBlockAndWait:^{
+    
     for (ItemInformation* currentItem in items) {
-        Item *itemDB = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:_dataController.managedObjectContext];
+        Item *itemDB = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:privateContext];
         
         itemDB.name     = currentItem.name;
         itemDB.article  = currentItem.article;
@@ -598,10 +605,12 @@
         itemDB.stock    = @(currentItem.stock);
         itemDB.material = currentItem.material;
         [itemDB setAdditionalParameters:currentItem.additionalParameters];
-        
     }
-    
-    [_dataController.managedObjectContext save:nil];
+        [privateContext save:nil];
+        [_dataController.managedObjectContext performBlockAndWait:^{
+            [_dataController.managedObjectContext save:nil];
+        }];
+    }];
     
 }
 

@@ -17,7 +17,7 @@ typedef void (^SaveCompletion) (NSArray<ItemInformation*>*);
 - (void) cancel;
 - (void) complete: (BOOL) isSuccessfull;
 
-@property (nonatomic, strong) id <ItemDescriptionDelegate> delegate;
+@property (nonatomic, weak) id <ItemDescriptionDelegate> delegate;
 
 // input parameters:
 
