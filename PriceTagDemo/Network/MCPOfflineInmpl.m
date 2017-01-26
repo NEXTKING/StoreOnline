@@ -22,8 +22,11 @@
 #import "NwpsobjItemDescription.h"
 
 @interface MCPOfflineInmpl()
+{
+}
 @property (nonatomic, strong) NSDictionary* itemsDictionary;
 @property (nonatomic, strong) NSDictionary* inventoryItemsDictionary;
+@property (nonatomic) BOOL shouldCleanDB;
 @end
 
 @implementation MCPOfflineInmpl
@@ -63,6 +66,7 @@
 
 - (void) itemDescription:(id<ItemDescriptionDelegate>)delegate itemCode:(NSString *)code shopCode:(NSString *)shopCode isoType:(int)type progress:(NSProgress **)progress
 {
+    self.shouldCleanDB = YES;
     if (code)
         [self itemDescriptionOffline:delegate itemCode:code];
     else
@@ -79,7 +83,9 @@
         nwobjItemDescription.shopId = shopCode;
         nwobjItemDescription.delegate = delegate;
         nwobjItemDescription.completionHandler = ^(NSArray* items){
-            [self saveItemsToCoreData:items];
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+                [self saveItemsToCoreData:items];
+            });
         };
         [nwobjItemDescription run:_serverAddress];
     }
@@ -134,7 +140,8 @@
         nwobjStock.shopId = shopID;
         nwobjStock.barcode = code;
         nwobjStock.completionHandler = ^(NSArray* items){
-            [self saveStockToCoreData:items];
+            
+                [self saveStockToCoreData:items];
         };
         
         [nwobjStock run:_serverAddress];
@@ -590,8 +597,14 @@
 
 - (void) saveItemsToCoreData:(NSArray*) items
 {
-    [self deleteOldObjects];
-    
+    @synchronized (self) {
+        
+        if (self.shouldCleanDB)
+        {
+            self.shouldCleanDB = NO;
+            [self deleteOldObjects];
+        }
+    }
     
     NSManagedObjectContext *privateContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     [privateContext setParentContext:_dataController.managedObjectContext];
@@ -660,7 +673,6 @@
 
 - (void) deleteOldObjects
 {
-    
     [_dataController recreatePersistentStore];
     
     NSLog(@"Done");
