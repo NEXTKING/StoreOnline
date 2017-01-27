@@ -25,6 +25,7 @@
 
 - (UIColor *)tableViewSeparatorColor;
 - (UITableViewCellSeparatorStyle)tableViewSeparatorStyle;
+- (UIEdgeInsets)tableViewSeparatorInsets;
 - (UIColor *)tableViewBackgroundColor;
 
 #pragma mark - UITableViewSectionHeader appearance

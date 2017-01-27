@@ -46,7 +46,7 @@
     self.label = [UILabel new];
     self.label.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:self.label];
-    self.label.font = [UIFont fontWithName:@"Roboto-Light" size:self.fontSize];
+    self.label.font = [UIFont fontWithName:@"Roboto-Regular" size:self.fontSize];
     self.label.textColor = self.fontColor;
     self.label.textAlignment = NSTextAlignmentCenter;
     [self updateLabel];

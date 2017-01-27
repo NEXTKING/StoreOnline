@@ -43,6 +43,7 @@ typedef enum : NSUInteger
     
     self.tableView.separatorColor = AppAppearance.sharedApperance.tableViewSeparatorColor;
     self.tableView.separatorStyle = AppAppearance.sharedApperance.tableViewSeparatorStyle;
+    self.tableView.separatorInset = AppAppearance.sharedApperance.tableViewSeparatorInsets;
     self.tableView.backgroundColor = AppAppearance.sharedApperance.tableViewBackgroundColor;
     self.tableView.tableFooterView = [UIView new];
     self.headerView.backgroundColor = AppAppearance.sharedApperance.tableViewSectionHeaderBackgroundColor;

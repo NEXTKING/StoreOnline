@@ -13,7 +13,7 @@
 
 @interface PrintLabelsViewController () <WYPopoverControllerDelegate, UIAlertViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 {
-    NSUInteger _selectedPriceTagType;
+    NSInteger _selectedPriceTagType;
     UIPickerView *_priceTagTypePicker;
     NSArray<NSDictionary*> *_priceTagTypes;
 }
@@ -29,6 +29,9 @@
     [self initChangePriceTagTypePicker];
     _priceTagChangeTypeTextField.text = NSLocalizedString(@"Изменить", nil);
     self.title = NSLocalizedString(@"Печать ярлыков", nil);
+    
+    _selectedPriceTagType = -1;
+    _priceTagTypeLabel.text = NSLocalizedString(@"не выбран", nil);
 }
 
 - (void) updateItemInfo:(ItemInformation *)itemInfo
@@ -39,6 +42,12 @@
 
 - (IBAction)printButtonAction:(id)sender
 {
+    if (_selectedPriceTagType < 0)
+    {
+        [self showInfoMessage:NSLocalizedString(@"Тип этикетки не выбран", nil)];
+        return;
+    }
+    
     [[NSUserDefaults standardUserDefaults] setValue:_priceTagTypes[_selectedPriceTagType][@"xibName"] forKey:@"PriceTagXibName"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
@@ -56,9 +65,6 @@
                        @{@"name":NSLocalizedString(@"30x60 мм", nil), @"xibName":@"MelonPriceTag30x60"},
                        @{@"name":NSLocalizedString(@"29x28 мм", nil), @"xibName":@"MelonPriceTag29x28"}];
     
-    _selectedPriceTagType = 0;
-    _priceTagTypeLabel.text = _priceTagTypes[_selectedPriceTagType][@"name"];
-    
     UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Отмена", nil) style:UIBarButtonItemStylePlain target:self action:@selector(cancelChangePriceTagType:)];
     UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
@@ -73,8 +79,8 @@
     _priceTagChangeTypeTextField.inputAccessoryView = toolBar;
     _priceTagChangeTypeTextField.tintColor = [UIColor clearColor];
     _priceTagChangeTypeTextField.layer.cornerRadius = 4;
-    _priceTagChangeTypeTextField.layer.borderColor = [UIColor colorWithRed:205.0/255.0 green:205.0/255.0 blue:205.0/255.0 alpha:1].CGColor;
-    _priceTagChangeTypeTextField.backgroundColor = [UIColor colorWithRed:205.0/255.0 green:205.0/255.0 blue:205.0/255.0 alpha:1];
+    _priceTagChangeTypeTextField.layer.borderColor = [UIColor colorWithRed:105.0/255.0 green:105.0/255.0 blue:105.0/255.0 alpha:1].CGColor;
+    _priceTagChangeTypeTextField.backgroundColor = [UIColor colorWithRed:105.0/255.0 green:105.0/255.0 blue:105.0/255.0 alpha:1];
     _priceTagChangeTypeTextField.textColor = [UIColor whiteColor];
 }
 

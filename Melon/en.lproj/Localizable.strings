@@ -114,3 +114,5 @@
 /* Печать ярлыков */
 
 "Тип ярлыка" = "Type Label";
+"Тип этикетки не выбран" = "Label type not selected";
+"не выбран" = "not selected";

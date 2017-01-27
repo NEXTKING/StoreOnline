@@ -54,6 +54,11 @@
     return UITableViewCellSeparatorStyleSingleLine;
 }
 
+- (UIEdgeInsets)tableViewSeparatorInsets
+{
+    return UIEdgeInsetsMake(0, 40, 0, 0);
+}
+
 - (UIColor *)tableViewBackgroundColor
 {
     return [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1];
