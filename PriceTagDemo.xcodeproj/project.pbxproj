@@ -413,8 +413,6 @@
 		B9551CCA1D0187DC000F7736 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9551CC91D0187DC000F7736 /* Assets.xcassets */; };
 		B9551CCD1D0187DC000F7736 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9551CCB1D0187DC000F7736 /* LaunchScreen.storyboard */; };
 		B9551CD41D018855000F7736 /* AzbukaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9551CD31D018855000F7736 /* AzbukaViewController.m */; };
-		B9551CD81D018B23000F7736 /* StatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9551CD71D018B23000F7736 /* StatusView.m */; };
-		B9551CD91D01C889000F7736 /* StatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9551CD71D018B23000F7736 /* StatusView.m */; };
 		B9551CDA1D01D633000F7736 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B93DB9B21C50DAA500C8A7A3 /* AppDelegate.m */; };
 		B9551CDB1D01D657000F7736 /* libdtdev.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B93DBA041C50DFC200C8A7A3 /* libdtdev.a */; };
 		B9551CDC1D01D671000F7736 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B93DBA0C1C50DFD600C8A7A3 /* ExternalAccessory.framework */; };
@@ -633,6 +631,10 @@
 		C607A60B1DB0E0E000F3E5E9 /* SOAPTaskWareBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = C607A60A1DB0E0E000F3E5E9 /* SOAPTaskWareBinding.m */; };
 		C60F6F7F1CD36965003949CE /* AntiAliasView.m in Sources */ = {isa = PBXBuildFile; fileRef = B90CE48A1C89B44600DFB3E4 /* AntiAliasView.m */; };
 		C60F6F821CD3754E003949CE /* MelonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C60F6F811CD3754E003949CE /* MelonViewController.m */; };
+		C61E2E261E3F3D4A00B4B838 /* StatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = C61E2E221E3F3D4A00B4B838 /* StatusView.m */; };
+		C61E2E271E3F3D8D00B4B838 /* TransitionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C61E2E201E3F3D4A00B4B838 /* TransitionDelegate.m */; };
+		C61E2E281E3F3D9300B4B838 /* PresentingAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = C61E2E1E1E3F3D4A00B4B838 /* PresentingAnimator.m */; };
+		C61E2E291E3F3D9600B4B838 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C61E2E1C1E3F3D4A00B4B838 /* ImageViewController.m */; };
 		C629B5C71D076552002108DF /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C629B5C51D076552002108DF /* AboutViewController.m */; };
 		C629B5C81D076552002108DF /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C629B5C61D076552002108DF /* AboutViewController.xib */; };
 		C63011091D35335A00D3DD57 /* BarCodeEAN13.m in Sources */ = {isa = PBXBuildFile; fileRef = C63010EF1D35335A00D3DD57 /* BarCodeEAN13.m */; };
@@ -1077,8 +1079,6 @@
 		B9551CCE1D0187DC000F7736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B9551CD21D018855000F7736 /* AzbukaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AzbukaViewController.h; sourceTree = "<group>"; };
 		B9551CD31D018855000F7736 /* AzbukaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AzbukaViewController.m; sourceTree = "<group>"; };
-		B9551CD61D018B23000F7736 /* StatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusView.h; sourceTree = "<group>"; };
-		B9551CD71D018B23000F7736 /* StatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusView.m; sourceTree = "<group>"; };
 		B957B0D71D1C291B002A5256 /* OstinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OstinViewController.h; sourceTree = "<group>"; };
 		B957B0D81D1C291B002A5256 /* OstinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OstinViewController.m; sourceTree = "<group>"; };
 		B957B0DB1D1C2A2D002A5256 /* 299101026771.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 299101026771.jpg; sourceTree = "<group>"; };
@@ -1238,6 +1238,14 @@
 		C607A60A1DB0E0E000F3E5E9 /* SOAPTaskWareBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPTaskWareBinding.m; sourceTree = "<group>"; };
 		C60F6F801CD3754E003949CE /* MelonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MelonViewController.h; sourceTree = "<group>"; };
 		C60F6F811CD3754E003949CE /* MelonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MelonViewController.m; sourceTree = "<group>"; };
+		C61E2E1B1E3F3D4A00B4B838 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
+		C61E2E1C1E3F3D4A00B4B838 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
+		C61E2E1D1E3F3D4A00B4B838 /* PresentingAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentingAnimator.h; sourceTree = "<group>"; };
+		C61E2E1E1E3F3D4A00B4B838 /* PresentingAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentingAnimator.m; sourceTree = "<group>"; };
+		C61E2E1F1E3F3D4A00B4B838 /* TransitionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransitionDelegate.h; sourceTree = "<group>"; };
+		C61E2E201E3F3D4A00B4B838 /* TransitionDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransitionDelegate.m; sourceTree = "<group>"; };
+		C61E2E211E3F3D4A00B4B838 /* StatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusView.h; sourceTree = "<group>"; };
+		C61E2E221E3F3D4A00B4B838 /* StatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusView.m; sourceTree = "<group>"; };
 		C629B5C41D076552002108DF /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		C629B5C51D076552002108DF /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		C629B5C61D076552002108DF /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
@@ -1883,7 +1891,7 @@
 		B93DB9AD1C50DAA500C8A7A3 /* PriceTagDemo */ = {
 			isa = PBXGroup;
 			children = (
-				B9551CD51D018AE8000F7736 /* Common */,
+				C61E2E191E3F3D4A00B4B838 /* Common */,
 				B92DCE471C859C80002AA184 /* barcode.gif */,
 				B92DCE451C84A421002AA184 /* barcode-4@2x.png */,
 				B92DCE071C78C277002AA184 /* discount@2x.png */,
@@ -2062,15 +2070,6 @@
 				B9551CBE1D0187DC000F7736 /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		B9551CD51D018AE8000F7736 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				B9551CD61D018B23000F7736 /* StatusView.h */,
-				B9551CD71D018B23000F7736 /* StatusView.m */,
-			);
-			name = Common;
 			sourceTree = "<group>";
 		};
 		B957B0DA1D1C2A2D002A5256 /* images */ = {
@@ -2360,6 +2359,29 @@
 				218228691DAFCB2A00F04B70 /* TaskItemInformation.m */,
 			);
 			name = Protocol;
+			sourceTree = "<group>";
+		};
+		C61E2E191E3F3D4A00B4B838 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				C61E2E1A1E3F3D4A00B4B838 /* ImageBrowser */,
+				C61E2E211E3F3D4A00B4B838 /* StatusView.h */,
+				C61E2E221E3F3D4A00B4B838 /* StatusView.m */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		C61E2E1A1E3F3D4A00B4B838 /* ImageBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				C61E2E1B1E3F3D4A00B4B838 /* ImageViewController.h */,
+				C61E2E1C1E3F3D4A00B4B838 /* ImageViewController.m */,
+				C61E2E1D1E3F3D4A00B4B838 /* PresentingAnimator.h */,
+				C61E2E1E1E3F3D4A00B4B838 /* PresentingAnimator.m */,
+				C61E2E1F1E3F3D4A00B4B838 /* TransitionDelegate.h */,
+				C61E2E201E3F3D4A00B4B838 /* TransitionDelegate.m */,
+			);
+			path = ImageBrowser;
 			sourceTree = "<group>";
 		};
 		C629B5C31D07653A002108DF /* About */ = {
@@ -2985,7 +3007,7 @@
 				ORGANIZATIONNAME = Dataphone;
 				TargetAttributes = {
 					215A02801E1127B400CCAA2C = {
-						DevelopmentTeam = QR4V9984C7;
+						DevelopmentTeam = 9X8R3QG8L6;
 					};
 					B90710AE1C96E26500268CE8 = {
 						CreatedOnToolsVersion = 7.2;
@@ -3013,7 +3035,7 @@
 					};
 					B970B8141CD209820066A66A = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = QR4V9984C7;
+						DevelopmentTeam = 9X8R3QG8L6;
 						ProvisioningStyle = Automatic;
 					};
 					B9A3FE171CA19E200060483D = {
@@ -3999,6 +4021,7 @@
 				215A02B71E1127B400CCAA2C /* UserInformation.m in Sources */,
 				215A02B81E1127B400CCAA2C /* MCPOfflineInmpl.m in Sources */,
 				215A02B91E1127B400CCAA2C /* Group+CoreDataProperties.m in Sources */,
+				C61E2E291E3F3D9600B4B838 /* ImageViewController.m in Sources */,
 				215A02BA1E1127B400CCAA2C /* WYPopoverController.m in Sources */,
 				215A02BB1E1127B400CCAA2C /* TasksCell.m in Sources */,
 				215A02BC1E1127B400CCAA2C /* Logger.m in Sources */,
@@ -4017,7 +4040,9 @@
 				215A02C61E1127B400CCAA2C /* Task+CoreDataClass.m in Sources */,
 				215A03561E11458100CCAA2C /* SOAPClaim.m in Sources */,
 				215A02C71E1127B400CCAA2C /* Subgroup+CoreDataClass.m in Sources */,
+				C61E2E281E3F3D9300B4B838 /* PresentingAnimator.m in Sources */,
 				215A02C81E1127B400CCAA2C /* main.m in Sources */,
+				C61E2E271E3F3D8D00B4B838 /* TransitionDelegate.m in Sources */,
 				215A02C91E1127B400CCAA2C /* SearchViewController.m in Sources */,
 				215A02CA1E1127B400CCAA2C /* User+CoreDataClass.m in Sources */,
 				215A02CB1E1127B400CCAA2C /* SOAPBarcodes.m in Sources */,
@@ -4209,7 +4234,6 @@
 			files = (
 				B9950B691CDB8772005B4375 /* WYStoryboardPopoverSegue.m in Sources */,
 				B93DBA111C50E56E00C8A7A3 /* PrintViewController.m in Sources */,
-				B9551CD81D018B23000F7736 /* StatusView.m in Sources */,
 				B93DBA661C5132BD00C8A7A3 /* NwRequest.m in Sources */,
 				B90A19141C513C920024FF23 /* NwobjItemDescription.m in Sources */,
 				B9950B601CD9F5EC005B4375 /* NwobjInventoryItemDescription.m in Sources */,
@@ -4233,6 +4257,7 @@
 				B90CE4961C89FCC100DFB3E4 /* AntiAliasView.m in Sources */,
 				B92DCE061C78A600002AA184 /* WarehouseInformation.m in Sources */,
 				214AD0EF1DE4881F00FE0345 /* NwobjSendAcceptanes.m in Sources */,
+				C61E2E261E3F3D4A00B4B838 /* StatusView.m in Sources */,
 				B93DBA6E1C5132BD00C8A7A3 /* NSString+MD5.m in Sources */,
 				21C0549C1DCB8A0A0094C7B1 /* PrintServer.m in Sources */,
 				B93DB9B31C50DAA500C8A7A3 /* AppDelegate.m in Sources */,
@@ -4276,7 +4301,6 @@
 				B9551CBF1D0187DC000F7736 /* main.m in Sources */,
 				B9551CEE1D01D6DD000F7736 /* Logger.m in Sources */,
 				B9551CEB1D01D6A6000F7736 /* WarehouseInformation.m in Sources */,
-				B9551CD91D01C889000F7736 /* StatusView.m in Sources */,
 				B9551CEA1D01D6A6000F7736 /* ItemInformation.m in Sources */,
 				B9551CE61D01D69E000F7736 /* NwobjClientCard.m in Sources */,
 				B9551CED1D01D6D1000F7736 /* PrintViewController.m in Sources */,
@@ -4652,7 +4676,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = QR4V9984C7;
+				DEVELOPMENT_TEAM = 9X8R3QG8L6;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -4675,7 +4699,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/PriceTagDemo/DTDevicesLib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dataphone.Ostin-IM";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.saures.Ostin-IM";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
@@ -4689,7 +4713,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = QR4V9984C7;
+				DEVELOPMENT_TEAM = 9X8R3QG8L6;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"OSTIN_IM=1",
@@ -4710,7 +4734,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/PriceTagDemo/DTDevicesLib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dataphone.Ostin-IM";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.saures.Ostin-IM";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
@@ -5074,7 +5098,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = QR4V9984C7;
+				DEVELOPMENT_TEAM = 9X8R3QG8L6;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -5105,7 +5129,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = QR4V9984C7;
+				DEVELOPMENT_TEAM = 9X8R3QG8L6;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"MELON=1",

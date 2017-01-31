@@ -17,6 +17,9 @@
 #import "SettingsViewController+Ostin.h"
 #import "DTDevices.h"
 
+#import "TransitionDelegate.h"
+#import "ImageViewController.h"
+
 @interface ClaimListViewController () <UITableViewDelegate, UITableViewDataSource, AcceptancesDataSourceDelegate>
 {
     UIActivityIndicatorView *_activityIndicator;
@@ -146,6 +149,50 @@
         [cell configureWithAcceptanceItem:item cancelButtonEnabled:(_rootItem.startDate && !_rootItem.endDate)];
         [cell.changeCancelReasonButton addTarget:self action:@selector(changeClaimCancelReasonButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [cell.changeCancelReasonButton setTag:indexPath.row];
+        cell.zoomEnabled = NO;
+        
+        if ([item descriptionForKey:@"pictureURLString"])
+        {
+            NSString *pictureURLString = [item descriptionForKey:@"pictureURLString"];
+            
+            //_pictureImageView.imageURL = [NSURL URLWithString:pictureURLString];
+            NSURL* imageURL = [NSURL URLWithString:pictureURLString];
+            [cell.pictureImageView  setImageURL:imageURL
+                                    successBlock:^(UIImage* image)
+             {
+                 cell.pictureImageView.image = image;
+                 cell.zoomEnabled = YES;
+                 
+             }
+                                    failureBlock:^(NSError* error)
+             {
+                 NSLog(@"fail");
+             }];
+        }
+        
+        
+        __weak ClaimItemInformationCell* _cell = cell;
+        cell.actionBlock = ^{
+            
+             CGRect imageFrame = [_cell.pictureImageView convertRect:_cell.imageView.bounds toView:self.navigationController.view];
+            imageFrame.size = _cell.pictureImageView.frame.size;
+            NSLog(@"%@", NSStringFromCGRect(_cell.pictureImageView.frame));
+            TransitionDelegate* trDelegate = [TransitionDelegate new];
+            trDelegate.initialFrame = imageFrame;
+            ImageViewController* imageVC = [ImageViewController new];
+            imageVC.image = _cell.pictureImageView.image;
+            __weak ImageViewController *_imageVC = imageVC;
+            imageVC.transitioningDelegate = trDelegate;
+            imageVC.tapAction = ^{
+                TransitionDelegate *trDelegate = [TransitionDelegate new];
+                trDelegate.initialFrame = imageFrame;
+                
+                _imageVC.transitioningDelegate = trDelegate;
+                [self dismissViewControllerAnimated:YES completion:nil];
+            };
+            
+            [self presentViewController:imageVC animated:YES completion:nil];
+        };
         
         return cell;
     }

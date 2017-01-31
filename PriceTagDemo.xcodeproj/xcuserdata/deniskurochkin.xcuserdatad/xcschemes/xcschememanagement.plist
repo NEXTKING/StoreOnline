@@ -24,6 +24,11 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
+		<key>Ostin_IM.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>21</integer>
+		</dict>
 		<key>PriceTagDemo.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -47,6 +52,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>215A02801E1127B400CCAA2C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>B90710AE1C96E26500268CE8</key>
 		<dict>
 			<key>primary</key>

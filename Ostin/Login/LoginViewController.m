@@ -94,14 +94,16 @@
 
 - (IBAction)loginButtonPressed:(id)sender
 {
-    if (_loginTextField.text != nil && _passwordTextField.text != nil)
+    /* if (_loginTextField.text != nil && _passwordTextField.text != nil)
     {
         _syncButton.enabled = NO;
         _resetButton.enabled = NO;
         _loginButton.enabled = NO;
         _scanLoginEnable = NO;
         [[MCPServer instance] user:self login:_loginTextField.text password:_passwordTextField.text];
-    }
+    }*/
+    
+    [self performSegueWithIdentifier:@"LoginSegue" sender:self];
 }
 
 - (void)userComplete:(int)result user:(UserInformation *)userInformation

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "AcceptancesProtocol.h"
 
+typedef void (^ImageTapBlock) (void);
+
 @interface ClaimItemInformationCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *pictureImageView;
 @property (weak, nonatomic) IBOutlet UILabel *articleLabel;
@@ -17,6 +19,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *countLabel;
 @property (weak, nonatomic) IBOutlet UILabel *cancelReasonLabel;
 @property (weak, nonatomic) IBOutlet UIButton *changeCancelReasonButton;
+
+@property (assign, nonatomic) BOOL zoomEnabled;
+@property (copy, nonatomic) ImageTapBlock actionBlock;
 
 - (void)configureWithAcceptanceItem:(id<AcceptancesItem>)item cancelButtonEnabled:(BOOL)enabled;
 @end

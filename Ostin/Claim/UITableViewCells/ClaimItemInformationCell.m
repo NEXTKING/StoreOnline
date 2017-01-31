@@ -17,6 +17,9 @@
     
     UIImage *image = [[UIImage imageNamed:@"icon_pencil"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [_changeCancelReasonButton setImage:image forState:UIControlStateNormal];
+    
+    UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureAction:)];
+    [_pictureImageView addGestureRecognizer:tapGesture];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -34,11 +37,6 @@
     _cancelReasonLabel.text = [item descriptionForKey:@"cancelReasonDescription"];
     _pictureImageView.image = [UIImage imageNamed:@"no-image.png"];
     
-    if ([item descriptionForKey:@"pictureURLString"])
-    {
-        NSString *pictureURLString = [item descriptionForKey:@"pictureURLString"];
-        _pictureImageView.imageURL = [NSURL URLWithString:pictureURLString];
-    }
     
     _changeCancelReasonButton.tintColor = enabled ? [UIColor colorWithRed:0 green:82/255.0 blue:1 alpha:1] : [UIColor lightGrayColor];
     _changeCancelReasonButton.enabled = enabled;
@@ -54,6 +52,12 @@
     {
         _changeCancelReasonButton.hidden = NO;
     }
+}
+
+- (IBAction)tapGestureAction:(id)sender
+{
+    if (_actionBlock && _zoomEnabled)
+        _actionBlock();
 }
 
 @end

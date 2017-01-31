@@ -1491,7 +1491,7 @@
     NSMutableString *address = [NSMutableString stringWithFormat:@"%@://%@%@",protocol, host, port.length > 0?[NSString stringWithFormat:@":%@", port]:@""];
     if (path.length > 0)
         [address appendFormat:@"/%@", path];
-    return [NSString stringWithFormat:@"%@/%ld", address, itemID];
+    return [NSString stringWithFormat:@"%@/?id=%ld", address, itemID];
 }
 
 @end
