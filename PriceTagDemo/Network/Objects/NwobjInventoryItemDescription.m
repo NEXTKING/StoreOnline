@@ -292,24 +292,20 @@
     obj = [result objectForKey:@"parameters"];
     if (obj && [obj isKindOfClass:[NSArray class]])
     {
-        NSMutableArray *finalArray = [NSMutableArray new];
+        NSMutableDictionary *params = [NSMutableDictionary new];
+        
         NSArray *parameters = obj;
-        for (int i = 0; i < parameters.count; ++i) {
-            ParameterInformation *parameter = [ParameterInformation new];
+        for (int i = 0; i < parameters.count; ++i)
+        {
             NSDictionary *parameterServer = parameters[i];
-            
-            obj = [parameterServer objectForKey:@"paramName"];
-            if (obj != Nil  && [obj isKindOfClass:[NSString class]] )
-                parameter.name = obj;
-            obj = [parameterServer objectForKey:@"paramValue"];
-            if (obj != Nil  && [obj isKindOfClass:[NSString class]] )
-                parameter.value = obj;
-            
-            [finalArray addObject:parameter];
-            
+            id name = [parameterServer objectForKey:@"paramName"];
+            id value = [parameterServer objectForKey:@"paramValue"];
+
+            if (name && [name isKindOfClass:[NSString class]] && value)
+                params[name] = value;
         }
         
-        itemInfo.additionalParameters = finalArray;
+        itemInfo.additionalParameters = params;
     }
     
     return itemInfo;

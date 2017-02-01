@@ -442,13 +442,10 @@
             itemInfo.stock      = [itemDB.stock integerValue];
             itemInfo.material   = itemDB.material;
             
-            NSMutableArray* addParams = [NSMutableArray new];
+            NSMutableDictionary* addParams = [NSMutableDictionary new];
             for (AdditionalParameter* paramDB in itemDB.additionalParams)
             {
-                ParameterInformation* paramInfo = [ParameterInformation new];
-                paramInfo.name = paramDB.name;
-                paramInfo.value = paramDB.value;
-                [addParams addObject:paramInfo];
+                addParams[paramDB.name] = paramDB.value;
             }
             
             itemInfo.additionalParameters = addParams;
@@ -530,13 +527,10 @@
                 itemInfo.price      = itemDB.price.doubleValue;
                 itemInfo.stock      = [itemDB.stock integerValue];
                 
-                NSMutableArray* addParams = [NSMutableArray new];
+                NSMutableDictionary* addParams = [NSMutableDictionary new];
                 for (AdditionalParameter* paramDB in itemDB.additionalParams)
                 {
-                    ParameterInformation* paramInfo = [ParameterInformation new];
-                    paramInfo.name = paramDB.name;
-                    paramInfo.value = paramDB.value;
-                    [addParams addObject:paramInfo];
+                    addParams[paramDB.name] = paramDB.value;
                 }
                 
                 itemInfo.additionalParameters = addParams;

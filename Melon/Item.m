@@ -11,15 +11,20 @@
 
 @implementation Item
 
-- (void) setAdditionalParameters:(NSArray<ParameterInformation *> *)params
+- (void) setAdditionalParameters:(NSDictionary*)params
 {
     NSMutableSet *paramsDBSet = [NSMutableSet new];
     
-    for (ParameterInformation* paramInfo in params)
+    NSArray *keys = [params allKeys];
+    for (NSString *key in keys)
     {
+        id value = @"";
+        if ([params[key] isKindOfClass:[NSString class]])
+            value = params[key];
+        
         AdditionalParameter *parameterDB = [NSEntityDescription insertNewObjectForEntityForName:@"AdditionalParameter" inManagedObjectContext:[self managedObjectContext]];
-        [parameterDB setValue:paramInfo.name forKey:@"name"];
-        [parameterDB setValue:paramInfo.value forKey:@"value"];
+        [parameterDB setValue:key forKey:@"name"];
+        [parameterDB setValue:value forKey:@"value"];
         
         [paramsDBSet addObject:parameterDB];
     }

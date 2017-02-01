@@ -240,7 +240,7 @@
                 
                 
                 itemInfo = [ItemInformation new];
-                NSMutableArray *additionalParams = [NSMutableArray new];
+                NSMutableDictionary *additionalParams = [NSMutableDictionary new];
                 
                     obj = [dictParams objectForKey:@"Цена"];
                     if (obj && [obj isKindOfClass:[NSNumber class]])
@@ -257,28 +257,19 @@
                     obj = [dictParams objectForKey:@"УИДСтроки"];
                     if (obj && [obj isKindOfClass:[NSString class]])
                     {
-                        ParameterInformation *param = [ParameterInformation new];
-                        param.name = @"uid";
-                        param.value = obj;
-                        [additionalParams addObject:param];
+                        additionalParams[@"uid"] = obj;
                     }
                 obj = [dictParams objectForKey:@"Количество"];
                 if (obj && [obj isKindOfClass:[NSNumber class]])
                 {
-                    ParameterInformation *param = [ParameterInformation new];
-                    param.name = @"quantity";
-                    param.value = [NSString stringWithFormat:@"%ld", (long)[obj integerValue]];
-                    [additionalParams addObject:param];
+                    additionalParams[@"quantity"] = [NSString stringWithFormat:@"%ld", (long)[obj integerValue]];
                 }
                 
                 
                 obj = [dictParams objectForKey:@"Скидки"];
                 if (obj && [obj isKindOfClass:[NSArray class]])
                 {
-                    ParameterInformation *param = [ParameterInformation new];
-                    param.name = @"discounts";
-                    param.value = obj;
-                    [additionalParams addObject:param];
+                    additionalParams[@"discounts"] = obj;
                 }
                 
                 itemInfo.additionalParameters = additionalParams;

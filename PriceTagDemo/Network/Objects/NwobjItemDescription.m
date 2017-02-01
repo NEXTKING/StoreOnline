@@ -300,24 +300,20 @@
     obj = [result objectForKey:@"parameters"];
     if (obj && [obj isKindOfClass:[NSArray class]])
     {
-        NSMutableArray *finalArray = [NSMutableArray new];
+        NSMutableDictionary *params = [NSMutableDictionary new];
+        
         NSArray *parameters = obj;
-        for (int i = 0; i < parameters.count; ++i) {
-            ParameterInformation *parameter = [ParameterInformation new];
+        for (int i = 0; i < parameters.count; ++i)
+        {
             NSDictionary *parameterServer = parameters[i];
+            id name = [parameterServer objectForKey:@"paramName"];
+            id value = [parameterServer objectForKey:@"paramValue"];
             
-            obj = [parameterServer objectForKey:@"paramName"];
-            if (obj != Nil  && [obj isKindOfClass:[NSString class]] )
-                parameter.name = obj;
-            obj = [parameterServer objectForKey:@"paramValue"];
-            if (obj != Nil  && [obj isKindOfClass:[NSString class]] )
-                parameter.value = obj;
-            
-            [finalArray addObject:parameter];
-            
+            if (name && [name isKindOfClass:[NSString class]] && value)
+                params[name] = value;
         }
         
-        itemInfo.additionalParameters = finalArray;
+        itemInfo.additionalParameters = params;
     }
     
     return itemInfo;
@@ -342,7 +338,7 @@
     }
     
     ItemInformation *itemInfo = nil;
-    NSMutableArray *additionalParams = [NSMutableArray new];
+    NSMutableDictionary *additionalParams = [NSMutableDictionary new];
     id obj = [result objectForKey:@"data"];
     if (obj && [obj isKindOfClass:[NSDictionary class]])
     {
@@ -375,10 +371,7 @@
                     obj = [dictParams objectForKey:@"УИДСтроки"];
                     if (obj && [obj isKindOfClass:[NSString class]])
                     {
-                        ParameterInformation *param = [ParameterInformation new];
-                        param.name = @"uid";
-                        param.value = obj;
-                        [additionalParams addObject:param];
+                        additionalParams[@"uid"] = obj;
                     }
 
                     
@@ -394,10 +387,7 @@
             obj = [HDR objectForKey:@"Id"];
             if (obj && [obj isKindOfClass:[NSString class]])
             {
-                ParameterInformation *param = [ParameterInformation new];
-                param.name = @"ReceiptID";
-                param.value = obj;
-                [additionalParams addObject:param];
+                additionalParams[@"ReceiptID"] = obj;
             }
         }
         

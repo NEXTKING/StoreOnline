@@ -77,18 +77,11 @@
 - (void) updateItemInfo:(ItemInformation *)itemInfo
 {
     [super updateItemInfo:itemInfo];
-    ParameterInformation *paramInfo = nil;
-    for (ParameterInformation* currentParam in itemInfo.additionalParameters) {
-        if ([currentParam.name isEqualToString:@"sale"])
-        {
-            paramInfo = currentParam;
-            break;
-        }
-    }
-    
-    if (paramInfo)
+    NSDictionary *params = itemInfo.additionalParameters;
+
+    if (params && params[@"sale"] && [params[@"sale"] isKindOfClass:[NSString class]])
     {
-        BOOL isSale = [paramInfo.value isEqualToString:@"1"];
+        BOOL isSale = [params[@"sale"] isEqualToString:@"1"];
         //self.itemPriceLabel.backgroundColor = isSale ? [UIColor redColor]:[UIColor colorWithRed:113.0/255.0 green:113.0/255.0 blue:113.0/255.0 alpha:0.28];
         self.itemPriceLabel.textColor = isSale ? [UIColor redColor] : [UIColor blackColor];
     }

@@ -157,18 +157,18 @@
     //Rivgosh hack
     
     ItemInformation *itemInfo = [aNotification.userInfo objectForKey:@"item"];
-    ParameterInformation *uidParam = nil;
-    for (ParameterInformation *currentParam in itemInfo.additionalParameters) {
-        if ([currentParam.name isEqualToString:@"uid"])
+    id uidParam = nil;
+    if (itemInfo.additionalParameters && itemInfo.additionalParameters[@"uid"])
+    {
+        if ([itemInfo.additionalParameters[@"uid"] isKindOfClass:[NSString class]])
         {
-            uidParam = currentParam;
-            break;
+            uidParam = itemInfo.additionalParameters[@"uid"];
         }
     }
     
     if (uidParam && [self.itemsCount objectForKey:itemInfo.barcode])
     {
-        if ([self isUniqueItem:uidParam.value])
+        if ([self isUniqueItem:uidParam])
         {
             [self.items addObject:itemInfo];
             [self.itemsCount setObject:[NSNumber numberWithInteger:1] forKey:itemInfo.barcode];
@@ -187,9 +187,11 @@
 {
     BOOL unique = YES;
     
-    for (ItemInformation* currentItem in self.items) {
-        for (ParameterInformation *currentParam in currentItem.additionalParameters) {
-            if ([currentParam.name isEqualToString:@"uid"] && [currentParam.value isEqualToString:uid])
+    for (ItemInformation* currentItem in self.items)
+    {
+        if (currentItem.additionalParameters)
+        {
+            if (currentItem.additionalParameters[@"uid"] && [currentItem.additionalParameters[@"uid"] isEqualToString:uid])
             {
                 unique = NO;
                 break;
@@ -215,15 +217,15 @@
         NSNotification *notification = [[NSNotification alloc] initWithName:@"CartAddMessage" object:nil userInfo:userInfo];
         [[NSNotificationCenter defaultCenter] postNotification:notification];
         
-        if (itemDescription.additionalParameters.count > 0)
+        if (itemDescription.additionalParameters)
         {
-            ParameterInformation*param = nil;
-            for (ParameterInformation* currentParam in itemDescription.additionalParameters) {
-                if ([currentParam.name isEqualToString:@"ReceiptID"])
-                    param = currentParam;
+            id param = nil;
+            if (itemDescription.additionalParameters[@"ReceiptID"] && [itemDescription.additionalParameters[@"ReceiptID"] isKindOfClass:[NSString class]])
+            {
+                param = itemDescription.additionalParameters[@"ReceiptID"];
             }
             if (param)
-                self.currentReceiptId = param.value;
+                self.currentReceiptId = param;
         }
         //if (![itemDescription.barcode isEqualToString:@"788800"])
         //    [self barcodeData:@"788800" type:0];

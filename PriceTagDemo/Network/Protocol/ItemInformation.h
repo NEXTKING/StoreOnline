@@ -9,14 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "DiscountInformation.h"
 
-@interface ParameterInformation : NSObject <NSCoding>
-@property (nonatomic, strong) NSString* name;
-@property (nonatomic, strong) NSString* value;
-
-- (instancetype)initWithName:(NSString *)name value:(NSString *)value;
-
-@end
-
 @interface ItemInformation : NSObject <NSCoding>
 
 @property (nonatomic, assign) NSInteger itemId;
@@ -32,13 +24,11 @@
 @property (nonatomic, copy) NSNumber* diameter;
 @property (nonatomic, copy) NSString* unit;
 @property (nonatomic, strong) NSArray* warehouses;
-@property (nonatomic, strong) NSArray<ParameterInformation*>* additionalParameters;
+@property (nonatomic, strong) NSDictionary* additionalParameters;
 @property (nonatomic, assign) double price;
 @property (nonatomic, assign) NSInteger stock;
 
 //Rivgosh
 @property (nonatomic, strong) NSArray<DiscountInformation*>* appliedDiscounts;
-
-- (NSString *)additionalParameterValueForName:(NSString *)name;
 
 @end

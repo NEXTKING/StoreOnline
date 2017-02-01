@@ -208,37 +208,26 @@
 {
     if (result == 0 && itemDescription)
     {
-        if (itemDescription.additionalParameters.count > 0)
-        {
-            ParameterInformation*param = nil;
-            for (ParameterInformation* currentParam in itemDescription.additionalParameters) {
-                if ([currentParam.name isEqualToString:@"ReceiptID"])
-                    param = currentParam;
-            }
-        }
+//        if (itemDescription.additionalParameters)
+//        {
+//            id param = itemDescription.additionalParameters[@"ReceiptID"];
+//        }
     }
     else
     {
-        
-        
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Внимание", nil) message:NSLocalizedString(@"Товар не найден в базе", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
-            alert.tag = 0;
-            [alert show];
-    
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Внимание", nil) message:NSLocalizedString(@"Товар не найден в базе", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
+        alert.tag = 0;
+        [alert show];
     }
     
     //Adding date to item
     
-    NSMutableArray* paramsWithDate = [[NSMutableArray alloc] initWithArray:itemDescription.additionalParameters];
+    NSMutableDictionary* paramsWithDate = [itemDescription.additionalParameters mutableCopy];
     
-    ParameterInformation* paramInfo = [ParameterInformation new];
-    paramInfo.name = @"date";
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat:@"yyyy-MM-dd' 'HH:mm:ss.SSSSSSS"];
-    paramInfo.value = [dateFormatter stringFromDate:[NSDate date]];
-    NSLog(@"%@", paramInfo.value);
     
-    [paramsWithDate addObject:paramInfo];
+    paramsWithDate[@"date"] = [dateFormatter stringFromDate:[NSDate date]];
     itemDescription.additionalParameters = paramsWithDate;
     
     NSDictionary *userInfo = @{@"item":itemDescription};

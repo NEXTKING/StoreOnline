@@ -15,15 +15,15 @@
 {
     [super setItemInformation:item];
     
-    ParameterInformation *firstPriceParam = nil;
-    for (ParameterInformation* currentParam in item.additionalParameters)
+    id firstPriceParam = nil;
+    if (item.additionalParameters && item.additionalParameters[@"FirstPrice"])
     {
-        if ([currentParam.name isEqualToString:@"FirstPrice"])
-            firstPriceParam = currentParam;
+        if ([item.additionalParameters[@"FirstPrice"] isKindOfClass:[NSString class]])
+            firstPriceParam = item.additionalParameters[@"FirstPrice"];
     }
     
     if (firstPriceParam)
-        self.priceLabel.text = [NSString stringWithFormat:@"Цена: %@р.", firstPriceParam.value];
+        self.priceLabel.text = [NSString stringWithFormat:@"Цена: %@р.", firstPriceParam];
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"ShouldPrintBarcode"])
     {

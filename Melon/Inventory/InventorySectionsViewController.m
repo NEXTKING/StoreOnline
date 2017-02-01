@@ -314,10 +314,11 @@
 
 - (NSString*) getStringDateFromItem:(ItemInformation*) item
 {
-    for (ParameterInformation* param in item.additionalParameters) {
-        if ([param.name isEqualToString:@"date"])
+    if (item.additionalParameters && item.additionalParameters[@"date"])
+    {
+        if ([item.additionalParameters[@"date"] isKindOfClass:[NSString class]])
         {
-            return param.value;
+            return item.additionalParameters[@"date"];
         }
     }
     

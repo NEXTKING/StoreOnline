@@ -67,28 +67,28 @@
     
     if (_manufactureLabel)
     {
-        ParameterInformation *manufacturerParam = nil;
+        id manufacturerParam = nil;
         
-        for (ParameterInformation* currentParam in item.additionalParameters)
+        if (item.additionalParameters)
         {
-            if ([currentParam.name isEqualToString:@"Manufacturer"])
-                manufacturerParam = currentParam;
+            if (item.additionalParameters[@"Manufacturer"] && [item.additionalParameters[@"Manufacturer"] isKindOfClass:[NSString class]])
+                manufacturerParam = item.additionalParameters[@"Manufacturer"];
         }
-        _manufactureLabel.text = manufacturerParam ? [NSString stringWithFormat:@"Изготовитель: %@", manufacturerParam.value] : @"Изготовитель:";
+        _manufactureLabel.text = manufacturerParam ? [NSString stringWithFormat:@"Изготовитель: %@", manufacturerParam] : @"Изготовитель:";
     }
     
     if (_manufactureDateLabel)
     {
-        ParameterInformation *manufactureDateParam = nil;
+        id manufactureDateParam = nil;
         
-        for (ParameterInformation* currentParam in item.additionalParameters)
+        if (item.additionalParameters)
         {
-            if ([currentParam.name isEqualToString:@"ProductionDate"])
-                manufactureDateParam = currentParam;
+            if (item.additionalParameters[@"ProductionDate"] && [item.additionalParameters[@"ProductionDate"] isKindOfClass:[NSString class]])
+                manufactureDateParam = item.additionalParameters[@"ProductionDate"];
         }
         
         if (manufactureDateParam)
-            _manufactureDateLabel.text = [NSString stringWithFormat:@"Дата изгот.: %@", [manufactureDateParam.value stringByReplacingOccurrencesOfString:@" 0:00:00" withString:@""]];
+            _manufactureDateLabel.text = [NSString stringWithFormat:@"Дата изгот.: %@", [manufactureDateParam stringByReplacingOccurrencesOfString:@" 0:00:00" withString:@""]];
         else
             _manufactureDateLabel.text = @"Дата изгот.:";
     }
@@ -97,11 +97,13 @@
     NSString *size1 = @"";
     NSString *size2 = @"";
     
-    for (ParameterInformation* currentParam in item.additionalParameters)
+    if (item.additionalParameters)
     {
-        if ([currentParam.name isEqualToString:@"Описание"])
+        id descParam = item.additionalParameters[@"Описание"];
+        
+        if (descParam && [descParam isKindOfClass:[NSString class]])
         {
-            NSString *string = currentParam.value;
+            NSString *string = descParam;
             NSRange searchedRange = NSMakeRange(0, [string length]);
             NSString *pattern = @".* арт\\..* цв\\.(.*) р-р\\.(.*) р\\.(.*)";
             
@@ -110,8 +112,6 @@
             color = [string substringWithRange:[match rangeAtIndex:1]];
             size1 = [string substringWithRange:[match rangeAtIndex:2]];
             size2 = [string substringWithRange:[match rangeAtIndex:3]];
-            
-            break;
         }
     }
     
@@ -122,32 +122,30 @@
     
     if (_sizeLabel)
     {
-        ParameterInformation *sizeParam = nil;
+        id sizeParam = nil;
         
-        for (ParameterInformation* currentParam in item.additionalParameters)
+        if (item.additionalParameters)
         {
-            if ([currentParam.name isEqualToString:@"Size"])
-                sizeParam = currentParam;
+            sizeParam = item.additionalParameters[@"Size"];
         }
         
         if (sizeParam)
-            _sizeLabel.text = sizeParam.value;
+            _sizeLabel.text = sizeParam;
         else
             _sizeLabel.text = @"";
     }
     
     if (_importerLabel)
     {
-        ParameterInformation *importerParam = nil;
+        id importerParam = nil;
         
-        for (ParameterInformation* currentParam in item.additionalParameters)
+        if (item.additionalParameters)
         {
-            if ([currentParam.name isEqualToString:@"Importer"])
-                importerParam = currentParam;
+            importerParam = item.additionalParameters[@"Importer"];
         }
         
         if (importerParam)
-            _importerLabel.text = [NSString stringWithFormat:@"Импортер: %@", importerParam.value];
+            _importerLabel.text = [NSString stringWithFormat:@"Импортер: %@", importerParam];
         else
             _importerLabel.text = @"Импортер:";
     }
@@ -160,18 +158,15 @@
 
 - (void) addOldPriceIfNeeded:(ItemInformation*) item
 {
-    ParameterInformation *oldPriceParam = nil;
-    ParameterInformation *firstPriceParam = nil;
-    ParameterInformation *saleParam = nil;
-    for (ParameterInformation* currentParam in item.additionalParameters) {
-        if ([currentParam.name isEqualToString:@"Старая цена"])
-            oldPriceParam = currentParam;
-        
-        if ([currentParam.name isEqualToString:@"sale"])
-            saleParam = currentParam;
-        
-        if ([currentParam.name isEqualToString:@"FirstPrice"])
-            firstPriceParam = currentParam;
+    NSString *oldPriceParam = nil;
+    NSString *firstPriceParam = nil;
+    NSString *saleParam = nil;
+    
+    if (item.additionalParameters)
+    {
+        oldPriceParam = item.additionalParameters[@"Старая цена"];
+        saleParam = item.additionalParameters[@"sale"];
+        firstPriceParam = item.additionalParameters[@"FirstPrice"];
     }
     
     /*NSString *message = [NSString stringWithFormat:
@@ -195,13 +190,13 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Title" message:message delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
     [alert show];*/
     
-    if (saleParam && firstPriceParam && oldPriceParam  && [saleParam.value isEqualToString:@"1"] && (item.price <= oldPriceParam.value.doubleValue) )
+    if (saleParam && firstPriceParam && oldPriceParam  && [saleParam isEqualToString:@"1"] && (item.price <= oldPriceParam.doubleValue))
     {
         
-        NSString *addString = [NSString stringWithFormat:@"%@ Ст.цена %@ р.", _dateLabel.text, firstPriceParam.value];
+        NSString *addString = [NSString stringWithFormat:@"%@ Ст.цена %@ р.", _dateLabel.text, firstPriceParam];
         NSMutableAttributedString *mutableAttr = [[NSMutableAttributedString alloc] initWithString:addString];
         NSInteger location  = _dateLabel.text.length+9;
-        NSInteger length    = firstPriceParam.value.length;
+        NSInteger length    = firstPriceParam.length;
         [mutableAttr addAttribute:NSStrikethroughStyleAttributeName
                                 value:@2
                                 range:NSMakeRange(location,length)];

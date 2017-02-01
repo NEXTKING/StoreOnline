@@ -169,27 +169,14 @@ static const double _longitude_scale_factor = 0.55;
         itemInfo.price      = 460.00;
         
         {
-            NSMutableArray *additional = [NSMutableArray new];
+            NSMutableDictionary *additional = [NSMutableDictionary new];
             
-            {
-                ParameterInformation *paramInfo = [ParameterInformation new];
-                paramInfo.name = @"Материал";
-                paramInfo.value = @"ХлопокХлопокХлопокХлопокХлопокХлопокХлопокХлопокХлопокХлопокХлопок ХлопокХлопокХлопокм  Хлопок Хлопок м м v v Хлопок vХлопок ХлопокХлопок Хлопок Хлопок Хлопок Хлопок Хлопок ";
-                [additional addObject:paramInfo];
-            }
-            {
-                ParameterInformation *paramInfo = [ParameterInformation new];
-                paramInfo.name = @"Размер";
-                paramInfo.value = @"42";
-                [additional addObject:paramInfo];
-            }
-            {
-                ParameterInformation *paramInfo = [ParameterInformation new];
-                paramInfo.name = @"Вонючесть";
-                paramInfo.value = @"кХлопокХлопокХлопокХлопокХлопокХлопокХлопок ХлопокХлопокХлопокм  Хлопок Хлопок м м v v Хлопок vХлопок ХлопокХлопок Хлопок Хлопок Хлопок Хлопок Хлопок";
-                [additional addObject:paramInfo];
-            }
+            additional[@"Материал"] = @"ХлопокХлопокХлопокХлопокХлопокХлопокХлопокХлопокХлопокХлопокХлопок ХлопокХлопокХлопокм  Хлопок Хлопок м м v v Хлопок vХлопок ХлопокХлопок Хлопок Хлопок Хлопок Хлопок Хлопок ";
             
+            additional[@"Размер"] = @"42";
+
+            additional[@"Вонючесть"] = @"кХлопокХлопокХлопокХлопокХлопокХлопокХлопок ХлопокХлопокХлопокм  Хлопок Хлопок м м v v Хлопок vХлопок ХлопокХлопок Хлопок Хлопок Хлопок Хлопок Хлопок";
+
             itemInfo.additionalParameters = additional;
         }
         
