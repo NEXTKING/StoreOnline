@@ -11,6 +11,10 @@
 @interface StockCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *articleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *stockLabel;
 @property (weak, nonatomic) IBOutlet UILabel *positionLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *sizesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *stocksLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalCountLabel;
+
 @end

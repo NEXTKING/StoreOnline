@@ -23,8 +23,14 @@
     _articleLabel.textColor = AppAppearance.sharedApperance.tableViewCellTitle2Color;
     _articleLabel.font = AppAppearance.sharedApperance.tableViewCellTitle2Font;
     
-    _stockLabel.textColor = AppAppearance.sharedApperance.tableViewCellTitle1Color;
-    _stockLabel.font = AppAppearance.sharedApperance.tableViewCellTitle1Font;
+    _stocksLabel.textColor = AppAppearance.sharedApperance.tableViewCellTitle2Color;
+    _stocksLabel.font = AppAppearance.sharedApperance.tableViewCellTitle2Font;
+    
+    _sizesLabel.textColor = AppAppearance.sharedApperance.tableViewCellTitle2Color;
+    _sizesLabel.font = AppAppearance.sharedApperance.tableViewCellTitle2Font;
+    
+    _totalCountLabel.textColor = AppAppearance.sharedApperance.tableViewCellTitle2Color;
+    _totalCountLabel.font = AppAppearance.sharedApperance.tableViewCellTitle2Font;
     
     _positionLabel.textColor = AppAppearance.sharedApperance.tableViewCellTitle2Color;
     _positionLabel.font = AppAppearance.sharedApperance.tableViewCellTitle2Font;

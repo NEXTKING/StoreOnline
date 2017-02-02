@@ -513,14 +513,17 @@
         [request setPredicate:[NSPredicate predicateWithFormat:@"barcode == %@", code]];
         NSArray* results = [moc executeFetchRequest:request error:nil];
         
-        __block ItemInformation *itemInfo = nil;
         if (results.count > 0)
         {
+            Item *item = results[0];
+            request = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+            [request setPredicate:[NSPredicate predicateWithFormat:@"article == %@", item.article]];
+            results = [moc executeFetchRequest:request error:nil];
             
             itemsToReturn = [NSMutableArray new];
             
             for (Item* itemDB in results) {
-                itemInfo = [ItemInformation new];
+                ItemInformation *itemInfo = [ItemInformation new];
                 itemInfo.name       = itemDB.name;
                 itemInfo.article    = itemDB.article;
                 itemInfo.barcode    = itemDB.barcode;
@@ -543,14 +546,10 @@
         dispatch_async(dispatch_get_main_queue(), ^(void){
             if (delegate)
             {
-                if (itemInfo)
+                if (itemsToReturn)
                     [delegate stockComplete:0 items:itemsToReturn];
                 else
-                {
-                    //itemInfo = [ItemInformation new];
-                    //itemInfo.barcode = code;
                     [delegate stockComplete:1 items:nil];
-                }
             }
         });
     });

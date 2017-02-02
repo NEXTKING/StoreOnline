@@ -11,10 +11,12 @@
 #import "DTDevices.h"
 #import "StockCell.h"
 #import "AppAppearance.h"
+#import "StockGroup.h"
+#import "StockDetailsViewController.h"
 
 @interface StockViewController () <StockDelegate, DTDeviceDelegate>
 {
-    NSArray* stocks;
+    NSArray<StockGroup*>* stocks;
     DTDevices* dtDev;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -121,13 +123,32 @@ static NSString * const reuseIdentifier = @"StockCell";
 {
     StockCell* cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    ItemInformation* item = stocks[indexPath.row];
+    StockGroup* group = stocks[indexPath.row];
     
-    cell.nameLabel.text     = item.name;
-    cell.articleLabel.text  = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Арт.", nil), item.article?item.article:@""];
-    cell.stockLabel.text    = [NSString stringWithFormat:@"%ld", (long)item.stock];
+    cell.nameLabel.text     = group.title;
+    cell.articleLabel.text  = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Арт.", nil), group.article];
+    cell.positionLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row + 1];
+    
+    NSArray *sizes = [group sizes];
+    NSMutableString *stockDescription = [NSMutableString new];
+    NSMutableString *sizesDescription = [NSMutableString new];
+    for (int i = 0; i < sizes.count; i++)
+    {
+        NSString *size = sizes[i];
+        [stockDescription appendFormat:@"%ld%@", [group countForSize:size color:nil], (i == sizes.count - 1 ? @"" : @"\n")];
+        [sizesDescription appendFormat:@"%@%@", size, (i == sizes.count - 1 ? @"" : @"\n")];
+    }
+    
+    cell.sizesLabel.text = sizesDescription;
+    cell.stocksLabel.text = stockDescription;
+    cell.totalCountLabel.text = [NSString stringWithFormat:@"%@: %ld", NSLocalizedString(@"Итого", nil), [group totalCount]];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"StockDetailsSegue" sender:indexPath];
 }
 
 #pragma mark - Network Delegate
@@ -136,7 +157,8 @@ static NSString * const reuseIdentifier = @"StockCell";
 {
     if (result == 0)
     {
-        stocks = items;
+        StockGroup *group = [[StockGroup alloc] initWithItems:items];
+        stocks = @[group];
     }
     else
     {
@@ -163,5 +185,16 @@ static NSString * const reuseIdentifier = @"StockCell";
     
 }
 
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"StockDetailsSegue"])
+    {
+        StockDetailsViewController *dvc = segue.destinationViewController;
+        NSIndexPath *indexPath = sender;
+        dvc.group = stocks[indexPath.row];
+    }
+}
 
 @end
