@@ -21,7 +21,7 @@ enum : NSUInteger
     SettingsSectionUserActions = 3
 };
 
-@interface SettingsViewController_Ostin () <UITableViewDelegate, UITableViewDataSource, SyncronizationDelegate>
+@interface SettingsViewController_Ostin () <UITableViewDelegate, UITableViewDataSource, SyncronizationDelegate, DTDeviceDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
 
@@ -37,6 +37,18 @@ enum : NSUInteger
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     SynchronizationController.sharedInstance.delegate = self;
+    [dtdev addDelegate:self];
+}
+
+- (void)dealloc
+{
+    [dtdev removeDelegate:self];
+}
+
+- (void)connectionState:(int)state
+{
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:SettingsSectionScanerActions];
+    [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (void)showInfoMessage:(NSString*)info
@@ -46,6 +58,21 @@ enum : NSUInteger
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [ac dismissViewControllerAnimated:YES completion:nil];
     });
+}
+
+- (void)showResetPortionsAlert
+{
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Сброс порций" message:@"Сброс порций приведет к удалению с устройства базы товаров. Продолжить?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *resetAction = [UIAlertAction actionWithTitle:@"Сбросить порции" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [SynchronizationController.sharedInstance resetPortions];
+        [self reloadSyncActionsSection];
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleCancel handler:nil];
+    
+    [ac addAction:resetAction];
+    [ac addAction:cancelAction];
+    
+    [self presentViewController:ac animated:YES completion:nil];
 }
 
 - (void)logout
@@ -64,6 +91,28 @@ enum : NSUInteger
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (IBAction)setChargingSwitchDidChanged:(id)sender
+{
+    UISwitch *_switch = sender;
+    NSError *error = nil;
+    
+    [dtdev setCharging:_switch.on error:nil];
+    
+    if (error)
+        [_switch setOn:!_switch.on animated:YES];
+}
+
+- (IBAction)setPassThroughSyncSwitchDidChanged:(id)sender
+{
+    UISwitch *_switch = sender;
+    NSError *error = nil;
+    
+    [dtdev setPassThroughSync:_switch.on error:&error];
+    
+    if (error)
+        [_switch setOn:!_switch.on animated:YES];
+}
+
 #pragma mark - UITableView Delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -79,7 +128,7 @@ enum : NSUInteger
             return _showPrintAdditionalLabelSwitch ? 2 : 1;
             break;
         case SettingsSectionScanerActions:
-            return 2;
+            return 4;
             break;
         case SettingsSectionSyncActions:
             return 2;
@@ -141,11 +190,58 @@ enum : NSUInteger
     {
         SettingsSwitchCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingsSwitchCell" forIndexPath:indexPath];
         cell.titleLabel.text = @"Звук при сканировании";
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ScanSoundEnabled"])
-            cell.switchControl.on = [[[NSUserDefaults standardUserDefaults] objectForKey:@"ScanSoundEnabled"] boolValue];
-        else
+        if (dtdev.connstate != CONN_CONNECTED)
+        {
+            cell.switchControl.enabled = NO;
             cell.switchControl.on = YES;
+        }
+        else
+        {
+            cell.switchControl.enabled = YES;
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ScanSoundEnabled"])
+                cell.switchControl.on = [[[NSUserDefaults standardUserDefaults] objectForKey:@"ScanSoundEnabled"] boolValue];
+            else
+                cell.switchControl.on = YES;
+        }
         [cell.switchControl addTarget:self action:@selector(soundSwitchAction:) forControlEvents:UIControlEventValueChanged];
+        return cell;
+    }
+    else if (indexPath.section == SettingsSectionScanerActions && indexPath.row == 2)
+    {
+        SettingsSwitchCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingsSwitchCell" forIndexPath:indexPath];
+        cell.titleLabel.text = @"Заряжать iOS устройство";
+        if (dtdev.connstate != CONN_CONNECTED)
+        {
+            cell.switchControl.enabled = NO;
+            cell.switchControl.on = NO;
+        }
+        else
+        {
+            cell.switchControl.enabled = YES;
+            BOOL enabled = NO;
+            [dtdev getCharging:&enabled error:nil];
+            cell.switchControl.on = enabled;
+        }
+        [cell.switchControl addTarget:self action:@selector(setChargingSwitchDidChanged:) forControlEvents:UIControlEventValueChanged];
+        return cell;
+    }
+    else if (indexPath.section == SettingsSectionScanerActions && indexPath.row == 3)
+    {
+        SettingsSwitchCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingsSwitchCell" forIndexPath:indexPath];
+        cell.titleLabel.text = @"Pass-through sync";
+        if (dtdev.connstate != CONN_CONNECTED)
+        {
+            cell.switchControl.enabled = NO;
+            cell.switchControl.on = NO;
+        }
+        else
+        {
+            cell.switchControl.enabled = YES;
+            BOOL enabled = NO;
+            [dtdev getPassThroughSync:&enabled error:nil];
+            cell.switchControl.on = enabled;
+        }
+        [cell.switchControl addTarget:self action:@selector(setPassThroughSyncSwitchDidChanged:) forControlEvents:UIControlEventValueChanged];
         return cell;
     }
     else if (indexPath.section == SettingsSectionSyncActions && indexPath.row == 0)
@@ -208,21 +304,6 @@ enum : NSUInteger
     {
         [self logout];
     }
-}
-
-- (void)showResetPortionsAlert
-{
-    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Сброс порций" message:@"Сброс порций приведет к удалению с устройства базы товаров. Продолжить?" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *resetAction = [UIAlertAction actionWithTitle:@"Сбросить порции" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [SynchronizationController.sharedInstance resetPortions];
-        [self reloadSyncActionsSection];
-    }];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleCancel handler:nil];
-    
-    [ac addAction:resetAction];
-    [ac addAction:cancelAction];
-    
-    [self presentViewController:ac animated:YES completion:nil];
 }
 
 #pragma mark - Syncronization Delegate

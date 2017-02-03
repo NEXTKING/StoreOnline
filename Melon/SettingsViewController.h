@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DTDevices.h"
 
 @interface SettingsViewController : UIViewController
+{
+    @protected DTDevices *dtdev;
+}
 @property (weak, nonatomic) IBOutlet UIButton *feedPaperButton;
 @property (weak, nonatomic) IBOutlet UIButton *resetBarcodeEngineButton;
 @property (weak, nonatomic) IBOutlet UIButton *calibrateBlackMarkButton;

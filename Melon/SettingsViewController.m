@@ -7,7 +7,6 @@
 //
 
 #import "SettingsViewController.h"
-#import "DTDevices.h"
 
 enum SETTINGS{
     SET_BEEP=0,
@@ -30,9 +29,6 @@ enum SETTINGS{
 };
 
 @interface SettingsViewController ()
-{
-    DTDevices *dtdev;
-}
 
 @end
 
