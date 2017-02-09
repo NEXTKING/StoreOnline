@@ -1,13 +1,13 @@
 //
-//  MelonPriceTag48x48.h
+//  MelonPriceTag29x28.h
 //  PriceTagDemo
 //
 //  Created by Evgeny Seliverstov on 30/11/2016.
 //  Copyright © 2016 Dataphone. All rights reserved.
 //
 
-#import "MelonPriceTag.h"
+#import "MelonLabel.h"
 
-@interface MelonPriceTag48x48 : MelonPriceTag
+@interface MelonLabel29x28 : MelonLabel
 
 @end

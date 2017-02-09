@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="vr3-a7-OT2" customClass="MelonPriceTag29x28">
+        <view contentMode="scaleToFill" id="vr3-a7-OT2" customClass="MelonLabel29x28">
             <rect key="frame" x="0.0" y="0.0" width="114" height="110"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -221,6 +221,11 @@
                 <outlet property="nameLabel" destination="h5r-hZ-HYE" id="780-pf-f4b"/>
                 <outlet property="priceLabel" destination="iNY-1s-jp7" id="bcd-Ik-7MR"/>
                 <outlet property="sizeLabel" destination="W2U-lL-Xqg" id="2fF-xD-PDn"/>
+                <outletCollection property="localizedLabels" destination="bld-8d-vKw" id="QuD-BJ-R81"/>
+                <outletCollection property="localizedLabels" destination="sFM-UW-fCO" id="dpV-kH-5jb"/>
+                <outletCollection property="localizedLabels" destination="CJP-Fx-wma" id="eiQ-Cg-E2N"/>
+                <outletCollection property="localizedLabels" destination="kC1-E6-iKG" id="CGf-4o-J6G"/>
+                <outletCollection property="localizedLabels" destination="1CG-p3-Afn" id="4vw-k0-Wsk"/>
             </connections>
             <point key="canvasLocation" x="50" y="279"/>
         </view>

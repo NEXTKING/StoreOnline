@@ -17,20 +17,21 @@
     
     if (_priceLabel)
     {
-        _priceLabel.text = [NSString stringWithFormat:@"Цена: %.0fр.", item.price];
+        _priceLabel.text = [NSString stringWithFormat:@"%@: %.0f%@", NSLocalizedString(@"Цена", nil), item.price, NSLocalizedString(@"р.", nil)];
     }
     
     if (_dateLabel)
     {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateStyle = NSDateFormatterShortStyle;
-        dateFormatter.timeStyle = NSDateFormatterNoStyle;
+        dateFormatter.dateFormat = @"dd.MM.yy";
+//        dateFormatter.dateStyle = NSDateFormatterShortStyle;
+//        dateFormatter.timeStyle = NSDateFormatterNoStyle;
         _dateLabel.text = [dateFormatter stringFromDate:[NSDate date]];
 //    }
 //    
 //    if (_oldPriceLabel)
 //    {
-        NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:@"0 р."];
+        NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"0%@", NSLocalizedString(@"р.", nil)]];
         [attributeString addAttribute:NSStrikethroughStyleAttributeName
                                 value:@2
                                 range:NSMakeRange(0, [attributeString length])];
@@ -53,108 +54,6 @@
         [barCodeView setBarCode:item.barcode];
 
         [_barcodeView setNeedsDisplay];
-    }
-    
-    if (_nameLabel)
-    {
-        _nameLabel.text = item.name;
-    }
-    
-    if (_articleLabel)
-    {
-        _articleLabel.text = item.article;
-    }
-    
-    if (_manufactureLabel)
-    {
-        ParameterInformation *manufacturerParam = nil;
-        
-        for (ParameterInformation* currentParam in item.additionalParameters)
-        {
-            if ([currentParam.name isEqualToString:@"Manufacturer"])
-                manufacturerParam = currentParam;
-        }
-        _manufactureLabel.text = manufacturerParam ? [NSString stringWithFormat:@"Изготовитель: %@", manufacturerParam.value] : @"Изготовитель:";
-    }
-    
-    if (_manufactureDateLabel)
-    {
-        ParameterInformation *manufactureDateParam = nil;
-        
-        for (ParameterInformation* currentParam in item.additionalParameters)
-        {
-            if ([currentParam.name isEqualToString:@"ProductionDate"])
-                manufactureDateParam = currentParam;
-        }
-        
-        if (manufactureDateParam)
-            _manufactureDateLabel.text = [NSString stringWithFormat:@"Дата изгот.: %@", [manufactureDateParam.value stringByReplacingOccurrencesOfString:@" 0:00:00" withString:@""]];
-        else
-            _manufactureDateLabel.text = @"Дата изгот.:";
-    }
-    
-    NSString *color = @"";
-    NSString *size1 = @"";
-    NSString *size2 = @"";
-    
-    for (ParameterInformation* currentParam in item.additionalParameters)
-    {
-        if ([currentParam.name isEqualToString:@"Описание"])
-        {
-            NSString *string = currentParam.value;
-            NSRange searchedRange = NSMakeRange(0, [string length]);
-            NSString *pattern = @".* арт\\..* цв\\.(.*) р-р\\.(.*) р\\.(.*)";
-            
-            NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:nil];
-            NSTextCheckingResult *match = [regex firstMatchInString:string options:0 range: searchedRange];
-            color = [string substringWithRange:[match rangeAtIndex:1]];
-            size1 = [string substringWithRange:[match rangeAtIndex:2]];
-            size2 = [string substringWithRange:[match rangeAtIndex:3]];
-            
-            break;
-        }
-    }
-    
-    if (_colorLabel)
-    {
-        _colorLabel.text = color;
-    }
-    
-    if (_sizeLabel)
-    {
-        ParameterInformation *sizeParam = nil;
-        
-        for (ParameterInformation* currentParam in item.additionalParameters)
-        {
-            if ([currentParam.name isEqualToString:@"Size"])
-                sizeParam = currentParam;
-        }
-        
-        if (sizeParam)
-            _sizeLabel.text = sizeParam.value;
-        else
-            _sizeLabel.text = @"";
-    }
-    
-    if (_importerLabel)
-    {
-        ParameterInformation *importerParam = nil;
-        
-        for (ParameterInformation* currentParam in item.additionalParameters)
-        {
-            if ([currentParam.name isEqualToString:@"Importer"])
-                importerParam = currentParam;
-        }
-        
-        if (importerParam)
-            _importerLabel.text = [NSString stringWithFormat:@"Импортер: %@", importerParam.value];
-        else
-            _importerLabel.text = @"Импортер:";
-    }
-    
-    if (_materialLabel)
-    {
-        _materialLabel.text = item.material;
     }
 }
 
@@ -198,9 +97,9 @@
     if (saleParam && firstPriceParam && oldPriceParam  && [saleParam.value isEqualToString:@"1"] && (item.price <= oldPriceParam.value.doubleValue) )
     {
         
-        NSString *addString = [NSString stringWithFormat:@"%@ Ст.цена %@ р.", _dateLabel.text, firstPriceParam.value];
+        NSString *addString = [NSString stringWithFormat:@"%@ %@ %@%@", _dateLabel.text, NSLocalizedString(@"Ст.цена", nil), firstPriceParam.value, NSLocalizedString(@"р.", nil)];
         NSMutableAttributedString *mutableAttr = [[NSMutableAttributedString alloc] initWithString:addString];
-        NSInteger location  = _dateLabel.text.length+9;
+        NSInteger location = [addString rangeOfString:firstPriceParam.value].location;
         NSInteger length    = firstPriceParam.value.length;
         [mutableAttr addAttribute:NSStrikethroughStyleAttributeName
                                 value:@2
