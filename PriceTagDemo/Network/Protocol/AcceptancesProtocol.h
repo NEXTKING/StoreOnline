@@ -21,7 +21,7 @@
 - (instancetype)initWithAcceptanceItem:(id<AcceptancesItem>)acceptancesItem;
 - (NSUInteger)numberOfItems;
 - (id<AcceptancesItem>)itemAtIndex:(NSUInteger)index;
-- (void)didScannedBarcode:(NSString *)barcode;
+- (void)didScannedBarcode:(NSString *)barcode type:(int)type;
 - (void)didInteractWithItemAtIndex:(NSUInteger)index;
 @end
 

@@ -50,7 +50,7 @@
 
 - (NSString *)descriptionForKey:(NSString *)key
 {
-    NSArray *descriptions = @[@"title", @"articleDescription", @"priceDescription", @"countDescription", @"cancelReasonDescription", @"pictureURLString"];
+    NSArray *descriptions = @[@"title", @"articleDescription", @"priceDescription", @"countDescription", @"cancelReasonDescription", @"pictureURLString", @"ean"];
     
     if ([descriptions containsObject:key])
     {
@@ -131,6 +131,11 @@
         return @"товар упакован к отправке";
     else
         return @"";
+}
+
+- (NSString *)ean
+{
+    return [_itemInformation additionalParameterValueForName:@"ean"];
 }
 
 @end

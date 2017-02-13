@@ -11,6 +11,7 @@
 #import "ClaimItemInformation.h"
 #import "MCPServer.h"
 #import "Delegates+Ostin.h"
+#import "BarcodeFormatter.h"
 
 @interface ClaimDataSource () <ClaimDelegate>
 @property (nonatomic, strong) id<AcceptancesItem> rootItem;
@@ -78,20 +79,27 @@
     [_delegate acceptancesDataSourceDidUpdate];
 }
 
-- (void)didScannedBarcode:(NSString *)barcode
+- (void)didScannedBarcode:(NSString *)barcode type:(int)type
 {
     for (int i = 0; i < _items.count; i++)
     {
         id<AcceptancesItem> item = _items[i];
 
-        if ([item.barcode isEqualToString:barcode] && [item isKindOfClass:[ClaimItemInformation class]])
+        if ([item isKindOfClass:[ClaimItemInformation class]])
         {
-            if (item.scannedCount < item.totalCount)
+            NSString *itemEan = [item descriptionForKey:@"ean"];
+            NSString *intBarcode = [BarcodeFormatter normalizedBarcodeFromString:barcode isoType:type];
+            NSString *bWithoutChecksum = [barcode substringToIndex:barcode.length - 1];
+            
+            if ([item.barcode isEqualToString:intBarcode] || [itemEan isEqualToString:bWithoutChecksum])
             {
-                [item setScannedCount:(item.scannedCount + 1)];
-                [_delegate acceptancesDataSourceDidUpdateItemAtIndex:i];
-                
-                return;
+                if (item.scannedCount < item.totalCount)
+                {
+                    [item setScannedCount:(item.scannedCount + 1)];
+                    [_delegate acceptancesDataSourceDidUpdateItemAtIndex:i];
+                    
+                    return;
+                }
             }
         }
     }

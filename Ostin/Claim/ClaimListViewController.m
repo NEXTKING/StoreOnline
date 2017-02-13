@@ -11,7 +11,6 @@
 #import "ClaimItemInformation.h"
 #import "ClaimItemInformationCell.h"
 #import "AsyncImageView.h"
-#import "BarcodeFormatter.h"
 #import "MCPServer.h"
 #import "WYStoryboardPopoverSegue.h"
 #import "SettingsViewController+Ostin.h"
@@ -119,10 +118,9 @@
 {
     NSString *barcode = notification.object[@"barcode"];
     NSNumber *type = notification.object[@"type"];
-    NSString *internalBarcode = [BarcodeFormatter normalizedBarcodeFromString:barcode isoType:type.intValue];
-    
+
     if (_rootItem.startDate && !_rootItem.endDate)
-        [self.dataSource didScannedBarcode:internalBarcode];
+        [self.dataSource didScannedBarcode:barcode type:type.intValue];
 }
 
 #pragma mark - UITableViewDataSource delegate
