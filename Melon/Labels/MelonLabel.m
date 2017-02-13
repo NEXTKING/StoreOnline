@@ -36,27 +36,27 @@
     
     if (_manufactureLabel)
     {
-        ParameterInformation *manufacturerParam = nil;
+        NSString *manufacturerParam = nil;
         
         for (ParameterInformation* currentParam in item.additionalParameters)
         {
             if ([currentParam.name isEqualToString:@"Manufacturer"])
-                manufacturerParam = currentParam;
+                manufacturerParam = currentParam.value;
         }
-        _manufactureLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Изготовитель", nil), manufacturerParam ? manufacturerParam.value : @""];
+        _manufactureLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Изготовитель", nil), manufacturerParam ? manufacturerParam : @""];
     }
     
     if (_manufactureDateLabel)
     {
-        ParameterInformation *manufactureDateParam = nil;
+        NSString *manufactureDateParam = nil;
         
         for (ParameterInformation* currentParam in item.additionalParameters)
         {
             if ([currentParam.name isEqualToString:@"ProductionDate"])
-                manufactureDateParam = currentParam;
+                manufactureDateParam = currentParam.value;
         }
         
-        _manufactureDateLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Дата изгот.", nil), manufactureDateParam ? [manufactureDateParam.value stringByReplacingOccurrencesOfString:@" 0:00:00" withString:@""] : @""];
+        _manufactureDateLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Дата изгот.", nil), manufactureDateParam ? [manufactureDateParam stringByReplacingOccurrencesOfString:@" 0:00:00" withString:@""] : @""];
     }
     
     NSString *color = @"";
@@ -69,7 +69,8 @@
         {
             NSString *string = currentParam.value;
             NSRange searchedRange = NSMakeRange(0, [string length]);
-            NSString *pattern = @".* арт\\..* цв\\.(.*) р-р\\.(.*) р\\.(.*)";
+//            NSString *pattern = @".* арт\\..* цв\\.(.*) р-р\\.(.*) р\\.(.*)";
+            NSString *pattern = @".*\\.(.*) .*\\.(.*) .*\\.(.*)";
             
             NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:nil];
             NSTextCheckingResult *match = [regex firstMatchInString:string options:0 range: searchedRange];
