@@ -727,6 +727,7 @@
 		218228651DAF864000F04B70 /* TasksCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TasksCell.xib; sourceTree = "<group>"; };
 		218228681DAFCB2A00F04B70 /* TaskItemInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskItemInformation.h; sourceTree = "<group>"; };
 		218228691DAFCB2A00F04B70 /* TaskItemInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskItemInformation.m; sourceTree = "<group>"; };
+		2188881A1E533C3D00936D86 /* ItemsModel_AddedColor.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ItemsModel_AddedColor.xcdatamodel; sourceTree = "<group>"; };
 		21B8DC791DB66CF900FD9161 /* BarcodeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarcodeFormatter.h; path = Utilities/BarcodeFormatter.h; sourceTree = "<group>"; };
 		21B8DC7A1DB66CF900FD9161 /* BarcodeFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BarcodeFormatter.m; path = Utilities/BarcodeFormatter.m; sourceTree = "<group>"; };
 		21BB44BC1DACF0D100ED67EE /* TaskProgressOverlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskProgressOverlayController.h; sourceTree = "<group>"; };
@@ -5055,9 +5056,10 @@
 		C6FFF3F91D79785100947948 /* ItemsModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2188881A1E533C3D00936D86 /* ItemsModel_AddedColor.xcdatamodel */,
 				C6FFF3FA1D79785100947948 /* ItemsModel.xcdatamodel */,
 			);
-			currentVersion = C6FFF3FA1D79785100947948 /* ItemsModel.xcdatamodel */;
+			currentVersion = 2188881A1E533C3D00936D86 /* ItemsModel_AddedColor.xcdatamodel */;
 			path = ItemsModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -17,6 +17,7 @@
 @dynamic article;
 @dynamic barcode;
 @dynamic material;
+@dynamic color;
 @dynamic itemId;
 @dynamic price;
 @dynamic additionalParams;
