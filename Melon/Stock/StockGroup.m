@@ -91,8 +91,11 @@
     {
         if (item.additionalParameters && item.additionalParameters[@"Size"] && [item.additionalParameters[@"Size"] isEqualToString:size])
         {
-            if (color && item.color && [item.color isEqualToString:color])
-                count = count + item.stock;
+            if (color)
+            {
+                if (item.color && [item.color isEqualToString:color])
+                    count = count + item.stock;
+            }
             else
                 count = count + item.stock;
         }
