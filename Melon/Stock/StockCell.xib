@@ -39,7 +39,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="70s-UZ-JFv">
                         <rect key="frame" x="42" y="58" width="31" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="U5x-wy-vjb"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" placeholder="YES" id="U5x-wy-vjb"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

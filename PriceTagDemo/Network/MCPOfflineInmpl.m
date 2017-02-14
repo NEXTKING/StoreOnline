@@ -529,6 +529,8 @@
                 itemInfo.barcode    = itemDB.barcode;
                 itemInfo.price      = itemDB.price.doubleValue;
                 itemInfo.stock      = [itemDB.stock integerValue];
+                itemInfo.material   = itemDB.material;
+                itemInfo.color      = itemDB.color;
                 
                 NSMutableDictionary* addParams = [NSMutableDictionary new];
                 for (AdditionalParameter* paramDB in itemDB.additionalParams)
@@ -613,6 +615,7 @@
         itemDB.barcode  = currentItem.barcode;
         itemDB.stock    = @(currentItem.stock);
         itemDB.material = currentItem.material;
+        itemDB.color    = currentItem.color;
         [itemDB setAdditionalParameters:currentItem.additionalParameters];
     }
         [privateContext save:nil];

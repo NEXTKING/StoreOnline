@@ -142,13 +142,18 @@ static NSString * const reuseIdentifier = @"StockCell";
     cell.sizesLabel.text = sizesDescription;
     cell.stocksLabel.text = stockDescription;
     cell.totalCountLabel.text = [NSString stringWithFormat:@"%@: %ld", NSLocalizedString(@"Итого", nil), [group totalCount]];
+    cell.accessoryType = sizes.count > 0 ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"StockDetailsSegue" sender:indexPath];
+    StockGroup *group = stocks[indexPath.row];
+    NSArray *sizes = [group sizes];
+    
+    if (sizes.count > 0)
+        [self performSegueWithIdentifier:@"StockDetailsSegue" sender:indexPath];
 }
 
 #pragma mark - Network Delegate

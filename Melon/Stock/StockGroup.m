@@ -67,11 +67,11 @@
     
     for (ItemInformation *item in self.items)
     {
-        if (item.additionalParameters && item.additionalParameters[@"Color"] && [item.additionalParameters[@"Color"] isKindOfClass:[NSString class]])
+        if (item.additionalParameters && item.color)
         {
             if (item.additionalParameters[@"Size"] && [item.additionalParameters[@"Size"] isEqualToString:size])
             {
-                [colorsSet addObject:item.additionalParameters[@"Color"]];
+                [colorsSet addObject:item.color];
             }
         }
     }
@@ -91,7 +91,7 @@
     {
         if (item.additionalParameters && item.additionalParameters[@"Size"] && [item.additionalParameters[@"Size"] isEqualToString:size])
         {
-            if (color && item.additionalParameters[@"Color"] && [item.additionalParameters[@"Color"] isEqualToString:color])
+            if (color && item.color && [item.color isEqualToString:color])
                 count = count + item.stock;
             else
                 count = count + item.stock;

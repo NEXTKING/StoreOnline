@@ -264,6 +264,14 @@
 #else
         itemInfo.unit = obj;
 #endif
+    obj = [result objectForKey:@"paramValue2"];
+    if (obj && [obj isKindOfClass:[NSString class]])
+#if defined MELON
+    itemInfo.color = obj;
+#else
+    itemInfo.color = nil;
+#endif
+    
     obj = [result objectForKey:@"remains"];
     if (obj && [obj isKindOfClass:[NSString class]])
         itemInfo.stock = [obj integerValue];
