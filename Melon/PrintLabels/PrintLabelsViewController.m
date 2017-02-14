@@ -61,9 +61,9 @@
 
 - (void)initChangePriceTagTypePicker
 {
-    _priceTagTypes = @[@{@"name":NSLocalizedString(@"48x48 мм", nil), @"xibName":@"MelonPriceTag48x48"},
-                       @{@"name":NSLocalizedString(@"30x60 мм", nil), @"xibName":@"MelonPriceTag30x60"},
-                       @{@"name":NSLocalizedString(@"29x28 мм", nil), @"xibName":@"MelonPriceTag29x28"}];
+    _priceTagTypes = @[@{@"name":NSLocalizedString(@"48x48 мм", nil), @"xibName":@"MelonLabel48x48"},
+                       @{@"name":NSLocalizedString(@"30x60 мм", nil), @"xibName":@"MelonLabel30x60"},
+                       @{@"name":NSLocalizedString(@"29x28 мм", nil), @"xibName":@"MelonLabel29x28"}];
     
     UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Отмена", nil) style:UIBarButtonItemStylePlain target:self action:@selector(cancelChangePriceTagType:)];

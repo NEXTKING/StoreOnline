@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MelonPriceTag.h"
+#import "MelonLabel.h"
 
-@interface MelonPriceTag30x60 : MelonPriceTag
+@interface MelonLabel30x60 : MelonLabel
 
 @end
