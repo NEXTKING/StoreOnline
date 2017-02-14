@@ -34,6 +34,20 @@
     return self;
 }
 
+- (BOOL)isEqual:(id)object
+{
+    if ([object isKindOfClass:[self class]])
+    {
+        ClaimItem *obj = object;
+        if (obj.claimID.intValue == self.claimID.intValue) // && [obj.claimNumber isEqualToString:self.claimNumber]
+            return YES;
+        else
+            return NO;
+    }
+    else
+        return NO;
+}
+
 - (NSUInteger)totalCount
 {
     return 0;

@@ -33,6 +33,20 @@
     return self;
 }
 
+- (BOOL)isEqual:(id)object
+{
+    if ([object isKindOfClass:[self class]])
+    {
+        ClaimItemInformation *obj = object;
+        if (obj.claimBindingID.intValue == self.claimBindingID.intValue)
+            return YES;
+        else
+            return NO;
+    }
+    else
+        return NO;
+}
+
 - (NSUInteger)totalCount
 {
     return _total.unsignedIntegerValue;

@@ -29,5 +29,6 @@
 - (void)acceptancesDataSourceDidUpdate;
 - (void)acceptancesDataSourceDidUpdateItemAtIndex:(NSUInteger)index;
 @optional
+- (void)acceptancesDataSourceDidDeleteItemsAtIndexes:(NSArray *)indexesForDelete addedItemsAtIndexes:(NSArray *)indexesForInsert;
 - (void)acceptancesDataSourceErrorOccurred:(NSString *)errorMessage;
 @end

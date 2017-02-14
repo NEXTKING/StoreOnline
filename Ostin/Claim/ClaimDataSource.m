@@ -75,8 +75,18 @@
 
 - (void)claimComplete:(int)result items:(NSArray *)items
 {
-    _items = items;
-    [_delegate acceptancesDataSourceDidUpdate];
+    if ([_delegate respondsToSelector:@selector(acceptancesDataSourceDidDeleteItemsAtIndexes:addedItemsAtIndexes:)])
+    {
+        NSArray *indexesForDelete = [self findDeletedIndexesFromOriginalArray:_items replacedArray:items];
+        NSArray *indexesForInsert = [self findInseredIndexesFromOriginalArray:_items replacedArray:items];
+        _items = items;
+        [_delegate acceptancesDataSourceDidDeleteItemsAtIndexes:indexesForDelete addedItemsAtIndexes:indexesForInsert];
+    }
+    else
+    {
+        _items = items;
+        [_delegate acceptancesDataSourceDidUpdate];
+    }
 }
 
 - (void)didScannedBarcode:(NSString *)barcode type:(int)type
@@ -134,6 +144,66 @@
 - (void)didInteractWithItemAtIndex:(NSUInteger)index
 {
     
+}
+
+#pragma mark - Helpers
+
+- (NSArray *)findInseredIndexesFromOriginalArray:(NSArray *)oa replacedArray:(NSArray *)ra
+{
+    NSArray *currentItems = oa;
+    NSArray *newItems = ra;
+
+    NSMutableArray *indexesForInsert = [NSMutableArray new];
+
+    for (int i=0; i<newItems.count; i++)
+    {
+        id<AcceptancesItem> nitem = newItems[i];
+        
+        BOOL needInsert = YES;
+        for (id<AcceptancesItem> citem in currentItems)
+        {
+            if ([nitem isEqual:citem])
+            {
+                needInsert = NO;
+                break;
+            }
+        }
+        
+        if (needInsert)
+        {
+            [indexesForInsert addObject:@(i)];
+        }
+    }
+    return indexesForInsert;
+}
+
+- (NSArray *)findDeletedIndexesFromOriginalArray:(NSArray *)oa replacedArray:(NSArray *)ra
+{
+    NSArray *currentItems = oa;
+    NSArray *newItems = ra;
+
+    NSMutableArray *indexesForDelete = [NSMutableArray new];
+    
+    for (int i=0; i<currentItems.count; i++)
+    {
+        id<AcceptancesItem> citem = currentItems[i];
+        
+        BOOL needDelete = YES;
+        for (id<AcceptancesItem> nitem in newItems)
+        {
+            if ([citem isEqual:nitem])
+            {
+                needDelete = NO;
+                break;
+            }
+        }
+        
+        if (needDelete)
+        {
+            [indexesForDelete addObject:@(i)];
+        }
+    }
+    return indexesForDelete;
 }
 
 @end

@@ -238,6 +238,25 @@
     [self hideLoadingIndicator];
 }
 
+- (void)acceptancesDataSourceDidDeleteItemsAtIndexes:(NSArray *)indexesForDelete addedItemsAtIndexes:(NSArray *)indexesForInsert
+{
+    [self hideLoadingIndicator];
+    
+    NSMutableArray *indexPathsForDelete = [NSMutableArray new];
+    NSMutableArray *indexPathsForInsert = [NSMutableArray new];
+    for (NSNumber *index in indexesForDelete)
+        [indexPathsForDelete addObject:[NSIndexPath indexPathForRow:index.intValue inSection:0]];
+    for (NSNumber *index in indexesForInsert)
+        [indexPathsForInsert addObject:[NSIndexPath indexPathForRow:index.intValue inSection:0]];
+    
+    [self.tableView beginUpdates];
+    if (indexPathsForDelete.count > 0)
+        [self.tableView deleteRowsAtIndexPaths:indexPathsForDelete withRowAnimation:UITableViewRowAnimationAutomatic];
+    if (indexPathsForInsert.count > 0)
+        [self.tableView insertRowsAtIndexPaths:indexPathsForInsert withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
+}
+
 - (void)acceptancesDataSourceDidUpdateItemAtIndex:(NSUInteger)index
 {
     DTDevices *dtDev = [DTDevices sharedDevice];

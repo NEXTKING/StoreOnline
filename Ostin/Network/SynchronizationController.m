@@ -108,8 +108,11 @@ static void *ProgressObserverContext = &ProgressObserverContext;
 
 - (void)resetPortions
 {
-    _syncIsRunning = YES;
-    [[MCPServer instance] resetDatabaseAndPortionsCount:self];
+    if (!_syncIsRunning)
+    {
+        _syncIsRunning = YES;
+        [[MCPServer instance] resetDatabaseAndPortionsCount:self];
+    }
 }
 
 #pragma mark - Network Delegates

@@ -32,6 +32,17 @@
     _passwordTextField.returnKeyType = UIReturnKeyDone;
     _scanLoginEnable = YES;
     
+    NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
+    _buildLabel.text = [NSString stringWithFormat:@"Build: %@", build];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBarHidden = NO;
+    [self subscribeToScanNotifications];
+    
     SynchronizationController.sharedInstance.delegate = self;
     if (SynchronizationController.sharedInstance.syncIsRunning)
     {
@@ -50,8 +61,15 @@
         _progressView.hidden = YES;
         _progressLabel.hidden = YES;
     }
-    NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
-    _buildLabel.text = [NSString stringWithFormat:@"Build: %@", build];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    [self unsubscribeFromScanNotifications];
+    SynchronizationController.sharedInstance.delegate = nil;
 }
 
 #pragma mark Notifications
@@ -159,22 +177,6 @@
     _loginButton.enabled = NO;
     
     [SynchronizationController.sharedInstance resetPortions];
-}
-
-- (void) viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    self.navigationController.navigationBarHidden = NO;
-    [self subscribeToScanNotifications];
-}
-
-- (void) viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    [[self navigationController] setNavigationBarHidden:YES animated:YES];
-    [self unsubscribeFromScanNotifications];
 }
 
 - (void)syncProgressChanged:(double)progress

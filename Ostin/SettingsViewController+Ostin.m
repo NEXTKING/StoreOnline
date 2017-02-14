@@ -37,7 +37,18 @@ enum : NSUInteger
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     SynchronizationController.sharedInstance.delegate = self;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    SynchronizationController.sharedInstance.delegate = nil;
 }
 
 - (void)showInfoMessage:(NSString*)info
