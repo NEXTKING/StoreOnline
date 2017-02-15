@@ -232,6 +232,22 @@
 		218228661DAF864000F04B70 /* TasksCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 218228641DAF864000F04B70 /* TasksCell.m */; };
 		218228671DAF864000F04B70 /* TasksCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 218228651DAF864000F04B70 /* TasksCell.xib */; };
 		2182286A1DAFCB2A00F04B70 /* TaskItemInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 218228691DAFCB2A00F04B70 /* TaskItemInformation.m */; };
+		2188881D1E545F6600936D86 /* SettingGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2188881C1E545F6600936D86 /* SettingGroup.m */; };
+		2188881E1E545F6600936D86 /* SettingGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2188881C1E545F6600936D86 /* SettingGroup.m */; };
+		218888221E545FEB00936D86 /* SettingAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 218888211E545FEB00936D86 /* SettingAction.m */; };
+		218888231E545FEB00936D86 /* SettingAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 218888211E545FEB00936D86 /* SettingAction.m */; };
+		218888261E54625B00936D86 /* SettingGroupCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 218888251E54625B00936D86 /* SettingGroupCase.m */; };
+		218888271E54625B00936D86 /* SettingGroupCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 218888251E54625B00936D86 /* SettingGroupCase.m */; };
+		2188882A1E54696A00936D86 /* SettingGroupSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 218888291E54696A00936D86 /* SettingGroupSync.m */; };
+		2188882B1E54696A00936D86 /* SettingGroupSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 218888291E54696A00936D86 /* SettingGroupSync.m */; };
+		2188882E1E54808A00936D86 /* SettingGroupUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2188882D1E54808A00936D86 /* SettingGroupUser.m */; };
+		2188882F1E54808A00936D86 /* SettingGroupUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2188882D1E54808A00936D86 /* SettingGroupUser.m */; };
+		218888321E54820600936D86 /* SettingGroupPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = 218888311E54820600936D86 /* SettingGroupPrinter.m */; };
+		218888331E54820600936D86 /* SettingGroupPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = 218888311E54820600936D86 /* SettingGroupPrinter.m */; };
+		2188883A1E5484C400936D86 /* OstinSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 218888391E5484C400936D86 /* OstinSettingsViewController.m */; };
+		2188883B1E5484C400936D86 /* OstinSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 218888391E5484C400936D86 /* OstinSettingsViewController.m */; };
+		2188883F1E548B6C00936D86 /* SettingGroupManualInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 2188883E1E548B6C00936D86 /* SettingGroupManualInput.m */; };
+		218888401E548B6C00936D86 /* SettingGroupManualInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 2188883E1E548B6C00936D86 /* SettingGroupManualInput.m */; };
 		21B8DC7B1DB66CF900FD9161 /* BarcodeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B8DC7A1DB66CF900FD9161 /* BarcodeFormatter.m */; };
 		21BB44BF1DACF0D100ED67EE /* TaskProgressOverlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BB44BD1DACF0D100ED67EE /* TaskProgressOverlayController.m */; };
 		21BB44C01DACF0D100ED67EE /* TaskProgressOverlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21BB44BE1DACF0D100ED67EE /* TaskProgressOverlayController.xib */; };
@@ -784,15 +800,15 @@
 		130FCD91C43484C3772DAD9E /* Pods-Desondo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Desondo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Desondo/Pods-Desondo.release.xcconfig"; sourceTree = "<group>"; };
 		18C39E1F4A73A73377662262 /* libPods-Azbuka.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Azbuka.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FEDC44E1FDE1CDA6F21D54C /* Pods-Desondo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Desondo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Desondo/Pods-Desondo.debug.xcconfig"; sourceTree = "<group>"; };
-		210F2B6B1DF561EB00818512 /* SettingsSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsSwitchCell.h; path = Settings/SettingsSwitchCell.h; sourceTree = "<group>"; };
-		210F2B6C1DF561EB00818512 /* SettingsSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsSwitchCell.m; path = Settings/SettingsSwitchCell.m; sourceTree = "<group>"; };
-		210F2B6D1DF561EB00818512 /* SettingsSwitchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsSwitchCell.xib; path = Settings/SettingsSwitchCell.xib; sourceTree = "<group>"; };
-		210F2B711DF5655500818512 /* SettingsSyncCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsSyncCell.h; path = Settings/SettingsSyncCell.h; sourceTree = "<group>"; };
-		210F2B721DF5655500818512 /* SettingsSyncCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsSyncCell.m; path = Settings/SettingsSyncCell.m; sourceTree = "<group>"; };
-		210F2B731DF5655500818512 /* SettingsSyncCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsSyncCell.xib; path = Settings/SettingsSyncCell.xib; sourceTree = "<group>"; };
-		210F2B761DF566A900818512 /* SettingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsCell.h; path = Settings/SettingsCell.h; sourceTree = "<group>"; };
-		210F2B771DF566A900818512 /* SettingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsCell.m; path = Settings/SettingsCell.m; sourceTree = "<group>"; };
-		210F2B781DF566A900818512 /* SettingsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsCell.xib; path = Settings/SettingsCell.xib; sourceTree = "<group>"; };
+		210F2B6B1DF561EB00818512 /* SettingsSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsSwitchCell.h; path = Settings/TableViewCells/SettingsSwitchCell.h; sourceTree = "<group>"; };
+		210F2B6C1DF561EB00818512 /* SettingsSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsSwitchCell.m; path = Settings/TableViewCells/SettingsSwitchCell.m; sourceTree = "<group>"; };
+		210F2B6D1DF561EB00818512 /* SettingsSwitchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsSwitchCell.xib; path = Settings/TableViewCells/SettingsSwitchCell.xib; sourceTree = "<group>"; };
+		210F2B711DF5655500818512 /* SettingsSyncCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsSyncCell.h; path = Settings/TableViewCells/SettingsSyncCell.h; sourceTree = "<group>"; };
+		210F2B721DF5655500818512 /* SettingsSyncCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsSyncCell.m; path = Settings/TableViewCells/SettingsSyncCell.m; sourceTree = "<group>"; };
+		210F2B731DF5655500818512 /* SettingsSyncCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsSyncCell.xib; path = Settings/TableViewCells/SettingsSyncCell.xib; sourceTree = "<group>"; };
+		210F2B761DF566A900818512 /* SettingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsCell.h; path = Settings/TableViewCells/SettingsCell.h; sourceTree = "<group>"; };
+		210F2B771DF566A900818512 /* SettingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsCell.m; path = Settings/TableViewCells/SettingsCell.m; sourceTree = "<group>"; };
+		210F2B781DF566A900818512 /* SettingsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsCell.xib; path = Settings/TableViewCells/SettingsCell.xib; sourceTree = "<group>"; };
 		2118ABA51E140262002F7E93 /* SOAPProcessClaim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPProcessClaim.h; sourceTree = "<group>"; };
 		2118ABA61E140262002F7E93 /* SOAPProcessClaim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPProcessClaim.m; sourceTree = "<group>"; };
 		2118ABA91E1537B5002F7E93 /* icon_pencil@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_pencil@2x.png"; sourceTree = "<group>"; };
@@ -853,6 +869,22 @@
 		218228651DAF864000F04B70 /* TasksCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TasksCell.xib; sourceTree = "<group>"; };
 		218228681DAFCB2A00F04B70 /* TaskItemInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskItemInformation.h; sourceTree = "<group>"; };
 		218228691DAFCB2A00F04B70 /* TaskItemInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskItemInformation.m; sourceTree = "<group>"; };
+		2188881B1E545F6600936D86 /* SettingGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingGroup.h; path = Settings/Objects/SettingGroup.h; sourceTree = "<group>"; };
+		2188881C1E545F6600936D86 /* SettingGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingGroup.m; path = Settings/Objects/SettingGroup.m; sourceTree = "<group>"; };
+		218888201E545FEB00936D86 /* SettingAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingAction.h; path = Settings/Objects/SettingAction.h; sourceTree = "<group>"; };
+		218888211E545FEB00936D86 /* SettingAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingAction.m; path = Settings/Objects/SettingAction.m; sourceTree = "<group>"; };
+		218888241E54625B00936D86 /* SettingGroupCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingGroupCase.h; path = Settings/Objects/SettingGroupCase.h; sourceTree = "<group>"; };
+		218888251E54625B00936D86 /* SettingGroupCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingGroupCase.m; path = Settings/Objects/SettingGroupCase.m; sourceTree = "<group>"; };
+		218888281E54696A00936D86 /* SettingGroupSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingGroupSync.h; path = Settings/Objects/SettingGroupSync.h; sourceTree = "<group>"; };
+		218888291E54696A00936D86 /* SettingGroupSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingGroupSync.m; path = Settings/Objects/SettingGroupSync.m; sourceTree = "<group>"; };
+		2188882C1E54808A00936D86 /* SettingGroupUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingGroupUser.h; path = Settings/Objects/SettingGroupUser.h; sourceTree = "<group>"; };
+		2188882D1E54808A00936D86 /* SettingGroupUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingGroupUser.m; path = Settings/Objects/SettingGroupUser.m; sourceTree = "<group>"; };
+		218888301E54820600936D86 /* SettingGroupPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingGroupPrinter.h; path = Settings/Objects/SettingGroupPrinter.h; sourceTree = "<group>"; };
+		218888311E54820600936D86 /* SettingGroupPrinter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingGroupPrinter.m; path = Settings/Objects/SettingGroupPrinter.m; sourceTree = "<group>"; };
+		218888381E5484C400936D86 /* OstinSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OstinSettingsViewController.h; path = Settings/OstinSettingsViewController.h; sourceTree = "<group>"; };
+		218888391E5484C400936D86 /* OstinSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OstinSettingsViewController.m; path = Settings/OstinSettingsViewController.m; sourceTree = "<group>"; };
+		2188883D1E548B6C00936D86 /* SettingGroupManualInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingGroupManualInput.h; path = Settings/Objects/SettingGroupManualInput.h; sourceTree = "<group>"; };
+		2188883E1E548B6C00936D86 /* SettingGroupManualInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingGroupManualInput.m; path = Settings/Objects/SettingGroupManualInput.m; sourceTree = "<group>"; };
 		21B8DC791DB66CF900FD9161 /* BarcodeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarcodeFormatter.h; path = Utilities/BarcodeFormatter.h; sourceTree = "<group>"; };
 		21B8DC7A1DB66CF900FD9161 /* BarcodeFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BarcodeFormatter.m; path = Utilities/BarcodeFormatter.m; sourceTree = "<group>"; };
 		21BB44BC1DACF0D100ED67EE /* TaskProgressOverlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskProgressOverlayController.h; sourceTree = "<group>"; };
@@ -1534,17 +1566,12 @@
 		210F2B701DF561F400818512 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				218888381E5484C400936D86 /* OstinSettingsViewController.h */,
+				218888391E5484C400936D86 /* OstinSettingsViewController.m */,
 				21D8381B1DD0A72800A98E0F /* SettingsViewController+Ostin.h */,
 				21D8381C1DD0A72800A98E0F /* SettingsViewController+Ostin.m */,
-				210F2B761DF566A900818512 /* SettingsCell.h */,
-				210F2B771DF566A900818512 /* SettingsCell.m */,
-				210F2B781DF566A900818512 /* SettingsCell.xib */,
-				210F2B6B1DF561EB00818512 /* SettingsSwitchCell.h */,
-				210F2B6C1DF561EB00818512 /* SettingsSwitchCell.m */,
-				210F2B6D1DF561EB00818512 /* SettingsSwitchCell.xib */,
-				210F2B711DF5655500818512 /* SettingsSyncCell.h */,
-				210F2B721DF5655500818512 /* SettingsSyncCell.m */,
-				210F2B731DF5655500818512 /* SettingsSyncCell.xib */,
+				2188881F1E545F6C00936D86 /* Objects */,
+				2188883C1E54892E00936D86 /* TableViewCells */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -1584,6 +1611,43 @@
 				215A03751E129BAB00CCAA2C /* ClaimItemInformationCell.xib */,
 			);
 			name = UITableViewCells;
+			sourceTree = "<group>";
+		};
+		2188881F1E545F6C00936D86 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				218888201E545FEB00936D86 /* SettingAction.h */,
+				218888211E545FEB00936D86 /* SettingAction.m */,
+				2188881B1E545F6600936D86 /* SettingGroup.h */,
+				2188881C1E545F6600936D86 /* SettingGroup.m */,
+				218888241E54625B00936D86 /* SettingGroupCase.h */,
+				218888251E54625B00936D86 /* SettingGroupCase.m */,
+				218888281E54696A00936D86 /* SettingGroupSync.h */,
+				218888291E54696A00936D86 /* SettingGroupSync.m */,
+				2188882C1E54808A00936D86 /* SettingGroupUser.h */,
+				2188882D1E54808A00936D86 /* SettingGroupUser.m */,
+				218888301E54820600936D86 /* SettingGroupPrinter.h */,
+				218888311E54820600936D86 /* SettingGroupPrinter.m */,
+				2188883D1E548B6C00936D86 /* SettingGroupManualInput.h */,
+				2188883E1E548B6C00936D86 /* SettingGroupManualInput.m */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
+		2188883C1E54892E00936D86 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				210F2B761DF566A900818512 /* SettingsCell.h */,
+				210F2B771DF566A900818512 /* SettingsCell.m */,
+				210F2B781DF566A900818512 /* SettingsCell.xib */,
+				210F2B6B1DF561EB00818512 /* SettingsSwitchCell.h */,
+				210F2B6C1DF561EB00818512 /* SettingsSwitchCell.m */,
+				210F2B6D1DF561EB00818512 /* SettingsSwitchCell.xib */,
+				210F2B711DF5655500818512 /* SettingsSyncCell.h */,
+				210F2B721DF5655500818512 /* SettingsSyncCell.m */,
+				210F2B731DF5655500818512 /* SettingsSyncCell.xib */,
+			);
+			name = TableViewCells;
 			sourceTree = "<group>";
 		};
 		21B8DC781DB66BFD00FD9161 /* Utilities */ = {
@@ -3980,6 +4044,7 @@
 				215A02911E1127B400CCAA2C /* SynchronizationController.m in Sources */,
 				215A03421E11402A00CCAA2C /* ltemsModel.xcdatamodeld in Sources */,
 				215A02921E1127B400CCAA2C /* ItemPrintFact+CoreDataClass.m in Sources */,
+				2188882B1E54696A00936D86 /* SettingGroupSync.m in Sources */,
 				215A02931E1127B400CCAA2C /* PI_MOBILE_SERVICEService.m in Sources */,
 				215A02941E1127B400CCAA2C /* NSDate+ISO8601Unparsing.m in Sources */,
 				215A02951E1127B400CCAA2C /* NwobjInventoryItemDescription.m in Sources */,
@@ -4001,10 +4066,12 @@
 				215A02A41E1127B400CCAA2C /* NwobjAcceptanes.m in Sources */,
 				215A02A51E1127B400CCAA2C /* PrintViewController.m in Sources */,
 				215A02A61E1127B400CCAA2C /* Price+CoreDataClass.m in Sources */,
+				2188883B1E5484C400936D86 /* OstinSettingsViewController.m in Sources */,
 				215A02A71E1127B400CCAA2C /* AsyncImageView.m in Sources */,
 				215A02A81E1127B400CCAA2C /* MCPOfflineInmpl+Ostin.m in Sources */,
 				215A02A91E1127B400CCAA2C /* MCPSimulatorImpl.m in Sources */,
 				215A02AA1E1127B400CCAA2C /* AntiAliasingLabel.m in Sources */,
+				2188881E1E545F6600936D86 /* SettingGroup.m in Sources */,
 				215A02AB1E1127B400CCAA2C /* TaskInformation.m in Sources */,
 				215A02AC1E1127B400CCAA2C /* NwObject.m in Sources */,
 				215A02AD1E1127B400CCAA2C /* CategoriesCollectionCell.m in Sources */,
@@ -4020,13 +4087,16 @@
 				215A02B51E1127B400CCAA2C /* WYStoryboardPopoverSegue.m in Sources */,
 				215A02B61E1127B400CCAA2C /* SOAPOperation.m in Sources */,
 				215A02B71E1127B400CCAA2C /* UserInformation.m in Sources */,
+				218888231E545FEB00936D86 /* SettingAction.m in Sources */,
 				215A02B81E1127B400CCAA2C /* MCPOfflineInmpl.m in Sources */,
 				215A02B91E1127B400CCAA2C /* Group+CoreDataProperties.m in Sources */,
 				C61E2E291E3F3D9600B4B838 /* ImageViewController.m in Sources */,
+				218888331E54820600936D86 /* SettingGroupPrinter.m in Sources */,
 				215A02BA1E1127B400CCAA2C /* WYPopoverController.m in Sources */,
 				215A02BB1E1127B400CCAA2C /* TasksCell.m in Sources */,
 				215A02BC1E1127B400CCAA2C /* Logger.m in Sources */,
 				215A036F1E129B7100CCAA2C /* ClaimItemCell.m in Sources */,
+				218888271E54625B00936D86 /* SettingGroupCase.m in Sources */,
 				215A02BD1E1127B400CCAA2C /* ItemInformation.m in Sources */,
 				215A02BE1E1127B400CCAA2C /* TaskProgressOverlayController.m in Sources */,
 				215A02BF1E1127B400CCAA2C /* ItemsListCell.m in Sources */,
@@ -4045,6 +4115,7 @@
 				215A02C81E1127B400CCAA2C /* main.m in Sources */,
 				C61E2E271E3F3D8D00B4B838 /* TransitionDelegate.m in Sources */,
 				215A02C91E1127B400CCAA2C /* SearchViewController.m in Sources */,
+				218888401E548B6C00936D86 /* SettingGroupManualInput.m in Sources */,
 				215A02CA1E1127B400CCAA2C /* User+CoreDataClass.m in Sources */,
 				215A02CB1E1127B400CCAA2C /* SOAPBarcodes.m in Sources */,
 				215A02CC1E1127B400CCAA2C /* AntiAliasTextLayer.m in Sources */,
@@ -4064,6 +4135,7 @@
 				215A02DA1E1127B400CCAA2C /* NwobjItemDescription.m in Sources */,
 				215A02DB1E1127B400CCAA2C /* SOAPSetTaskDone.m in Sources */,
 				215A02DC1E1127B400CCAA2C /* MCPNetworkImpl.m in Sources */,
+				2188882F1E54808A00936D86 /* SettingGroupUser.m in Sources */,
 				215A02DD1E1127B400CCAA2C /* TaskItemBinding+CoreDataClass.m in Sources */,
 				215A03771E129BAB00CCAA2C /* ClaimItemInformationCell.m in Sources */,
 				215A02DE1E1127B400CCAA2C /* Subgroup+CoreDataProperties.m in Sources */,
@@ -4126,6 +4198,7 @@
 				215A027F1E11256A00CCAA2C /* AcceptanesInformation.m in Sources */,
 				C667239E1DAAEEFB001B30AC /* TaskItemBinding+CoreDataProperties.m in Sources */,
 				B9F5F0B71D0057710010E1EA /* NwobjDiscounts.m in Sources */,
+				2188881D1E545F6600936D86 /* SettingGroup.m in Sources */,
 				C655B1BE1DA5399000EE7AB9 /* SynchronizationController.m in Sources */,
 				21D8385C1DE3499F00A98E0F /* ItemPrintFact+CoreDataClass.m in Sources */,
 				C6F600C91D9C363C0095AE21 /* PI_MOBILE_SERVICEService.m in Sources */,
@@ -4153,6 +4226,7 @@
 				C66723821DA81285001B30AC /* Price+CoreDataClass.m in Sources */,
 				21C0545A1DC23F8E0094C7B1 /* AsyncImageView.m in Sources */,
 				C6F601AD1D9D63440095AE21 /* MCPOfflineInmpl+Ostin.m in Sources */,
+				218888221E545FEB00936D86 /* SettingAction.m in Sources */,
 				B92DCE341C845F0A002AA184 /* MCPSimulatorImpl.m in Sources */,
 				215A03761E129BAB00CCAA2C /* ClaimItemInformationCell.m in Sources */,
 				B90CE4881C89A05400DFB3E4 /* AntiAliasingLabel.m in Sources */,
@@ -4170,6 +4244,7 @@
 				B907ADDD1D095C3200B44BF1 /* WYStoryboardPopoverSegue.m in Sources */,
 				C66723861DA912CF001B30AC /* SOAPOperation.m in Sources */,
 				21C054661DC36D4D0094C7B1 /* UserInformation.m in Sources */,
+				2188883A1E5484C400936D86 /* OstinSettingsViewController.m in Sources */,
 				215A03651E12741C00CCAA2C /* ClaimItem.m in Sources */,
 				B957B0D61D1BF5E0002A5256 /* MCPOfflineInmpl.m in Sources */,
 				21C054511DC238DA0094C7B1 /* Group+CoreDataProperties.m in Sources */,
@@ -4194,6 +4269,7 @@
 				B92DCE1A1C845E60002AA184 /* main.m in Sources */,
 				C67103F91D93DFE5000AEC24 /* SearchViewController.m in Sources */,
 				21C0545F1DC355550094C7B1 /* User+CoreDataClass.m in Sources */,
+				2188883F1E548B6C00936D86 /* SettingGroupManualInput.m in Sources */,
 				C667238C1DA93A66001B30AC /* SOAPBarcodes.m in Sources */,
 				B90CE48E1C89B6DB00DFB3E4 /* AntiAliasTextLayer.m in Sources */,
 				C66723831DA81285001B30AC /* Price+CoreDataProperties.m in Sources */,
@@ -4203,7 +4279,9 @@
 				B90CE48B1C89B44600DFB3E4 /* AntiAliasView.m in Sources */,
 				C66723811DA81285001B30AC /* Item+CoreDataProperties.m in Sources */,
 				C67103EE1D93CAE7000AEC24 /* ItemsListViewController.m in Sources */,
+				218888261E54625B00936D86 /* SettingGroupCase.m in Sources */,
 				C667237F1DA81285001B30AC /* Barcode+CoreDataProperties.m in Sources */,
+				218888321E54820600936D86 /* SettingGroupPrinter.m in Sources */,
 				C646C40E1D8BFBF20048C8FE /* CoreDataController.m in Sources */,
 				C667237E1DA81285001B30AC /* Barcode+CoreDataClass.m in Sources */,
 				B92DCE2F1C845E8C002AA184 /* AppDelegate.m in Sources */,
@@ -4212,7 +4290,9 @@
 				B92DCE381C845F16002AA184 /* NwobjItemDescription.m in Sources */,
 				C68216321DB668FD00833751 /* SOAPSetTaskDone.m in Sources */,
 				B92DCE351C845F0C002AA184 /* MCPNetworkImpl.m in Sources */,
+				2188882A1E54696A00936D86 /* SettingGroupSync.m in Sources */,
 				C667239D1DAAEEFB001B30AC /* TaskItemBinding+CoreDataClass.m in Sources */,
+				2188882E1E54808A00936D86 /* SettingGroupUser.m in Sources */,
 				21C054571DC239220094C7B1 /* Subgroup+CoreDataProperties.m in Sources */,
 				C6F600CC1D9C363C0095AE21 /* xsd.m in Sources */,
 				C6F601CA1DA256A30095AE21 /* NwobjStock.m in Sources */,

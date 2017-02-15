@@ -63,6 +63,16 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0)
+    {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert) completionHandler:^(BOOL granted, NSError *error) {}];
+    }
+}
+
 - (void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -162,11 +172,6 @@
     _progressView.progress = 0;
     _progressLabel.text = @"0 %";
     
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0)
-    {
-        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-        [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert) completionHandler:^(BOOL granted, NSError *error) {}];
-    }
     [SynchronizationController.sharedInstance synchronize];
 }
 

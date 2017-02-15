@@ -432,10 +432,10 @@
             </objects>
             <point key="canvasLocation" x="370" y="-229"/>
         </scene>
-        <!--Settings View Controller Ostin-->
+        <!--Ostin Settings View Controller-->
         <scene sceneID="Yrr-wm-m76">
             <objects>
-                <viewController id="e9B-d6-2V2" customClass="SettingsViewController_Ostin" sceneMemberID="viewController">
+                <viewController id="e9B-d6-2V2" customClass="OstinSettingsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vxx-Lm-iOU"/>
                         <viewControllerLayoutGuide type="bottom" id="Okm-CI-19c"/>
@@ -471,7 +471,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="260" height="300"/>
                     <connections>
-                        <outlet property="tableView" destination="WEz-PK-g6w" id="2pb-m2-wow"/>
+                        <outlet property="tableView" destination="WEz-PK-g6w" id="6nA-IM-VQV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s8K-Vw-iPM" userLabel="First Responder" sceneMemberID="firstResponder"/>

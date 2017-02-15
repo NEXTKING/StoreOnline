@@ -12,12 +12,17 @@
 #import "ClaimItemInformationCell.h"
 #import "AsyncImageView.h"
 #import "MCPServer.h"
-#import "WYStoryboardPopoverSegue.h"
-#import "SettingsViewController+Ostin.h"
 #import "DTDevices.h"
 
 #import "TransitionDelegate.h"
 #import "ImageViewController.h"
+
+#import "WYStoryboardPopoverSegue.h"
+#import "OstinSettingsViewController.h"
+#import "SettingGroupCase.h"
+#import "SettingGroupSync.h"
+#import "SettingGroupUser.h"
+#import "SettingGroupManualInput.h"
 
 @interface ClaimListViewController () <UITableViewDelegate, UITableViewDataSource, AcceptancesDataSourceDelegate>
 {
@@ -145,8 +150,6 @@
     {
         ClaimItemInformationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ClaimItemInformationCell"];
         [cell configureWithAcceptanceItem:item cancelButtonEnabled:(_rootItem.startDate && !_rootItem.endDate)];
-        [cell.changeCancelReasonButton addTarget:self action:@selector(changeClaimCancelReasonButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.changeCancelReasonButton setTag:indexPath.row];
         cell.zoomEnabled = NO;
         
         if ([item descriptionForKey:@"pictureURLString"])
@@ -217,6 +220,11 @@
         ClaimListViewController *vc = [[UIStoryboard storyboardWithName:@"IM_Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ClaimVC"];
         vc.rootItem = item;
         [self.navigationController pushViewController:vc animated:YES];
+    }
+    else if ([item isKindOfClass:[ClaimItemInformation class]])
+    {
+        if (_rootItem.startDate && !_rootItem.endDate)
+            [self showCancelReasonPickerForClaimItemInformation:item];
     }
 }
 
@@ -304,13 +312,6 @@
     }];
 }
 
-- (void)changeClaimCancelReasonButtonAction:(id)sender
-{
-    UIButton *cancelButton = sender;
-    ClaimItemInformation *claimItemInfo = [self.dataSource itemAtIndex:cancelButton.tag];
-    [self showCancelReasonPickerForClaimItemInformation:claimItemInfo];
-}
-
 - (void)menuButtonPressed:(id)sender
 {
     [self performSegueWithIdentifier:@"MelonPopover" sender:sender];
@@ -322,14 +323,32 @@
     {
         WYStoryboardPopoverSegue* popoverSegue = (WYStoryboardPopoverSegue*)segue;
         
-        SettingsViewController_Ostin* destinationViewController = (SettingsViewController_Ostin *)segue.destinationViewController;
+        OstinSettingsViewController* destinationViewController = (OstinSettingsViewController *)segue.destinationViewController;
         destinationViewController.preferredContentSize = CGSizeMake(260, 300);
-        if (self.dataSource.rootItem)
-            destinationViewController.manualInputAction = ^
+        
+        SettingGroupCase *caseSettings = [[SettingGroupCase alloc] init];
+        SettingGroupSync *syncSettings = [[SettingGroupSync alloc] init];
+        SettingGroupUser *userSettings = [[SettingGroupUser alloc] init];
+        SettingGroupManualInput *manualInputSettings = [[SettingGroupManualInput alloc] init];
+        manualInputSettings.settingActions[0].action = ^
+        {
+            if (_rootItem.startDate && !_rootItem.endDate)
             {
                 [self showManualInputAlert];
                 [_settingsPopover dismissPopoverAnimated:YES];
-            };
+            }
+            else
+            {
+                [self showAlertWithMessage:@"Задание не взято в работу"];
+                [_settingsPopover dismissPopoverAnimated:YES];
+            }
+        };
+        
+        if (self.dataSource.rootItem)
+            destinationViewController.settingsGroups = @[manualInputSettings, userSettings, caseSettings, syncSettings];
+        else
+            destinationViewController.settingsGroups = @[userSettings, caseSettings, syncSettings];
+        
         _settingsPopover = [popoverSegue popoverControllerWithSender:sender permittedArrowDirections:WYPopoverArrowDirectionAny animated:YES];
     }
 }
