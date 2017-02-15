@@ -222,7 +222,7 @@
     
     //Adding date to item
     
-    NSMutableDictionary* paramsWithDate = [itemDescription.additionalParameters mutableCopy];
+    NSMutableDictionary* paramsWithDate = itemDescription.additionalParameters ? [itemDescription.additionalParameters mutableCopy] : [NSMutableDictionary new];
     
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat:@"yyyy-MM-dd' 'HH:mm:ss.SSSSSSS"];

@@ -9,6 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "DiscountInformation.h"
 
+@interface ParameterInformation : NSObject <NSCoding>
+@property (nonatomic, strong) NSString* name;
+@property (nonatomic, strong) NSString* value;
+
+- (instancetype)initWithName:(NSString *)name value:(NSString *)value;
+
+@end
+
 @interface ItemInformation : NSObject <NSCoding>
 
 @property (nonatomic, assign) NSInteger itemId;
