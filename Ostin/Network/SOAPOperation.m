@@ -83,7 +83,7 @@
             }];
         
             
-            if (!localSuccess || self.isCancelled || !SynchronizationController.sharedInstance.syncIsRunning)
+            if (!localSuccess)
                 return;
             
             localSuccess = [self commitPortion:_incValue portionID:@(currentPortionID)];

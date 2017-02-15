@@ -82,13 +82,13 @@
 {
     Price* priceDB = (Price*)obj;
     
-    priceDB.itemID          = @([csv[1] integerValue]);
-    priceDB.catalogPrice    = @([csv[2] doubleValue]);
-    priceDB.retailPrice     = @([csv[3] doubleValue]);
-    priceDB.discount        = @([csv[4] doubleValue]);
-    
     if (csv.count >= 9)
     {
+        priceDB.itemID          = @([csv[1] integerValue]);
+        priceDB.catalogPrice    = @([csv[2] doubleValue]);
+        priceDB.retailPrice     = @([csv[3] doubleValue]);
+        priceDB.discount        = @([csv[4] doubleValue]);
+
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"dd.MM.yyyy hh:mm:ss"];
         NSDate *date = [dateFormatter dateFromString:csv[8]];

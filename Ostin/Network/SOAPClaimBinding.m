@@ -48,12 +48,15 @@
 {
     ClaimBinding* claimBindingDB = (ClaimBinding*)obj;
     
-    claimBindingDB.claimBindingID = @([csv[1] integerValue]);
-    claimBindingDB.claimID = @([csv[2] integerValue]);
-    claimBindingDB.itemID = @([csv[3] integerValue]);
-    claimBindingDB.quantity = @([csv[4] integerValue]);
-    claimBindingDB.scanned = @(0);
-    claimBindingDB.cancelReason = nil;
+    if (csv.count >= 5)
+    {
+        claimBindingDB.claimBindingID = @([csv[1] integerValue]);
+        claimBindingDB.claimID = @([csv[2] integerValue]);
+        claimBindingDB.itemID = @([csv[3] integerValue]);
+        claimBindingDB.quantity = @([csv[4] integerValue]);
+        claimBindingDB.scanned = @(0);
+        claimBindingDB.cancelReason = nil;
+    }
 }
 
 - (NSManagedObject*) findObject:(NSArray *)csv

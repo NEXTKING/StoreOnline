@@ -78,10 +78,13 @@
 {
     TaskItemBinding* taskDB = (TaskItemBinding*)obj;
     
-    taskDB.bindingKey = @([csv[1] integerValue]);
-    taskDB.taskID = @([csv[2] integerValue]);
-    taskDB.itemID = @([csv[3] integerValue]);
-    taskDB.quantity = @([csv[4] integerValue]);
+    if (csv.count >= 4)
+    {
+        taskDB.bindingKey = @([csv[1] integerValue]);
+        taskDB.taskID = @([csv[2] integerValue]);
+        taskDB.itemID = @([csv[3] integerValue]);
+        taskDB.quantity = @([csv[4] integerValue]);
+    }
 }
 
 - (NSManagedObject*) findObject:(NSArray *)csv

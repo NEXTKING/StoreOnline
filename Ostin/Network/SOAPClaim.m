@@ -51,25 +51,28 @@
 {
     Claim* claimDB = (Claim*)obj;
     
-    claimDB.claimID = @([csv[1] integerValue]);
-    claimDB.claimNumber  = csv[2];
-    claimDB.userID    = @([csv[3] integerValue]);
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"dd.MM.yyyy HH:mm:ss";
-    claimDB.incomingDate = [dateFormatter dateFromString:csv[4]];
-    
-    if ([csv[0] isEqualToString:@"I"])
+    if (csv.count >= 5)
     {
-        claimDB.startDate = nil;
-        claimDB.endDate = nil;
+        claimDB.claimID = @([csv[1] integerValue]);
+        claimDB.claimNumber  = csv[2];
+        claimDB.userID    = @([csv[3] integerValue]);
         
-        if (UIApplication.sharedApplication.applicationState == UIApplicationStateBackground)
-            [self notifity:csv[2]];
-    }
-    else if ([csv[0] isEqualToString:@"D"])
-    {
-        [self cancelNotifity:csv[2]];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"dd.MM.yyyy HH:mm:ss";
+        claimDB.incomingDate = [dateFormatter dateFromString:csv[4]];
+        
+        if ([csv[0] isEqualToString:@"I"])
+        {
+            claimDB.startDate = nil;
+            claimDB.endDate = nil;
+            
+            if (UIApplication.sharedApplication.applicationState == UIApplicationStateBackground)
+                [self notifity:csv[2]];
+        }
+        else if ([csv[0] isEqualToString:@"D"])
+        {
+            [self cancelNotifity:csv[2]];
+        }
     }
 }
 

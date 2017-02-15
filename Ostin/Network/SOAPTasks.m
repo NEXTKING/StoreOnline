@@ -78,11 +78,12 @@
 {
     Task* taskDB = (Task*)obj;
     
-    taskDB.taskID = @([csv[1] integerValue]);
-    taskDB.name = csv[2];
-    taskDB.userID = csv[3];
     if (csv.count >= 4)
     {
+        taskDB.taskID = @([csv[1] integerValue]);
+        taskDB.name = csv[2];
+        taskDB.userID = csv[3];
+
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"dd.MM.yyyy hh:mm:ss"];
         NSDate *date = [dateFormatter dateFromString:csv[4]];

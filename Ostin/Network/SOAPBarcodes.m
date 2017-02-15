@@ -82,9 +82,12 @@
 {
     Barcode* barcodeDB = (Barcode*)obj;
     
-    barcodeDB.itemID = @([csv[1] integerValue]);
-    barcodeDB.code128 = csv[2];
-    barcodeDB.ean = csv[3];
+    if (csv.count >= 4)
+    {
+        barcodeDB.itemID = @([csv[1] integerValue]);
+        barcodeDB.code128 = csv[2];
+        barcodeDB.ean = csv[3];
+    }
 }
 
 - (NSManagedObject*) findObject:(NSArray *)csv

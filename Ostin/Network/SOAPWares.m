@@ -83,27 +83,26 @@
 {
     Item* itemDB = (Item*)obj;
     
-    itemDB.itemID       = @([csv[1] integerValue]);
-    itemDB.itemCode     = csv[2];
-    itemDB.groupID      = @([csv[3] intValue]);
-    itemDB.subgroupID   = @([csv[4] intValue]);
-    itemDB.trademarkID  = @([csv[5] intValue]);
-    itemDB.color        = csv[6];
-    itemDB.certificationType    = csv[7];
-    itemDB.certificationAuthorittyCode  = csv[8];
-    itemDB.line1        = csv[9];
-    itemDB.line2        = csv[10];
-    itemDB.storeNumber  = csv[11];
-    itemDB.name         = csv[12];
-    itemDB.priceHeader  = csv[13];
-    itemDB.sizeHeader   = csv[14];
-    itemDB.size         = csv[15];
-    itemDB.additionalSize = csv[16];
-    itemDB.additionalInfo = csv[17];
-    itemDB.boxType = csv[18];
-    
     if (csv.count >= 22)
     {
+        itemDB.itemID       = @([csv[1] integerValue]);
+        itemDB.itemCode     = csv[2];
+        itemDB.groupID      = @([csv[3] intValue]);
+        itemDB.subgroupID   = @([csv[4] intValue]);
+        itemDB.trademarkID  = @([csv[5] intValue]);
+        itemDB.color        = csv[6];
+        itemDB.certificationType    = csv[7];
+        itemDB.certificationAuthorittyCode  = csv[8];
+        itemDB.line1        = csv[9];
+        itemDB.line2        = csv[10];
+        itemDB.storeNumber  = csv[11];
+        itemDB.name         = csv[12];
+        itemDB.priceHeader  = csv[13];
+        itemDB.sizeHeader   = csv[14];
+        itemDB.size         = csv[15];
+        itemDB.additionalSize = csv[16];
+        itemDB.additionalInfo = csv[17];
+        itemDB.boxType = csv[18];
         itemDB.itemCode_2 = csv[19];
         itemDB.drop = csv[20];
         itemDB.collection = csv[21];

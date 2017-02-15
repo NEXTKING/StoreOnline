@@ -83,11 +83,14 @@
 {
     User* userDB = (User*)obj;
     
-    userDB.key_user = csv[1];
-    userDB.barcode  = csv[2];
-    userDB.login    = csv[3];
-    userDB.password = csv[4];
-    userDB.name     = csv[5];
+    if (csv.count >= 5)
+    {
+        userDB.key_user = csv[1];
+        userDB.barcode  = csv[2];
+        userDB.login    = csv[3];
+        userDB.password = csv[4];
+        userDB.name     = csv[5];
+    }
 }
 
 - (NSManagedObject*) findObject:(NSArray *)csv
