@@ -325,11 +325,18 @@
     return @"";
 }
 
-- (void) sendCartComplete:(int)result
+- (void) sendCartComplete:(int)result notAccepted:(int)notAccepted
 {
     if (result == 0)
     {
-        [self showInfoMessage:NSLocalizedString(@"Товары успешно отправлены!", nil)];
+        NSMutableString *message = [[NSMutableString alloc] initWithString:NSLocalizedString(@"Товары успешно отправлены!", nil)];
+        if (notAccepted > 0)
+        {
+            [message appendString:@"\n\n"];
+            [message appendFormat:NSLocalizedString(@"Среди отправленных товаров %d не относятся к текущей инвентаризации", nil), notAccepted];
+        }
+        
+        [self showInfoMessage:message];
     }
     else
     {

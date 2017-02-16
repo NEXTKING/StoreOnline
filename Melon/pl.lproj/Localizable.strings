@@ -77,6 +77,7 @@
 "Необходимо выполнить синхронизацию" = "Trzeba wykonać synchronizację";
 "Перед отправкой необходимо отсканировать хотя бы один товар" = "Przed wysyłką trzeba skanować  chociażby jeden towar";
 "Товары успешно отправлены!" = "Towary są pomyślnie wysłane!";
+"Среди отправленных товаров %d не относятся к текущей инвентаризации" = "%d towarów nie odnoszą się do aktualnej inwentaryzacji.";
 "Не удалось отправить товары. Убедитесь в наличии подключения к сети." = "Nie udało się wysłać towary. Przekonać się, że jest podłaczanie do sieci.";
 "Новая инвентаризация успешно начата" = "Nowa inwentaryzacja pomyślnie jest podjęta";
 "Не удалось завершить инвентаризацию. Убедитесь в наличии подключения к сети." = "Nie udało się zakończyć inwentaryzację. Przekonać się, że jest podłaczanie do sieci.";

@@ -27,7 +27,7 @@
 @end
 @protocol SendCartDelegate <NSObject>
 @optional
-- (void) sendCartComplete:(int) result;
+- (void) sendCartComplete:(int) result notAccepted:(int)notAccepted;
 - (void) endOfInventComplete:(int) result;
 @end
 @protocol DiscountsDelegate <NSObject>

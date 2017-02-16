@@ -77,6 +77,7 @@
 "Необходимо выполнить синхронизацию" = "It is necessary to synchronize";
 "Перед отправкой необходимо отсканировать хотя бы один товар" = "Before sending scan at least one item";
 "Товары успешно отправлены!" = "Items are successfully send";
+"Среди отправленных товаров %d не относятся к текущей инвентаризации" = "%d items do not belong to the current inventory.";
 "Не удалось отправить товары. Убедитесь в наличии подключения к сети." = "Failed to send items. Check the network connection.";
 "Новая инвентаризация успешно начата" = "New inventory is successfully started";
 "Не удалось завершить инвентаризацию. Убедитесь в наличии подключения к сети." = "Failed to complete inventory.";

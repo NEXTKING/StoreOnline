@@ -141,7 +141,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Состав: см. вшивной ярлык" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r0c-o5-ZQN" customClass="AntiAliasingLabel">
-                            <rect key="frame" x="27" y="57" width="82.5" height="6"/>
+                            <rect key="frame" x="22" y="57" width="92" height="6"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="6" id="adH-OQ-7hM"/>
                             </constraints>
@@ -189,6 +189,7 @@
                         <constraint firstItem="kC1-E6-iKG" firstAttribute="leading" secondItem="3m2-Xu-OKC" secondAttribute="trailing" constant="2" id="hPs-Tg-gfz"/>
                         <constraint firstItem="r0c-o5-ZQN" firstAttribute="centerY" secondItem="Ge7-Fs-vbO" secondAttribute="centerY" id="iWw-jg-Btx"/>
                         <constraint firstItem="3m2-Xu-OKC" firstAttribute="centerY" secondItem="CJP-Fx-wma" secondAttribute="centerY" id="jKh-wT-BIr"/>
+                        <constraint firstAttribute="trailing" secondItem="r0c-o5-ZQN" secondAttribute="trailing" id="lO1-sd-NgE"/>
                         <constraint firstAttribute="trailing" secondItem="vCo-AQ-7SE" secondAttribute="trailing" id="mCo-el-Wzo"/>
                         <constraint firstItem="HkE-v0-fPu" firstAttribute="leading" secondItem="HzB-ig-QVf" secondAttribute="leading" id="mI6-6o-Mi3"/>
                         <constraint firstItem="U5X-Zy-dk5" firstAttribute="leading" secondItem="kC1-E6-iKG" secondAttribute="trailing" constant="1" id="mUI-bS-6Kf"/>
@@ -196,7 +197,7 @@
                         <constraint firstItem="iNY-1s-jp7" firstAttribute="leading" secondItem="HzB-ig-QVf" secondAttribute="leading" id="rI9-TQ-0je"/>
                         <constraint firstItem="CJP-Fx-wma" firstAttribute="top" secondItem="sFM-UW-fCO" secondAttribute="bottom" id="tOe-2r-VNn"/>
                         <constraint firstItem="QbC-Dw-XG6" firstAttribute="leading" secondItem="HzB-ig-QVf" secondAttribute="leading" id="wZ4-C1-fFe"/>
-                        <constraint firstItem="r0c-o5-ZQN" firstAttribute="leading" secondItem="HzB-ig-QVf" secondAttribute="leading" constant="27" id="xDT-CB-0Se"/>
+                        <constraint firstItem="r0c-o5-ZQN" firstAttribute="leading" secondItem="HzB-ig-QVf" secondAttribute="leading" constant="22" id="xDT-CB-0Se"/>
                         <constraint firstItem="bld-8d-vKw" firstAttribute="leading" secondItem="HzB-ig-QVf" secondAttribute="leading" id="xnh-iT-dbz"/>
                         <constraint firstAttribute="trailing" secondItem="QbC-Dw-XG6" secondAttribute="trailing" id="y3K-JK-hE0"/>
                         <constraint firstAttribute="trailing" secondItem="HkE-v0-fPu" secondAttribute="trailing" id="zne-wC-wvY"/>

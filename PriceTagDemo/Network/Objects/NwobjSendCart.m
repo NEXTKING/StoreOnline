@@ -123,6 +123,7 @@
     _succeeded = isSuccessfull;
     
     _resultCode = -1;
+    int notAccepted = 0;
     //ItemInformation *itemInfo = nil;
     
     if ( _succeeded )
@@ -168,19 +169,21 @@
         else
             _resultCode = -2;
         
-        //id obj = nil;
+        id obj = nil;
         
         if ( _resultCode == 0 )
         {
-           
+            obj = [result objectForKey:@"NotAccepted"];
+            if (obj && [obj isKindOfClass:[NSString class]])
+                notAccepted = [obj intValue];
         }
         
         //[dataString release];
     }
     // Send signal to delegate
     // If delegate is not NIL, it conforms to correct protocol
-    if ( _delegate && [_delegate respondsToSelector:@selector(sendCartComplete:)] )
-        [_delegate sendCartComplete:_resultCode];
+    if ( _delegate && [_delegate respondsToSelector:@selector(sendCartComplete:notAccepted:)] )
+        [_delegate sendCartComplete:_resultCode notAccepted:notAccepted];
 }
 
 @end
