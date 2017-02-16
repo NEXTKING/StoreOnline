@@ -72,8 +72,6 @@ static void *ProgressObserverContext = &ProgressObserverContext;
         [[MCPServer instance] tasks:self userID:nil];
 #endif
         [[MCPServer instance] user:self login:nil password:nil];
-        
-        NSLog(@"%d", SSCount);
     }
 }
 
@@ -228,6 +226,8 @@ static void *ProgressObserverContext = &ProgressObserverContext;
 {
     if ([_timer isValid])
         [_timer invalidate];
+    
+    updateMask = 0;
     
     _syncIsRunning = NO;
     _syncProgress = 0;

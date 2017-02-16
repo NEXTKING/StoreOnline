@@ -770,7 +770,6 @@
         NSProgress *itemsProgress = [NSProgress progressWithTotalUnitCount:3 parent:delegate.progress pendingUnitCount:3];
         
         NSOperationQueue *waresQueue = [NSOperationQueue new];
-        NSDate *startDate = [NSDate date];
         waresQueue.name = @"waresQueue";
     
         SOAPWares *wares = [SOAPWares new];
@@ -798,8 +797,6 @@
         NSBlockOperation* delegateCallOperation = [NSBlockOperation blockOperationWithBlock:^{
         
             BOOL success = _wares.success && _barcodes.success && _prices.success;
-            NSDate *endDate = [NSDate date];
-            NSLog(@"%f s", [endDate timeIntervalSince1970] - [startDate timeIntervalSince1970]);
             
             if (success)
                 [delegate allItemsDescription:0 items:nil];
