@@ -43,6 +43,7 @@
     
     UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithImage:AppAppearance.sharedApperance.navigationBarSendButtonImage style:UIBarButtonItemStylePlain target:self action:@selector(sendButtonAction:)];
     self.navigationItem.rightBarButtonItem = sendButton;
+    self.startInventoryButton.enabled = self.sections.count > 0 ? YES : NO;
 }
 
 - (void) viewWillAppear:(BOOL)animated
