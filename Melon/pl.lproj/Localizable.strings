@@ -113,6 +113,7 @@
 "Накладная" = "List przewozowy";
 "Итого: %ld из %ld товаров" = "Razem: %ld z %ld towarów";
 "из" = "z";
+"Отсканируйте штрих-код" = "Skanować kod kreskowy";
 
 /* Печать ярлыков */
 

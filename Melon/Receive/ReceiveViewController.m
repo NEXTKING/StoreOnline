@@ -97,7 +97,7 @@ typedef enum : NSUInteger
         NSUInteger selfIndex = [self.navigationController.viewControllers indexOfObject:self];
         ReceiveViewController *prevVC = self.navigationController.viewControllers[selfIndex - 1];
         if ([prevVC kind] == AcceptanesControllerKindRoot)
-            _titleLabel.text = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Накладная", nil), _rootItem.barcode];
+            _titleLabel.text = self.rootItem.name;
     }
     else
     {
@@ -600,7 +600,15 @@ typedef enum : NSUInteger
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AcceptanesInformation *item = _items[indexPath.row];
-    [self pushToAcceptItem:item];
+    if (item.containerBarcode == nil)
+        [self pushToAcceptItem:item];
+    else
+    {
+        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"Отсканируйте штрих-код", nil) preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleCancel handler:nil];
+        [ac addAction:cancelAction];
+        [self presentViewController:ac animated:YES completion:nil];
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
